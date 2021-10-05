@@ -12,5 +12,6 @@ namespace EcommerceWebsite.Data.Entities
         public bool IsShowInHome { get; set; }
         public int? ParentId { get; set; }
         public Status Status { get; set; }
+        public List<ProductCategory> ProductCategories { get; set; }
     }
 }
