@@ -3,6 +3,7 @@
 ## Technologies
 - ASP.NET Core 3.1
 - Entity Framework Core 3.1
+- Fluent API
 ## Install Packages
 - Microsoft.EntityFrameworkCore.Tools
 - Microsoft.EntityFrameworkCore.Design
