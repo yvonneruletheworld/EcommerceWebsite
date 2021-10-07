@@ -10,9 +10,14 @@ namespace EcommerceWebsite.Data.EF
     public class EcomWebDbContext : DbContext
     {
 
+
         public EcomWebDbContext( DbContextOptions options) : base(options)
         {
 
+        }
+
+        protected EcomWebDbContext()
+        {
         }
 
         public DbSet<Product> Products { get; set; }
@@ -21,6 +26,7 @@ namespace EcommerceWebsite.Data.EF
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //Configure using Fluent API
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
             modelBuilder.ApplyConfiguration(new CategoryConfiguration());
             modelBuilder.ApplyConfiguration(new ProductCategoryConfiguartion());

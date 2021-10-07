@@ -1,11 +1,16 @@
+using EcommerceWebsite.Application.Interfaces;
+using EcommerceWebsite.Application.Services;
+using EcommerceWebsite.Data.EF;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -24,6 +29,19 @@ namespace EcommerceWebsite.WebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            IConfigurationRoot configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("D:/School/EcommerceWebsite/EcommerceWebsite.Data/appsetting.json")
+                .Build();
+
+            var connectionString = configuration.GetConnectionString("EcommerceWebsiteDatabase");
+            var optionBuilder = new DbContextOptionsBuilder<EcomWebDbContext>();
+            optionBuilder.UseSqlServer(connectionString);
+
+
+
+            services.AddScoped<IProductServices, ProductServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,8 +68,10 @@ namespace EcommerceWebsite.WebApp
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Product}/{action=Index}/{id?}");
             });
         }
+
+
     }
 }

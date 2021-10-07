@@ -22,12 +22,14 @@ namespace EcommerceWebsite.Data.Entities
         //              MinimumLength = 8)]
         public string Name { get; set; }
         public string Description { get; set; }
+        public string Brand { get; set; }
         public decimal Price { get; set; }
         //[Required]
         public decimal Const { get; set; }
         public int Stock { get; set; }
         public int ViewCount { get; set; }
         public Status Status { get; set; }
+        //public string Brands { get; set; }
 
         //Foreign Key
 
