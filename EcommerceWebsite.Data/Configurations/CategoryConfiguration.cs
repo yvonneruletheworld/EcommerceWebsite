@@ -16,6 +16,11 @@ namespace EcommerceWebsite.Data.Configurations
 
             builder.HasKey(c => c.Id);
 
+            builder.Property(c => c.Id).IsRequired().HasMaxLength(100);
+            builder.Property(c => c.Name)
+                    .HasMaxLength(200)
+                    .HasColumnType("nvarchar");
+
             builder.Property(c => c.Status)
                    .HasDefaultValue(Status.Active);
         }
