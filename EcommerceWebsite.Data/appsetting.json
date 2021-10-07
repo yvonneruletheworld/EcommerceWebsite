@@ -1,0 +1,5 @@
+{
+  "ConnectionStrings": {
+    "EcommerceWebsiteDatabase": "Data Source=DESKTOP-G7MO77S;Initial Catalog=EcommerceWebsite;User ID=sa;Password=sa2019"
+  }
+}

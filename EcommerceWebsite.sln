@@ -3,16 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31702.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EcommerceWebsite.WebApp", "EcommerceWebsite.WebApp\EcommerceWebsite.WebApp.csproj", "{AA4A940D-8882-424A-9AA8-505C4EA6E9B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EcommerceWebsite.WebApp", "EcommerceWebsite.WebApp\EcommerceWebsite.WebApp.csproj", "{AA4A940D-8882-424A-9AA8-505C4EA6E9B0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DD75F978-9B12-47C0-816C-9048BC288FE8}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EcommerceWebsite.Data", "EcommerceWebsite.Data\EcommerceWebsite.Data.csproj", "{5B26E4EF-0AB5-432D-BD5F-BBA188180701}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EcommerceWebsite.Data", "EcommerceWebsite.Data\EcommerceWebsite.Data.csproj", "{5B26E4EF-0AB5-432D-BD5F-BBA188180701}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EcommerceWebsite.Application", "EcommerceWebsite.Application\EcommerceWebsite.Application.csproj", "{B2B34B3D-2799-45BD-94DA-3060E32050C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EcommerceWebsite.Application", "EcommerceWebsite.Application\EcommerceWebsite.Application.csproj", "{B2B34B3D-2799-45BD-94DA-3060E32050C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EcommerceWebsite.Media", "EcommerceWebsite.Media\EcommerceWebsite.Media.csproj", "{8A63D818-86B3-490E-A4B4-0DEF75874C19}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,6 +34,10 @@ Global
 		{B2B34B3D-2799-45BD-94DA-3060E32050C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2B34B3D-2799-45BD-94DA-3060E32050C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2B34B3D-2799-45BD-94DA-3060E32050C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A63D818-86B3-490E-A4B4-0DEF75874C19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A63D818-86B3-490E-A4B4-0DEF75874C19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A63D818-86B3-490E-A4B4-0DEF75874C19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A63D818-86B3-490E-A4B4-0DEF75874C19}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
