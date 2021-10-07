@@ -36,6 +36,9 @@ namespace EcommerceWebsite.Data.Configurations
 
             builder.Property(p => p.ViewCount)
                     .HasDefaultValue(0);
+            builder.Property(p => p.Brand)
+                    .HasColumnType("nvarchar")
+                    .HasMaxLength(100);
                    
         }
     }
