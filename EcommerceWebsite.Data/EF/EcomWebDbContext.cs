@@ -1,5 +1,6 @@
 ﻿using EcommerceWebsite.Data.Configurations;
 using EcommerceWebsite.Data.Entities;
+using EcommerceWebsite.Data.Extensions;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,12 @@ namespace EcommerceWebsite.Data.EF
         {
         }
 
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<ProductCategory> ProductCategories { get; set; }
+        public DbSet<HoaDon> HoaDons { get; set; }
+        public DbSet<KhachHang> KhachHangs { get; set; }
+        public DbSet<ChiTietHoaDon> ChiTietHoaDons { get; set; }
         public DbSet<SanPham> SanPhams { get; set; }
         public DbSet<LoaiSanPham> loaiSanPhams { get; set; }
         public DbSet<ThuocTinh> thuocTinhs { get; set; }
@@ -45,6 +52,12 @@ namespace EcommerceWebsite.Data.EF
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //Configure using Fluent API
+            modelBuilder.ApplyConfiguration(new ProductConfiguration());
+            modelBuilder.ApplyConfiguration(new CategoryConfiguration());
+            modelBuilder.ApplyConfiguration(new ProductCategoryConfiguartion());
+            modelBuilder.ApplyConfiguration(new HoaDonConfiguration());
+            modelBuilder.ApplyConfiguration(new KhachHangConfiguration());
+            modelBuilder.ApplyConfiguration(new ChiTietHoaDonConfiguration());
             modelBuilder.ApplyConfiguration(new SanPhamConfiguration());
             modelBuilder.ApplyConfiguration(new LoaiSanPhamConfiguration());
             modelBuilder.ApplyConfiguration(new ThuocTinhConfiguration());
@@ -67,6 +80,9 @@ namespace EcommerceWebsite.Data.EF
             modelBuilder.ApplyConfiguration(new TinhTrangGHConfiguration());
             modelBuilder.ApplyConfiguration(new DanhGiaSPConfiguration());
             //base.OnModelCreating(modelBuilder);
+
+            //Seeding
+            modelBuilder.Seed();
         }
     }
 }

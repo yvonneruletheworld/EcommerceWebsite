@@ -17,9 +17,7 @@ namespace EcommerceWebsite.Data.Configurations
 
             builder.Property(hd => hd.MaHD)
                 .HasMaxLength(100);
-
-            builder.Property(hd => hd.MaKH)
-                .HasMaxLength(100)
+            builder.Property(hd => hd.CreateDate)
                 .IsRequired();
 
             builder.Property(hd => hd.MaKM)
