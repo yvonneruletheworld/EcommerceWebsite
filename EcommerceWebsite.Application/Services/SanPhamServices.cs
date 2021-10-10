@@ -9,18 +9,18 @@ using System.Threading.Tasks;
 
 namespace EcommerceWebsite.Application.Services
 {
-    public class ProductServices : IProductServices
+    public class SanPhamServices : ISanPhamServices
     {
         private readonly EcomWebDbContext context;
 
-        public ProductServices(EcomWebDbContext context)
+        public SanPhamServices(EcomWebDbContext context)
         {
             this.context = context;
         }
 
-        public List<Product> GetListProduct ()
+        public List<SanPham> GetListProduct ()
         {
-            return context.Products.ToList();
+            return context.SanPhams.ToList();
         }
 
         public bool? KiemTra(string value)

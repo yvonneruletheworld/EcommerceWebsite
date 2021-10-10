@@ -5,9 +5,9 @@ using System.Text;
 
 namespace EcommerceWebsite.Application.Interfaces
 {
-    public interface IProductServices 
+    public interface ISanPhamServices 
     {
-        List<Product> GetListProduct();
+        List<SanPham> GetListProduct();
 
         bool? KiemTra(string value);
     }

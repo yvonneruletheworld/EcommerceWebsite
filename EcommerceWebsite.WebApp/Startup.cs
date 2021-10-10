@@ -41,7 +41,7 @@ namespace EcommerceWebsite.WebApp
 
 
 
-            services.AddScoped<IProductServices, ProductServices>();
+            services.AddScoped<ISanPhamServices, SanPhamServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
