@@ -1,4 +1,6 @@
 ﻿using EcommerceWebsite.Data.Entities;
+using EcommerceWebsite.Data.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -89,6 +91,37 @@ namespace EcommerceWebsite.Data.Extensions
                     CategoryId = "DM003",
                     ProductId = "SP002"
                 });
+            // any guid
+            //var roleId = new Guid("8D04DCE2-969A-435D-BBA4-DF3F325983DC");
+            var adminId = new Guid("8D04DCE2-969A-435D-BBA4-DF3F325983DC");
+            //modelBuilder.Entity<AppRole>().HasData(new AppRole
+            //{
+            //    Id = roleId,
+            //    Name = "admin",
+            //    NormalizedName = "admin",
+            //    Description = "Administrator role"
+            //});
+
+            var hasher = new PasswordHasher<KhachHangVM>();
+            modelBuilder.Entity<KhachHangVM>().HasData(new KhachHangVM
+            {
+                Id = adminId.ToString(),
+                UserName = "admin",
+                NormalizedUserName = "admin",
+                Email = "yvonnetran.work@gmail.com",
+                NormalizedEmail = "yvonnetran.work@gmail.com",
+                EmailConfirmed = true,
+                PasswordHash = hasher.HashPassword(null, "Abcd1234$"),
+                SecurityStamp = string.Empty,
+                HoTen = "Yvonne Tran",
+                GioiTinh = false,
+                Status = Enum.Status.Active
+            });
+
+            modelBuilder.Entity<IdentityUserRole<Guid>>().HasData(new IdentityUserRole<Guid>
+            {
+                UserId = adminId
+            });
         }
     }
 }

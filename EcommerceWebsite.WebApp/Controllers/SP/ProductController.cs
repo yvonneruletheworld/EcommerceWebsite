@@ -1,4 +1,4 @@
-﻿using EcommerceWebsite.Application.Interfaces;
+﻿using EcommerceWebsite.Services.Interfaces.Main;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
