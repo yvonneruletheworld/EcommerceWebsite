@@ -13,9 +13,9 @@ namespace EcommerceWebsite.Data.Configurations
         {
             builder.ToTable("CTNHAPSP");
 
-            builder.HasKey(ctn => new { ctn.MaNhap, ctn.MaSP });
+            builder.HasKey(ctn => new { ctn.MaNhap, ctn.MaSanPham });
 
-            builder.Property(ctn => ctn.MaSP)
+            builder.Property(ctn => ctn.MaSanPham)
                 .HasMaxLength(100);
 
             builder.Property(ctn => ctn.MaNhap)
@@ -31,13 +31,13 @@ namespace EcommerceWebsite.Data.Configurations
                .HasColumnType("int")
                 .HasDefaultValue(0); ;
 
-            builder.HasOne(xl => xl.nhapSanPham)
+            builder.HasOne(xl => xl.NhapSanPhams)
                 .WithMany(xl => xl.cTNhapSPs)
                 .HasForeignKey(xl => xl.MaNhap);
 
-            builder.HasOne(xl => xl.sanPham)
+            builder.HasOne(xl => xl.SanPhams)
                 .WithMany(xl => xl.cTNhapSPs)
-                .HasForeignKey(xl => xl.MaSP);
+                .HasForeignKey(xl => xl.MaSanPham);
         }
     }
 }

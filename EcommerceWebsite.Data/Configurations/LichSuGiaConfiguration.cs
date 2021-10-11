@@ -13,9 +13,9 @@ namespace EcommerceWebsite.Data.Configurations
         {
             builder.ToTable("LICHSUGIA");
 
-            builder.HasKey(xl => new { xl.MaSP, xl.NgayBD });
+            builder.HasKey(xl => new { xl.MaSanPham, xl.NgayBD });
 
-            builder.Property(xl => xl.MaSP)
+            builder.Property(xl => xl.MaSanPham)
                 .HasMaxLength(100);
 
             builder.Property(xl => xl.Gia)
@@ -25,7 +25,7 @@ namespace EcommerceWebsite.Data.Configurations
             //Khóa ngoại
             builder.HasOne(xl => xl.sanPham)
                  .WithMany(xl => xl.lishSuGias)
-                 .HasForeignKey(xl => xl.MaSP);
+                 .HasForeignKey(xl => xl.MaSanPham);
         }
     }
 }

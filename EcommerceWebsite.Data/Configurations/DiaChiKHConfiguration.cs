@@ -13,12 +13,12 @@ namespace EcommerceWebsite.Data.Configurations
         {
             builder.ToTable("DIACHIKH");
 
-            builder.HasKey(dc =>new { dc.MaDiaChiKH, dc.MaKH });
+            builder.HasKey(dc =>new { dc.MaDiaChiKH, dc.MaKhachHang });
 
             builder.Property(dc => dc.MaDiaChiKH)
                 .HasMaxLength(100);
 
-            builder.Property(dc => dc.MaKH)
+            builder.Property(dc => dc.MaKhachHang)
                 .HasMaxLength(100);
 
             builder.Property(dc => dc.DiaChiGH)
@@ -31,7 +31,7 @@ namespace EcommerceWebsite.Data.Configurations
             //Khóa ngoại
             builder.HasOne(xl => xl.khachHang)
                  .WithMany(xl => xl.diaChiKHs)
-                 .HasForeignKey(dl => dl.MaKH);
+                 .HasForeignKey(dl => dl.MaKhachHang);
         }
     }
 }

@@ -6,8 +6,8 @@ namespace EcommerceWebsite.Data.Entities
 {
   public class KhuyenMai
     {
-        public string MaKM { get; set; }
-        public string TenKM { get; set; }
+        public string MaKhuyenMai { get; set; }
+        public string TenKhuyenMai { get; set; }
         public DateTime NgayBD { get; set; }
         public DateTime NgayKT { get; set; }
         public float PhanTram { get; set; }

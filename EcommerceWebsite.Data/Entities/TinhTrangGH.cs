@@ -6,10 +6,10 @@ namespace EcommerceWebsite.Data.Entities
 {
    public class TinhTrangGH
     {
-        public string MaTTGH { get; set; }
-        public string MaGH { get; set; }
+        public string MaTinhTrangGH { get; set; }
+        public string MaGiaoHang { get; set; }
         public DateTime NgayThucHien { get; set; }
         public string TinhTrang { get; set; }
-        public GiaoHang giaoHang { get; set; }
+        public GiaoHang giaoHangs { get; set; }
     }
 }

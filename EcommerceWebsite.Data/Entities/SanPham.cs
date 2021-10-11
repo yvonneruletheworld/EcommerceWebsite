@@ -8,20 +8,20 @@ namespace EcommerceWebsite.Data.Entities
     {
         public SanPham()
         {
-            this.MaSP = Guid.NewGuid().ToString();
+            this.MaSanPham = Guid.NewGuid().ToString();
         }
 
         //[Key]
         //[MaxLength(100)]
         //[Required]
-        public string MaSP { get; set; }
+        public string MaSanPham { get; set; }
         //[StringLength(270,
         //              ErrorMessage = "Tên loại sản phẩm từ 8 kí tự đến 8 kí tự",
         //              MinimumLength = 8)]
-        public string TenSP { get; set; }
+        public string TenSanPham { get; set; }
         public int SoLuongTon { get; set; }
         public string HinhAnh { get; set; }
-        public string MaLoaiSP { get; set; }
+        public string MaLoai { get; set; }
         public string MaHang { get; set; }
 
         public DanhGiaSP danhGiaSP { get; set; }

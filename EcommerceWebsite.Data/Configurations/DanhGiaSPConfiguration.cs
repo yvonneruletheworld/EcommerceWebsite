@@ -13,12 +13,12 @@ namespace EcommerceWebsite.Data.Configurations
         {
             builder.ToTable("DANHGIASP");
 
-            builder.HasKey(dg => dg.MaDG);
+            builder.HasKey(dg => dg.MaDanhGia);
 
-            builder.Property(dg => dg.MaDG)
+            builder.Property(dg => dg.MaDanhGia)
                 .HasMaxLength(100);
 
-            builder.Property(dg => dg.MaSP)
+            builder.Property(dg => dg.MaSanPham)
               .HasMaxLength(100);
 
             builder.Property(dg => dg.NoiDung)
@@ -26,7 +26,7 @@ namespace EcommerceWebsite.Data.Configurations
 
             builder.HasOne(dg => dg.sanPhams)
                 .WithOne(dg => dg.danhGiaSP)
-                .HasForeignKey<DanhGiaSP>(dg => dg.MaSP);
+                .HasForeignKey<DanhGiaSP>(dg => dg.MaSanPham);
 
         }
     }

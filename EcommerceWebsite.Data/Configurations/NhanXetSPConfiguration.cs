@@ -13,12 +13,12 @@ namespace EcommerceWebsite.Data.Configurations
         {
             builder.ToTable("NHANXETSP");
 
-            builder.HasKey(nx => new { nx.MaKH, nx.MaSP });
+            builder.HasKey(nx => new { nx.MaKhachHang, nx.MaSanPham });
 
-            builder.Property(nx => nx.MaSP)
+            builder.Property(nx => nx.MaSanPham)
                 .HasMaxLength(100);
 
-            builder.Property(nx => nx.MaKH)
+            builder.Property(nx => nx.MaKhachHang)
                 .HasMaxLength(100);
 
             builder.Property(nx => nx.NoiDung)
@@ -29,13 +29,13 @@ namespace EcommerceWebsite.Data.Configurations
                  .IsRequired();
 
             //Khóa ngoại
-            builder.HasOne(xl => xl.sanPham)
+            builder.HasOne(xl => xl.sanPhams)
                  .WithMany(xl => xl.nhanXetSPs)
-                 .HasForeignKey(xl => xl.MaSP);
+                 .HasForeignKey(xl => xl.MaSanPham);
             //Khóa ngoại
-            builder.HasOne(xl => xl.KhachHang)
+            builder.HasOne(xl => xl.KhachHangs)
                  .WithMany(xl => xl.nhanXetSPs)
-                 .HasForeignKey(xl => xl.MaKH);
+                 .HasForeignKey(xl => xl.MaKhachHang);
         }
     }
 }

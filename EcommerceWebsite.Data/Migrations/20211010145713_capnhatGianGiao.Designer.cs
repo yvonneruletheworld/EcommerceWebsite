@@ -4,14 +4,16 @@ using EcommerceWebsite.Data.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EcommerceWebsite.Data.Migrations
 {
     [DbContext(typeof(EcomWebDbContext))]
-    partial class EcomWebDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211010145713_capnhatGianGiao")]
+    partial class capnhatGianGiao
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,26 +23,26 @@ namespace EcommerceWebsite.Data.Migrations
 
             modelBuilder.Entity("EcommerceWebsite.Data.Entities.BoPhan", b =>
                 {
-                    b.Property<string>("MaBoPhan")
+                    b.Property<string>("MaBP")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("TenBoPhan")
+                    b.Property<string>("TenBP")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("MaBoPhan");
+                    b.HasKey("MaBP");
 
                     b.ToTable("BOPHAN");
                 });
 
             modelBuilder.Entity("EcommerceWebsite.Data.Entities.CTHoaDon", b =>
                 {
-                    b.Property<string>("MaHoaDon")
+                    b.Property<string>("MaHD")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("MaSanPham")
+                    b.Property<string>("MaSP")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -55,9 +57,9 @@ namespace EcommerceWebsite.Data.Migrations
                     b.Property<decimal>("ThanhTien")
                         .HasColumnType("money");
 
-                    b.HasKey("MaHoaDon", "MaSanPham");
+                    b.HasKey("MaHD", "MaSP");
 
-                    b.HasIndex("MaSanPham");
+                    b.HasIndex("MaSP");
 
                     b.ToTable("CTHOADON");
                 });
@@ -68,7 +70,7 @@ namespace EcommerceWebsite.Data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("MaSanPham")
+                    b.Property<string>("MaSP")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -83,23 +85,23 @@ namespace EcommerceWebsite.Data.Migrations
                     b.Property<decimal>("ThanhTien")
                         .HasColumnType("money");
 
-                    b.HasKey("MaNhap", "MaSanPham");
+                    b.HasKey("MaNhap", "MaSP");
 
-                    b.HasIndex("MaSanPham");
+                    b.HasIndex("MaSP");
 
                     b.ToTable("CTNHAPSP");
                 });
 
             modelBuilder.Entity("EcommerceWebsite.Data.Entities.DanhGiaSP", b =>
                 {
-                    b.Property<string>("MaDanhGia")
+                    b.Property<string>("MaDG")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("HinhAnhDG")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("MaSanPham")
+                    b.Property<string>("MaSP")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -107,11 +109,11 @@ namespace EcommerceWebsite.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("MaDanhGia");
+                    b.HasKey("MaDG");
 
-                    b.HasIndex("MaSanPham")
+                    b.HasIndex("MaSP")
                         .IsUnique()
-                        .HasFilter("[MaSanPham] IS NOT NULL");
+                        .HasFilter("[MaSP] IS NOT NULL");
 
                     b.ToTable("DANHGIASP");
                 });
@@ -122,7 +124,7 @@ namespace EcommerceWebsite.Data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("MaKhachHang")
+                    b.Property<string>("MaKH")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -135,20 +137,20 @@ namespace EcommerceWebsite.Data.Migrations
                         .HasMaxLength(11)
                         .HasColumnType("nvarchar(11)");
 
-                    b.HasKey("MaDiaChiKH", "MaKhachHang");
+                    b.HasKey("MaDiaChiKH", "MaKH");
 
-                    b.HasIndex("MaKhachHang");
+                    b.HasIndex("MaKH");
 
                     b.ToTable("DIACHIKH");
                 });
 
             modelBuilder.Entity("EcommerceWebsite.Data.Entities.DinhLuong", b =>
                 {
-                    b.Property<string>("MaThuocTinh")
+                    b.Property<string>("MaTT")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("MaSanPham")
+                    b.Property<string>("MaSP")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -159,25 +161,25 @@ namespace EcommerceWebsite.Data.Migrations
                     b.Property<float>("GiaTri")
                         .HasColumnType("real");
 
-                    b.HasKey("MaThuocTinh", "MaSanPham");
+                    b.HasKey("MaTT", "MaSP");
 
-                    b.HasIndex("MaSanPham");
+                    b.HasIndex("MaSP");
 
                     b.ToTable("DINHLUONG");
                 });
 
             modelBuilder.Entity("EcommerceWebsite.Data.Entities.GiaoHang", b =>
                 {
-                    b.Property<string>("MaGiaoHanh")
+                    b.Property<string>("MaGH")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("MaHoaDon")
+                    b.Property<string>("MaHD")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<DateTime>("NgayDuKienGiao")
-                        .HasColumnType("DateTime");
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("NgayGiao")
                         .HasColumnType("DateTime");
@@ -188,11 +190,11 @@ namespace EcommerceWebsite.Data.Migrations
                     b.Property<string>("TrangThaiHienTai")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("MaGiaoHanh");
+                    b.HasKey("MaGH");
 
-                    b.HasIndex("MaHoaDon")
+                    b.HasIndex("MaHD")
                         .IsUnique()
-                        .HasFilter("[MaHoaDon] IS NOT NULL");
+                        .HasFilter("[MaHD] IS NOT NULL");
 
                     b.ToTable("GIAOHANG");
                 });
@@ -214,7 +216,7 @@ namespace EcommerceWebsite.Data.Migrations
 
             modelBuilder.Entity("EcommerceWebsite.Data.Entities.HoaDon", b =>
                 {
-                    b.Property<string>("MaHoaDon")
+                    b.Property<string>("MaHD")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -222,12 +224,12 @@ namespace EcommerceWebsite.Data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("MaKhachHang")
+                    b.Property<string>("MaKH")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("MaKhuyenMai")
+                    b.Property<string>("MaKM")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -246,20 +248,20 @@ namespace EcommerceWebsite.Data.Migrations
                     b.Property<string>("TrangThaiTT")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("MaHoaDon");
+                    b.HasKey("MaHD");
 
-                    b.HasIndex("MaKhachHang");
+                    b.HasIndex("MaKH");
 
-                    b.HasIndex("MaKhuyenMai");
+                    b.HasIndex("MaKM");
 
-                    b.HasIndex("MaDiaChiKH", "MaKhachHang");
+                    b.HasIndex("MaDiaChiKH", "MaKH");
 
                     b.ToTable("HOADON");
                 });
 
             modelBuilder.Entity("EcommerceWebsite.Data.Entities.KhachHang", b =>
                 {
-                    b.Property<string>("MaKhachHang")
+                    b.Property<string>("MaKH")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -282,19 +284,19 @@ namespace EcommerceWebsite.Data.Migrations
                         .HasMaxLength(11)
                         .HasColumnType("nvarchar(11)");
 
-                    b.Property<string>("TenKhachHang")
+                    b.Property<string>("TenKH")
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.HasKey("MaKhachHang");
+                    b.HasKey("MaKH");
 
                     b.ToTable("KHACHHANG");
                 });
 
             modelBuilder.Entity("EcommerceWebsite.Data.Entities.KhuyenMai", b =>
                 {
-                    b.Property<string>("MaKhuyenMai")
+                    b.Property<string>("MaKM")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -312,18 +314,18 @@ namespace EcommerceWebsite.Data.Migrations
                         .HasColumnType("real")
                         .HasDefaultValue(0f);
 
-                    b.Property<string>("TenKhuyenMai")
+                    b.Property<string>("TenKM")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("MaKhuyenMai");
+                    b.HasKey("MaKM");
 
                     b.ToTable("KHUYENMAI");
                 });
 
             modelBuilder.Entity("EcommerceWebsite.Data.Entities.LichSuGia", b =>
                 {
-                    b.Property<string>("MaSanPham")
+                    b.Property<string>("MaSP")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -333,7 +335,7 @@ namespace EcommerceWebsite.Data.Migrations
                     b.Property<decimal>("Gia")
                         .HasColumnType("money");
 
-                    b.HasKey("MaSanPham", "NgayBD");
+                    b.HasKey("MaSP", "NgayBD");
 
                     b.ToTable("LICHSUGIA");
                 });
@@ -356,7 +358,7 @@ namespace EcommerceWebsite.Data.Migrations
 
             modelBuilder.Entity("EcommerceWebsite.Data.Entities.MauSanPham", b =>
                 {
-                    b.Property<string>("MaSanPham")
+                    b.Property<string>("MaSP")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -367,14 +369,14 @@ namespace EcommerceWebsite.Data.Migrations
                     b.Property<string>("HinhAnh")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("MaSanPham", "TenMau");
+                    b.HasKey("MaSP", "TenMau");
 
                     b.ToTable("MAUSANPHAM");
                 });
 
             modelBuilder.Entity("EcommerceWebsite.Data.Entities.NhaCungCap", b =>
                 {
-                    b.Property<string>("MaNhaCungCap")
+                    b.Property<string>("MaNCC")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -385,18 +387,18 @@ namespace EcommerceWebsite.Data.Migrations
                         .HasMaxLength(11)
                         .HasColumnType("nvarchar(11)");
 
-                    b.Property<string>("TenNhaCungCap")
+                    b.Property<string>("TenNCC")
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.HasKey("MaNhaCungCap");
+                    b.HasKey("MaNCC");
 
                     b.ToTable("NHACUNGCAP");
                 });
 
             modelBuilder.Entity("EcommerceWebsite.Data.Entities.NhanVien", b =>
                 {
-                    b.Property<string>("MaNhanVien")
+                    b.Property<string>("MaNV")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -406,7 +408,7 @@ namespace EcommerceWebsite.Data.Migrations
                     b.Property<string>("HinhAnh")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("MaBoPhan")
+                    b.Property<string>("MaBP")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -423,25 +425,25 @@ namespace EcommerceWebsite.Data.Migrations
                         .HasMaxLength(11)
                         .HasColumnType("nvarchar(11)");
 
-                    b.Property<string>("TenNhanVien")
+                    b.Property<string>("TenNV")
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.HasKey("MaNhanVien");
+                    b.HasKey("MaNV");
 
-                    b.HasIndex("MaBoPhan");
+                    b.HasIndex("MaBP");
 
                     b.ToTable("NHANVIEN");
                 });
 
             modelBuilder.Entity("EcommerceWebsite.Data.Entities.NhanXetSP", b =>
                 {
-                    b.Property<string>("MaKhachHang")
+                    b.Property<string>("MaKH")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("MaSanPham")
+                    b.Property<string>("MaSP")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -452,9 +454,9 @@ namespace EcommerceWebsite.Data.Migrations
                     b.Property<int>("soSao")
                         .HasColumnType("int");
 
-                    b.HasKey("MaKhachHang", "MaSanPham");
+                    b.HasKey("MaKH", "MaSP");
 
-                    b.HasIndex("MaSanPham");
+                    b.HasIndex("MaSP");
 
                     b.ToTable("NHANXETSP");
                 });
@@ -465,11 +467,11 @@ namespace EcommerceWebsite.Data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("MaNhaCungCap")
+                    b.Property<string>("MaNCC")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("MaNhanVien")
+                    b.Property<string>("MaNV")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -481,16 +483,16 @@ namespace EcommerceWebsite.Data.Migrations
 
                     b.HasKey("MaNhap");
 
-                    b.HasIndex("MaNhaCungCap");
+                    b.HasIndex("MaNCC");
 
-                    b.HasIndex("MaNhanVien");
+                    b.HasIndex("MaNV");
 
                     b.ToTable("NHAPSANPHAM");
                 });
 
             modelBuilder.Entity("EcommerceWebsite.Data.Entities.SanPham", b =>
                 {
-                    b.Property<string>("MaSanPham")
+                    b.Property<string>("MaSP")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -500,7 +502,7 @@ namespace EcommerceWebsite.Data.Migrations
                     b.Property<string>("MaHang")
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("MaLoai")
+                    b.Property<string>("MaLoaiSP")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)")
@@ -511,42 +513,42 @@ namespace EcommerceWebsite.Data.Migrations
                         .HasColumnType("int")
                         .HasDefaultValue(0);
 
-                    b.Property<string>("TenSanPham")
+                    b.Property<string>("TenSP")
                         .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
-                    b.HasKey("MaSanPham");
+                    b.HasKey("MaSP");
 
                     b.HasIndex("MaHang");
 
-                    b.HasIndex("MaLoai");
+                    b.HasIndex("MaLoaiSP");
 
                     b.ToTable("SANPHAM");
                 });
 
             modelBuilder.Entity("EcommerceWebsite.Data.Entities.ThuocTinh", b =>
                 {
-                    b.Property<string>("MaThuocTinh")
+                    b.Property<string>("MaTT")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("TenThuocTinh")
+                    b.Property<string>("TenTT")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("MaThuocTinh");
+                    b.HasKey("MaTT");
 
                     b.ToTable("THUOCTINH");
                 });
 
             modelBuilder.Entity("EcommerceWebsite.Data.Entities.TinhTrangGH", b =>
                 {
-                    b.Property<string>("MaGiaoHang")
+                    b.Property<string>("MaGH")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("MaTinhTrangGH")
+                    b.Property<string>("MaTTGH")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -556,7 +558,7 @@ namespace EcommerceWebsite.Data.Migrations
                     b.Property<string>("TinhTrang")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("MaGiaoHang", "MaTinhTrangGH");
+                    b.HasKey("MaGH", "MaTTGH");
 
                     b.ToTable("TINHTRANGIAOHANG");
                 });
@@ -565,13 +567,13 @@ namespace EcommerceWebsite.Data.Migrations
                 {
                     b.HasOne("EcommerceWebsite.Data.Entities.HoaDon", "hoaDon")
                         .WithMany("cTHoaDons")
-                        .HasForeignKey("MaHoaDon")
+                        .HasForeignKey("MaHD")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("EcommerceWebsite.Data.Entities.SanPham", "sanPham")
                         .WithMany("cTHoaDons")
-                        .HasForeignKey("MaSanPham")
+                        .HasForeignKey("MaSP")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -590,7 +592,7 @@ namespace EcommerceWebsite.Data.Migrations
 
                     b.HasOne("EcommerceWebsite.Data.Entities.SanPham", "sanPham")
                         .WithMany("cTNhapSPs")
-                        .HasForeignKey("MaSanPham")
+                        .HasForeignKey("MaSP")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -603,7 +605,7 @@ namespace EcommerceWebsite.Data.Migrations
                 {
                     b.HasOne("EcommerceWebsite.Data.Entities.SanPham", "sanPhams")
                         .WithOne("danhGiaSP")
-                        .HasForeignKey("EcommerceWebsite.Data.Entities.DanhGiaSP", "MaSanPham");
+                        .HasForeignKey("EcommerceWebsite.Data.Entities.DanhGiaSP", "MaSP");
 
                     b.Navigation("sanPhams");
                 });
@@ -612,7 +614,7 @@ namespace EcommerceWebsite.Data.Migrations
                 {
                     b.HasOne("EcommerceWebsite.Data.Entities.KhachHang", "khachHang")
                         .WithMany("diaChiKHs")
-                        .HasForeignKey("MaKhachHang")
+                        .HasForeignKey("MaKH")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -623,13 +625,13 @@ namespace EcommerceWebsite.Data.Migrations
                 {
                     b.HasOne("EcommerceWebsite.Data.Entities.SanPham", "sanPham")
                         .WithMany("dinhLuongs")
-                        .HasForeignKey("MaSanPham")
+                        .HasForeignKey("MaSP")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("EcommerceWebsite.Data.Entities.ThuocTinh", "thuocTinh")
                         .WithMany("dinhLuongs")
-                        .HasForeignKey("MaThuocTinh")
+                        .HasForeignKey("MaTT")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -640,41 +642,41 @@ namespace EcommerceWebsite.Data.Migrations
 
             modelBuilder.Entity("EcommerceWebsite.Data.Entities.GiaoHang", b =>
                 {
-                    b.HasOne("EcommerceWebsite.Data.Entities.HoaDon", "hoaDons")
+                    b.HasOne("EcommerceWebsite.Data.Entities.HoaDon", "hoaDon")
                         .WithOne("giaoHang")
-                        .HasForeignKey("EcommerceWebsite.Data.Entities.GiaoHang", "MaHoaDon");
+                        .HasForeignKey("EcommerceWebsite.Data.Entities.GiaoHang", "MaHD");
 
-                    b.Navigation("hoaDons");
+                    b.Navigation("hoaDon");
                 });
 
             modelBuilder.Entity("EcommerceWebsite.Data.Entities.HoaDon", b =>
                 {
-                    b.HasOne("EcommerceWebsite.Data.Entities.KhachHang", "khachHangs")
+                    b.HasOne("EcommerceWebsite.Data.Entities.KhachHang", "khachHang")
                         .WithMany("hoaDons")
-                        .HasForeignKey("MaKhachHang")
+                        .HasForeignKey("MaKH")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("EcommerceWebsite.Data.Entities.KhuyenMai", "khuyenMais")
+                    b.HasOne("EcommerceWebsite.Data.Entities.KhuyenMai", "khuyenMai")
                         .WithMany("hoaDons")
-                        .HasForeignKey("MaKhuyenMai");
+                        .HasForeignKey("MaKM");
 
-                    b.HasOne("EcommerceWebsite.Data.Entities.DiaChiKH", "diaChiKHs")
+                    b.HasOne("EcommerceWebsite.Data.Entities.DiaChiKH", "diaChiKH")
                         .WithMany("hoaDons")
-                        .HasForeignKey("MaDiaChiKH", "MaKhachHang");
+                        .HasForeignKey("MaDiaChiKH", "MaKH");
 
-                    b.Navigation("diaChiKHs");
+                    b.Navigation("diaChiKH");
 
-                    b.Navigation("khachHangs");
+                    b.Navigation("khachHang");
 
-                    b.Navigation("khuyenMais");
+                    b.Navigation("khuyenMai");
                 });
 
             modelBuilder.Entity("EcommerceWebsite.Data.Entities.LichSuGia", b =>
                 {
                     b.HasOne("EcommerceWebsite.Data.Entities.SanPham", "sanPham")
                         .WithMany("lishSuGias")
-                        .HasForeignKey("MaSanPham")
+                        .HasForeignKey("MaSP")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -685,7 +687,7 @@ namespace EcommerceWebsite.Data.Migrations
                 {
                     b.HasOne("EcommerceWebsite.Data.Entities.SanPham", "sanPham")
                         .WithMany("mauSanPhams")
-                        .HasForeignKey("MaSanPham")
+                        .HasForeignKey("MaSP")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -696,43 +698,43 @@ namespace EcommerceWebsite.Data.Migrations
                 {
                     b.HasOne("EcommerceWebsite.Data.Entities.BoPhan", "BoPhan")
                         .WithMany("nhanViens")
-                        .HasForeignKey("MaBoPhan");
+                        .HasForeignKey("MaBP");
 
                     b.Navigation("BoPhan");
                 });
 
             modelBuilder.Entity("EcommerceWebsite.Data.Entities.NhanXetSP", b =>
                 {
-                    b.HasOne("EcommerceWebsite.Data.Entities.KhachHang", "KhachHangs")
+                    b.HasOne("EcommerceWebsite.Data.Entities.KhachHang", "KhachHang")
                         .WithMany("nhanXetSPs")
-                        .HasForeignKey("MaKhachHang")
+                        .HasForeignKey("MaKH")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("EcommerceWebsite.Data.Entities.SanPham", "sanPhams")
+                    b.HasOne("EcommerceWebsite.Data.Entities.SanPham", "sanPham")
                         .WithMany("nhanXetSPs")
-                        .HasForeignKey("MaSanPham")
+                        .HasForeignKey("MaSP")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("KhachHangs");
+                    b.Navigation("KhachHang");
 
-                    b.Navigation("sanPhams");
+                    b.Navigation("sanPham");
                 });
 
             modelBuilder.Entity("EcommerceWebsite.Data.Entities.NhapSanPham", b =>
                 {
-                    b.HasOne("EcommerceWebsite.Data.Entities.NhaCungCap", "nhaCungCaps")
+                    b.HasOne("EcommerceWebsite.Data.Entities.NhaCungCap", "nhaCungCap")
                         .WithMany("nhapSanPhams")
-                        .HasForeignKey("MaNhaCungCap");
+                        .HasForeignKey("MaNCC");
 
-                    b.HasOne("EcommerceWebsite.Data.Entities.NhanVien", "nhanViens")
+                    b.HasOne("EcommerceWebsite.Data.Entities.NhanVien", "nhanVien")
                         .WithMany("nhapSanPhams")
-                        .HasForeignKey("MaNhanVien");
+                        .HasForeignKey("MaNV");
 
-                    b.Navigation("nhaCungCaps");
+                    b.Navigation("nhaCungCap");
 
-                    b.Navigation("nhanViens");
+                    b.Navigation("nhanVien");
                 });
 
             modelBuilder.Entity("EcommerceWebsite.Data.Entities.SanPham", b =>
@@ -743,7 +745,7 @@ namespace EcommerceWebsite.Data.Migrations
 
                     b.HasOne("EcommerceWebsite.Data.Entities.LoaiSanPham", "loaiSanPhams")
                         .WithMany("sanPhams")
-                        .HasForeignKey("MaLoai")
+                        .HasForeignKey("MaLoaiSP")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -754,13 +756,13 @@ namespace EcommerceWebsite.Data.Migrations
 
             modelBuilder.Entity("EcommerceWebsite.Data.Entities.TinhTrangGH", b =>
                 {
-                    b.HasOne("EcommerceWebsite.Data.Entities.GiaoHang", "giaoHangs")
+                    b.HasOne("EcommerceWebsite.Data.Entities.GiaoHang", "giaoHang")
                         .WithMany("tinhTrangGHs")
-                        .HasForeignKey("MaGiaoHang")
+                        .HasForeignKey("MaGH")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("giaoHangs");
+                    b.Navigation("giaoHang");
                 });
 
             modelBuilder.Entity("EcommerceWebsite.Data.Entities.BoPhan", b =>

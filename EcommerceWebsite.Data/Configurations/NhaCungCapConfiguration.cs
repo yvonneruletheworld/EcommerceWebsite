@@ -13,12 +13,12 @@ namespace EcommerceWebsite.Data.Configurations
         {
             builder.ToTable("NHACUNGCAP");
 
-            builder.HasKey(ncc => ncc.MaNCC);
+            builder.HasKey(ncc => ncc.MaNhaCungCap);
 
-            builder.Property(ncc => ncc.MaNCC)
+            builder.Property(ncc => ncc.MaNhaCungCap)
                 .HasMaxLength(100);
 
-            builder.Property(ncc => ncc.TenNCC)
+            builder.Property(ncc => ncc.TenNhaCungCap)
                 .HasColumnType("nvarchar")
                 .HasMaxLength(200);
 

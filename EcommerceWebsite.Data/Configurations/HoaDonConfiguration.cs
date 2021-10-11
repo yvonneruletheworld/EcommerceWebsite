@@ -13,16 +13,16 @@ namespace EcommerceWebsite.Data.Configurations
         {
             builder.ToTable("HOADON");
 
-            builder.HasKey(hd => hd.MaHD);
+            builder.HasKey(hd => hd.MaHoaDon);
 
-            builder.Property(hd => hd.MaHD)
+            builder.Property(hd => hd.MaHoaDon)
                 .HasMaxLength(100);
 
-            builder.Property(hd => hd.MaKH)
+            builder.Property(hd => hd.MaKhachHang)
                 .HasMaxLength(100)
                 .IsRequired();
 
-            builder.Property(hd => hd.MaKM)
+            builder.Property(hd => hd.MaKhuyenMai)
                 .HasMaxLength(100);
 
             builder.Property(hd => hd.MaDiaChiKH)
@@ -37,17 +37,17 @@ namespace EcommerceWebsite.Data.Configurations
             builder.Property(hd => hd.TongTien)
                 .HasColumnType("money");
 
-            builder.HasOne(hd => hd.khachHang)
+            builder.HasOne(hd => hd.khachHangs)
                 .WithMany(hd => hd.hoaDons)
-                .HasForeignKey(hd => hd.MaKH);
+                .HasForeignKey(hd => hd.MaKhachHang);
 
-            builder.HasOne(hd => hd.khuyenMai)
+            builder.HasOne(hd => hd.khuyenMais)
                 .WithMany(hd => hd.hoaDons)
-                .HasForeignKey(hd => hd.MaKM);
+                .HasForeignKey(hd => hd.MaKhuyenMai);
 
-            builder.HasOne(hd => hd.diaChiKH)
+            builder.HasOne(hd => hd.diaChiKHs)
                 .WithMany(hd => hd.hoaDons)
-                .HasForeignKey(hd =>new { hd.MaDiaChiKH, hd.MaKH });
+                .HasForeignKey(hd =>new { hd.MaDiaChiKH, hd.MaKhachHang });
         }
     }
 }

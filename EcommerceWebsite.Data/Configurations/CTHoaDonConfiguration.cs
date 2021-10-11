@@ -13,12 +13,12 @@ namespace EcommerceWebsite.Data.Configurations
         {
             builder.ToTable("CTHOADON");
 
-            builder.HasKey(ct => new { ct.MaHD, ct.MaSP });
+            builder.HasKey(ct => new { ct.MaHoaDon, ct.MaSanPham });
 
-            builder.Property(ct => ct.MaSP)
+            builder.Property(ct => ct.MaSanPham)
                 .HasMaxLength(100);
 
-            builder.Property(ct => ct.MaHD)
+            builder.Property(ct => ct.MaHoaDon)
                 .HasMaxLength(100);
 
             builder.Property(ct => ct.SoLuong)
@@ -31,13 +31,13 @@ namespace EcommerceWebsite.Data.Configurations
             builder.Property(ct => ct.DonGia)
                 .HasColumnType("money");
 
-            builder.HasOne(ct => ct.hoaDon)
+            builder.HasOne(ct => ct.HoaDons)
                 .WithMany(ct => ct.cTHoaDons)
-                .HasForeignKey(ct => ct.MaHD);
+                .HasForeignKey(ct => ct.MaHoaDon);
 
-            builder.HasOne(ct => ct.sanPham)
+            builder.HasOne(ct => ct.SanPhams)
                .WithMany(ct => ct.cTHoaDons)
-               .HasForeignKey(ct => ct.MaSP);
+               .HasForeignKey(ct => ct.MaSanPham);
         }
     }
 }

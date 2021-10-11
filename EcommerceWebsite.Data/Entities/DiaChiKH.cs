@@ -9,7 +9,7 @@ namespace EcommerceWebsite.Data.Entities
         public string MaDiaChiKH { get; set; }
         public string DiaChiGH { get; set; }
         public string SDT { get; set; }
-        public string MaKH { get; set; }
+        public string MaKhachHang { get; set; }
         public KhachHang khachHang { get; set; }
         public List<HoaDon> hoaDons { get; set; }
     }

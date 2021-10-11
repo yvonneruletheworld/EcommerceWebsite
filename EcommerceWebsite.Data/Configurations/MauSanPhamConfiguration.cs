@@ -13,9 +13,9 @@ namespace EcommerceWebsite.Data.Configurations
         {
             builder.ToTable("MAUSANPHAM");
 
-            builder.HasKey(msp => new { msp.MaSP, msp.TenMau });
+            builder.HasKey(msp => new { msp.MaSanPham, msp.TenMau });
 
-            builder.Property(msp => msp.MaSP)
+            builder.Property(msp => msp.MaSanPham)
                 .HasMaxLength(100);
 
             builder.Property(msp => msp.TenMau)
@@ -24,7 +24,7 @@ namespace EcommerceWebsite.Data.Configurations
 
             builder.HasOne(msp => msp.sanPham)
                 .WithMany(msp => msp.mauSanPhams)
-                .HasForeignKey(msp => msp.MaSP);
+                .HasForeignKey(msp => msp.MaSanPham);
 
         }
     }

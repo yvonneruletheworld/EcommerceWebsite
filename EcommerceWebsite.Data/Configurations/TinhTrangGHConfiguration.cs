@@ -13,17 +13,17 @@ namespace EcommerceWebsite.Data.Configurations
         {
             builder.ToTable("TINHTRANGIAOHANG");
 
-            builder.HasKey(tt => new { tt.MaGH, tt.MaTTGH });
+            builder.HasKey(tt => new { tt.MaGiaoHang, tt.MaTinhTrangGH });
 
-            builder.Property(tt => tt.MaGH)
+            builder.Property(tt => tt.MaGiaoHang)
                 .HasMaxLength(100);
 
-            builder.Property(tt => tt.MaTTGH)
+            builder.Property(tt => tt.MaTinhTrangGH)
                .HasMaxLength(100);
 
-            builder.HasOne(tt => tt.giaoHang)
+            builder.HasOne(tt => tt.giaoHangs)
                 .WithMany(tt => tt.tinhTrangGHs)
-                .HasForeignKey(tt => tt.MaGH);
+                .HasForeignKey(tt => tt.MaGiaoHang);
 
 
 

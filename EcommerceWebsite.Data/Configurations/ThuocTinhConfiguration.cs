@@ -13,13 +13,13 @@ namespace EcommerceWebsite.Data.Configurations
         {
             builder.ToTable("THUOCTINH");
 
-            builder.HasKey(tt => tt.MaTT);
+            builder.HasKey(tt => tt.MaThuocTinh);
 
-            builder.Property(tt => tt.MaTT)
+            builder.Property(tt => tt.MaThuocTinh)
                 .HasMaxLength(100)
                 .IsRequired();
 
-            builder.Property(tt => tt.TenTT)
+            builder.Property(tt => tt.TenThuocTinh)
                 .IsRequired();
         }
     }

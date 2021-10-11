@@ -18,22 +18,22 @@ namespace EcommerceWebsite.Data.Configurations
             builder.Property(nsp => nsp.MaNhap)
                 .HasMaxLength(100);
 
-            builder.Property(nsp => nsp.MaNCC)
+            builder.Property(nsp => nsp.MaNhaCungCap)
                .HasMaxLength(100);
 
-            builder.Property(nsp => nsp.MaNV)
+            builder.Property(nsp => nsp.MaNhanVien)
                .HasMaxLength(100);
 
             builder.Property(nsp => nsp.TongTien)
                 .HasColumnType("money");
 
-            builder.HasOne(nsp => nsp.nhaCungCap)
+            builder.HasOne(nsp => nsp.nhaCungCaps)
                 .WithMany(nsp => nsp.nhapSanPhams)
-                .HasForeignKey(nsp => nsp.MaNCC);
+                .HasForeignKey(nsp => nsp.MaNhaCungCap);
 
-            builder.HasOne(nsp => nsp.nhanVien)
+            builder.HasOne(nsp => nsp.nhanViens)
                 .WithMany(nsp => nsp.nhapSanPhams)
-                .HasForeignKey(nsp => nsp.MaNV);
+                .HasForeignKey(nsp => nsp.MaNhanVien);
         }
     }
 }

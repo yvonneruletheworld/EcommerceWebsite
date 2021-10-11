@@ -6,8 +6,8 @@ namespace EcommerceWebsite.Data.Entities
 {
    public class BoPhan
     {
-        public string MaBP { get; set; }
-        public string TenBP { get; set; }
+        public string MaBoPhan { get; set; }
+        public string TenBoPhan { get; set; }
         public List<NhanVien> nhanViens { get; set; }
     }
 }

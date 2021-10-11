@@ -12,13 +12,13 @@ namespace EcommerceWebsite.Data.Configurations
         public void Configure(EntityTypeBuilder<SanPham> builder)
         {
             builder.ToTable("SANPHAM");
-            builder.HasKey(sp => sp.MaSP);
+            builder.HasKey(sp => sp.MaSanPham);
 
-            builder.Property(sp => sp.MaSP)
+            builder.Property(sp => sp.MaSanPham)
                 .HasMaxLength(100)
                 .IsRequired();
 
-            builder.Property(sp => sp.TenSP)
+            builder.Property(sp => sp.TenSanPham)
                 .HasMaxLength(500)
                 .HasColumnType("nvarchar")
                 .IsRequired();
@@ -28,14 +28,14 @@ namespace EcommerceWebsite.Data.Configurations
                   .HasColumnType("int")
                   .HasDefaultValue(0);
 
-            builder.Property(sp => sp.MaLoaiSP)
+            builder.Property(sp => sp.MaLoai)
                  .IsRequired()
                  .HasMaxLength(100)
                  .HasDefaultValue(0);
 
             builder.HasOne(sp => sp.loaiSanPhams)
                   .WithMany(sp => sp.sanPhams)
-                  .HasForeignKey(sp => sp.MaLoaiSP);
+                  .HasForeignKey(sp => sp.MaLoai);
 
             builder.HasOne(sp => sp.hangSanPhams)
                  .WithMany(sp => sp.sanPhams)

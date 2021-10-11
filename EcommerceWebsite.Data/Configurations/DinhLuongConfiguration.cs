@@ -13,12 +13,12 @@ namespace EcommerceWebsite.Data.Configurations
         {
             builder.ToTable("DINHLUONG");
 
-            builder.HasKey(dl => new { dl.MaTT, dl.MaSP });
+            builder.HasKey(dl => new { dl.MaThuocTinh, dl.MaSanPham });
 
-            builder.Property(dl => dl.MaSP)
+            builder.Property(dl => dl.MaSanPham)
                 .HasMaxLength(100);
 
-            builder.Property(dl => dl.MaTT)
+            builder.Property(dl => dl.MaThuocTinh)
                 .HasMaxLength(100);
 
             builder.Property(dl => dl.DonVi)
@@ -27,11 +27,11 @@ namespace EcommerceWebsite.Data.Configurations
             //Khóa ngoại
             builder.HasOne(dl => dl.sanPham)
                  .WithMany(dl => dl.dinhLuongs)
-                 .HasForeignKey(dl => dl.MaSP);
+                 .HasForeignKey(dl => dl.MaSanPham);
 
             builder.HasOne(dl => dl.thuocTinh)
                    .WithMany(dl => dl.dinhLuongs)
-                   .HasForeignKey(dl => dl.MaTT);
+                   .HasForeignKey(dl => dl.MaThuocTinh);
         }
     }
 }
