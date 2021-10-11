@@ -24,6 +24,7 @@ namespace EcommerceWebsite.Data.Entities
         public string Description { get; set; }
         public string Brand { get; set; }
         public decimal Price { get; set; }
+        public decimal Utility { get; set; }
         //[Required]
         public decimal Const { get; set; }
         public int Stock { get; set; }
@@ -34,5 +35,6 @@ namespace EcommerceWebsite.Data.Entities
         //Foreign Key
 
         public List<ProductCategory> ProductCategories { get; set; }
+        public List<ChiTietHoaDon> ChiTietHoaDons { get; set; }
     }
 }
