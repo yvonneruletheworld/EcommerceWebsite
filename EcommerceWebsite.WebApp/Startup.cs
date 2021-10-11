@@ -30,18 +30,20 @@ namespace EcommerceWebsite.WebApp
         {
             services.AddControllersWithViews();
 
-            IConfigurationRoot configuration = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("D:/School/EcommerceWebsite/EcommerceWebsite.Data/appsetting.json")
-                .Build();
+            //IConfigurationRoot configuration = new ConfigurationBuilder()
+            //    .SetBasePath(Directory.GetCurrentDirectory())
+            //    .AddJsonFile("D:/School/EcommerceWebsite/EcommerceWebsite.Data/appsetting.json")
+            //    .Build();
 
-            var connectionString = configuration.GetConnectionString("EcommerceWebsiteDatabase");
-            var optionBuilder = new DbContextOptionsBuilder<EcomWebDbContext>();
-            optionBuilder.UseSqlServer(connectionString);
+            var str = Configuration.GetConnectionString("EcommerceWebsiteDatabase");
+            services.AddDbContext<EcomWebDbContext>(options =>
+                options.UseSqlServer(str));
 
+            //var connectionString = configuration.GetConnectionString("EcommerceWebsiteDatabase");
+            //var optionBuilder = new DbContextOptionsBuilder<EcomWebDbContext>();
+            //optionBuilder.UseSqlServer(connectionString);
 
-
-            services.AddScoped<IProductServices, ProductServices>();
+            services.AddScoped<IProductServices,ProductServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
