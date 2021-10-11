@@ -3,6 +3,7 @@
 ## Technologies
 - ASP.NET Core 3.1
 - Entity Framework Core 3.1
+- Fluent API
 ## Install Packages
 - Microsoft.EntityFrameworkCore.Tools
 - Microsoft.EntityFrameworkCore.Design
@@ -11,4 +12,3 @@
 ## How to contributes
 ## Our Team:
 - Yvonne: https://github.com/yvonneruletheworld?tab=repositories
-- PhamTVi:
