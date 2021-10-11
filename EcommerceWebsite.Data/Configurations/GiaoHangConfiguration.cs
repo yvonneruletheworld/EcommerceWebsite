@@ -28,7 +28,7 @@ namespace EcommerceWebsite.Data.Configurations
                 .HasColumnType("DateTime");
 
             builder.HasOne(gh => gh.hoaDons)
-                .WithOne(gh => gh.giaoHang)
+                .WithOne(gh => gh.giaoHangs)
                 .HasForeignKey<GiaoHang>(gh => gh.MaHoaDon);
         }
     }

@@ -9,6 +9,6 @@ namespace EcommerceWebsite.Data.Entities
         public DateTime NgayBD { get; set; }
         public decimal Gia { get; set; }
         public string MaSanPham { get; set; }
-        public SanPham sanPham { get; set; }
+        public SanPham sanPhams { get; set; }
     }
 }

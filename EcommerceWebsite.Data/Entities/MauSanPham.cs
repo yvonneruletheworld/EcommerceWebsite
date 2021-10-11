@@ -9,6 +9,6 @@ namespace EcommerceWebsite.Data.Entities
         public string MaSanPham { get; set; }
         public string TenMau { get; set; }
         public string HinhAnh { get; set; }
-        public SanPham sanPham { get; set; }
+        public SanPham sanPhams { get; set; }
     }
 }

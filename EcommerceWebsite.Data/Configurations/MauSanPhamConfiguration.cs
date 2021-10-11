@@ -22,7 +22,7 @@ namespace EcommerceWebsite.Data.Configurations
                 .HasMaxLength(200)
                 .HasColumnType("nvarchar");
 
-            builder.HasOne(msp => msp.sanPham)
+            builder.HasOne(msp => msp.sanPhams)
                 .WithMany(msp => msp.mauSanPhams)
                 .HasForeignKey(msp => msp.MaSanPham);
 
