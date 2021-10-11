@@ -21,6 +21,6 @@ namespace EcommerceWebsite.Data.Entities
         public KhuyenMai khuyenMais { get; set; }
         public List<CTHoaDon> cTHoaDons { get; set; }
 
-        public GiaoHang giaoHang { get; set; }
+        public GiaoHang giaoHangs { get; set; }
     }
 }

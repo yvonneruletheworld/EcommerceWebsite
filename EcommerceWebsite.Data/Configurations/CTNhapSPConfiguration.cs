@@ -31,11 +31,11 @@ namespace EcommerceWebsite.Data.Configurations
                .HasColumnType("int")
                 .HasDefaultValue(0); ;
 
-            builder.HasOne(xl => xl.NhapSanPhams)
+            builder.HasOne(xl => xl.nhapSanPhams)
                 .WithMany(xl => xl.cTNhapSPs)
                 .HasForeignKey(xl => xl.MaNhap);
 
-            builder.HasOne(xl => xl.SanPhams)
+            builder.HasOne(xl => xl.sanPhams)
                 .WithMany(xl => xl.cTNhapSPs)
                 .HasForeignKey(xl => xl.MaSanPham);
         }

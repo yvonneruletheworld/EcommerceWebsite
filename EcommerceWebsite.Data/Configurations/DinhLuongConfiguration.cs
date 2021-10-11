@@ -25,11 +25,11 @@ namespace EcommerceWebsite.Data.Configurations
                 .IsRequired();
 
             //Khóa ngoại
-            builder.HasOne(dl => dl.sanPham)
+            builder.HasOne(dl => dl.sanPhams)
                  .WithMany(dl => dl.dinhLuongs)
                  .HasForeignKey(dl => dl.MaSanPham);
 
-            builder.HasOne(dl => dl.thuocTinh)
+            builder.HasOne(dl => dl.thuocTinhs)
                    .WithMany(dl => dl.dinhLuongs)
                    .HasForeignKey(dl => dl.MaThuocTinh);
         }

@@ -31,11 +31,11 @@ namespace EcommerceWebsite.Data.Configurations
             builder.Property(ct => ct.DonGia)
                 .HasColumnType("money");
 
-            builder.HasOne(ct => ct.HoaDons)
+            builder.HasOne(ct => ct.hoaDons)
                 .WithMany(ct => ct.cTHoaDons)
                 .HasForeignKey(ct => ct.MaHoaDon);
 
-            builder.HasOne(ct => ct.SanPhams)
+            builder.HasOne(ct => ct.sanPhams)
                .WithMany(ct => ct.cTHoaDons)
                .HasForeignKey(ct => ct.MaSanPham);
         }

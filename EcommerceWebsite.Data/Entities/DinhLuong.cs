@@ -11,8 +11,8 @@ namespace EcommerceWebsite.Data.Entities
         public string MaSanPham { get; set; }
         public string MaThuocTinh { get; set; }
         //Khóa ngoại
-        public ThuocTinh thuocTinh { get; set; }
-        public SanPham sanPham { get; set; }
+        public ThuocTinh thuocTinhs { get; set; }
+        public SanPham sanPhams { get; set; }
 
     }
 }
