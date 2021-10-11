@@ -30,7 +30,7 @@ namespace EcommerceWebsite.Services.Services.Main
 
         public List<Product> GetListProduct()
         {
-            throw new NotImplementedException();
+            return null;
         }
 
         public PageResponse<List<ProductOutput>> GetListProductByPage(string key, int pageIndex, int pageSize)
