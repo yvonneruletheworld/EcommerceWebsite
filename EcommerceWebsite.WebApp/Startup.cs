@@ -1,6 +1,6 @@
-using EcommerceWebsite.Application.Interfaces;
-using EcommerceWebsite.Application.Services;
 using EcommerceWebsite.Data.EF;
+using EcommerceWebsite.Services.Interfaces.Main;
+using EcommerceWebsite.Services.Services.Main;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;

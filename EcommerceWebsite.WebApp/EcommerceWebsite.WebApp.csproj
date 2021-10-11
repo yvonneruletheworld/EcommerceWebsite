@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EcommerceWebsite.Application\EcommerceWebsite.Application.csproj" />
+    <ProjectReference Include="..\EcommerceWebsite.Services\EcommerceWebsite.Services.csproj" />
   </ItemGroup>
 
 </Project>
