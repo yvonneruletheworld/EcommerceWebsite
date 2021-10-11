@@ -18,8 +18,7 @@ namespace EcommerceWebsite.WebApp.Controllers.SP
 
         public IActionResult Index()
         {
-            var lst = sanPhamServices.GetListProduct();
-            bool? kt = sanPhamServices.KiemTra("j");
+            bool? kt = productServices.KiemTra("j");
             return View();
         }
     }
