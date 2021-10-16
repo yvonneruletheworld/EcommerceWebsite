@@ -11,20 +11,27 @@ namespace EcommerceWebsite.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<KhachHang> builder)
         {
-            builder.ToTable("KhachHang"); //Tên bảng
-            builder.HasKey(kh => kh.Id);  //Khóa Chính
+            builder.ToTable("KHACHHANG");
 
-            //Các thuộc tính khác
+            builder.HasKey(kh => kh.Id);
 
             builder.Property(kh => kh.Id)
-                .IsRequired()  //not null
-                .HasMaxLength(100);  //...(100)
-            builder.Property(kh => kh.Sdt)
-                .IsRequired()
-                .HasMaxLength(11);
-            builder.Property(kh => kh.HoTen)
-                .HasColumnType("nvarchar")
                 .HasMaxLength(100);
+            builder.Property(kh => kh.Username)
+                .HasMaxLength(20).IsRequired();
+
+            builder.Property(Kh => Kh.HoTen)
+                .HasMaxLength(200)
+                .HasColumnType("nvarchar")
+                .IsRequired();
+
+            builder.Property(kh => kh.Sdt)
+                .HasMaxLength(11)
+                .IsRequired();
+
+            builder.Property(kh => kh.Email)
+                .HasMaxLength(200)
+                .IsRequired();
         }
     }
 }

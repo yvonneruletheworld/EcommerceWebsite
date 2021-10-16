@@ -11,20 +11,41 @@ namespace EcommerceWebsite.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<HoaDon> builder)
         {
-            builder.ToTable("HoaDon");
+            builder.ToTable("HOADON");
+
             builder.HasKey(hd => hd.Id);
 
-            builder.Property(hd => hd.CreateDate)
+            builder.Property(hd => hd.Id)
+                .HasMaxLength(100);
+            builder.Property(hd => hd.NgayTao)
                 .IsRequired();
-            builder.Property(hd => hd.MaKhachHang)
-                .IsRequired();
-            builder.Property(hd => hd.TongCong)
-                .HasDefaultValue(0).HasColumnType("money");
+
+            builder.Property(hd => hd.MaKhuyenMai)
+                .HasMaxLength(100);
+
+            builder.Property(hd => hd.MaDiaChi)
+                .HasMaxLength(100);
+
+            builder.Property(hd => hd.PhiGiaoHang)
+                .HasColumnType("money");
+
             builder.Property(hd => hd.ThanhTien)
-                .HasDefaultValue(0).HasColumnType("money");
-            builder.HasOne(hd => hd.KhachHangs)
-                .WithMany(kh => kh.HoaDons)
+                .HasColumnType("money");
+
+            builder.Property(hd => hd.TongCong)
+                .HasColumnType("money");
+
+            builder.HasOne(hd => hd.KhachHang)
+                .WithMany(hd => hd.HoaDons)
                 .HasForeignKey(hd => hd.MaKhachHang);
+
+            builder.HasOne(hd => hd.KhuyenMai)
+                .WithMany(hd => hd.HoaDons)
+                .HasForeignKey(hd => hd.MaKhuyenMai);
+
+            builder.HasOne(hd => hd.DiaChiKhachHang)
+                .WithMany(hd => hd.HoaDons)
+                .HasForeignKey(hd =>new { hd.MaDiaChi, hd.MaKhachHang });
         }
     }
 }

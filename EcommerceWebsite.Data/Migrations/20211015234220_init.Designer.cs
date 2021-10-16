@@ -4,14 +4,16 @@ using EcommerceWebsite.Data.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EcommerceWebsite.Data.Migrations
 {
     [DbContext(typeof(EcomWebDbContext))]
-    partial class EcomWebDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211015234220_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -201,7 +203,7 @@ namespace EcommerceWebsite.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DANHMUC");
+                    b.ToTable("LOAISANPHAM");
 
                     b.HasData(
                         new
@@ -210,7 +212,7 @@ namespace EcommerceWebsite.Data.Migrations
                             DaXoa = false,
                             IsShowInHome = true,
                             Name = "Điện thoại",
-                            NgayTao = new DateTime(2021, 10, 15, 23, 46, 22, 82, DateTimeKind.Utc).AddTicks(5644),
+                            NgayTao = new DateTime(2021, 10, 15, 23, 42, 19, 720, DateTimeKind.Utc).AddTicks(1919),
                             NguoiTao = "admin",
                             Status = 1
                         },
@@ -220,7 +222,7 @@ namespace EcommerceWebsite.Data.Migrations
                             DaXoa = false,
                             IsShowInHome = true,
                             Name = "iPhone",
-                            NgayTao = new DateTime(2021, 10, 15, 23, 46, 22, 82, DateTimeKind.Utc).AddTicks(6447),
+                            NgayTao = new DateTime(2021, 10, 15, 23, 42, 19, 720, DateTimeKind.Utc).AddTicks(2911),
                             NguoiTao = "admin",
                             ParentId = "DM001",
                             Status = 1
@@ -231,7 +233,7 @@ namespace EcommerceWebsite.Data.Migrations
                             DaXoa = false,
                             IsShowInHome = true,
                             Name = "Samsung",
-                            NgayTao = new DateTime(2021, 10, 15, 23, 46, 22, 82, DateTimeKind.Utc).AddTicks(6492),
+                            NgayTao = new DateTime(2021, 10, 15, 23, 42, 19, 720, DateTimeKind.Utc).AddTicks(2954),
                             NguoiTao = "admin",
                             ParentId = "DM001",
                             Status = 1
@@ -834,7 +836,7 @@ namespace EcommerceWebsite.Data.Migrations
                             MaSanPham = "SP001",
                             DaXoa = false,
                             MaLoaiSanPham = "DM003",
-                            NgayTao = new DateTime(2021, 10, 15, 23, 46, 22, 83, DateTimeKind.Utc).AddTicks(6521),
+                            NgayTao = new DateTime(2021, 10, 15, 23, 42, 19, 721, DateTimeKind.Utc).AddTicks(2359),
                             NguoiTao = "admin",
                             NhanHieu = "Samsung",
                             SoLuongTon = 1,
@@ -847,7 +849,7 @@ namespace EcommerceWebsite.Data.Migrations
                             MaSanPham = "SP002",
                             DaXoa = false,
                             MaLoaiSanPham = "DM003",
-                            NgayTao = new DateTime(2021, 10, 15, 23, 46, 22, 83, DateTimeKind.Utc).AddTicks(7009),
+                            NgayTao = new DateTime(2021, 10, 15, 23, 42, 19, 721, DateTimeKind.Utc).AddTicks(2823),
                             NguoiTao = "admin",
                             NhanHieu = "Samsung",
                             SoLuongTon = 1,
@@ -1282,13 +1284,13 @@ namespace EcommerceWebsite.Data.Migrations
                         {
                             Id = "8d04dce2-969a-435d-bba4-df3f325983dc",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "fd4c6b2b-4283-4738-881f-93e23b80944e",
+                            ConcurrencyStamp = "54606f2e-02b4-498a-82fc-2c8aa05efae4",
                             Email = "yvonnetran.work@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "yvonnetran.work@gmail.com",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGcL2cbnh9MT3g7Dn7JmQcGVmR79mxPSeT3tiBdovhSi9fuhzzR7di5AvPOQOZ/MwA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJXP5ngUm1UvaOHLW3dn4KDIPxz43zHllX1v+l8HUKA3YuBkLLTL5QnldNfUW0UQCg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,

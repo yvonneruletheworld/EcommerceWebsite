@@ -9,16 +9,16 @@ namespace EcommerceWebsite.WebApp.Controllers.SP
 {
     public class ProductController : Controller
     {
-        private readonly IProductServices productServices;
+        private readonly ISanPhamServices sanPhamServices;
 
-        public ProductController(IProductServices productServices)
+        public ProductController(ISanPhamServices sanPhamServices)
         {
-            this.productServices = productServices;
+            this.sanPhamServices = sanPhamServices;
         }
 
         public IActionResult Index()
         {
-            bool? kt = productServices.KiemTra("j");
+            bool? kt = sanPhamServices.KiemTra("j");
             return View();
         }
     }
