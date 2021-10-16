@@ -11,16 +11,29 @@ namespace EcommerceWebsite.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<ChiTietHoaDon> builder)
         {
-            builder.ToTable("ChiTietHoaDon");
-            builder.HasKey(ct => new { ct.HoaDonId, ct.ProductId});
-            builder.Property(hd => hd.SoLuong)
+            builder.ToTable("CHITIETHOADON");
+
+            builder.HasKey(ct => new { ct.ProductId, ct.HoaDonId });
+
+            builder.Property(ct => ct.ProductId)
+                .HasMaxLength(100);
+            builder.Property(ct => ct.HoaDonId)
+                .HasMaxLength(100);
+
+            builder.Property(ct => ct.SoLuong)
+                .HasColumnType("int")
                 .HasDefaultValue(0);
-            builder.HasOne(ct => ct.Products)
-                .WithMany(p => p.ChiTietHoaDons)
-                .HasForeignKey(ct => ct.ProductId);
+
+            builder.Property(ct => ct.GiaBan)
+                .HasColumnType("money");
+
             builder.HasOne(ct => ct.HoaDons)
-                .WithMany(p => p.ChiTietHoaDons)
+                .WithMany(ct => ct.ChiTietHoaDons)
                 .HasForeignKey(ct => ct.HoaDonId);
+
+            builder.HasOne(ct => ct.SanPhams)
+               .WithMany(ct => ct.ChiTietHoaDons)
+               .HasForeignKey(ct => ct.ProductId);
         }
     }
 }

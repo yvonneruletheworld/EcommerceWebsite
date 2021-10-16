@@ -1,5 +1,4 @@
 ﻿using EcommerceWebsite.Data.Enum;
-using EcommerceWebsite.Media.Strings;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,9 +6,9 @@ using System.Text;
 
 namespace EcommerceWebsite.Data.Entities
 {
-    public class Category: EntityBase
+    public class DanhMuc: EntityBase
     {
-        public Category()
+        public DanhMuc()
         {
             this.Id = Guid.NewGuid().ToString();
         }
@@ -26,6 +25,6 @@ namespace EcommerceWebsite.Data.Entities
         public bool IsShowInHome { get; set; }
         public string ParentId { get; set; }
         public Status Status { get; set; }
-        public List<ProductCategory> ProductCategories { get; set; }
+        public List<SanPham> SanPhams { get; set; }
     }
 }

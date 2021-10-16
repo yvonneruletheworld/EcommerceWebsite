@@ -4,13 +4,13 @@ namespace EcommerceWebsite.Data.Entities
 {
     public class EntityBase
     {
-        public DateTime CreateDate { get; set; }
-        public string CreateUserId { get; set; }
-        public string LastModificationUserId { get; set; }
-        public DateTime? LastModificationTime { get; set; }
-        public bool IsDeleted { get; set; }
-        public DateTime? DeleterTime { get; set; }
-        public string DeleteUserId { get; set; }
+        public DateTime NgayTao { get; set; }
+        public string NguoiTao { get; set; }
+        public string NguoiSuaCuoi { get; set; }
+        public DateTime? NgaySuaCuoi { get; set; }
+        public bool DaXoa { get; set; }
+        public DateTime? NgayXoa { get; set; }
+        public string NguoiXoa { get; set; }
 
     }
 }
