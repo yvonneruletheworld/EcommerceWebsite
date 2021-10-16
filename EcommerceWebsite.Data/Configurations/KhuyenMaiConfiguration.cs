@@ -13,12 +13,12 @@ namespace EcommerceWebsite.Data.Configurations
         {
             builder.ToTable("KHUYENMAI");
 
-            builder.HasKey(km => km.MaKM);
+            builder.HasKey(km => km.MaKhuyenMai);
 
-            builder.Property(km => km.MaKM)
+            builder.Property(km => km.MaKhuyenMai)
                 .HasMaxLength(100);
 
-            builder.Property(km => km.TenKM)
+            builder.Property(km => km.TenKhuyenMai)
                 .IsRequired();
 
             builder.Property(km => km.PhanTram)

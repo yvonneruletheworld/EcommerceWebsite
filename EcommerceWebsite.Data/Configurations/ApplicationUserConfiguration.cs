@@ -9,13 +9,11 @@ using System.Text;
 
 namespace EcommerceWebsite.Data.Configurations
 {
-    public class KhachHangVMConfiguration : IEntityTypeConfiguration<KhachHangVM>
+    public class ApplicationUserConfiguration : IEntityTypeConfiguration<ApplicationUser>
     {
-        public void Configure(EntityTypeBuilder<KhachHangVM> builder)
+        public void Configure(EntityTypeBuilder<ApplicationUser> builder)
         {
-            builder.Property(kh => kh.HoTen)
-                .HasColumnType("nvarchar")
-                .HasMaxLength(100);
+            builder.HasIndex(x => new { x.IdAuto }).IsUnique();
         }
     }
 }

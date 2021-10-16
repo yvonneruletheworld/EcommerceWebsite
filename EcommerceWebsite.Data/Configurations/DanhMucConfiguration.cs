@@ -7,19 +7,19 @@ using System.Text;
 
 namespace EcommerceWebsite.Data.Configurations
 {
-    public class LoaiSanPhamConfiguration : IEntityTypeConfiguration<LoaiSanPham>
+    public class DanhMucConfiguration : IEntityTypeConfiguration<DanhMuc>
     {
-        public void Configure(EntityTypeBuilder<LoaiSanPham> builder)
+        public void Configure(EntityTypeBuilder<DanhMuc> builder)
         {
-            builder.ToTable("LOAISANPHAM");
+            builder.ToTable("DANHMUC");
 
-            builder.HasKey(lsp => lsp.MaLoai);
+            builder.HasKey(lsp => lsp.Id);
 
-            builder.Property(lsp => lsp.MaLoai)
+            builder.Property(lsp => lsp.Id)
                 .HasMaxLength(100)
                 .IsRequired();
 
-            builder.Property(lsp => lsp.TenLoai)
+            builder.Property(lsp => lsp.Name)
                 .HasMaxLength(200)
                 .IsRequired()
                 .HasColumnType("nvarchar");

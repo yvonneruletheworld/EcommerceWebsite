@@ -13,13 +13,14 @@ namespace EcommerceWebsite.Data.Configurations
         {
             builder.ToTable("BOPHAN");
 
-            builder.HasKey(bp => bp.MaBP);
+            builder.HasKey(bp => bp.MaBoPhan);
+            
+            builder.Property(bp => bp.MaBoPhan)
+                .HasMaxLength(100).IsRequired();
 
-            builder.Property(bp => bp.MaBP)
-                .HasMaxLength(100);
-
-            builder.Property(bp => bp.TenBP)
-                .IsRequired();
+            builder.Property(bp => bp.TenBoPhan)
+                .HasColumnType("nvarchar").HasMaxLength(100);
+            
         }
     }
 }

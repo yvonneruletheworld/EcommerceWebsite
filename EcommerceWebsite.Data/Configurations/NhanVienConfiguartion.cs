@@ -13,15 +13,17 @@ namespace EcommerceWebsite.Data.Configurations
         {
             builder.ToTable("NHANVIEN");
 
-            builder.HasKey(nv => nv.MaNV);
+            builder.HasKey(nv => nv.MaNhanVien);
 
-            builder.Property(nv => nv.MaNV)
+            builder.Property(nv => nv.MaNhanVien)
+                .HasMaxLength(100).IsRequired();
+            builder.Property(nv => nv.Username)
+                .HasMaxLength(20).IsRequired();
+
+            builder.Property(nv => nv.MaBoPhan)
                 .HasMaxLength(100);
 
-            builder.Property(nv => nv.MaBP)
-                .HasMaxLength(100);
-
-            builder.Property(nv => nv.TenNV)
+            builder.Property(nv => nv.TenNhanVien)
                 .HasMaxLength(200)
                 .HasColumnType("nvarchar")
                 .IsRequired();
@@ -35,8 +37,8 @@ namespace EcommerceWebsite.Data.Configurations
                 .IsRequired();
 
             builder.HasOne(nv => nv.BoPhan)
-                .WithMany(nv => nv.nhanViens)
-                .HasForeignKey(nv => nv.MaBP);
+                .WithMany(nv => nv.NhanViens)
+                .HasForeignKey(nv => nv.MaBoPhan);
 
 
 

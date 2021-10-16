@@ -8,11 +8,11 @@ namespace EcommerceWebsite.Data.Entities
     {
         public string DonVi { get; set; }
         public float GiaTri { get; set; }
-        public string MaSP { get; set; }
-        public string MaTT { get; set; }
+        public string MaSanPham { get; set; }
+        public string MaThuocTinh { get; set; }
         //Khóa ngoại
-        public ThuocTinh thuocTinh { get; set; }
-        public SanPham sanPham { get; set; }
+        public ThuocTinh ThuocTinh { get; set; }
+        public SanPham SanPham { get; set; }
 
     }
 }

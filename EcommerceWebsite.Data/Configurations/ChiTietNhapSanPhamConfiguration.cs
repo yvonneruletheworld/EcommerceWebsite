@@ -7,15 +7,15 @@ using System.Text;
 
 namespace EcommerceWebsite.Data.Configurations
 {
-    public class CTNhapSPConfiguration : IEntityTypeConfiguration<CTNhapSP>
+    public class ChiTietNhapSanPhamConfiguration : IEntityTypeConfiguration<ChiTietNhapSanPham>
     {
-        public void Configure(EntityTypeBuilder<CTNhapSP> builder)
+        public void Configure(EntityTypeBuilder<ChiTietNhapSanPham> builder)
         {
-            builder.ToTable("CTNHAPSP");
+            builder.ToTable("CHITIETNHAPSANPHAM");
 
-            builder.HasKey(ctn => new { ctn.MaNhap, ctn.MaSP });
+            builder.HasKey(ctn => new { ctn.MaNhap, ctn.MaSanPham });
 
-            builder.Property(ctn => ctn.MaSP)
+            builder.Property(ctn => ctn.MaSanPham)
                 .HasMaxLength(100);
 
             builder.Property(ctn => ctn.MaNhap)
@@ -31,13 +31,13 @@ namespace EcommerceWebsite.Data.Configurations
                .HasColumnType("int")
                 .HasDefaultValue(0); ;
 
-            builder.HasOne(xl => xl.nhapSanPham)
-                .WithMany(xl => xl.cTNhapSPs)
+            builder.HasOne(xl => xl.PhieuNhap)
+                .WithMany(xl => xl.ChiTietNhapSanPhams)
                 .HasForeignKey(xl => xl.MaNhap);
 
-            builder.HasOne(xl => xl.sanPham)
-                .WithMany(xl => xl.cTNhapSPs)
-                .HasForeignKey(xl => xl.MaSP);
+            builder.HasOne(xl => xl.SanPham)
+                .WithMany(xl => xl.ChiTietNhapSanPhams)
+                .HasForeignKey(xl => xl.MaSanPham);
         }
     }
 }

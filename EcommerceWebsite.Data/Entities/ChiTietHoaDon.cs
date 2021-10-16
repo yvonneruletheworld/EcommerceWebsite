@@ -13,6 +13,6 @@ namespace EcommerceWebsite.Data.Entities
         public decimal GiaBan { get; set; }
 
         public HoaDon HoaDons { get; set; }
-        public Product Products { get; set; }
+        public SanPham SanPhams { get; set; }
     }
 }

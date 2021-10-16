@@ -4,17 +4,20 @@ using System.Text;
 
 namespace EcommerceWebsite.Data.Entities
 {
-   public class GiaoHang
+   public class GiaoHang : EntityBase
     {
-        public string MaGH { get; set; }
-        public string MaHD { get; set; }
+        public GiaoHang()
+        {
+            this.MaGiaoHang = Guid.NewGuid().ToString();
+        }
+        public string MaGiaoHang { get; set; }
+        public string MaHoaDon { get; set; }
         public string TrangThaiHienTai { get; set; }
         public DateTime NgayTiepNhan { get; set; }
         public DateTime NgayDuKienGiao { get; set; }
-        public DateTime NgayGiao { get; set; }
 
-        public HoaDon hoaDon { get; set; }
+        public HoaDon HoaDon { get; set; }
 
-        public List<TinhTrangGH> tinhTrangGHs { get; set; }
+        public List<TinhTrangGiaoHang> TinhTrangGiaoHangs { get; set; }
     }
 }

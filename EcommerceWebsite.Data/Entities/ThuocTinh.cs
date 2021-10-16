@@ -6,9 +6,13 @@ namespace EcommerceWebsite.Data.Entities
 {
    public class ThuocTinh
     {
-        public string MaTT { get; set; }
-        public string TenTT { get; set; }
+        public ThuocTinh()
+        {
+            this.MaThuocTinh = Guid.NewGuid().ToString();
+        }
+        public string MaThuocTinh { get; set; }
+        public string TenThuocTinh { get; set; }
         //Khóa ngoại
-        public List<DinhLuong> dinhLuongs { get; set; }
+        public List<DinhLuong> DinhLuongs { get; set; }
     }
 }

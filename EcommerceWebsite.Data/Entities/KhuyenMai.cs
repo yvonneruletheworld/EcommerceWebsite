@@ -4,14 +4,17 @@ using System.Text;
 
 namespace EcommerceWebsite.Data.Entities
 {
-  public class KhuyenMai
+  public class KhuyenMai : EntityBase
     {
-        public string MaKM { get; set; }
-        public string TenKM { get; set; }
-        public DateTime NgayBD { get; set; }
-        public DateTime NgayKT { get; set; }
+        public KhuyenMai()
+        {
+            this.MaKhuyenMai = Guid.NewGuid().ToString();
+        }
+
+        public string MaKhuyenMai { get; set; }
+        public string TenKhuyenMai { get; set; }
         public float PhanTram { get; set; }
         public string HinhAnh { get; set; }
-        public List<HoaDon> hoaDons { get; set; }
+        public List<HoaDon> HoaDons { get; set; }
     }
 }

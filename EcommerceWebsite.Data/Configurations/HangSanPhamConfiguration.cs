@@ -7,9 +7,9 @@ using System.Text;
 
 namespace EcommerceWebsite.Data.Configurations
 {
-    public class HangSanPhamConfiguration : IEntityTypeConfiguration<HangSanPham>
+    public class HangSanPhamConfiguration : IEntityTypeConfiguration<XepHangSanPham>
     {
-        public void Configure(EntityTypeBuilder<HangSanPham> builder)
+        public void Configure(EntityTypeBuilder<XepHangSanPham> builder)
         {
             builder.ToTable("HANGSANPHAM");
 

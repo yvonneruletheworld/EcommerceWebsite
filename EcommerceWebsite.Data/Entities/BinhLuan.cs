@@ -4,13 +4,13 @@ using System.Text;
 
 namespace EcommerceWebsite.Data.Entities
 {
-   public class NhanXetSP
+   public class BinhLuan : EntityBase
     {
-        public string MaSP { get; set; }
-        public string MaKH { get; set; }
+        public string MaSanPham { get; set; }
+        public string MaKhachHang { get; set; }
         public string NoiDung { get; set; }
-        public int soSao { get; set; }
-        public SanPham sanPham { get; set; }
+        public int SoSao { get; set; }
+        public SanPham SanPham { get; set; }
         public KhachHang KhachHang { get; set; }
 
     }

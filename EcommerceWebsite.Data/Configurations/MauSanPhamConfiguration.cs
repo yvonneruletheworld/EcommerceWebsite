@@ -7,24 +7,24 @@ using System.Text;
 
 namespace EcommerceWebsite.Data.Configurations
 {
-    public class MauSanPhamConfiguration : IEntityTypeConfiguration<MauSanPham>
+    public class MauSanPhamConfiguration : IEntityTypeConfiguration<MauMaSanPham>
     {
-        public void Configure(EntityTypeBuilder<MauSanPham> builder)
+        public void Configure(EntityTypeBuilder<MauMaSanPham> builder)
         {
-            builder.ToTable("MAUSANPHAM");
+            builder.ToTable("MAUMASANPHAM");
 
-            builder.HasKey(msp => new { msp.MaSP, msp.TenMau });
+            builder.HasKey(msp => new { msp.MaSanPham, msp.TenMauMa });
 
-            builder.Property(msp => msp.MaSP)
+            builder.Property(msp => msp.MaSanPham)
                 .HasMaxLength(100);
 
-            builder.Property(msp => msp.TenMau)
+            builder.Property(msp => msp.TenMauMa)
                 .HasMaxLength(200)
                 .HasColumnType("nvarchar");
 
-            builder.HasOne(msp => msp.sanPham)
-                .WithMany(msp => msp.mauSanPhams)
-                .HasForeignKey(msp => msp.MaSP);
+            builder.HasOne(msp => msp.SanPham)
+                .WithMany(msp => msp.MauMaSanPhams)
+                .HasForeignKey(msp => msp.MaSanPham);
 
         }
     }

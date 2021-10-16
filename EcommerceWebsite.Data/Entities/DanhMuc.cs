@@ -6,9 +6,9 @@ using System.Text;
 
 namespace EcommerceWebsite.Data.Entities
 {
-    public class Product : EntityBase
+    public class DanhMuc: EntityBase
     {
-        public Product()
+        public DanhMuc()
         {
             this.Id = Guid.NewGuid().ToString();
         }
@@ -17,24 +17,14 @@ namespace EcommerceWebsite.Data.Entities
         //[MaxLength(100)]
         //[Required]
         public string Id { get; set; }
+        //[Required]
         //[StringLength(270,
         //              ErrorMessage = "Tên loại sản phẩm từ 8 kí tự đến 8 kí tự",
         //              MinimumLength = 8)]
         public string Name { get; set; }
-        public string Description { get; set; }
-        public string Brand { get; set; }
-        public decimal Price { get; set; }
-        public decimal Utility { get; set; }
-        //[Required]
-        public decimal Const { get; set; }
-        public int Stock { get; set; }
-        public int ViewCount { get; set; }
+        public bool IsShowInHome { get; set; }
+        public string ParentId { get; set; }
         public Status Status { get; set; }
-        //public string Brands { get; set; }
-
-        //Foreign Key
-
-        public List<ProductCategory> ProductCategories { get; set; }
-        public List<ChiTietHoaDon> ChiTietHoaDons { get; set; }
+        public List<SanPham> SanPhams { get; set; }
     }
 }

@@ -13,17 +13,17 @@ namespace EcommerceWebsite.Data.Configurations
         {
             builder.ToTable("GIAOHANG");
 
-            builder.HasKey(gh => gh.MaGH);
+            builder.HasKey(gh => gh.MaGiaoHang);
 
-            builder.Property(gh => gh.MaGH)
+            builder.Property(gh => gh.MaGiaoHang)
                 .HasMaxLength(100);
 
-            builder.Property(gh => gh.MaHD)
+            builder.Property(gh => gh.MaHoaDon)
                 .HasMaxLength(100);
 
-            builder.HasOne(gh => gh.hoaDon)
-                .WithOne(gh => gh.giaoHang)
-                .HasForeignKey<GiaoHang>(gh => gh.MaHD);
+            builder.HasOne(gh => gh.HoaDon)
+                .WithOne(gh => gh.GiaoHang)
+                .HasForeignKey<GiaoHang>(gh => gh.MaHoaDon);
         }
     }
 }

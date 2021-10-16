@@ -13,19 +13,19 @@ namespace EcommerceWebsite.Data.Configurations
         {
             builder.ToTable("LICHSUGIA");
 
-            builder.HasKey(xl => new { xl.MaSP, xl.NgayBD });
+            builder.HasKey(xl => new { xl.MaSanPham, xl.NgayTao });
 
-            builder.Property(xl => xl.MaSP)
+            builder.Property(xl => xl.MaSanPham)
                 .HasMaxLength(100);
 
-            builder.Property(xl => xl.Gia)
+            builder.Property(xl => xl.GiaMoi)
                    .HasColumnType("money")
                    .IsRequired();
 
             //Khóa ngoại
-            builder.HasOne(xl => xl.sanPham)
-                 .WithMany(xl => xl.lishSuGias)
-                 .HasForeignKey(xl => xl.MaSP);
+            builder.HasOne(xl => xl.SanPham)
+                 .WithMany(xl => xl.LichSuGias)
+                 .HasForeignKey(xl => xl.MaSanPham);
         }
     }
 }

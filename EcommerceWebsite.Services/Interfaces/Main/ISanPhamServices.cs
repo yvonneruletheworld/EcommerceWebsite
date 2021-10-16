@@ -10,14 +10,12 @@ using System.Threading.Tasks;
 
 namespace EcommerceWebsite.Services.Interfaces.Main
 {
-    public interface IProductServices 
+    public interface ISanPhamServices 
     {
-        List<Product> GetListProduct();
-
         PageResponse<List<ProductOutput>> GetListProductByPage(string key, int pageIndex, int pageSize);
 
         bool? KiemTra(string value);
 
-        Task<IdentityResult> Create(KhachHangVM obj);
+        //Task<IdentityResult> Create(ApplicationUser obj);
     }
 }

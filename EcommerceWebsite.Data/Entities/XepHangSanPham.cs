@@ -4,10 +4,14 @@ using System.Text;
 
 namespace EcommerceWebsite.Data.Entities
 {
-   public class HangSanPham
+   public class XepHangSanPham
     {
+        public XepHangSanPham()
+        {
+            this.MaHang = Guid.NewGuid().ToString();
+        }
         public string MaHang { get; set; }
         public string TenHang { get; set; }
-        public List<SanPham> sanPhams { get; set; }
+        public List<SanPham> SanPhams { get; set; }
     }
 }

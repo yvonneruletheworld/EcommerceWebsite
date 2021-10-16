@@ -13,39 +13,39 @@ namespace EcommerceWebsite.Data.Configurations
         {
             builder.ToTable("HOADON");
 
-            builder.HasKey(hd => hd.MaHD);
+            builder.HasKey(hd => hd.Id);
 
-            builder.Property(hd => hd.MaHD)
+            builder.Property(hd => hd.Id)
                 .HasMaxLength(100);
-            builder.Property(hd => hd.CreateDate)
+            builder.Property(hd => hd.NgayTao)
                 .IsRequired();
 
-            builder.Property(hd => hd.MaKM)
+            builder.Property(hd => hd.MaKhuyenMai)
                 .HasMaxLength(100);
 
-            builder.Property(hd => hd.MaDiaChiKH)
+            builder.Property(hd => hd.MaDiaChi)
                 .HasMaxLength(100);
 
-            builder.Property(hd => hd.PhiGH)
+            builder.Property(hd => hd.PhiGiaoHang)
                 .HasColumnType("money");
 
             builder.Property(hd => hd.ThanhTien)
                 .HasColumnType("money");
 
-            builder.Property(hd => hd.TongTien)
+            builder.Property(hd => hd.TongCong)
                 .HasColumnType("money");
 
-            builder.HasOne(hd => hd.khachHang)
-                .WithMany(hd => hd.hoaDons)
-                .HasForeignKey(hd => hd.MaKH);
+            builder.HasOne(hd => hd.KhachHang)
+                .WithMany(hd => hd.HoaDons)
+                .HasForeignKey(hd => hd.MaKhachHang);
 
-            builder.HasOne(hd => hd.khuyenMai)
-                .WithMany(hd => hd.hoaDons)
-                .HasForeignKey(hd => hd.MaKM);
+            builder.HasOne(hd => hd.KhuyenMai)
+                .WithMany(hd => hd.HoaDons)
+                .HasForeignKey(hd => hd.MaKhuyenMai);
 
-            builder.HasOne(hd => hd.diaChiKH)
-                .WithMany(hd => hd.hoaDons)
-                .HasForeignKey(hd =>new { hd.MaDiaChiKH, hd.MaKH });
+            builder.HasOne(hd => hd.DiaChiKhachHang)
+                .WithMany(hd => hd.HoaDons)
+                .HasForeignKey(hd =>new { hd.MaDiaChi, hd.MaKhachHang });
         }
     }
 }

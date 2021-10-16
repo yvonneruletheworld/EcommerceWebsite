@@ -13,84 +13,82 @@ namespace EcommerceWebsite.Data.Extensions
         public static void Seed(this ModelBuilder modelBuilder)
         {
             //Catagory
-            modelBuilder.Entity<Category>().HasData(
-                new Category()
+            modelBuilder.Entity<DanhMuc>().HasData(
+                new DanhMuc()
                 {
                     Id = "DM001",
                     Name = "Điện thoại",
                     Status = Enum.Status.Active,
-                    CreateDate = DateTime.UtcNow,
-                    CreateUserId = "admin",
-                    IsDeleted = false,
+                    NgayTao = DateTime.UtcNow,
+                    NguoiTao = "admin",
+                    DaXoa = false,
                     IsShowInHome = true,
                     ParentId = null,
                 },
-                new Category()
+                new DanhMuc()
                 {
                     Id = "DM002",
                     Name = "iPhone",
                     Status = Enum.Status.Active,
-                    CreateDate = DateTime.UtcNow,
-                    CreateUserId = "admin",
-                    IsDeleted = false,
+                    NgayTao = DateTime.UtcNow,
+                    NguoiTao = "admin",
+                    DaXoa = false,
                     IsShowInHome = true,
                     ParentId = "DM001",
                 },
-                new Category()
+                new DanhMuc()
                 {
                     Id = "DM003",
                     Name = "Samsung",
                     Status = Enum.Status.Active,
-                    CreateDate = DateTime.UtcNow,
-                    CreateUserId = "admin",
-                    IsDeleted = false,
+                    NgayTao = DateTime.UtcNow,
+                    NguoiTao = "admin",
+                    DaXoa = false,
                     IsShowInHome = true,
                     ParentId = "DM001",
                 });
             //Product
-            modelBuilder.Entity<Product>().HasData(
-                new Product()
+            modelBuilder.Entity<SanPham>().HasData(
+                new SanPham()
                 {
-                    Id = "SP001",
-                    Name = "Samsung Galaxy Z Fold3 5G 512GB",
-                    Price = 44990000,
-                    Const = 43990000,
-                    Brand = "Samsung",
-                    CreateDate = DateTime.UtcNow,
-                    CreateUserId = "admin",
-                    Description = " Z Fold 3 đi kèm với bút S Pen được thiết kế đặc thù, trang bị kính Victus Corning Gorilla Glass và khung điện thoại Armor Frame, cho độ bền tốt hơn. Fold mới sẽ có hai màn hình Dynamic AMOLED 2X, tốc độ làm mới 120 Hz với kích thước 6.28 inch",
-                    IsDeleted = false,
+                    MaSanPham = "SP001",
+                    TenSanPham = "Samsung Galaxy Z Fold3 5G 512GB",
+                    NhanHieu = "Samsung",
+                    NgayTao = DateTime.UtcNow,
+                    MaLoaiSanPham = "DM003",
+                    NguoiTao = "admin",
+                    //Mota = " Z Fold 3 đi kèm với bút S Pen được thiết kế đặc thù, trang bị kính Victus Corning Gorilla Glass và khung điện thoại Armor Frame, cho độ bền tốt hơn. Fold mới sẽ có hai màn hình Dynamic AMOLED 2X, tốc độ làm mới 120 Hz với kích thước 6.28 inch",
+                    DaXoa = false,
                     Status = Enum.Status.Active,
-                    Stock = 1,
-                    ViewCount = 0
+                    SoLuongTon = 1,
                 },
-                new Product()
+                new SanPham()
                 {
-                    Id = "SP002",
-                    Name = "Samsung Galaxy Z Flip3 5G 128GB",
-                    Price = 24990000,
-                    Const = 23990000,
-                    Brand = "Samsung",
-                    CreateDate = DateTime.UtcNow,
-                    CreateUserId = "admin",
-                    Description = " Biểu tượng thời trang độc đáo nằm gọn trong túi khi gập cho bạn thỏa sức tham gia các hoạt động yêu thích ở bất cứ nơi đâu. Siêu phẩm công nghệ khi mở để bạn đắm chìm trải nghiệm với tốc độ mạng 5G và khả năng gập ở nhiều góc độ linh hoạt chưa từng có.1 Không chỉ là điện thoại,đó là một ngôn ngữ thời trang cá tính",
-                    IsDeleted = false,
+                    MaSanPham = "SP002",
+                    TenSanPham = "Samsung Galaxy Z Flip3 5G 128GB",
+                    //Price = 24990000,
+                    //Const = 23990000,
+                    NhanHieu = "Samsung",
+                    NgayTao = DateTime.UtcNow,
+                    NguoiTao = "admin",
+                    MaLoaiSanPham = "DM003",
+                    //Description = " Biểu tượng thời trang độc đáo nằm gọn trong túi khi gập cho bạn thỏa sức tham gia các hoạt động yêu thích ở bất cứ nơi đâu. Siêu phẩm công nghệ khi mở để bạn đắm chìm trải nghiệm với tốc độ mạng 5G và khả năng gập ở nhiều góc độ linh hoạt chưa từng có.1 Không chỉ là điện thoại,đó là một ngôn ngữ thời trang cá tính",
+                    DaXoa = false,
                     Status = Enum.Status.Active,
-                    Stock = 1,
-                    ViewCount = 0
+                    SoLuongTon = 1,
                 });
-            //ProductInCategory
-            modelBuilder.Entity<ProductCategory>().HasData(
-                new ProductCategory()
-                {
-                    CategoryId = "DM003",
-                    ProductId = "SP001"
-                },
-                new ProductCategory()
-                {
-                    CategoryId = "DM003",
-                    ProductId = "SP002"
-                });
+            //ProductInDanhMuc
+            //modelBuilder.Entity<ProductDanhMuc>().HasData(
+            //    new ProductDanhMuc()
+            //    {
+            //        DanhMucId = "DM003",
+            //        ProductId = "SP001"
+            //    },
+            //    new ProductDanhMuc()
+            //    {
+            //        DanhMucId = "DM003",
+            //        ProductId = "SP002"
+            //    });
             // any guid
             //var roleId = new Guid("8D04DCE2-969A-435D-BBA4-DF3F325983DC");
             var adminId = new Guid("8D04DCE2-969A-435D-BBA4-DF3F325983DC");
@@ -102,8 +100,8 @@ namespace EcommerceWebsite.Data.Extensions
             //    Description = "Administrator role"
             //});
 
-            var hasher = new PasswordHasher<KhachHangVM>();
-            modelBuilder.Entity<KhachHangVM>().HasData(new KhachHangVM
+            var hasher = new PasswordHasher<ApplicationUser>();
+            modelBuilder.Entity<ApplicationUser>().HasData(new ApplicationUser
             {
                 Id = adminId.ToString(),
                 UserName = "admin",
@@ -113,8 +111,17 @@ namespace EcommerceWebsite.Data.Extensions
                 EmailConfirmed = true,
                 PasswordHash = hasher.HashPassword(null, "Abcd1234$"),
                 SecurityStamp = string.Empty,
+                Status = Enum.Status.Active
+            });
+            
+            modelBuilder.Entity<KhachHang>().HasData(new KhachHang
+            {
+                Id = adminId.ToString(),
+                Username = "admin",
+                Email = "yvonnetran.work@gmail.com",
                 HoTen = "Yvonne Tran",
                 GioiTinh = false,
+                Sdt = "no value",
                 Status = Enum.Status.Active
             });
 
