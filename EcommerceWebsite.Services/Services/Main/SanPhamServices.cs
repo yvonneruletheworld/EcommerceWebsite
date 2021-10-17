@@ -1,4 +1,5 @@
-﻿using EcommerceWebsite.Application.Pagination;
+﻿using AutoMapper;
+using EcommerceWebsite.Application.Pagination;
 using EcommerceWebsite.Data.EF;
 using EcommerceWebsite.Data.Entities;
 using EcommerceWebsite.Data.Identity;
@@ -16,21 +17,42 @@ namespace EcommerceWebsite.Services.Services.Main
     public class SanPhamServices : ISanPhamServices
     {
         private readonly EcomWebDbContext _context;
+        private readonly IMapper _mapper;
 
-        public SanPhamServices(EcomWebDbContext context)
+        public SanPhamServices(EcomWebDbContext context, IMapper mapper)
         {
-            this._context = context;
+            _context = context;
+            _mapper = mapper;
         }
 
-        public List<SanPham> GetListProduct()
+        public async Task<PageResponse<List<SanPhamOutput>>> GetListProductByPage(PaginationFilter filter)
         {
-            return null;
+            try
+            {
+                PaginationFilter validFilter = new PaginationFilter(filter.PageNumber, filter.PageSize);
+
+                var pageQuery = _context.SanPhams.Where(x => !x.DaXoa);
+
+                var pageData = new List<SanPham>();
+                Func<SanPham, object> filterSort = x => x.MaSanPham;
+                pageData = pageQuery
+                    .OrderBy(filterSort)
+                    .Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
+                    .Take(validFilter.PageSize)
+                    .ToList();
+
+                var result = new PageResponse<List<SanPhamOutput>>(_mapper.Map<List<SanPhamOutput>>(pageData),
+                                                                   validFilter.PageNumber,
+                                                                   validFilter.PageSize,
+                                                                   pageData.Count());
+                return result;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
-
-        //public PageResponse<List<ProductOutput>> GetListProductByPage(string key, int pageIndex, int pageSize)
-        //{
-
-        //}
 
         public bool? KiemTra(string value)
         {

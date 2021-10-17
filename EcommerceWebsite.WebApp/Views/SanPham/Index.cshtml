@@ -1,0 +1,55 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    var queryPageIndex = Context.Request.Query["pageIndex"];
+    var valPageIndex = queryPageIndex.Count > 0 ? (int.TryParse(queryPageIndex[0], out int idx) ? idx : 1) : 1;
+}
+
+<h2>Danh Sách Sản Phẩm Theo Phân Trang</h2>
+
+<table class="table-section"></table>
+<script>
+    let gPageIndex = 1;
+
+    $(document).ready(() => {
+        gPageIndex = @valPageIndex ;
+        initResourceFilterQuery();
+
+    })
+
+    function initResourceFilterQuery() {
+        getDataSanPham(gPageIndex);
+    }
+
+    function getDataSanPham(pId) {
+        gPageIndex = pId;
+        //load san pham bang ajax
+        $.ajax({
+            url: '/get-data-sanpham?pageIndex=' + pId,
+            type: 'GET',
+            dataType: 'html',
+            success: (result) => {
+                $(".table-section")[0].innerHTML = result;
+            },
+            error: (err) => {
+                alert('failed');
+                console.log(err);
+            }
+        });
+    }
+
+    function selectCheckboxAll() {
+
+    }
+
+    function sortByColumn(fieldSort) {
+
+    }
+
+    function selectCheckboxItem() {
+
+    }
+
+
+</script>

@@ -13,4 +13,19 @@
     <ProjectReference Include="..\EcommerceWebsite.Services\EcommerceWebsite.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\logo\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\lib\vendor\bootstrap-select-1.13.14\.github\FUNDING.yml" />
+    <None Include="wwwroot\lib\vendor\bootstrap-select-1.13.14\.github\ISSUE_TEMPLATE.md" />
+    <None Include="wwwroot\lib\vendor\bootstrap-select-1.13.14\.github\move.yml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    <PackageReference Include="ServiceStack.Text" Version="5.12.0" />
+  </ItemGroup>
+
 </Project>

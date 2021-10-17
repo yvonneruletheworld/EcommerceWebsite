@@ -5,8 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="ExtraServices\" />
-    <Folder Include="System\" />
+    <ProjectReference Include="..\EcommerceWebsite.Data\EcommerceWebsite.Data.csproj" />
   </ItemGroup>
 
 </Project>
