@@ -1,6 +1,7 @@
 using EcommerceWebsite.Data.EF;
 using EcommerceWebsite.Services.Interfaces.Main;
 using EcommerceWebsite.Services.Services.Main;
+using EcommerceWebsite.WebApp.Mapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -30,20 +31,18 @@ namespace EcommerceWebsite.WebApp
         {
             services.AddControllersWithViews();
 
-            //IConfigurationRoot configuration = new ConfigurationBuilder()
-            //    .SetBasePath(Directory.GetCurrentDirectory())
-            //    .AddJsonFile("D:/School/EcommerceWebsite/EcommerceWebsite.Data/appsetting.json")
-            //    .Build();
 
             var str = Configuration.GetConnectionString("EcommerceWebsiteDatabase");
             services.AddDbContext<EcomWebDbContext>(options =>
                 options.UseSqlServer(str));
 
-            //var connectionString = configuration.GetConnectionString("EcommerceWebsiteDatabase");
-            //var optionBuilder = new DbContextOptionsBuilder<EcomWebDbContext>();
-            //optionBuilder.UseSqlServer(connectionString);
+            DependencyInjectionSystemConfig(services);
+            services.AddAutoMapper(typeof(AutoMapping));
+        }
 
-            services.AddScoped<ISanPhamServices,SanPhamServices>();
+        private void DependencyInjectionSystemConfig(IServiceCollection services)
+        {
+            services.AddScoped<ISanPhamServices, SanPhamServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -70,8 +69,9 @@ namespace EcommerceWebsite.WebApp
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Product}/{action=Index}/{id?}");
+                    pattern: "{type=SP}/{controller=SanPham}/{action=Index}/{id?}");
             });
+
         }
 
 

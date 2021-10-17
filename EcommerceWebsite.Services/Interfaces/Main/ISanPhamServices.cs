@@ -12,7 +12,7 @@ namespace EcommerceWebsite.Services.Interfaces.Main
 {
     public interface ISanPhamServices 
     {
-        PageResponse<List<ProductOutput>> GetListProductByPage(string key, int pageIndex, int pageSize);
+        Task<PageResponse<List<SanPhamOutput>>> GetListProductByPage(PaginationFilter filter);
 
         bool? KiemTra(string value);
 
