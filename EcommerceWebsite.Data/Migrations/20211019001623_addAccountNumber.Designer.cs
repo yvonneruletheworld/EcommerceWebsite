@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EcommerceWebsite.Data.Migrations
 {
     [DbContext(typeof(EcomWebDbContext))]
-    [Migration("20211015234220_init")]
-    partial class init
+    [Migration("20211019001623_addAccountNumber")]
+    partial class addAccountNumber
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -203,7 +203,7 @@ namespace EcommerceWebsite.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("LOAISANPHAM");
+                    b.ToTable("DANHMUC");
 
                     b.HasData(
                         new
@@ -212,7 +212,7 @@ namespace EcommerceWebsite.Data.Migrations
                             DaXoa = false,
                             IsShowInHome = true,
                             Name = "Điện thoại",
-                            NgayTao = new DateTime(2021, 10, 15, 23, 42, 19, 720, DateTimeKind.Utc).AddTicks(1919),
+                            NgayTao = new DateTime(2021, 10, 19, 0, 16, 22, 642, DateTimeKind.Utc).AddTicks(2353),
                             NguoiTao = "admin",
                             Status = 1
                         },
@@ -222,7 +222,7 @@ namespace EcommerceWebsite.Data.Migrations
                             DaXoa = false,
                             IsShowInHome = true,
                             Name = "iPhone",
-                            NgayTao = new DateTime(2021, 10, 15, 23, 42, 19, 720, DateTimeKind.Utc).AddTicks(2911),
+                            NgayTao = new DateTime(2021, 10, 19, 0, 16, 22, 642, DateTimeKind.Utc).AddTicks(3173),
                             NguoiTao = "admin",
                             ParentId = "DM001",
                             Status = 1
@@ -233,7 +233,7 @@ namespace EcommerceWebsite.Data.Migrations
                             DaXoa = false,
                             IsShowInHome = true,
                             Name = "Samsung",
-                            NgayTao = new DateTime(2021, 10, 15, 23, 42, 19, 720, DateTimeKind.Utc).AddTicks(2954),
+                            NgayTao = new DateTime(2021, 10, 19, 0, 16, 22, 642, DateTimeKind.Utc).AddTicks(3217),
                             NguoiTao = "admin",
                             ParentId = "DM001",
                             Status = 1
@@ -836,7 +836,7 @@ namespace EcommerceWebsite.Data.Migrations
                             MaSanPham = "SP001",
                             DaXoa = false,
                             MaLoaiSanPham = "DM003",
-                            NgayTao = new DateTime(2021, 10, 15, 23, 42, 19, 721, DateTimeKind.Utc).AddTicks(2359),
+                            NgayTao = new DateTime(2021, 10, 19, 0, 16, 22, 643, DateTimeKind.Utc).AddTicks(2584),
                             NguoiTao = "admin",
                             NhanHieu = "Samsung",
                             SoLuongTon = 1,
@@ -849,7 +849,7 @@ namespace EcommerceWebsite.Data.Migrations
                             MaSanPham = "SP002",
                             DaXoa = false,
                             MaLoaiSanPham = "DM003",
-                            NgayTao = new DateTime(2021, 10, 15, 23, 42, 19, 721, DateTimeKind.Utc).AddTicks(2823),
+                            NgayTao = new DateTime(2021, 10, 19, 0, 16, 22, 643, DateTimeKind.Utc).AddTicks(3048),
                             NguoiTao = "admin",
                             NhanHieu = "Samsung",
                             SoLuongTon = 1,
@@ -1236,6 +1236,9 @@ namespace EcommerceWebsite.Data.Migrations
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
+                    b.Property<string>("AccountNumber")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("CreateDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2");
@@ -1243,11 +1246,11 @@ namespace EcommerceWebsite.Data.Migrations
                     b.Property<string>("CreateUserId")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("DeleteTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("DeleteUserId")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("DeleterTime")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("IdAuto")
                         .HasColumnType("nvarchar(450)");
@@ -1284,13 +1287,13 @@ namespace EcommerceWebsite.Data.Migrations
                         {
                             Id = "8d04dce2-969a-435d-bba4-df3f325983dc",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "54606f2e-02b4-498a-82fc-2c8aa05efae4",
+                            ConcurrencyStamp = "837f7f56-fcbf-4029-b998-ad644f7faa13",
                             Email = "yvonnetran.work@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "yvonnetran.work@gmail.com",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJXP5ngUm1UvaOHLW3dn4KDIPxz43zHllX1v+l8HUKA3YuBkLLTL5QnldNfUW0UQCg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEA2HehmF8AZ0xY5m1BAwQdtxqWIQF2N3Qk2ih1ZODCjAXjRkcOAudu5nqnsQ9tAyrg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,

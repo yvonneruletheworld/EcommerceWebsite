@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MimeKit" Version="2.15.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EcommerceWebsite.Application\EcommerceWebsite.Application.csproj" />
     <ProjectReference Include="..\EcommerceWebsite.Data\EcommerceWebsite.Data.csproj" />
   </ItemGroup>
 

@@ -1,5 +1,7 @@
 using EcommerceWebsite.Data.EF;
+using EcommerceWebsite.Services.Interfaces.System;
 using EcommerceWebsite.Services.Interfaces.Main;
+using EcommerceWebsite.Services.Services.System;
 using EcommerceWebsite.Services.Services.Main;
 using EcommerceWebsite.WebApp.Mapper;
 using Microsoft.AspNetCore.Builder;
@@ -14,6 +16,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using EcommerceWebsite.Data.Identity;
+using Microsoft.AspNetCore.Identity;
+using ValensBankCore.Services.Services;
+using EcommerceWebsite.Services.Interfaces.ExtraServices;
+using EcommerceWebsite.Services.Services.ExtraServices;
+using EcommerceWebsite.Data.Configurations;
 
 namespace EcommerceWebsite.WebApp
 {
@@ -36,13 +44,27 @@ namespace EcommerceWebsite.WebApp
             services.AddDbContext<EcomWebDbContext>(options =>
                 options.UseSqlServer(str));
 
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<EcomWebDbContext>()
+                .AddClaimsPrincipalFactory<MyUserClaimsPrincipalFactoryService>()
+                .AddDefaultTokenProviders();
+
+            services.AddHttpContextAccessor();
+
             DependencyInjectionSystemConfig(services);
             services.AddAutoMapper(typeof(AutoMapping));
+
+            var emailConfig = Configuration
+                .GetSection("EmailSenderConfig")
+                .Get<EmailConfiguration>();
+            services.AddSingleton(emailConfig);
         }
 
         private void DependencyInjectionSystemConfig(IServiceCollection services)
         {
             services.AddScoped<ISanPhamServices, SanPhamServices>();
+            services.AddScoped<IKhachHangServices, KhachHangServices>();
+            services.AddScoped<IEmailSenderServices, EmailSenderServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -63,6 +85,7 @@ namespace EcommerceWebsite.WebApp
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
