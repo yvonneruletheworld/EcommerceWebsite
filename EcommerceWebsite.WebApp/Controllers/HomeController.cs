@@ -38,13 +38,13 @@ namespace EcommerceWebsite.WebApp.Controllers
         [HttpGet("Login")]
         public IActionResult Index()
         {
-            var userId = _khachHangService.GetUserId(User);
-            if(userId != null)
-            {
-                var u = User.Claims.ToArray()[2].Value;
-                var id = userId;
-            }    
-            return View();
+            var currentUser = _khachHangService.GetUserId(User);
+            //if(userId != null)
+            //{
+            //    var u = User.Claims.ToArray()[2].Value;
+            //    var id = userId;
+            //}    
+            return View(currentUser);
         }
         [HttpPost("Login")]
         public async Task<IActionResult> IndexAsync(ThongTinKhachHangInput model)
@@ -103,7 +103,7 @@ namespace EcommerceWebsite.WebApp.Controllers
         }
 
         [HttpPost("verify-otp-code")]
-        public async Task<JsonResult> VerifyOTPCode (string otpInput, string input)
+        public async Task<IActionResult> VerifyOTPCode (string otpInput, string input)
         {
             if (string.IsNullOrEmpty(otpInput) || string.IsNullOrEmpty(input))
                 return Json(new { code = Messages.OTP_Invalid });
@@ -116,8 +116,8 @@ namespace EcommerceWebsite.WebApp.Controllers
                     return Json(new { code = Messages.KhachHang_NguoiDungKhongTonTai });
                 if (user.OTPCode.Equals(otpInput))
                 {
-                    RedirectToAction("Index", "Home", "Login");
-                    return Json(new { code = Messages.OTP_VerifySuccess });
+                    return RedirectToAction("Index", "Home");
+                     //Json(new { code = Messages.OTP_VerifySuccess });
                 }
                 else
                     return Json(new { code = Messages.OTP_VerifyFailed });

@@ -47,6 +47,11 @@ namespace EcommerceWebsite.Services.Services.System
                                             .FirstOrDefaultAsync();
         }
 
+        public async Task<ApplicationUser> GetKhachHangTheoId(string id)
+        {
+            return await _context.ApplicationUsers.FirstOrDefaultAsync(u => !u.IsDeleted && u.Id.Equals(id));
+        }
+
         public async Task<ApplicationUser> GetKhachHangTheoUsername(string userName)
         {
             return await _userManager.FindByNameAsync(userName);
@@ -67,16 +72,28 @@ namespace EcommerceWebsite.Services.Services.System
             return await _userManager.CheckPasswordAsync(obj, pwd);
         }
 
+
         public async Task<bool> UpdateOTPCode(string id, string otpCode)
         {
             try
             {
                 await _context.Database.BeginTransactionAsync();
-            }
-            catch (Exception)
-            {
 
-                throw;
+                var obj = await GetKhachHangTheoId(id);
+                if (obj == null) return false;
+
+                //update OTP code
+                obj.OTPCode = otpCode;
+                _context.Entry(obj).State = EntityState.Modified;
+
+                var result = await _context.SaveChangesAsync();
+                await _context.Database.CommitTransactionAsync();
+
+                return result > 0 ;
+            }
+            catch (Exception exx)
+            {
+                throw exx;
             }
         }
 

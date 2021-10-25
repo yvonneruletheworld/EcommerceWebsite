@@ -44,20 +44,28 @@
 
 <div class="modal fade" id="mdl-login-form" role="dialog">
     <div class="modal-dialog">
-        <form id="continue-login" asp-action="Index" asp-controller="Home" method="post">
-            <!-- Modal content-->
-            <div class="modal-content">
+        <div class="modal-content">
+            <form id="continue-login" asp-action="Index" asp-controller="Home" method="post">
+                <!-- Modal content-->
                 <div class="modal-header">
                     <p>Cảm ơn vì đã chọn mua hàng</p>
                     <p>Xác nhận tài khoản để tiến hàng đặt hàng</p>
                 </div>
                 <div id="form-login-container"></div>
+
+            </form>
+
+            <div class="modal-footer">
+                <button id="login-cancel" class="btn btn-default btn-close" data-dismiss="modal" onclick="hannleCancel()"> Hủy</button>
+                <button id="login-submit" class="btn btn-default btn-submit btn-primary" onclick="continueLogin()">Tiếp tục</button>
             </div>
-        </form>
+        </div>
     </div>
 </div>
 
 <script>
+
+    var isOTP = 0;
 
     function getUserState() {
         var phoneInput = $('#text-phone-cash').val();
@@ -91,8 +99,9 @@
         });
     }
 
-    function continueLogin(value) {
-        if (value === 'login') {
+    function continueLogin() {
+        console.log(isOTP);
+        if (isOTP === 0) {
             var frmData = $("#continue-login")[0];
             var data = new FormData(frmData);
 
@@ -103,12 +112,15 @@
                 method: "POST",
                 data: data,
                 success: (result) => {
-                    console.log(result.msg);
+                    console.log(result.code);
                     if (result.code === '@Messages.OTP_SentSuccess') {
                         $("#otp-input-verify").show();
                         $("#form-login-input").hide();
-                        $("#login-submit").innerText = 'Xác nhận';
-                        $("#login-cancel").innerText = 'Trở về';
+                        var btn = $("#login-submit");
+                        $("#login-submit").html("Xác nhận");
+                        console.log(btn);
+                        $("#login-cancel").html("Trở về");
+                        isOTP = 1;
                     }
                     else {
                         $('#error-login-msg').innerText = result.code;
@@ -121,18 +133,21 @@
         }
         else {
             var otpCode = $("#otp-input").val();
+            var input = $("#txt-login").val();
             console.log(otpCode);
+            console.log(input);
             $.ajax({
-                url: '/verify-otp-code',
+                url: "/verify-otp-code?otpInput=" + otpCode + "&input=" + input,
                 method: 'POST',
-                data: otpCode,
                 success: (result) => {
                     $("#error-login-msg").innerText = result.msg;
                 },
                 error: (err) => {
+                    console.log(err)
                     alert('@Messages.OTP_ServerDisconnectable')
                 }
             });
+            console.log(otpCode);
         }
     }
 
