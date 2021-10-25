@@ -23,6 +23,11 @@ namespace EcommerceWebsite.WebApp.Controllers
             return View();
         }
 
+        public IActionResult TrangChu()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();

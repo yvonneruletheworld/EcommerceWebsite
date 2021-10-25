@@ -12,7 +12,7 @@ namespace EcommerceWebsite.Services.Interfaces.Main
 {
     public interface ISanPhamServices 
     {
-        PageResponse<List<ProductOutput>> GetListProductByPage(string key, int pageIndex, int pageSize);
+        //PageResponse<List<ProductOutput>> GetListProductByPage(string key, int pageIndex, int pageSize);
 
         bool? KiemTra(string value);
 

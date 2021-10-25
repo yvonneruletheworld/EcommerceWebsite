@@ -28,7 +28,7 @@ namespace EcommerceWebsite.Services.Services.Main
             return await _userManager.CreateAsync(obj);
         }
 
-        public List<Product> GetListProduct()
+        public List<SanPham> GetListProduct()
         {
             return null;
         }

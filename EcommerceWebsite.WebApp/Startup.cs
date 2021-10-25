@@ -70,7 +70,7 @@ namespace EcommerceWebsite.WebApp
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Product}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=TrangChu}/{id?}");
             });
         }
 

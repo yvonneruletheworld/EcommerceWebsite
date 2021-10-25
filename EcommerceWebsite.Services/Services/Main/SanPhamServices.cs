@@ -27,10 +27,10 @@ namespace EcommerceWebsite.Services.Services.Main
             return null;
         }
 
-        public PageResponse<List<ProductOutput>> GetListProductByPage(string key, int pageIndex, int pageSize)
-        {
+        //public PageResponse<List<ProductOutput>> GetListProductByPage(string key, int pageIndex, int pageSize)
+        //{
 
-        }
+        //}
 
         public bool? KiemTra(string value)
         {

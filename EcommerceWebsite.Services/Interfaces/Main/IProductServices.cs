@@ -12,7 +12,7 @@ namespace EcommerceWebsite.Services.Interfaces.Main
 {
     public interface IProductServices 
     {
-        List<Product> GetListProduct();
+        List<SanPham> GetListProduct();
 
         PageResponse<List<ProductOutput>> GetListProductByPage(string key, int pageIndex, int pageSize);
 
