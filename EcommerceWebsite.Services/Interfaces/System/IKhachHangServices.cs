@@ -13,6 +13,7 @@ namespace EcommerceWebsite.Services.Interfaces.System
     {
         Task<ThongTinKhachHangInput> GetKhachHangInputTheoSdt(string sdt);
         Task<ApplicationUser> GetKhachHangTheoUsername(string userName);
+        Task<ApplicationUser> GetKhachHangTheoId(string id);
         Task<ApplicationUser> GetKhachHangTheoEmail(string email);
         Task<bool> KiemTraDangNhapKhachHang(ApplicationUser obj, string pwd);
         //Task<Dictionary<string, KhachHang>> LoginAsync(string usernameOrPhone, string pass);
