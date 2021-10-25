@@ -1,8 +1,142 @@
-﻿@{
+﻿@using EcommerceWebsite.Application.Constants
+@using EcommerceWebsite.Data.Identity
+@model ApplicationUser
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+@* Style *@
+<link href="~/css/home/style.css" rel="stylesheet" />
+<link href="~/css/login/style.css" rel="stylesheet" />
+@* Style *@
+
+@*DIsplay message status*@
+<div id="alert-message-success" class="w-100 alert alert-success" style="display: none;" role="alert">
+    <button type="button" class="close" aria-label="Close" onclick="hideAllMessage()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <h6 class="alert-heading">Thông báo</h6>
+    <span id="content-message-success"></span>
 </div>
+
+<div id="alert-message-fail" class="w-100 alert alert-danger" style="display: none;" role="alert">
+    <button type="button" class="close" aria-label="Close" onclick="hideAllMessage()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <h6 class="alert-heading">Thông báo</h6>
+    <span id="content-message-fail"></span>
+</div>
+@*DIsplay message status*@
+<div class="text-center">
+    @if (Model != null)
+    {
+        <h1 class="display-4">Xin chào, @Model.UserName</h1>
+    }
+    else
+    {
+        <h1 class="display-4">Nhập số điện thoại để thanh toán</h1>
+    }
+    <div class="error-msg text-danger"></div>
+    <input type="text" class="d-inline mr-2" placeholder="Số điện thoại" id="text-phone-cash" required>
+    <!--<!--<button type="button" class="btn btn-primary btn-user btn-block" data-toggle="modal" data-target="#SavedRegistration">--><!--Saved Registration*--><!--</button>-->
+    <button type="button" onclick="getUserState()" class="btn btn-block d-inline btn-primary">Đặt hàng</button>
+</div>
+
+<div class="modal fade" id="mdl-login-form" role="dialog">
+    <div class="modal-dialog">
+        <form id="continue-login" asp-action="Index" asp-controller="Home" method="post">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <p>Cảm ơn vì đã chọn mua hàng</p>
+                    <p>Xác nhận tài khoản để tiến hàng đặt hàng</p>
+                </div>
+                <div id="form-login-container"></div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+
+    function getUserState() {
+        var phoneInput = $('#text-phone-cash').val();
+        console.log(phoneInput);
+
+        ///validate số điện thoại
+        ///chỉnh lại thông báo và form modal
+
+        $.ajax({
+            url: '/get-form-login?phoneNumber=' + phoneInput + '&isPhoneNumber=true',
+            type: 'GET',
+            success: (result) => {
+                console.log(result.code);
+                $('#mdl-login-form').modal('hide');
+                if (result.code === '@Messages.Login_PhoneNumEmpty')
+                    alert("sdt empty");
+                else if (result.code === '@Messages.Login_PhoneNumIsNotExist')
+                    alert("sdt not exit");
+                else if (result.code === '@string.Empty')
+                    alert("sdt is not phone num");
+                else {
+                    $('#mdl-login-form').modal('show');
+                    $('#form-login-container')[0].innerHTML = result;
+                }
+            },
+            error: (err) => {
+                alert('failed');
+                console.log(err);
+                $('#mdl-login-form').hide();
+            }
+        });
+    }
+
+    function continueLogin(value) {
+        if (value === 'login') {
+            var frmData = $("#continue-login")[0];
+            var data = new FormData(frmData);
+
+            $.ajax({
+                url: "/Login",
+                contentType: false,
+                processData: false,
+                method: "POST",
+                data: data,
+                success: (result) => {
+                    console.log(result.msg);
+                    if (result.code === '@Messages.OTP_SentSuccess') {
+                        $("#otp-input-verify").show();
+                        $("#form-login-input").hide();
+                        $("#login-submit").innerText = 'Xác nhận';
+                        $("#login-cancel").innerText = 'Trở về';
+                    }
+                    else {
+                        $('#error-login-msg').innerText = result.code;
+                    }
+                },
+                error: (err) =>{
+                    console.log(err);
+                }
+            });
+        }
+        else {
+            var otpCode = $("#otp-input").val();
+            console.log(otpCode);
+            $.ajax({
+                url: '/verify-otp-code',
+                method: 'POST',
+                data: otpCode,
+                success: (result) => {
+                    $("#error-login-msg").innerText = result.msg;
+                },
+                error: (err) => {
+                    alert('@Messages.OTP_ServerDisconnectable')
+                }
+            });
+        }
+    }
+
+    function hannleCancel() {
+
+    }
+</script>

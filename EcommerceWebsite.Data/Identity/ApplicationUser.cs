@@ -16,13 +16,13 @@ namespace EcommerceWebsite.Data.Identity
         public string LastModificationUserId { get; set; }
         public DateTime? LastModificationTime { get; set; }
         public bool IsDeleted { get; set; }
-        public DateTime? DeleterTime { get; set; }
+        public DateTime? DeleteTime { get; set; }
         public string DeleteUserId { get; set; }
         public string LoginString { get; set; }
         // for check otp email when login
         public string OTPCode { get; set; }
         public string Ip { get; set; }
-
+        public string AccountNumber { get; set; }
         public Status Status { get; set; }
         public string IdAuto { get; set; }
     }
