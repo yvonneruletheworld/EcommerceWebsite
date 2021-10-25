@@ -104,10 +104,11 @@ namespace EcommerceWebsite.Data.Extensions
             modelBuilder.Entity<ApplicationUser>().HasData(new ApplicationUser
             {
                 Id = adminId.ToString(),
-                UserName = "admin",
-                NormalizedUserName = "admin",
+                UserName = "havyclient1",
+                NormalizedUserName = "havyclient1",
                 Email = "yvonnetran.work@gmail.com",
                 NormalizedEmail = "yvonnetran.work@gmail.com",
+                PhoneNumber = "0905187524",
                 EmailConfirmed = true,
                 PasswordHash = hasher.HashPassword(null, "Abcd1234$"),
                 SecurityStamp = string.Empty,
@@ -117,12 +118,11 @@ namespace EcommerceWebsite.Data.Extensions
             modelBuilder.Entity<KhachHang>().HasData(new KhachHang
             {
                 Id = adminId.ToString(),
-                Username = "admin",
+                Username = "havyclient1",
                 Email = "yvonnetran.work@gmail.com",
                 HoTen = "Yvonne Tran",
                 GioiTinh = false,
-                Sdt = "no value",
-                Status = Enum.Status.Active
+                Sdt = "0905187524",
             });
 
             modelBuilder.Entity<IdentityUserRole<Guid>>().HasData(new IdentityUserRole<Guid>

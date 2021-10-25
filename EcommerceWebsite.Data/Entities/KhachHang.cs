@@ -20,7 +20,6 @@ namespace EcommerceWebsite.Data.Entities
         public string LoginString { get; set; }
         public bool GioiTinh { get; set; }
         public string HinhAnh { get; set; }
-        public Status Status { get; set; }
         //Khoa ngoai
 
         public List<DiaChiKhachHang> DiaChiKhachHangs { get; set; }

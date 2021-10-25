@@ -11,8 +11,8 @@ namespace EcommerceWebsite.Application.Pagination
 
         public PaginationFilter(int pageNumber, int pageSize)
         {
-            PageNumber = pageNumber;
-            PageSize = pageSize;
+            PageNumber = pageNumber > 1? pageNumber : 1;
+            PageSize = pageSize > 10 ? pageSize : 10;
         }
 
         public PaginationFilter()
