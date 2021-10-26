@@ -36,15 +36,16 @@ namespace EcommerceWebsite.WebApp.Controllers
         }
 
         [HttpGet("Login")]
-        public IActionResult Index()
+        public async Task<IActionResult> IndexAsync()
         {
-            var currentUser = _khachHangService.GetUserId(User);
-            //if(userId != null)
-            //{
-            //    var u = User.Claims.ToArray()[2].Value;
-            //    var id = userId;
-            //}    
-            return View(currentUser);
+            var currentUser = await _userManager.GetUserAsync(User);
+            if(currentUser == null)
+            {
+                await _signInManager.SignOutAsync();
+                return View("/Views/Home/Index.cshtml");
+            }
+            
+            return View("/Views/Home/Index.cshtml", currentUser);
         }
         [HttpPost("Login")]
         public async Task<IActionResult> IndexAsync(ThongTinKhachHangInput model)
@@ -116,8 +117,8 @@ namespace EcommerceWebsite.WebApp.Controllers
                     return Json(new { code = Messages.KhachHang_NguoiDungKhongTonTai });
                 if (user.OTPCode.Equals(otpInput))
                 {
-                    return RedirectToAction("Index", "Home");
-                     //Json(new { code = Messages.OTP_VerifySuccess });
+                    //return RedirectToAction("Index", "Home");
+                    return Json(new { code = Messages.OTP_VerifySuccess });
                 }
                 else
                     return Json(new { code = Messages.OTP_VerifyFailed });
