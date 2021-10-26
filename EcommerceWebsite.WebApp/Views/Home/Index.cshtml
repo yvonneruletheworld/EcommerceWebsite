@@ -140,7 +140,14 @@
                 url: "/verify-otp-code?otpInput=" + otpCode + "&input=" + input,
                 method: 'POST',
                 success: (result) => {
-                    $("#error-login-msg").innerText = result.msg;
+                    if (result.code === '@Messages.OTP_VerifySuccess') {
+                        history.go(0);
+                    } else {
+                        var d = $('#error-login-msg');
+                        console.log(result.code);
+                        console.log(d);
+                        d.text(result.code);
+                    }
                 },
                 error: (err) => {
                     console.log(err)
