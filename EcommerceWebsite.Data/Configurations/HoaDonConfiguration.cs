@@ -13,9 +13,9 @@ namespace EcommerceWebsite.Data.Configurations
         {
             builder.ToTable("HOADON");
 
-            builder.HasKey(hd => hd.Id);
+            builder.HasKey(hd => hd.MaHoaDon);
 
-            builder.Property(hd => hd.Id)
+            builder.Property(hd => hd.MaHoaDon)
                 .HasMaxLength(100);
             builder.Property(hd => hd.NgayTao)
                 .IsRequired();

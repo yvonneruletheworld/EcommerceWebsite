@@ -7,11 +7,11 @@ using System.Text;
 
 namespace EcommerceWebsite.Data.Configurations
 {
-    public class NhanXetSanPhamConfiguration : IEntityTypeConfiguration<BinhLuan>
+    class SanPhamYeuThichConfiguration : IEntityTypeConfiguration<SanPhamYeuThich>
     {
-        public void Configure(EntityTypeBuilder<BinhLuan> builder)
+        public void Configure(EntityTypeBuilder<SanPhamYeuThich> builder)
         {
-            builder.ToTable("NHANXETSANPHAM");
+            builder.ToTable("SANPHAMYEUTHICH");
 
             builder.HasKey(nx => new { nx.MaKhachHang, nx.MaSanPham });
 
@@ -20,21 +20,13 @@ namespace EcommerceWebsite.Data.Configurations
 
             builder.Property(nx => nx.MaKhachHang)
                 .HasMaxLength(100);
-
-            builder.Property(nx => nx.NoiDung)
-                .IsRequired();
-
-            builder.Property(nx => nx.SoSao)
-                 .HasColumnType("int")
-                 .IsRequired();
-
             //Khóa ngoại
             builder.HasOne(xl => xl.SanPham)
-                 .WithMany(xl => xl.BinhLuans)
+                 .WithMany(xl => xl.SanPhamYeus)
                  .HasForeignKey(xl => xl.MaSanPham);
             //Khóa ngoại
             builder.HasOne(xl => xl.KhachHang)
-                 .WithMany(xl => xl.BinhLuans)
+                 .WithMany(xl => xl.SanPhamYeus)
                  .HasForeignKey(xl => xl.MaKhachHang);
         }
     }

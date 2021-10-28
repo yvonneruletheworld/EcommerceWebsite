@@ -6,6 +6,7 @@ using EcommerceWebsite.Data.Identity;
 using EcommerceWebsite.Services.Interfaces.Main;
 using EcommerceWebsite.Utilities.Main;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,6 +58,18 @@ namespace EcommerceWebsite.Services.Services.Main
         public bool? KiemTra(string value)
         {
             return value?.Contains("j");
+        }
+        public async Task<List<SanPham>> LayDanhSachSanPham()
+        {
+            try
+            {
+                return await _context.SanPhams.ToListAsync();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
     }
 }
