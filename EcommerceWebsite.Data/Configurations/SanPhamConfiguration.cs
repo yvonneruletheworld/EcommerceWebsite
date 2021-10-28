@@ -30,16 +30,19 @@ namespace EcommerceWebsite.Data.Configurations
 
             builder.Property(sp => sp.MaLoaiSanPham)
                  .IsRequired()
-                 .HasMaxLength(100)
-                 .HasDefaultValue(0);
+                 .HasMaxLength(100);
+
+            builder.Property(sp => sp.MaHang)
+                .IsRequired()
+                .HasMaxLength(100);
 
             builder.HasOne(sp => sp.DanhMuc)
                   .WithMany(sp => sp.SanPhams)
                   .HasForeignKey(sp => sp.MaLoaiSanPham);
 
-            builder.HasOne(sp => sp.XepHangSanPham)
+            builder.HasOne(sp => sp.NhanHieu)
                  .WithMany(sp => sp.SanPhams)
-                 .HasForeignKey(sp => sp.MaXepHang);
+                 .HasForeignKey(sp => sp.MaHang);
 
         }
     }

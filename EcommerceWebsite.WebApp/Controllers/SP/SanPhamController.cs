@@ -11,10 +11,12 @@ namespace EcommerceWebsite.WebApp.Controllers.SP
     public class SanPhamController : Controller
     {
         private readonly ISanPhamServices _sanPhamServices;
+        private readonly IBoPhanServices _boPhanServices;
 
-        public SanPhamController(ISanPhamServices sanPhamServices)
+        public SanPhamController(ISanPhamServices sanPhamServices, IBoPhanServices boPhanServices)
         {
             this._sanPhamServices = sanPhamServices;
+            _boPhanServices = boPhanServices;
         }
 
         public IActionResult Index()
@@ -28,11 +30,11 @@ namespace EcommerceWebsite.WebApp.Controllers.SP
             try
             {
                 PaginationFilter filter = new PaginationFilter();
-                filter.PageSize = 20;
+                filter.PageSize = 10;
                 filter.PageNumber = pageIndex;
 
                 var data = await _sanPhamServices.GetListProductByPage(filter);
-                return PartialView("/Views/SanPham/_List.cshtml", data);
+                return PartialView("/Views/SanPham/_ListDS.cshtml", data);
 
             }
             catch (Exception ex)
@@ -41,5 +43,22 @@ namespace EcommerceWebsite.WebApp.Controllers.SP
                 throw ex;
             }
         }
+        [HttpGet("get-data-bophan")]
+        public async Task<IActionResult> LoadBoPhan()
+        {
+            try
+            {
+                var data = await _boPhanServices.LayDanhSachBoPhan();
+                var kq = data.Count();
+                return Json(new { code = kq });
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
     }
 }

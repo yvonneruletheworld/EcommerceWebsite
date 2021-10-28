@@ -13,13 +13,13 @@ namespace EcommerceWebsite.Data.Configurations
         {
             builder.ToTable("DANHMUC");
 
-            builder.HasKey(lsp => lsp.Id);
+            builder.HasKey(lsp => lsp.MaDanhMuc);
 
-            builder.Property(lsp => lsp.Id)
+            builder.Property(lsp => lsp.MaDanhMuc)
                 .HasMaxLength(100)
                 .IsRequired();
 
-            builder.Property(lsp => lsp.Name)
+            builder.Property(lsp => lsp.TenDanhMuc)
                 .HasMaxLength(200)
                 .IsRequired()
                 .HasColumnType("nvarchar");

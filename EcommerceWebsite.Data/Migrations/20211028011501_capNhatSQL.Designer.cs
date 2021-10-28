@@ -4,39 +4,22 @@ using EcommerceWebsite.Data.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EcommerceWebsite.Data.Migrations
 {
     [DbContext(typeof(EcomWebDbContext))]
-    partial class EcomWebDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211028011501_capNhatSQL")]
+    partial class capNhatSQL
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.10")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("EcommerceWebsite.Data.Entities.Banner", b =>
-                {
-                    b.Property<string>("MaBanner")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("HinhAnhBanner")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("TenBanner")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("MaBanner");
-
-                    b.ToTable("BANNER");
-                });
 
             modelBuilder.Entity("EcommerceWebsite.Data.Entities.BinhLuan", b =>
                 {
@@ -211,9 +194,6 @@ namespace EcommerceWebsite.Data.Migrations
                     b.Property<bool>("HienThiTrangHome")
                         .HasColumnType("bit");
 
-                    b.Property<string>("HinhAnh")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("NgaySuaCuoi")
                         .HasColumnType("datetime2");
 
@@ -253,8 +233,7 @@ namespace EcommerceWebsite.Data.Migrations
                             MaDanhMuc = "DM01",
                             DaXoa = false,
                             HienThiTrangHome = true,
-                            HinhAnh = "",
-                            NgayTao = new DateTime(2021, 10, 28, 1, 52, 55, 884, DateTimeKind.Utc).AddTicks(4914),
+                            NgayTao = new DateTime(2021, 10, 28, 1, 15, 0, 0, DateTimeKind.Utc).AddTicks(2329),
                             NguoiTao = "admin",
                             Status = 1,
                             TenDanhMuc = "Điện thoại"
@@ -264,8 +243,7 @@ namespace EcommerceWebsite.Data.Migrations
                             MaDanhMuc = "DM02",
                             DaXoa = false,
                             HienThiTrangHome = true,
-                            HinhAnh = "https://i.ibb.co/hKbXPTb/56bd682737d0d355fe665d380783371c.jpg",
-                            NgayTao = new DateTime(2021, 10, 28, 1, 52, 55, 884, DateTimeKind.Utc).AddTicks(7012),
+                            NgayTao = new DateTime(2021, 10, 28, 1, 15, 0, 0, DateTimeKind.Utc).AddTicks(4400),
                             NguoiTao = "admin",
                             ParentId = "DM01",
                             Status = 1,
@@ -276,8 +254,7 @@ namespace EcommerceWebsite.Data.Migrations
                             MaDanhMuc = "DM03",
                             DaXoa = false,
                             HienThiTrangHome = true,
-                            HinhAnh = "https://i.ibb.co/CmZS7bp/ng-h-th-ng-min.jpg",
-                            NgayTao = new DateTime(2021, 10, 28, 1, 52, 55, 884, DateTimeKind.Utc).AddTicks(7116),
+                            NgayTao = new DateTime(2021, 10, 28, 1, 15, 0, 0, DateTimeKind.Utc).AddTicks(4491),
                             NguoiTao = "admin",
                             ParentId = "DM01",
                             Status = 1,
@@ -288,7 +265,7 @@ namespace EcommerceWebsite.Data.Migrations
                             MaDanhMuc = "DM04",
                             DaXoa = false,
                             HienThiTrangHome = true,
-                            NgayTao = new DateTime(2021, 10, 28, 1, 52, 55, 884, DateTimeKind.Utc).AddTicks(7122),
+                            NgayTao = new DateTime(2021, 10, 28, 1, 15, 0, 0, DateTimeKind.Utc).AddTicks(4498),
                             NguoiTao = "admin",
                             ParentId = "DM01",
                             Status = 1,
@@ -348,7 +325,7 @@ namespace EcommerceWebsite.Data.Migrations
                             MaKhachHang = "KH01",
                             DaXoa = true,
                             DiaChi = "Hẻm 1 Bùi Xuân Phái, Tây Thạnh, Tân Phú, HCM",
-                            NgayTao = new DateTime(2021, 10, 28, 8, 52, 55, 949, DateTimeKind.Local).AddTicks(9052),
+                            NgayTao = new DateTime(2021, 10, 28, 8, 15, 0, 75, DateTimeKind.Local).AddTicks(4236),
                             SDT = "0376437459"
                         },
                         new
@@ -357,7 +334,7 @@ namespace EcommerceWebsite.Data.Migrations
                             MaKhachHang = "KH01",
                             DaXoa = true,
                             DiaChi = "140 Lê Trọng Tấn,",
-                            NgayTao = new DateTime(2021, 10, 28, 8, 52, 55, 949, DateTimeKind.Local).AddTicks(9176),
+                            NgayTao = new DateTime(2021, 10, 28, 8, 15, 0, 75, DateTimeKind.Local).AddTicks(4353),
                             SDT = "0376437459"
                         });
                 });
@@ -2654,9 +2631,6 @@ namespace EcommerceWebsite.Data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("HinhAnh")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("TenHang")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -2793,7 +2767,7 @@ namespace EcommerceWebsite.Data.Migrations
                             DiaChi = "Quảng Ngãi",
                             Mail = "phamthivi459@gmail.com",
                             NgaySinh = new DateTime(2000, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NgayTao = new DateTime(2021, 10, 28, 8, 52, 55, 948, DateTimeKind.Local).AddTicks(6729),
+                            NgayTao = new DateTime(2021, 10, 28, 8, 15, 0, 74, DateTimeKind.Local).AddTicks(3515),
                             SDT = "0376437459",
                             Status = 1,
                             TenNhanVien = "Phạm Thị Vi",
@@ -2806,7 +2780,7 @@ namespace EcommerceWebsite.Data.Migrations
                             DiaChi = "Quảng Ngãi",
                             Mail = "danhvu@gmail.com",
                             NgaySinh = new DateTime(2000, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NgayTao = new DateTime(2021, 10, 28, 8, 52, 55, 949, DateTimeKind.Local).AddTicks(4126),
+                            NgayTao = new DateTime(2021, 10, 28, 8, 15, 0, 74, DateTimeKind.Local).AddTicks(8097),
                             SDT = "123456789",
                             Status = 1,
                             TenNhanVien = "Lê Danh Vũ",
@@ -2819,7 +2793,7 @@ namespace EcommerceWebsite.Data.Migrations
                             DiaChi = "Quảng Ngãi",
                             Mail = "havy@gmail.com",
                             NgaySinh = new DateTime(2000, 7, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NgayTao = new DateTime(2021, 10, 28, 8, 52, 55, 949, DateTimeKind.Local).AddTicks(4210),
+                            NgayTao = new DateTime(2021, 10, 28, 8, 15, 0, 74, DateTimeKind.Local).AddTicks(8127),
                             SDT = "123456789",
                             Status = 1,
                             TenNhanVien = "Trần Nhật Hạ Vy",
@@ -2946,7 +2920,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/T2Ywg8N/Samsung-galaxy-z-fold-3-silver-gc-org.jpg",
                             MaHang = "MH02",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 10, 28, 1, 52, 55, 886, DateTimeKind.Utc).AddTicks(5983),
+                            NgayTao = new DateTime(2021, 10, 28, 1, 15, 0, 2, DateTimeKind.Utc).AddTicks(9082),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -2960,7 +2934,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/CPq556s/Samsung-galaxy-z-flip-3-kem-1-org.jpg",
                             MaHang = "MH02",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 10, 28, 1, 52, 55, 886, DateTimeKind.Utc).AddTicks(7302),
+                            NgayTao = new DateTime(2021, 10, 28, 1, 15, 0, 3, DateTimeKind.Utc).AddTicks(752),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -2974,7 +2948,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/RNz8N1G/Iphone-12-64-GB.jpg",
                             MaHang = "MH01",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 10, 28, 1, 52, 55, 886, DateTimeKind.Utc).AddTicks(7352),
+                            NgayTao = new DateTime(2021, 10, 28, 1, 15, 0, 3, DateTimeKind.Utc).AddTicks(840),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -2988,7 +2962,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/JQNGCzb/Iphone-12-pro-max-128-GB.jpg",
                             MaHang = "MH01",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 10, 28, 1, 52, 55, 886, DateTimeKind.Utc).AddTicks(7357),
+                            NgayTao = new DateTime(2021, 10, 28, 1, 15, 0, 3, DateTimeKind.Utc).AddTicks(847),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3002,7 +2976,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/vsLZ8km/Iphone-12-mini-64-GB.jpg",
                             MaHang = "MH01",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 10, 28, 1, 52, 55, 886, DateTimeKind.Utc).AddTicks(7362),
+                            NgayTao = new DateTime(2021, 10, 28, 1, 15, 0, 3, DateTimeKind.Utc).AddTicks(855),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3016,7 +2990,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/hZS5MJ3/Iphone-11-64-GB.jpg",
                             MaHang = "MH01",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 10, 28, 1, 52, 55, 886, DateTimeKind.Utc).AddTicks(7367),
+                            NgayTao = new DateTime(2021, 10, 28, 1, 15, 0, 3, DateTimeKind.Utc).AddTicks(862),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3030,7 +3004,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/2v36jLV/iphone-XR-64-GB.jpg",
                             MaHang = "MH01",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 10, 28, 1, 52, 55, 886, DateTimeKind.Utc).AddTicks(7384),
+                            NgayTao = new DateTime(2021, 10, 28, 1, 15, 0, 3, DateTimeKind.Utc).AddTicks(869),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3044,7 +3018,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/1rp5mbM/Oppo-reno6-z-5g-bac-1-org.jpg",
                             MaHang = "MH03",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 10, 28, 1, 52, 55, 886, DateTimeKind.Utc).AddTicks(7389),
+                            NgayTao = new DateTime(2021, 10, 28, 1, 15, 0, 3, DateTimeKind.Utc).AddTicks(890),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3058,7 +3032,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/zRQB86R/Oppo-a74-xanh-duong-1-org.jpg",
                             MaHang = "MH03",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 10, 28, 1, 52, 55, 886, DateTimeKind.Utc).AddTicks(7393),
+                            NgayTao = new DateTime(2021, 10, 28, 1, 15, 0, 3, DateTimeKind.Utc).AddTicks(898),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3072,7 +3046,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/ydCdghQ/Oppo-reno6-pro-5g-xanh-duong-1.jpg",
                             MaHang = "MH03",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 10, 28, 1, 52, 55, 886, DateTimeKind.Utc).AddTicks(7413),
+                            NgayTao = new DateTime(2021, 10, 28, 1, 15, 0, 3, DateTimeKind.Utc).AddTicks(906),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3086,7 +3060,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/pw2Kqcp/Oppo-find-x3-pro-den-1-org.jpg",
                             MaHang = "MH03",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 10, 28, 1, 52, 55, 886, DateTimeKind.Utc).AddTicks(7418),
+                            NgayTao = new DateTime(2021, 10, 28, 1, 15, 0, 3, DateTimeKind.Utc).AddTicks(913),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3100,7 +3074,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/zbPGb0s/Oppo-reno6-den-1-org.jpg",
                             MaHang = "MH03",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 10, 28, 1, 52, 55, 886, DateTimeKind.Utc).AddTicks(7423),
+                            NgayTao = new DateTime(2021, 10, 28, 1, 15, 0, 3, DateTimeKind.Utc).AddTicks(920),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3114,7 +3088,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/55BgPLp/Oppo-reno5-5g-bac-1-org.jpg",
                             MaHang = "MH03",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 10, 28, 1, 52, 55, 886, DateTimeKind.Utc).AddTicks(7429),
+                            NgayTao = new DateTime(2021, 10, 28, 1, 15, 0, 3, DateTimeKind.Utc).AddTicks(929),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3128,7 +3102,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/94LDnqK/Oppo-reno4-pro-trang-1-org.jpg",
                             MaHang = "MH03",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 10, 28, 1, 52, 55, 886, DateTimeKind.Utc).AddTicks(7434),
+                            NgayTao = new DateTime(2021, 10, 28, 1, 15, 0, 3, DateTimeKind.Utc).AddTicks(957),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3142,7 +3116,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/vVV9xVR/Oppo-a16-1-2.jpg",
                             MaHang = "MH03",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 10, 28, 1, 52, 55, 886, DateTimeKind.Utc).AddTicks(7442),
+                            NgayTao = new DateTime(2021, 10, 28, 1, 15, 0, 3, DateTimeKind.Utc).AddTicks(965),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3156,7 +3130,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/XWGXkDf/Vivo-y21-1-2.jpg",
                             MaHang = "MH04",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 10, 28, 1, 52, 55, 886, DateTimeKind.Utc).AddTicks(7448),
+                            NgayTao = new DateTime(2021, 10, 28, 1, 15, 0, 3, DateTimeKind.Utc).AddTicks(978),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3170,7 +3144,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/NrnVRWj/Vivo-x70-pro-black-gc-org.jpg",
                             MaHang = "MH04",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 10, 28, 1, 52, 55, 886, DateTimeKind.Utc).AddTicks(7452),
+                            NgayTao = new DateTime(2021, 10, 28, 1, 15, 0, 3, DateTimeKind.Utc).AddTicks(985),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3184,7 +3158,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/S7Xy2TM/Vivo-v21-5g-tim-hong-1-3-org.jpg",
                             MaHang = "MH04",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 10, 28, 1, 52, 55, 886, DateTimeKind.Utc).AddTicks(7458),
+                            NgayTao = new DateTime(2021, 10, 28, 1, 15, 0, 3, DateTimeKind.Utc).AddTicks(991),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3198,7 +3172,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/TLdWMdd/Vivo-v20-2021-xanh-hong-1-org.jpg",
                             MaHang = "MH04",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 10, 28, 1, 52, 55, 886, DateTimeKind.Utc).AddTicks(7463),
+                            NgayTao = new DateTime(2021, 10, 28, 1, 15, 0, 3, DateTimeKind.Utc).AddTicks(998),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3212,7 +3186,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/swGN954/Vivo-y72-5g-xanh-hong-1-1-org.jpg",
                             MaHang = "MH04",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 10, 28, 1, 52, 55, 886, DateTimeKind.Utc).AddTicks(7468),
+                            NgayTao = new DateTime(2021, 10, 28, 1, 15, 0, 3, DateTimeKind.Utc).AddTicks(1005),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3226,7 +3200,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/swGN954/Vivo-y72-5g-xanh-hong-1-1-org.jpg",
                             MaHang = "MH04",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 10, 28, 1, 52, 55, 886, DateTimeKind.Utc).AddTicks(7472),
+                            NgayTao = new DateTime(2021, 10, 28, 1, 15, 0, 3, DateTimeKind.Utc).AddTicks(1011),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3240,7 +3214,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/k5rV9Vg/Samsung-galaxy-watch-4-44mm-den-1-org.jpg",
                             MaHang = "MH02",
                             MaLoaiSanPham = "DM03",
-                            NgayTao = new DateTime(2021, 10, 28, 1, 52, 55, 886, DateTimeKind.Utc).AddTicks(7478),
+                            NgayTao = new DateTime(2021, 10, 28, 1, 15, 0, 3, DateTimeKind.Utc).AddTicks(1018),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3749,13 +3723,13 @@ namespace EcommerceWebsite.Data.Migrations
                         {
                             Id = "8d04dce2-969a-435d-bba4-df3f325983dc",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a7be6905-4fcb-4980-be84-b030668b04c8",
+                            ConcurrencyStamp = "e36df0dd-058e-4f27-a727-e4234fc71ee9",
                             Email = "yvonnetran.work@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "yvonnetran.work@gmail.com",
                             NormalizedUserName = "havyclient1",
-                            PasswordHash = "AQAAAAEAACcQAAAAEG90K5yyqcBhoaxQCIC+W9m2/6Pk0Ayxf1YjXDoS21XfJvo0D8/Vn2pyDKKT6G9j4A==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBdfZcRNV1eNiST03FHX6TU1sGHQMbp35+Z3BZFHk34hcMajQeEcTEZKslol5UUTZA==",
                             PhoneNumber = "0905187524",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
@@ -3769,13 +3743,13 @@ namespace EcommerceWebsite.Data.Migrations
                         {
                             Id = "04052000",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e422c961-a735-4c9c-9b1c-02777416ed76",
+                            ConcurrencyStamp = "026e1d8e-e416-498c-85ae-ed5ee72742e9",
                             Email = "phamthivi459@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "phamthivi459@gmail.com",
                             NormalizedUserName = "phamTVi0405",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGge7h6Wh7YiXtNXAUAa26kYPXX2ywxuWG5o1+0OgmDyKbKFX3TFHdS9qHlXFuAk4w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEB9rLByksIopYunzC7It6X+/h+9daSxn3jA3d1/+bwOdGIJC+2eIoU/Wsgyu6WwK+w==",
                             PhoneNumber = "0376437459",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
@@ -3789,13 +3763,13 @@ namespace EcommerceWebsite.Data.Migrations
                         {
                             Id = "123456789",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "92f222a2-aeaa-49ca-a533-6dc2ad25022e",
+                            ConcurrencyStamp = "94da1b44-3753-442b-a075-2fdaeab1caa0",
                             Email = "danhVu@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "danhVu@gmail.com",
                             NormalizedUserName = "danhVu",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMnkAm4408fGyE+DmuLw48hY7AXBbGo4PHTc3ZBk9AOGrQR6fxNfeKzAcFdcBqduZA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAELeFsQ5joFjq1Lslbcqk4cPshFWSS+X2qL9dR5E4/H9BYzAq4gpAGElG39Mn+BNfWw==",
                             PhoneNumber = "0376437459",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
