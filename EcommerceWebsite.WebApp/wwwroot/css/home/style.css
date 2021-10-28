@@ -1,9 +1,4 @@
-﻿html, body {
-    display: flex;
-    justify-content: center;
-    font-family: Roboto, Arial, sans-serif;
-    font-size: 15px;
-}
+﻿
 .input-login {
     width: 100%;
     padding: 16px 8px;

@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Views\SanPham\" />
     <Folder Include="wwwroot\images\logo\" />
   </ItemGroup>
 

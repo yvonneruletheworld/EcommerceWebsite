@@ -1,15 +1,21 @@
 ﻿
 @{
-    ViewData["Title"] = "TrangChu";
-    Layout = "~/Views/Shared/_HomePage.cshtml";
+    ViewData["Title"] = "TRIPLE V - Trang Chủ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var queryPageIndex = Context.Request.Query["pageIndex"];
+    var valPageIndex = queryPageIndex.Count > 0 ? (int.TryParse(queryPageIndex[0], out int idx) ? idx : 1) : 1;
+
 }
 <!-- OFFER -->
 <section class="offer section">
-    <div class="heading">
-        <h2>SẢN PHẨM NỔI BẬT</h2>
-        <p></p>
-    </div>
-    <div class="offer__container">
+    
+
+    <h2>Danh Sách Sản Phẩm Theo Phân Trang</h2>
+
+    <table class="table-section"></table>
+
+    @*<div class="offer__container">
         <div class="row row-cols-5">
             <div class="col offer__col">
                 <div class="offer__item">
@@ -174,5 +180,50 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>*@
 </section>
+
+<script>
+    let gPageIndex = 1;
+
+    $(document).ready(() => {
+        gPageIndex = @valPageIndex ;
+        initResourceFilterQuery();
+
+    })
+
+    function initResourceFilterQuery() {
+        getDataSanPham(gPageIndex);
+    }
+
+    function getDataSanPham(pId) {
+        gPageIndex = pId;
+        //load san pham bang ajax
+        $.ajax({
+            url: '/get-data-sanpham?pageIndex=' + pId,
+            type: 'GET',
+            dataType: 'html',
+            success: (result) => {
+                $(".table-section")[0].innerHTML = result;
+            },
+            error: (err) => {
+                alert('failed');
+                console.log(err);
+            }
+        });
+    }
+
+    function selectCheckboxAll() {
+
+    }
+
+    function sortByColumn(fieldSort) {
+
+    }
+
+    function selectCheckboxItem() {
+
+    }
+
+
+</script>
