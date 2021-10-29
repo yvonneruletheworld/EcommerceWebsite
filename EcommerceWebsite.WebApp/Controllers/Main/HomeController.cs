@@ -70,5 +70,26 @@ namespace EcommerceWebsite.WebApp.Controllers
                 throw ex;
             }
         }
+
+        private string GetUserIp()
+        {
+            return Request.HttpContext.Connection.RemoteIpAddress.ToString();
+        }
+
+
+        //[HttpGet("get-client-cart")]
+        //public Task<IActionResult> GetClientCart ()
+        //{
+        //    try
+        //    {
+        //        var curIp = GetUserIp();
+        //        curIp ??=
+        //    }
+        //    catch (Exception)
+        //    {
+
+        //        throw;
+        //    }
+        //}
     }
 }

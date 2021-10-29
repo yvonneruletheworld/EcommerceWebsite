@@ -79,8 +79,7 @@ namespace EcommerceWebsite.WebApp.Controllers.SP
                     if (currentUser == null) msg = Messages.Login_EmailNull;
                     else
                     {
-                        // get computer's ip
-                        var comIp = GetUserIp();
+                        
                         //gen otp
                         var otpCode = Randoms.RandomString().ToUpper();
                         var updateOtpCode = await _khachHangService.UpdateOTPCode(getByUserName.Id, otpCode ??= "OTCODENULL");
@@ -125,10 +124,7 @@ namespace EcommerceWebsite.WebApp.Controllers.SP
         }
 
 
-        public string GetUserIp()
-        {
-            return Request.HttpContext.Connection.RemoteIpAddress.ToString();
-        }
+        
 
         [HttpGet("get-form-login")]
         public async Task<IActionResult> GetFormLoginAsync(string phoneNumber, bool isPhoneNumber)
