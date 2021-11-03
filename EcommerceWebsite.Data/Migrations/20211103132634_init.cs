@@ -816,9 +816,9 @@ namespace EcommerceWebsite.Data.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "AccountNumber", "ConcurrencyStamp", "CreateUserId", "DeleteTime", "DeleteUserId", "Discriminator", "Email", "EmailConfirmed", "IdAuto", "Ip", "IsDeleted", "LastModificationTime", "LastModificationUserId", "LockoutEnabled", "LockoutEnd", "LoginString", "NormalizedEmail", "NormalizedUserName", "OTPCode", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "Status", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "04052000", 0, null, "2cbb48aa-77c8-405d-8759-1c7b95a6f05a", null, null, null, "ApplicationUser", "phamthivi459@gmail.com", true, null, null, false, null, null, false, null, null, "phamthivi459@gmail.com", "phamTVi0405", null, "AQAAAAEAACcQAAAAELCD4cjYHJCOAFvzLCtMdmUR3IP8PReV2JVmNoluHm4Vhro21Gf851CY55FZneyRBw==", "0376437459", false, "", 1, false, "phamTVi0405" },
-                    { "8d04dce2-969a-435d-bba4-df3f325983dc", 0, null, "24221f02-2bc2-4f2f-805f-859ec7c929a6", null, null, null, "ApplicationUser", "yvonnetran.work@gmail.com", true, null, null, false, null, null, false, null, null, "yvonnetran.work@gmail.com", "havyclient1", null, "AQAAAAEAACcQAAAAEE4D8IVqIQnlXFqd23M1r4s/dpBNgKhw+NK74fGCZj3+TuyEyfPBennDAZI/hY/vyw==", "0905187524", false, "", 1, false, "havyclient1" },
-                    { "123456789", 0, null, "17810fbc-3ebd-401e-9644-fe27f4416144", null, null, null, "ApplicationUser", "danhVu@gmail.com", true, null, null, false, null, null, false, null, null, "danhVu@gmail.com", "danhVu", null, "AQAAAAEAACcQAAAAEOQW6pCg888AxSKUc0Qa3YP2twbPUf/3VD6VSs+0anapMKk7MEj5uKjNGYALC7e9aw==", "0376437459", false, "", 1, false, "danhVu" }
+                    { "04052000", 0, null, "1a50ea96-edbe-4f42-bc1a-a6c079e99b82", null, null, null, "ApplicationUser", "phamthivi459@gmail.com", true, null, null, false, null, null, false, null, null, "phamthivi459@gmail.com", "phamTVi0405", null, "AQAAAAEAACcQAAAAEHcmOPGHF4Fi4jDFEa1/nG8D3BKltzuqInsZb9Jqs+aJG9VdpuE29KiVc7xc9AKaQQ==", "0376437459", false, "", 1, false, "phamTVi0405" },
+                    { "8d04dce2-969a-435d-bba4-df3f325983dc", 0, null, "2c2d9781-6821-4499-b27f-dc940b19d01f", null, null, null, "ApplicationUser", "yvonnetran.work@gmail.com", true, null, null, false, null, null, false, null, null, "yvonnetran.work@gmail.com", "havyclient1", null, "AQAAAAEAACcQAAAAEI4Y3Ic7m9/NPsOuV9nanY7ULi4bjDxLj8VX07Dx4OO10k+hp3ncCl173ir9pMSrww==", "0905187524", false, "", 1, false, "havyclient1" },
+                    { "123456789", 0, null, "bd7e9aa6-690f-49b2-bcdb-9aac00abb34a", null, null, null, "ApplicationUser", "danhVu@gmail.com", true, null, null, false, null, null, false, null, null, "danhVu@gmail.com", "danhVu", null, "AQAAAAEAACcQAAAAEBylAzHx9ODQNs//JzxQCRKJWkbqXFvPefQ+m3Bjm832fGTyxw1YIj1YtMT+Wi88cw==", "0376437459", false, "", 1, false, "danhVu" }
                 });
 
             migrationBuilder.InsertData(
@@ -837,10 +837,10 @@ namespace EcommerceWebsite.Data.Migrations
                 columns: new[] { "MaDanhMuc", "DaXoa", "HienThiTrangHome", "HinhAnh", "NgaySuaCuoi", "NgayTao", "NgayXoa", "NguoiSuaCuoi", "NguoiTao", "NguoiXoa", "ParentId", "Status", "TenDanhMuc" },
                 values: new object[,]
                 {
-                    { "DM02", false, true, "https://i.ibb.co/hKbXPTb/56bd682737d0d355fe665d380783371c.jpg", null, new DateTime(2021, 10, 28, 2, 2, 53, 116, DateTimeKind.Utc).AddTicks(2362), null, null, "admin", null, "DM01", 1, "Phụ kiện" },
-                    { "DM03", false, true, "https://i.ibb.co/CmZS7bp/ng-h-th-ng-min.jpg", null, new DateTime(2021, 10, 28, 2, 2, 53, 116, DateTimeKind.Utc).AddTicks(2418), null, null, "admin", null, "DM01", 1, "Đồng hồ thông minh" },
-                    { "DM04", false, true, null, null, new DateTime(2021, 10, 28, 2, 2, 53, 116, DateTimeKind.Utc).AddTicks(2421), null, null, "admin", null, "DM01", 1, "PC, Máy in" },
-                    { "DM01", false, true, "", null, new DateTime(2021, 10, 28, 2, 2, 53, 116, DateTimeKind.Utc).AddTicks(1390), null, null, "admin", null, null, 1, "Điện thoại" }
+                    { "DM02", false, true, "https://i.ibb.co/hKbXPTb/56bd682737d0d355fe665d380783371c.jpg", null, new DateTime(2021, 11, 3, 13, 26, 33, 721, DateTimeKind.Utc).AddTicks(4712), null, null, "admin", null, "DM01", 1, "Phụ kiện" },
+                    { "DM03", false, true, "https://i.ibb.co/CmZS7bp/ng-h-th-ng-min.jpg", null, new DateTime(2021, 11, 3, 13, 26, 33, 721, DateTimeKind.Utc).AddTicks(4766), null, null, "admin", null, "DM01", 1, "Đồng hồ thông minh" },
+                    { "DM04", false, true, null, null, new DateTime(2021, 11, 3, 13, 26, 33, 721, DateTimeKind.Utc).AddTicks(4770), null, null, "admin", null, "DM01", 1, "PC, Máy in" },
+                    { "DM01", false, true, "", null, new DateTime(2021, 11, 3, 13, 26, 33, 721, DateTimeKind.Utc).AddTicks(3718), null, null, "admin", null, null, 1, "Điện thoại" }
                 });
 
             migrationBuilder.InsertData(
@@ -874,9 +874,9 @@ namespace EcommerceWebsite.Data.Migrations
                 columns: new[] { "MaNhanVien", "DaXoa", "DiaChi", "HinhAnh", "LoginString", "MaBoPhan", "Mail", "NgaySinh", "NgaySuaCuoi", "NgayTao", "NgayXoa", "NguoiSuaCuoi", "NguoiTao", "NguoiXoa", "SDT", "Status", "TenNhanVien", "Username" },
                 values: new object[,]
                 {
-                    { "NV03", false, "Quảng Ngãi", null, null, null, "havy@gmail.com", new DateTime(2000, 7, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(2021, 10, 28, 9, 2, 53, 137, DateTimeKind.Local).AddTicks(1626), null, null, null, null, "123456789", 1, "Trần Nhật Hạ Vy", "haVy" },
-                    { "NV02", false, "Quảng Ngãi", null, null, null, "danhvu@gmail.com", new DateTime(2000, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(2021, 10, 28, 9, 2, 53, 137, DateTimeKind.Local).AddTicks(1608), null, null, null, null, "123456789", 1, "Lê Danh Vũ", "DanhVu" },
-                    { "NV01", false, "Quảng Ngãi", null, null, null, "phamthivi459@gmail.com", new DateTime(2000, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(2021, 10, 28, 9, 2, 53, 136, DateTimeKind.Local).AddTicks(8977), null, null, null, null, "0376437459", 1, "Phạm Thị Vi", "PhamTVi" }
+                    { "NV03", false, "Quảng Ngãi", null, null, null, "havy@gmail.com", new DateTime(2000, 7, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(2021, 11, 3, 20, 26, 33, 747, DateTimeKind.Local).AddTicks(1813), null, null, null, null, "123456789", 1, "Trần Nhật Hạ Vy", "haVy" },
+                    { "NV02", false, "Quảng Ngãi", null, null, null, "danhvu@gmail.com", new DateTime(2000, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(2021, 11, 3, 20, 26, 33, 747, DateTimeKind.Local).AddTicks(1790), null, null, null, null, "123456789", 1, "Lê Danh Vũ", "DanhVu" },
+                    { "NV01", false, "Quảng Ngãi", null, null, null, "phamthivi459@gmail.com", new DateTime(2000, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(2021, 11, 3, 20, 26, 33, 745, DateTimeKind.Local).AddTicks(9781), null, null, null, null, "0376437459", 1, "Phạm Thị Vi", "PhamTVi" }
                 });
 
             migrationBuilder.InsertData(
@@ -904,8 +904,8 @@ namespace EcommerceWebsite.Data.Migrations
                 columns: new[] { "MaDiaChi", "MaKhachHang", "DaXoa", "DiaChi", "NgaySuaCuoi", "NgayTao", "NgayXoa", "NguoiSuaCuoi", "NguoiTao", "NguoiXoa", "SDT" },
                 values: new object[,]
                 {
-                    { "DC01", "KH01", true, "Hẻm 1 Bùi Xuân Phái, Tây Thạnh, Tân Phú, HCM", null, new DateTime(2021, 10, 28, 9, 2, 53, 137, DateTimeKind.Local).AddTicks(3092), null, null, null, null, "0376437459" },
-                    { "DC02", "KH01", true, "140 Lê Trọng Tấn,", null, new DateTime(2021, 10, 28, 9, 2, 53, 137, DateTimeKind.Local).AddTicks(3130), null, null, null, null, "0376437459" }
+                    { "DC01", "KH01", true, "Hẻm 1 Bùi Xuân Phái, Tây Thạnh, Tân Phú, HCM", null, new DateTime(2021, 11, 3, 20, 26, 33, 747, DateTimeKind.Local).AddTicks(4182), null, null, null, null, "0376437459" },
+                    { "DC02", "KH01", true, "140 Lê Trọng Tấn,", null, new DateTime(2021, 11, 3, 20, 26, 33, 747, DateTimeKind.Local).AddTicks(4229), null, null, null, null, "0376437459" }
                 });
 
             migrationBuilder.InsertData(
@@ -913,28 +913,28 @@ namespace EcommerceWebsite.Data.Migrations
                 columns: new[] { "MaSanPham", "DaXoa", "HinhAnh", "MaHang", "MaLoaiSanPham", "NgaySuaCuoi", "NgayTao", "NgayXoa", "NguoiSuaCuoi", "NguoiTao", "NguoiXoa", "SoLuongTon", "Status", "TenSanPham", "Utility" },
                 values: new object[,]
                 {
-                    { "SP019", false, "https://i.ibb.co/TLdWMdd/Vivo-v20-2021-xanh-hong-1-org.jpg", "MH04", "DM01", null, new DateTime(2021, 10, 28, 2, 2, 53, 117, DateTimeKind.Utc).AddTicks(4017), null, null, "admin", null, 1, 1, "Vivo V20 (2021)", 0m },
-                    { "SP018", false, "https://i.ibb.co/S7Xy2TM/Vivo-v21-5g-tim-hong-1-3-org.jpg", "MH04", "DM01", null, new DateTime(2021, 10, 28, 2, 2, 53, 117, DateTimeKind.Utc).AddTicks(4014), null, null, "admin", null, 1, 1, "Vivo V21 5G", 0m },
-                    { "SP017", false, "https://i.ibb.co/NrnVRWj/Vivo-x70-pro-black-gc-org.jpg", "MH04", "DM01", null, new DateTime(2021, 10, 28, 2, 2, 53, 117, DateTimeKind.Utc).AddTicks(4008), null, null, "admin", null, 1, 1, "Vivo X70 Pro 5G", 0m },
-                    { "SP016", false, "https://i.ibb.co/XWGXkDf/Vivo-y21-1-2.jpg", "MH04", "DM01", null, new DateTime(2021, 10, 28, 2, 2, 53, 117, DateTimeKind.Utc).AddTicks(4005), null, null, "admin", null, 1, 1, "OPPO A16", 0m },
-                    { "SP015", false, "https://i.ibb.co/vVV9xVR/Oppo-a16-1-2.jpg", "MH03", "DM01", null, new DateTime(2021, 10, 28, 2, 2, 53, 117, DateTimeKind.Utc).AddTicks(4002), null, null, "admin", null, 1, 1, "OPPO A16", 0m },
-                    { "SP014", false, "https://i.ibb.co/94LDnqK/Oppo-reno4-pro-trang-1-org.jpg", "MH03", "DM01", null, new DateTime(2021, 10, 28, 2, 2, 53, 117, DateTimeKind.Utc).AddTicks(3998), null, null, "admin", null, 1, 1, "OPPO Reno4 Pro", 0m },
-                    { "SP013", false, "https://i.ibb.co/55BgPLp/Oppo-reno5-5g-bac-1-org.jpg", "MH03", "DM01", null, new DateTime(2021, 10, 28, 2, 2, 53, 117, DateTimeKind.Utc).AddTicks(3995), null, null, "admin", null, 1, 1, "OPPO Reno5 5G", 0m },
-                    { "SP012", false, "https://i.ibb.co/zbPGb0s/Oppo-reno6-den-1-org.jpg", "MH03", "DM01", null, new DateTime(2021, 10, 28, 2, 2, 53, 117, DateTimeKind.Utc).AddTicks(3992), null, null, "admin", null, 1, 1, "OPPO Reno6 5G", 0m },
-                    { "SP011", false, "https://i.ibb.co/pw2Kqcp/Oppo-find-x3-pro-den-1-org.jpg", "MH03", "DM01", null, new DateTime(2021, 10, 28, 2, 2, 53, 117, DateTimeKind.Utc).AddTicks(3988), null, null, "admin", null, 1, 1, "OPPO Find X3 Pro 5G", 0m },
-                    { "SP010", false, "https://i.ibb.co/ydCdghQ/Oppo-reno6-pro-5g-xanh-duong-1.jpg", "MH03", "DM01", null, new DateTime(2021, 10, 28, 2, 2, 53, 117, DateTimeKind.Utc).AddTicks(3985), null, null, "admin", null, 1, 1, "OPPO Reno6 Pro 5G", 0m },
-                    { "SP09", false, "https://i.ibb.co/zRQB86R/Oppo-a74-xanh-duong-1-org.jpg", "MH03", "DM01", null, new DateTime(2021, 10, 28, 2, 2, 53, 117, DateTimeKind.Utc).AddTicks(3979), null, null, "admin", null, 1, 1, "OPPO A74", 0m },
-                    { "SP08", false, "https://i.ibb.co/1rp5mbM/Oppo-reno6-z-5g-bac-1-org.jpg", "MH03", "DM01", null, new DateTime(2021, 10, 28, 2, 2, 53, 117, DateTimeKind.Utc).AddTicks(3976), null, null, "admin", null, 1, 1, "OPPO Reno6 Z 5G", 0m },
-                    { "SP022", false, "https://i.ibb.co/k5rV9Vg/Samsung-galaxy-watch-4-44mm-den-1-org.jpg", "MH02", "DM03", null, new DateTime(2021, 10, 28, 2, 2, 53, 117, DateTimeKind.Utc).AddTicks(4027), null, null, "admin", null, 1, 1, "Samsung Galaxy Watch 4 44mm", 0m },
-                    { "SP02", false, "https://i.ibb.co/CPq556s/Samsung-galaxy-z-flip-3-kem-1-org.jpg", "MH02", "DM01", null, new DateTime(2021, 10, 28, 2, 2, 53, 117, DateTimeKind.Utc).AddTicks(3928), null, null, "admin", null, 1, 1, "Samsung Galaxy Z Flip3 5G 128GB", 0m },
-                    { "SP01", false, "https://i.ibb.co/T2Ywg8N/Samsung-galaxy-z-fold-3-silver-gc-org.jpg", "MH02", "DM01", null, new DateTime(2021, 10, 28, 2, 2, 53, 117, DateTimeKind.Utc).AddTicks(3164), null, null, "admin", null, 1, 1, "Samsung Galaxy Z Fold3 5G 512GB", 0m },
-                    { "SP07", false, "https://i.ibb.co/2v36jLV/iphone-XR-64-GB.jpg", "MH01", "DM01", null, new DateTime(2021, 10, 28, 2, 2, 53, 117, DateTimeKind.Utc).AddTicks(3972), null, null, "admin", null, 1, 1, "iPhone XR 64GB", 0m },
-                    { "SP06", false, "https://i.ibb.co/hZS5MJ3/Iphone-11-64-GB.jpg", "MH01", "DM01", null, new DateTime(2021, 10, 28, 2, 2, 53, 117, DateTimeKind.Utc).AddTicks(3968), null, null, "admin", null, 1, 1, "iPhone 11 64GB", 0m },
-                    { "SP05", false, "https://i.ibb.co/vsLZ8km/Iphone-12-mini-64-GB.jpg", "MH01", "DM01", null, new DateTime(2021, 10, 28, 2, 2, 53, 117, DateTimeKind.Utc).AddTicks(3964), null, null, "admin", null, 1, 1, "iPhone 12 mini 64GB", 0m },
-                    { "SP04", false, "https://i.ibb.co/JQNGCzb/Iphone-12-pro-max-128-GB.jpg", "MH01", "DM01", null, new DateTime(2021, 10, 28, 2, 2, 53, 117, DateTimeKind.Utc).AddTicks(3961), null, null, "admin", null, 1, 1, "iPhone 12 Pro Max 128GB", 0m },
-                    { "SP03", false, "https://i.ibb.co/RNz8N1G/Iphone-12-64-GB.jpg", "MH01", "DM01", null, new DateTime(2021, 10, 28, 2, 2, 53, 117, DateTimeKind.Utc).AddTicks(3957), null, null, "admin", null, 1, 1, "iPhone 12 64GB", 0m },
-                    { "SP020", false, "https://i.ibb.co/swGN954/Vivo-y72-5g-xanh-hong-1-1-org.jpg", "MH04", "DM01", null, new DateTime(2021, 10, 28, 2, 2, 53, 117, DateTimeKind.Utc).AddTicks(4020), null, null, "admin", null, 1, 1, "Vivo Y72 5G", 0m },
-                    { "SP021", false, "https://i.ibb.co/swGN954/Vivo-y72-5g-xanh-hong-1-1-org.jpg", "MH04", "DM01", null, new DateTime(2021, 10, 28, 2, 2, 53, 117, DateTimeKind.Utc).AddTicks(4024), null, null, "admin", null, 1, 1, "Vivo Y21s 6GB", 0m }
+                    { "SP019", false, "https://i.ibb.co/TLdWMdd/Vivo-v20-2021-xanh-hong-1-org.jpg", "MH04", "DM01", null, new DateTime(2021, 11, 3, 13, 26, 33, 722, DateTimeKind.Utc).AddTicks(9237), null, null, "admin", null, 1, 1, "Vivo V20 (2021)", 0m },
+                    { "SP018", false, "https://i.ibb.co/S7Xy2TM/Vivo-v21-5g-tim-hong-1-3-org.jpg", "MH04", "DM01", null, new DateTime(2021, 11, 3, 13, 26, 33, 722, DateTimeKind.Utc).AddTicks(9232), null, null, "admin", null, 1, 1, "Vivo V21 5G", 0m },
+                    { "SP017", false, "https://i.ibb.co/NrnVRWj/Vivo-x70-pro-black-gc-org.jpg", "MH04", "DM01", null, new DateTime(2021, 11, 3, 13, 26, 33, 722, DateTimeKind.Utc).AddTicks(9228), null, null, "admin", null, 1, 1, "Vivo X70 Pro 5G", 0m },
+                    { "SP016", false, "https://i.ibb.co/XWGXkDf/Vivo-y21-1-2.jpg", "MH04", "DM01", null, new DateTime(2021, 11, 3, 13, 26, 33, 722, DateTimeKind.Utc).AddTicks(9225), null, null, "admin", null, 1, 1, "OPPO A16", 0m },
+                    { "SP015", false, "https://i.ibb.co/vVV9xVR/Oppo-a16-1-2.jpg", "MH03", "DM01", null, new DateTime(2021, 11, 3, 13, 26, 33, 722, DateTimeKind.Utc).AddTicks(9222), null, null, "admin", null, 1, 1, "OPPO A16", 0m },
+                    { "SP014", false, "https://i.ibb.co/94LDnqK/Oppo-reno4-pro-trang-1-org.jpg", "MH03", "DM01", null, new DateTime(2021, 11, 3, 13, 26, 33, 722, DateTimeKind.Utc).AddTicks(9218), null, null, "admin", null, 1, 1, "OPPO Reno4 Pro", 0m },
+                    { "SP013", false, "https://i.ibb.co/55BgPLp/Oppo-reno5-5g-bac-1-org.jpg", "MH03", "DM01", null, new DateTime(2021, 11, 3, 13, 26, 33, 722, DateTimeKind.Utc).AddTicks(9215), null, null, "admin", null, 1, 1, "OPPO Reno5 5G", 0m },
+                    { "SP012", false, "https://i.ibb.co/zbPGb0s/Oppo-reno6-den-1-org.jpg", "MH03", "DM01", null, new DateTime(2021, 11, 3, 13, 26, 33, 722, DateTimeKind.Utc).AddTicks(9197), null, null, "admin", null, 1, 1, "OPPO Reno6 5G", 0m },
+                    { "SP011", false, "https://i.ibb.co/pw2Kqcp/Oppo-find-x3-pro-den-1-org.jpg", "MH03", "DM01", null, new DateTime(2021, 11, 3, 13, 26, 33, 722, DateTimeKind.Utc).AddTicks(9194), null, null, "admin", null, 1, 1, "OPPO Find X3 Pro 5G", 0m },
+                    { "SP010", false, "https://i.ibb.co/ydCdghQ/Oppo-reno6-pro-5g-xanh-duong-1.jpg", "MH03", "DM01", null, new DateTime(2021, 11, 3, 13, 26, 33, 722, DateTimeKind.Utc).AddTicks(9188), null, null, "admin", null, 1, 1, "OPPO Reno6 Pro 5G", 0m },
+                    { "SP09", false, "https://i.ibb.co/zRQB86R/Oppo-a74-xanh-duong-1-org.jpg", "MH03", "DM01", null, new DateTime(2021, 11, 3, 13, 26, 33, 722, DateTimeKind.Utc).AddTicks(9185), null, null, "admin", null, 1, 1, "OPPO A74", 0m },
+                    { "SP08", false, "https://i.ibb.co/1rp5mbM/Oppo-reno6-z-5g-bac-1-org.jpg", "MH03", "DM01", null, new DateTime(2021, 11, 3, 13, 26, 33, 722, DateTimeKind.Utc).AddTicks(9180), null, null, "admin", null, 1, 1, "OPPO Reno6 Z 5G", 0m },
+                    { "SP022", false, "https://i.ibb.co/k5rV9Vg/Samsung-galaxy-watch-4-44mm-den-1-org.jpg", "MH02", "DM03", null, new DateTime(2021, 11, 3, 13, 26, 33, 722, DateTimeKind.Utc).AddTicks(9247), null, null, "admin", null, 1, 1, "Samsung Galaxy Watch 4 44mm", 0m },
+                    { "SP02", false, "https://i.ibb.co/CPq556s/Samsung-galaxy-z-flip-3-kem-1-org.jpg", "MH02", "DM01", null, new DateTime(2021, 11, 3, 13, 26, 33, 722, DateTimeKind.Utc).AddTicks(9070), null, null, "admin", null, 1, 1, "Samsung Galaxy Z Flip3 5G 128GB", 0m },
+                    { "SP01", false, "https://i.ibb.co/T2Ywg8N/Samsung-galaxy-z-fold-3-silver-gc-org.jpg", "MH02", "DM01", null, new DateTime(2021, 11, 3, 13, 26, 33, 722, DateTimeKind.Utc).AddTicks(8153), null, null, "admin", null, 1, 1, "Samsung Galaxy Z Fold3 5G 512GB", 0m },
+                    { "SP07", false, "https://i.ibb.co/2v36jLV/iphone-XR-64-GB.jpg", "MH01", "DM01", null, new DateTime(2021, 11, 3, 13, 26, 33, 722, DateTimeKind.Utc).AddTicks(9177), null, null, "admin", null, 1, 1, "iPhone XR 64GB", 0m },
+                    { "SP06", false, "https://i.ibb.co/hZS5MJ3/Iphone-11-64-GB.jpg", "MH01", "DM01", null, new DateTime(2021, 11, 3, 13, 26, 33, 722, DateTimeKind.Utc).AddTicks(9174), null, null, "admin", null, 1, 1, "iPhone 11 64GB", 0m },
+                    { "SP05", false, "https://i.ibb.co/vsLZ8km/Iphone-12-mini-64-GB.jpg", "MH01", "DM01", null, new DateTime(2021, 11, 3, 13, 26, 33, 722, DateTimeKind.Utc).AddTicks(9169), null, null, "admin", null, 1, 1, "iPhone 12 mini 64GB", 0m },
+                    { "SP04", false, "https://i.ibb.co/JQNGCzb/Iphone-12-pro-max-128-GB.jpg", "MH01", "DM01", null, new DateTime(2021, 11, 3, 13, 26, 33, 722, DateTimeKind.Utc).AddTicks(9164), null, null, "admin", null, 1, 1, "iPhone 12 Pro Max 128GB", 0m },
+                    { "SP03", false, "https://i.ibb.co/RNz8N1G/Iphone-12-64-GB.jpg", "MH01", "DM01", null, new DateTime(2021, 11, 3, 13, 26, 33, 722, DateTimeKind.Utc).AddTicks(9159), null, null, "admin", null, 1, 1, "iPhone 12 64GB", 0m },
+                    { "SP020", false, "https://i.ibb.co/swGN954/Vivo-y72-5g-xanh-hong-1-1-org.jpg", "MH04", "DM01", null, new DateTime(2021, 11, 3, 13, 26, 33, 722, DateTimeKind.Utc).AddTicks(9240), null, null, "admin", null, 1, 1, "Vivo Y72 5G", 0m },
+                    { "SP021", false, "https://i.ibb.co/swGN954/Vivo-y72-5g-xanh-hong-1-1-org.jpg", "MH04", "DM01", null, new DateTime(2021, 11, 3, 13, 26, 33, 722, DateTimeKind.Utc).AddTicks(9243), null, null, "admin", null, 1, 1, "Vivo Y21s 6GB", 0m }
                 });
 
             migrationBuilder.InsertData(
