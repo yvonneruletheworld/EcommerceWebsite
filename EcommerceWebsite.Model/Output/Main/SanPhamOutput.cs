@@ -19,6 +19,6 @@ namespace EcommerceWebsite.Utilities.Main
         public decimal Utility { get; set; }
         public DanhGiaSanPham DanhGiaSanPham { get; set; }
         public DanhMuc DanhMuc { get; set; }
-        //Khóa ngoại
+        public LichSuGia lichSuGia { get; set; }
     }
 }

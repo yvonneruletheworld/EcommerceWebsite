@@ -20,8 +20,9 @@ namespace EcommerceWebsite.Data.EF
 
         }
 
-        protected EcomWebDbContext()
+        public EcomWebDbContext()
         {
+
         }
 
         public DbSet<HoaDon> HoaDons { get; set; }
@@ -34,7 +35,7 @@ namespace EcommerceWebsite.Data.EF
         public DbSet<DinhLuong> DinhLuongs { get; set; }
         public DbSet<MauMaSanPham> MauMaSanPhams { get; set; }
         public DbSet<LichSuGia> LichSuGias { get; set; }
-        public DbSet<NhanHieu> XepHangSanPhams { get; set; }
+        public DbSet<NhanHieu> NhanHieus { get; set; }
         public DbSet<DiaChiKhachHang> DiaChiKhaches { get; set; }
         public DbSet<BinhLuan> BinhLuans { get; set; }
         public DbSet<BoPhan> BoPhans { get; set; }
