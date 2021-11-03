@@ -22,18 +22,18 @@ namespace EcommerceWebsite.Data.Extensions
                     NgayTao = DateTime.UtcNow,
                     NguoiTao = "admin",
                     DaXoa = false,
-                    HinhAnh = "",
+                    HinhAnh = "https://i.ibb.co/NSBhk4f/E5wft-Ni-Vk-AQHbh-S.jpg",
                     HienThiTrangHome = true,
                     ParentId = null,
                 },
                 new DanhMuc()
                 {
-                    MaDanhMuc = "DM02",
+                    MaDanhMuc = "DM04",
                     TenDanhMuc = "Phụ kiện",
                     Status = Enum.Status.Active,
                     NgayTao = DateTime.UtcNow,
                     NguoiTao = "admin",
-                    HinhAnh = "https://i.ibb.co/hKbXPTb/56bd682737d0d355fe665d380783371c.jpg",
+                    HinhAnh = "https://i.ibb.co/QHfCkK1/28-11-2020-0-16065566805fc21c0855b09-0.jpg",
                     DaXoa = false,
                     HienThiTrangHome = true,
                     ParentId = "DM01",
@@ -41,23 +41,24 @@ namespace EcommerceWebsite.Data.Extensions
                 new DanhMuc()
                 {
                     MaDanhMuc = "DM03",
-                    TenDanhMuc = "Đồng hồ thông minh",
+                    TenDanhMuc = "Đồng hồ",
                     Status = Enum.Status.Active,
                     NgayTao = DateTime.UtcNow,
                     NguoiTao = "admin",
-                    HinhAnh = "https://i.ibb.co/CmZS7bp/ng-h-th-ng-min.jpg",
+                    HinhAnh = "https://i.ibb.co/3fWbd3c/Dong-ho-haylou-h3.jpg",
                     DaXoa = false,
                     HienThiTrangHome = true,
                     ParentId = "DM01",
                 },
                 new DanhMuc()
                 {
-                    MaDanhMuc = "DM04",
+                    MaDanhMuc = "DM02",
                     TenDanhMuc = "PC, Máy in",
                     Status = Enum.Status.Active,
                     NgayTao = DateTime.UtcNow,
                     NguoiTao = "admin",
                     DaXoa = false,
+                    HinhAnh= "https://i.ibb.co/sHxtWdf/Song-toi-gian-may-tinh-1.jpg",
                     HienThiTrangHome = true,
                     ParentId = "DM01",
                 });
@@ -405,7 +406,90 @@ namespace EcommerceWebsite.Data.Extensions
                       DaXoa = false,
                       Status = Enum.Status.Active,
                       SoLuongTon = 1,
-                  });
+                  },
+                  new SanPham()
+                  {
+                      MaSanPham = "SP023",
+                      TenSanPham = "Apple Watch S6 40mm viền nhôm dây cao su",
+                      MaHang = "MH01",
+                      NgayTao = DateTime.UtcNow,
+                      NguoiTao = "admin",
+                      MaLoaiSanPham = "DM03",
+                      HinhAnh = "https://i.ibb.co/bHRpNch/Apple-watch-s6-40mm-vien-nhom-day-cao-su-xanh-cont-1-org.jpg",
+                      DaXoa = false,
+                      Status = Enum.Status.Active,
+                      SoLuongTon = 1,
+                  },
+                  //SP024
+                  new SanPham()
+                  {
+                      MaSanPham = "SP024",
+                      TenSanPham = "Apple Watch SE 40mm viền nhôm dây cao su",
+                      MaHang = "MH01",
+                      NgayTao = DateTime.UtcNow,
+                      NguoiTao = "admin",
+                      MaLoaiSanPham = "DM03",
+                      HinhAnh = "https://i.ibb.co/rcfS9Nm/Untitled-1-org.jpg",
+                      DaXoa = false,
+                      Status = Enum.Status.Active,
+                      SoLuongTon = 1,
+                  },
+                  //SP025
+                  new SanPham()
+                  {
+                      MaSanPham = "SP025",
+                      TenSanPham = "Samsung Galaxy Watch 3 45mm viền thép bạc dây da",
+                      MaHang = "MH02",
+                      NgayTao = DateTime.UtcNow,
+                      NguoiTao = "admin",
+                      MaLoaiSanPham = "DM03",
+                      HinhAnh = "https://i.ibb.co/9yR299t/Samsung-galaxy-watch-3-45mm-bac-2-org.jpg",
+                      DaXoa = false,
+                      Status = Enum.Status.Active,
+                      SoLuongTon = 1,
+                  },
+                  //SP026
+                  new SanPham()
+                  {
+                      MaSanPham = "SP026",
+                      TenSanPham = "Samsung Galaxy Watch 4 44mm ",
+                      MaHang = "MH02",
+                      NgayTao = DateTime.UtcNow,
+                      NguoiTao = "admin",
+                      MaLoaiSanPham = "DM03",
+                      HinhAnh = "https://i.ibb.co/ydJ9XY5/Samsung-galaxy-watch-4-44mm-den-1-org.jpg",
+                      DaXoa = false,
+                      Status = Enum.Status.Active,
+                      SoLuongTon = 1,
+                  },
+                    //SP027
+                    new SanPham()
+                    {
+                        MaSanPham = "SP027",
+                        TenSanPham = "Apple Watch S6 LTE 40mm viền thép dây thép ",
+                        MaHang = "MH01",
+                        NgayTao = DateTime.UtcNow,
+                        NguoiTao = "admin",
+                        MaLoaiSanPham = "DM03",
+                        HinhAnh = "https://i.ibb.co/2YttfZB/Apple-watch-s6-lte-40mm-vien-thep-day-thep-vang-cont-1-org.jpg",
+                        DaXoa = false,
+                        Status = Enum.Status.Active,
+                        SoLuongTon = 1,
+                    },
+                    //SP028
+                    new SanPham()
+                    {
+                        MaSanPham = "SP028",
+                        TenSanPham = "Apple Watch Series 7 GPS 45mm ",
+                        MaHang = "MH01",
+                        NgayTao = DateTime.UtcNow,
+                        NguoiTao = "admin",
+                        MaLoaiSanPham = "DM03",
+                        HinhAnh = "https://i.ibb.co/ZW5Wqpk/Apple-watch-s7-45mm-gps-do-1.jpg",
+                        DaXoa = false,
+                        Status = Enum.Status.Active,
+                        SoLuongTon = 1,
+                    });
             //Thuộc tính
             modelBuilder.Entity<ThuocTinh>().HasData(
                 new ThuocTinh()
@@ -1889,6 +1973,222 @@ namespace EcommerceWebsite.Data.Extensions
                     MaThuocTinh = "TT013",
                     GiaTri = 0,
                     DonVi = "Theo dõi giấc ngủ, Đo nhịp tim, Đo nồng độ oxy (SpO2), Đếm số bước chân"
+                },
+                //SP023 Đồng hồ thông minh (TT01, TT010,TT011, TT012, TT013)
+                new DinhLuong()
+                {
+                    MaSanPham = "SP023",
+                    MaThuocTinh = "TT01",
+                    GiaTri = 0,
+                    DonVi = "OLED, 1.57 inch"
+                },
+                new DinhLuong()
+                {
+                    MaSanPham = "SP023",
+                    MaThuocTinh = "TT010",
+                    GiaTri = 0,
+                    DonVi = "Khoảng 1.5 ngày"
+                },
+                new DinhLuong()
+                {
+                    MaSanPham = "SP023",
+                    MaThuocTinh = "TT011",
+                    GiaTri = 0,
+                    DonVi = "iOS 14 trở lên"
+                },
+                new DinhLuong()
+                {
+                    MaSanPham = "SP023",
+                    MaThuocTinh = "TT012",
+                    GiaTri = 0,
+                    DonVi = "Ion-X strengthened glass, 40 mm"
+                },
+                new DinhLuong()
+                {
+                    MaSanPham = "SP023",
+                    MaThuocTinh = "TT013",
+                    GiaTri = 0,
+                    DonVi = "Chế độ luyện tập, Theo dõi giấc ngủ, Tính lượng calories tiêu thụ, Tính quãng đường chạy, Điện tâm đồ, Đo nhịp tim, Đo nồng độ oxy (SpO2), Đếm số bước chân"
+                },
+                //SP024
+                new DinhLuong()
+                {
+                    MaSanPham = "SP024",
+                    MaThuocTinh = "TT01",
+                    GiaTri = 0,
+                    DonVi = "OLED, 1.57 inch"
+                },
+                new DinhLuong()
+                {
+                    MaSanPham = "SP024",
+                    MaThuocTinh = "TT010",
+                    GiaTri = 0,
+                    DonVi = "Khoảng 1.5 ngày"
+                },
+                new DinhLuong()
+                {
+                    MaSanPham = "SP024",
+                    MaThuocTinh = "TT011",
+                    GiaTri = 0,
+                    DonVi = "iOS 14 trở lên"
+                },
+                new DinhLuong()
+                {
+                    MaSanPham = "SP024",
+                    MaThuocTinh = "TT012",
+                    GiaTri = 0,
+                    DonVi = "Ion-X strengthened glass, 40 mm"
+                },
+                new DinhLuong()
+                {
+                    MaSanPham = "SP024",
+                    MaThuocTinh = "TT013",
+                    GiaTri = 0,
+                    DonVi = "Chế độ luyện tập, Theo dõi giấc ngủ, Tính lượng calories tiêu thụ, Tính quãng đường chạy, Đo nhịp tim, Đếm số bước chân"
+                },
+                //SP025
+                new DinhLuong()
+                {
+                    MaSanPham = "SP025",
+                    MaThuocTinh = "TT01",
+                    GiaTri = 0,
+                    DonVi = "SUPER AMOLED, 1.4 inch"
+                },
+                new DinhLuong()
+                {
+                    MaSanPham = "SP025",
+                    MaThuocTinh = "TT010",
+                    GiaTri = 0,
+                    DonVi = "Khoảng 2 ngày"
+                },
+                new DinhLuong()
+                {
+                    MaSanPham = "SP025",
+                    MaThuocTinh = "TT011",
+                    GiaTri = 0,
+                    DonVi = "Android 5.0 trở lên, iOS 9 trở lên"
+                },
+                new DinhLuong()
+                {
+                    MaSanPham = "SP025",
+                    MaThuocTinh = "TT012",
+                    GiaTri = 0,
+                    DonVi = "Kính cường lực Gorrilla Glass Dx+, 45 mm"
+                },
+                new DinhLuong()
+                {
+                    MaSanPham = "SP025",
+                    MaThuocTinh = "TT013",
+                    GiaTri = 0,
+                    DonVi = "Chế độ luyện tập, Theo dõi giấc ngủ, Tính lượng calories tiêu thụ, Tính quãng đường chạy, Đo nhịp tim, Đo nồng độ oxy (SpO2), Đếm số bước chân"
+                },
+                //SP026
+                new DinhLuong()
+                {
+                    MaSanPham = "SP026",
+                    MaThuocTinh = "TT01",
+                    GiaTri = 0,
+                    DonVi = "SUPER AMOLED, 1.36 inch"
+                },
+                new DinhLuong()
+                {
+                    MaSanPham = "SP026",
+                    MaThuocTinh = "TT010",
+                    GiaTri = 0,
+                    DonVi = "Khoảng 1.5 ngày"
+                },
+                new DinhLuong()
+                {
+                    MaSanPham = "SP026",
+                    MaThuocTinh = "TT011",
+                    GiaTri = 0,
+                    DonVi = "Android dùng Google Mobile Service"
+                },
+                new DinhLuong()
+                {
+                    MaSanPham = "SP026",
+                    MaThuocTinh = "TT012",
+                    GiaTri = 0,
+                    DonVi = "Kính cường lực Gorrilla Glass Dx+, 44 mm"
+                },
+                new DinhLuong()
+                {
+                    MaSanPham = "SP026",
+                    MaThuocTinh = "TT013",
+                    GiaTri = 0,
+                    DonVi = "Theo dõi giấc ngủ, Đo nhịp tim, Đo nồng độ oxy (SpO2), Đếm số bước chân"
+                },
+                //SP027
+                new DinhLuong()
+                {
+                    MaSanPham = "SP027",
+                    MaThuocTinh = "TT01",
+                    GiaTri = 0,
+                    DonVi = "OLED, 1.57 inch"
+                },
+                new DinhLuong()
+                {
+                    MaSanPham = "SP027",
+                    MaThuocTinh = "TT010",
+                    GiaTri = 0,
+                    DonVi = "Khoảng 1.5 ngày"
+                },
+                new DinhLuong()
+                {
+                    MaSanPham = "SP027",
+                    MaThuocTinh = "TT011",
+                    GiaTri = 0,
+                    DonVi = "iOS 14 trở lên"
+                },
+                new DinhLuong()
+                {
+                    MaSanPham = "SP027",
+                    MaThuocTinh = "TT012",
+                    GiaTri = 0,
+                    DonVi = "Kính cường lực Sapphire40 mm"
+                },
+                new DinhLuong()
+                {
+                    MaSanPham = "SP027",
+                    MaThuocTinh = "TT013",
+                    GiaTri = 0,
+                    DonVi = "Chế độ luyện tập, Theo dõi giấc ngủ, Tính lượng calories tiêu thụ, Tính quãng đường chạy, Đo nhịp tim, Đếm số bước chân"
+                },
+                //SP028
+                new DinhLuong()
+                {
+                    MaSanPham = "SP028",
+                    MaThuocTinh = "TT01",
+                    GiaTri = 0,
+                    DonVi = "OLED, 1.77 inch"
+                },
+                new DinhLuong()
+                {
+                    MaSanPham = "SP028",
+                    MaThuocTinh = "TT010",
+                    GiaTri = 0,
+                    DonVi = "Khoảng 1.5 ngày"
+                },
+                new DinhLuong()
+                {
+                    MaSanPham = "SP028",
+                    MaThuocTinh = "TT011",
+                    GiaTri = 0,
+                    DonVi = "iOS 14 trở lên"
+                },
+                new DinhLuong()
+                {
+                    MaSanPham = "SP028",
+                    MaThuocTinh = "TT012",
+                    GiaTri = 0,
+                    DonVi = "Ion-X strengthened glass45 mm"
+                },
+                new DinhLuong()
+                {
+                    MaSanPham = "SP028",
+                    MaThuocTinh = "TT013",
+                    GiaTri = 0,
+                    DonVi = "Chế độ luyện tập, Theo dõi giấc ngủ, Tính lượng calories tiêu thụ, Tính quãng đường chạy, Điện tâm đồ, Đo nhịp tim, Đo nồng độ oxy (SpO2), Đếm số bước chân"
                 }
                 );
             //Mẫu mã sản phẩm
@@ -2317,6 +2617,138 @@ namespace EcommerceWebsite.Data.Extensions
                         MaSanPham = "SP021",
                         TenMauMa = "Xanh",
                         HinhAnh = "https://i.ibb.co/5hkXcM1/Vivo-y21s-blue-gc-org.jpg",
+                    },
+                    //SP023
+                    new MauMaSanPham()
+                    {
+                        MaMauMa = "MM058",
+                        MaSanPham = "SP023",
+                        TenMauMa = "Hồng",
+                        HinhAnh = "https://i.ibb.co/whQPQYR/Apple-watch-s6-40mm-vien-nhom-day-cao-su-hong-cont-1-org.jpg",
+                    },
+                    new MauMaSanPham()
+                    {
+                        MaMauMa = "MM059",
+                        MaSanPham = "SP023",
+                        TenMauMa = "Xanh dương đậm",
+                        HinhAnh = "https://i.ibb.co/bHRpNch/Apple-watch-s6-40mm-vien-nhom-day-cao-su-xanh-cont-1-org.jpg",
+                    },
+                    new MauMaSanPham()
+                    {
+                        MaMauMa = "MM060",
+                        MaSanPham = "SP023",
+                        TenMauMa = "Trắng",
+                        HinhAnh = "https://i.ibb.co/vV2zr9s/Apple-watch-s6-40mm-vien-nhom-day-cao-su-trang-cont-1-org.jpg",
+                    },
+                    new MauMaSanPham()
+                    {
+                        MaMauMa = "MM061",
+                        MaSanPham = "SP023",
+                        TenMauMa = "Đen",
+                        HinhAnh = "https://i.ibb.co/sPCkGSb/Apple-watch-s6-40mm-vien-nhom-day-cao-su-den-cont-1-org.jpg",
+                    },
+                    new MauMaSanPham()
+                    {
+                        MaMauMa = "MM062",
+                        MaSanPham = "SP023",
+                        TenMauMa = "Đỏ",
+                        HinhAnh = "https://i.ibb.co/4TQV8yv/Apple-watch-s6-40mm-vien-nhom-day-cao-su-red-do-cont-1-org-org.jp",
+                    },
+                    //SP024
+                    new MauMaSanPham()
+                    {
+                        MaMauMa = "MM063",
+                        MaSanPham = "SP024",
+                        TenMauMa = "Hồng",
+                        HinhAnh = "https://i.ibb.co/rcfS9Nm/Untitled-1-org.jpg",
+                    },
+                    new MauMaSanPham()
+                    {
+                        MaMauMa = "MM064",
+                        MaSanPham = "SP024",
+                        TenMauMa = "Đen",
+                        HinhAnh = "https://i.ibb.co/3dBt9bj/Se-40mm-vien-nhom-day-cao-su-hong-glr-1-org.jpg",
+                    },
+                    //SP025
+                    new MauMaSanPham()
+                    {
+                        MaMauMa = "MM065",
+                        MaSanPham = "SP025",
+                        TenMauMa = "Bạc",
+                        HinhAnh = "https://i.ibb.co/9yR299t/Samsung-galaxy-watch-3-45mm-bac-2-org.jpg",
+                    },
+                    //SP026
+                    new MauMaSanPham()
+                    {
+                        MaMauMa = "MM066",
+                        MaSanPham = "SP026",
+                        TenMauMa = "Đen",
+                        HinhAnh = "https://i.ibb.co/ydJ9XY5/Samsung-galaxy-watch-4-44mm-den-1-org.jpg",
+                    },
+                    new MauMaSanPham()
+                    {
+                        MaMauMa = "MM067",
+                        MaSanPham = "SP026",
+                        TenMauMa = "Xanh lá",
+                        HinhAnh = "https://i.ibb.co/s2mSnhK/Samsung-galaxy-watch-4-44mm-1-1.jpg",
+                    },
+                    new MauMaSanPham()
+                    {
+                        MaMauMa = "MM068",
+                        MaSanPham = "SP026",
+                        TenMauMa = "Bạc",
+                        HinhAnh = "https://i.ibb.co/XVM9Mxj/Samsung-galaxy-watch-4-44mm-bac-1-org.jpg",
+                    },
+                    //SP027
+                    new MauMaSanPham()
+                    {
+                        MaMauMa = "MM069",
+                        MaSanPham = "SP027",
+                        TenMauMa = "vàng",
+                        HinhAnh = "https://i.ibb.co/2YttfZB/Apple-watch-s6-lte-40mm-vien-thep-day-thep-vang-cont-1-org.jpg",
+                    },
+                    new MauMaSanPham()
+                    {
+                        MaMauMa = "MM070",
+                        MaSanPham = "SP027",
+                        TenMauMa = "Đen",
+                        HinhAnh = "https://i.ibb.co/JH2Fshs/Apple-watch-s6-lte-40mm-vien-thep-day-thep-den-cont-1-org.jpg",
+                    },
+                    //SP028
+                    new MauMaSanPham()
+                    {
+                        MaMauMa = "MM071",
+                        MaSanPham = "SP028",
+                        TenMauMa = "Đen",
+                        HinhAnh = "https://i.ibb.co/mDSQcPD/Apple-watch-s7-45mm-gps-den-1.jpg",
+                    },
+                    new MauMaSanPham()
+                    {
+                        MaMauMa = "MM072",
+                        MaSanPham = "SP028",
+                        TenMauMa = "Vàng",
+                        HinhAnh = "https://i.ibb.co/BrWrjZh/Apple-watch-s7-45mm-gps-vang-1.jp",
+                    },
+                    new MauMaSanPham()
+                    {
+                        MaMauMa = "MM073",
+                        MaSanPham = "SP028",
+                        TenMauMa = "Đỏ",
+                        HinhAnh = "https://i.ibb.co/ZW5Wqpk/Apple-watch-s7-45mm-gps-do-1.jpg",
+                    },
+                    new MauMaSanPham()
+                    {
+                        MaMauMa = "MM074",
+                        MaSanPham = "SP028",
+                        TenMauMa = "Xanh Dương",
+                        HinhAnh = "https://i.ibb.co/Qjbqcqf/Apple-watch-s7-45mm-gps-xanh-duong-1.jpg",
+                    },
+                    new MauMaSanPham()
+                    {
+                        MaMauMa = "MM075",
+                        MaSanPham = "SP028",
+                        TenMauMa = "Xanh Lá",
+                        HinhAnh = "ttps://i.ibb.co/V9d5FLq/apple-watch-s7-45mm-gps-xanh-la-1.jpg",
                     }
                     );
             //Lịch sử giá
@@ -2498,9 +2930,55 @@ namespace EcommerceWebsite.Data.Extensions
                      DaXoa = true,
                      GiaMoi = 750000,
                      NgayTao = DateTime.Parse("2021-10-16 00:00:00.0000000"),
-
-                 }
-                );
+                 },
+                //SP023
+                new LichSuGia()
+                {
+                    MaSanPham = "SP023",
+                    DaXoa = false,
+                    GiaMoi = 9592000,
+                    NgayTao = DateTime.Parse("2021-10-16 00:00:00.0000000"),
+                },
+                //SP024
+                new LichSuGia()
+                {
+                    MaSanPham = "SP024",
+                    DaXoa = false,
+                    GiaMoi = 8450000,
+                    NgayTao = DateTime.Parse("2021-10-16 00:00:00.0000000"),
+                },
+                //SP025
+                new LichSuGia()
+                {
+                    MaSanPham = "SP025",
+                    DaXoa = false,
+                    GiaMoi = 4990000,
+                    NgayTao = DateTime.Parse("2021-10-16 00:00:00.0000000"),
+                },
+                //SP026
+                new LichSuGia()
+                {
+                    MaSanPham = "SP026",
+                    DaXoa = false,
+                    GiaMoi = 6990000,
+                    NgayTao = DateTime.Parse("2021-10-16 00:00:00.0000000"),
+                },
+                //SP027
+                new LichSuGia()
+                {
+                    MaSanPham = "SP027",
+                    DaXoa = false,
+                    GiaMoi = 16792000,
+                    NgayTao = DateTime.Parse("2021-10-16 00:00:00.0000000"),
+                },
+                //SP28
+                new LichSuGia()
+                {
+                    MaSanPham = "SP028",
+                    DaXoa = false,
+                    GiaMoi = 12990000,
+                    NgayTao = DateTime.Parse("2021-10-16 00:00:00.0000000"),
+                });
             //ProductInDanhMuc
             //modelBuilder.Entity<ProductDanhMuc>().HasData(
             //    new ProductDanhMuc()

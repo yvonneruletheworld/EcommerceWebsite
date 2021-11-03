@@ -47,10 +47,8 @@ namespace EcommerceWebsite.WebApp.Controllers
                 await _signInManager.SignOutAsync();
                 return View("/Views/Home/TrangChu.cshtml");
             }
-            
              return View("/Views/Home/TrangChu.cshtml", currentUser);
         }
-
         [HttpGet("get-data-sanpham")]
         public async Task<IActionResult> LayDanhSachSanPhamAsync(int pageIndex)
         {
@@ -59,10 +57,58 @@ namespace EcommerceWebsite.WebApp.Controllers
                 PaginationFilter filter = new PaginationFilter();
                 filter.PageSize = 20;
                 filter.PageNumber = pageIndex;
-
                 var data = await _sanPhamServices.GetListProductByPage(filter);
                 return PartialView("/Views/Home/_ListSanPham.cshtml", data);
+            }
+            catch (Exception ex)
+            {
 
+                throw ex;
+            }
+        }
+        [HttpGet("get-data-danhmucSP")]
+        public async Task<IActionResult> LayDanhMucSanPham()
+        {
+            try
+            {
+                var data = await _sanPhamServices.LayDanhMucSanPham();
+                return PartialView("/Views/Home/_ListDanhMucSanPham.cshtml", data);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+        public IActionResult AllSanPham()
+        {
+            return View();
+        }
+        [HttpGet("get-data-nhanhieuSP")]
+        public async Task<IActionResult> layNhanHieuSanPham()
+        {
+            try
+            {
+                var data = await _sanPhamServices.LayNhanHieuSanPham();
+                return PartialView("/Views/Home/_ListNhanHieuSanPham.cshtml", data);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+        }
+        [HttpGet("get-data-allSanPham")]
+        public async Task<IActionResult> layALLSanPham(int pageIndex)
+        {
+            try
+            {
+                PaginationFilter filter = new PaginationFilter();
+                filter.PageSize = 12;
+                filter.PageNumber = pageIndex;
+                var data = await _sanPhamServices.GetListProductByPage(filter);
+                return PartialView("/Views/Home/_ListAllSanPham.cshtml", data);
             }
             catch (Exception ex)
             {

@@ -16,7 +16,9 @@ namespace EcommerceWebsite.Services.Interfaces.Main
 
         bool? KiemTra(string value);
 
-        Task<List<SanPham>> LayDanhSachSanPham();
+        Task<List<DanhMuc>> LayDanhMucSanPham();
+
+        Task<List<NhanHieu>> LayNhanHieuSanPham();
 
         //Task<IdentityResult> Create(ApplicationUser obj);
     }
