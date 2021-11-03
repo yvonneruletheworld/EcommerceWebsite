@@ -3,7 +3,7 @@ using EcommerceWebsite.Services.Interfaces.System;
 using EcommerceWebsite.Services.Interfaces.Main;
 using EcommerceWebsite.Services.Services.System;
 using EcommerceWebsite.Services.Services.Main;
-using EcommerceWebsite.WebApp.Mapper;
+//using EcommerceWebsite.WebApp.Mapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -23,6 +23,8 @@ using EcommerceWebsite.Services.Interfaces.ExtraServices;
 using EcommerceWebsite.Services.Services.ExtraServices;
 using EcommerceWebsite.Data.Configurations;
 using EcommerceWebsite.Utilities.Mapper;
+using EcommerceWebsite.Api.ApiInterfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace EcommerceWebsite.WebApp
 {
@@ -39,7 +41,7 @@ namespace EcommerceWebsite.WebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-
+            services.AddHttpClient();
 
             var str = Configuration.GetConnectionString("EcommerceWebsiteDatabase");
             services.AddDbContext<EcomWebDbContext>(options =>
@@ -49,9 +51,21 @@ namespace EcommerceWebsite.WebApp
                 .AddEntityFrameworkStores<EcomWebDbContext>()
                 .AddClaimsPrincipalFactory<MyUserClaimsPrincipalFactoryService>()
                 .AddDefaultTokenProviders();
-
+            
             services.AddHttpContextAccessor();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+            });
 
+            services.AddApiVersioning(
+                options =>
+                {
+                    options.ReportApiVersions = true;
+                    options.DefaultApiVersion = new ApiVersion(0, 0);
+                    options.AssumeDefaultVersionWhenUnspecified = true;
+                    options.UseApiBehavior = false;
+                });
             DependencyInjectionSystemConfig(services);
             services.AddAutoMapper(typeof(AutoMapping));
 
@@ -77,6 +91,7 @@ namespace EcommerceWebsite.WebApp
             services.AddScoped<IKhachHangServices, KhachHangServices>();
             services.AddScoped<IEmailSenderServices, EmailSenderServices>();
             services.AddScoped<IBoPhanServices, BoPhanServices>();
+            services.AddScoped<IHUIApiServices, HUIApiServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -99,6 +114,7 @@ namespace EcommerceWebsite.WebApp
 
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {

@@ -54,6 +54,7 @@ namespace EcommerceWebsite.Api
             services.AddSwaggerGen(s =>
            {
                s.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Swagger EcommerceShop", Version = "v1" });
+               s.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
            });
 
             services.AddAutoMapper(typeof(AutoMapping));
@@ -71,6 +72,7 @@ namespace EcommerceWebsite.Api
             services.AddScoped<IKhachHangServices, KhachHangServices>();
             services.AddScoped<IEmailSenderServices, EmailSenderServices>();
             services.AddScoped<IBoPhanServices, BoPhanServices>();
+            services.AddScoped<IHUIServices, HUIServices>();
         }
 
 
@@ -96,11 +98,10 @@ namespace EcommerceWebsite.Api
 
             app.UseSwagger();
 
-            app.UseSwaggerUI(s =>
+            app.UseSwaggerUI(c =>
             {
-                s.SwaggerEndpoint("/swagger/v1/swagger.json", "Swagger Ecomshop V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Swagger EcommerceShop V1");
             });
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

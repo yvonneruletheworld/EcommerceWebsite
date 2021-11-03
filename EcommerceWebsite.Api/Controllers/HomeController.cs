@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 
 namespace EcommerceWebsite.Api.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -17,7 +19,7 @@ namespace EcommerceWebsite.Api.Controllers
         {
             _logger = logger;
         }
-
+        [Microsoft.AspNetCore.Mvc.HttpGet]
         public IActionResult Index()
         {
             return Ok();

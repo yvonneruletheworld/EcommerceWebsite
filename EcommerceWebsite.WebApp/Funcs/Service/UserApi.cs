@@ -9,7 +9,7 @@ namespace EcommerceWebsite.WebApp.Funcs.Service
 {
     public class UserApi : IUserApi
     {
-        private readonly IHttpClientFactory
+        //private readonly IHttpClientFactory
         public Task<string> Authenticate(ThongTinKhachHangInput request)
         {
             throw new NotImplementedException();
