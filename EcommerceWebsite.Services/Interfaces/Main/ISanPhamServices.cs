@@ -2,6 +2,7 @@
 using EcommerceWebsite.Data.Entities;
 using EcommerceWebsite.Data.Identity;
 using EcommerceWebsite.Utilities.Main;
+using EcommerceWebsite.Utilities.Output.Main;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,7 @@ namespace EcommerceWebsite.Services.Interfaces.Main
 
         Task<List<NhanHieu>> LayNhanHieuSanPham();
 
+        Task<ChiTietSanPhamOutput> LayChiTietSanPham(string id, bool coGiamGia);
         //Task<IdentityResult> Create(ApplicationUser obj);
     }
 }
