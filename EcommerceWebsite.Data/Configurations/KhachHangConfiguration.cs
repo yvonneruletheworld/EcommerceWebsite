@@ -13,19 +13,17 @@ namespace EcommerceWebsite.Data.Configurations
         {
             builder.ToTable("KHACHHANG");
 
-            builder.HasKey(kh => kh.Id);
+            builder.HasKey(kh => kh.MaKhachHang);
 
-            builder.Property(kh => kh.Id)
+            builder.Property(kh => kh.MaKhachHang)
                 .HasMaxLength(100);
-            builder.Property(kh => kh.Username)
-                .HasMaxLength(20).IsRequired();
 
             builder.Property(Kh => Kh.HoTen)
                 .HasMaxLength(200)
                 .HasColumnType("nvarchar")
                 .IsRequired();
 
-            builder.Property(kh => kh.Sdt)
+            builder.Property(kh => kh.SDT)
                 .HasMaxLength(11)
                 .IsRequired();
 

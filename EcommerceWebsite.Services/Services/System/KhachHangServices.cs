@@ -84,9 +84,9 @@ namespace EcommerceWebsite.Services.Services.System
 
                 //update OTP code
                 obj.OTPCode = otpCode;
-                _context.Entry(obj).State = EntityState.Modified;
+                _context.Entry(obj).State = EntityState.Modified;//sửa
 
-                var result = await _context.SaveChangesAsync();
+                var result = await _context.SaveChangesAsync();//Lưu
                 await _context.Database.CommitTransactionAsync();
 
                 return result > 0 ;

@@ -20,14 +20,13 @@
     <link href="~/vendor/lightbox2/css/lightbox.min.css" rel="stylesheet" />
     <link href="~/css/util.css" rel="stylesheet" />
     <link href="~/css/main.css" rel="stylesheet" />
-
-
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     @*@RenderSection("Styles", required: false)*@
-
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-
+    @using EcommerceWebsite.Application.Constants
+    @using EcommerceWebsite.Data.Identity
+    @model ApplicationUser
 </head>
 <body class="animsition">
     <header class="header1">
@@ -41,11 +40,11 @@
                     <a href="#" class="topbar-social-item fa fa-youtube-play"></a>
                 </div>
                 <span class="topbar-child1">
-                    Free shipping for standard order over $300
+                    Giao hàng miễn phí cho đơn đặt hàng không quá 2km
                 </span>
                 <div class="topbar-child2">
                     <span class="topbar-email">
-                        <a href="javascript:void(0);">demo@gmail.com</a>
+                        <a href="mailto:triplev.store.2021@gmail.com"> triplev.store.2021@gmail.com</a>
                     </span>
                     <div class="topbar-language rs1-select2">
                         <select class="selection-1" name="time">
@@ -64,14 +63,14 @@
                 <div class="wrap_menu">
                     <nav class="menu">
                         <ul class="main_menu">
-                            <li>
+                            <li class="sale-noti">
                                 <a asp-area="" asp-controller="Home" asp-action="Index">Trang chủ</a>
                             </li>
                             <li>
-                                <a asp-area="" asp-controller="Home" asp-action="Index">Cửa hàng</a>
+                                <a asp-area="" asp-controller="Home" asp-action="ALLSanPham">Cửa hàng</a>
                             </li>
-                            <li class="sale-noti">
-                                <a asp-area="" asp-controller="Home" asp-action="Index">Khuyến mãi</a>
+                            <li >
+                                <a asp-area="" asp-controller="Home" asp-action="ALLSanPham">Khuyến mãi</a>
                             </li>
                             <li>
                                 <a asp-area="" asp-controller="GioHang" asp-action="Index">Giỏ hàng</a>
@@ -83,15 +82,24 @@
                                 <a asp-area="" asp-controller="Home" asp-action="Index">Giới thiệu</a>
                             </li>
                             <li>
-                                <a asp-area="" asp-controller="Home" asp-action="Index">Liên hệ</a>
+                                <a asp-area="" asp-controller="LienHe" asp-action="LienHeVoiChungToi">Liên hệ</a>
                             </li>
                         </ul>
                     </nav>
                 </div>
 
                 <div class="header-icons">
+                   
                     <a href="#" class="header-wrapicon1 dis-block">
-                        <img src="~/images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
+                        @if (Model != null)
+                        {
+                            <p style="color:red; margin-top:5px; padding-left:5px">Xin chào, @Model.UserName</p>
+                        }
+                        else
+                        {
+                            <img src="~/images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
+                        }
+
                     </a>
                     <span class="linedivide1"></span>
                     <div class="header-wrapicon2">
@@ -162,13 +170,12 @@
                 </div>
             </div>
         </div>
-
         @* Dành cho mobile *@
 
         <div class="wrap_header_mobile">
 
             <a href="index-2.html" class="logo-mobile">
-                <img src="~/images/icons/logo.png" alt="IMG-LOGO">
+                TRIPLE V
             </a>
 
             <div class="btn-show-menu">
@@ -257,13 +264,13 @@
                 <ul class="main-menu">
                     <li class="item-topbar-mobile p-l-20 p-t-8 p-b-8">
                         <span class="topbar-child1">
-                            Free shipping for standard order over $100
+                            Giao hàng miễn phí cho đơn đặt hàng không quá 2km
                         </span>
                     </li>
                     <li class="item-topbar-mobile p-l-20 p-t-8 p-b-8">
                         <div class="topbar-child2-mobile">
                             <span class="topbar-email">
-                                <a href="https://preview.colorlib.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c7a1a6b4afa287a2bfa6aab7aba2e9a4a8aa">[email&#160;protected]</a>
+                                <a href="" mailto:triplev.store.2021@gmail.com" class="__cf_email__" data-cfemail="c7a1a6b4afa287a2bfa6aab7aba2e9a4a8aa">triplev.store.2021@gmail.com</a>
                             </span>
                             <div class="topbar-language rs1-select2">
                                 <select class="selection-1" name="time">
@@ -292,7 +299,7 @@
                         <i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>
                     </li>
                     <li class="item-menu-mobile">
-                        <a asp-area="" asp-controller="Home" asp-action="Index">Cửa hàng</a>
+                        <a asp-area="" asp-controller="Home" asp-action="ALLSanPham">Cửa hàng</a>
                     </li>
                     <li class="item-menu-mobile">
                         <a asp-area="" asp-controller="Home" asp-action="Index">Khuyến mãi</a>
@@ -307,19 +314,17 @@
                         <a asp-area="" asp-controller="Home" asp-action="Index">Giới thiệu</a>
                     </li>
                     <li class="item-menu-mobile">
-                        <a asp-area="" asp-controller="Home" asp-action="Index">Liên hệ</a>
+                        <a asp-area="" asp-controller="LienHe" asp-action="LienHeVoiChungToi">Liên hệ</a>
                     </li>
                 </ul>
             </nav>
         </div>
 
         @* Dành cho mobile *@
+
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+
+    @RenderBody()
 
     <footer class="bg6 p-t-45 p-b-43 p-l-45 p-r-45">
         <div class="flex-w p-b-90">
@@ -329,7 +334,7 @@
                 </h4>
                 <div>
                     <p class="s-text7 w-size27">
-                        Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us on (+1) 96 716 6879
+                        140 Lê Trọng Tấn, Tây Thạnh, Tân Phú, TP. HCM - hotline: 028 6270 6275
                     </p>
                     <div class="flex-m p-t-30">
                         <a href="#" class="fs-18 color1 p-r-20 fa fa-facebook"></a>
@@ -342,98 +347,94 @@
             </div>
             <div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
                 <h4 class="s-text12 p-b-30">
-                    Categories
+                    THỂ LOẠI
                 </h4>
                 <ul>
                     <li class="p-b-9">
                         <a href="#" class="s-text7">
-                            Men
+                            Điện thoại
                         </a>
                     </li>
                     <li class="p-b-9">
                         <a href="#" class="s-text7">
-                            Women
+                            Phụ kiện
                         </a>
                     </li>
                     <li class="p-b-9">
                         <a href="#" class="s-text7">
-                            Dresses
+                            Đồng hồ thông minh
                         </a>
                     </li>
                     <li class="p-b-9">
                         <a href="#" class="s-text7">
-                            Sunglasses
+                            PC, Máy in
                         </a>
                     </li>
                 </ul>
             </div>
             <div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
                 <h4 class="s-text12 p-b-30">
-                    Links
+                    LIÊN HỆ
                 </h4>
                 <ul>
                     <li class="p-b-9">
                         <a href="#" class="s-text7">
-                            Search
+                            Tình trạng đặt hàng
                         </a>
                     </li>
                     <li class="p-b-9">
                         <a href="#" class="s-text7">
-                            About Us
+                            Vận chuyển và giao hàng
                         </a>
                     </li>
                     <li class="p-b-9">
                         <a href="#" class="s-text7">
-                            Contact Us
+                            Lợi nhuận
                         </a>
                     </li>
                     <li class="p-b-9">
                         <a href="#" class="s-text7">
-                            Returns
+                            Các lựa chọn thanh toán
                         </a>
                     </li>
                 </ul>
             </div>
             <div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
                 <h4 class="s-text12 p-b-30">
-                    Help
+                    VỀ CHÚNG TÔI
                 </h4>
                 <ul>
                     <li class="p-b-9">
                         <a href="#" class="s-text7">
-                            Track Order
+                            Mã giảm giá
                         </a>
                     </li>
                     <li class="p-b-9">
                         <a href="#" class="s-text7">
-                            Returns
+                            Đăng nhập bằng mail
                         </a>
                     </li>
                     <li class="p-b-9">
                         <a href="#" class="s-text7">
-                            Shipping
+                            Phản hồi về trang Web
                         </a>
                     </li>
-                    <li class="p-b-9">
-                        <a href="#" class="s-text7">
-                            FAQs
-                        </a>
-                    </li>
+
                 </ul>
             </div>
             <div class="w-size8 p-t-30 p-l-15 p-r-15 respon3">
                 <h4 class="s-text12 p-b-30">
-                    Newsletter
+                    PHẢN HỒI
                 </h4>
                 <form>
                     <div class="effect1 w-size9">
-                        <input class="s-text7 bg6 w-full p-b-5" type="text" name="email" placeholder="email@example.com">
+                        <input class="s-text7 bg6 w-full p-b-5" type="text" name="email" placeholder="email@gmail.com">
                         <span class="effect1-line"></span>
                     </div>
                     <div class="w-size2 p-t-20">
 
                         <button class="flex-c-m size2 bg4 bo-rad-23 hov1 m-text3 trans-0-4">
-                            Subscribe
+                            PHẢN HỒI
                         </button>
                     </div>
                 </form>
@@ -456,7 +457,7 @@
                 <img class="h-size2" src="~/images/icons/discover.png" alt="IMG-DISCOVER">
             </a>
             <div class="t-center s-text8 p-t-20">
-                Copyright © 2021 All rights reserved.
+                Copyright © 2021 <a href="#">Triple V</a>. All rights reserved.
             </div>
         </div>
     </footer>
@@ -469,7 +470,8 @@
 
     <div id="dropDownSelect1"></div>
 
-    @*<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>*@
+    <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script type="text/javascript" src="~/vendor/jquery/jquery-3.2.1.min.js"></script>
     <script src="~/vendor/jquery/jquery-3.2.1.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
@@ -481,7 +483,6 @@
 
     <script type="text/javascript" src="~/vendor/select2/select2.min.js"></script>
 
-    <script type="text/javascript" src="~/vendor/select2/select2.min.js"></script>
     <script type="text/javascript">
         $(".selection-1").select2({
             minimumResultsForSearch: 20,
@@ -496,6 +497,10 @@
 
     <script type="text/javascript" src="~/vendor/slick/slick.min.js"></script>
     <script type="text/javascript" src="~/js/slick-custom.js"></script>
+
+    <script type="text/javascript" src="~/vendor/countdowntime/countdowntime.js"></script>
+
+    <script type="text/javascript" src="~/vendor/lightbox2/js/lightbox.min.js"></script>
 
     <script type="text/javascript" src="~/vendor/sweetalert/sweetalert.min.js"></script>
     <script>
@@ -522,7 +527,7 @@
     </script>
 
     <script src="~/js/main.js"></script>
-    @*<script defer src="../../../static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"rayId":"64a7260aa9e752b0","si":10,"version":"2021.4.0"}'></script>*@
+    <script defer src="../../../static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"rayId":"64a7260aa9e752b0","si":10,"version":"2021.4.0"}'></script>
 
     @RenderSection("Scripts", required: false)
 </body>

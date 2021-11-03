@@ -9,9 +9,9 @@ namespace EcommerceWebsite.Data.Entities
     {
         public HoaDon()
         {
-            this.Id = Guid.NewGuid().ToString();
+            this.MaHoaDon = Guid.NewGuid().ToString();
         }
-        public string Id { get; set; }
+        public string MaHoaDon { get; set; }
         public string MaKhachHang { get; set; }
         public decimal TongCong { get; set; }
         public string MaKhuyenMai { get; set; }

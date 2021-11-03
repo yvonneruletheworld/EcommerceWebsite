@@ -22,21 +22,21 @@ namespace EcommerceWebsite.Data.Entities
         public string TenSanPham { get; set; }
         public int SoLuongTon { get; set; }
         public string HinhAnh { get; set; }
-        public string NhanHieu { get; set; }
         public string MaLoaiSanPham { get; set; }
-        public string MaXepHang { get; set; }
+        public string MaHang { get; set; }
         public Status Status { get; set; }
 
         public DanhGiaSanPham DanhGiaSanPham { get; set; }
         public decimal Utility { get; set; }
 
         public DanhMuc DanhMuc { get; set; }
-        public XepHangSanPham XepHangSanPham { get; set; }
+        public NhanHieu NhanHieu {get; set; }
         //Khóa ngoại
         public List<DinhLuong> DinhLuongs { get; set; }
         public List<MauMaSanPham> MauMaSanPhams { get; set; }
         public List<LichSuGia> LichSuGias { get; set; }
         public List<BinhLuan> BinhLuans { get; set; }
+        public List<SanPhamYeuThich> SanPhamYeus { get; set; }
         public List<ChiTietNhapSanPham> ChiTietNhapSanPhams { get; set; }
         public List<ChiTietHoaDon> ChiTietHoaDons { get; set; }
 

@@ -7,19 +7,21 @@ using System.Text;
 
 namespace EcommerceWebsite.Data.Configurations
 {
-    public class HangSanPhamConfiguration : IEntityTypeConfiguration<XepHangSanPham>
+    public class NhanHieuConfiguration : IEntityTypeConfiguration<NhanHieu>
     {
-        public void Configure(EntityTypeBuilder<XepHangSanPham> builder)
+        public void Configure(EntityTypeBuilder<NhanHieu> builder)
         {
-            builder.ToTable("HANGSANPHAM");
+            builder.ToTable("NHANHIEU");
 
             builder.HasKey(hsp => hsp.MaHang);
 
-            builder.Property(hsp => hsp.MaHang)
+            builder.Property(sp => sp.MaHang)
+                .IsRequired()
                 .HasMaxLength(100);
 
             builder.Property(hsp => hsp.TenHang)
                 .IsRequired();
+
         }
     }
 }

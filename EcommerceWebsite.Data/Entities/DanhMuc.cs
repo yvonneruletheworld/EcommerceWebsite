@@ -10,19 +10,20 @@ namespace EcommerceWebsite.Data.Entities
     {
         public DanhMuc()
         {
-            this.Id = Guid.NewGuid().ToString();
+            this.MaDanhMuc = Guid.NewGuid().ToString();
         }
 
         //[Key]
         //[MaxLength(100)]
         //[Required]
-        public string Id { get; set; }
+        public string MaDanhMuc { get; set; }
         //[Required]
         //[StringLength(270,
         //              ErrorMessage = "Tên loại sản phẩm từ 8 kí tự đến 8 kí tự",
         //              MinimumLength = 8)]
-        public string Name { get; set; }
-        public bool IsShowInHome { get; set; }
+        public string TenDanhMuc { get; set; }
+        public bool HienThiTrangHome { get; set; }
+        public string HinhAnh { get; set; }
         public string ParentId { get; set; }
         public Status Status { get; set; }
         public List<SanPham> SanPhams { get; set; }

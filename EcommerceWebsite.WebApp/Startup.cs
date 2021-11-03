@@ -59,12 +59,13 @@ namespace EcommerceWebsite.WebApp
                 .Get<EmailConfiguration>();
             services.AddSingleton(emailConfig);
         }
-
+        //Khai báo
         private void DependencyInjectionSystemConfig(IServiceCollection services)
         {
             services.AddScoped<ISanPhamServices, SanPhamServices>();
             services.AddScoped<IKhachHangServices, KhachHangServices>();
             services.AddScoped<IEmailSenderServices, EmailSenderServices>();
+            services.AddScoped<IBoPhanServices, BoPhanServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -92,7 +93,7 @@ namespace EcommerceWebsite.WebApp
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{type=Main}/{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{type=Main}/{controller=Home}/{action=ALLSanPham}/{id?}");
             });
 
         }

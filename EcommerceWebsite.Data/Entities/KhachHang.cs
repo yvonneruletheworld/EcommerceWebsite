@@ -9,15 +9,14 @@ namespace EcommerceWebsite.Data.Entities
     {
         public KhachHang()
         {
-            this.Id = Guid.NewGuid().ToString();
+            this.MaKhachHang = Guid.NewGuid().ToString();
         }
 
-        public string Id { get; set; }
+        public string MaKhachHang { get; set; }
         public string HoTen { get; set; }
-        public string Username { get; set; }
         public string Email { get; set; }
-        public string Sdt { get; set; }
-        public string LoginString { get; set; }
+        public string SDT { get; set; }
+        public string ChuoiDangNhap { get; set; }
         public bool GioiTinh { get; set; }
         public string HinhAnh { get; set; }
         //Khoa ngoai
@@ -25,5 +24,6 @@ namespace EcommerceWebsite.Data.Entities
         public List<DiaChiKhachHang> DiaChiKhachHangs { get; set; }
         public List<BinhLuan> BinhLuans { get; set; }
         public List<HoaDon> HoaDons { get; set; }
+        public List<SanPhamYeuThich> SanPhamYeus { get; set; }
     }
 }
