@@ -65,23 +65,23 @@ namespace EcommerceWebsite.Services.Services.Main
         {
             try
             {
-                var pageQuery = await (from sp in _context.SanPhams
+                var pageQuery =  (from sp in _context.SanPhams
                                        join bg in _context.LichSuGias on (sp == null ? string.Empty : sp.MaSanPham) equals bg.MaSanPham into sp_bg_group
                                        from sp_g in sp_bg_group.DefaultIfEmpty()
-                                       join dl in _context.DinhLuongs on sp_g.MaSanPham equals dl.MaSanPham into sp_dl_group
-                                       from sp_dl in sp_dl_group.DefaultIfEmpty()
-                                       join tt in _context.ThuocTinhs on sp_dl.MaThuocTinh equals tt.MaThuocTinh into dl_tt_group
-                                       from dl_tt in dl_tt_group.DefaultIfEmpty()
+                                       //join dl in _context.DinhLuongs on sp_g.MaSanPham equals dl.MaSanPham into sp_dl_group
+                                       //from sp_dl in sp_dl_group.DefaultIfEmpty()
+                                       //join tt in _context.ThuocTinhs on sp_dl.MaThuocTinh equals tt.MaThuocTinh into dl_tt_group
+                                       //from dl_tt in dl_tt_group.DefaultIfEmpty()
                                        where !sp.DaXoa && sp.MaSanPham == id
                                        select new ChiTietSanPhamOutput()
                                        {
                                            MaSanPham = sp.MaSanPham,
-                                           DonGia = sp_bg_group.FirstOrDefault().GiaMoi.ToString(), // 2
-                                           GiaBan = sp_bg_group.Skip(1).FirstOrDefault().GiaMoi.ToString(), //1
-                                           SoLuongTon = sp.SoLuongTon,
-                                           TenSanPham = sp.TenSanPham,
-                                           TinhTrang = nameof(sp.Status)
-                                       }).FirstOrDefaultAsync();
+                                           //DonGia = sp_bg_group.FirstOrDefault().GiaMoi.ToString(), // 2
+                                           //GiaBan = sp_bg_group.Skip(1).FirstOrDefault().GiaMoi.ToString(), //1
+                                           //SoLuongTon = sp.SoLuongTon,
+                                           //TenSanPham = sp.TenSanPham,
+                                           //TinhTrang = nameof(sp.Status)
+                                       }).FirstOrDefault();
 
                 ChiTietSanPhamOutput de = new ChiTietSanPhamOutput();
                 de.HinhAnhs = await _context.MauMaSanPhams.Where(x => x.MaSanPham.Equals(id))

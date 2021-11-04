@@ -137,11 +137,11 @@
     $(document).ready(() => {
         gPageIndex = @valPageIndex ;
         initResourceFilterQuery();
-        layHieuSanPham()
     })
 
     function initResourceFilterQuery() {
         getDataSanPham(gPageIndex);
+        layHieuSanPham();
     }
     function layHieuSanPham() {
         layNhanHieuSanPham();

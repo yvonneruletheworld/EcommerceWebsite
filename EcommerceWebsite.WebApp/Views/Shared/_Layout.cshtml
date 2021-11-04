@@ -64,7 +64,8 @@
                     <nav class="menu">
                         <ul class="main_menu">
                             <li class="sale-noti">
-                                <a asp-area="" asp-controller="Home" asp-action="Index">Trang chủ</a>
+                                @*<a asp-area="" asp-controller="Home" asp-action="Index">Trang chủ</a>*@
+                                <a href="~/Main/Home/Index">Trang chủ</a>
                             </li>
                             <li>
                                 <a asp-area="" asp-controller="Home" asp-action="ALLSanPham">Cửa hàng</a>
@@ -470,7 +471,7 @@
 
     <div id="dropDownSelect1"></div>
 
-    <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    @*<script data-cfasync="false" src="~/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>*@
     <script type="text/javascript" src="~/vendor/jquery/jquery-3.2.1.min.js"></script>
     <script src="~/vendor/jquery/jquery-3.2.1.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
@@ -527,7 +528,7 @@
     </script>
 
     <script src="~/js/main.js"></script>
-    <script defer src="../../../static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"rayId":"64a7260aa9e752b0","si":10,"version":"2021.4.0"}'></script>
+    @*<script defer src="~/static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"rayId":"64a7260aa9e752b0","si":10,"version":"2021.4.0"}'></script>*@
 
     @RenderSection("Scripts", required: false)
 </body>

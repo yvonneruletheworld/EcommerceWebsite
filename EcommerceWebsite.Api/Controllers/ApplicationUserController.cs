@@ -1,6 +1,7 @@
 ﻿using EcommerceWebsite.Application.Constants;
 using EcommerceWebsite.Data.Identity;
 using EcommerceWebsite.Services.Interfaces.ExtraServices;
+using EcommerceWebsite.Services.Interfaces.Main;
 using EcommerceWebsite.Services.Interfaces.System;
 using EcommerceWebsite.Utilities.Input;
 using Microsoft.AspNetCore.Authorization;
@@ -28,21 +29,24 @@ namespace EcommerceWebsite.Api.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IConfiguration _config; 
         private readonly IEmailSenderServices _emailServices;
+        private readonly ISanPhamServices _spServices;
 
         public ApplicationUserController(IKhachHangServices khachHangServices, SignInManager<ApplicationUser> signInManager,
-            UserManager<ApplicationUser> userManager, IEmailSenderServices emailServices, IConfiguration config)
+            UserManager<ApplicationUser> userManager, IEmailSenderServices emailServices, IConfiguration config, ISanPhamServices spServices)
         {
             _khachHangServices = khachHangServices;
             _signInManager = signInManager;
             _userManager = userManager;
             _emailServices = emailServices;
             _config = config;
+            _spServices = spServices;
         }
 
         [AllowAnonymous]
         [HttpPost("auth/login")]
         public async Task<IActionResult> Login(ThongTinKhachHangInput model)
         {
+            var g = _spServices.LayChiTietSanPham("SP01", true);
             var getByUserName = await _userManager.FindByNameAsync(model.TenDangNhap);
             getByUserName ??= await _khachHangServices.GetKhachHangTheoUsername(model.TenDangNhap);
 
