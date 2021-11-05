@@ -20,8 +20,9 @@ namespace EcommerceWebsite.Data.EF
 
         }
 
-        protected EcomWebDbContext()
+        public EcomWebDbContext()
         {
+
         }
 
         public DbSet<HoaDon> HoaDons { get; set; }
@@ -34,7 +35,7 @@ namespace EcommerceWebsite.Data.EF
         public DbSet<DinhLuong> DinhLuongs { get; set; }
         public DbSet<MauMaSanPham> MauMaSanPhams { get; set; }
         public DbSet<LichSuGia> LichSuGias { get; set; }
-        public DbSet<XepHangSanPham> XepHangSanPhams { get; set; }
+        public DbSet<NhanHieu> NhanHieus { get; set; }
         public DbSet<DiaChiKhachHang> DiaChiKhaches { get; set; }
         public DbSet<BinhLuan> BinhLuans { get; set; }
         public DbSet<BoPhan> BoPhans { get; set; }
@@ -46,6 +47,8 @@ namespace EcommerceWebsite.Data.EF
         public DbSet<GiaoHang> GiaoHangs { get; set; }
         public DbSet<TinhTrangGiaoHang> TinhTrangGiaoHangs { get; set; }
         public DbSet<DanhGiaSanPham> DanhGiaSanPhams { get; set; }
+        public DbSet<SanPhamYeuThich> SanPhamYeuThiches { get; set; }
+        public DbSet<Banner> Banners { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -61,10 +64,10 @@ namespace EcommerceWebsite.Data.EF
             modelBuilder.ApplyConfiguration(new DinhLuongConfiguration());
             modelBuilder.ApplyConfiguration(new MauSanPhamConfiguration());
             modelBuilder.ApplyConfiguration(new LichSuGiaConfiguration());
-            modelBuilder.ApplyConfiguration(new HangSanPhamConfiguration());
+            modelBuilder.ApplyConfiguration(new NhanHieuConfiguration());
             modelBuilder.ApplyConfiguration(new KhachHangConfiguration());
             modelBuilder.ApplyConfiguration(new DiaChiKhachHangConfiguration());
-            modelBuilder.ApplyConfiguration(new NhanXetSanPhamConfiguration());
+            modelBuilder.ApplyConfiguration(new BinhLuanConfiguration());
             modelBuilder.ApplyConfiguration(new BoPhanConfiguration());
             modelBuilder.ApplyConfiguration(new NhanVienConfiguartion());
             modelBuilder.ApplyConfiguration(new NhaCungCapConfiguration());
@@ -76,14 +79,17 @@ namespace EcommerceWebsite.Data.EF
             modelBuilder.ApplyConfiguration(new GiaoHangConfiguration());
             modelBuilder.ApplyConfiguration(new TinhTrangGiaoHangConfiguration());
             modelBuilder.ApplyConfiguration(new DanhGiaSanPhamConfiguration());
+            modelBuilder.ApplyConfiguration(new SanPhamYeuThichConfiguration());
+            modelBuilder.ApplyConfiguration(new BannerConfiguration());
             base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<IdentityUserClaim<Guid>>().ToTable("AppUserClaims");
             modelBuilder.Entity<IdentityUserRole<Guid>>().ToTable("AppUserRoles").HasKey(x => new { x.UserId, x.RoleId });
             modelBuilder.Entity<IdentityUserLogin<Guid>>().ToTable("AppUserLogins").HasKey(x => x.UserId);
 
             modelBuilder.Entity<IdentityRoleClaim<Guid>>().ToTable("AppRoleClaims");
             modelBuilder.Entity<IdentityUserToken<Guid>>().ToTable("AppUserTokens").HasKey(x => x.UserId); 
-            modelBuilder.Seed();
+            //modelBuilder.Seed();
         }
     }
 }

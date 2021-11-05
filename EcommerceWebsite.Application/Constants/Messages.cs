@@ -31,5 +31,10 @@ namespace EcommerceWebsite.Application.Constants
         //Form
         public const string Form_Invalid = "Yêu cầu nhập đầy đủ thông tin";
 
+        //API
+        public const string API_EmptyInput = "empty-input";
+        public const string API_EmptyResult = "empty-result";
+        public const string API_Exception = "api-exception: ";
+
     }
 }

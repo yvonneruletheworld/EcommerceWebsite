@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace EcommerceWebsite.Utilities.Main
+namespace EcommerceWebsite.Utilities.Output.Main
 {
     public class SanPhamOutput : EntityBase
     {

@@ -25,8 +25,6 @@ namespace EcommerceWebsite.Data.Configurations
                 .WithMany(tt => tt.TinhTrangGiaoHangs)
                 .HasForeignKey(tt => tt.MaGiaoHang);
 
-
-
         }
     }
 }

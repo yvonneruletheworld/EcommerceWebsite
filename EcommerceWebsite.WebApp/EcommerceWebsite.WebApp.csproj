@@ -5,16 +5,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\SanPham\**" />
+    <Content Remove="Views\SanPham\**" />
+    <EmbeddedResource Remove="Views\SanPham\**" />
+    <None Remove="Views\SanPham\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\EcommerceWebsite.Api\EcommerceWebsite.Api.csproj" />
     <ProjectReference Include="..\EcommerceWebsite.Application\EcommerceWebsite.Application.csproj" />
-    <ProjectReference Include="..\EcommerceWebsite.Services\EcommerceWebsite.Services.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\SanPham\" />
+    <Folder Include="Controllers\User\" />
     <Folder Include="wwwroot\images\logo\" />
   </ItemGroup>
 

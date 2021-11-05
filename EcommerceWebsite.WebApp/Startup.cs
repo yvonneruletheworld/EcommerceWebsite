@@ -22,6 +22,7 @@ using ValensBankCore.Services.Services;
 using EcommerceWebsite.Services.Interfaces.ExtraServices;
 using EcommerceWebsite.Services.Services.ExtraServices;
 using EcommerceWebsite.Data.Configurations;
+using EcommerceWebsite.Api.Interface;
 
 namespace EcommerceWebsite.WebApp
 {
@@ -37,34 +38,42 @@ namespace EcommerceWebsite.WebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
-
-
-            var str = Configuration.GetConnectionString("EcommerceWebsiteDatabase");
-            services.AddDbContext<EcomWebDbContext>(options =>
-                options.UseSqlServer(str));
-
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<EcomWebDbContext>()
-                .AddClaimsPrincipalFactory<MyUserClaimsPrincipalFactoryService>()
-                .AddDefaultTokenProviders();
+            services.AddHttpClient();
 
             services.AddHttpContextAccessor();
+            services.AddControllersWithViews();
 
+            //var str = Configuration.GetConnectionString("EcommerceWebsiteDatabase");
+            //services.AddDbContext<EcomWebDbContext>(options =>
+            //    options.UseSqlServer(str));
+
+            //services.AddIdentity<ApplicationUser, IdentityRole>()
+            //    .AddEntityFrameworkStores<EcomWebDbContext>()
+            //    .AddClaimsPrincipalFactory<MyUserClaimsPrincipalFactoryService>()
+            //    .AddDefaultTokenProviders();
+
+            
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+            });
+            //DI
             DependencyInjectionSystemConfig(services);
-            services.AddAutoMapper(typeof(AutoMapping));
+            //services.AddAutoMapper(typeof(AutoMapping));
 
-            var emailConfig = Configuration
-                .GetSection("EmailSenderConfig")
-                .Get<EmailConfiguration>();
-            services.AddSingleton(emailConfig);
+            //var emailConfig = Configuration
+            //    .GetSection("EmailSenderConfig")
+            //    .Get<EmailConfiguration>();
+            //services.AddSingleton(emailConfig);
         }
 
         private void DependencyInjectionSystemConfig(IServiceCollection services)
         {
-            services.AddScoped<ISanPhamServices, SanPhamServices>();
-            services.AddScoped<IKhachHangServices, KhachHangServices>();
-            services.AddScoped<IEmailSenderServices, EmailSenderServices>();
+            services.AddScoped<IHUIApiServices, HUIApiServices>();
+            services.AddScoped<IDanhMucApiServices, DanhMucApiServices>();
+            //services.AddScoped<ISanPhamServices, SanPhamServices>();
+            //services.AddScoped<IKhachHangServices, KhachHangServices>();
+            //services.AddScoped<IEmailSenderServices, EmailSenderServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -88,6 +97,7 @@ namespace EcommerceWebsite.WebApp
             app.UseAuthentication();
             app.UseAuthorization();
 
+            app.UseSession();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
