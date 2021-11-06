@@ -21,14 +21,14 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
         public async Task<IActionResult> IndexAsync()
         {
             var fileName = "output1";
-            var listHUI = await _huiApiServices.GetListHUIFromOutput($"/api/HUI/get-list-hui/{fileName}");
+            var listHUI = await _huiApiServices.GetListHUIFromOutput(fileName);
             return View();
         }
 
         [HttpGet("list-danh-muc")]
         public async Task<IActionResult> GetListCategories ()
         {
-            var rs = await _danhMucApiServices.GetCategories("/api/DanhMuc/get-categories");
+            var rs = await _danhMucApiServices.GetCategories();
             return Json (new { data = rs.Count });
         }
     }

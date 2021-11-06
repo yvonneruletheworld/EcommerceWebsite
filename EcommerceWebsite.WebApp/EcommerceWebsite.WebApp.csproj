@@ -5,9 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\User\**" />
     <Compile Remove="Views\SanPham\**" />
+    <Content Remove="Controllers\User\**" />
     <Content Remove="Views\SanPham\**" />
+    <EmbeddedResource Remove="Controllers\User\**" />
     <EmbeddedResource Remove="Views\SanPham\**" />
+    <None Remove="Controllers\User\**" />
     <None Remove="Views\SanPham\**" />
   </ItemGroup>
 
@@ -21,7 +25,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\User\" />
     <Folder Include="wwwroot\images\logo\" />
   </ItemGroup>
 

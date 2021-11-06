@@ -16,9 +16,9 @@ namespace EcommerceWebsite.Api.Interface
         {
         }
 
-        public async Task<List<DanhMucOutput>> GetCategories(string uri)
+        public async Task<List<DanhMucOutput>> GetCategories()
         {
-            return await GetListAsync<DanhMucOutput>(uri);
+            return await GetListAsync<DanhMucOutput>("/api/DanhMuc/get-categories");
         }
     }
 }
