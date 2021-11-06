@@ -15,7 +15,7 @@ namespace EcommerceWebsite.Services.Interfaces.System
         Task<ApplicationUser> GetKhachHangTheoUsername(string userName);
         Task<ApplicationUser> GetKhachHangTheoId(string id);
         Task<ApplicationUser> GetKhachHangTheoEmail(string email);
-        Task<bool> KiemTraDangNhapKhachHang(ApplicationUser obj, string pwd);
+        Task<bool> CheckLoginPass(ApplicationUser obj, string pwd);
         //Task<Dictionary<string, KhachHang>> LoginAsync(string usernameOrPhone, string pass);
         string GetUserId(ClaimsPrincipal user);
         string GetUserEmail(ClaimsPrincipal user);

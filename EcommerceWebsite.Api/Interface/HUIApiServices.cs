@@ -16,9 +16,9 @@ namespace EcommerceWebsite.Api.Interface
         {
         }
 
-        public async Task<List<HUI>> GetListHUIFromOutput(string url)
+        public async Task<List<HUI>> GetListHUIFromOutput(string fileName)
         {
-            return await GetListAsync<HUI>(url);
+            return await GetListAsync<HUI>($"/api/HUI/get-list-hui/{fileName}");
         }
     }
 }

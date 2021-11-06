@@ -8,6 +8,6 @@ namespace EcommerceWebsite.Api.Interface
 {
     public interface IDanhMucApiServices
     {
-        Task<List<DanhMucOutput>> GetCategories(string uri);
+        Task<List<DanhMucOutput>> GetCategories();
     }
 }

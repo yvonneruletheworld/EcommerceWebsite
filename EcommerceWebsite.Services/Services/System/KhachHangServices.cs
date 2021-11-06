@@ -54,7 +54,7 @@ namespace EcommerceWebsite.Services.Services.System
 
         public async Task<ApplicationUser> GetKhachHangTheoUsername(string userName)
         {
-            return await _userManager.FindByNameAsync(userName);
+            return await _context.ApplicationUsers.FirstOrDefaultAsync(kh => !kh.IsDeleted && kh.UserName.Equals(userName));
         }
 
         public string GetUserEmail(ClaimsPrincipal user)
@@ -67,7 +67,7 @@ namespace EcommerceWebsite.Services.Services.System
             return user.FindFirstValue(ClaimTypes.NameIdentifier);
         }
 
-        public async Task<bool> KiemTraDangNhapKhachHang(ApplicationUser obj, string pwd)
+        public async Task<bool> CheckLoginPass(ApplicationUser obj, string pwd)
         {
             return await _userManager.CheckPasswordAsync(obj, pwd);
         }
@@ -84,9 +84,9 @@ namespace EcommerceWebsite.Services.Services.System
 
                 //update OTP code
                 obj.OTPCode = otpCode;
-                _context.Entry(obj).State = EntityState.Modified;
+                _context.Entry(obj).State = EntityState.Modified;//sửa
 
-                var result = await _context.SaveChangesAsync();
+                var result = await _context.SaveChangesAsync();//Lưu
                 await _context.Database.CommitTransactionAsync();
 
                 return result > 0 ;
