@@ -101,17 +101,15 @@
 
     $(document).ready(() => {
         gPageIndex = @valPageIndex ;
-        initResourceFilterQuery();
-        layDanhMucSanPham()
+        init();
+      
     })
 
-    function initResourceFilterQuery() {
+    function init() {
         getDataSanPham(gPageIndex);
-    }
-    function layDanhMucSanPham() {
+        layDanhMucSanPham();
         layDanhMuc();
     }
-
     function getDataSanPham(pId) {
         gPageIndex = pId;
         //load san pham bang ajax

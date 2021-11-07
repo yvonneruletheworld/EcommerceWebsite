@@ -44,7 +44,7 @@ namespace EcommerceWebsite.WebApp.Controllers
 
         public async Task<IActionResult> IndexAsync()
         {
-            var getListApi = await _huiApiServices.GetListHuiFromApi();
+            //var getListApi = await _huiApiServices.GetListHuiFromApi();
             var currentUser = await _userManager.GetUserAsync(User);
             if(currentUser == null)
             {
@@ -86,6 +86,8 @@ namespace EcommerceWebsite.WebApp.Controllers
         }
         public IActionResult AllSanPham()
         {
+            var fileName = "output1";
+            //var listHUI = await _huiApiServices.GetListHUIFromOutput($"/api/HUI/get-list-hui/{fileName}");
             return View();
         }
         [HttpGet("get-data-nhanhieuSP")]

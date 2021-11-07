@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace EcommerceWebsite.Services.Interfaces.Main
 {
-    public interface ISanPhamServices 
+    public interface ISanPhamServices
     {
         Task<PageResponse<List<SanPhamOutput>>> GetListProductByPage(PaginationFilter filter);
 

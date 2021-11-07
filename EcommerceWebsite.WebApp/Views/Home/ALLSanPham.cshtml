@@ -10,12 +10,12 @@
         max-width: 1400px;
     }
 </style>
-<section class="bg-title-page p-t-50 p-b-40 flex-col-c-m" style="background-image: url(images/heading-pages-02.jpg);">
+<section class="bg-title-page p-t-50 p-b-40 flex-col-c-m" style="background-image: url(https://cdn.tgdd.vn/2021/11/banner/800-200-800x200-44.png);">
     <h2 class="l-text2 t-center">
-        Women
+        Siêu phẩm
     </h2>
     <p class="m-text13 t-center">
-        New Arrivals Women Collection 2018
+        Thế giới công nghệ thế kỉ 21
     </p>
 </section>
 <section class="bgwhite p-t-55 p-b-65">
@@ -137,11 +137,12 @@
     $(document).ready(() => {
         gPageIndex = @valPageIndex ;
         initResourceFilterQuery();
-        layHieuSanPham()
+      
     })
 
     function initResourceFilterQuery() {
         getDataSanPham(gPageIndex);
+        layHieuSanPham()
     }
     function layHieuSanPham() {
         layNhanHieuSanPham();

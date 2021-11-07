@@ -27,6 +27,11 @@
     @using EcommerceWebsite.Application.Constants
     @using EcommerceWebsite.Data.Identity
     @model ApplicationUser
+    <style>
+        :hover a{
+            text-decoration:none;
+        }
+    </style>
 </head>
 <body class="animsition">
     <header class="header1">
@@ -64,7 +69,7 @@
                     <nav class="menu">
                         <ul class="main_menu">
                             <li class="sale-noti">
-                                <a asp-area="" asp-controller="Home" asp-action="Index">Trang chủ</a>
+                                <a asp-area="" asp-controller="Home" asp-action="TrangChu">Trang chủ</a>
                             </li>
                             <li>
                                 <a asp-area="" asp-controller="Home" asp-action="ALLSanPham">Cửa hàng</a>
