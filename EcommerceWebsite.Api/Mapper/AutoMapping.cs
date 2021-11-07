@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace EcommerceWebsite.Utilities.Mapper
+namespace EcommerceWebsite.Api.Mapper
 {
     public class AutoMapping : Profile
     {

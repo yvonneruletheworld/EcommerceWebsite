@@ -3,7 +3,6 @@ using EcommerceWebsite.Services.Interfaces.System;
 using EcommerceWebsite.Services.Interfaces.Main;
 using EcommerceWebsite.Services.Services.System;
 using EcommerceWebsite.Services.Services.Main;
-using EcommerceWebsite.WebApp.Mapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -23,6 +22,7 @@ using EcommerceWebsite.Services.Interfaces.ExtraServices;
 using EcommerceWebsite.Services.Services.ExtraServices;
 using EcommerceWebsite.Data.Configurations;
 using EcommerceWebsite.Api.Interface;
+using EcommerceWebsite.WebApp.Mapper;
 
 namespace EcommerceWebsite.WebApp
 {
@@ -59,12 +59,7 @@ namespace EcommerceWebsite.WebApp
             });
             //DI
             DependencyInjectionSystemConfig(services);
-            //services.AddAutoMapper(typeof(AutoMapping));
-
-            //var emailConfig = Configuration
-            //    .GetSection("EmailSenderConfig")
-            //    .Get<EmailConfiguration>();
-            //services.AddSingleton(emailConfig);
+            services.AddAutoMapper(typeof(AutoMapping));
         }
 
         private void DependencyInjectionSystemConfig(IServiceCollection services)
