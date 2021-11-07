@@ -9,6 +9,8 @@ namespace EcommerceWebsite.Services.Interfaces.Main
 {
     public interface IDanhMucServices
     {
-        Task<List<DanhMucOutput>> GetDanhMucs();
+        Task<List<DanhMuc>> layDanhMucs();
+
+
     }
 }

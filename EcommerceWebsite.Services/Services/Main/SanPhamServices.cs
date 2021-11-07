@@ -121,5 +121,29 @@ namespace EcommerceWebsite.Services.Services.Main
                 throw ex;
             }
         }
+
+        public async Task<List<SanPhamOutput>> laySanPham()
+        {
+            try
+            {
+                var data = await (from sp in _context.SanPhams
+                            join gia in _context.LichSuGias on sp.MaSanPham equals gia.MaSanPham
+                            select new SanPhamOutput
+                            {
+                                MaSanPham = sp.MaSanPham,
+                                TenSanPham = sp.TenSanPham,
+                                SoLuongTon = sp.SoLuongTon,
+                                HinhAnh = sp.HinhAnh,
+                                giaSP = gia.GiaMoi,
+                            }).ToListAsync();
+                return data;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
     }
 }

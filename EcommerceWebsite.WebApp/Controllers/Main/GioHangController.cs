@@ -8,15 +8,9 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
 {
     public class GioHangController : Controller
     {
-
-
-
         public IActionResult Index()
         {
             return View("/Views/GioHang/Index.cshtml");
         }
-
-
-
     }
 }

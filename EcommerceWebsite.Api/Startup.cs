@@ -70,6 +70,7 @@ namespace EcommerceWebsite.Api
                 .GetSection("EmailSenderConfig")
                 .Get<EmailConfiguration>();
             services.AddSingleton(emailConfig);
+          
 
         }
 
@@ -81,6 +82,7 @@ namespace EcommerceWebsite.Api
             //services.AddScoped<IBoPhanServices, BoPhanServices>();
             services.AddScoped<IHUIServices, HUIServices>();
             services.AddScoped<IDanhMucServices, DanhMucServices>();
+          
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

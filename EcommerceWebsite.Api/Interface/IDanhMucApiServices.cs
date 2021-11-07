@@ -1,4 +1,5 @@
-﻿using EcommerceWebsite.Utilities.Output.Main;
+﻿using EcommerceWebsite.Data.Entities;
+using EcommerceWebsite.Utilities.Output.Main;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,7 @@ namespace EcommerceWebsite.Api.Interface
 {
     public interface IDanhMucApiServices
     {
-        Task<List<DanhMucOutput>> GetCategories();
+        Task<List<DanhMuc>> layDanhMuc();
+
     }
 }

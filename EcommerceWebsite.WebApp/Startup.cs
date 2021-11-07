@@ -71,7 +71,7 @@ namespace EcommerceWebsite.WebApp
         {
             services.AddScoped<IHUIApiServices, HUIApiServices>();
             services.AddScoped<IDanhMucApiServices, DanhMucApiServices>();
-            //services.AddScoped<ISanPhamServices, SanPhamServices>();
+            services.AddScoped<ISanPhamApiServices, SanPhamApiServices>();
             //services.AddScoped<IKhachHangServices, KhachHangServices>();
             //services.AddScoped<IEmailSenderServices, EmailSenderServices>();
         }

@@ -73,8 +73,8 @@
 @*HIỂN THỊ DANH MỤC SẢN PHẨM*@
 <section class="banner bgwhite p-t-40 p-b-40">
     <div class="container">
-        <div class="row" id="danhmuc-sanpham">
-
+        <div class="row danhmuc-sanpham">
+           
         </div>
     </div>
 </section>
@@ -102,19 +102,33 @@
 
     //FUNC
     function init() {
+        getDataSanPham();
         getDanhMuc();
     }
-
     //Danh Muc
     function getDanhMuc() {
         $.ajax({
             url: '/list-danh-muc',
             type: 'GET',
             success: (result) => {
-                //$("#danhmuc-sanpham")[0].innerHTML = result;
-                alert(result.data);
+                $(".danhmuc-sanpham")[0].innerHTML = result;
             },
             error: (err) => {
+                console.log(err);
+            }
+        });
+    }
+    //san pham
+    function getDataSanPham() {
+        $.ajax({
+            url: '/get-data-sanpham',
+            type: 'GET',
+            //  dataType: 'html',
+            success: (result) => {
+                $("#sanphamload")[0].innerHTML = result;
+            },
+            error: (err) => {
+                alert('failed');
                 console.log(err);
             }
         });

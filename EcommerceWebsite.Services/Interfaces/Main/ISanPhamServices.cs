@@ -16,6 +16,8 @@ namespace EcommerceWebsite.Services.Interfaces.Main
 
         bool? KiemTra(string value);
 
+        Task<List<SanPhamOutput>> laySanPham();
+
         //Task<IdentityResult> Create(ApplicationUser obj);
     }
 }

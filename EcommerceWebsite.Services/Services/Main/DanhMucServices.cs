@@ -20,23 +20,25 @@ namespace EcommerceWebsite.Services.Services.Main
             _context = context;
         }
 
-        public async Task<List<DanhMucOutput>> GetDanhMucs()
+        public async Task<List<DanhMuc>> layDanhMucs()
         {
             try
             {
-                return await _context.DanhMucs
-                    .Where(dm => !dm.DaXoa)
-                    .Select(item => new DanhMucOutput{ 
-                        MaDanhMuc = item.MaDanhMuc,
-                        HinhAnh = item.HinhAnh,
-                        TenDanhMuc = item.TenDanhMuc
-                     })
-                    .ToListAsync();
+                //return await _context.DanhMucs
+                //    .Where(dm => !dm.DaXoa)
+                //    .Select(item => new DanhMucOutput{ 
+                //        MaDanhMuc = item.MaDanhMuc,
+                //        HinhAnh = item.HinhAnh,
+                //        TenDanhMuc = item.TenDanhMuc
+                //     })
+                //    .ToListAsync();
+                return await _context.DanhMucs.Where(dm => !dm.DaXoa).ToListAsync();
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
+
     }
 }

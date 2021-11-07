@@ -15,6 +15,7 @@ namespace EcommerceWebsite.Utilities.Output.Main
         public string NhanHieu { get; set; }
         public string MaLoaiSanPham { get; set; }
         public string MaXepHang { get; set; }
+        public decimal giaSP { get; set; }
         public Status Status { get; set; }
         public decimal Utility { get; set; }
         public DanhGiaSanPham DanhGiaSanPham { get; set; }

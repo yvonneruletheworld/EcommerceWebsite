@@ -1,4 +1,5 @@
-﻿using EcommerceWebsite.Utilities.Output.Main;
+﻿using EcommerceWebsite.Data.Entities;
+using EcommerceWebsite.Utilities.Output.Main;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -16,9 +17,11 @@ namespace EcommerceWebsite.Api.Interface
         {
         }
 
-        public async Task<List<DanhMucOutput>> GetCategories()
+        public async Task<List<DanhMuc>> layDanhMuc()
         {
-            return await GetListAsync<DanhMucOutput>("/api/DanhMuc/get-categories");
+            return await GetListAsync<DanhMuc>("/api/DanhMuc/lay-danhmuc");
         }
+
+
     }
 }

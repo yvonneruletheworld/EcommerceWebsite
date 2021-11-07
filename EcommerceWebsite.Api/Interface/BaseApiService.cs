@@ -23,6 +23,10 @@ namespace EcommerceWebsite.Api.Interface
             _httpContextAccessor = httpContextAccessor;
         }
 
+        public BaseApiService(IHttpClientFactory httpClietnFactory, AutoMapper.Configuration.IConfiguration config, IHttpContextAccessor httpContextAccessor)
+        {
+        }
+
         public async Task<List<T>> GetListAsync<T> (string url, bool requiredLogin = false)
         {
             var session = _httpContextAccessor

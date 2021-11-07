@@ -1,7 +1,6 @@
 ﻿using EcommerceWebsite.Application.Constants;
-using EcommerceWebsite.Data.Entities;
+using EcommerceWebsite.Application.Pagination;
 using EcommerceWebsite.Services.Interfaces.Main;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -12,21 +11,19 @@ namespace EcommerceWebsite.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DanhMucController : ControllerBase
+    public class SanPhamController : Controller
     {
-        private readonly IDanhMucServices _danhMucServices;
-
-        public DanhMucController(IDanhMucServices danhMucServices)
+        private readonly ISanPhamServices _sanPhamServices;
+        public SanPhamController(ISanPhamServices sanPhamServices)
         {
-            _danhMucServices = danhMucServices;
+            _sanPhamServices = sanPhamServices;
         }
-
-        [HttpGet("lay-danhmuc")]
-        public async Task<IActionResult> layDanhMucs ()
+        [HttpGet("lay-sanpham")]
+        public async Task<IActionResult> laySanPhams()
         {
             try
             {
-                var result = await _danhMucServices.layDanhMucs();
+                var result = await _sanPhamServices.laySanPham();
                 if (result == null)
                     return BadRequest(Messages.API_EmptyResult);
                 else return Ok(result);
@@ -34,7 +31,7 @@ namespace EcommerceWebsite.Api.Controllers
             catch (Exception ex)
             {
                 return BadRequest(Messages.API_Exception + ex);
-            } 
+            }
         }
     }
 }
