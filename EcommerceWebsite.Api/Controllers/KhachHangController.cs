@@ -37,7 +37,6 @@ namespace EcommerceWebsite.Api.Controllers
         [HttpPost("user-login")]
         public async Task<IActionResult> UserLogin (ThongTinKhachHangInput input)
         {
-            
             if (input == null || string.IsNullOrEmpty(input.TenDangNhap) || string.IsNullOrEmpty(input.MatKhau))
                 return BadRequest(Messages.API_EmptyInput);
 
@@ -80,6 +79,20 @@ namespace EcommerceWebsite.Api.Controllers
             }
 
             return BadRequest("Could not create token");
+        }
+
+        [HttpPost("user-resigter")]
+        public async Task<IActionResult> UserRegister (ThongTinKhachHangInput input)
+        {
+            if(ModelState.IsValid)
+            {
+                if (await _khachHangServices.SubmitUser(input))
+                {
+                    return Ok(Messages.API_Success);
+                }
+                return Ok(Messages.API_Failed);
+            }
+            return BadRequest(ModelState);
         }
     }
 }

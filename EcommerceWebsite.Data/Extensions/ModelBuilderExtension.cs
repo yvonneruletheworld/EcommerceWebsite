@@ -2341,7 +2341,7 @@ namespace EcommerceWebsite.Data.Extensions
                     {
                         MaMauMa = "MM021",
                         MaSanPham = "SP05",
-                        TenMauMa = "Đen",
+                        TenMauMa = "Hologram",
                         HinhAnh = "https://i.ibb.co/0stYCyp/Iphone-11-den-1-1-1-org.jpg",
                     },
                     //
@@ -3046,26 +3046,20 @@ namespace EcommerceWebsite.Data.Extensions
             modelBuilder.Entity<KhachHang>().HasData(new KhachHang
             {
                 MaKhachHang = adminId.ToString(),
-                Email = "yvonnetran.work@gmail.com",
                 HoTen = "Yvonne Tran",
                 GioiTinh = false,
-                SDT = "0905187524",
             },
             new KhachHang
             {
                 MaKhachHang = "KH01",
-                Email = "phamthivi459@gmail.com",
                 HoTen = "Phạm Thị Vi",
                 GioiTinh = false,
-                SDT = "0376437459",
             },
             new KhachHang
             {
                 MaKhachHang = "KH02",
-                Email = "danhVu@gmail.com",
                 HoTen = "Danh Vũ",
                 GioiTinh = false,
-                SDT = "12345678",
             });
 
             modelBuilder.Entity<IdentityUserRole<Guid>>().HasData(new IdentityUserRole<Guid>

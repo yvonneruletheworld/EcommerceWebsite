@@ -27,7 +27,7 @@
                             <span class="fix-height"><strong>Tên đăng nhập/ SĐT</strong></span>
                             @if (string.IsNullOrEmpty(Model.TenDangNhap))
                             {
-                                @Html.EditorFor(model => Model.Sdt, new { htmlAttributes = new { @class = "input-login form-control", placeholder = "Type here", id = "txt-login" } })
+                                @Html.EditorFor(model => Model.SDT, new { htmlAttributes = new { @class = "input-login form-control", placeholder = "Type here", id = "txt-login" } })
                             }
                             else
                             {

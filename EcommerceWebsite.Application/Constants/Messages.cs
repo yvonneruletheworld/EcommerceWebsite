@@ -35,6 +35,8 @@ namespace EcommerceWebsite.Application.Constants
         public const string API_EmptyInput = "empty-input";
         public const string API_EmptyResult = "empty-result";
         public const string API_Exception = "api-exception: ";
+        public const string API_Success = "api-success";
+        public const string API_Failed = "api-failed";
 
     }
 }

@@ -20,5 +20,7 @@ namespace EcommerceWebsite.Services.Interfaces.System
         string GetUserId(ClaimsPrincipal user);
         string GetUserEmail(ClaimsPrincipal user);
         Task<bool> UpdateOTPCode(string id, string v);
+
+        Task<bool> SubmitUser(ThongTinKhachHangInput input);
     }
 }

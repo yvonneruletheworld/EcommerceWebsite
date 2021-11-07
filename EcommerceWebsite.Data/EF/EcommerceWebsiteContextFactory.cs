@@ -21,6 +21,7 @@ namespace EcommerceWebsite.Data.EF
             var connectionString = configuration.GetConnectionString("EcommerceWebsiteDatabase");
             var optionBuilder = new DbContextOptionsBuilder<EcomWebDbContext>();
             optionBuilder.UseSqlServer(connectionString);
+            optionBuilder.EnableSensitiveDataLogging();
 
             return new EcomWebDbContext(optionBuilder.Options);
         }
