@@ -23,13 +23,6 @@ namespace EcommerceWebsite.Data.Configurations
                 .HasColumnType("nvarchar")
                 .IsRequired();
 
-            builder.Property(kh => kh.SDT)
-                .HasMaxLength(11)
-                .IsRequired();
-
-            builder.Property(kh => kh.Email)
-                .HasMaxLength(200)
-                .IsRequired();
         }
     }
 }
