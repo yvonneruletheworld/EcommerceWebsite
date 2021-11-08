@@ -19,11 +19,13 @@ namespace EcommerceWebsite.Services.Services.Main
     {
         private readonly EcomWebDbContext _context;
         private readonly IMapper _mapper;
+        private readonly IBangGiaServices _bangGiaServices;
 
-        public SanPhamServices(EcomWebDbContext context, IMapper mapper)
+        public SanPhamServices(EcomWebDbContext context, IMapper mapper, IBangGiaServices bangGiaServices)
         {
             _context = context;
             _mapper = mapper;
+            _bangGiaServices = bangGiaServices;
         }
 
         public async Task<PageResponse<List<SanPhamOutput>>> GetListProductByPage(PaginationFilter filter)
@@ -114,6 +116,33 @@ namespace EcommerceWebsite.Services.Services.Main
             try
             {
                 return await _context.NhanHieus.ToListAsync();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public async Task<List<SanPhamOutput>> laySanPham()
+        {
+            try
+            {
+                var data = await (from sp in _context.SanPhams
+                                  join gia in _context.LichSuGias on sp.MaSanPham equals gia.MaSanPham
+                                  where !sp.DaXoa
+                                  select new SanPhamOutput
+                                  {
+                                      MaSanPham = sp.MaSanPham,
+                                      TenSanPham = sp.TenSanPham,
+                                      SoLuongTon = sp.SoLuongTon,
+                                      HinhAnh = sp.HinhAnh,
+                                      GiaBan = gia.GiaMoi.ToString(),
+                                  }).ToListAsync();
+
+                var result
+                return data;
+
             }
             catch (Exception ex)
             {
