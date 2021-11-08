@@ -22,7 +22,7 @@ namespace EcommerceWebsite.Api.Controllers
         }
 
         [HttpGet("lay-danhmuc")]
-        public async Task<IActionResult> layDanhMucs ()
+        public async Task<IActionResult> layDanhMucs()
         {
             try
             {

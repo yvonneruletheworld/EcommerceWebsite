@@ -79,9 +79,10 @@ namespace EcommerceWebsite.Api
             services.AddScoped<ISanPhamServices, SanPhamServices>();
             services.AddScoped<IKhachHangServices, KhachHangServices>();
             services.AddScoped<IEmailSenderServices, EmailSenderServices>();
-            //services.AddScoped<IBoPhanServices, BoPhanServices>();
             services.AddScoped<IHUIServices, HUIServices>();
             services.AddScoped<IDanhMucServices, DanhMucServices>();
+            services.AddScoped<IKhuyenMaiServices, KhuyenMaiServices>();
+            services.AddScoped<INhanHieuServices, NhanHieuServices>();
           
         }
 

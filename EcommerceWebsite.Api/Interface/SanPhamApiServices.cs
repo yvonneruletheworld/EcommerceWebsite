@@ -1,11 +1,9 @@
-﻿using AutoMapper.Configuration;
-using EcommerceWebsite.Application.Pagination;
-using EcommerceWebsite.Data.Entities;
+﻿using EcommerceWebsite.Application.Pagination;
 using EcommerceWebsite.Utilities.Output.Main;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -13,12 +11,13 @@ using System.Threading.Tasks;
 namespace EcommerceWebsite.Api.Interface
 {
     public class SanPhamApiServices : BaseApiService, ISanPhamApiServices
-    {
-        public SanPhamApiServices(IHttpClientFactory httpClietnFactory, IConfiguration config, IHttpContextAccessor httpContextAccessor)
-            : base(httpClietnFactory, config, httpContextAccessor)
+{
+        
+        public SanPhamApiServices(IHttpClientFactory httpClientFactory, IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
+            : base(httpClientFactory, configuration, httpContextAccessor)
         {
-        }
 
+        }
         public Task<PageResponse<List<SanPhamOutput>>> laySanPham(PaginationFilter pagination)
         {
             throw new NotImplementedException();

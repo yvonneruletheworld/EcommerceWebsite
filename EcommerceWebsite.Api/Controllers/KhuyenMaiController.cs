@@ -1,5 +1,4 @@
 ﻿using EcommerceWebsite.Application.Constants;
-using EcommerceWebsite.Application.Pagination;
 using EcommerceWebsite.Services.Interfaces.Main;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,19 +10,20 @@ namespace EcommerceWebsite.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SanPhamController : ControllerBase
+    public class KhuyenMaiController : ControllerBase
     {
-        private readonly ISanPhamServices _sanPhamServices;
-        public SanPhamController(ISanPhamServices sanPhamServices)
+        private readonly IKhuyenMaiServices _khuyenMaiServices;
+        public KhuyenMaiController(IKhuyenMaiServices khuyenMaiServices)
         {
-            _sanPhamServices = sanPhamServices;
+            _khuyenMaiServices = khuyenMaiServices;
         }
-        [HttpGet("lay-sanpham")]
+
+        [HttpGet("lay-khuyenmai")]
         public async Task<IActionResult> laySanPhams()
         {
             try
             {
-                var result = await _sanPhamServices.laySanPham();
+                var result = await _khuyenMaiServices.layKhuyenMai();
                 if (result == null)
                     return BadRequest(Messages.API_EmptyResult);
                 else return Ok(result);
