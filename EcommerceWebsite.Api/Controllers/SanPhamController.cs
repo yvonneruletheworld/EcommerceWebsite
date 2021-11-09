@@ -25,7 +25,7 @@ namespace EcommerceWebsite.Api.Controllers
             _mapper = mapper;
         }
         [HttpGet("lay-sanpham")]
-        public async Task<IActionResult> laySanPhams()
+        public async Task<IActionResult> LaySanPhams()
         {
             try
             {
