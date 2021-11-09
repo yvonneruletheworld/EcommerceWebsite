@@ -1,3 +1,4 @@
+using EcommerceWebsite.Api.Mapper;
 using EcommerceWebsite.Data.Configurations;
 using EcommerceWebsite.Data.EF;
 using EcommerceWebsite.Data.Identity;
@@ -7,7 +8,6 @@ using EcommerceWebsite.Services.Interfaces.System;
 using EcommerceWebsite.Services.Services.ExtraServices;
 using EcommerceWebsite.Services.Services.Main;
 using EcommerceWebsite.Services.Services.System;
-using EcommerceWebsite.Utilities.Mapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -62,14 +62,14 @@ namespace EcommerceWebsite.Api
                 s.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
             });
 
-            //Mapper
-            services.AddAutoMapper(typeof(AutoMapping));
+
 
             //Email
             var emailConfig = Configuration
                 .GetSection("EmailSenderConfig")
                 .Get<EmailConfiguration>();
             services.AddSingleton(emailConfig);
+          
 
         }
 
@@ -81,6 +81,9 @@ namespace EcommerceWebsite.Api
             services.AddScoped<IHUIServices, HUIServices>();
             services.AddScoped<IDanhMucServices, DanhMucServices>();
             services.AddScoped<IBangGiaServices, BangGiaServices>();
+            services.AddScoped<IKhuyenMaiServices, KhuyenMaiServices>();
+            services.AddScoped<INhanHieuServices, NhanHieuServices>();
+          
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

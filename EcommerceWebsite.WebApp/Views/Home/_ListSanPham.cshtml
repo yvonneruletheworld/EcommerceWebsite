@@ -1,0 +1,101 @@
+﻿@using EcommerceWebsite.Application.Pagination
+@using EcommerceWebsite.Utilities.Output.Main
+@model List<SanPhamOutput>
+
+        @if (Model.Any())
+        {
+            foreach (var item in Model)
+            {
+                <div class="item-slick2 p-l-15 p-r-15">
+                    <div class="block2">
+                        <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
+                            <img src="@item.HinhAnh" alt="IMG-PRODUCT">
+                            <div class="block2-overlay trans-0-4">
+                                <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+                                    <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+                                    <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+                                </a>
+                                <div class="block2-btn-addcart w-size1 trans-0-4">
+
+                                    <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+                                        Thêm vào giỏ
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="block2-txt p-t-20">
+                            <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
+                                @item.TenSanPham
+                            </a>
+                            <span class="block2-price m-text6 p-r-5">
+                                @string.Format("{0:0,0}",item.giaSP)  VNĐ
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+
+            }
+        }
+        else
+        {
+            <h2>CHƯA CÓ SẢN PHẨM</h2>
+        }
+
+        @*<ul class="pagination pagination-custom">
+                @if (Model.PageNumber > 1)
+                {
+                    <li class="page-item" style="cursor: pointer"><a onclick="getDataSanPham(@Model.PageNumber - 1))"><img src="../images/icon/ic-arrow-left-active.svg" alt="../images/ic-arrow-left-active.svg"></a></li>
+                }
+                else
+                {
+                    <li class="page-item disabled"><a href="#"><img src="../images/icon/ic-arrow-left.svg" alt="../images/ic-arrow-left.svg"></a></li>
+                }
+
+                @if (Model.TotalPages < 6)
+                {
+                    @for (int i = 1; i <= Model.TotalPages; i++)
+                    {
+                        <li class="page-item @(Model.PageNumber == i ? "page-item-active" : "")" style="cursor: pointer">
+                            <a onclick="getDataSanPham(@i)">@i</a>
+                        </li>
+                    }
+                }
+                else
+                {
+                    var valStart = Model.PageNumber;
+                    var value = Model.TotalPages / Model.PageNumber;
+                    var valLength = value < 1 ? Model.PageNumber + value : Model.PageNumber + 2;
+
+                    if (Model.PageNumber < 3)
+                    {
+                        valStart = 1;
+                        valLength += (Model.PageNumber) == 1 ? 2 : 1;
+                    }
+                    else if (Model.TotalPages - Model.PageNumber <= 2)
+                    {
+                        valStart = Model.TotalPages - 4;
+                        valLength = Model.TotalPages;
+                    }
+                    else
+                    {
+                        valStart = Model.PageNumber - 2;
+                    }
+
+                    @for (int i = valStart; i <= valLength; i++)
+                    {
+                        <li class="page-item @(Model.PageNumber == i ? "page-item-active" : "")" style="cursor: pointer">
+                            <a onclick="getDataSanPham(@i)">@i</a>
+                        </li>
+                    }
+                }
+
+                @if (Model.PageNumber < Model.TotalPages)
+                {
+                    <li class="page-item" style="cursor: pointer"><a onclick="getDataSanPham(@Model.PageNumber + 1))"><img src="../images/icon/ic-arrow-right-active.svg" alt="../images/ic-arrow-right-active.svg"></a></li>
+                }
+                else
+                {
+                    <li class="page-item disabled"><a href="#"><img src="../images/icon/ic-arrow-right.svg" alt="../images/icon/ic-arrow-right.svg"></a></li>
+                }
+            </ul>*@

@@ -58,11 +58,13 @@ namespace EcommerceWebsite.WebApp
         {
             services.AddScoped<IHUIApiServices, HUIApiServices>();
             services.AddScoped<IDanhMucApiServices, DanhMucApiServices>();
-            //services.AddScoped<ISanPhamServices, SanPhamServices>();
+            services.AddScoped<ISanPhamApiServices, SanPhamApiServices>();
+            services.AddScoped<IKhuyenMaiApiServices, KhuyenMaiApiServices>();
+            services.AddScoped<INhanHieuApiServices, NhanHieuApiServices>();
             //services.AddScoped<IKhachHangServices, KhachHangServices>();
             //services.AddScoped<IEmailSenderServices, EmailSenderServices>();
         }
-
+       
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
