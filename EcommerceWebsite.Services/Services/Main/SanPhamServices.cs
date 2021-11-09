@@ -97,31 +97,6 @@ namespace EcommerceWebsite.Services.Services.Main
         //    }
         //}
 
-        public async Task<List<DanhMuc>> LayDanhMucSanPham()
-        {
-            try
-            {
-                return await _context.DanhMucs.ToListAsync();
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
-        }
-        public async Task<List<NhanHieu>> LayNhanHieuSanPham()
-        {
-            try
-            {
-                return await _context.NhanHieus.ToListAsync();
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
-        }
-
         public async Task<List<SanPhamOutput>> laySanPham()
         {
             try

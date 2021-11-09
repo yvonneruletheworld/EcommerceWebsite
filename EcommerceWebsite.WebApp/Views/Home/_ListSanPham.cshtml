@@ -27,17 +27,9 @@
                             <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
                                 @item.TenSanPham
                             </a>
-                            @*@{
-                                    EcomWebDbContext _context = new EcomWebDbContext();
-                                    var gia = _context.LichSuGias.Where(x => x.MaSanPham == item.MaSanPham && x.NgayTao <= DateTime.Now).ToList();
-
-                                }
-                                @foreach (var item2 in gia)
-                                {
-                                    <span class="block2-price m-text6 p-r-5">
-                                        @item2.GiaMoi  VNĐ
-                                    </span>
-                                }*@
+                            <span class="block2-price m-text6 p-r-5">
+                                @string.Format("{0:0,0}",item.giaSP)  VNĐ
+                            </span>
                         </div>
                     </div>
                 </div>
