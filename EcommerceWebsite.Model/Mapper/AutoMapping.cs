@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using EcommerceWebsite.Data.Entities;
+using EcommerceWebsite.Utilities.Input;
 using EcommerceWebsite.Utilities.Output.Main;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,8 @@ namespace EcommerceWebsite.Utilities.Mapper
         public AutoMapping()
         {
             CreateMap<SanPham, SanPhamOutput>();
+            CreateMap<SanPhamInput, SanPham>()
+                .ForMember(sp => sp.MaLoaiSanPham, sp => sp.MapFrom(spi => spi.LoaiSanPham));
         }
     }
 }
