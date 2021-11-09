@@ -4,6 +4,7 @@ using EcommerceWebsite.Data.EF;
 using EcommerceWebsite.Data.Entities;
 using EcommerceWebsite.Data.Identity;
 using EcommerceWebsite.Services.Interfaces.Main;
+using EcommerceWebsite.Utilities.Input;
 using EcommerceWebsite.Utilities.Output.Main;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -19,11 +20,13 @@ namespace EcommerceWebsite.Services.Services.Main
     {
         private readonly EcomWebDbContext _context;
         private readonly IMapper _mapper;
+        private readonly IBangGiaServices _bangGiaServices;
 
-        public SanPhamServices(EcomWebDbContext context, IMapper mapper)
+        public SanPhamServices(EcomWebDbContext context, IMapper mapper, IBangGiaServices bangGiaServices)
         {
             _context = context;
             _mapper = mapper;
+            _bangGiaServices = bangGiaServices;
         }
 
         public async Task<PageResponse<List<SanPhamOutput>>> GetListProductByPage(PaginationFilter filter)
@@ -55,11 +58,41 @@ namespace EcommerceWebsite.Services.Services.Main
             }
         }
 
+        public async Task<SanPham> GetSanPhamTheoMa(string id, string tensanpham)
+        {
+            return await _context.SanPhams
+                .FirstOrDefaultAsync(x => !x.DaXoa 
+                && (x.MaSanPham == id || x.TenSanPham == tensanpham));
+        }
+
         public bool? KiemTra(string value)
         {
             return value?.Contains("j");
         }
 
+        public async Task<List<SanPhamOutput>> LaySanPham()
+        {
+            try
+            {
+                var data = await (from sp in _context.SanPhams
+                                  join gia in _context.LichSuGias on sp.MaSanPham equals gia.MaSanPham
+                                  select new SanPhamOutput
+                                  {
+                                      MaSanPham = sp.MaSanPham,
+                                      TenSanPham = sp.TenSanPham,
+                                      SoLuongTon = sp.SoLuongTon,
+                                      HinhAnh = sp.HinhAnh,
+                                      GiaBan = gia.GiaMoi.ToString(),
+                                  }).ToListAsync();
+                return data;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
         //public async Task<ChiTietSanPhamOutput> LayChiTietSanPham(string id, bool coGiamGia)
         //{
         //    try
@@ -97,29 +130,25 @@ namespace EcommerceWebsite.Services.Services.Main
         //    }
         //}
 
-        public async Task<List<DanhMuc>> LayDanhMucSanPham()
+        public async Task<bool> ThemSanPham (SanPham input)
         {
-            try
-            {
-                return await _context.DanhMucs.ToListAsync();
-            }
-            catch (Exception ex)
-            {
+            //begin transaction
+            await _context.Database.BeginTransactionAsync();
 
-                throw ex;
-            }
-        }
-        public async Task<List<NhanHieu>> LayNhanHieuSanPham()
-        {
-            try
-            {
-                return await _context.NhanHieus.ToListAsync();
-            }
-            catch (Exception ex)
-            {
+            //setup obj
+            input.NgayTao = DateTime.UtcNow;
+            input.DaXoa = false;
+            input.Status = Data.Enum.Status.Active;
 
-                throw ex;
-            }
+            //add
+
+            await _context.SanPhams.AddAsync(input);
+            var result = await _context.SaveChangesAsync();
+
+            await _context.Database.CommitTransactionAsync();
+
+            return  result > 0;
         }
+
     }
 }

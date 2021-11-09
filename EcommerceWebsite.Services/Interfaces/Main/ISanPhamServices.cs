@@ -14,7 +14,10 @@ namespace EcommerceWebsite.Services.Interfaces.Main
     {
         Task<PageResponse<List<SanPhamOutput>>> GetListProductByPage(PaginationFilter filter);
 
+        Task<bool> ThemSanPham(SanPham input);
+        Task<SanPham> GetSanPhamTheoMa(string id, string tensanpham);
         bool? KiemTra(string value);
+        Task<List<SanPhamOutput>> LaySanPham();
 
         //Task<IdentityResult> Create(ApplicationUser obj);
     }
