@@ -1,9 +1,3 @@
-using EcommerceWebsite.Data.EF;
-using EcommerceWebsite.Services.Interfaces.System;
-using EcommerceWebsite.Services.Interfaces.Main;
-using EcommerceWebsite.Services.Services.System;
-using EcommerceWebsite.Services.Services.Main;
-using EcommerceWebsite.WebApp.Mapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -15,13 +9,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
-using EcommerceWebsite.Data.Identity;
-using Microsoft.AspNetCore.Identity;
-using ValensBankCore.Services.Services;
-using EcommerceWebsite.Services.Interfaces.ExtraServices;
-using EcommerceWebsite.Services.Services.ExtraServices;
-using EcommerceWebsite.Data.Configurations;
 using EcommerceWebsite.Api.Interface;
 
 namespace EcommerceWebsite.WebApp
@@ -77,7 +64,7 @@ namespace EcommerceWebsite.WebApp
             //services.AddScoped<IKhachHangServices, KhachHangServices>();
             //services.AddScoped<IEmailSenderServices, EmailSenderServices>();
         }
-
+       
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {

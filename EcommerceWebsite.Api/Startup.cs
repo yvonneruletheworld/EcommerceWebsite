@@ -1,3 +1,4 @@
+using EcommerceWebsite.Api.Mapper;
 using EcommerceWebsite.Data.Configurations;
 using EcommerceWebsite.Data.EF;
 using EcommerceWebsite.Data.Identity;
@@ -7,7 +8,6 @@ using EcommerceWebsite.Services.Interfaces.System;
 using EcommerceWebsite.Services.Services.ExtraServices;
 using EcommerceWebsite.Services.Services.Main;
 using EcommerceWebsite.Services.Services.System;
-using EcommerceWebsite.Utilities.Mapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -51,7 +51,8 @@ namespace EcommerceWebsite.Api
                .AddEntityFrameworkStores<EcomWebDbContext>()
                .AddClaimsPrincipalFactory<MyUserClaimsPrincipalFactoryService>()
                .AddDefaultTokenProviders();
-
+            //Mapper
+            services.AddAutoMapper(typeof(AutoMapping));
             //DI
             DependencyInjectionSystemConfig(services);
 
@@ -62,8 +63,7 @@ namespace EcommerceWebsite.Api
                 s.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
             });
 
-            //Mapper
-            services.AddAutoMapper(typeof(AutoMapping));
+
 
             //Email
             var emailConfig = Configuration
