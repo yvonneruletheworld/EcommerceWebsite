@@ -1,4 +1,4 @@
-using EcommerceWebsite.Api.Mapper;
+﻿using EcommerceWebsite.Api.Mapper;
 using EcommerceWebsite.Data.Configurations;
 using EcommerceWebsite.Data.EF;
 using EcommerceWebsite.Data.Identity;
@@ -18,6 +18,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -60,6 +61,36 @@ namespace EcommerceWebsite.Api
             {
                 s.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Swagger EcommerceShop", Version = "v1" });
                 s.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
+
+                s.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Description = @"Sử dụng JWT Authorization header dựa trên Bearer scheme. Công dụng để Authorization cho các API viết trong hệ thống\r\n\r\n
+                      Nhập 'Bearer' [khoảng trắng] và token nhận được sau khi chạy Login của User.
+                      \r\n\r\nVí dụ: 'Bearer 12345abcdef'",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer"
+                });
+
+                s.AddSecurityRequirement(new OpenApiSecurityRequirement()
+                  {
+                    {
+                      new OpenApiSecurityScheme
+                      {
+                        Reference = new OpenApiReference
+                          {
+                            Type = ReferenceType.SecurityScheme,
+                            Id = "Bearer"
+                          },
+                          Scheme = "oauth2",
+                          Name = "Bearer",
+                          In = ParameterLocation.Header,
+                        },
+                        new List<string>()
+                      }
+                    });
+
             });
 
 
@@ -69,7 +100,8 @@ namespace EcommerceWebsite.Api
                 .GetSection("EmailSenderConfig")
                 .Get<EmailConfiguration>();
             services.AddSingleton(emailConfig);
-          
+            //Mapper
+            services.AddAutoMapper(typeof(AutoMapping));
 
         }
 

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace EcommerceWebsite.Api.Interface
@@ -34,7 +35,7 @@ namespace EcommerceWebsite.Api.Interface
 
             var client = _httpClietnFactory.CreateClient();
             client.BaseAddress = new Uri(_config[SystemConstant.BaseAddress]);
-            //client.DefaultRequestHeaders.Authorization = new 
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", session);
 
             var response = await client.GetAsync(url);
             var body = await response.Content.ReadAsStringAsync();

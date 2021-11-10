@@ -1,4 +1,5 @@
 ﻿using EcommerceWebsite.Application.Pagination;
+using EcommerceWebsite.Utilities.Input;
 using EcommerceWebsite.Utilities.Output.Main;
 using System;
 using System.Collections.Generic;
@@ -12,5 +13,7 @@ namespace EcommerceWebsite.Api.Interface
         Task<PageResponse<List<SanPhamOutput>>> laySanPham(PaginationFilter pagination);
 
         Task<List<SanPhamOutput>> laySanPham2();
+
+        Task<bool> ThemSanPham(SanPhamInput input);
     }
 }

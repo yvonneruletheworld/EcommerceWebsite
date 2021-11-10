@@ -40,11 +40,11 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
             return View();
         }
         [HttpGet("list-danh-muc")]
-        public async Task<IActionResult> layDanhMucSanPham ()
+        public async Task<IActionResult> LayDanhMucSanPham ()
         {
             try
             {
-                var data = await _danhMucApiServices.layDanhMuc();
+                var data = await _danhMucApiServices.GetCategories();
                 return PartialView("/Views/Home/_ListDanhMucSanPham.cshtml", data);
             }
             catch (Exception ex)
