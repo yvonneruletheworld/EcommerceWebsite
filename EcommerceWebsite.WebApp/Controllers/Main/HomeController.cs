@@ -32,7 +32,7 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
             var fileName = "output1";
             var listHUI = await _huiApiServices.GetListHUIFromOutput(fileName);
             var data = await _khuyenMaiApiServices.laykhuyenMais();
-            return View("~/Views/Home/Index.cshtml", data);
+            return View(data);
         }
         public IActionResult CuaHangAsync()
         {
