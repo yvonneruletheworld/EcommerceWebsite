@@ -52,7 +52,7 @@ namespace EcommerceWebsite.Api.Interface
 
 
 
-            var response = await client.PostAsync($"/api/products/", input);
+            var response = await client.PostAsync($"/api/products/", requestItem);
             return response.IsSuccessStatusCode;
 
         }
