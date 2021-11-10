@@ -103,6 +103,8 @@ namespace EcommerceWebsite.Services.Services.Main
             {
                 var data = await (from sp in _context.SanPhams
                             join gia in _context.LichSuGias on sp.MaSanPham equals gia.MaSanPham
+                            join nhanHieu in _context.NhanHieus on sp.MaHang equals nhanHieu.MaHang
+                            join loaiSanPham in _context.DanhMucs on sp.MaLoaiSanPham equals loaiSanPham.MaDanhMuc
                             select new SanPhamOutput
                             {
                                 MaSanPham = sp.MaSanPham,
@@ -110,6 +112,8 @@ namespace EcommerceWebsite.Services.Services.Main
                                 SoLuongTon = sp.SoLuongTon,
                                 HinhAnh = sp.HinhAnh,
                                 giaSP = gia.GiaMoi,
+                                NhanHieu = nhanHieu.TenHang,
+                                LoaiSanPham = loaiSanPham.TenDanhMuc,
                             }).ToListAsync();
                 return data;
 

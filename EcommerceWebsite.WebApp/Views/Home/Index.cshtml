@@ -16,13 +16,9 @@
 </style>
 <!-- OFFER -->
 @*Hiển thi banner*@
-<section class="slide1">
-    <div class="wrap-slick1">
-        <div class="slick1">
+<div class="container-fluid" id="load-khuyenMai">
 
-         </div>
-        </div>
-</section>
+</div>
     @*HIỂN THỊ DANH MỤC SẢN PHẨM*@
     <section class="banner bgwhite p-t-40 p-b-40">
         <div class="container">
@@ -57,7 +53,7 @@
         function init() {
             getDataSanPham();
             layDanhMuc();
-           // layKhuyenMai();
+            layKhuyenMai();
         }
         //Danh Muc
         function layDanhMuc() {
@@ -95,7 +91,7 @@
                 type: 'GET',
                 dataType: 'html',
                 success: (result) => {
-                    $(".slick1")[0].innerHTML = result;
+                    $("#load-khuyenMai")[0].innerHTML = result;
                 },
                 error: (err) => {
                     alert('failed');
@@ -103,5 +99,59 @@
                 }
             });
         }
+                //function layKhuyenMai() {
+                //    $.ajax({
+                //        url: '/get-data-khuyenmai',
+                //        type: 'GET',
+                //        dataType: 'html',
+                //        success: (result) => {
+                //            if (data.status) {
+                //                var str = "";
+                //                var s = "";
+                //                $.each(data.dataList, (i, item) => {
+                //                    + `<section class="slide1">
+                //                        <div class="wrap-slick1">
+                //                            <div class="slick1">
+                //                                 <div class="item-slick1 item-slick1" style="background-image: url(${item.HinhAnh}); ">
+                //                                    <div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
+                //                                        <span class="caption1-slide1 m-text1 t-center animated visible-false m-b-15" data-appear="fadeInDown">
+                //                                            ${item.TenKhuyenMai}
+                //                                        </span>
+                //                                        <h2 class="caption2-slide1 xl-text1 t-center animated visible-false m-b-37" data-appear="fadeInUp">
+                //                                            Giảm ngay ${item.PhanTram}  %
+                //                                        </h2>
+                //                                        <div class="wrap-btn-slide1 w-size1 animated visible-false" data-appear="zoomIn">
 
+                //                                            <a href="product.html" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
+                //                                                Xem ngay
+                //                                            </a>
+                //                                        </div>
+                //                                    </div>
+                //                                </div>
+                //                             </div>
+                //                            </div>
+                //                    </section>`
+                //                    //str += "<tr>";
+                //                    //str += "<td>" + item.MaSanPham + "</td>";
+                //                    //str += "<td>" + item.TenSanPham + "</td>";
+                //                    //str += "<td>" + item.SoLuongTon + "</td>";
+                //                    //str += "<td><img src=" + item.HinhAnh + " style='width: 100px' /></td>";
+                //                    //str += "<td>" + item.MaLoai + "</td>";
+                //                    //str += "<td>" + item.MaHang + "</td>"
+                //                    //    //  str += " <td> <a href='#' style='color: red' data-id='" + item.MaSanPham + "'>SỬA</a> <span>|</span> <a href='#' style='color: red' onClick = 'QuanLyAjaxController.Delete('" + item.MaSanPham + "')'>XÓA</a> <span>|</span> <a href='#' style='color: red' data-id='" + item.MaSanPham + "'>CHI TIẾT</a></td > "
+                //                    //    //+ `<td><a href="#" style="color: red">SỬA</a> <span>|</span>`
+                //                    //    + `<td><a href='#' style='color: red' onClick = "QuanLyAjaxController.SuaSP('${item.MaSanPham}')">SỬA</a><span>&ensp;|&ensp;</span>`
+                //                    //    + `<a href='#' style='color: red' onClick = "QuanLyAjaxController.Delete('${item.MaSanPham}')">CHI TIẾT</a><span>&ensp;|&ensp;</span>`
+                //                    //    + `<a href='#' style='color: red' onClick = "QuanLyAjaxController.Delete('${item.MaSanPham}')">XÓA</a></td>`
+                //                    //    + '</tr>';
+                //                });
+                //                $('#load-khuyenMai').append(str);
+                //                // $(".slick1")[0].innerHTML = result;
+                //            },
+                //            error: (err) => {
+                //                alert('failed');
+                //                console.log(err);
+                //            }
+                //        });
+                //}
     </script>
