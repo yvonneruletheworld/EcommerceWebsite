@@ -34,10 +34,8 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
             var data = await _khuyenMaiApiServices.laykhuyenMais();
             return View("~/Views/Home/Index.cshtml", data);
         }
-        public async Task<IActionResult> CuaHangAsync()
+        public IActionResult CuaHangAsync()
         {
-            var fileName = "output1";
-            var listHUI = await _huiApiServices.GetListHUIFromOutput(fileName);
             return View();
         }
         [HttpGet("list-danh-muc")]
@@ -73,7 +71,12 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
             try
             {
                 var data = await _khuyenMaiApiServices.laykhuyenMais();
-                return PartialView("/Views/Home/_ListKhuyenMai.cshtml", data);
+                //return Json(new
+                //{
+                //    datalist = (from a in data select new { a.MaKhuyenMai, a.TenKhuyenMai, a.PhanTram, a.HinhAnh }).ToList(),
+                //    status = true
+                //});
+               return PartialView("/Views/Home/_ListKhuyenMai.cshtml", data);
             }
             catch (Exception ex)
             {
