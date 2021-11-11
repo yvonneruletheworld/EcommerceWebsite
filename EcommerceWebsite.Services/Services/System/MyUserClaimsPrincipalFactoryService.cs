@@ -25,14 +25,14 @@ namespace ValensBankCore.Services.Services
         protected override async Task<ClaimsIdentity> GenerateClaimsAsync(ApplicationUser user)
         {
             //get the data from dbcontext
-            var client = _context.KhachHangs.Where(x => !x.DaXoa && x.MaKhachHang == user.Id).FirstOrDefault();
+            var client = _context.ApplicationUsers.Where(x => !x.IsDeleted && x.Id == user.Id).FirstOrDefault();
 
             var identity = await base.GenerateClaimsAsync(user);
             //Get the data from EF core
 
             if (client != null)
             {
-                identity.AddClaim(new Claim("ClientId", client.MaKhachHang));
+                identity.AddClaim(new Claim("ClientId", client.Id));
             }
 
             return identity;
