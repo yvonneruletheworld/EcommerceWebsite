@@ -24,9 +24,14 @@
     <link rel="stylesheet" href="~/css/site.css" />
     @*@RenderSection("Styles", required: false)*@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    @using EcommerceWebsite.Application.Constants
-    @using EcommerceWebsite.Data.Identity
-    @model ApplicationUser
+    @*@using EcommerceWebsite.Application.Constants
+        @using EcommerceWebsite.Data.Identity
+        @model ApplicationUser*@
+
+    @* Application User- Name *@
+    @inject SignInManager<ApplicationUser> SignInManager
+    @inject UserManager<ApplicationUser> UserManager
+
     <style>
         :hover a {
             text-decoration: none;
@@ -98,7 +103,7 @@
                     <a href="#" class="header-wrapicon1 dis-block">
                         @if (User != null)
                         {
-                            <p style="color:red; margin-top:5px; padding-left:5px">Xin chào, @(await User.)</p>
+                            <p id="user-name-id" style="color:red; margin-top:5px; padding-left:5px"></p>
                         }
                         else
                         {
@@ -509,6 +514,7 @@
                 swal(nameProduct, "is added to wishlist !", "success");
             });
         });
+
     </script>
     <script src="~/js/main.js"></script>
     @*<script defer src="../../../static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"rayId":"64a7260aa9e752b0","si":10,"version":"2021.4.0"}'></script>*@
