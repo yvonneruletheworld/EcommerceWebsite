@@ -17,6 +17,8 @@ namespace EcommerceWebsite.Services.Interfaces.Main
         bool? KiemTra(string value);
 
         Task<List<SanPhamOutput>> laySanPham();
+        //Xóa sản phẩm
+        Task<bool> XoaSanPham(string maSP, string editorMaSP);
 
         //Task<IdentityResult> Create(ApplicationUser obj);
     }

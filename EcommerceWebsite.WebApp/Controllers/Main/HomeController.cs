@@ -31,12 +31,17 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
         {
             var fileName = "output1";
             var listHUI = await _huiApiServices.GetListHUIFromOutput(fileName);
+<<<<<<< Updated upstream
             var data = await _khuyenMaiApiServices.laykhuyenMais();
             return View(data);
         }
         public IActionResult CuaHangAsync()
         {
             return View();
+=======
+          //  var data = await _khuyenMaiApiServices.laykhuyenMais();
+            return View("~/Views/Home/Index.cshtml");
+>>>>>>> Stashed changes
         }
         [HttpGet("list-danh-muc")]
         public async Task<IActionResult> layDanhMucSanPham ()
@@ -83,31 +88,6 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
                 throw ex;
             }
         }
-        [HttpGet("get-data-allsanpham")]
-        public async Task<IActionResult> LayAllSanPham()
-        {
-            try
-            {
-                var data = await _sanPhamApiServices.laySanPham2();
-                return PartialView("/Views/Home/_ListAllSanPham.cshtml", data);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-        [HttpGet("get-data-nhanhieuSP")]
-        public async Task<IActionResult> layHangSanPham()
-        {
-            try
-            {
-                var data = await _nhanHieuApiServices.layNhanHieus();
-                return PartialView("/Views/Home/_ListNhanHieuSanPham.cshtml", data);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
+        
     }
 }
