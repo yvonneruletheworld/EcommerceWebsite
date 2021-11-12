@@ -34,11 +34,13 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
             var data = await _khuyenMaiApiServices.laykhuyenMais();
             return View(data);
         }
-        public async Task<IActionResult> CuaHangAsync()
+        public IActionResult CuaHangAsync()
         {
-            var fileName = "output1";
-            var listHUI = await _huiApiServices.GetListHUIFromOutput(fileName);
             return View();
+=======
+          //  var data = await _khuyenMaiApiServices.laykhuyenMais();
+            return View("~/Views/Home/Index.cshtml");
+>>>>>>> Stashed changes
         }
         [HttpGet("list-danh-muc")]
         public async Task<IActionResult> LayDanhMucSanPham ()
@@ -73,38 +75,18 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
             try
             {
                 var data = await _khuyenMaiApiServices.laykhuyenMais();
-                return PartialView("/Views/Home/_ListKhuyenMai.cshtml", data);
+                //return Json(new
+                //{
+                //    datalist = (from a in data select new { a.MaKhuyenMai, a.TenKhuyenMai, a.PhanTram, a.HinhAnh }).ToList(),
+                //    status = true
+                //});
+               return PartialView("/Views/Home/_ListKhuyenMai.cshtml", data);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
-        [HttpGet("get-data-allsanpham")]
-        public async Task<IActionResult> LayAllSanPham()
-        {
-            try
-            {
-                var data = await _sanPhamApiServices.laySanPham2();
-                return PartialView("/Views/Home/_ListAllSanPham.cshtml", data);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-        [HttpGet("get-data-nhanhieuSP")]
-        public async Task<IActionResult> layHangSanPham()
-        {
-            try
-            {
-                var data = await _nhanHieuApiServices.layNhanHieus();
-                return PartialView("/Views/Home/_ListNhanHieuSanPham.cshtml", data);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
+        
     }
 }

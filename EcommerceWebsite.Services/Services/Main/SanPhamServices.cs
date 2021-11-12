@@ -130,6 +130,25 @@ namespace EcommerceWebsite.Services.Services.Main
         //    }
         //}
 
+        public async Task<List<SanPhamOutput>> laySanPham()
+        {
+            try
+            {
+                var data = await (from sp in _context.SanPhams
+                            join gia in _context.LichSuGias on sp.MaSanPham equals gia.MaSanPham
+                            join nhanHieu in _context.NhanHieus on sp.MaHang equals nhanHieu.MaHang
+                            join loaiSanPham in _context.DanhMucs on sp.MaLoaiSanPham equals loaiSanPham.MaDanhMuc
+                            select new SanPhamOutput
+                            {
+                                MaSanPham = sp.MaSanPham,
+                                TenSanPham = sp.TenSanPham,
+                                SoLuongTon = sp.SoLuongTon,
+                                HinhAnh = sp.HinhAnh,
+                                giaSP = gia.GiaMoi,
+                                NhanHieu = nhanHieu.TenHang,
+                                LoaiSanPham = loaiSanPham.TenDanhMuc,
+                            }).ToListAsync();
+                return data;
         public async Task<bool> ThemSanPham (SanPham input)
         {
             //begin transaction
@@ -150,5 +169,40 @@ namespace EcommerceWebsite.Services.Services.Main
             return  result > 0;
         }
 
+                throw ex;
+            }
+        }
+        private async Task<SanPham> GetByIdAsync(string maSP)
+        {
+            try
+            {
+                var data = await _context.SanPhams.SingleOrDefaultAsync(s => s.MaSanPham == maSP);
+                return data;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+        //Xóa sản phẩm
+        public async Task<bool> XoaSanPham(string maSP, string editorMaSP)
+        {
+            try
+            {
+                await _context.Database.BeginTransactionAsync();
+                var obj = await GetByIdAsync(maSP);
+                if (obj == null) return false;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                await _context.Database.RollbackTransactionAsync();
+                throw ex;
+            }
+        }
+
+      
     }
 }

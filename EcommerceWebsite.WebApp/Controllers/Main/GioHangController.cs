@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using EcommerceWebsite.Utilities.Output.Main;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,18 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
         {
             return View("/Views/GioHang/Index.cshtml");
         }
+        ////lấy giỏ hàng
+        //public List<GioHangOutput> LayGioHang()
+        //{
+
+        //    List<GioHangOutput> listGHang = Session["cart"] as List<GioHangOutput>;
+        //    if (listGHang == null)
+        //    {
+        //        //Nếu gỏi k tồn tại thì khởi tạo
+        //        listGHang = new List<GioHangOutput>();
+        //        Session["cart"] = listGHang;
+        //    }
+        //    return listGHang;
+        //}
     }
 }

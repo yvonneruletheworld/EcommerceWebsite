@@ -58,7 +58,7 @@ namespace EcommerceWebsite.Data.Extensions
                     NgayTao = DateTime.UtcNow,
                     NguoiTao = "admin",
                     DaXoa = false,
-                    HinhAnh= "https://i.ibb.co/sHxtWdf/Song-toi-gian-may-tinh-1.jpg",
+                    HinhAnh = "https://i.ibb.co/sHxtWdf/Song-toi-gian-may-tinh-1.jpg",
                     HienThiTrangHome = true,
                     ParentId = "DM01",
                 });
@@ -200,29 +200,29 @@ namespace EcommerceWebsite.Data.Extensions
                 },
                 new SanPham()
                 {
-                     MaSanPham = "SP07",
-                     TenSanPham = "iPhone XR 64GB",
-                     MaHang = "MH01",
-                     NgayTao = DateTime.UtcNow,
-                     NguoiTao = "admin",
-                     MaLoaiSanPham = "DM01",
-                     HinhAnh = "https://i.ibb.co/2v36jLV/iphone-XR-64-GB.jpg",
-                     DaXoa = false,
-                     Status = Enum.Status.Active,
-                     SoLuongTon = 1,
+                    MaSanPham = "SP07",
+                    TenSanPham = "iPhone XR 64GB",
+                    MaHang = "MH01",
+                    NgayTao = DateTime.UtcNow,
+                    NguoiTao = "admin",
+                    MaLoaiSanPham = "DM01",
+                    HinhAnh = "https://i.ibb.co/2v36jLV/iphone-XR-64-GB.jpg",
+                    DaXoa = false,
+                    Status = Enum.Status.Active,
+                    SoLuongTon = 1,
                 },
                 new SanPham()
                 {
-                      MaSanPham = "SP08",
-                      TenSanPham = "OPPO Reno6 Z 5G",
-                      MaHang = "MH03",
-                      NgayTao = DateTime.UtcNow,
-                      NguoiTao = "admin",
-                      MaLoaiSanPham = "DM01",
-                      HinhAnh = "https://i.ibb.co/1rp5mbM/Oppo-reno6-z-5g-bac-1-org.jpg",
-                      DaXoa = false,
-                      Status = Enum.Status.Active,
-                      SoLuongTon = 1,
+                    MaSanPham = "SP08",
+                    TenSanPham = "OPPO Reno6 Z 5G",
+                    MaHang = "MH03",
+                    NgayTao = DateTime.UtcNow,
+                    NguoiTao = "admin",
+                    MaLoaiSanPham = "DM01",
+                    HinhAnh = "https://i.ibb.co/1rp5mbM/Oppo-reno6-z-5g-bac-1-org.jpg",
+                    DaXoa = false,
+                    Status = Enum.Status.Active,
+                    SoLuongTon = 1,
                 },
                 new SanPham()
                 {
@@ -1171,7 +1171,7 @@ namespace EcommerceWebsite.Data.Extensions
                     DonVi = "5000 mAh, 30 W"
                 }
                 //
-                ,new DinhLuong()
+                , new DinhLuong()
                 {
                     MaSanPham = "SP010",
                     MaThuocTinh = "TT01",
@@ -1299,7 +1299,7 @@ namespace EcommerceWebsite.Data.Extensions
                     DonVi = "4500 mAh, 65 W"
                 }
                 //
-                ,new DinhLuong()
+                , new DinhLuong()
                 {
                     MaSanPham = "SP012",
                     MaThuocTinh = "TT01",
@@ -1363,7 +1363,7 @@ namespace EcommerceWebsite.Data.Extensions
                     DonVi = "4300 mAh, 65 W"
                 }
                 //
-                ,new DinhLuong()
+                , new DinhLuong()
                 {
                     MaSanPham = "SP013",
                     MaThuocTinh = "TT01",
@@ -2192,581 +2192,581 @@ namespace EcommerceWebsite.Data.Extensions
                 }
                 );
             //Mẫu mã sản phẩm
-             modelBuilder.Entity<MauMaSanPham>().HasData(
-                new MauMaSanPham()
-                {
-                    MaMauMa = "MM01",
-                    MaSanPham = "SP01",
-                    TenMauMa = "Xanh riêu",
-                    HinhAnh = "https://i.ibb.co/9WvYqLR/Samsung-galaxy-z-fold3-5g-1.jpg",
-                },
-                new MauMaSanPham()
-                {
-                    MaMauMa = "MM02",
-                    MaSanPham = "SP01",
-                    TenMauMa = "Bạc",
-                    HinhAnh = "https://i.ibb.co/T2Ywg8N/Samsung-galaxy-z-fold-3-silver-gc-org.jpg",
-                },
-                new MauMaSanPham()
-                {
-                    MaMauMa = "MM03",
-                    MaSanPham = "SP01",
-                    TenMauMa = "Đen",
-                    HinhAnh = "https://i.ibb.co/qyCNcw6/Samsung-galaxy-z-fold-3-1-org.jpg",
-                },
-                //
-                new MauMaSanPham()
-                {
-                    MaMauMa = "MM04",
-                    MaSanPham = "SP02",
-                    TenMauMa = "Kem",
-                    HinhAnh = "https://i.ibb.co/CPq556s/Samsung-galaxy-z-flip-3-kem-1-org.jpg",
-                },
-                new MauMaSanPham()
-                 {
-                     MaMauMa = "MM05",
-                     MaSanPham = "SP02",
-                     TenMauMa = "Đen",
-                     HinhAnh = "https://i.ibb.co/0tXPPWn/Samsung-galaxy-z-flip-3-black-gc-org.jpg",
-                 },
-                new MauMaSanPham()
-                 {
-                     MaMauMa = "MM06",
-                     MaSanPham = "SP02",
-                     TenMauMa = "Xanh riêu",
-                     HinhAnh = "https://i.ibb.co/9WvYqLR/Samsung-galaxy-z-fold3-5g-1.jpg",
-                 },
-                //
-                new MauMaSanPham()
-                  {
-                      MaMauMa = "MM07",
-                      MaSanPham = "SP03",
-                      TenMauMa = "Đen",
-                      HinhAnh = "https://i.ibb.co/0qYwZ5c/Iphone-12-64-GB-en.jpg",
-                  },
-                new MauMaSanPham()
-                  {
-                      MaMauMa = "MM08",
-                      MaSanPham = "SP03",
-                      TenMauMa = "Đỏ",
-                      HinhAnh = "https://i.ibb.co/RNz8N1G/Iphone-12-64-GB.jpg",
-                  },
-                new MauMaSanPham()
-                  {
-                      MaMauMa = "MM09",
-                      MaSanPham = "SP03",
-                      TenMauMa = "Tím",
-                      HinhAnh = "https://i.ibb.co/GC6Tdwd/Iphone-12-64-GB-T-m.jpg",
-                  },
-                new MauMaSanPham()
-                  {
-                      MaMauMa = "MM010",
-                      MaSanPham = "SP03",
-                      TenMauMa = "Trắng",
-                      HinhAnh = "https://i.ibb.co/vsLZ8km/Iphone-12-mini-64-GB.jpg",
-                  },
-                new MauMaSanPham()
+            modelBuilder.Entity<MauMaSanPham>().HasData(
+               new MauMaSanPham()
+               {
+                   MaMauMa = "MM01",
+                   MaSanPham = "SP01",
+                   TenMauMa = "Xanh riêu",
+                   HinhAnh = "https://i.ibb.co/9WvYqLR/Samsung-galaxy-z-fold3-5g-1.jpg",
+               },
+               new MauMaSanPham()
+               {
+                   MaMauMa = "MM02",
+                   MaSanPham = "SP01",
+                   TenMauMa = "Bạc",
+                   HinhAnh = "https://i.ibb.co/T2Ywg8N/Samsung-galaxy-z-fold-3-silver-gc-org.jpg",
+               },
+               new MauMaSanPham()
+               {
+                   MaMauMa = "MM03",
+                   MaSanPham = "SP01",
+                   TenMauMa = "Đen",
+                   HinhAnh = "https://i.ibb.co/qyCNcw6/Samsung-galaxy-z-fold-3-1-org.jpg",
+               },
+               //
+               new MauMaSanPham()
+               {
+                   MaMauMa = "MM04",
+                   MaSanPham = "SP02",
+                   TenMauMa = "Kem",
+                   HinhAnh = "https://i.ibb.co/CPq556s/Samsung-galaxy-z-flip-3-kem-1-org.jpg",
+               },
+               new MauMaSanPham()
+               {
+                   MaMauMa = "MM05",
+                   MaSanPham = "SP02",
+                   TenMauMa = "Đen",
+                   HinhAnh = "https://i.ibb.co/0tXPPWn/Samsung-galaxy-z-flip-3-black-gc-org.jpg",
+               },
+               new MauMaSanPham()
+               {
+                   MaMauMa = "MM06",
+                   MaSanPham = "SP02",
+                   TenMauMa = "Xanh riêu",
+                   HinhAnh = "https://i.ibb.co/9WvYqLR/Samsung-galaxy-z-fold3-5g-1.jpg",
+               },
+               //
+               new MauMaSanPham()
+               {
+                   MaMauMa = "MM07",
+                   MaSanPham = "SP03",
+                   TenMauMa = "Đen",
+                   HinhAnh = "https://i.ibb.co/0qYwZ5c/Iphone-12-64-GB-en.jpg",
+               },
+               new MauMaSanPham()
+               {
+                   MaMauMa = "MM08",
+                   MaSanPham = "SP03",
+                   TenMauMa = "Đỏ",
+                   HinhAnh = "https://i.ibb.co/RNz8N1G/Iphone-12-64-GB.jpg",
+               },
+               new MauMaSanPham()
+               {
+                   MaMauMa = "MM09",
+                   MaSanPham = "SP03",
+                   TenMauMa = "Tím",
+                   HinhAnh = "https://i.ibb.co/GC6Tdwd/Iphone-12-64-GB-T-m.jpg",
+               },
+               new MauMaSanPham()
+               {
+                   MaMauMa = "MM010",
+                   MaSanPham = "SP03",
+                   TenMauMa = "Trắng",
+                   HinhAnh = "https://i.ibb.co/vsLZ8km/Iphone-12-mini-64-GB.jpg",
+               },
+               new MauMaSanPham()
+               {
+                   MaMauMa = "MM011",
+                   MaSanPham = "SP03",
+                   TenMauMa = "Xanh",
+                   HinhAnh = "https://i.ibb.co/6XtyJbM/Iphone-12-64-GB-Xanh.jpg",
+               },
+               new MauMaSanPham()
+               {
+                   MaMauMa = "MM012",
+                   MaSanPham = "SP03",
+                   TenMauMa = "Xanh lá",
+                   HinhAnh = "https://i.ibb.co/D5Xg9sQ/Iphone-12-64-GB-Xanh-l.jpg",
+               },
+               //
+               new MauMaSanPham()
+               {
+                   MaMauMa = "MM013",
+                   MaSanPham = "SP04",
+                   TenMauMa = "Bạc",
+                   HinhAnh = "https://i.ibb.co/pW2nvth/Iphone-12-pro-max-bac-1-org.jpg",
+               },
+               new MauMaSanPham()
+               {
+                   MaMauMa = "MM014",
+                   MaSanPham = "SP04",
+                   TenMauMa = "Vàng",
+                   HinhAnh = "https://i.ibb.co/JQNGCzb/Iphone-12-pro-max-128-GB.jpg",
+               },
+               new MauMaSanPham()
+               {
+                   MaMauMa = "MM015",
+                   MaSanPham = "SP04",
+                   TenMauMa = "Xanh",
+                   HinhAnh = "https://i.ibb.co/5LvRhJ4/Iphone-12-pro-max-xanh-duong-1-org.jpg",
+               },
+               //
+               new MauMaSanPham()
+               {
+                   MaMauMa = "MM016",
+                   MaSanPham = "SP05",
+                   TenMauMa = "Đen",
+                   HinhAnh = "https://i.ibb.co/crZFrkD/Iphone-12-mini-den-1-1-org.jpg",
+               },
+                   new MauMaSanPham()
                    {
-                       MaMauMa = "MM011",
-                       MaSanPham = "SP03",
-                       TenMauMa = "Xanh",
-                       HinhAnh = "https://i.ibb.co/6XtyJbM/Iphone-12-64-GB-Xanh.jpg",
+                       MaMauMa = "MM017",
+                       MaSanPham = "SP05",
+                       TenMauMa = "Đỏ",
+                       HinhAnh = "https://i.ibb.co/jkmt501/Iphone-12-mini-1-1-org.jpg",
                    },
-                new MauMaSanPham()
+                   new MauMaSanPham()
                    {
-                       MaMauMa = "MM012",
-                       MaSanPham = "SP03",
+                       MaMauMa = "MM018",
+                       MaSanPham = "SP05",
+                       TenMauMa = "Tím",
+                       HinhAnh = "https://i.ibb.co/30KH8b2/Iphone-12-mini-tim-gc-1-org.jpg",
+                   },
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM019",
+                       MaSanPham = "SP05",
+                       TenMauMa = "Trắng",
+                       HinhAnh = "https://i.ibb.co/5LRj1Wh/Iphone-12-mini-trang-1-1-org.jpg",
+                   },
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM020",
+                       MaSanPham = "SP05",
+                       TenMauMa = "Xanh dương",
+                       HinhAnh = "https://i.ibb.co/Np97nN6/Iphone-12-mini-xanh-duong-1-1-org.jpg",
+                   },
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM021",
+                       MaSanPham = "SP05",
+                       TenMauMa = "Đen",
+                       HinhAnh = "https://i.ibb.co/0stYCyp/Iphone-11-den-1-1-1-org.jpg",
+                   },
+                   //
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM022",
+                       MaSanPham = "SP06",
+                       TenMauMa = "Đỏ",
+                       HinhAnh = "https://i.ibb.co/WBH28Zh/Iphone-11-do-1-1-1-org.jpg",
+                   },
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM023",
+                       MaSanPham = "SP06",
+                       TenMauMa = "Tím",
+                       HinhAnh = "https://i.ibb.co/Lnt4WzS/Iphone-11-tim-1-1-1-org.jpg",
+                   },
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM024",
+                       MaSanPham = "SP06",
+                       TenMauMa = "Trắng",
+                       HinhAnh = "https://i.ibb.co/pLyJDFG/Iphone-11-trang-1-2-org.jpg",
+                   },
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM025",
+                       MaSanPham = "SP06",
+                       TenMauMa = "Vàng",
+                       HinhAnh = "https://i.ibb.co/26xpZH9/Iphone-11-vang-1-2-org.jpg",
+                   },
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM026",
+                       MaSanPham = "SP06",
                        TenMauMa = "Xanh lá",
-                       HinhAnh = "https://i.ibb.co/D5Xg9sQ/Iphone-12-64-GB-Xanh-l.jpg",
+                       HinhAnh = "https://i.ibb.co/hZS5MJ3/Iphone-11-64-GB.jpg",
                    },
-                //
-                new MauMaSanPham()
-                    {
-                        MaMauMa = "MM013",
-                        MaSanPham = "SP04",
-                        TenMauMa = "Bạc",
-                        HinhAnh = "https://i.ibb.co/pW2nvth/Iphone-12-pro-max-bac-1-org.jpg",
-                    },
-                new MauMaSanPham()
-                    {
-                        MaMauMa = "MM014",
-                        MaSanPham = "SP04",
-                        TenMauMa = "Vàng",
-                        HinhAnh = "https://i.ibb.co/JQNGCzb/Iphone-12-pro-max-128-GB.jpg",
-                    },
-                new MauMaSanPham()
-                    {
-                        MaMauMa = "MM015",
-                        MaSanPham = "SP04",
-                        TenMauMa = "Xanh",
-                        HinhAnh = "https://i.ibb.co/5LvRhJ4/Iphone-12-pro-max-xanh-duong-1-org.jpg",
-                    },
-                //
-                new MauMaSanPham()
-                    {
-                        MaMauMa = "MM016",
-                        MaSanPham = "SP05",
-                        TenMauMa = "Đen",
-                        HinhAnh = "https://i.ibb.co/crZFrkD/Iphone-12-mini-den-1-1-org.jpg",
-                    },
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM017",
-                        MaSanPham = "SP05",
-                        TenMauMa = "Đỏ",
-                        HinhAnh = "https://i.ibb.co/jkmt501/Iphone-12-mini-1-1-org.jpg",
-                    },
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM018",
-                        MaSanPham = "SP05",
-                        TenMauMa = "Tím",
-                        HinhAnh = "https://i.ibb.co/30KH8b2/Iphone-12-mini-tim-gc-1-org.jpg",
-                    },
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM019",
-                        MaSanPham = "SP05",
-                        TenMauMa = "Trắng",
-                        HinhAnh = "https://i.ibb.co/5LRj1Wh/Iphone-12-mini-trang-1-1-org.jpg",
-                    },
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM020",
-                        MaSanPham = "SP05",
-                        TenMauMa = "Xanh dương",
-                        HinhAnh = "https://i.ibb.co/Np97nN6/Iphone-12-mini-xanh-duong-1-1-org.jpg",
-                    },
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM021",
-                        MaSanPham = "SP05",
-                        TenMauMa = "Hologram",
-                        HinhAnh = "https://i.ibb.co/0stYCyp/Iphone-11-den-1-1-1-org.jpg",
-                    },
-                    //
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM022",
-                        MaSanPham = "SP06",
-                        TenMauMa = "Đỏ",
-                        HinhAnh = "https://i.ibb.co/WBH28Zh/Iphone-11-do-1-1-1-org.jpg",
-                    },
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM023",
-                        MaSanPham = "SP06",
-                        TenMauMa = "Tím",
-                        HinhAnh = "https://i.ibb.co/Lnt4WzS/Iphone-11-tim-1-1-1-org.jpg",
-                    },
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM024",
-                        MaSanPham = "SP06",
-                        TenMauMa = "Trắng",
-                        HinhAnh = "https://i.ibb.co/pLyJDFG/Iphone-11-trang-1-2-org.jpg",
-                    },
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM025",
-                        MaSanPham = "SP06",
-                        TenMauMa = "Vàng",
-                        HinhAnh = "https://i.ibb.co/26xpZH9/Iphone-11-vang-1-2-org.jpg",
-                    },
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM026",
-                        MaSanPham = "SP06",
-                        TenMauMa = "Xanh lá",
-                        HinhAnh = "https://i.ibb.co/hZS5MJ3/Iphone-11-64-GB.jpg",
-                    },
-                    //
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM027",
-                        MaSanPham = "SP07",
-                        TenMauMa = "Cam",
-                        HinhAnh = "https://i.ibb.co/8d4VJxn/mo-hop-iphone-xr-ban-mau-cam.jpg",
-                    },
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM028",
-                        MaSanPham = "SP07",
-                        TenMauMa = "Đen",
-                        HinhAnh = "https://i.ibb.co/yWZQJPt/Iphone-XR-en.jpg",
-                    },
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM029",
-                        MaSanPham = "SP07",
-                        TenMauMa = "Vàng",
-                        HinhAnh = "https://i.ibb.co/6y40G5v/20210416-6cec022bdb9abc311894b08e71bd0769-1618550179.jpg",
-                    },
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM030",
-                        MaSanPham = "SP07",
-                        TenMauMa = "Xanh",
-                        HinhAnh = "https://i.ibb.co/2v36jLV/iphone-XR-64-GB.jpg",
-                    },
-                    //
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM031",
-                        MaSanPham = "SP08",
-                        TenMauMa = "Bạc",
-                        HinhAnh = "https://i.ibb.co/MNpLvHY/Oppo-reno6-z-5g-bac-1-org.jpg",
-                    },
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM032",
-                        MaSanPham = "SP08",
-                        TenMauMa = "Đen",
-                        HinhAnh = "https://i.ibb.co/KXWZfKL/Oppo-reno6-z-5g-den-1-org.jpg",
-                    },
-                    //
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM033",
-                        MaSanPham = "SP09",
-                        TenMauMa = "Xanh dương",
-                        HinhAnh = "https://i.ibb.co/zRQB86R/Oppo-a74-xanh-duong-1-org.jpg",
-                    },
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM034",
-                        MaSanPham = "SP09",
-                        TenMauMa = "Đen",
-                        HinhAnh = "https://i.ibb.co/M5Mk64X/Oppo-a74-den-5-org.jpg",
-                    },
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM035",
-                        MaSanPham = "SP010",
-                        TenMauMa = "Xanh dương",
-                        HinhAnh = "https://i.ibb.co/jJ1XBWq/Oppo-reno6-pro-5g-xanh-duong-1.jpg",
-                    },
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM036",
-                        MaSanPham = "SP010",
-                        TenMauMa = "Xám",
-                        HinhAnh = "https://i.ibb.co/yVs3g8T/Oppo-reno6-pro-5g-xam-1.jpg",
-                    },
-                    //
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM037",
-                        MaSanPham = "SP011",
-                        TenMauMa = "Đen",
-                        HinhAnh = "https://i.ibb.co/pw2Kqcp/Oppo-find-x3-pro-den-1-org.jpg",
-                    },
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM038",
-                        MaSanPham = "SP011",
-                        TenMauMa = "Xanh đen",
-                        HinhAnh = "https://i.ibb.co/Rp3jcB3/Oppo-find-x3-pro-xanh-1-org.jpg",
-                    },
-                    //
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM039",
-                        MaSanPham = "SP012",
-                        TenMauMa = "Bạc",
-                        HinhAnh = "https://i.ibb.co/7YG6TFH/Oppo-reno6-bac-1-org.jpg",
-                    },
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM040",
-                        MaSanPham = "SP012",
-                        TenMauMa = "Đen",
-                        HinhAnh = "https://i.ibb.co/zbPGb0s/Oppo-reno6-den-1-org.jpg",
-                    },
-                    //
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM041",
-                        MaSanPham = "SP013",
-                        TenMauMa = "Bạc",
-                        HinhAnh = "https://i.ibb.co/55BgPLp/Oppo-reno5-5g-bac-1-org.jpg",
-                    },
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM042",
-                        MaSanPham = "SP013",
-                        TenMauMa = "Đen",
-                        HinhAnh = "https://i.ibb.co/MhHDY3L/Oppo-reno5-5g-den-org.jpg",
-                    },
-                    //
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM043",
-                        MaSanPham = "SP014",
-                        TenMauMa = "Trắng",
-                        HinhAnh = "https://i.ibb.co/94LDnqK/Oppo-reno4-pro-trang-1-org.jpg",
-                    },
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM044",
-                        MaSanPham = "SP014",
-                        TenMauMa = "Đen",
-                        HinhAnh = "https://i.ibb.co/RBQ3zwg/Oppo-reno4-pro-den-1-org.jpg",
-                    },
-                    //
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM045",
-                        MaSanPham = "SP015",
-                        TenMauMa = "Bạc",
-                        HinhAnh = "https://i.ibb.co/vVV9xVR/Oppo-a16-1-2.jpg",
-                    },
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM044",
-                        MaSanPham = "SP015",
-                        TenMauMa = "Đen",
-                        HinhAnh = "https://i.ibb.co/2M6JLdw/Oppo-a16-1-1.jpg",
-                    },
-                    //
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM046",
-                        MaSanPham = "SP016",
-                        TenMauMa = "Trắng",
-                        HinhAnh = "https://i.ibb.co/XWGXkDf/Vivo-y21-1-2.jpg",
-                    },
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM047",
-                        MaSanPham = "SP016",
-                        TenMauMa = "Xanh tím",
-                        HinhAnh = "https://i.ibb.co/XYj2R7d/Vivo-y21-blue-gc-1-org.jpg",
-                    },
-                    //
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM048",
-                        MaSanPham = "SP017",
-                        TenMauMa = "Xanh hồng",
-                        HinhAnh = "https://i.ibb.co/TcQYYxs/Vivo-x70-pro-xanh-1-1.jpg",
-                    },
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM049",
-                        MaSanPham = "SP017",
-                        TenMauMa = "Đen",
-                        HinhAnh = "https://i.ibb.co/NrnVRWj/Vivo-x70-pro-black-gc-org.jpg",
-                    },
-                    //
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM050",
-                        MaSanPham = "SP018",
-                        TenMauMa = "Tím hồng",
-                        HinhAnh = "https://i.ibb.co/S7Xy2TM/Vivo-v21-5g-tim-hong-1-3-org.jpg",
-                    },
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM051",
-                        MaSanPham = "SP018",
-                        TenMauMa = "Đen",
-                        HinhAnh = "https://i.ibb.co/wwT6MVD/Vivo-v21-5g-xanh-den-1-org.jpg",
-                    },
-                    //
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM052",
-                        MaSanPham = "SP019",
-                        TenMauMa = "Đen",
-                        HinhAnh = "https://i.ibb.co/tcNjPQL/Vivo-v20-2021-den-1-org.jpg",
-                    },
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM053",
-                        MaSanPham = "SP019",
-                        TenMauMa = "Xanh hồng",
-                        HinhAnh = "https://i.ibb.co/TLdWMdd/Vivo-v20-2021-xanh-hong-1-org.jpg",
-                    },
-                    //
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM054",
-                        MaSanPham = "SP020",
-                        TenMauMa = "Đen",
-                        HinhAnh = "https://i.ibb.co/mCbyxk9/Vivo-y72-5g-den-1-org.jpg",
-                    },
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM055",
-                        MaSanPham = "SP020",
-                        TenMauMa = "Xanh hồng",
-                        HinhAnh = "https://i.ibb.co/swGN954/Vivo-y72-5g-xanh-hong-1-1-org.jpg",
-                    }
-                    , //
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM056",
-                        MaSanPham = "SP021",
-                        TenMauMa = "Trắng",
-                        HinhAnh = "https://i.ibb.co/Yd1wV4H/Vivo-y21s-trang-1-1.jpg",
-                    },
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM057",
-                        MaSanPham = "SP021",
-                        TenMauMa = "Xanh",
-                        HinhAnh = "https://i.ibb.co/5hkXcM1/Vivo-y21s-blue-gc-org.jpg",
-                    },
-                    //SP023
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM058",
-                        MaSanPham = "SP023",
-                        TenMauMa = "Hồng",
-                        HinhAnh = "https://i.ibb.co/whQPQYR/Apple-watch-s6-40mm-vien-nhom-day-cao-su-hong-cont-1-org.jpg",
-                    },
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM059",
-                        MaSanPham = "SP023",
-                        TenMauMa = "Xanh dương đậm",
-                        HinhAnh = "https://i.ibb.co/bHRpNch/Apple-watch-s6-40mm-vien-nhom-day-cao-su-xanh-cont-1-org.jpg",
-                    },
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM060",
-                        MaSanPham = "SP023",
-                        TenMauMa = "Trắng",
-                        HinhAnh = "https://i.ibb.co/vV2zr9s/Apple-watch-s6-40mm-vien-nhom-day-cao-su-trang-cont-1-org.jpg",
-                    },
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM061",
-                        MaSanPham = "SP023",
-                        TenMauMa = "Đen",
-                        HinhAnh = "https://i.ibb.co/sPCkGSb/Apple-watch-s6-40mm-vien-nhom-day-cao-su-den-cont-1-org.jpg",
-                    },
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM062",
-                        MaSanPham = "SP023",
-                        TenMauMa = "Đỏ",
-                        HinhAnh = "https://i.ibb.co/4TQV8yv/Apple-watch-s6-40mm-vien-nhom-day-cao-su-red-do-cont-1-org-org.jp",
-                    },
-                    //SP024
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM063",
-                        MaSanPham = "SP024",
-                        TenMauMa = "Hồng",
-                        HinhAnh = "https://i.ibb.co/rcfS9Nm/Untitled-1-org.jpg",
-                    },
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM064",
-                        MaSanPham = "SP024",
-                        TenMauMa = "Đen",
-                        HinhAnh = "https://i.ibb.co/3dBt9bj/Se-40mm-vien-nhom-day-cao-su-hong-glr-1-org.jpg",
-                    },
-                    //SP025
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM065",
-                        MaSanPham = "SP025",
-                        TenMauMa = "Bạc",
-                        HinhAnh = "https://i.ibb.co/9yR299t/Samsung-galaxy-watch-3-45mm-bac-2-org.jpg",
-                    },
-                    //SP026
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM066",
-                        MaSanPham = "SP026",
-                        TenMauMa = "Đen",
-                        HinhAnh = "https://i.ibb.co/ydJ9XY5/Samsung-galaxy-watch-4-44mm-den-1-org.jpg",
-                    },
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM067",
-                        MaSanPham = "SP026",
-                        TenMauMa = "Xanh lá",
-                        HinhAnh = "https://i.ibb.co/s2mSnhK/Samsung-galaxy-watch-4-44mm-1-1.jpg",
-                    },
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM068",
-                        MaSanPham = "SP026",
-                        TenMauMa = "Bạc",
-                        HinhAnh = "https://i.ibb.co/XVM9Mxj/Samsung-galaxy-watch-4-44mm-bac-1-org.jpg",
-                    },
-                    //SP027
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM069",
-                        MaSanPham = "SP027",
-                        TenMauMa = "vàng",
-                        HinhAnh = "https://i.ibb.co/2YttfZB/Apple-watch-s6-lte-40mm-vien-thep-day-thep-vang-cont-1-org.jpg",
-                    },
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM070",
-                        MaSanPham = "SP027",
-                        TenMauMa = "Đen",
-                        HinhAnh = "https://i.ibb.co/JH2Fshs/Apple-watch-s6-lte-40mm-vien-thep-day-thep-den-cont-1-org.jpg",
-                    },
-                    //SP028
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM071",
-                        MaSanPham = "SP028",
-                        TenMauMa = "Đen",
-                        HinhAnh = "https://i.ibb.co/mDSQcPD/Apple-watch-s7-45mm-gps-den-1.jpg",
-                    },
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM072",
-                        MaSanPham = "SP028",
-                        TenMauMa = "Vàng",
-                        HinhAnh = "https://i.ibb.co/BrWrjZh/Apple-watch-s7-45mm-gps-vang-1.jp",
-                    },
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM073",
-                        MaSanPham = "SP028",
-                        TenMauMa = "Đỏ",
-                        HinhAnh = "https://i.ibb.co/ZW5Wqpk/Apple-watch-s7-45mm-gps-do-1.jpg",
-                    },
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM074",
-                        MaSanPham = "SP028",
-                        TenMauMa = "Xanh Dương",
-                        HinhAnh = "https://i.ibb.co/Qjbqcqf/Apple-watch-s7-45mm-gps-xanh-duong-1.jpg",
-                    },
-                    new MauMaSanPham()
-                    {
-                        MaMauMa = "MM075",
-                        MaSanPham = "SP028",
-                        TenMauMa = "Xanh Lá",
-                        HinhAnh = "ttps://i.ibb.co/V9d5FLq/apple-watch-s7-45mm-gps-xanh-la-1.jpg",
-                    }
-                    );
+                   //
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM027",
+                       MaSanPham = "SP07",
+                       TenMauMa = "Cam",
+                       HinhAnh = "https://i.ibb.co/8d4VJxn/mo-hop-iphone-xr-ban-mau-cam.jpg",
+                   },
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM028",
+                       MaSanPham = "SP07",
+                       TenMauMa = "Đen",
+                       HinhAnh = "https://i.ibb.co/yWZQJPt/Iphone-XR-en.jpg",
+                   },
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM029",
+                       MaSanPham = "SP07",
+                       TenMauMa = "Vàng",
+                       HinhAnh = "https://i.ibb.co/6y40G5v/20210416-6cec022bdb9abc311894b08e71bd0769-1618550179.jpg",
+                   },
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM030",
+                       MaSanPham = "SP07",
+                       TenMauMa = "Xanh",
+                       HinhAnh = "https://i.ibb.co/2v36jLV/iphone-XR-64-GB.jpg",
+                   },
+                   //
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM031",
+                       MaSanPham = "SP08",
+                       TenMauMa = "Bạc",
+                       HinhAnh = "https://i.ibb.co/MNpLvHY/Oppo-reno6-z-5g-bac-1-org.jpg",
+                   },
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM032",
+                       MaSanPham = "SP08",
+                       TenMauMa = "Đen",
+                       HinhAnh = "https://i.ibb.co/KXWZfKL/Oppo-reno6-z-5g-den-1-org.jpg",
+                   },
+                   //
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM033",
+                       MaSanPham = "SP09",
+                       TenMauMa = "Xanh dương",
+                       HinhAnh = "https://i.ibb.co/zRQB86R/Oppo-a74-xanh-duong-1-org.jpg",
+                   },
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM034",
+                       MaSanPham = "SP09",
+                       TenMauMa = "Đen",
+                       HinhAnh = "https://i.ibb.co/M5Mk64X/Oppo-a74-den-5-org.jpg",
+                   },
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM035",
+                       MaSanPham = "SP010",
+                       TenMauMa = "Xanh dương",
+                       HinhAnh = "https://i.ibb.co/jJ1XBWq/Oppo-reno6-pro-5g-xanh-duong-1.jpg",
+                   },
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM036",
+                       MaSanPham = "SP010",
+                       TenMauMa = "Xám",
+                       HinhAnh = "https://i.ibb.co/yVs3g8T/Oppo-reno6-pro-5g-xam-1.jpg",
+                   },
+                   //
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM037",
+                       MaSanPham = "SP011",
+                       TenMauMa = "Đen",
+                       HinhAnh = "https://i.ibb.co/pw2Kqcp/Oppo-find-x3-pro-den-1-org.jpg",
+                   },
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM038",
+                       MaSanPham = "SP011",
+                       TenMauMa = "Xanh đen",
+                       HinhAnh = "https://i.ibb.co/Rp3jcB3/Oppo-find-x3-pro-xanh-1-org.jpg",
+                   },
+                   //
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM039",
+                       MaSanPham = "SP012",
+                       TenMauMa = "Bạc",
+                       HinhAnh = "https://i.ibb.co/7YG6TFH/Oppo-reno6-bac-1-org.jpg",
+                   },
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM040",
+                       MaSanPham = "SP012",
+                       TenMauMa = "Đen",
+                       HinhAnh = "https://i.ibb.co/zbPGb0s/Oppo-reno6-den-1-org.jpg",
+                   },
+                   //
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM041",
+                       MaSanPham = "SP013",
+                       TenMauMa = "Bạc",
+                       HinhAnh = "https://i.ibb.co/55BgPLp/Oppo-reno5-5g-bac-1-org.jpg",
+                   },
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM042",
+                       MaSanPham = "SP013",
+                       TenMauMa = "Đen",
+                       HinhAnh = "https://i.ibb.co/MhHDY3L/Oppo-reno5-5g-den-org.jpg",
+                   },
+                   //
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM043",
+                       MaSanPham = "SP014",
+                       TenMauMa = "Trắng",
+                       HinhAnh = "https://i.ibb.co/94LDnqK/Oppo-reno4-pro-trang-1-org.jpg",
+                   },
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM044",
+                       MaSanPham = "SP014",
+                       TenMauMa = "Đen",
+                       HinhAnh = "https://i.ibb.co/RBQ3zwg/Oppo-reno4-pro-den-1-org.jpg",
+                   },
+                   //
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM045",
+                       MaSanPham = "SP015",
+                       TenMauMa = "Bạc",
+                       HinhAnh = "https://i.ibb.co/vVV9xVR/Oppo-a16-1-2.jpg",
+                   },
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM044",
+                       MaSanPham = "SP015",
+                       TenMauMa = "Đen",
+                       HinhAnh = "https://i.ibb.co/2M6JLdw/Oppo-a16-1-1.jpg",
+                   },
+                   //
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM046",
+                       MaSanPham = "SP016",
+                       TenMauMa = "Trắng",
+                       HinhAnh = "https://i.ibb.co/XWGXkDf/Vivo-y21-1-2.jpg",
+                   },
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM047",
+                       MaSanPham = "SP016",
+                       TenMauMa = "Xanh tím",
+                       HinhAnh = "https://i.ibb.co/XYj2R7d/Vivo-y21-blue-gc-1-org.jpg",
+                   },
+                   //
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM048",
+                       MaSanPham = "SP017",
+                       TenMauMa = "Xanh hồng",
+                       HinhAnh = "https://i.ibb.co/TcQYYxs/Vivo-x70-pro-xanh-1-1.jpg",
+                   },
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM049",
+                       MaSanPham = "SP017",
+                       TenMauMa = "Đen",
+                       HinhAnh = "https://i.ibb.co/NrnVRWj/Vivo-x70-pro-black-gc-org.jpg",
+                   },
+                   //
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM050",
+                       MaSanPham = "SP018",
+                       TenMauMa = "Tím hồng",
+                       HinhAnh = "https://i.ibb.co/S7Xy2TM/Vivo-v21-5g-tim-hong-1-3-org.jpg",
+                   },
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM051",
+                       MaSanPham = "SP018",
+                       TenMauMa = "Đen",
+                       HinhAnh = "https://i.ibb.co/wwT6MVD/Vivo-v21-5g-xanh-den-1-org.jpg",
+                   },
+                   //
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM052",
+                       MaSanPham = "SP019",
+                       TenMauMa = "Đen",
+                       HinhAnh = "https://i.ibb.co/tcNjPQL/Vivo-v20-2021-den-1-org.jpg",
+                   },
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM053",
+                       MaSanPham = "SP019",
+                       TenMauMa = "Xanh hồng",
+                       HinhAnh = "https://i.ibb.co/TLdWMdd/Vivo-v20-2021-xanh-hong-1-org.jpg",
+                   },
+                   //
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM054",
+                       MaSanPham = "SP020",
+                       TenMauMa = "Đen",
+                       HinhAnh = "https://i.ibb.co/mCbyxk9/Vivo-y72-5g-den-1-org.jpg",
+                   },
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM055",
+                       MaSanPham = "SP020",
+                       TenMauMa = "Xanh hồng",
+                       HinhAnh = "https://i.ibb.co/swGN954/Vivo-y72-5g-xanh-hong-1-1-org.jpg",
+                   }
+                   , //
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM056",
+                       MaSanPham = "SP021",
+                       TenMauMa = "Trắng",
+                       HinhAnh = "https://i.ibb.co/Yd1wV4H/Vivo-y21s-trang-1-1.jpg",
+                   },
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM057",
+                       MaSanPham = "SP021",
+                       TenMauMa = "Xanh",
+                       HinhAnh = "https://i.ibb.co/5hkXcM1/Vivo-y21s-blue-gc-org.jpg",
+                   },
+                   //SP023
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM058",
+                       MaSanPham = "SP023",
+                       TenMauMa = "Hồng",
+                       HinhAnh = "https://i.ibb.co/whQPQYR/Apple-watch-s6-40mm-vien-nhom-day-cao-su-hong-cont-1-org.jpg",
+                   },
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM059",
+                       MaSanPham = "SP023",
+                       TenMauMa = "Xanh dương đậm",
+                       HinhAnh = "https://i.ibb.co/bHRpNch/Apple-watch-s6-40mm-vien-nhom-day-cao-su-xanh-cont-1-org.jpg",
+                   },
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM060",
+                       MaSanPham = "SP023",
+                       TenMauMa = "Trắng",
+                       HinhAnh = "https://i.ibb.co/vV2zr9s/Apple-watch-s6-40mm-vien-nhom-day-cao-su-trang-cont-1-org.jpg",
+                   },
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM061",
+                       MaSanPham = "SP023",
+                       TenMauMa = "Đen",
+                       HinhAnh = "https://i.ibb.co/sPCkGSb/Apple-watch-s6-40mm-vien-nhom-day-cao-su-den-cont-1-org.jpg",
+                   },
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM062",
+                       MaSanPham = "SP023",
+                       TenMauMa = "Đỏ",
+                       HinhAnh = "https://i.ibb.co/4TQV8yv/Apple-watch-s6-40mm-vien-nhom-day-cao-su-red-do-cont-1-org-org.jp",
+                   },
+                   //SP024
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM063",
+                       MaSanPham = "SP024",
+                       TenMauMa = "Hồng",
+                       HinhAnh = "https://i.ibb.co/rcfS9Nm/Untitled-1-org.jpg",
+                   },
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM064",
+                       MaSanPham = "SP024",
+                       TenMauMa = "Đen",
+                       HinhAnh = "https://i.ibb.co/3dBt9bj/Se-40mm-vien-nhom-day-cao-su-hong-glr-1-org.jpg",
+                   },
+                   //SP025
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM065",
+                       MaSanPham = "SP025",
+                       TenMauMa = "Bạc",
+                       HinhAnh = "https://i.ibb.co/9yR299t/Samsung-galaxy-watch-3-45mm-bac-2-org.jpg",
+                   },
+                   //SP026
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM066",
+                       MaSanPham = "SP026",
+                       TenMauMa = "Đen",
+                       HinhAnh = "https://i.ibb.co/ydJ9XY5/Samsung-galaxy-watch-4-44mm-den-1-org.jpg",
+                   },
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM067",
+                       MaSanPham = "SP026",
+                       TenMauMa = "Xanh lá",
+                       HinhAnh = "https://i.ibb.co/s2mSnhK/Samsung-galaxy-watch-4-44mm-1-1.jpg",
+                   },
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM068",
+                       MaSanPham = "SP026",
+                       TenMauMa = "Bạc",
+                       HinhAnh = "https://i.ibb.co/XVM9Mxj/Samsung-galaxy-watch-4-44mm-bac-1-org.jpg",
+                   },
+                   //SP027
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM069",
+                       MaSanPham = "SP027",
+                       TenMauMa = "vàng",
+                       HinhAnh = "https://i.ibb.co/2YttfZB/Apple-watch-s6-lte-40mm-vien-thep-day-thep-vang-cont-1-org.jpg",
+                   },
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM070",
+                       MaSanPham = "SP027",
+                       TenMauMa = "Đen",
+                       HinhAnh = "https://i.ibb.co/JH2Fshs/Apple-watch-s6-lte-40mm-vien-thep-day-thep-den-cont-1-org.jpg",
+                   },
+                   //SP028
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM071",
+                       MaSanPham = "SP028",
+                       TenMauMa = "Đen",
+                       HinhAnh = "https://i.ibb.co/mDSQcPD/Apple-watch-s7-45mm-gps-den-1.jpg",
+                   },
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM072",
+                       MaSanPham = "SP028",
+                       TenMauMa = "Vàng",
+                       HinhAnh = "https://i.ibb.co/BrWrjZh/Apple-watch-s7-45mm-gps-vang-1.jp",
+                   },
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM073",
+                       MaSanPham = "SP028",
+                       TenMauMa = "Đỏ",
+                       HinhAnh = "https://i.ibb.co/ZW5Wqpk/Apple-watch-s7-45mm-gps-do-1.jpg",
+                   },
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM074",
+                       MaSanPham = "SP028",
+                       TenMauMa = "Xanh Dương",
+                       HinhAnh = "https://i.ibb.co/Qjbqcqf/Apple-watch-s7-45mm-gps-xanh-duong-1.jpg",
+                   },
+                   new MauMaSanPham()
+                   {
+                       MaMauMa = "MM075",
+                       MaSanPham = "SP028",
+                       TenMauMa = "Xanh Lá",
+                       HinhAnh = "ttps://i.ibb.co/V9d5FLq/apple-watch-s7-45mm-gps-xanh-la-1.jpg",
+                   }
+                   );
             //Lịch sử giá
             modelBuilder.Entity<LichSuGia>().HasData(
                 new LichSuGia()
                 {
-                    MaSanPham ="SP01",
+                    MaSanPham = "SP01",
                     DaXoa = true,
                     GiaMoi = 43990000,
-                    NgayTao= DateTime.Parse("2021-10-16 00:00:00.0000000"),
+                    NgayTao = DateTime.Parse("2021-10-16 00:00:00.0000000"),
 
                 },
                 new LichSuGia()
                 {
-                    MaSanPham ="SP02",
+                    MaSanPham = "SP02",
                     DaXoa = true,
                     GiaMoi = 24990000,
-                    NgayTao= DateTime.Parse("2021-10-16 00:00:00.0000000"),
+                    NgayTao = DateTime.Parse("2021-10-16 00:00:00.0000000"),
 
                 },
                 new LichSuGia()
@@ -2923,7 +2923,7 @@ namespace EcommerceWebsite.Data.Extensions
                      NgayTao = DateTime.Parse("2021-10-16 00:00:00.0000000"),
 
                  },
-                  //
+                 //
                  new LichSuGia()
                  {
                      MaSanPham = "SP022",
@@ -3083,8 +3083,8 @@ namespace EcommerceWebsite.Data.Extensions
             },
             new BoPhan
             {
-                 MaBoPhan = "BP04",
-                 TenBoPhan = "Nhân viên kĩ thuật",
+                MaBoPhan = "BP04",
+                TenBoPhan = "Nhân viên kĩ thuật",
             });
             //Nhân viên
             modelBuilder.Entity<NhanVien>().HasData(
@@ -3094,7 +3094,7 @@ namespace EcommerceWebsite.Data.Extensions
                 Username = "PhamTVi",
                 TenNhanVien = "Phạm Thị Vi",
                 DiaChi = "Quảng Ngãi",
-                SDT ="0376437459",
+                SDT = "0376437459",
                 Mail = "phamthivi459@gmail.com",
                 Status = Enum.Status.Active,
                 NgaySinh = DateTime.Parse("04/05/2000"),
@@ -3124,25 +3124,62 @@ namespace EcommerceWebsite.Data.Extensions
                 NgaySinh = DateTime.Parse("07/05/2000"),
                 NgayTao = DateTime.Now
             });
-        modelBuilder.Entity<DiaChiKhachHang>().HasData(
-             new DiaChiKhachHang()
-             {
-                 MaKhachHang = "KH01",
-                 MaDiaChi ="DC01",
-                 DiaChi ="Hẻm 1 Bùi Xuân Phái, Tây Thạnh, Tân Phú, HCM",
-                 SDT = "0376437459",
-                 NgayTao = DateTime.Now,
-                 DaXoa = true,
-             },
-             new DiaChiKhachHang()
-             {
-                 MaKhachHang = "KH01",
-                 MaDiaChi = "DC02",
-                 DiaChi = "140 Lê Trọng Tấn,",
-                 SDT = "0376437459",
-                 NgayTao = DateTime.Now,
-                 DaXoa = true,
-             }) ;
+            modelBuilder.Entity<DiaChiKhachHang>().HasData(
+                 new DiaChiKhachHang()
+                 {
+                     MaKhachHang = "KH01",
+                     MaDiaChi = "DC01",
+                     DiaChi = "Hẻm 1 Bùi Xuân Phái, Tây Thạnh, Tân Phú, HCM",
+                     SDT = "0376437459",
+                     NgayTao = DateTime.Now,
+                     DaXoa = true,
+                 },
+                 new DiaChiKhachHang()
+                 {
+                     MaKhachHang = "KH01",
+                     MaDiaChi = "DC02",
+                     DiaChi = "140 Lê Trọng Tấn,",
+                     SDT = "0376437459",
+                     NgayTao = DateTime.Now,
+                     DaXoa = true,
+                 });
+            modelBuilder.Entity<KhuyenMai>().HasData(
+                new KhuyenMai()
+                {
+                    MaKhuyenMai = "KM01",
+                    TenKhuyenMai = "Đồng hồ thời trang giảm 35%",
+                    PhanTram = 35,
+                    HinhAnh = "https://cdn.tgdd.vn/2021/11/banner/830-300(1)-830x300.png",
+                    NgayTao = DateTime.Now,
+                    DaXoa = true,
+                },
+                new KhuyenMai()
+                {
+                    MaKhuyenMai = "KM02",
+                    TenKhuyenMai = "Apple Watch S6 giảm đến 15%",
+                    PhanTram = 15,
+                    HinhAnh = "https://cdn.tgdd.vn/2021/10/banner/830-300-830x300-29.png",
+                    NgayTao = DateTime.Now,
+                    DaXoa = true,
+                },
+                new KhuyenMai()
+                {
+                    MaKhuyenMai = "KM03",
+                    TenKhuyenMai = "Phụ kiện giảm đến 50%",
+                    PhanTram = 50,
+                    HinhAnh = "https://cdn.tgdd.vn/2021/11/banner/big11-pk-830-300-830x300.png",
+                    NgayTao = DateTime.Now,
+                    DaXoa = true,
+                },
+                new KhuyenMai()
+                {
+                    MaKhuyenMai = "KM04",
+                    TenKhuyenMai = "Apple Watch S6 giảm đến 25%",
+                    PhanTram = 25,
+                    HinhAnh = "https://cdn.tgdd.vn/2021/11/banner/830-300-830x300-6.png",
+                    NgayTao = DateTime.Now,
+                    DaXoa = true,
+                }) ;
         }
     }
 }
