@@ -1,4 +1,5 @@
 ﻿using EcommerceWebsite.Application.Constants;
+using EcommerceWebsite.Utilities.Input;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
@@ -43,6 +44,18 @@ namespace EcommerceWebsite.Api.Interface
             return response.IsSuccessStatusCode ?
                 (List<T>)JsonConvert.DeserializeObject(body, typeof(List<T>)) 
                 : null;
+        }
+
+        public async Task<bool> Modify(string url, SanPhamInput input)
+        {
+            var sessions = _httpContextAccessor
+                .HttpContext.Session.GetString(SystemConstant.Token);
+
+            var client = _httpClietnFactory.CreateClient();
+            client.BaseAddress = new Uri(_config[SystemConstant.BaseAddress]);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+
+            var response = await client.PutAsync(url, );
         }
     }
 }

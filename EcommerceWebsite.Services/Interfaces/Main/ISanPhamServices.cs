@@ -21,7 +21,7 @@ namespace EcommerceWebsite.Services.Interfaces.Main
 
         //Task<List<SanPhamOutput>> laySanPham();
         //Xóa sản phẩm
-        Task<bool> XoaSanPham(string maSP, string editorMaSP);
+        Task<bool> SuaHoacXoaSanPham(SanPham input, bool laXoa, string editorMaSP = null);
 
         //Task<IdentityResult> Create(ApplicationUser obj);
     }

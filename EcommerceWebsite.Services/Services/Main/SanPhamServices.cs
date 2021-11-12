@@ -189,14 +189,35 @@ namespace EcommerceWebsite.Services.Services.Main
             }
         }
         //Xóa sản phẩm
-        public async Task<bool> XoaSanPham(string maSP, string editorMaSP)
+        public async Task<bool> SuaHoacXoaSanPham(SanPham input, bool laXoa, string editorMaSP = null)
         {
             try
             {
                 await _context.Database.BeginTransactionAsync();
-                var obj = await GetByIdAsync(maSP);
+                var obj = await GetByIdAsync(input.MaSanPham);
                 if (obj == null) return false;
-                return true;
+
+                //
+                if(laXoa)
+                {
+                    obj.DaXoa = true;
+                    obj.NgayXoa = DateTime.UtcNow;
+                    obj.NguoiXoa = editorMaSP;
+                }
+                else
+                {
+                    obj.NgaySuaCuoi = DateTime.UtcNow;
+                    obj.NguoiSuaCuoi = editorMaSP;
+                }
+
+                // 
+                _context.SanPhams.Update(obj);
+                _context.Entry(obj).State = EntityState.Modified;
+
+                var rs = await _context.SaveChangesAsync();
+                await _context.Database.CommitTransactionAsync();
+
+                return rs > 0;
             }
             catch (Exception ex)
             {
@@ -204,7 +225,5 @@ namespace EcommerceWebsite.Services.Services.Main
                 throw ex;
             }
         }
-
-      
     }
 }

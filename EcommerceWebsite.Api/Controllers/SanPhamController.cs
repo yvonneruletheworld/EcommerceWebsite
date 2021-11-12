@@ -82,5 +82,23 @@ namespace EcommerceWebsite.Api.Controllers
                 throw ex;
             }
         }
+
+        [HttpPut("sua-san-pham")]
+        public async Task<IActionResult> SuaHoacXoaSanPham (SanPhamInput input, bool laXoa)
+        {
+            if(ModelState.IsValid)
+            {
+                var obj = _mapper.Map<SanPham>(input);
+                if (obj != null)
+                {
+                    var rs = await _sanPhamServices.SuaHoacXoaSanPham(obj, laXoa, input.NguoiTao);
+                    if (rs)
+                        return Ok(Messages.API_Success);
+                    return BadRequest(Messages.API_EmptyResult);
+                }
+                return BadRequest(Messages.API_EmptyInput);
+            }
+            return BadRequest(Messages.API_Failed);
+        }
     }
 }
