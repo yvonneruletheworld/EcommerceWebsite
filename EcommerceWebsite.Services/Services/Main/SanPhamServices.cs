@@ -135,20 +135,26 @@ namespace EcommerceWebsite.Services.Services.Main
             try
             {
                 var data = await (from sp in _context.SanPhams
-                            join gia in _context.LichSuGias on sp.MaSanPham equals gia.MaSanPham
-                            join nhanHieu in _context.NhanHieus on sp.MaHang equals nhanHieu.MaHang
-                            join loaiSanPham in _context.DanhMucs on sp.MaLoaiSanPham equals loaiSanPham.MaDanhMuc
-                            select new SanPhamOutput
-                            {
-                                MaSanPham = sp.MaSanPham,
-                                TenSanPham = sp.TenSanPham,
-                                SoLuongTon = sp.SoLuongTon,
-                                HinhAnh = sp.HinhAnh,
-                                giaSP = gia.GiaMoi,
-                                NhanHieu = nhanHieu.TenHang,
-                                LoaiSanPham = loaiSanPham.TenDanhMuc,
-                            }).ToListAsync();
+                                  join gia in _context.LichSuGias on sp.MaSanPham equals gia.MaSanPham
+                                  join nhanHieu in _context.NhanHieus on sp.MaHang equals nhanHieu.MaHang
+                                  join loaiSanPham in _context.DanhMucs on sp.MaLoaiSanPham equals loaiSanPham.MaDanhMuc
+                                  select new SanPhamOutput
+                                  {
+                                      MaSanPham = sp.MaSanPham,
+                                      TenSanPham = sp.TenSanPham,
+                                      SoLuongTon = sp.SoLuongTon,
+                                      HinhAnh = sp.HinhAnh,
+                                      GiaBan = gia.GiaMoi.ToString(),
+                                      NhanHieu = nhanHieu.TenHang,
+                                      LoaiSanPham = loaiSanPham.TenDanhMuc,
+                                  }).ToListAsync();
                 return data;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public async Task<bool> ThemSanPham (SanPham input)
         {
             //begin transaction
@@ -167,10 +173,6 @@ namespace EcommerceWebsite.Services.Services.Main
             await _context.Database.CommitTransactionAsync();
 
             return  result > 0;
-        }
-
-                throw ex;
-            }
         }
         private async Task<SanPham> GetByIdAsync(string maSP)
         {
