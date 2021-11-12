@@ -31,18 +31,10 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
         {
             var fileName = "output1";
             var listHUI = await _huiApiServices.GetListHUIFromOutput(fileName);
-<<<<<<< Updated upstream
             var data = await _khuyenMaiApiServices.laykhuyenMais();
             return View(data);
         }
-        public IActionResult CuaHangAsync()
-        {
-            return View();
-=======
-          //  var data = await _khuyenMaiApiServices.laykhuyenMais();
-            return View("~/Views/Home/Index.cshtml");
->>>>>>> Stashed changes
-        }
+
         [HttpGet("list-danh-muc")]
         public async Task<IActionResult> layDanhMucSanPham ()
         {

@@ -8,15 +8,6 @@
     var valPageIndex = queryPageIndex.Count > 0 ? (int.TryParse(queryPageIndex[0], out int idx) ? idx : 1) : 1;
 
 }
-
-<<<<<<< Updated upstream
-=======
-@*@using EcommerceWebsite.Data.Entities
-@model List<KhuyenMai>*@
-<head>
-
-</head>
->>>>>>> Stashed changes
 <style>
     .container {
         max-width: 1400px;
@@ -25,7 +16,7 @@
 <!-- OFFER -->
 @*Hiển thi banner*@
 
-@*@(await Html.PartialAsync("~/Views/Home/_ListKhuyenMai.cshtml", Model))*@
+@(await Html.PartialAsync("~/Views/Home/_ListKhuyenMai.cshtml", Model))
 @*HIỂN THỊ DANH MỤC SẢN PHẨM*@
 <section class="banner bgwhite p-t-40 p-b-40">
     <div class="container">
