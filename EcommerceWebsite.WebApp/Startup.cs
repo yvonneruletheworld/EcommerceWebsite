@@ -10,6 +10,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using EcommerceWebsite.Api.Interface;
+using ValensBankCore.Services.Services;
+using EcommerceWebsite.Data.Identity;
+using Microsoft.AspNetCore.Identity;
+using EcommerceWebsite.Data.EF;
 
 namespace EcommerceWebsite.WebApp
 {
@@ -39,7 +43,6 @@ namespace EcommerceWebsite.WebApp
             //    .AddClaimsPrincipalFactory<MyUserClaimsPrincipalFactoryService>()
             //    .AddDefaultTokenProviders();
 
-            
             services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromMinutes(30);

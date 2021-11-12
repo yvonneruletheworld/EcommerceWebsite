@@ -1,9 +1,9 @@
-﻿@using EcommerceWebsite.Data.Entities
+﻿@using EcommerceWebsite.Utilities.Output.Main
 @{
     int giaTri = 0;
     int giaTri2 = 0;
 }
-@model List<DanhMuc>
+@model List<DanhMucOutput>
 <div class="col-sm-10 col-md-8 col-lg-4 m-l-r-auto">
     @foreach (var item in Model.ToList())
     {
