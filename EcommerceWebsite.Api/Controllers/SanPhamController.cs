@@ -83,7 +83,7 @@ namespace EcommerceWebsite.Api.Controllers
             }
         }
 
-        [HttpPut("sua-san-pham")]
+        [HttpPut("sua-san-pham/{laXoa}")]
         public async Task<IActionResult> SuaHoacXoaSanPham (SanPhamInput input, bool laXoa)
         {
             if(ModelState.IsValid)
@@ -98,6 +98,27 @@ namespace EcommerceWebsite.Api.Controllers
                 }
                 return BadRequest(Messages.API_EmptyInput);
             }
+            return BadRequest(Messages.API_Failed);
+        }
+
+        [HttpPatch("{productId}/{editor}/{newPrice}")]
+        public async Task<IActionResult> ModifyPrice (string productId, string editor, decimal newPrice)
+        {
+            if (string.IsNullOrEmpty(productId) || newPrice < 0)
+                return BadRequest(Messages.API_EmptyInput);
+
+            var obj = new LichSuGia()
+            {
+                MaSanPham = productId,
+                GiaMoi = newPrice,
+                NguoiTao = editor
+            };
+            var prdExist = await _sanPhamServices.GetSanPhamTheoMa(productId, null);
+            if (prdExist == null)
+                return BadRequest(Messages.API_EmptyInput);
+            var rs = await _bangGiaServices.ModifyPrice(obj);
+            if (rs)
+                return Ok(Messages.API_Success);
             return BadRequest(Messages.API_Failed);
         }
     }

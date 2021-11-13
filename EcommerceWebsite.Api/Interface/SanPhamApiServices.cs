@@ -4,10 +4,12 @@ using EcommerceWebsite.Utilities.Input;
 using EcommerceWebsite.Utilities.Output.Main;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 
 
@@ -48,13 +50,28 @@ namespace EcommerceWebsite.Api.Interface
             client.BaseAddress = new Uri(_configuration[SystemConstant.BaseAddress]);
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
 
-            var requestItem = new MultipartFormDataContent();
+            var requestItem = JsonConvert.SerializeObject(input);
+            var httpContent = new StringContent(requestItem, Encoding.UTF8, "application/json");
 
-
-
-            var response = await client.PostAsync($"/api/products/", requestItem);
+            var response = await client.PostAsync($"/api/products/", httpContent );
             return response.IsSuccessStatusCode;
+        }
 
+        public async Task<bool> Modify(string url, SanPhamInput input)
+        {
+            var sessions = _httpContextAccessor
+                .HttpContext.Session.GetString(SystemConstant.Token);
+
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_configuration[SystemConstant.BaseAddress]);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+
+            //convert sang json
+            var request = JsonConvert.SerializeObject(input);
+            var httpContent = new StringContent(request, Encoding.UTF8, "application/json");
+            var response = await client.PutAsync(url, httpContent);
+
+            return response.IsSuccessStatusCode;
         }
     }
 }

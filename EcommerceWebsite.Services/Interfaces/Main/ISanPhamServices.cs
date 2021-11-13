@@ -16,7 +16,7 @@ namespace EcommerceWebsite.Services.Interfaces.Main
 
         Task<bool> ThemSanPham(SanPham input);
         Task<SanPham> GetSanPhamTheoMa(string id, string tensanpham);
-        bool? KiemTra(string value);
+        Task<bool> KiemTraGia(string value);
         Task<List<SanPhamOutput>> LaySanPham();
 
         //Task<List<SanPhamOutput>> laySanPham();
@@ -24,5 +24,7 @@ namespace EcommerceWebsite.Services.Interfaces.Main
         Task<bool> SuaHoacXoaSanPham(SanPham input, bool laXoa, string editorMaSP = null);
 
         //Task<IdentityResult> Create(ApplicationUser obj);
+
+        
     }
 }

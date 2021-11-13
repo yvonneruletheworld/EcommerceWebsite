@@ -49,5 +49,27 @@ namespace EcommerceWebsite.Services.Services.Main
             await _context.Database.CommitTransactionAsync();
             return result > 0;
         }
+
+        public async Task<bool> ModifyPrice(LichSuGia ls)
+        {
+            try
+            {
+                if (ls == null)
+                    return false;
+                await _context.Database.BeginTransactionAsync();
+                ls.DaXoa = false;
+                ls.NgayTao = DateTime.UtcNow;
+                 _context.LichSuGias.Update(ls);
+                _context.Entry(ls).State = EntityState.Modified;
+                var rs = await _context.SaveChangesAsync();
+                await _context.Database.CommitTransactionAsync();
+                return rs > 0;
+            }
+            catch (Exception ex)
+            {
+                await _context.Database.RollbackTransactionAsync();
+                throw ex;
+            }
+        }
     }
 }

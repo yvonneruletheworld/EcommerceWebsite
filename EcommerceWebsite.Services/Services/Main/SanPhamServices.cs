@@ -65,34 +65,11 @@ namespace EcommerceWebsite.Services.Services.Main
                 && (x.MaSanPham == id || x.TenSanPham == tensanpham));
         }
 
-        public bool? KiemTra(string value)
+        public async Task<bool> KiemTraGia(string prdId)
         {
-            return value?.Contains("j");
+            return (await _context.LichSuGias.FindAsync(prdId) == null);
         }
 
-        public async Task<List<SanPhamOutput>> LaySanPham()
-        {
-            try
-            {
-                var data = await (from sp in _context.SanPhams
-                                  join gia in _context.LichSuGias on sp.MaSanPham equals gia.MaSanPham
-                                  select new SanPhamOutput
-                                  {
-                                      MaSanPham = sp.MaSanPham,
-                                      TenSanPham = sp.TenSanPham,
-                                      SoLuongTon = sp.SoLuongTon,
-                                      HinhAnh = sp.HinhAnh,
-                                      GiaBan = gia.GiaMoi.ToString(),
-                                  }).ToListAsync();
-                return data;
-
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
-        }
         //public async Task<ChiTietSanPhamOutput> LayChiTietSanPham(string id, bool coGiamGia)
         //{
         //    try
@@ -130,7 +107,7 @@ namespace EcommerceWebsite.Services.Services.Main
         //    }
         //}
 
-        public async Task<List<SanPhamOutput>> laySanPham()
+        public async Task<List<SanPhamOutput>> LaySanPham()
         {
             try
             {
@@ -225,5 +202,7 @@ namespace EcommerceWebsite.Services.Services.Main
                 throw ex;
             }
         }
+
+       
     }
 }
