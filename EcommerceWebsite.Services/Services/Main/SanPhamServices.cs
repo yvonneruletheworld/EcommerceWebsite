@@ -70,42 +70,44 @@ namespace EcommerceWebsite.Services.Services.Main
             return (await _context.LichSuGias.FindAsync(prdId) == null);
         }
 
-        //public async Task<ChiTietSanPhamOutput> LayChiTietSanPham(string id, bool coGiamGia)
-        //{
-        //    try
-        //    {
-        //        var pageQuery = (from sp in _context.SanPhams
-        //                         join bg in _context.LichSuGias on (sp == null ? string.Empty : sp.MaSanPham) equals bg.MaSanPham into sp_bg_group
-        //                         from sp_g in sp_bg_group.DefaultIfEmpty()
-        //                             //join dl in _context.DinhLuongs on sp_g.MaSanPham equals dl.MaSanPham into sp_dl_group
-        //                             //from sp_dl in sp_dl_group.DefaultIfEmpty()
-        //                             //join tt in _context.ThuocTinhs on sp_dl.MaThuocTinh equals tt.MaThuocTinh into dl_tt_group
-        //                             //from dl_tt in dl_tt_group.DefaultIfEmpty()
-        //                         where !sp.DaXoa && sp.MaSanPham == id
-        //                         select new ChiTietSanPhamOutput()
-        //                         {
-        //                             MaSanPham = sp.MaSanPham,
-        //                             //DonGia = sp_bg_group.FirstOrDefault().GiaMoi.ToString(), // 2
-        //                             //GiaBan = sp_bg_group.Skip(1).FirstOrDefault().GiaMoi.ToString(), //1
-        //                             //SoLuongTon = sp.SoLuongTon,
-        //                             //TenSanPham = sp.TenSanPham,
-        //                             //TinhTrang = nameof(sp.Status)
-        //                         }).FirstOrDefault();
+        public async Task<SanPhamOutput> LayChiTietSanPham(string id, bool coGiamGia)
+        {
+            try
+            {
+                //lấy những thông số k phải list
+                var obj = (from sp in _context.SanPhams
+                                 // Sản phẩm - Đánh giá 1 - 1
+                                 join dg in _context.DanhGiaSanPhams on (sp == null ? string.Empty : sp.MaSanPham) equals dg.MaSanPham into sp_dg_group
+                                 from sp_dg in sp_dg_group.DefaultIfEmpty()
+                                 // Sản phẩm - Danh mục 1 - 1 
+                                 join dm in _context.DanhMucs on (sp == null ? string.Empty : sp.MaLoaiSanPham) equals dm.MaDanhMuc into sp_dm_group
+                                 from view in sp_dm_group.DefaultIfEmpty()
+                                 where !sp.DaXoa && sp.MaSanPham == id
+                                 select new SanPhamOutput()
+                                 {
+                                     MaSanPham = sp.MaSanPham,
+                                     SoLuongTon = sp.SoLuongTon,
+                                     TenSanPham = sp.TenSanPham,
+                                     Status = sp.Status,
+                                     DanhGia = sp_dg.NoiDung,
+                                     LoaiSanPham = view.TenDanhMuc
+                                 }).FirstOrDefault();
 
-        //        ChiTietSanPhamOutput de = new ChiTietSanPhamOutput();
-        //        de.HinhAnhs = await _context.MauMaSanPhams.Where(x => x.MaSanPham.Equals(id))
-        //                                                  .Select(mm => mm.HinhAnh)
-        //                                                  .ToListAsync();
+                // lấy hình ảnh
+                obj.ListHinhAnh = await _context.MauMaSanPhams.Where(x => x.MaSanPham.Equals(id))
+                                                          .Select(mm => mm.HinhAnh)
+                                                          .ToListAsync();
 
+                //obj.ListThongSo =  
 
-        //        return pageQuery;
-        //    }
-        //    catch (Exception ex)
-        //    {
+                return null;
+            }
+            catch (Exception ex)
+            {
 
-        //        throw ex;
-        //    }
-        //}
+                throw ex;
+            }
+        }
 
         public async Task<List<SanPhamOutput>> LaySanPham()
         {

@@ -18,10 +18,11 @@ namespace EcommerceWebsite.Utilities.Output.Main
         public string GiaBan { get; set; }
         public Status Status { get; set; }
 
-
+        public List<string> ListHinhAnh { get; set; }
+        public List<ThongSoSanPhamOutput> ListThongSo { get; set; }
         public decimal Utility { get; set; }
-        public DanhGiaSanPham DanhGiaSanPham { get; set; }
-        public DanhMuc DanhMuc { get; set; }
+
+        public string DanhGia { get; set; }
         //Khóa ngoại
     }
 }

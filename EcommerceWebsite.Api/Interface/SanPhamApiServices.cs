@@ -53,11 +53,11 @@ namespace EcommerceWebsite.Api.Interface
             var requestItem = JsonConvert.SerializeObject(input);
             var httpContent = new StringContent(requestItem, Encoding.UTF8, "application/json");
 
-            var response = await client.PostAsync($"/api/products/", httpContent );
+            var response = await client.PostAsync($"/api/SanPham/them-san-pham", httpContent );
             return response.IsSuccessStatusCode;
         }
 
-        public async Task<bool> Modify(string url, SanPhamInput input)
+        public async Task<bool> Modify(bool laXoa, SanPhamInput input)
         {
             var sessions = _httpContextAccessor
                 .HttpContext.Session.GetString(SystemConstant.Token);
@@ -69,7 +69,7 @@ namespace EcommerceWebsite.Api.Interface
             //convert sang json
             var request = JsonConvert.SerializeObject(input);
             var httpContent = new StringContent(request, Encoding.UTF8, "application/json");
-            var response = await client.PutAsync(url, httpContent);
+            var response = await client.PutAsync($"/api/SanPham/them-san-pham/{laXoa}", httpContent);
 
             return response.IsSuccessStatusCode;
         }
