@@ -2306,7 +2306,7 @@ namespace EcommerceWebsite.Data.Extensions
                {
                    MaMauMa = "MM016",
                    MaSanPham = "SP05",
-                   TenMauMa = "Đen",
+                   TenMauMa = "Hologram",
                    HinhAnh = "https://i.ibb.co/crZFrkD/Iphone-12-mini-den-1-1-org.jpg",
                },
                    new MauMaSanPham()
