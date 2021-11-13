@@ -13,10 +13,13 @@ namespace EcommerceWebsite.Data.Configurations
         {
             builder.ToTable("MAUMASANPHAM");
 
-            builder.HasKey(msp => new { msp.MaSanPham, msp.TenMauMa });
+            builder.HasKey(msp => new { msp.MaSanPham, msp.MaMauMa });
 
             builder.Property(msp => msp.MaSanPham)
                 .HasMaxLength(100);
+
+            builder.Property(msp => msp.MaMauMa)
+               .HasMaxLength(100);
 
             builder.Property(msp => msp.TenMauMa)
                 .HasMaxLength(200)

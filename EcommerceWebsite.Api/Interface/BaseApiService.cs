@@ -46,6 +46,16 @@ namespace EcommerceWebsite.Api.Interface
                 : null;
         }
 
-        
+        //public async Task<bool> Modify(string url, SanPhamInput input)
+        //{
+        //    var sessions = _httpContextAccessor
+        //        .HttpContext.Session.GetString(SystemConstant.Token);
+
+        //    var client = _httpClietnFactory.CreateClient();
+        //    client.BaseAddress = new Uri(_config[SystemConstant.BaseAddress]);
+        //    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+
+        //    var response = await client.PutAsync(url, );
+        //}
     }
 }
