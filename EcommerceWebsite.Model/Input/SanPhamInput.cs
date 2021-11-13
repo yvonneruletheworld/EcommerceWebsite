@@ -10,7 +10,7 @@ namespace EcommerceWebsite.Utilities.Input
        public string MaSanPham { get; set; }
        public string TenSanPham { get; set; }
        public string HinhAnh { get; set; }
-       public string NhanHieu { get; set; }
+       public string TenNhanHieu { get; set; }
        public decimal DonGia { get; set; }
        public decimal GiaBan { get; set; }
        public string LoaiSanPham { get; set; }

@@ -20,10 +20,15 @@ namespace EcommerceWebsite.Api.Controllers
         private readonly ISanPhamServices _sanPhamServices;
         private readonly IMapper _mapper;
         private readonly IBangGiaServices _bangGiaServices;
-        public SanPhamController(ISanPhamServices sanPhamServices, IMapper mapper)
+        private readonly IMauMaServices _mauMaServices;
+        private readonly IDinhLuongServices _dinhLuongServices;
+        public SanPhamController(ISanPhamServices sanPhamServices, IMapper mapper, IMauMaServices mauMaServices, IBangGiaServices bangGiaServices, IDinhLuongServices dinhLuongServices)
         {
             _sanPhamServices = sanPhamServices;
             _mapper = mapper;
+            _mauMaServices = mauMaServices;
+            _bangGiaServices = bangGiaServices;
+            _dinhLuongServices = dinhLuongServices;
         }
         [HttpGet("lay-sanpham")]
         public async Task<IActionResult> LaySanPhams()
@@ -120,6 +125,25 @@ namespace EcommerceWebsite.Api.Controllers
             if (rs)
                 return Ok(Messages.API_Success);
             return BadRequest(Messages.API_Failed);
+        }
+
+        [HttpGet("ChiTiet/{productId}")]
+        public async Task<IActionResult> LayChiTietSanPham (string productId)
+        {
+            if (String.IsNullOrEmpty(productId))
+                return BadRequest(Messages.API_EmptyInput);
+            else
+            {
+                // lay san pham
+                var obj = await _sanPhamServices.LayChiTietSanPham(productId);
+                if (obj == null)
+                    return BadRequest(Messages.API_EmptyResult);
+                // list Hinh anh, Thong so, Gia, Danh gia
+                obj.ListHinhAnh = await _mauMaServices.LayListMauMaTheoSanPham(productId);
+                obj.ListThongSo = await _dinhLuongServices.LayThongSoTheoSanPham(productId);
+                obj.GiaBan = (await _bangGiaServices.GetGiaSanPhamMoiNhat(productId)).GiaMoi;
+                return Ok(obj); 
+            }    
         }
     }
 }

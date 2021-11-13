@@ -61,8 +61,9 @@ namespace EcommerceWebsite.Services.Services.Main
         public async Task<SanPham> GetSanPhamTheoMa(string id, string tensanpham)
         {
             return await _context.SanPhams
-                .FirstOrDefaultAsync(x => !x.DaXoa 
-                && (x.MaSanPham == id || x.TenSanPham == tensanpham));
+                .Where(x => !x.DaXoa 
+                && (x.MaSanPham == id || x.TenSanPham == tensanpham))
+                .FirstOrDefaultAsync();
         }
 
         public async Task<bool> KiemTraGia(string prdId)
@@ -70,18 +71,21 @@ namespace EcommerceWebsite.Services.Services.Main
             return (await _context.LichSuGias.FindAsync(prdId) == null);
         }
 
-        public async Task<SanPhamOutput> LayChiTietSanPham(string id, bool coGiamGia)
+        public async Task<SanPhamOutput> LayChiTietSanPham(string id)
         {
             try
             {
                 //lấy những thông số k phải list
-                var obj = (from sp in _context.SanPhams
+                var obj = await (from sp in _context.SanPhams
                                  // Sản phẩm - Đánh giá 1 - 1
                                  join dg in _context.DanhGiaSanPhams on (sp == null ? string.Empty : sp.MaSanPham) equals dg.MaSanPham into sp_dg_group
                                  from sp_dg in sp_dg_group.DefaultIfEmpty()
                                  // Sản phẩm - Danh mục 1 - 1 
                                  join dm in _context.DanhMucs on (sp == null ? string.Empty : sp.MaLoaiSanPham) equals dm.MaDanhMuc into sp_dm_group
-                                 from view in sp_dm_group.DefaultIfEmpty()
+                                 from sp_dm in sp_dm_group.DefaultIfEmpty()
+                                 // Sản phẩm  - Nhãn hiệu 1 - 1
+                                 join nh in _context.NhanHieus on (sp == null ? string.Empty : sp.MaHang) equals nh.MaHang into sp_nh_group
+                                 from sp_nh in sp_nh_group.DefaultIfEmpty()
                                  where !sp.DaXoa && sp.MaSanPham == id
                                  select new SanPhamOutput()
                                  {
@@ -89,18 +93,11 @@ namespace EcommerceWebsite.Services.Services.Main
                                      SoLuongTon = sp.SoLuongTon,
                                      TenSanPham = sp.TenSanPham,
                                      Status = sp.Status,
-                                     DanhGia = sp_dg.NoiDung,
-                                     LoaiSanPham = view.TenDanhMuc
-                                 }).FirstOrDefault();
-
-                // lấy hình ảnh
-                obj.ListHinhAnh = await _context.MauMaSanPhams.Where(x => x.MaSanPham.Equals(id))
-                                                          .Select(mm => mm.HinhAnh)
-                                                          .ToListAsync();
-
-                //obj.ListThongSo =  
-
-                return null;
+                                     DanhGia = sp_dg,
+                                     LoaiSanPham = sp_dm.TenDanhMuc,
+                                     NhanHieu = sp_nh.TenHang,
+                                 }).FirstOrDefaultAsync();
+                return obj;
             }
             catch (Exception ex)
             {
@@ -123,7 +120,7 @@ namespace EcommerceWebsite.Services.Services.Main
                                       TenSanPham = sp.TenSanPham,
                                       SoLuongTon = sp.SoLuongTon,
                                       HinhAnh = sp.HinhAnh,
-                                      GiaBan = gia.GiaMoi.ToString(),
+                                      GiaBan = gia.GiaMoi,
                                       NhanHieu = nhanHieu.TenHang,
                                       LoaiSanPham = loaiSanPham.TenDanhMuc,
                                   }).ToListAsync();
