@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EcommerceWebsite.Data.Migrations
 {
     [DbContext(typeof(EcomWebDbContext))]
-    [Migration("20211107233853_add-data")]
-    partial class adddata
+    [Migration("20211113011706_dưLieuDataBase")]
+    partial class dưLieuDataBase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -256,7 +256,7 @@ namespace EcommerceWebsite.Data.Migrations
                             DaXoa = false,
                             HienThiTrangHome = true,
                             HinhAnh = "https://i.ibb.co/NSBhk4f/E5wft-Ni-Vk-AQHbh-S.jpg",
-                            NgayTao = new DateTime(2021, 11, 7, 23, 38, 52, 412, DateTimeKind.Utc).AddTicks(6215),
+                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 522, DateTimeKind.Utc).AddTicks(5947),
                             NguoiTao = "admin",
                             Status = 1,
                             TenDanhMuc = "Điện thoại"
@@ -267,7 +267,7 @@ namespace EcommerceWebsite.Data.Migrations
                             DaXoa = false,
                             HienThiTrangHome = true,
                             HinhAnh = "https://i.ibb.co/QHfCkK1/28-11-2020-0-16065566805fc21c0855b09-0.jpg",
-                            NgayTao = new DateTime(2021, 11, 7, 23, 38, 52, 412, DateTimeKind.Utc).AddTicks(7203),
+                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 522, DateTimeKind.Utc).AddTicks(7767),
                             NguoiTao = "admin",
                             ParentId = "DM01",
                             Status = 1,
@@ -279,7 +279,7 @@ namespace EcommerceWebsite.Data.Migrations
                             DaXoa = false,
                             HienThiTrangHome = true,
                             HinhAnh = "https://i.ibb.co/3fWbd3c/Dong-ho-haylou-h3.jpg",
-                            NgayTao = new DateTime(2021, 11, 7, 23, 38, 52, 412, DateTimeKind.Utc).AddTicks(7619),
+                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 522, DateTimeKind.Utc).AddTicks(7838),
                             NguoiTao = "admin",
                             ParentId = "DM01",
                             Status = 1,
@@ -291,7 +291,7 @@ namespace EcommerceWebsite.Data.Migrations
                             DaXoa = false,
                             HienThiTrangHome = true,
                             HinhAnh = "https://i.ibb.co/sHxtWdf/Song-toi-gian-may-tinh-1.jpg",
-                            NgayTao = new DateTime(2021, 11, 7, 23, 38, 52, 412, DateTimeKind.Utc).AddTicks(7624),
+                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 522, DateTimeKind.Utc).AddTicks(7844),
                             NguoiTao = "admin",
                             ParentId = "DM01",
                             Status = 1,
@@ -374,7 +374,7 @@ namespace EcommerceWebsite.Data.Migrations
                             DiaChi = "Hẻm 1 Bùi Xuân Phái, Tây Thạnh, Tân Phú, HCM",
                             LoaiDiaChi = 0,
                             MacDinh = false,
-                            NgayTao = new DateTime(2021, 11, 8, 6, 38, 52, 443, DateTimeKind.Local).AddTicks(5802),
+                            NgayTao = new DateTime(2021, 11, 13, 8, 17, 5, 564, DateTimeKind.Local).AddTicks(8239),
                             SDT = "0376437459"
                         },
                         new
@@ -385,7 +385,7 @@ namespace EcommerceWebsite.Data.Migrations
                             DiaChi = "140 Lê Trọng Tấn,",
                             LoaiDiaChi = 0,
                             MacDinh = false,
-                            NgayTao = new DateTime(2021, 11, 8, 6, 38, 52, 443, DateTimeKind.Local).AddTicks(5859),
+                            NgayTao = new DateTime(2021, 11, 13, 8, 17, 5, 564, DateTimeKind.Local).AddTicks(8292),
                             SDT = "0376437459"
                         });
                 });
@@ -2208,6 +2208,44 @@ namespace EcommerceWebsite.Data.Migrations
                     b.HasKey("MaKhuyenMai");
 
                     b.ToTable("KHUYENMAI");
+
+                    b.HasData(
+                        new
+                        {
+                            MaKhuyenMai = "KM01",
+                            DaXoa = true,
+                            HinhAnh = "https://cdn.tgdd.vn/2021/11/banner/830-300(1)-830x300.png",
+                            NgayTao = new DateTime(2021, 11, 13, 8, 17, 5, 565, DateTimeKind.Local).AddTicks(155),
+                            PhanTram = 35f,
+                            TenKhuyenMai = "Đồng hồ thời trang giảm 35%"
+                        },
+                        new
+                        {
+                            MaKhuyenMai = "KM02",
+                            DaXoa = true,
+                            HinhAnh = "https://cdn.tgdd.vn/2021/10/banner/830-300-830x300-29.png",
+                            NgayTao = new DateTime(2021, 11, 13, 8, 17, 5, 565, DateTimeKind.Local).AddTicks(205),
+                            PhanTram = 15f,
+                            TenKhuyenMai = "Apple Watch S6 giảm đến 15%"
+                        },
+                        new
+                        {
+                            MaKhuyenMai = "KM03",
+                            DaXoa = true,
+                            HinhAnh = "https://cdn.tgdd.vn/2021/11/banner/big11-pk-830-300-830x300.png",
+                            NgayTao = new DateTime(2021, 11, 13, 8, 17, 5, 565, DateTimeKind.Local).AddTicks(209),
+                            PhanTram = 50f,
+                            TenKhuyenMai = "Phụ kiện giảm đến 50%"
+                        },
+                        new
+                        {
+                            MaKhuyenMai = "KM04",
+                            DaXoa = true,
+                            HinhAnh = "https://cdn.tgdd.vn/2021/11/banner/830-300-830x300-6.png",
+                            NgayTao = new DateTime(2021, 11, 13, 8, 17, 5, 565, DateTimeKind.Local).AddTicks(223),
+                            PhanTram = 25f,
+                            TenKhuyenMai = "Apple Watch S6 giảm đến 25%"
+                        });
                 });
 
             modelBuilder.Entity("EcommerceWebsite.Data.Entities.LichSuGia", b =>
@@ -2442,17 +2480,18 @@ namespace EcommerceWebsite.Data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("TenMauMa")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                    b.Property<string>("MaMauMa")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("HinhAnh")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("MaMauMa")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("TenMauMa")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
-                    b.HasKey("MaSanPham", "TenMauMa");
+                    b.HasKey("MaSanPham", "MaMauMa");
 
                     b.ToTable("MAUMASANPHAM");
 
@@ -2460,534 +2499,534 @@ namespace EcommerceWebsite.Data.Migrations
                         new
                         {
                             MaSanPham = "SP01",
-                            TenMauMa = "Xanh riêu",
+                            MaMauMa = "MM01",
                             HinhAnh = "https://i.ibb.co/9WvYqLR/Samsung-galaxy-z-fold3-5g-1.jpg",
-                            MaMauMa = "MM01"
+                            TenMauMa = "Xanh riêu"
                         },
                         new
                         {
                             MaSanPham = "SP01",
-                            TenMauMa = "Bạc",
+                            MaMauMa = "MM02",
                             HinhAnh = "https://i.ibb.co/T2Ywg8N/Samsung-galaxy-z-fold-3-silver-gc-org.jpg",
-                            MaMauMa = "MM02"
+                            TenMauMa = "Bạc"
                         },
                         new
                         {
                             MaSanPham = "SP01",
-                            TenMauMa = "Đen",
+                            MaMauMa = "MM03",
                             HinhAnh = "https://i.ibb.co/qyCNcw6/Samsung-galaxy-z-fold-3-1-org.jpg",
-                            MaMauMa = "MM03"
+                            TenMauMa = "Đen"
                         },
                         new
                         {
                             MaSanPham = "SP02",
-                            TenMauMa = "Kem",
+                            MaMauMa = "MM04",
                             HinhAnh = "https://i.ibb.co/CPq556s/Samsung-galaxy-z-flip-3-kem-1-org.jpg",
-                            MaMauMa = "MM04"
+                            TenMauMa = "Kem"
                         },
                         new
                         {
                             MaSanPham = "SP02",
-                            TenMauMa = "Đen",
+                            MaMauMa = "MM05",
                             HinhAnh = "https://i.ibb.co/0tXPPWn/Samsung-galaxy-z-flip-3-black-gc-org.jpg",
-                            MaMauMa = "MM05"
+                            TenMauMa = "Đen"
                         },
                         new
                         {
                             MaSanPham = "SP02",
-                            TenMauMa = "Xanh riêu",
+                            MaMauMa = "MM06",
                             HinhAnh = "https://i.ibb.co/9WvYqLR/Samsung-galaxy-z-fold3-5g-1.jpg",
-                            MaMauMa = "MM06"
+                            TenMauMa = "Xanh riêu"
                         },
                         new
                         {
                             MaSanPham = "SP03",
-                            TenMauMa = "Đen",
+                            MaMauMa = "MM07",
                             HinhAnh = "https://i.ibb.co/0qYwZ5c/Iphone-12-64-GB-en.jpg",
-                            MaMauMa = "MM07"
+                            TenMauMa = "Đen"
                         },
                         new
                         {
                             MaSanPham = "SP03",
-                            TenMauMa = "Đỏ",
+                            MaMauMa = "MM08",
                             HinhAnh = "https://i.ibb.co/RNz8N1G/Iphone-12-64-GB.jpg",
-                            MaMauMa = "MM08"
+                            TenMauMa = "Đỏ"
                         },
                         new
                         {
                             MaSanPham = "SP03",
-                            TenMauMa = "Tím",
+                            MaMauMa = "MM09",
                             HinhAnh = "https://i.ibb.co/GC6Tdwd/Iphone-12-64-GB-T-m.jpg",
-                            MaMauMa = "MM09"
+                            TenMauMa = "Tím"
                         },
                         new
                         {
                             MaSanPham = "SP03",
-                            TenMauMa = "Trắng",
+                            MaMauMa = "MM010",
                             HinhAnh = "https://i.ibb.co/vsLZ8km/Iphone-12-mini-64-GB.jpg",
-                            MaMauMa = "MM010"
+                            TenMauMa = "Trắng"
                         },
                         new
                         {
                             MaSanPham = "SP03",
-                            TenMauMa = "Xanh",
+                            MaMauMa = "MM011",
                             HinhAnh = "https://i.ibb.co/6XtyJbM/Iphone-12-64-GB-Xanh.jpg",
-                            MaMauMa = "MM011"
+                            TenMauMa = "Xanh"
                         },
                         new
                         {
                             MaSanPham = "SP03",
-                            TenMauMa = "Xanh lá",
+                            MaMauMa = "MM012",
                             HinhAnh = "https://i.ibb.co/D5Xg9sQ/Iphone-12-64-GB-Xanh-l.jpg",
-                            MaMauMa = "MM012"
+                            TenMauMa = "Xanh lá"
                         },
                         new
                         {
                             MaSanPham = "SP04",
-                            TenMauMa = "Bạc",
+                            MaMauMa = "MM013",
                             HinhAnh = "https://i.ibb.co/pW2nvth/Iphone-12-pro-max-bac-1-org.jpg",
-                            MaMauMa = "MM013"
+                            TenMauMa = "Bạc"
                         },
                         new
                         {
                             MaSanPham = "SP04",
-                            TenMauMa = "Vàng",
+                            MaMauMa = "MM014",
                             HinhAnh = "https://i.ibb.co/JQNGCzb/Iphone-12-pro-max-128-GB.jpg",
-                            MaMauMa = "MM014"
+                            TenMauMa = "Vàng"
                         },
                         new
                         {
                             MaSanPham = "SP04",
-                            TenMauMa = "Xanh",
+                            MaMauMa = "MM015",
                             HinhAnh = "https://i.ibb.co/5LvRhJ4/Iphone-12-pro-max-xanh-duong-1-org.jpg",
-                            MaMauMa = "MM015"
+                            TenMauMa = "Xanh"
                         },
                         new
                         {
                             MaSanPham = "SP05",
-                            TenMauMa = "Đen",
+                            MaMauMa = "MM016",
                             HinhAnh = "https://i.ibb.co/crZFrkD/Iphone-12-mini-den-1-1-org.jpg",
-                            MaMauMa = "MM016"
+                            TenMauMa = "Đen"
                         },
                         new
                         {
                             MaSanPham = "SP05",
-                            TenMauMa = "Đỏ",
+                            MaMauMa = "MM017",
                             HinhAnh = "https://i.ibb.co/jkmt501/Iphone-12-mini-1-1-org.jpg",
-                            MaMauMa = "MM017"
+                            TenMauMa = "Đỏ"
                         },
                         new
                         {
                             MaSanPham = "SP05",
-                            TenMauMa = "Tím",
+                            MaMauMa = "MM018",
                             HinhAnh = "https://i.ibb.co/30KH8b2/Iphone-12-mini-tim-gc-1-org.jpg",
-                            MaMauMa = "MM018"
+                            TenMauMa = "Tím"
                         },
                         new
                         {
                             MaSanPham = "SP05",
-                            TenMauMa = "Trắng",
+                            MaMauMa = "MM019",
                             HinhAnh = "https://i.ibb.co/5LRj1Wh/Iphone-12-mini-trang-1-1-org.jpg",
-                            MaMauMa = "MM019"
+                            TenMauMa = "Trắng"
                         },
                         new
                         {
                             MaSanPham = "SP05",
-                            TenMauMa = "Xanh dương",
+                            MaMauMa = "MM020",
                             HinhAnh = "https://i.ibb.co/Np97nN6/Iphone-12-mini-xanh-duong-1-1-org.jpg",
-                            MaMauMa = "MM020"
+                            TenMauMa = "Xanh dương"
                         },
                         new
                         {
                             MaSanPham = "SP05",
-                            TenMauMa = "Hologram",
+                            MaMauMa = "MM021",
                             HinhAnh = "https://i.ibb.co/0stYCyp/Iphone-11-den-1-1-1-org.jpg",
-                            MaMauMa = "MM021"
+                            TenMauMa = "Đen"
                         },
                         new
                         {
                             MaSanPham = "SP06",
-                            TenMauMa = "Đỏ",
+                            MaMauMa = "MM022",
                             HinhAnh = "https://i.ibb.co/WBH28Zh/Iphone-11-do-1-1-1-org.jpg",
-                            MaMauMa = "MM022"
+                            TenMauMa = "Đỏ"
                         },
                         new
                         {
                             MaSanPham = "SP06",
-                            TenMauMa = "Tím",
+                            MaMauMa = "MM023",
                             HinhAnh = "https://i.ibb.co/Lnt4WzS/Iphone-11-tim-1-1-1-org.jpg",
-                            MaMauMa = "MM023"
+                            TenMauMa = "Tím"
                         },
                         new
                         {
                             MaSanPham = "SP06",
-                            TenMauMa = "Trắng",
+                            MaMauMa = "MM024",
                             HinhAnh = "https://i.ibb.co/pLyJDFG/Iphone-11-trang-1-2-org.jpg",
-                            MaMauMa = "MM024"
+                            TenMauMa = "Trắng"
                         },
                         new
                         {
                             MaSanPham = "SP06",
-                            TenMauMa = "Vàng",
+                            MaMauMa = "MM025",
                             HinhAnh = "https://i.ibb.co/26xpZH9/Iphone-11-vang-1-2-org.jpg",
-                            MaMauMa = "MM025"
+                            TenMauMa = "Vàng"
                         },
                         new
                         {
                             MaSanPham = "SP06",
-                            TenMauMa = "Xanh lá",
+                            MaMauMa = "MM026",
                             HinhAnh = "https://i.ibb.co/hZS5MJ3/Iphone-11-64-GB.jpg",
-                            MaMauMa = "MM026"
+                            TenMauMa = "Xanh lá"
                         },
                         new
                         {
                             MaSanPham = "SP07",
-                            TenMauMa = "Cam",
+                            MaMauMa = "MM027",
                             HinhAnh = "https://i.ibb.co/8d4VJxn/mo-hop-iphone-xr-ban-mau-cam.jpg",
-                            MaMauMa = "MM027"
+                            TenMauMa = "Cam"
                         },
                         new
                         {
                             MaSanPham = "SP07",
-                            TenMauMa = "Đen",
+                            MaMauMa = "MM028",
                             HinhAnh = "https://i.ibb.co/yWZQJPt/Iphone-XR-en.jpg",
-                            MaMauMa = "MM028"
+                            TenMauMa = "Đen"
                         },
                         new
                         {
                             MaSanPham = "SP07",
-                            TenMauMa = "Vàng",
+                            MaMauMa = "MM029",
                             HinhAnh = "https://i.ibb.co/6y40G5v/20210416-6cec022bdb9abc311894b08e71bd0769-1618550179.jpg",
-                            MaMauMa = "MM029"
+                            TenMauMa = "Vàng"
                         },
                         new
                         {
                             MaSanPham = "SP07",
-                            TenMauMa = "Xanh",
+                            MaMauMa = "MM030",
                             HinhAnh = "https://i.ibb.co/2v36jLV/iphone-XR-64-GB.jpg",
-                            MaMauMa = "MM030"
+                            TenMauMa = "Xanh"
                         },
                         new
                         {
                             MaSanPham = "SP08",
-                            TenMauMa = "Bạc",
+                            MaMauMa = "MM031",
                             HinhAnh = "https://i.ibb.co/MNpLvHY/Oppo-reno6-z-5g-bac-1-org.jpg",
-                            MaMauMa = "MM031"
+                            TenMauMa = "Bạc"
                         },
                         new
                         {
                             MaSanPham = "SP08",
-                            TenMauMa = "Đen",
+                            MaMauMa = "MM032",
                             HinhAnh = "https://i.ibb.co/KXWZfKL/Oppo-reno6-z-5g-den-1-org.jpg",
-                            MaMauMa = "MM032"
+                            TenMauMa = "Đen"
                         },
                         new
                         {
                             MaSanPham = "SP09",
-                            TenMauMa = "Xanh dương",
+                            MaMauMa = "MM033",
                             HinhAnh = "https://i.ibb.co/zRQB86R/Oppo-a74-xanh-duong-1-org.jpg",
-                            MaMauMa = "MM033"
+                            TenMauMa = "Xanh dương"
                         },
                         new
                         {
                             MaSanPham = "SP09",
-                            TenMauMa = "Đen",
+                            MaMauMa = "MM034",
                             HinhAnh = "https://i.ibb.co/M5Mk64X/Oppo-a74-den-5-org.jpg",
-                            MaMauMa = "MM034"
+                            TenMauMa = "Đen"
                         },
                         new
                         {
                             MaSanPham = "SP010",
-                            TenMauMa = "Xanh dương",
+                            MaMauMa = "MM035",
                             HinhAnh = "https://i.ibb.co/jJ1XBWq/Oppo-reno6-pro-5g-xanh-duong-1.jpg",
-                            MaMauMa = "MM035"
+                            TenMauMa = "Xanh dương"
                         },
                         new
                         {
                             MaSanPham = "SP010",
-                            TenMauMa = "Xám",
+                            MaMauMa = "MM036",
                             HinhAnh = "https://i.ibb.co/yVs3g8T/Oppo-reno6-pro-5g-xam-1.jpg",
-                            MaMauMa = "MM036"
+                            TenMauMa = "Xám"
                         },
                         new
                         {
                             MaSanPham = "SP011",
-                            TenMauMa = "Đen",
+                            MaMauMa = "MM037",
                             HinhAnh = "https://i.ibb.co/pw2Kqcp/Oppo-find-x3-pro-den-1-org.jpg",
-                            MaMauMa = "MM037"
+                            TenMauMa = "Đen"
                         },
                         new
                         {
                             MaSanPham = "SP011",
-                            TenMauMa = "Xanh đen",
+                            MaMauMa = "MM038",
                             HinhAnh = "https://i.ibb.co/Rp3jcB3/Oppo-find-x3-pro-xanh-1-org.jpg",
-                            MaMauMa = "MM038"
+                            TenMauMa = "Xanh đen"
                         },
                         new
                         {
                             MaSanPham = "SP012",
-                            TenMauMa = "Bạc",
+                            MaMauMa = "MM039",
                             HinhAnh = "https://i.ibb.co/7YG6TFH/Oppo-reno6-bac-1-org.jpg",
-                            MaMauMa = "MM039"
+                            TenMauMa = "Bạc"
                         },
                         new
                         {
                             MaSanPham = "SP012",
-                            TenMauMa = "Đen",
+                            MaMauMa = "MM040",
                             HinhAnh = "https://i.ibb.co/zbPGb0s/Oppo-reno6-den-1-org.jpg",
-                            MaMauMa = "MM040"
+                            TenMauMa = "Đen"
                         },
                         new
                         {
                             MaSanPham = "SP013",
-                            TenMauMa = "Bạc",
+                            MaMauMa = "MM041",
                             HinhAnh = "https://i.ibb.co/55BgPLp/Oppo-reno5-5g-bac-1-org.jpg",
-                            MaMauMa = "MM041"
+                            TenMauMa = "Bạc"
                         },
                         new
                         {
                             MaSanPham = "SP013",
-                            TenMauMa = "Đen",
+                            MaMauMa = "MM042",
                             HinhAnh = "https://i.ibb.co/MhHDY3L/Oppo-reno5-5g-den-org.jpg",
-                            MaMauMa = "MM042"
+                            TenMauMa = "Đen"
                         },
                         new
                         {
                             MaSanPham = "SP014",
-                            TenMauMa = "Trắng",
+                            MaMauMa = "MM043",
                             HinhAnh = "https://i.ibb.co/94LDnqK/Oppo-reno4-pro-trang-1-org.jpg",
-                            MaMauMa = "MM043"
+                            TenMauMa = "Trắng"
                         },
                         new
                         {
                             MaSanPham = "SP014",
-                            TenMauMa = "Đen",
+                            MaMauMa = "MM044",
                             HinhAnh = "https://i.ibb.co/RBQ3zwg/Oppo-reno4-pro-den-1-org.jpg",
-                            MaMauMa = "MM044"
+                            TenMauMa = "Đen"
                         },
                         new
                         {
                             MaSanPham = "SP015",
-                            TenMauMa = "Bạc",
+                            MaMauMa = "MM045",
                             HinhAnh = "https://i.ibb.co/vVV9xVR/Oppo-a16-1-2.jpg",
-                            MaMauMa = "MM045"
+                            TenMauMa = "Bạc"
                         },
                         new
                         {
                             MaSanPham = "SP015",
-                            TenMauMa = "Đen",
+                            MaMauMa = "MM044",
                             HinhAnh = "https://i.ibb.co/2M6JLdw/Oppo-a16-1-1.jpg",
-                            MaMauMa = "MM044"
+                            TenMauMa = "Đen"
                         },
                         new
                         {
                             MaSanPham = "SP016",
-                            TenMauMa = "Trắng",
+                            MaMauMa = "MM046",
                             HinhAnh = "https://i.ibb.co/XWGXkDf/Vivo-y21-1-2.jpg",
-                            MaMauMa = "MM046"
+                            TenMauMa = "Trắng"
                         },
                         new
                         {
                             MaSanPham = "SP016",
-                            TenMauMa = "Xanh tím",
+                            MaMauMa = "MM047",
                             HinhAnh = "https://i.ibb.co/XYj2R7d/Vivo-y21-blue-gc-1-org.jpg",
-                            MaMauMa = "MM047"
+                            TenMauMa = "Xanh tím"
                         },
                         new
                         {
                             MaSanPham = "SP017",
-                            TenMauMa = "Xanh hồng",
+                            MaMauMa = "MM048",
                             HinhAnh = "https://i.ibb.co/TcQYYxs/Vivo-x70-pro-xanh-1-1.jpg",
-                            MaMauMa = "MM048"
+                            TenMauMa = "Xanh hồng"
                         },
                         new
                         {
                             MaSanPham = "SP017",
-                            TenMauMa = "Đen",
+                            MaMauMa = "MM049",
                             HinhAnh = "https://i.ibb.co/NrnVRWj/Vivo-x70-pro-black-gc-org.jpg",
-                            MaMauMa = "MM049"
+                            TenMauMa = "Đen"
                         },
                         new
                         {
                             MaSanPham = "SP018",
-                            TenMauMa = "Tím hồng",
+                            MaMauMa = "MM050",
                             HinhAnh = "https://i.ibb.co/S7Xy2TM/Vivo-v21-5g-tim-hong-1-3-org.jpg",
-                            MaMauMa = "MM050"
+                            TenMauMa = "Tím hồng"
                         },
                         new
                         {
                             MaSanPham = "SP018",
-                            TenMauMa = "Đen",
+                            MaMauMa = "MM051",
                             HinhAnh = "https://i.ibb.co/wwT6MVD/Vivo-v21-5g-xanh-den-1-org.jpg",
-                            MaMauMa = "MM051"
+                            TenMauMa = "Đen"
                         },
                         new
                         {
                             MaSanPham = "SP019",
-                            TenMauMa = "Đen",
+                            MaMauMa = "MM052",
                             HinhAnh = "https://i.ibb.co/tcNjPQL/Vivo-v20-2021-den-1-org.jpg",
-                            MaMauMa = "MM052"
+                            TenMauMa = "Đen"
                         },
                         new
                         {
                             MaSanPham = "SP019",
-                            TenMauMa = "Xanh hồng",
+                            MaMauMa = "MM053",
                             HinhAnh = "https://i.ibb.co/TLdWMdd/Vivo-v20-2021-xanh-hong-1-org.jpg",
-                            MaMauMa = "MM053"
+                            TenMauMa = "Xanh hồng"
                         },
                         new
                         {
                             MaSanPham = "SP020",
-                            TenMauMa = "Đen",
+                            MaMauMa = "MM054",
                             HinhAnh = "https://i.ibb.co/mCbyxk9/Vivo-y72-5g-den-1-org.jpg",
-                            MaMauMa = "MM054"
+                            TenMauMa = "Đen"
                         },
                         new
                         {
                             MaSanPham = "SP020",
-                            TenMauMa = "Xanh hồng",
+                            MaMauMa = "MM055",
                             HinhAnh = "https://i.ibb.co/swGN954/Vivo-y72-5g-xanh-hong-1-1-org.jpg",
-                            MaMauMa = "MM055"
+                            TenMauMa = "Xanh hồng"
                         },
                         new
                         {
                             MaSanPham = "SP021",
-                            TenMauMa = "Trắng",
+                            MaMauMa = "MM056",
                             HinhAnh = "https://i.ibb.co/Yd1wV4H/Vivo-y21s-trang-1-1.jpg",
-                            MaMauMa = "MM056"
+                            TenMauMa = "Trắng"
                         },
                         new
                         {
                             MaSanPham = "SP021",
-                            TenMauMa = "Xanh",
+                            MaMauMa = "MM057",
                             HinhAnh = "https://i.ibb.co/5hkXcM1/Vivo-y21s-blue-gc-org.jpg",
-                            MaMauMa = "MM057"
+                            TenMauMa = "Xanh"
                         },
                         new
                         {
                             MaSanPham = "SP023",
-                            TenMauMa = "Hồng",
+                            MaMauMa = "MM058",
                             HinhAnh = "https://i.ibb.co/whQPQYR/Apple-watch-s6-40mm-vien-nhom-day-cao-su-hong-cont-1-org.jpg",
-                            MaMauMa = "MM058"
+                            TenMauMa = "Hồng"
                         },
                         new
                         {
                             MaSanPham = "SP023",
-                            TenMauMa = "Xanh dương đậm",
+                            MaMauMa = "MM059",
                             HinhAnh = "https://i.ibb.co/bHRpNch/Apple-watch-s6-40mm-vien-nhom-day-cao-su-xanh-cont-1-org.jpg",
-                            MaMauMa = "MM059"
+                            TenMauMa = "Xanh dương đậm"
                         },
                         new
                         {
                             MaSanPham = "SP023",
-                            TenMauMa = "Trắng",
+                            MaMauMa = "MM060",
                             HinhAnh = "https://i.ibb.co/vV2zr9s/Apple-watch-s6-40mm-vien-nhom-day-cao-su-trang-cont-1-org.jpg",
-                            MaMauMa = "MM060"
+                            TenMauMa = "Trắng"
                         },
                         new
                         {
                             MaSanPham = "SP023",
-                            TenMauMa = "Đen",
+                            MaMauMa = "MM061",
                             HinhAnh = "https://i.ibb.co/sPCkGSb/Apple-watch-s6-40mm-vien-nhom-day-cao-su-den-cont-1-org.jpg",
-                            MaMauMa = "MM061"
+                            TenMauMa = "Đen"
                         },
                         new
                         {
                             MaSanPham = "SP023",
-                            TenMauMa = "Đỏ",
+                            MaMauMa = "MM062",
                             HinhAnh = "https://i.ibb.co/4TQV8yv/Apple-watch-s6-40mm-vien-nhom-day-cao-su-red-do-cont-1-org-org.jp",
-                            MaMauMa = "MM062"
+                            TenMauMa = "Đỏ"
                         },
                         new
                         {
                             MaSanPham = "SP024",
-                            TenMauMa = "Hồng",
+                            MaMauMa = "MM063",
                             HinhAnh = "https://i.ibb.co/rcfS9Nm/Untitled-1-org.jpg",
-                            MaMauMa = "MM063"
+                            TenMauMa = "Hồng"
                         },
                         new
                         {
                             MaSanPham = "SP024",
-                            TenMauMa = "Đen",
+                            MaMauMa = "MM064",
                             HinhAnh = "https://i.ibb.co/3dBt9bj/Se-40mm-vien-nhom-day-cao-su-hong-glr-1-org.jpg",
-                            MaMauMa = "MM064"
+                            TenMauMa = "Đen"
                         },
                         new
                         {
                             MaSanPham = "SP025",
-                            TenMauMa = "Bạc",
+                            MaMauMa = "MM065",
                             HinhAnh = "https://i.ibb.co/9yR299t/Samsung-galaxy-watch-3-45mm-bac-2-org.jpg",
-                            MaMauMa = "MM065"
+                            TenMauMa = "Bạc"
                         },
                         new
                         {
                             MaSanPham = "SP026",
-                            TenMauMa = "Đen",
+                            MaMauMa = "MM066",
                             HinhAnh = "https://i.ibb.co/ydJ9XY5/Samsung-galaxy-watch-4-44mm-den-1-org.jpg",
-                            MaMauMa = "MM066"
+                            TenMauMa = "Đen"
                         },
                         new
                         {
                             MaSanPham = "SP026",
-                            TenMauMa = "Xanh lá",
+                            MaMauMa = "MM067",
                             HinhAnh = "https://i.ibb.co/s2mSnhK/Samsung-galaxy-watch-4-44mm-1-1.jpg",
-                            MaMauMa = "MM067"
+                            TenMauMa = "Xanh lá"
                         },
                         new
                         {
                             MaSanPham = "SP026",
-                            TenMauMa = "Bạc",
+                            MaMauMa = "MM068",
                             HinhAnh = "https://i.ibb.co/XVM9Mxj/Samsung-galaxy-watch-4-44mm-bac-1-org.jpg",
-                            MaMauMa = "MM068"
+                            TenMauMa = "Bạc"
                         },
                         new
                         {
                             MaSanPham = "SP027",
-                            TenMauMa = "vàng",
+                            MaMauMa = "MM069",
                             HinhAnh = "https://i.ibb.co/2YttfZB/Apple-watch-s6-lte-40mm-vien-thep-day-thep-vang-cont-1-org.jpg",
-                            MaMauMa = "MM069"
+                            TenMauMa = "vàng"
                         },
                         new
                         {
                             MaSanPham = "SP027",
-                            TenMauMa = "Đen",
+                            MaMauMa = "MM070",
                             HinhAnh = "https://i.ibb.co/JH2Fshs/Apple-watch-s6-lte-40mm-vien-thep-day-thep-den-cont-1-org.jpg",
-                            MaMauMa = "MM070"
+                            TenMauMa = "Đen"
                         },
                         new
                         {
                             MaSanPham = "SP028",
-                            TenMauMa = "Đen",
+                            MaMauMa = "MM071",
                             HinhAnh = "https://i.ibb.co/mDSQcPD/Apple-watch-s7-45mm-gps-den-1.jpg",
-                            MaMauMa = "MM071"
+                            TenMauMa = "Đen"
                         },
                         new
                         {
                             MaSanPham = "SP028",
-                            TenMauMa = "Vàng",
+                            MaMauMa = "MM072",
                             HinhAnh = "https://i.ibb.co/BrWrjZh/Apple-watch-s7-45mm-gps-vang-1.jp",
-                            MaMauMa = "MM072"
+                            TenMauMa = "Vàng"
                         },
                         new
                         {
                             MaSanPham = "SP028",
-                            TenMauMa = "Đỏ",
+                            MaMauMa = "MM073",
                             HinhAnh = "https://i.ibb.co/ZW5Wqpk/Apple-watch-s7-45mm-gps-do-1.jpg",
-                            MaMauMa = "MM073"
+                            TenMauMa = "Đỏ"
                         },
                         new
                         {
                             MaSanPham = "SP028",
-                            TenMauMa = "Xanh Dương",
+                            MaMauMa = "MM074",
                             HinhAnh = "https://i.ibb.co/Qjbqcqf/Apple-watch-s7-45mm-gps-xanh-duong-1.jpg",
-                            MaMauMa = "MM074"
+                            TenMauMa = "Xanh Dương"
                         },
                         new
                         {
                             MaSanPham = "SP028",
-                            TenMauMa = "Xanh Lá",
+                            MaMauMa = "MM075",
                             HinhAnh = "ttps://i.ibb.co/V9d5FLq/apple-watch-s7-45mm-gps-xanh-la-1.jpg",
-                            MaMauMa = "MM075"
+                            TenMauMa = "Xanh Lá"
                         });
                 });
 
@@ -3179,7 +3218,7 @@ namespace EcommerceWebsite.Data.Migrations
                             DiaChi = "Quảng Ngãi",
                             Mail = "phamthivi459@gmail.com",
                             NgaySinh = new DateTime(2000, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NgayTao = new DateTime(2021, 11, 8, 6, 38, 52, 442, DateTimeKind.Local).AddTicks(4442),
+                            NgayTao = new DateTime(2021, 11, 13, 8, 17, 5, 564, DateTimeKind.Local).AddTicks(2496),
                             SDT = "0376437459",
                             Status = 1,
                             TenNhanVien = "Phạm Thị Vi",
@@ -3192,7 +3231,7 @@ namespace EcommerceWebsite.Data.Migrations
                             DiaChi = "Quảng Ngãi",
                             Mail = "danhvu@gmail.com",
                             NgaySinh = new DateTime(2000, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NgayTao = new DateTime(2021, 11, 8, 6, 38, 52, 443, DateTimeKind.Local).AddTicks(3462),
+                            NgayTao = new DateTime(2021, 11, 13, 8, 17, 5, 564, DateTimeKind.Local).AddTicks(6118),
                             SDT = "123456789",
                             Status = 1,
                             TenNhanVien = "Lê Danh Vũ",
@@ -3205,7 +3244,7 @@ namespace EcommerceWebsite.Data.Migrations
                             DiaChi = "Quảng Ngãi",
                             Mail = "havy@gmail.com",
                             NgaySinh = new DateTime(2000, 7, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NgayTao = new DateTime(2021, 11, 8, 6, 38, 52, 443, DateTimeKind.Local).AddTicks(3488),
+                            NgayTao = new DateTime(2021, 11, 13, 8, 17, 5, 564, DateTimeKind.Local).AddTicks(6141),
                             SDT = "123456789",
                             Status = 1,
                             TenNhanVien = "Trần Nhật Hạ Vy",
@@ -3332,7 +3371,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/T2Ywg8N/Samsung-galaxy-z-fold-3-silver-gc-org.jpg",
                             MaHang = "MH02",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 11, 7, 23, 38, 52, 415, DateTimeKind.Utc).AddTicks(6098),
+                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 524, DateTimeKind.Utc).AddTicks(1823),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3346,7 +3385,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/CPq556s/Samsung-galaxy-z-flip-3-kem-1-org.jpg",
                             MaHang = "MH02",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 11, 7, 23, 38, 52, 415, DateTimeKind.Utc).AddTicks(8409),
+                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 524, DateTimeKind.Utc).AddTicks(2825),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3360,7 +3399,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/RNz8N1G/Iphone-12-64-GB.jpg",
                             MaHang = "MH01",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 11, 7, 23, 38, 52, 415, DateTimeKind.Utc).AddTicks(8509),
+                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 524, DateTimeKind.Utc).AddTicks(2867),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3374,7 +3413,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/JQNGCzb/Iphone-12-pro-max-128-GB.jpg",
                             MaHang = "MH01",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 11, 7, 23, 38, 52, 415, DateTimeKind.Utc).AddTicks(8523),
+                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 524, DateTimeKind.Utc).AddTicks(2871),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3388,7 +3427,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/vsLZ8km/Iphone-12-mini-64-GB.jpg",
                             MaHang = "MH01",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 11, 7, 23, 38, 52, 415, DateTimeKind.Utc).AddTicks(8533),
+                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 524, DateTimeKind.Utc).AddTicks(2875),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3402,7 +3441,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/hZS5MJ3/Iphone-11-64-GB.jpg",
                             MaHang = "MH01",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 11, 7, 23, 38, 52, 415, DateTimeKind.Utc).AddTicks(8542),
+                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 524, DateTimeKind.Utc).AddTicks(2893),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3416,7 +3455,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/2v36jLV/iphone-XR-64-GB.jpg",
                             MaHang = "MH01",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 11, 7, 23, 38, 52, 415, DateTimeKind.Utc).AddTicks(8551),
+                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 524, DateTimeKind.Utc).AddTicks(2898),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3430,7 +3469,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/1rp5mbM/Oppo-reno6-z-5g-bac-1-org.jpg",
                             MaHang = "MH03",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 11, 7, 23, 38, 52, 415, DateTimeKind.Utc).AddTicks(8561),
+                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 524, DateTimeKind.Utc).AddTicks(2902),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3444,7 +3483,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/zRQB86R/Oppo-a74-xanh-duong-1-org.jpg",
                             MaHang = "MH03",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 11, 7, 23, 38, 52, 415, DateTimeKind.Utc).AddTicks(8582),
+                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 524, DateTimeKind.Utc).AddTicks(2907),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3458,7 +3497,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/ydCdghQ/Oppo-reno6-pro-5g-xanh-duong-1.jpg",
                             MaHang = "MH03",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 11, 7, 23, 38, 52, 415, DateTimeKind.Utc).AddTicks(8591),
+                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 524, DateTimeKind.Utc).AddTicks(2914),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3472,7 +3511,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/pw2Kqcp/Oppo-find-x3-pro-den-1-org.jpg",
                             MaHang = "MH03",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 11, 7, 23, 38, 52, 415, DateTimeKind.Utc).AddTicks(8600),
+                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 524, DateTimeKind.Utc).AddTicks(2918),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3486,7 +3525,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/zbPGb0s/Oppo-reno6-den-1-org.jpg",
                             MaHang = "MH03",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 11, 7, 23, 38, 52, 415, DateTimeKind.Utc).AddTicks(8611),
+                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 524, DateTimeKind.Utc).AddTicks(2922),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3500,7 +3539,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/55BgPLp/Oppo-reno5-5g-bac-1-org.jpg",
                             MaHang = "MH03",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 11, 7, 23, 38, 52, 415, DateTimeKind.Utc).AddTicks(8620),
+                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 524, DateTimeKind.Utc).AddTicks(2927),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3514,7 +3553,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/94LDnqK/Oppo-reno4-pro-trang-1-org.jpg",
                             MaHang = "MH03",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 11, 7, 23, 38, 52, 415, DateTimeKind.Utc).AddTicks(8630),
+                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 524, DateTimeKind.Utc).AddTicks(2931),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3528,7 +3567,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/vVV9xVR/Oppo-a16-1-2.jpg",
                             MaHang = "MH03",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 11, 7, 23, 38, 52, 415, DateTimeKind.Utc).AddTicks(8640),
+                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 524, DateTimeKind.Utc).AddTicks(2935),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3542,7 +3581,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/XWGXkDf/Vivo-y21-1-2.jpg",
                             MaHang = "MH04",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 11, 7, 23, 38, 52, 415, DateTimeKind.Utc).AddTicks(8649),
+                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 524, DateTimeKind.Utc).AddTicks(2939),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3556,7 +3595,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/NrnVRWj/Vivo-x70-pro-black-gc-org.jpg",
                             MaHang = "MH04",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 11, 7, 23, 38, 52, 415, DateTimeKind.Utc).AddTicks(8664),
+                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 524, DateTimeKind.Utc).AddTicks(2943),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3570,7 +3609,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/S7Xy2TM/Vivo-v21-5g-tim-hong-1-3-org.jpg",
                             MaHang = "MH04",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 11, 7, 23, 38, 52, 415, DateTimeKind.Utc).AddTicks(8674),
+                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 524, DateTimeKind.Utc).AddTicks(2951),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3584,7 +3623,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/TLdWMdd/Vivo-v20-2021-xanh-hong-1-org.jpg",
                             MaHang = "MH04",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 11, 7, 23, 38, 52, 415, DateTimeKind.Utc).AddTicks(8681),
+                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 524, DateTimeKind.Utc).AddTicks(2955),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3598,7 +3637,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/swGN954/Vivo-y72-5g-xanh-hong-1-1-org.jpg",
                             MaHang = "MH04",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 11, 7, 23, 38, 52, 415, DateTimeKind.Utc).AddTicks(8715),
+                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 524, DateTimeKind.Utc).AddTicks(2959),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3612,7 +3651,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/swGN954/Vivo-y72-5g-xanh-hong-1-1-org.jpg",
                             MaHang = "MH04",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 11, 7, 23, 38, 52, 415, DateTimeKind.Utc).AddTicks(8726),
+                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 524, DateTimeKind.Utc).AddTicks(2964),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3626,7 +3665,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/k5rV9Vg/Samsung-galaxy-watch-4-44mm-den-1-org.jpg",
                             MaHang = "MH02",
                             MaLoaiSanPham = "DM03",
-                            NgayTao = new DateTime(2021, 11, 7, 23, 38, 52, 415, DateTimeKind.Utc).AddTicks(8734),
+                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 524, DateTimeKind.Utc).AddTicks(2968),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3640,7 +3679,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/bHRpNch/Apple-watch-s6-40mm-vien-nhom-day-cao-su-xanh-cont-1-org.jpg",
                             MaHang = "MH01",
                             MaLoaiSanPham = "DM03",
-                            NgayTao = new DateTime(2021, 11, 7, 23, 38, 52, 415, DateTimeKind.Utc).AddTicks(8743),
+                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 524, DateTimeKind.Utc).AddTicks(2973),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3654,7 +3693,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/rcfS9Nm/Untitled-1-org.jpg",
                             MaHang = "MH01",
                             MaLoaiSanPham = "DM03",
-                            NgayTao = new DateTime(2021, 11, 7, 23, 38, 52, 415, DateTimeKind.Utc).AddTicks(8753),
+                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 524, DateTimeKind.Utc).AddTicks(2977),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3668,7 +3707,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/9yR299t/Samsung-galaxy-watch-3-45mm-bac-2-org.jpg",
                             MaHang = "MH02",
                             MaLoaiSanPham = "DM03",
-                            NgayTao = new DateTime(2021, 11, 7, 23, 38, 52, 415, DateTimeKind.Utc).AddTicks(8771),
+                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 524, DateTimeKind.Utc).AddTicks(2981),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3682,7 +3721,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/ydJ9XY5/Samsung-galaxy-watch-4-44mm-den-1-org.jpg",
                             MaHang = "MH02",
                             MaLoaiSanPham = "DM03",
-                            NgayTao = new DateTime(2021, 11, 7, 23, 38, 52, 415, DateTimeKind.Utc).AddTicks(8780),
+                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 524, DateTimeKind.Utc).AddTicks(2987),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3696,7 +3735,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/2YttfZB/Apple-watch-s6-lte-40mm-vien-thep-day-thep-vang-cont-1-org.jpg",
                             MaHang = "MH01",
                             MaLoaiSanPham = "DM03",
-                            NgayTao = new DateTime(2021, 11, 7, 23, 38, 52, 415, DateTimeKind.Utc).AddTicks(8790),
+                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 524, DateTimeKind.Utc).AddTicks(2991),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3710,7 +3749,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/ZW5Wqpk/Apple-watch-s7-45mm-gps-do-1.jpg",
                             MaHang = "MH01",
                             MaLoaiSanPham = "DM03",
-                            NgayTao = new DateTime(2021, 11, 7, 23, 38, 52, 415, DateTimeKind.Utc).AddTicks(8800),
+                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 524, DateTimeKind.Utc).AddTicks(2995),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -4219,13 +4258,13 @@ namespace EcommerceWebsite.Data.Migrations
                         {
                             Id = "8d04dce2-969a-435d-bba4-df3f325983dc",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9f73acf0-81db-416b-99c8-fe10954c1426",
+                            ConcurrencyStamp = "af7ba4bb-f603-439f-9e3f-cf2995d76d16",
                             Email = "yvonnetran.work@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "yvonnetran.work@gmail.com",
                             NormalizedUserName = "havyclient1",
-                            PasswordHash = "AQAAAAEAACcQAAAAEP7vjqSppv2kqI4Rjrm90PJI0wYdfxnowoSxS58aHVe7NBvr7xL7Hcw0MvElzBPINA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJ1iuWC34zwgkjpP2Z/GCLqH2s6CERixLp8m8WPx9Ef3GSp9K4hIJ0I2O6TwWxVZSA==",
                             PhoneNumber = "0905187524",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
@@ -4239,13 +4278,13 @@ namespace EcommerceWebsite.Data.Migrations
                         {
                             Id = "04052000",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4e79af42-f9db-482a-869a-621eb0076e44",
+                            ConcurrencyStamp = "78a7d96d-c1af-410f-bfd6-4aeac7f07871",
                             Email = "phamthivi459@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "phamthivi459@gmail.com",
                             NormalizedUserName = "phamTVi0405",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPw7W5U0Fx+l4y+GH+pHH99ec1dPzZ0B5UjvpbQ24Ev5jJDKeKoeoyKfxlO+Ky6Qgg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPgtHQclacizGt8phXGUqfOFWLZ5Ck3Gy3QqRd3CmLTWp2oC0CGB4ku7l8qODPsd0Q==",
                             PhoneNumber = "0376437459",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
@@ -4259,13 +4298,13 @@ namespace EcommerceWebsite.Data.Migrations
                         {
                             Id = "123456789",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "97841e85-6b4a-4bf7-9994-f202bac7af40",
+                            ConcurrencyStamp = "52efe294-d096-4133-a02c-c470b35f5af1",
                             Email = "danhVu@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "danhVu@gmail.com",
                             NormalizedUserName = "danhVu",
-                            PasswordHash = "AQAAAAEAACcQAAAAELeWAl37ABdWrhrVhNkkS/gJ3UAbxIq1PDVean5lgeZM9UUAbwjlm7v2RZE8ePDGtA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAED1tEFdvwjBqi1jOysBSw4EpU4fCI3VaXaaayfjEW3U2u15xzNumgjL/DR3vfFuvMg==",
                             PhoneNumber = "0376437459",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
