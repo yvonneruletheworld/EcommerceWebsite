@@ -11,5 +11,6 @@ namespace EcommerceWebsite.Services.Interfaces.Main
     {
         Task<LichSuGia> GetGiaSanPhamMoiNhat(string id);
         Task<bool> ThemGia(LichSuGia input);
+        Task<bool> ModifyPrice(LichSuGia ls);
     }
 }

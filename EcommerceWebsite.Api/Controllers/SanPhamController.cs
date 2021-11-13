@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using EcommerceWebsite.Application.Constants;
+using EcommerceWebsite.Application.Pagination;
 using EcommerceWebsite.Data.Entities;
 using EcommerceWebsite.Services.Interfaces.Main;
 using EcommerceWebsite.Utilities.Input;
@@ -80,6 +81,45 @@ namespace EcommerceWebsite.Api.Controllers
             {
                 throw ex;
             }
+        }
+
+        [HttpPut("sua-san-pham/{laXoa}")]
+        public async Task<IActionResult> SuaHoacXoaSanPham (SanPhamInput input, bool laXoa)
+        {
+            if(ModelState.IsValid)
+            {
+                var obj = _mapper.Map<SanPham>(input);
+                if (obj != null)
+                {
+                    var rs = await _sanPhamServices.SuaHoacXoaSanPham(obj, laXoa, input.NguoiTao);
+                    if (rs)
+                        return Ok(Messages.API_Success);
+                    return BadRequest(Messages.API_EmptyResult);
+                }
+                return BadRequest(Messages.API_EmptyInput);
+            }
+            return BadRequest(Messages.API_Failed);
+        }
+
+        [HttpPatch("{productId}/{editor}/{newPrice}")]
+        public async Task<IActionResult> ModifyPrice (string productId, string editor, decimal newPrice)
+        {
+            if (string.IsNullOrEmpty(productId) || newPrice < 0)
+                return BadRequest(Messages.API_EmptyInput);
+
+            var obj = new LichSuGia()
+            {
+                MaSanPham = productId,
+                GiaMoi = newPrice,
+                NguoiTao = editor
+            };
+            var prdExist = await _sanPhamServices.GetSanPhamTheoMa(productId, null);
+            if (prdExist == null)
+                return BadRequest(Messages.API_EmptyInput);
+            var rs = await _bangGiaServices.ModifyPrice(obj);
+            if (rs)
+                return Ok(Messages.API_Success);
+            return BadRequest(Messages.API_Failed);
         }
     }
 }

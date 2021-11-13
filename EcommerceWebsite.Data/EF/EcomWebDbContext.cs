@@ -15,12 +15,7 @@ namespace EcommerceWebsite.Data.EF
     {
 
 
-        public EcomWebDbContext( DbContextOptions options) : base(options)
-        {
-
-        }
-
-        public EcomWebDbContext()
+        public EcomWebDbContext( DbContextOptions<EcomWebDbContext> options) : base(options)
         {
 
         }

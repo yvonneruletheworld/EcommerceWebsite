@@ -10,6 +10,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using EcommerceWebsite.Api.Interface;
+using ValensBankCore.Services.Services;
+using EcommerceWebsite.Data.Identity;
+using Microsoft.AspNetCore.Identity;
+using EcommerceWebsite.Data.EF;
 
 namespace EcommerceWebsite.WebApp
 {
@@ -39,7 +43,6 @@ namespace EcommerceWebsite.WebApp
             //    .AddClaimsPrincipalFactory<MyUserClaimsPrincipalFactoryService>()
             //    .AddDefaultTokenProviders();
 
-            
             services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromMinutes(30);
@@ -58,11 +61,13 @@ namespace EcommerceWebsite.WebApp
         {
             services.AddScoped<IHUIApiServices, HUIApiServices>();
             services.AddScoped<IDanhMucApiServices, DanhMucApiServices>();
-            //services.AddScoped<ISanPhamServices, SanPhamServices>();
+            services.AddScoped<ISanPhamApiServices, SanPhamApiServices>();
+            services.AddScoped<IKhuyenMaiApiServices, KhuyenMaiApiServices>();
+            services.AddScoped<INhanHieuApiServices, NhanHieuApiServices>();
             //services.AddScoped<IKhachHangServices, KhachHangServices>();
             //services.AddScoped<IEmailSenderServices, EmailSenderServices>();
         }
-
+       
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {

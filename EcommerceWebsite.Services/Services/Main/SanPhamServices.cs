@@ -65,9 +65,48 @@ namespace EcommerceWebsite.Services.Services.Main
                 && (x.MaSanPham == id || x.TenSanPham == tensanpham));
         }
 
-        public bool? KiemTra(string value)
+        public async Task<bool> KiemTraGia(string prdId)
         {
-            return value?.Contains("j");
+            return (await _context.LichSuGias.FindAsync(prdId) == null);
+        }
+
+        public async Task<SanPhamOutput> LayChiTietSanPham(string id, bool coGiamGia)
+        {
+            try
+            {
+                //lấy những thông số k phải list
+                var obj = (from sp in _context.SanPhams
+                                 // Sản phẩm - Đánh giá 1 - 1
+                                 join dg in _context.DanhGiaSanPhams on (sp == null ? string.Empty : sp.MaSanPham) equals dg.MaSanPham into sp_dg_group
+                                 from sp_dg in sp_dg_group.DefaultIfEmpty()
+                                 // Sản phẩm - Danh mục 1 - 1 
+                                 join dm in _context.DanhMucs on (sp == null ? string.Empty : sp.MaLoaiSanPham) equals dm.MaDanhMuc into sp_dm_group
+                                 from view in sp_dm_group.DefaultIfEmpty()
+                                 where !sp.DaXoa && sp.MaSanPham == id
+                                 select new SanPhamOutput()
+                                 {
+                                     MaSanPham = sp.MaSanPham,
+                                     SoLuongTon = sp.SoLuongTon,
+                                     TenSanPham = sp.TenSanPham,
+                                     Status = sp.Status,
+                                     DanhGia = sp_dg.NoiDung,
+                                     LoaiSanPham = view.TenDanhMuc
+                                 }).FirstOrDefault();
+
+                // lấy hình ảnh
+                obj.ListHinhAnh = await _context.MauMaSanPhams.Where(x => x.MaSanPham.Equals(id))
+                                                          .Select(mm => mm.HinhAnh)
+                                                          .ToListAsync();
+
+                //obj.ListThongSo =  
+
+                return null;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
 
         public async Task<List<SanPhamOutput>> LaySanPham()
@@ -76,6 +115,8 @@ namespace EcommerceWebsite.Services.Services.Main
             {
                 var data = await (from sp in _context.SanPhams
                                   join gia in _context.LichSuGias on sp.MaSanPham equals gia.MaSanPham
+                                  join nhanHieu in _context.NhanHieus on sp.MaHang equals nhanHieu.MaHang
+                                  join loaiSanPham in _context.DanhMucs on sp.MaLoaiSanPham equals loaiSanPham.MaDanhMuc
                                   select new SanPhamOutput
                                   {
                                       MaSanPham = sp.MaSanPham,
@@ -83,53 +124,16 @@ namespace EcommerceWebsite.Services.Services.Main
                                       SoLuongTon = sp.SoLuongTon,
                                       HinhAnh = sp.HinhAnh,
                                       GiaBan = gia.GiaMoi.ToString(),
+                                      NhanHieu = nhanHieu.TenHang,
+                                      LoaiSanPham = loaiSanPham.TenDanhMuc,
                                   }).ToListAsync();
                 return data;
-
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
-        //public async Task<ChiTietSanPhamOutput> LayChiTietSanPham(string id, bool coGiamGia)
-        //{
-        //    try
-        //    {
-        //        var pageQuery = (from sp in _context.SanPhams
-        //                         join bg in _context.LichSuGias on (sp == null ? string.Empty : sp.MaSanPham) equals bg.MaSanPham into sp_bg_group
-        //                         from sp_g in sp_bg_group.DefaultIfEmpty()
-        //                             //join dl in _context.DinhLuongs on sp_g.MaSanPham equals dl.MaSanPham into sp_dl_group
-        //                             //from sp_dl in sp_dl_group.DefaultIfEmpty()
-        //                             //join tt in _context.ThuocTinhs on sp_dl.MaThuocTinh equals tt.MaThuocTinh into dl_tt_group
-        //                             //from dl_tt in dl_tt_group.DefaultIfEmpty()
-        //                         where !sp.DaXoa && sp.MaSanPham == id
-        //                         select new ChiTietSanPhamOutput()
-        //                         {
-        //                             MaSanPham = sp.MaSanPham,
-        //                             //DonGia = sp_bg_group.FirstOrDefault().GiaMoi.ToString(), // 2
-        //                             //GiaBan = sp_bg_group.Skip(1).FirstOrDefault().GiaMoi.ToString(), //1
-        //                             //SoLuongTon = sp.SoLuongTon,
-        //                             //TenSanPham = sp.TenSanPham,
-        //                             //TinhTrang = nameof(sp.Status)
-        //                         }).FirstOrDefault();
-
-        //        ChiTietSanPhamOutput de = new ChiTietSanPhamOutput();
-        //        de.HinhAnhs = await _context.MauMaSanPhams.Where(x => x.MaSanPham.Equals(id))
-        //                                                  .Select(mm => mm.HinhAnh)
-        //                                                  .ToListAsync();
-
-
-        //        return pageQuery;
-        //    }
-        //    catch (Exception ex)
-        //    {
-
-        //        throw ex;
-        //    }
-        //}
-
         public async Task<bool> ThemSanPham (SanPham input)
         {
             //begin transaction
@@ -149,6 +153,58 @@ namespace EcommerceWebsite.Services.Services.Main
 
             return  result > 0;
         }
+        private async Task<SanPham> GetByIdAsync(string maSP)
+        {
+            try
+            {
+                var data = await _context.SanPhams.SingleOrDefaultAsync(s => s.MaSanPham == maSP);
+                return data;
 
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+        //Xóa sản phẩm
+        public async Task<bool> SuaHoacXoaSanPham(SanPham input, bool laXoa, string editorMaSP = null)
+        {
+            try
+            {
+                await _context.Database.BeginTransactionAsync();
+                var obj = await GetByIdAsync(input.MaSanPham);
+                if (obj == null) return false;
+
+                //
+                if(laXoa)
+                {
+                    obj.DaXoa = true;
+                    obj.NgayXoa = DateTime.UtcNow;
+                    obj.NguoiXoa = editorMaSP;
+                }
+                else
+                {
+                    obj.NgaySuaCuoi = DateTime.UtcNow;
+                    obj.NguoiSuaCuoi = editorMaSP;
+                }
+
+                // 
+                _context.SanPhams.Update(obj);
+                _context.Entry(obj).State = EntityState.Modified;
+
+                var rs = await _context.SaveChangesAsync();
+                await _context.Database.CommitTransactionAsync();
+
+                return rs > 0;
+            }
+            catch (Exception ex)
+            {
+                await _context.Database.RollbackTransactionAsync();
+                throw ex;
+            }
+        }
+
+       
     }
 }

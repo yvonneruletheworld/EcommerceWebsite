@@ -13,7 +13,6 @@ namespace EcommerceWebsite.Utilities.Input
        public string NhanHieu { get; set; }
        public decimal DonGia { get; set; }
        public decimal GiaBan { get; set; }
-       public string DanhMuc { get; set; }
        public string LoaiSanPham { get; set; }
        public string Utility { get; set; }
        public string SoLuong { get; set; }

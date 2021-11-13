@@ -1,4 +1,5 @@
 ﻿using EcommerceWebsite.Application.Constants;
+using EcommerceWebsite.Utilities.Input;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
@@ -6,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace EcommerceWebsite.Api.Interface
@@ -34,7 +36,7 @@ namespace EcommerceWebsite.Api.Interface
 
             var client = _httpClietnFactory.CreateClient();
             client.BaseAddress = new Uri(_config[SystemConstant.BaseAddress]);
-            //client.DefaultRequestHeaders.Authorization = new 
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", session);
 
             var response = await client.GetAsync(url);
             var body = await response.Content.ReadAsStringAsync();
@@ -43,5 +45,17 @@ namespace EcommerceWebsite.Api.Interface
                 (List<T>)JsonConvert.DeserializeObject(body, typeof(List<T>)) 
                 : null;
         }
+
+        //public async Task<bool> Modify(string url, SanPhamInput input)
+        //{
+        //    var sessions = _httpContextAccessor
+        //        .HttpContext.Session.GetString(SystemConstant.Token);
+
+        //    var client = _httpClietnFactory.CreateClient();
+        //    client.BaseAddress = new Uri(_config[SystemConstant.BaseAddress]);
+        //    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+
+        //    var response = await client.PutAsync(url, );
+        //}
     }
 }

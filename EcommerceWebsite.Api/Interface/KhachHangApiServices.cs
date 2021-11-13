@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -35,6 +36,9 @@ namespace EcommerceWebsite.Api.Interface
 
             //create client
             var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_config[SystemConstant.BaseAddress]);
+            //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", session);
+
             var response = await client.PostAsync("/api/KhachHang/user-login", httpContext);
 
             if(response.IsSuccessStatusCode)

@@ -1,0 +1,73 @@
+﻿@using EcommerceWebsite.Utilities.Output.Main
+@{
+    int giaTri = 0;
+    int giaTri2 = 0;
+}
+@model List<DanhMucOutput>
+<div class="col-sm-10 col-md-8 col-lg-4 m-l-r-auto">
+    @foreach (var item in Model.ToList())
+    {
+        giaTri++;
+        if (giaTri % 2 != 0)
+        {
+            <div class="block1 hov-img-zoom pos-relative m-b-30">
+                <img src="@item.HinhAnh" alt="IMG-BENNER">
+                <div class="block1-wrapbtn w-size2">
+                    <a href="#" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
+                        @item.TenDanhMuc
+                    </a>
+                </div>
+            </div>
+
+        }
+    }
+</div>
+<div class="col-sm-10 col-md-8 col-lg-4 m-l-r-auto">
+    @foreach (var item in Model.ToList())
+    {
+        giaTri2++;
+        if (giaTri2 % 2 == 0)
+        {
+            <div class="block1 hov-img-zoom pos-relative m-b-30">
+                <img src="@item.HinhAnh" alt="IMG-BENNER">
+                <div class="block1-wrapbtn w-size2">
+                    <a href="#" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
+                        @item.TenDanhMuc
+                    </a>
+                </div>
+            </div>
+
+        }
+
+    }
+</div>
+<div class="col-sm-10 col-md-8 col-lg-4 m-l-r-auto">
+
+    <div class="block1 hov-img-zoom pos-relative m-b-30">
+        <img src="https://i.ibb.co/Ws8XzL5/Techontop-huong-dan-trang-tri-goc-choi-game-1.jpg" alt="IMG-BENNER">
+        <div class="block1-wrapbtn w-size2">
+
+            <a href="#" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
+                streamer
+            </a>
+        </div>
+    </div>
+
+    <div class="block2 wrap-pic-w pos-relative m-b-30">
+        <img src="~/images/icons/bg-01.jpg" alt="IMG">
+        <div class="block2-content sizefull ab-t-l flex-col-c-m">
+            <h4 class="m-text4 t-center w-size3 p-b-8">
+                Đăng ký và được giảm giá 20%
+            </h4>
+            <p class="t-center w-size4">
+                Hãy là tín đồ công nghệ để biết về những tin tức công nghệ mới nhất và nhận được những ưu đãi hấp dẫn
+            </p>
+            <div class="w-size2 p-t-25">
+
+                <a href="#" class="flex-c-m size2 bg4 bo-rad-23 hov1 m-text3 trans-0-4">
+                    ĐĂNG KÝ
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
