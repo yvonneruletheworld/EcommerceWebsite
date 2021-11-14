@@ -60,6 +60,7 @@ namespace EcommerceWebsite.Services.Services.Main
 
         public async Task<SanPham> GetSanPhamTheoMa(string id, string tensanpham)
         {
+            //loiix
             return await _context.SanPhams
                 .FirstOrDefaultAsync(x => !x.DaXoa 
                 && (x.MaSanPham == id || x.TenSanPham == tensanpham));
