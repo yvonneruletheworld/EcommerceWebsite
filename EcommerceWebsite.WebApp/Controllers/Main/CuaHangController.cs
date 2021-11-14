@@ -10,10 +10,12 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
     public class CuaHangController : Controller { 
         private readonly ISanPhamApiServices _sanPhamApiServices;
         private readonly INhanHieuApiServices _nhanHieuApiServices;
-        public CuaHangController(ISanPhamApiServices sanPhamApiServices, INhanHieuApiServices nhanHieuApiServices)
+        private readonly IDanhMucApiServices _danhMucApiServices;
+        public CuaHangController(ISanPhamApiServices sanPhamApiServices, INhanHieuApiServices nhanHieuApiServices, IDanhMucApiServices danhMucApiServices)
         {
             _sanPhamApiServices = sanPhamApiServices;
             _nhanHieuApiServices = nhanHieuApiServices;
+            _danhMucApiServices = danhMucApiServices;
         }
         public IActionResult Index()
         {
@@ -39,6 +41,19 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
             {
                 var data = await _nhanHieuApiServices.layNhanHieus();
                 return PartialView("/Views/Home/_ListNhanHieuSanPham.cshtml", data);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        [HttpGet("list-danh-muc-CH")]
+        public async Task<IActionResult> LayDanhMucSanPham()
+        {
+            try
+            {
+                var data = await _danhMucApiServices.GetCategories();
+                return PartialView("/Views/CuaHang/_ListdanhMucSP.cshtml", data);
             }
             catch (Exception ex)
             {

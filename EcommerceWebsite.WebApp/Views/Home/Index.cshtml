@@ -9,95 +9,130 @@
 
 }
 
-<style>
-    .container {
-        max-width: 1400px;
-    }
-</style>
-<!-- OFFER -->
-@*Hiển thi banner*@
-
-@(await Html.PartialAsync("~/Views/Home/_ListKhuyenMai.cshtml", Model))
-
-@*HIỂN THỊ DANH MỤC SẢN PHẨM*@
-<section class="banner bgwhite p-t-40 p-b-40">
+<div class="slider-with-banner">
     <div class="container">
-        <div class="row danhmuc-sanpham">
+        <div class="row">
+            <!-- Begin Category Menu Area -->
+            <div class="col-lg-3">
+                <!--Category Menu Start-->
+                <div class="category-menu category-menu-2">
+                    <div class="category-heading">
+                        <h2 class="categories-toggle"><span>LOẠI SẢN PHẨM</span></h2>
+                    </div>
+                    <div class="danhmuc-sanpham">
 
-        </div>
-    </div>
-</section>
-@*HIỂN THỊ SẢN PHẨM*@
-<section class="newproduct bgwhite p-t-45 p-b-105">
-    <div class="container">
-        <div class="sec-title p-b-60">
-            <h3 class="m-text5 t-center">
-                DANH SÁCH SẢN PHẨM NỔI BẬT
-            </h3>
-        </div>
-        <div class="wrap-slick2">
-            <div class="slick2" id="sanphamload">
-
+                    </div>
+                </div>
             </div>
+            @*Khuyến mãi*@
+            @(await Html.PartialAsync("~/Views/Home/_ListKhuyenMai.cshtml", Model))
+            <!-- Slider Area End Here -->
+            <!-- Begin Li Banner Area -->
+            <div class="col-lg-3 col-md-4 text-center pt-sm-30">
+                <div class="li-banner">
+                    <a href="#">
+                        <img src="images/banner/3_1.jpg" alt="">
+                    </a>
+                </div>
+                <div class="li-banner mt-15 mt-sm-30 mt-xs-25 mb-xs-5">
+                    <a href="#">
+                        <img src="images/banner/3_2.jpg" alt="">
+                    </a>
+                </div>
+            </div>
+            <!-- Li Banner Area End Here -->
         </div>
-
     </div>
-</section>
-
-<script>
-    $(document).ready(() => {
-        init();
-    });
-
-    //FUNC
-    function init() {
-        getDataSanPham();
-        layDanhMuc();
-        // layKhuyenMai();
-    }
-    //Danh Muc
-    function layDanhMuc() {
-        $.ajax({
-            url: '/list-danh-muc',
-            type: 'GET',
-            success: (result) => {
-                $(".danhmuc-sanpham")[0].innerHTML = result;
-            },
-            error: (err) => {
-                alert('failed');
-                console.log(err);
-            }
+</div>
+<div class="li-static-banner pt-20 pt-sm-30">
+    <div class="container">
+        <div class="row">
+            <!-- Begin Single Banner Area -->
+            <div class="col-lg-4 col-md-4 text-center">
+                <div class="single-banner pb-xs-30">
+                    <a href="#">
+                        <img src="images/banner/1_3.jpg" alt="Li's Static Banner">
+                    </a>
+                </div>
+            </div>
+            <!-- Single Banner Area End Here -->
+            <!-- Begin Single Banner Area -->
+            <div class="col-lg-4 col-md-4 text-center">
+                <div class="single-banner pb-xs-30">
+                    <a href="#">
+                        <img src="images/banner/1_4.jpg" alt="Li's Static Banner">
+                    </a>
+                </div>
+            </div>
+            <!-- Single Banner Area End Here -->
+            <!-- Begin Single Banner Area -->
+            <div class="col-lg-4 col-md-4 text-center">
+                <div class="single-banner">
+                    <a href="#">
+                        <img src="images/banner/1_5.jpg" alt="Li's Static Banner">
+                    </a>
+                </div>
+            </div>
+            <!-- Single Banner Area End Here -->
+        </div>
+    </div>
+</div>
+<div class="sanphamload">
+    
+    </div>
+    <script>
+        $(document).ready(() => {
+            init();
         });
-    }
-    //san pham
-    function getDataSanPham() {
-        $.ajax({
-            url: '/get-data-sanpham',
-            type: 'GET',
-            dataType: 'html',
-            success: (result) => {
-                $("#sanphamload")[0].innerHTML = result;
-            },
-            error: (err) => {
-                alert('failed');
-                console.log(err);
-            }
-        });
-    }
-    //Khuyến mãi
-    function layKhuyenMai() {
-        $.ajax({
-            url: '/get-data-khuyenmai',
-            type: 'GET',
-            dataType: 'html',
-            success: (result) => {
-                $(".slick1")[0].innerHTML = result;
-            },
-            error: (err) => {
-                alert('failed');
-                console.log(err);
-            }
-        });
-    }
 
-</script>
+        //FUNC
+        function init() {
+            getDataSanPham();
+            layDanhMuc();
+        }
+        //Danh Muc
+        function layDanhMuc() {
+            $.ajax({
+                url: '/list-danh-muc',
+                type: 'GET',
+                success: (result) => {
+                    $(".danhmuc-sanpham")[0].innerHTML = result;
+                },
+                error: (err) => {
+                    alert('failed');
+                    console.log(err);
+                }
+            });
+        }
+        //san pham
+        function getDataSanPham() {
+            $.ajax({
+                url: '/get-data-sanpham',
+                type: 'GET',
+                dataType: 'html',
+                success: (result) => {
+                    $(".sanphamload")[0].innerHTML = result;
+                },
+                error: (err) => {
+                    alert('failed');
+                    console.log(err);
+                }
+            });
+        }
+        //Khuyến mãi
+        function layKhuyenMai() {
+            $.ajax({
+                url: '/get-data-khuyenmai',
+                type: 'GET',
+                dataType: 'html',
+                success: (result) => {
+                    $("#layKhuyenMai")[0].innerHTML = result;
+                },
+                error: (err) => {
+                    alert('failed');
+                    console.log(err);
+                }
+            });
+        }
+
+    </script>

@@ -1,521 +1,496 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+
+<html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>@ViewData["Title"] - TRIPLE V</title>
-
-    <link rel="icon" type="image/png" href="~/images/icons/favicon.png" />
-    <link href="~/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/fonts/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-    <link href="~/fonts/themify/themify-icons.css" rel="stylesheet" />
-    <link href="~/fonts/Linearicons-Free-v1.0.0/icon-font.min.css" rel="stylesheet" />
-    <link href="~/fonts/elegant-font/html-css/style.css" rel="stylesheet" />
-    <link href="~/vendor/animate/animate.css" rel="stylesheet" />
-    <link href="~/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" />
-    <link href="~/vendor/animsition/css/animsition.min.css" rel="stylesheet" />
-    <link href="~/vendor/select2/select2.min.css" rel="stylesheet" />
-    <link href="~/vendor/daterangepicker/daterangepicker.css" rel="stylesheet" />
-    <link href="~/vendor/slick/slick.css" rel="stylesheet" />
-    <link href="~/vendor/lightbox2/css/lightbox.min.css" rel="stylesheet" />
-    <link href="~/css/util.css" rel="stylesheet" />
-    <link href="~/css/main.css" rel="stylesheet" />
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
-    @*@RenderSection("Styles", required: false)*@
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    @using Microsoft.AspNetCore.Identity
-    @using EcommerceWebsite.Data.Identity
-
-
-    @* Application User- Name *@
-    @*@inject SignInManager<ApplicationUser> _signInManager
-    @inject UserManager<ApplicationUser> _userManager*@
-
-    <style>
-        :hover a {
-            text-decoration: none;
-        }
-    </style>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="~/images/favicon.png">
+    <!-- Material Design Iconic Font-V2.2.0 -->
+    <link rel="stylesheet" href="~/css/material-design-iconic-font.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/css/font-awesome.min.css">
+    <!-- Font Awesome Stars-->
+    <link rel="stylesheet" href="~/css/fontawesome-stars.css">
+    <!-- Meanmenu CSS -->
+    <link rel="stylesheet" href="~/css/meanmenu.css">
+    <!-- owl carousel CSS -->
+    <link rel="stylesheet" href="~/css/owl.carousel.min.css">
+    <!-- Slick Carousel CSS -->
+    <link rel="stylesheet" href="~/css/slick.css">
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="~/css/animate.css">
+    <!-- Jquery-ui CSS -->
+    <link rel="stylesheet" href="~/css/jquery-ui.min.css">
+    <!-- Venobox CSS -->
+    <link rel="stylesheet" href="~/css/venobox.css">
+    <!-- Nice Select CSS -->
+    <link rel="stylesheet" href="~/css/nice-select.css">
+    <!-- Magnific Popup CSS -->
+    <link rel="stylesheet" href="~/css/magnific-popup.css">
+    <!-- Bootstrap V4.1.3 Fremwork CSS -->
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <!-- Helper CSS -->
+    <link rel="stylesheet" href="~/css/helper.css">
+    <!-- Main Style CSS -->
+    <link rel="stylesheet" href="~/style.css">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="~/css/responsive.css">
+    <!-- Modernizr js -->
+    <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
-<body class="animsition">
-    <header class="header1">
-        <div class="container-menu-header">
-            <div class="topbar">
-                <div class="topbar-social">
-                    <a href="#" class="topbar-social-item fa fa-facebook"></a>
-                    <a href="#" class="topbar-social-item fa fa-instagram"></a>
-                    <a href="#" class="topbar-social-item fa fa-pinterest-p"></a>
-                    <a href="#" class="topbar-social-item fa fa-snapchat-ghost"></a>
-                    <a href="#" class="topbar-social-item fa fa-youtube-play"></a>
-                </div>
-                <span class="topbar-child1">
-                    Giao hàng miễn phí cho đơn đặt hàng không quá 2km
-                </span>
-                <div class="topbar-child2">
-                    <span class="topbar-email">
-                        <a href="mailto:triplev.store.2021@gmail.com"> triplev.store.2021@gmail.com</a>
-                    </span>
-                    <div class="topbar-language rs1-select2">
-                        <select class="selection-1" name="time">
-                            <option>USD</option>
-                            <option>EUR</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="wrap_header">
-
-                <a href="index.html" class="logo">
-                    TRIPLE V
-                </a>
-
-                <div class="wrap_menu">
-                    <nav class="menu">
-                        <ul class="main_menu">
-                            <li class="sale-noti">
-                                <a asp-area="" asp-controller="Home" asp-action="Index">Trang chủ</a>
-                            </li>
-                            <li>
-                                <a asp-area="" asp-controller="CuaHang" asp-action="Index">Cửa hàng</a>
-                            </li>
-                            <li>
-                                <a asp-area="" asp-controller="Home" asp-action="ALLSanPham">Khuyến mãi</a>
-                            </li>
-                            <li>
-                                <a asp-area="" asp-controller="GioHang" asp-action="Index">Giỏ hàng</a>
-                            </li>
-                            <li>
-                                <a asp-area="" asp-controller="TrangChu" asp-action="Index">Blog</a>
-                            </li>
-                            <li>
-                                <a asp-area="" asp-controller="GioiThieu" asp-action="Index">Giới thiệu</a>
-                            </li>
-                            <li>
-                                <a asp-area="" asp-controller="LienHe" asp-action="Index">Liên hệ</a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-
-                <div class="header-icons">
-
-                    <a href="#" class="header-wrapicon1 dis-block">
-                        @if (User != null) { 
-                            <p id="user-name-id" style="color:red; margin-top:5px; padding-left:5px">@User.Identity.Name</p>
-                        }
-                        else
-                        {
-                            <img src="~/images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
-                        }
-
-                    </a>
-                    <span class="linedivide1"></span>
-                    <div class="header-wrapicon2">
-                        <img src="~/images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
-                        <span class="header-icons-noti">0</span>
-
-                        <div class="header-cart header-dropdown">
-                            <ul class="header-cart-wrapitem">
-                                <li class="header-cart-item">
-                                    <div class="header-cart-item-img">
-                                        <img src="~/images/item-cart-01.jpg" alt="IMG">
-                                    </div>
-                                    <div class="header-cart-item-txt">
-                                        <a href="#" class="header-cart-item-name">
-                                            White Shirt With Pleat Detail Back
-                                        </a>
-                                        <span class="header-cart-item-info">
-                                            1 x $19.00
-                                        </span>
-                                    </div>
-                                </li>
-                                <li class="header-cart-item">
-                                    <div class="header-cart-item-img">
-                                        <img src="~/images/item-cart-02.jpg" alt="IMG">
-                                    </div>
-                                    <div class="header-cart-item-txt">
-                                        <a href="#" class="header-cart-item-name">
-                                            Converse All Star Hi Black Canvas
-                                        </a>
-                                        <span class="header-cart-item-info">
-                                            1 x $39.00
-                                        </span>
-                                    </div>
-                                </li>
-                                <li class="header-cart-item">
-                                    <div class="header-cart-item-img">
-                                        <img src="~/images/item-cart-03.jpg" alt="IMG">
-                                    </div>
-                                    <div class="header-cart-item-txt">
-                                        <a href="#" class="header-cart-item-name">
-                                            Nixon Porter Leather Watch In Tan
-                                        </a>
-                                        <span class="header-cart-item-info">
-                                            1 x $17.00
-                                        </span>
-                                    </div>
-                                </li>
-                            </ul>
-                            <div class="header-cart-total">
-                                Total: $75.00
+<body>
+    <div class="body-wrapper">
+        <!--Phần Trên đẦU-->
+        <header>
+            <div class="header-top">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-4">
+                            <div class="header-top-left">
+                                <ul class="phone-wrap">
+                                    <li><span>Telephone:</span><a href="#">028 6270 6275</a></li>
+                                </ul>
                             </div>
-                            <div class="header-cart-buttons">
-                                <div class="header-cart-wrapbtn">
-
-                                    <a href="cart.html" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-                                        View Cart
-                                    </a>
-                                </div>
-                                <div class="header-cart-wrapbtn">
-
-                                    <a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-                                        Check Out
-                                    </a>
-                                </div>
+                        </div>
+                        <div class="col-lg-9 col-md-8">
+                            <div class="header-top-right">
+                                <ul class="ht-menu">
+                                    <li>
+                                        <div class="ht-setting-trigger"><span>Cài đặt</span></div>
+                                        <div class="setting ht-setting">
+                                            <ul class="ht-setting-list">
+                                                <li><a href="login-register.html">Tài khoản của bạn</a></li>
+                                                <li><a href="login-register.html">Đăng nhập</a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <span class="language-selector-wrapper">Ngôn ngữ :</span>
+                                        <div class="ht-language-trigger"><span>English</span></div>
+                                        <div class="language ht-language">
+                                            <ul class="ht-setting-list">
+                                                <li class="active"><a href="#"><img src="~/images/menu/flag-icon/1.jpg" alt="">English</a></li>
+                                                <li><a href="#"><img src="~/images/menu/flag-icon/2.jpg" alt="">Français</a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        @* Dành cho mobile *@
 
-        <div class="wrap_header_mobile">
-
-            <a href="index-2.html" class="logo-mobile">
-                TRIPLE V
-            </a>
-
-            <div class="btn-show-menu">
-
-                <div class="header-icons-mobile">
-                    <a href="#" class="header-wrapicon1 dis-block">
-                        <img src="~/images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
-                    </a>
-                    <span class="linedivide2"></span>
-                    <div class="header-wrapicon2">
-                        <img src="~/images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
-                        <span class="header-icons-noti">0</span>
-
-                        <div class="header-cart header-dropdown">
-                            <ul class="header-cart-wrapitem">
-                                <li class="header-cart-item">
-                                    <div class="header-cart-item-img">
-                                        <img src="~/images/item-cart-01.jpg" alt="IMG">
-                                    </div>
-                                    <div class="header-cart-item-txt">
-                                        <a href="#" class="header-cart-item-name">
-                                            White Shirt With Pleat Detail Back
-                                        </a>
-                                        <span class="header-cart-item-info">
-                                            1 x $19.00
-                                        </span>
-                                    </div>
-                                </li>
-                                <li class="header-cart-item">
-                                    <div class="header-cart-item-img">
-                                        <img src="~/images/item-cart-02.jpg" alt="IMG">
-                                    </div>
-                                    <div class="header-cart-item-txt">
-                                        <a href="#" class="header-cart-item-name">
-                                            Converse All Star Hi Black Canvas
-                                        </a>
-                                        <span class="header-cart-item-info">
-                                            1 x $39.00
-                                        </span>
-                                    </div>
-                                </li>
-                                <li class="header-cart-item">
-                                    <div class="header-cart-item-img">
-                                        <img src="~/images/item-cart-03.jpg" alt="IMG">
-                                    </div>
-                                    <div class="header-cart-item-txt">
-                                        <a href="#" class="header-cart-item-name">
-                                            Nixon Porter Leather Watch In Tan
-                                        </a>
-                                        <span class="header-cart-item-info">
-                                            1 x $17.00
-                                        </span>
-                                    </div>
-                                </li>
-                            </ul>
-                            <div class="header-cart-total">
-                                Total: $75.00
-                            </div>
-                            <div class="header-cart-buttons">
-                                <div class="header-cart-wrapbtn">
-
-                                    <a href="cart.html" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-                                        View Cart
-                                    </a>
-                                </div>
-                                <div class="header-cart-wrapbtn">
-
-                                    <a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-                                        Check Out
-                                    </a>
-                                </div>
+            <div class="header-middle pl-sm-0 pr-sm-0 pl-xs-0 pr-xs-0">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="logo pb-sm-30 pb-xs-30">
+                                <a href="index.html">
+                                    <img src="~/images/menu/logo/1.jpg" alt="">
+                                </a>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="btn-show-menu-mobile hamburger hamburger--squeeze">
-                    <span class="hamburger-box">
-                        <span class="hamburger-inner"></span>
-                    </span>
-                </div>
-            </div>
-        </div>
-
-        <div class="wrap-side-menu">
-            <nav class="side-menu">
-                <ul class="main-menu">
-                    <li class="item-topbar-mobile p-l-20 p-t-8 p-b-8">
-                        <span class="topbar-child1">
-                            Giao hàng miễn phí cho đơn đặt hàng không quá 2km
-                        </span>
-                    </li>
-                    <li class="item-topbar-mobile p-l-20 p-t-8 p-b-8">
-                        <div class="topbar-child2-mobile">
-                            <span class="topbar-email">
-                                <a href="" mailto:triplev.store.2021@gmail.com" class="__cf_email__" data-cfemail="c7a1a6b4afa287a2bfa6aab7aba2e9a4a8aa">triplev.store.2021@gmail.com</a>
-                            </span>
-                            <div class="topbar-language rs1-select2">
-                                <select class="selection-1" name="time">
-                                    <option>USD</option>
-                                    <option>EUR</option>
+                        <div class="col-lg-9">
+                            <form action="#" class="hm-searchbox">
+                                <select class="nice-select select-search-category">
+                                    <option value="0">All</option>
+                                    <option value="2">Điện thoại</option>
                                 </select>
+                                <input type="text" placeholder="Sản phẩm tìm kiếm ...">
+                                <button class="li-btn" type="submit"><i class="fa fa-search"></i></button>
+                            </form>
+                            <div class="header-middle-right">
+                                <ul class="hm-menu">
+                                    <li class="hm-wishlist">
+                                        <a href="wishlist.html">
+                                            <span class="cart-item-count wishlist-item-count">0</span>
+                                            <i class="fa fa-heart-o"></i>
+                                        </a>
+                                    </li>
+                                    <li class="hm-minicart">
+                                        <div class="hm-minicart-trigger">
+                                            <span class="item-icon"></span>
+                                            <span class="item-text">
+                                                £80.00
+                                                <span class="cart-item-count">2</span>
+                                            </span>
+                                        </div>
+                                        <span></span>
+                                        <div class="minicart">
+                                            <ul class="minicart-product-list">
+                                                <li>
+                                                    <a href="single-product.html" class="minicart-product-image">
+                                                        <img src="images/product/small-size/1.jpg" alt="cart products">
+                                                    </a>
+                                                    <div class="minicart-product-details">
+                                                        <h6><a href="single-product.html">Aenean eu tristique</a></h6>
+                                                        <span>£40 x 1</span>
+                                                    </div>
+                                                    <button class="close">
+                                                        <i class="fa fa-close"></i>
+                                                    </button>
+                                                </li>
+                                                <li>
+                                                    <a href="single-product.html" class="minicart-product-image">
+                                                        <img src="images/product/small-size/2.jpg" alt="cart products">
+                                                    </a>
+                                                    <div class="minicart-product-details">
+                                                        <h6><a href="single-product.html">Aenean eu tristique</a></h6>
+                                                        <span>£40 x 1</span>
+                                                    </div>
+                                                    <button class="close">
+                                                        <i class="fa fa-close"></i>
+                                                    </button>
+                                                </li>
+                                            </ul>
+                                            <p class="minicart-total">SUBTOTAL: <span>£80.00</span></p>
+                                            <div class="minicart-button">
+                                                <a href="checkout.html" class="li-button li-button-dark li-button-fullwidth li-button-sm">
+                                                    <span>Xem chi tiết giỏ hàng</span>
+                                                </a>
+                                                <a href="checkout.html" class="li-button li-button-fullwidth li-button-sm">
+                                                    <span>Thanh toán</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                </ul>
                             </div>
                         </div>
-                    </li>
-                    <li class="item-topbar-mobile p-l-10">
-                        <div class="topbar-social-mobile">
-                            <a href="#" class="topbar-social-item fa fa-facebook"></a>
-                            <a href="#" class="topbar-social-item fa fa-instagram"></a>
-                            <a href="#" class="topbar-social-item fa fa-pinterest-p"></a>
-                            <a href="#" class="topbar-social-item fa fa-snapchat-ghost"></a>
-                            <a href="#" class="topbar-social-item fa fa-youtube-play"></a>
-                        </div>
-                    </li>
-                    <li class="item-menu-mobile">
-                        <a asp-area="" asp-controller="Home" asp-action="Index">Trang Chủ</a>
-                        <ul class="sub-menu">
-                            <li><a href="index-2.html">Homepage V1</a></li>
-                            <li><a href="home-02.html">Homepage V2</a></li>
-                            <li><a href="home-03.html">Homepage V3</a></li>
-                        </ul>
-                        <i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>
-                    </li>
-                    <li class="item-menu-mobile">
-                        <a asp-area="" asp-controller="Home" asp-action="CuaHang">Cửa hàng</a>
-                    </li>
-                    <li class="item-menu-mobile">
-                        <a asp-area="" asp-controller="Home" asp-action="Index">Khuyến mãi</a>
-                    </li>
-                    <li class="item-menu-mobile">
-                        <a asp-area="" asp-controller="GioHang" asp-action="Index">Giỏ hàng</a>
-                    </li>
-                    <li class="item-menu-mobile">
-                        <a asp-area="" asp-controller="Home" asp-action="Index">Blog</a>
-                    </li>
-                    <li class="item-menu-mobile">
-                        <a asp-area="" asp-controller="Home" asp-action="Index">Giới thiệu</a>
-                    </li>
-                    <li class="item-menu-mobile">
-                        <a asp-area="" asp-controller="LienHe" asp-action="LienHeVoiChungToi">Liên hệ</a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-        @* Dành cho mobile *@
-    </header>
-    @RenderBody()
-    <footer class="bg6 p-t-45 p-b-43 p-l-45 p-r-45">
-        <div class="flex-w p-b-90">
-            <div class="w-size6 p-t-30 p-l-15 p-r-15 respon3">
-                <h4 class="s-text12 p-b-30">
-                    LIÊN HỆ TẠI
-                </h4>
-                <div>
-                    <p class="s-text7 w-size27">
-                        140 Lê Trọng Tấn, Tây Thạnh, Tân Phú, TP. HCM - hotline: 028 6270 6275
-                    </p>
-                    <div class="flex-m p-t-30">
-                        <a href="#" class="fs-18 color1 p-r-20 fa fa-facebook"></a>
-                        <a href="#" class="fs-18 color1 p-r-20 fa fa-instagram"></a>
-                        <a href="#" class="fs-18 color1 p-r-20 fa fa-pinterest-p"></a>
-                        <a href="#" class="fs-18 color1 p-r-20 fa fa-snapchat-ghost"></a>
-                        <a href="#" class="fs-18 color1 p-r-20 fa fa-youtube-play"></a>
                     </div>
                 </div>
             </div>
-            <div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
-                <h4 class="s-text12 p-b-30">
-                    THỂ LOẠI
-                </h4>
-                <ul>
-                    <li class="p-b-9">
-                        <a href="#" class="s-text7">
-                            Điện thoại
-                        </a>
-                    </li>
-                    <li class="p-b-9">
-                        <a href="#" class="s-text7">
-                            Phụ kiện
-                        </a>
-                    </li>
-                    <li class="p-b-9">
-                        <a href="#" class="s-text7">
-                            Đồng hồ thông minh
-                        </a>
-                    </li>
-                    <li class="p-b-9">
-                        <a href="#" class="s-text7">
-                            PC, Máy in
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
-                <h4 class="s-text12 p-b-30">
-                    LIÊN HỆ
-                </h4>
-                <ul>
-                    <li class="p-b-9">
-                        <a href="#" class="s-text7">
-                            Tình trạng đặt hàng
-                        </a>
-                    </li>
-                    <li class="p-b-9">
-                        <a href="#" class="s-text7">
-                            Vận chuyển và giao hàng
-                        </a>
-                    </li>
-                    <li class="p-b-9">
-                        <a href="#" class="s-text7">
-                            Lợi nhuận
-                        </a>
-                    </li>
-                    <li class="p-b-9">
-                        <a href="#" class="s-text7">
-                            Các lựa chọn thanh toán
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
-                <h4 class="s-text12 p-b-30">
-                    VỀ CHÚNG TÔI
-                </h4>
-                <ul>
-                    <li class="p-b-9">
-                        <a href="#" class="s-text7">
-                            Mã giảm giá
-                        </a>
-                    </li>
-                    <li class="p-b-9">
-                        <a href="#" class="s-text7">
-                            Đăng nhập bằng mail
-                        </a>
-                    </li>
-                    <li class="p-b-9">
-                        <a href="#" class="s-text7">
-                            Phản hồi về trang Web
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="w-size8 p-t-30 p-l-15 p-r-15 respon3">
-                <h4 class="s-text12 p-b-30">
-                    PHẢN HỒI
-                </h4>
-                <form>
-                    <div class="effect1 w-size9">
-                        <input class="s-text7 bg6 w-full p-b-5" type="text" name="email" placeholder="email@gmail.com">
-                        <span class="effect1-line"></span>
-                    </div>
-                    <div class="w-size2 p-t-20">
-                        <button class="flex-c-m size2 bg4 bo-rad-23 hov1 m-text3 trans-0-4">
-                            PHẢN HỒI
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <div class="t-center p-l-15 p-r-15">
-            <a href="#">
-                <img class="h-size2" src="~/images/icons/paypal.png" alt="IMG-PAYPAL">
-            </a>
-            <a href="#">
-                <img class="h-size2" src="~/images/icons/visa.png" alt="IMG-VISA">
-            </a>
-            <a href="#">
-                <img class="h-size2" src="~/images/icons/mastercard.png" alt="IMG-MASTERCARD">
-            </a>
-            <a href="#">
-                <img class="h-size2" src="~/images/icons/express.png" alt="IMG-EXPRESS">
-            </a>
-            <a href="#">
-                <img class="h-size2" src="~/images/icons/discover.png" alt="IMG-DISCOVER">
-            </a>
-            <div class="t-center s-text8 p-t-20">
-                Copyright © 2021 <a href="#">Triple V</a>. All rights reserved.
-            </div>
-        </div>
-    </footer>
-    <div class="btn-back-to-top bg0-hov" id="myBtn">
-        <span class="symbol-btn-back-to-top">
-            <i class="fa fa-angle-double-up" aria-hidden="true"></i>
-        </span>
-    </div>
-    <div id="dropDownSelect1"></div>
-    @*<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>*@
-    <script type="text/javascript" src="~/vendor/jquery/jquery-3.2.1.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    <script type="text/javascript" src="~/vendor/animsition/js/animsition.min.js"></script>
-    <script type="text/javascript" src="~/vendor/bootstrap/js/popper.js"></script>
-    <script type="text/javascript" src="~/vendor/bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="~/vendor/select2/select2.min.js"></script>
-    <script type="text/javascript">
-        $(".selection-1").select2({
-            minimumResultsForSearch: 20,
-            dropdownParent: $('#dropDownSelect1')
-        });
-        $(".selection-2").select2({
-            minimumResultsForSearch: 20,
-            dropdownParent: $('#dropDownSelect2')
-        });
-    </script>
-    <script type="text/javascript" src="~/vendor/slick/slick.min.js"></script>
-    <script type="text/javascript" src="~/js/slick-custom.js"></script>
-    <script type="text/javascript" src="~/vendor/countdowntime/countdowntime.js"></script>
-    <script type="text/javascript" src="~/vendor/lightbox2/js/lightbox.min.js"></script>
-    <script type="text/javascript" src="~/vendor/sweetalert/sweetalert.min.js"></script>
-    <script>
-        $('.block2-btn-addcart').each(function () {
-            var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
-            $(this).on('click', function () {
-                swal(nameProduct, "is added to cart !", "success");
-            });
-        });
-        $('.block2-btn-addwishlist').each(function () {
-            var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
-            $(this).on('click', function () {
-                swal(nameProduct, "is added to wishlist !", "success");
-            });
-        });
-        $('.btn-addcart-product-detail').each(function () {
-            var nameProduct = $('.product-detail-name').html();
-            $(this).on('click', function () {
-                swal(nameProduct, "is added to wishlist !", "success");
-            });
-        });
 
-    </script>
+            <div class="header-bottom header-sticky stick d-none d-lg-block d-xl-block">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <!-- Begin Header Bottom Menu Area -->
+                            <div class="hb-menu hb-menu-2">
+                                <nav>
+                                    <ul>
+                                        <li class="sale-noti">
+                                            <a asp-area="" asp-controller="Home" asp-action="Index">Trang chủ</a>
+                                        </li>
+                                        <li>
+                                            <a asp-area="" asp-controller="CuaHang" asp-action="Index">Cửa hàng</a>
+                                        </li>
+                                        <li>
+                                            <a asp-area="" asp-controller="Home" asp-action="ALLSanPham">Khuyến mãi</a>
+                                        </li>
+                                        <li>
+                                            <a asp-area="" asp-controller="GioHang" asp-action="Index">Giỏ hàng</a>
+                                        </li>
+                                        <li>
+                                            <a asp-area="" asp-controller="TrangChu" asp-action="Index">Blog</a>
+                                        </li>
+                                        <li>
+                                            <a asp-area="" asp-controller="GioiThieu" asp-action="Index">Giới thiệu</a>
+                                        </li>
+                                        <li>
+                                            <a asp-area="" asp-controller="LienHe" asp-action="Index">Liên hệ</a>
+                                        </li>
+                                        <li class="hb-info f-right p-0 d-sm-none d-lg-block">
+                                            <span>140 Lê Trọng Tấn, Tây Thạnh, Tân Phú, TP. HCM</span>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                            <!-- Header Bottom Menu Area End Here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Header Bottom Area End Here -->
+            <!-- Begin Mobile Menu Area -->
+            <div class="mobile-menu-area d-lg-none d-xl-none col-12">
+                <div class="container">
+                    <div class="row">
+                        <div class="mobile-menu">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Mobile Menu Area End Here -->
+        </header>
+
+
+        <div>
+            @RenderBody()
+        </div>
+        <div class="footer">
+            <!-- Begin Footer Static Top Area -->
+            <div class="footer-static-top footer-static-top-3 pt-xs-50 pb-xs-10">
+                <div class="container">
+                    <!-- Begin Footer Shipping Area -->
+                    <div class="footer-shipping pb-xs-0">
+                        <div class="row">
+                            <!-- Begin Li's Shipping Inner Box Area -->
+                            <div class="col-lg-3 col-md-3 col-sm-6 pb-xs-45">
+                                <div class="li-shipping-inner-box">
+                                    <div class="shipping-icon">
+                                        <img src="~/images/shipping-icon/1.png" alt="Shipping Icon">
+                                    </div>
+                                    <div class="shipping-text">
+                                        <h2>Giao hàng miễn phí</h2>
+                                        <p>Và trả lại miễn phí. Xem thanh toán để biết ngày giao hàng.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Li's Shipping Inner Box Area End Here -->
+                            <!-- Begin Li's Shipping Inner Box Area -->
+                            <div class="col-lg-3 col-md-3 col-sm-6 pb-xs-45">
+                                <div class="li-shipping-inner-box">
+                                    <div class="shipping-icon">
+                                        <img src="~/images/shipping-icon/2.png" alt="Shipping Icon">
+                                    </div>
+                                    <div class="shipping-text">
+                                        <h2>Thanh toán an toàn</h2>
+                                        <p>Thanh toán bằng các phương thức thanh toán an toàn và phổ biến nhất thế giới.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Li's Shipping Inner Box Area End Here -->
+                            <!-- Begin Li's Shipping Inner Box Area -->
+                            <div class="col-lg-3 col-md-3 col-sm-6 pb-xs-45">
+                                <div class="li-shipping-inner-box">
+                                    <div class="shipping-icon">
+                                        <img src="~/images/shipping-icon/3.png" alt="Shipping Icon">
+                                    </div>
+                                    <div class="shipping-text">
+                                        <h2>Mua sắm với sự tự tin</h2>
+                                        <p>Bảo vệ người mua của chúng tôi bao gồm việc mua hàng của bạn từ khi nhấp chuột đến khi giao hàng.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Li's Shipping Inner Box Area End Here -->
+                            <!-- Begin Li's Shipping Inner Box Area -->
+                            <div class="col-lg-3 col-md-3 col-sm-6">
+                                <div class="li-shipping-inner-box last-child">
+                                    <div class="shipping-icon">
+                                        <img src="~/images/shipping-icon/4.png" alt="Shipping Icon">
+                                    </div>
+                                    <div class="shipping-text">
+                                        <h2>
+                                            Trung tâm trợ giúp 24/7
+                                        </h2>
+                                        <p>Có một câu hỏi? Gọi cho Chuyên gia hoặc trò chuyện trực tuyến.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Li's Shipping Inner Box Area End Here -->
+                        </div>
+                    </div>
+                    <!-- Footer Shipping Area End Here -->
+                </div>
+            </div>
+            <!-- Footer Static Top Area End Here -->
+            <!-- Begin Footer Static Middle Area -->
+            <div class="footer-static-middle">
+                <div class="container">
+                    <div class="footer-logo-wrap pt-50 pb-35">
+                        <div class="row">
+                            <!-- Begin Footer Logo Area -->
+                            <div class="col-lg-4 col-md-6">
+                                <div class="footer-logo">
+                                    <img src="~/images/menu/logo/1.jpg" alt="Footer Logo">
+                                </div>
+                                <ul class="des">
+                                    <li>
+                                        <span>Địa chỉ: </span>
+                                        140, Lê Trọng Tấn, Tây Thạnh, Tân Phú, TP. HCM
+                                    </li>
+                                    <li>
+                                        <span>Phone: </span>
+                                        <a href="#">028 6270 6275</a>
+                                    </li>
+                                    <li>
+                                        <span>Email: </span>
+                                        <a href="mailto://info@yourdomain.com">triplev.store.2021@gmail.com</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- Footer Logo Area End Here -->
+                            <!-- Begin Footer Block Area -->
+                            <div class="col-lg-2 col-md-3 col-sm-6">
+                                <div class="footer-block">
+                                    <h3 class="footer-block-title">Sản Phẩm</h3>
+                                    <ul>
+                                        <li><a href="#">Điện thoại</a></li>
+                                        <li><a href="#">PC, Máy in</a></li>
+                                        <li><a href="#">Đồng hồ</a></li>
+                                        <li><a href="#">Phụ kiện</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Footer Block Area End Here -->
+                            <!-- Begin Footer Block Area -->
+                            <div class="col-lg-2 col-md-3 col-sm-6">
+                                <div class="footer-block">
+                                    <h3 class="footer-block-title">Cửa hàng</h3>
+                                    <ul>
+                                        <li><a href="#">Chuyển</a></li>
+                                        <li><a href="#">Thông báo pháp lý</a></li>
+                                        <li><a href="#">Về chúng tôi</a></li>
+                                        <li><a href="#">Liên hệ chúng tôi</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Footer Block Area End Here -->
+                            <!-- Begin Footer Block Area -->
+                            <div class="col-lg-4">
+                                <div class="footer-block">
+                                    <h3 class="footer-block-title">Theo dõi chúng tôi</h3>
+                                    <ul class="social-link">
+                                        <li class="twitter">
+                                            <a href="https://twitter.com/" data-toggle="tooltip" target="_blank" title="Twitter">
+                                                <i class="fa fa-twitter"></i>
+                                            </a>
+                                        </li>
+                                        <li class="rss">
+                                            <a href="https://rss.com/" data-toggle="tooltip" target="_blank" title="RSS">
+                                                <i class="fa fa-rss"></i>
+                                            </a>
+                                        </li>
+                                        <li class="google-plus">
+                                            <a href="https://www.plus.google.com/discover" data-toggle="tooltip" target="_blank" title="Google +">
+                                                <i class="fa fa-google-plus"></i>
+                                            </a>
+                                        </li>
+                                        <li class="facebook">
+                                            <a href="https://www.facebook.com/" data-toggle="tooltip" target="_blank" title="Facebook">
+                                                <i class="fa fa-facebook"></i>
+                                            </a>
+                                        </li>
+                                        <li class="youtube">
+                                            <a href="https://www.youtube.com/" data-toggle="tooltip" target="_blank" title="Youtube">
+                                                <i class="fa fa-youtube"></i>
+                                            </a>
+                                        </li>
+                                        <li class="instagram">
+                                            <a href="https://www.instagram.com/" data-toggle="tooltip" target="_blank" title="Instagram">
+                                                <i class="fa fa-instagram"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- Begin Footer Newsletter Area -->
+                                <div class="footer-newsletter">
+                                    <h4>Đăng ký nhận bản tin</h4>
+                                    <form action="#" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="footer-subscribe-form validate" target="_blank" novalidate>
+                                        <div id="mc_embed_signup_scroll">
+                                            <div id="mc-form" class="mc-form subscribe-form form-group">
+                                                <input id="mc-email" type="email" autocomplete="off" placeholder="Email của bạn " />
+                                                <button class="btn" id="mc-submit">GỬI</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- Footer Newsletter Area End Here -->
+                            </div>
+                            <!-- Footer Block Area End Here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer Static Middle Area End Here -->
+            <!-- Begin Footer Static Bottom Area -->
+            <div class="footer-static-bottom">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <!-- Begin Footer Links Area -->
+                            <div class="footer-links">
+                                <ul>
+                                    <li><a href="#">Mua sắm trực tuyến</a></li>
+                                    <li><a href="#">Khuyến mãi</a></li>
+                                    <li><a href="#">Đơn đặt hàng của tôi</a></li>
+                                    <li><a href="#">Giúp</a></li>
+                                    <li><a href="#">Dịch vụ khách hàng</a></li>
+                                    <li><a href="#">Ủng hộ</a></li>
+                                    <li><a href="#">Phổ biến nhất</a></li>
+                                    <li><a href="#">Điểm đến mới</a></li>
+                                    <li><a href="#">Special Products</a></li>
+                                    <li><a href="#">Sản phẩm đặc biệt</a></li>
+                                    <li><a href="#">Cửa hàng của chúng tôi</a></li>
+                                    <li><a href="#">Đang chuyển hàng</a></li>
+                                    <li><a href="#">Thanh toán</a></li>
+                                    <li><a href="#">Bảo lãnh</a></li>
+                                    <li><a href="#">Tiền hoàn lại</a></li>
+                                    <li><a href="#">Thủ tục thanh toán</a></li>
+                                    <li><a href="#">Chiết khấu</a></li>
+                                    <li><a href="#">Chính sách vận chuyển</a></li>
+                                </ul>
+                            </div>
+                            <!-- Footer Links Area End Here -->
+                            <!-- Begin Footer Payment Area -->
+                            <div class="payment text-center">
+                                <a href="#">
+                                    <img src="images/payment/1.png" alt="">
+                                </a>
+                            </div>
+                            <!-- Footer Payment Area End Here -->
+                            <!-- Begin Copyright Area -->
+                            <div class="copyright text-center pt-30 pb-50">
+                                <span>Copyright © 2021 <a target="_blank" href="https://www.templateshub.net"> Triple V</a>. All rights reserved.</span>
+                            </div>
+                            <!-- Copyright Area End Here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer Static Bottom Area End Here -->
+        </div>
+    </div>
+    <!-- Body Wrapper End Here -->
+    <!-- jQuery-V1.12.4 -->
+    <script src="~/js/vendor/jquery-1.12.4.min.js"></script>
+    <!-- Popper js -->
+    <script src="~/js/vendor/popper.min.js"></script>
+    <!-- Bootstrap V4.1.3 Fremwork js -->
+    <script src="~/js/bootstrap.min.js"></script>
+    <!-- Ajax Mail js -->
+    <script src="~/js/ajax-mail.js"></script>
+    <!-- Meanmenu js -->
+    <script src="~/js/jquery.meanmenu.min.js"></script>
+    <!-- Wow.min js -->
+    <script src="~/js/wow.min.js"></script>
+    <!-- Slick Carousel js -->
+    <script src="~/js/slick.min.js"></script>
+    <!-- Owl Carousel-2 js -->
+    <script src="~/js/owl.carousel.min.js"></script>
+    <!-- Magnific popup js -->
+    <script src="~/js/jquery.magnific-popup.min.js"></script>
+    <!-- Isotope js -->
+    <script src="~/js/isotope.pkgd.min.js"></script>
+    <!-- Imagesloaded js -->
+    <script src="~/js/imagesloaded.pkgd.min.js"></script>
+    <!-- Mixitup js -->
+    <script src="~/js/jquery.mixitup.min.js"></script>
+    <!-- Countdown -->
+    <script src="~/js/jquery.countdown.min.js"></script>
+    <!-- Counterup -->
+    <script src="~/js/jquery.counterup.min.js"></script>
+    <!-- Waypoints -->
+    <script src="~/js/waypoints.min.js"></script>
+    <!-- Barrating -->
+    <script src="~/js/jquery.barrating.min.js"></script>
+    <!-- Jquery-ui -->
+    <script src="~/js/jquery-ui.min.js"></script>
+    <!-- Venobox -->
+    <script src="~/js/venobox.min.js"></script>
+    <!-- Nice Select js -->
+    <script src="~/js/jquery.nice-select.min.js"></script>
+    <!-- ScrollUp js -->
+    <script src="~/js/scrollUp.min.js"></script>
+    <!-- Main/Activator js -->
     <script src="~/js/main.js"></script>
-    @*<script defer src="../../../static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"rayId":"64a7260aa9e752b0","si":10,"version":"2021.4.0"}'></script>*@
-    @RenderSection("Scripts", required: false)
+    @RenderSection("Styles", required: false)
+
 </body>
 </html>

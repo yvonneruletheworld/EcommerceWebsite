@@ -20,7 +20,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EcommerceWebsite.Data", "Ec
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EcommerceWebsite.Api", "EcommerceWebsite.Api\EcommerceWebsite.Api.csproj", "{24162A4A-7EB2-4D39-87E3-EEF0505E9526}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EcommerceWebsite.WebAdmin", "EcommerceWebsite.WebAdmin\EcommerceWebsite.WebAdmin.csproj", "{41D6BE42-0EE7-4F73-9D86-B513F2979DC0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EcommerceWebsite.WebAdmin", "EcommerceWebsite.WebAdmin\EcommerceWebsite.WebAdmin.csproj", "{41D6BE42-0EE7-4F73-9D86-B513F2979DC0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

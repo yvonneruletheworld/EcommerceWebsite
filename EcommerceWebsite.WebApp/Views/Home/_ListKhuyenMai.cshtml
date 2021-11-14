@@ -1,34 +1,27 @@
 ﻿@using EcommerceWebsite.Data.Entities
 @model List<KhuyenMai>
-@{
-    int soLuong = 0;
-    string giaTri = "";
-}
-<section class="slide1">
-    <div class="wrap-slick1">
-        <div class="slick1">
-            @foreach (var item in Model.ToList())
-            {
-                soLuong++;
-                giaTri = "item" + soLuong;
-                <div class="item-slick1 @giaTri-slick1" style="background-image: url(@item.HinhAnh); ">
-                    <div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
-                        <span class="caption1-slide1 m-text1 t-center animated visible-false m-b-15" data-appear="fadeInDown">
-                            @item.TenKhuyenMai
-                        </span>
-                        <h2 class="caption2-slide1 xl-text1 t-center animated visible-false m-b-37" data-appear="fadeInUp">
-                            Giảm ngay @item.PhanTram  %
-                        </h2>
-                        <div class="wrap-btn-slide1 w-size1 animated visible-false" data-appear="zoomIn">
 
-                            <a href="product.html" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
-                                Xem ngay
-                            </a>
+    <div class="col-lg-6 col-md-8">
+        <div class="slider-area slider-area-3 pt-sm-30 pt-xs-30 pb-xs-30">
+            <div class="slider-active owl-carousel">
+                @if (Model.Any())
+                {
+                    foreach (var item in Model)
+                    {
+                        <div class="single-slide align-center-left animation-style-01 bg-7">
+                            <div class="slider-progress"></div>
+                            <div class="slider-content">
+                                <h5>Sale Offer <span>@item.PhanTram% Off</span> This Week</h5>
+                                <h2>@item.TenKhuyenMai</h2>
+                                <div class="default-btn slide-btn">
+                                    <a class="links" href="shop-left-sidebar.html">Xem ngay</a>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            }
+                    }
+                }
+
+            </div>
         </div>
     </div>
-</section>
-        
+

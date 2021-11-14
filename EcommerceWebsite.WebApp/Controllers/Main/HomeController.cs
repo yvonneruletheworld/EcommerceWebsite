@@ -34,15 +34,6 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
             var data = await _khuyenMaiApiServices.laykhuyenMais();
             return View(data);
         }
-//        public IActionResult CuaHangAsync()
-//        {
-//            return View();
-//=======
-//          //  var data = await _khuyenMaiApiServices.laykhuyenMais();
-//            return View("~/Views/Home/Index.cshtml");
-//>>>>>>> Stashed changes
-//        }
-
 
         [HttpGet("list-danh-muc")]
         public async Task<IActionResult> LayDanhMucSanPham ()
@@ -77,11 +68,6 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
             try
             {
                 var data = await _khuyenMaiApiServices.laykhuyenMais();
-                //return Json(new
-                //{
-                //    datalist = (from a in data select new { a.MaKhuyenMai, a.TenKhuyenMai, a.PhanTram, a.HinhAnh }).ToList(),
-                //    status = true
-                //});
                return PartialView("/Views/Home/_ListKhuyenMai.cshtml", data);
             }
             catch (Exception ex)
