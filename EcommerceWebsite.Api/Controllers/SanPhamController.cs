@@ -141,8 +141,8 @@ namespace EcommerceWebsite.Api.Controllers
                 // list Hinh anh, Thong so, Gia, Danh gia
                 obj.ListHinhAnh = await _mauMaServices.LayListMauMaTheoSanPham(productId)??null;
                 obj.ListThongSo = await _dinhLuongServices.LayThongSoTheoSanPham(productId)??null;
-                //var giaBan = await _bangGiaServices.GetGiaSanPhamMoiNhat(productId);
-                //obj.GiaBan = giaBan == null ? 0 : giaBan.GiaMoi;
+                var giaBan = await _bangGiaServices.GetGiaSanPhamMoiNhat(productId);
+                obj.GiaBan = giaBan == null ? 0 : giaBan.GiaMoi;
                 return Ok(obj); 
             }    
         }

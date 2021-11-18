@@ -21,7 +21,7 @@ namespace EcommerceWebsite.MainWeb.Controllers
         {
             var vm = new DetailVM();
             vm.SanPham = await _sanPhamServices.LayChiTietSanPham(prdId);
-            return View("Views/Detail/Index.cshlml",vm);
+            return View("Views/Detail/Index.cshtml",vm);
         }
     }
 }

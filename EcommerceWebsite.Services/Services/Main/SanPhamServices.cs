@@ -87,10 +87,10 @@ namespace EcommerceWebsite.Services.Services.Main
                                  join nh in _context.NhanHieus on (sp == null ? string.Empty : sp.MaHang) equals nh.MaHang into sp_nh_group
                                  from sp_nh in sp_nh_group.DefaultIfEmpty()
                                  // Get newest price
-                                 from gb in _context.LichSuGias
-                                       .Where(lsg => !lsg.DaXoa && lsg.MaSanPham.Equals(sp.MaSanPham))
-                                       .OrderByDescending(lsg => lsg.NgayTao.Date)
-                                       .ThenByDescending(d => d.NgayTao.TimeOfDay).Take(1)
+                                 //from gb in _context.LichSuGias
+                                 //      .Where(lsg => !lsg.DaXoa && lsg.MaSanPham.Equals(sp.MaSanPham))
+                                 //      .OrderByDescending(lsg => lsg.NgayTao.Date)
+                                 //      .ThenByDescending(d => d.NgayTao.TimeOfDay).Take(1)
                                  where !sp.DaXoa && sp.MaSanPham == id
                                  select new SanPhamOutput()
                                  {
@@ -102,7 +102,7 @@ namespace EcommerceWebsite.Services.Services.Main
                                      DanhGia = sp_dg,
                                      LoaiSanPham = sp_dm.TenDanhMuc,
                                      NhanHieu = sp_nh.TenHang,
-                                     GiaBan = gb.GiaMoi
+                                     //GiaBan = gb.GiaMoi
                                  }).FirstOrDefaultAsync();
                 return obj;
             }

@@ -92,7 +92,7 @@
 
                                 <div class="single-product-wrap">
                                     <div class="product-image">
-                                        <a href="#">
+                                        <a href="@Url.Action("Index", "Detail",prd.MaSanPham)">
                                             <img src="@prd.HinhAnh" alt="@prd.TenSanPham">
                                         </a>
                                         <span class="sticker">@(nameof(Status.Hot))</span>
@@ -113,7 +113,7 @@
                                                     </ul>
                                                 </div>
                                             </div>
-                                            <h4><a class="product_name" href="#">@prd.TenSanPham</a></h4>
+                                            <h4><a class="product_name" href="@Url.Action("Index", "Detail",prd.MaSanPham)">@prd.TenSanPham</a></h4>
                                             <div class="price-box">
                                                 <span class="new-price">@prd.GiaBan</span>
                                             </div>
