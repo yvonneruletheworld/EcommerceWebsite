@@ -2,6 +2,7 @@
 using EcommerceWebsite.Data.Entities;
 using EcommerceWebsite.Utilities.Input;
 using EcommerceWebsite.Utilities.Output.Main;
+using EcommerceWebsite.Utilities.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace EcommerceWebsite.Api.Mapper
             CreateMap<SanPham, SanPhamOutput>();
             CreateMap<SanPhamInput, SanPham>()
                 .ForMember(sp => sp.MaLoaiSanPham, sp => sp.MapFrom(spi => spi.LoaiSanPham));
+            CreateMap<SanPhamOutput, SanPhamVM>();
         }
     }
 }

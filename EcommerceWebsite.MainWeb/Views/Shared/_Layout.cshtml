@@ -1,0 +1,606 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] TRIPLE V - Điện thoại, Máy tính bản </title>
+    <meta name="description" content="">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="~/images/favicon.png">
+    <!-- Material Design Iconic Font-V2.2.0 -->
+    <link href="~/css/material-design-iconic-font.min.css" rel="stylesheet" />
+    <!-- Font Awesome -->
+    <link href="~/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- Font Awesome Stars-->
+    <link href="~/css/fontawesome-stars.css" rel="stylesheet" />
+    <!-- Meanmenu CSS -->
+    <link href="~/css/meanmenu.css" rel="stylesheet" />
+    <!-- owl carousel CSS -->
+    <link href="~/css/owl.carousel.min.css" rel="stylesheet" />
+    <!-- Slick Carousel CSS -->
+    <link href="~/css/slick.css" rel="stylesheet" />
+    <!-- Animate CSS -->
+    <link href="~/css/animate.css" rel="stylesheet" />
+    <!-- Jquery-ui CSS -->
+    <link href="~/css/jquery-ui.min.css" rel="stylesheet" />
+    <!-- Venobox CSS -->
+    <link href="~/css/venobox.css" rel="stylesheet" />
+    <!-- Nice Select CSS -->
+    <link href="~/css/nice-select.css" rel="stylesheet" />
+    <!-- Magnific Popup CSS -->
+    <link href="~/css/magnific-popup.css" rel="stylesheet" />
+    <!-- Bootstrap V4.1.3 Fremwork CSS -->
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Helper CSS -->
+    <link href="~/css/helper.css" rel="stylesheet" />
+    <!-- Main Style CSS -->
+    <link href="~/css/style.css" rel="stylesheet" />
+    <!-- Responsive CSS -->
+    <link href="~/css/responsive.css" rel="stylesheet" />
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+    <!-- Modernizr js -->
+    <script src="~/js/vendor/modernizr-2.8.3.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/css/site.css" />*@
+    <style>
+        body {
+            font-family: 'Varela Round', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div class="body-wrapper">
+        <!-- Begin Header Area -->
+        <header>
+            <!-- Begin Header Top Area -->
+            <div class="header-top">
+                <div class="container">
+                    <div class="row">
+                        <!-- Begin Header Top Left Area -->
+                        <div class="col-lg-3 col-md-4">
+                            <div class="header-top-left">
+                                <ul class="phone-wrap">
+                                    <li><span>Hotline:</span><a href="#">(+84) 0908070605</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Header Top Left Area End Here -->
+                        <!-- Begin Header Top Right Area -->
+                        <div class="col-lg-9 col-md-8">
+                            <div class="header-top-right">
+                                <ul class="ht-menu">
+                                    <!-- Begin Setting Area -->
+                                    <li>
+                                        <div class="ht-setting-trigger"><span>Thiết lập chung</span></div>
+                                        <div class="setting ht-setting">
+                                            <ul class="ht-setting-list">
+                                                @if (User != null)
+                                                {
+                                                    <li><a href="#">Cá nhân</a></li>
+                                                    <li><a href="#">Ví Online</a></li>
+                                                }
+                                                else
+                                                {
+                                                    <li><a href="#">Đăng nhập</a></li>
+                                                    <li><a href="#">Đăng kí</a></li>
+                                                }
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <!-- Setting Area End Here -->
+                                    <!-- Begin Currency Area -->
+                                    <li>
+                                        <span class="currency-selector-wrapper">Mệnh giá :</span>
+                                        <div class="ht-currency-trigger"><span>VNĐ $</span></div>
+                                        <div class="currency ht-currency">
+                                            <ul class="ht-setting-list">
+                                                <li><a href="#">USD $</a></li>
+                                                <li class="active"><a href="#">VNĐ </a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <!-- Currency Area End Here -->
+                                    <!-- Begin Language Area -->
+                                    <li>
+                                        <span class="language-selector-wrapper">Ngôn ngữ :</span>
+                                        <div class="ht-language-trigger"><span>Tiếng Việt</span></div>
+                                        <div class="language ht-language">
+                                            <ul class="ht-setting-list">
+                                                <li class="active"><a href="#"><img src="~/images/menu/flag-icon/1.jpg" alt="">Tiếng Việt</a></li>
+                                                <li><a href="#"><img src="~/images/menu/flag-icon/2.jpg" alt="">Tiếng Anh</a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <!-- Language Area End Here -->
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Header Top Right Area End Here -->
+                    </div>
+                </div>
+            </div>
+            <!-- Header Top Area End Here -->
+            <!-- Begin Header Middle Area -->
+            <div class="header-middle pl-sm-0 pr-sm-0 pl-xs-0 pr-xs-0">
+                <div class="container">
+                    <div class="row">
+                        <!-- Begin Header Logo Area -->
+                        <div class="col-lg-3">
+                            <div class="logo pb-sm-30 pb-xs-30">
+                                <a href="@Url.Action("Index","Home")">
+                                    <img src="~/images/menu/logo/1.jpg" alt="TRIPLE V" />
+                                </a>
+                            </div>
+                        </div>
+                        <!-- Header Logo Area End Here -->
+                        <!-- Begin Header Middle Right Area -->
+                        <div class="col-lg-9">
+                            <!-- Begin Header Middle Searchbox Area -->
+                            <form action="#" class="hm-searchbox">
+                                <select class="nice-select select-search-category">
+                                    <option value="0">Tất cả</option>
+
+                                    <!-- Load cac item de tim kiem-->
+
+                                    <option value="10">Viết code load các item tìm kiếm</option>
+                                    <option value="17">- -  Prime Video</option>
+                                    <option value="20">- - - -  All Videos</option>
+                                    <option value="21">- - - -  Blouses</option>
+                                </select>
+                                <input type="text" placeholder="Enter your search key ...">
+                                <button class="li-btn" type="submit"><i class="fa fa-search"></i></button>
+                            </form>
+                            <!-- Header Middle Searchbox Area End Here -->
+                            <!-- Begin Header Middle Right Area -->
+                            <div class="header-middle-right">
+                                <ul class="hm-menu">
+                                    <!-- Begin Header Middle Wishlist Area -->
+                                    <li class="hm-wishlist">
+                                        <a href="#">
+                                            <!--Lien ket den trang yeu thich-->
+                                            <!-- Load san pham yeu thich cua khach hang-->
+                                            <span class="cart-item-count wishlist-item-count">0</span>
+                                            <i class="fa fa-heart-o"></i>
+                                        </a>
+                                    </li>
+                                    <!-- Header Middle Wishlist Area End Here -->
+                                    <!-- Begin Header Mini Cart Area -->
+                                    <li class="hm-minicart">
+                                        <div class="hm-minicart-trigger">
+                                            <span class="item-icon"></span>
+                                            <span class="item-text">
+                                                <!-- Load tong tien trong gio hang -->
+                                                0,000 VND
+                                                <!-- Load so san pham trong gio hang -->
+                                                <span class="cart-item-count">0</span>
+                                            </span>
+                                        </div>
+                                        <span></span>
+
+                                        @(await Html.PartialAsync("~/Views/Home/_MiniCart.cshtml"))
+                                    </li>
+                                    <!-- Header Mini Cart Area End Here -->
+                                </ul>
+                            </div>
+                            <!-- Header Middle Right Area End Here -->
+                        </div>
+                        <!-- Header Middle Right Area End Here -->
+                    </div>
+                </div>
+            </div>
+            <!-- Header Middle Area End Here -->
+            <!-- Begin Header Bottom Area -->
+            <div class="header-bottom header-sticky stick d-none d-lg-block d-xl-block">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <!-- Begin Header Bottom Menu Area -->
+                            <div class="hb-menu hb-menu-2">
+                                <nav>
+                                    <ul class="main-menu-ul">
+                                        <li><a href="@Url.Action("Index","Home")"  >Trang chủ</a></li>
+                                        <li class="megamenu-holder">
+                                            <a href="#">Cửa hàng</a>
+                                            <ul class="megamenu hb-megamenu">
+                                                <li>
+                                                    <a href="#">SẢN PHẨM</a>
+                                                    <ul>
+                                                        <li><a href="#">Hàng mới về</a></li>
+                                                        <li><a href="#">Sản phẩm nổi bật</a></li>
+                                                        <li><a href="#">Săn Sale cực HOT</a></li>
+                                                        <li><a href="#">Combo Tiện lợi</a></li>
+                                                        <li><a href="#">Sản phẩm bán chạy</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <a href="#">GIAO HÀNG</a>
+                                                    <ul>
+                                                        <li><a href="#">Thiết lập địa chỉ</a></li>
+                                                        <li><a href="#">Đơn vị giao hàng</a></li>
+                                                        <li><a href="#">Ưu đãi giao hàng</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <a href="single-product.html">CỬA HÀNG</a>
+                                                    <ul>
+                                                        <li><a href="#">Chi nhánh 1</a></li>
+                                                        <li><a href="#">Chi nhánh 1</a></li>
+                                                        <li><a href="#">Chi nhánh 1</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown-holder">
+                                            <a href="#">Bài viết</a>
+                                            <ul class="hb-dropdown">
+                                                <li class="sub-dropdown-holder">
+                                                    <a href="#">Tin tức công nghệ</a>
+                                                    <ul class="hb-dropdown hb-sub-dropdown">
+                                                        <li><a href="#">Điện thoại</a></li>
+                                                        <li><a href="#">PC, Tablets</a></li>
+                                                        <li><a href="#">Đồ dùng điện tử</a></li>
+                                                        <li><a href="#">Công nghệ mới</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="sub-dropdown-holder">
+                                                    <a href="#">Tin tức tổng hợp</a>
+                                                    <ul class="hb-dropdown hb-sub-dropdown">
+                                                        <li><a href="#">Thủ thuật</a></li>
+                                                        <li><a href="#">Hỗ trợ</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="megamenu-static-holder">
+                                            <a href="#">Lịch sử đơn hàng</a>
+                                            <ul class="megamenu hb-megamenu">
+                                                <li>
+                                                    <a href="#">Tình trạng </a>
+                                                    <ul>
+                                                        <li><a href="#">Đợi duyệt</a></li>
+                                                        <li><a href="#">Đang đóng gói</a></li>
+                                                        <li><a href="#">Đang giao</a></li>
+                                                        <li><a href="#">Đã giao</a></li>
+                                                        <li><a href="#">Hủy</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <a href="blog-details-left-sidebar.html">Tổng hợp</a>
+                                                    <ul>
+                                                        <li><a href="blog-details-left-sidebar.html">Danh sách đơn hàng</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="#">Khuyến Mãi</a></li>
+                                        <li><a href="#">Giới thiệu</a></li>
+                                        <li><a href="#">Liên hệ</a></li>
+                                        <!-- Begin Header Bottom Menu Information Area -->
+                                        <li class="hb-info f-right p-0 d-sm-none d-lg-block">
+                                            <span>140 Lê Trọng Tấn, Tân Phú, HCM</span>
+                                        </li>
+                                        <!-- Header Bottom Menu Information Area End Here -->
+                                    </ul>
+                                </nav>
+                            </div>
+                            <!-- Header Bottom Menu Area End Here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Header Bottom Area End Here -->
+            <!-- Begin Mobile Menu Area -->
+            <div class="mobile-menu-area d-lg-none d-xl-none col-12">
+                <div class="container">
+                    <div class="row">
+                        <div class="mobile-menu">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Mobile Menu Area End Here -->
+        </header>
+        <!-- Header Area End Here -->
+        <!-- Begin Main Body -->
+        <div>
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+
+        <!-- Begin Footer Area -->
+        <div class="footer">
+            <!-- Begin Footer Static Top Area -->
+            <div class="footer-static-top footer-static-top-3 pt-xs-50 pb-xs-10">
+                <div class="container">
+                    <!-- Begin Footer Shipping Area -->
+                    <div class="footer-shipping pb-xs-0">
+                        <div class="row">
+                            <!-- Begin Li's Shipping Inner Box Area -->
+                            <div class="col-lg-3 col-md-3 col-sm-6 pb-xs-45">
+                                <div class="li-shipping-inner-box">
+                                    <div class="shipping-icon">
+                                        <img src="~/images/shipping-icon/1.png" alt="Shipping Icon">
+                                    </div>
+                                    <div class="shipping-text">
+                                        <h2>Giao Hàng Miễn Phí</h2>
+                                        <p>Hỗ trợ giao/ trả hàng miễn phí. Tình trạng đơn hàng được cập nhật thường xuyên.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Li's Shipping Inner Box Area End Here -->
+                            <!-- Begin Li's Shipping Inner Box Area -->
+                            <div class="col-lg-3 col-md-3 col-sm-6 pb-xs-45">
+                                <div class="li-shipping-inner-box">
+                                    <div class="shipping-icon">
+                                        <img src="~/images/shipping-icon/2.png" alt="Shipping Icon">
+                                    </div>
+                                    <div class="shipping-text">
+                                        <h2>Thanh Toán An Toàn</h2>
+                                        <p>Phương thức thanh toán đơn giản và bảo mật tuyệt đối</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Li's Shipping Inner Box Area End Here -->
+                            <!-- Begin Li's Shipping Inner Box Area -->
+                            <div class="col-lg-3 col-md-3 col-sm-6 pb-xs-45">
+                                <div class="li-shipping-inner-box">
+                                    <div class="shipping-icon">
+                                        <img src="~/images/shipping-icon/3.png" alt="Shipping Icon">
+                                    </div>
+                                    <div class="shipping-text">
+                                        <h2>Nhiều Ưu Đãi</h2>
+                                        <p>Mang đến cho bạn không gian mua sắm chuyên nghiệp - thân thiện, cùng những sản phẩm chất lượng</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Li's Shipping Inner Box Area End Here -->
+                            <!-- Begin Li's Shipping Inner Box Area -->
+                            <div class="col-lg-3 col-md-3 col-sm-6">
+                                <div class="li-shipping-inner-box last-child">
+                                    <div class="shipping-icon">
+                                        <img src="~/images/shipping-icon/4.png" alt="Shipping Icon">
+                                    </div>
+                                    <div class="shipping-text">
+                                        <h2>Hỗ Trợ 24/7</h2>
+                                        <p>Mọi thắc mắc được giải quyết tức thời.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Li's Shipping Inner Box Area End Here -->
+                        </div>
+                    </div>
+                    <!-- Footer Shipping Area End Here -->
+                </div>
+            </div>
+            <!-- Footer Static Top Area End Here -->
+            <!-- Begin Footer Static Middle Area -->
+            <div class="footer-static-middle">
+                <div class="container">
+                    <div class="footer-logo-wrap pt-50 pb-35">
+                        <div class="row">
+                            <!-- Begin Footer Logo Area -->
+                            <div class="col-lg-4 col-md-6">
+                                <div class="footer-logo">
+                                    <img src="~/images/menu/logo/1.jpg" alt="Footer Logo">
+                                    <p class="info">
+                                        © 2018. Công ty cổ phần TRIPLE V. GPDKKD: 0303217354 do sở KH & ĐT TP.HCM cấp ngày 02/01/2007. GPMXH: 238/GP-BTTTT do Bộ Thông Tin và Truyền Thông cấp ngày 04/06/2020..
+                                    </p>
+                                </div>
+                                <ul class="des">
+                                    <li>
+                                        <span>Địa chỉ: </span>
+                                        128 Trần Quang Khải, P. Tân Định, Q.1, TP.Hồ Chí Minh
+                                    </li>
+                                    <li>
+                                        <span>Điện thoại: </span>
+                                        <a href="#">(+123) 123 321 345</a>
+                                    </li>
+                                    <li>
+                                        <span>Email: </span>
+                                        <a href="mailto://triplev.store.2021@gmail.com">triplev.store.2021@gmail.com</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- Footer Logo Area End Here -->
+                            <!-- Begin Footer Block Area -->
+                            <div class="col-lg-2 col-md-3 col-sm-6">
+                                <div class="footer-block">
+                                    <h3 class="footer-block-title">SẢN PHẨM</h3>
+                                    <ul>
+                                        <li><a href="#">Hàng mới về</a></li>
+                                        <li><a href="#">Deal khủng</a></li>
+                                        <li><a href="#">Best sales</a></li>
+                                        <li><a href="#">Phản hồi</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Footer Block Area End Here -->
+                            <!-- Begin Footer Block Area -->
+                            <div class="col-lg-2 col-md-3 col-sm-6">
+                                <div class="footer-block">
+                                    <h3 class="footer-block-title">DỊCH VỤ</h3>
+                                    <ul>
+                                        <li><a href="#">Giao hàng</a></li>
+                                        <li><a href="#">Thông báo</a></li>
+                                        <li><a href="#">Giới thiệu</a></li>
+                                        <li><a href="#">Liên hệ</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Footer Block Area End Here -->
+                            <!-- Begin Footer Block Area -->
+                            <div class="col-lg-4">
+                                <div class="footer-block">
+                                    <h3 class="footer-block-title">Kết nối với chúng tôi</h3>
+                                    <ul class="social-link">
+                                        <li class="twitter">
+                                            <a href="https://twitter.com/" data-toggle="tooltip" target="_blank" title="Twitter">
+                                                <i class="fa fa-twitter"></i>
+                                            </a>
+                                        </li>
+                                        <li class="rss">
+                                            <a href="https://rss.com/" data-toggle="tooltip" target="_blank" title="RSS">
+                                                <i class="fa fa-rss"></i>
+                                            </a>
+                                        </li>
+                                        <li class="google-plus">
+                                            <a href="https://www.plus.google.com/discover" data-toggle="tooltip" target="_blank" title="Google +">
+                                                <i class="fa fa-google-plus"></i>
+                                            </a>
+                                        </li>
+                                        <li class="facebook">
+                                            <a href="https://www.facebook.com/" data-toggle="tooltip" target="_blank" title="Facebook">
+                                                <i class="fa fa-facebook"></i>
+                                            </a>
+                                        </li>
+                                        <li class="youtube">
+                                            <a href="https://www.youtube.com/" data-toggle="tooltip" target="_blank" title="Youtube">
+                                                <i class="fa fa-youtube"></i>
+                                            </a>
+                                        </li>
+                                        <li class="instagram">
+                                            <a href="https://www.instagram.com/" data-toggle="tooltip" target="_blank" title="Instagram">
+                                                <i class="fa fa-instagram"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- Begin Footer Newsletter Area -->
+                                <div class="footer-newsletter">
+                                    <h4>Sign up to newsletter</h4>
+                                    <form action="#" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="footer-subscribe-form validate" target="_blank" novalidate>
+                                        <div id="mc_embed_signup_scroll">
+                                            <div id="mc-form" class="mc-form subscribe-form form-group">
+                                                <input id="mc-email" type="email" autocomplete="off" placeholder="Email của bạn" />
+                                                <button class="btn" id="mc-submit">Đăng ký theo dõi</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- Footer Newsletter Area End Here -->
+                            </div>
+                            <!-- Footer Block Area End Here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer Static Middle Area End Here -->
+            <!-- Begin Footer Static Bottom Area -->
+            <div class="footer-static-bottom">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <!-- Begin Footer Links Area -->
+                            <div class="footer-links">
+                                <ul>
+                                    <li><a href="#">Cửa hàng Online</a></li>
+                                    <li><a href="#">Quảng Cáo</a></li>
+                                    <li><a href="#">Đơn đặt của tôi</a></li>
+                                    <li><a href="#">Hỗ trợ</a></li>
+                                    <li><a href="#">Dịch vụ khách hàng</a></li>
+                                    <li><a href="#">Tư vấn</a></li>
+                                    <li><a href="#">Phổ biến nhất</a></li>
+                                    <li><a href="#">Hàng mới về</a></li>
+                                    <li><a href="#">Ưu đãi</a></li>
+                                    <li><a href="#">Nhà sản xuất</a></li>
+                                    <li><a href="#">Của hàng</a></li>
+                                    <li><a href="#">Shipping</a></li>
+                                    <li><a href="#">Thanh toán</a></li>
+                                    <li><a href="#">Bảo hành</a></li>
+                                    <li><a href="#">Hồi trả</a></li>
+                                    <li><a href="#">Xác nhận</a></li>
+                                    <li><a href="#">Giảm giá</a></li>
+                                    <li><a href="#">Policy Shipping</a></li>
+                                </ul>
+                            </div>
+                            <!-- Footer Links Area End Here -->
+                            <!-- Begin Footer Payment Area -->
+                            <div class="payment text-center">
+                                <a href="#">
+                                    <img src="~/images/payment/1.png" alt="">
+                                </a>
+                            </div>
+                            <!-- Footer Payment Area End Here -->
+                            <!-- Begin Copyright Area -->
+                            <div class="copyright text-center pt-30 pb-50">
+                                <span><a target="_blank" href="https://www.templateshub.net">Templates Hub</a></span>
+                            </div>
+                            <!-- Copyright Area End Here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer Static Bottom Area End Here -->
+        </div>
+        <!-- Footer Area End Here -->
+
+    </div>
+
+
+    <!-- Body Wrapper End Here -->
+
+    <script>
+        $(function () {
+            var mainMenuItem = $('.main-menu-ul li a');
+            for (var i = 0; i < mainMenuItem.length; i++) {
+                mainMenuItem[i].classList.add("font-weight-bold");
+            }
+        });
+
+    </script>
+
+    <!-- jQuery-V1.12.4 -->
+    <script src="~/js/vendor/jquery-3.2.1.min.js"></script>
+    @*<script src="~/js/vendor/jquery-1.12.4.min.js"></script>*@
+    <!-- Popper js -->
+    <script src="~/js/vendor/popper.min.js"></script>
+    <!-- Bootstrap V4.1.3 Fremwork js -->
+    <script src="~/js/bootstrap.min.js"></script>
+    <!-- Ajax Mail js -->
+    <script src="~/js/ajax-mail.js"></script>
+    <!-- Meanmenu js -->
+    <script src="~/js/jquery.meanmenu.min.js"></script>
+    <!-- Wow.min js -->
+    <script src="~/js/wow.min.js"></script>
+    <!-- Slick Carousel js -->
+    <script src="~/js/slick.min.js"></script>
+    <!-- Owl Carousel-2 js -->
+    <script src="~/js/owl.carousel.min.js"></script>
+    <!-- Magnific popup js -->
+    <script src="~/js/jquery.magnific-popup.min.js"></script>
+    <!-- Isotope js -->
+    <script src="~/js/isotope.pkgd.min.js"></script>
+    <!-- Imagesloaded js -->
+    <script src="~/js/imagesloaded.pkgd.min.js"></script>
+    <!-- Mixitup js -->
+    <script src="~/js/jquery.mixitup.min.js"></script>
+    <!-- Countdown -->
+    <script src="~/js/jquery.countdown.min.js"></script>
+    <!-- Counterup -->
+    <script src="~/js/jquery.counterup.min.js"></script>
+    <!-- Waypoints -->
+    <script src="~/js/waypoints.min.js"></script>
+    <!-- Barrating -->
+    <script src="~/js/jquery.barrating.min.js"></script>
+    <!-- Jquery-ui -->
+    <script src="~/js/jquery-ui.min.js"></script>
+    <!-- Venobox -->
+    <script src="~/js/venobox.min.js"></script>
+    <!-- Nice Select js -->
+    <script src="~/js/jquery.nice-select.min.js"></script>
+    <!-- ScrollUp js -->
+    <script src="~/js/scrollUp.min.js"></script>
+    <!-- Main/Activator js -->
+    <script src="~/js/main.js"></script>
+
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

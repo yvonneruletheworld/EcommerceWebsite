@@ -1,5 +1,6 @@
 ﻿using EcommerceWebsite.Data.Entities;
 using EcommerceWebsite.Utilities.Output.Main;
+using EcommerceWebsite.Utilities.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,5 +11,7 @@ namespace EcommerceWebsite.Services.Interfaces.Main
     public interface IDanhMucServices
     {
         Task<List<DanhMucOutput>> GetDanhMucs();
+        Task<List<CategorySetVM>> GetDanhMucVaSanPhams(int itemCount);
+        Task<List<DanhMucOutput>> GetDanhMucCon(string parentId);
     }
 }

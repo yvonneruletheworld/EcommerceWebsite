@@ -25,8 +25,8 @@ namespace EcommerceWebsite.Services.Services.Main
             {
                 var data = await _context.LichSuGias
                     .Where(lsg => !lsg.DaXoa && lsg.MaSanPham.Equals(id))
-                    .OrderBy(lsg => lsg.NgayTao.Date)
-                    .ThenBy(d => d.NgayTao.TimeOfDay)
+                    .OrderByDescending(lsg => lsg.NgayTao.Date)
+                    .ThenByDescending(d => d.NgayTao.TimeOfDay)
                     .FirstOrDefaultAsync();
                 return data;
             }
@@ -35,7 +35,7 @@ namespace EcommerceWebsite.Services.Services.Main
                 throw ex;
             }
         }
-
+         
         public async Task<bool> ThemGia(LichSuGia input)
         {
             //begin transaction

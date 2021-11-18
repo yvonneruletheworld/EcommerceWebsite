@@ -86,6 +86,11 @@ namespace EcommerceWebsite.Services.Services.Main
                                  // Sản phẩm  - Nhãn hiệu 1 - 1
                                  join nh in _context.NhanHieus on (sp == null ? string.Empty : sp.MaHang) equals nh.MaHang into sp_nh_group
                                  from sp_nh in sp_nh_group.DefaultIfEmpty()
+                                 // Get newest price
+                                 from gb in _context.LichSuGias
+                                       .Where(lsg => !lsg.DaXoa && lsg.MaSanPham.Equals(sp.MaSanPham))
+                                       .OrderByDescending(lsg => lsg.NgayTao.Date)
+                                       .ThenByDescending(d => d.NgayTao.TimeOfDay).Take(1)
                                  where !sp.DaXoa && sp.MaSanPham == id
                                  select new SanPhamOutput()
                                  {
@@ -93,9 +98,11 @@ namespace EcommerceWebsite.Services.Services.Main
                                      SoLuongTon = sp.SoLuongTon,
                                      TenSanPham = sp.TenSanPham,
                                      Status = sp.Status,
+                                     HinhAnh = sp.HinhAnh,
                                      DanhGia = sp_dg,
                                      LoaiSanPham = sp_dm.TenDanhMuc,
                                      NhanHieu = sp_nh.TenHang,
+                                     GiaBan = gb.GiaMoi
                                  }).FirstOrDefaultAsync();
                 return obj;
             }
@@ -202,6 +209,29 @@ namespace EcommerceWebsite.Services.Services.Main
             }
         }
 
-       
+        public async Task<List<SanPhamOutput>> LaySanPhamTheoLoai(string loaiSanPham, int take)
+        {
+            return await (from sp in _context.SanPhams
+                       join dm in _context.DanhMucs on sp.MaLoaiSanPham equals dm.MaDanhMuc into sp_dm_group
+                       from sp_dm in sp_dm_group.DefaultIfEmpty()
+                       join nh in _context.NhanHieus on sp.MaHang equals nh.MaHang into sp_nh_group
+                       from sp_nh in sp_nh_group.DefaultIfEmpty()
+                       from gb in _context.LichSuGias
+                            .Where(lsg => !lsg.DaXoa && lsg.MaSanPham.Equals(sp.MaSanPham))
+                            .OrderByDescending(lsg => lsg.NgayTao.Date)
+                            .ThenByDescending(d => d.NgayTao.TimeOfDay).Take(1)
+                          where !sp.DaXoa && sp.MaLoaiSanPham == loaiSanPham
+                       select new SanPhamOutput()
+                       {
+                           MaSanPham = sp.MaSanPham,
+                           SoLuongTon = sp.SoLuongTon,
+                           TenSanPham = sp.TenSanPham,
+                           Status = sp.Status,
+                           HinhAnh = sp.HinhAnh,
+                           LoaiSanPham = sp_dm.TenDanhMuc,
+                           NhanHieu = sp_nh.TenHang,
+                           GiaBan = gb.GiaMoi
+                       }).Take(take).ToListAsync();
+        }
     }
 }

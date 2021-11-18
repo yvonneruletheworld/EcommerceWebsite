@@ -594,1603 +594,1603 @@ namespace EcommerceWebsite.Data.Extensions
                  //}
         );
             //Dịnh lượng
-            modelBuilder.Entity<DinhLuong>().HasData(
-                new DinhLuong()
-                {
-                    MaSanPham = "SP01",
-                    MaThuocTinh = "TT01",
-                    GiaTri = 0,
-                    DonVi = "Dynamic AMOLED 2X, Chính 7.6 & Phụ 6.2, Full HD+"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP01",
-                    MaThuocTinh = "TT02",
-                    GiaTri = 0,
-                    DonVi = "Android 11"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP01",
-                    MaThuocTinh = "TT03",
-                    GiaTri = 0,
-                    DonVi = "3 camera 12 MP"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP01",
-                    MaThuocTinh = "TT04",
-                    GiaTri = 0,
-                    DonVi = "10 MP & 4 MP"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP01",
-                    MaThuocTinh = "TT05",
-                    GiaTri = 0,
-                    DonVi = "Snapdragon 888"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP01",
-                    MaThuocTinh = "TT06",
-                    GiaTri = 12,
-                    DonVi = "GB"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP01",
-                    MaThuocTinh = "TT07",
-                    GiaTri = 512,
-                    DonVi = "GB"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP01",
-                    MaThuocTinh = "TT08",
-                    GiaTri = 0,
-                    DonVi = "2 Nano SIM, Hỗ trợ 5G"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP01",
-                    MaThuocTinh = "TT09",
-                    GiaTri = 0,
-                    DonVi = "4400 mAh, 25 W"
-                },
-                //
-                new DinhLuong()
-                {
-                    MaSanPham = "SP02",
-                    MaThuocTinh = "TT01",
-                    GiaTri = 0,
-                    DonVi = "Dynamic AMOLED 2X, Chính 6.7 & Phụ 1.9, Full HD+"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP02",
-                    MaThuocTinh = "TT02",
-                    GiaTri = 0,
-                    DonVi = "Android 11"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP02",
-                    MaThuocTinh = "TT03",
-                    GiaTri = 0,
-                    DonVi = "2 camera 12 MP"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP02",
-                    MaThuocTinh = "TT04",
-                    GiaTri = 0,
-                    DonVi = "10 MP"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP02",
-                    MaThuocTinh = "TT05",
-                    GiaTri = 0,
-                    DonVi = "Snapdragon 888"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP02",
-                    MaThuocTinh = "TT06",
-                    GiaTri = 8,
-                    DonVi = "GB"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP02",
-                    MaThuocTinh = "TT07",
-                    GiaTri = 128,
-                    DonVi = "GB"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP02",
-                    MaThuocTinh = "TT08",
-                    GiaTri = 0,
-                    DonVi = "1 Nano SIM & 1 eSIM, Hỗ trợ 5G"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP02",
-                    MaThuocTinh = "TT09",
-                    GiaTri = 0,
-                    DonVi = "3300 mAh, 25 W"
-                },
-                //
-                new DinhLuong()
-                {
-                    MaSanPham = "SP03",
-                    MaThuocTinh = "TT01",
-                    GiaTri = 0,
-                    DonVi = "OLED, 6.1, Super Retina XDR"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP03",
-                    MaThuocTinh = "TT02",
-                    GiaTri = 0,
-                    DonVi = "iOS 14"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP03",
-                    MaThuocTinh = "TT03",
-                    GiaTri = 0,
-                    DonVi = "2 camera 12 MP"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP03",
-                    MaThuocTinh = "TT04",
-                    GiaTri = 0,
-                    DonVi = "12 MP"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP03",
-                    MaThuocTinh = "TT05",
-                    GiaTri = 0,
-                    DonVi = "Apple A14 Bionic"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP03",
-                    MaThuocTinh = "TT06",
-                    GiaTri = 4,
-                    DonVi = "GB"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP03",
-                    MaThuocTinh = "TT07",
-                    GiaTri = 64,
-                    DonVi = "GB"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP03",
-                    MaThuocTinh = "TT08",
-                    GiaTri = 0,
-                    DonVi = "1 Nano SIM & 1 eSIM, Hỗ trợ 5G"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP03",
-                    MaThuocTinh = "TT09",
-                    GiaTri = 0,
-                    DonVi = "2815 mAh, 20 W"
-                },
-                //
-                new DinhLuong()
-                {
-                    MaSanPham = "SP04",
-                    MaThuocTinh = "TT01",
-                    GiaTri = 0,
-                    DonVi = "OLED, 6.7, Super Retina XDR"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP04",
-                    MaThuocTinh = "TT02",
-                    GiaTri = 0,
-                    DonVi = "iOS 14"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP04",
-                    MaThuocTinh = "TT03",
-                    GiaTri = 0,
-                    DonVi = "3 camera 12 MP"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP04",
-                    MaThuocTinh = "TT04",
-                    GiaTri = 0,
-                    DonVi = "12 MP"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP04",
-                    MaThuocTinh = "TT05",
-                    GiaTri = 0,
-                    DonVi = "Apple A14 Bionic"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP04",
-                    MaThuocTinh = "TT06",
-                    GiaTri = 6,
-                    DonVi = "GB"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP04",
-                    MaThuocTinh = "TT07",
-                    GiaTri = 128,
-                    DonVi = "GB"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP04",
-                    MaThuocTinh = "TT08",
-                    GiaTri = 0,
-                    DonVi = "1 Nano SIM & 1 eSIM, Hỗ trợ 5G"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP04",
-                    MaThuocTinh = "TT09",
-                    GiaTri = 0,
-                    DonVi = "3687 mAh, 20 W"
-                },
-                //
-                new DinhLuong()
-                {
-                    MaSanPham = "SP05",
-                    MaThuocTinh = "TT01",
-                    GiaTri = 0,
-                    DonVi = "OLED, 5.4, Super Retina XDR"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP05",
-                    MaThuocTinh = "TT02",
-                    GiaTri = 0,
-                    DonVi = "iOS 14"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP05",
-                    MaThuocTinh = "TT03",
-                    GiaTri = 0,
-                    DonVi = "2 camera 12 MP"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP05",
-                    MaThuocTinh = "TT04",
-                    GiaTri = 0,
-                    DonVi = "12 MP"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP05",
-                    MaThuocTinh = "TT05",
-                    GiaTri = 0,
-                    DonVi = "Apple A14 Bionic"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP05",
-                    MaThuocTinh = "TT06",
-                    GiaTri = 4,
-                    DonVi = "GB"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP05",
-                    MaThuocTinh = "TT07",
-                    GiaTri = 64,
-                    DonVi = "GB"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP05",
-                    MaThuocTinh = "TT08",
-                    GiaTri = 0,
-                    DonVi = "1 Nano SIM & 1 eSIM, Hỗ trợ 5G"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP05",
-                    MaThuocTinh = "TT09",
-                    GiaTri = 0,
-                    DonVi = "2227 mAh, 20 W"
-                },
-                //
-                new DinhLuong()
-                {
-                    MaSanPham = "SP06",
-                    MaThuocTinh = "TT01",
-                    GiaTri = 0,
-                    DonVi = "IPS LCD, 6.1, Liquid Retina"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP06",
-                    MaThuocTinh = "TT02",
-                    GiaTri = 0,
-                    DonVi = "iOS 14"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP06",
-                    MaThuocTinh = "TT03",
-                    GiaTri = 0,
-                    DonVi = "2 camera 12 MP"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP06",
-                    MaThuocTinh = "TT04",
-                    GiaTri = 0,
-                    DonVi = "12 MP"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP06",
-                    MaThuocTinh = "TT05",
-                    GiaTri = 0,
-                    DonVi = "Apple A13 Bionic"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP06",
-                    MaThuocTinh = "TT06",
-                    GiaTri = 4,
-                    DonVi = "GB"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP06",
-                    MaThuocTinh = "TT07",
-                    GiaTri = 64,
-                    DonVi = "GB"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP06",
-                    MaThuocTinh = "TT08",
-                    GiaTri = 0,
-                    DonVi = "1 Nano SIM & 1 eSIM, Hỗ trợ 4G"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP06",
-                    MaThuocTinh = "TT09",
-                    GiaTri = 0,
-                    DonVi = "3110 mAh, 18 W"
-                },
-                //
-                new DinhLuong()
-                {
-                    MaSanPham = "SP07",
-                    MaThuocTinh = "TT01",
-                    GiaTri = 0,
-                    DonVi = "IPS LCD, 6.1, Liquid Retina"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP07",
-                    MaThuocTinh = "TT02",
-                    GiaTri = 0,
-                    DonVi = "iOS 14"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP07",
-                    MaThuocTinh = "TT03",
-                    GiaTri = 0,
-                    DonVi = "12 MP"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP07",
-                    MaThuocTinh = "TT04",
-                    GiaTri = 0,
-                    DonVi = "7 MP"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP07",
-                    MaThuocTinh = "TT05",
-                    GiaTri = 0,
-                    DonVi = "Apple A12 Bionic"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP07",
-                    MaThuocTinh = "TT06",
-                    GiaTri = 3,
-                    DonVi = "GB"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP07",
-                    MaThuocTinh = "TT07",
-                    GiaTri = 64,
-                    DonVi = "GB"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP07",
-                    MaThuocTinh = "TT08",
-                    GiaTri = 0,
-                    DonVi = "1 Nano SIM & 1 eSIM, Hỗ trợ 4G"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP07",
-                    MaThuocTinh = "TT09",
-                    GiaTri = 0,
-                    DonVi = "2942 mAh, 15 W"
-                },
-                //
-                new DinhLuong()
-                {
-                    MaSanPham = "SP08",
-                    MaThuocTinh = "TT01",
-                    GiaTri = 0,
-                    DonVi = "AMOLED, 6.43, Full HD + "
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP08",
-                    MaThuocTinh = "TT02",
-                    GiaTri = 0,
-                    DonVi = "Android 11"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP08",
-                    MaThuocTinh = "TT03",
-                    GiaTri = 0,
-                    DonVi = "Chính 64 MP & Phụ 8 MP, 2 MP"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP08",
-                    MaThuocTinh = "TT04",
-                    GiaTri = 0,
-                    DonVi = "32 MP"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP08",
-                    MaThuocTinh = "TT05",
-                    GiaTri = 0,
-                    DonVi = "MediaTek Dimensity 800U 5G"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP08",
-                    MaThuocTinh = "TT06",
-                    GiaTri = 8,
-                    DonVi = "GB"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP08",
-                    MaThuocTinh = "TT07",
-                    GiaTri = 128,
-                    DonVi = "GB"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP08",
-                    MaThuocTinh = "TT08",
-                    GiaTri = 0,
-                    DonVi = "2 Nano SIM, Hỗ trợ 5G"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP08",
-                    MaThuocTinh = "TT09",
-                    GiaTri = 0,
-                    DonVi = "4310 mAh, 30 W"
-                },
-                //
-                new DinhLuong()
-                {
-                    MaSanPham = "SP09",
-                    MaThuocTinh = "TT01",
-                    GiaTri = 0,
-                    DonVi = "AMOLED6.43, Full HD + "
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP09",
-                    MaThuocTinh = "TT02",
-                    GiaTri = 0,
-                    DonVi = "Android 11"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP09",
-                    MaThuocTinh = "TT03",
-                    GiaTri = 0,
-                    DonVi = "Chính 48 MP & Phụ 2 MP, 2 MP"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP09",
-                    MaThuocTinh = "TT04",
-                    GiaTri = 0,
-                    DonVi = "16 MP"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP09",
-                    MaThuocTinh = "TT05",
-                    GiaTri = 0,
-                    DonVi = "Snapdragon 662"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP09",
-                    MaThuocTinh = "TT06",
-                    GiaTri = 8,
-                    DonVi = "GB"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP09",
-                    MaThuocTinh = "TT07",
-                    GiaTri = 128,
-                    DonVi = "GB"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP09",
-                    MaThuocTinh = "TT08",
-                    GiaTri = 0,
-                    DonVi = "2 Nano SIM, Hỗ trợ 4G"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP09",
-                    MaThuocTinh = "TT09",
-                    GiaTri = 0,
-                    DonVi = "5000 mAh, 30 W"
-                }
-                //
-                , new DinhLuong()
-                {
-                    MaSanPham = "SP010",
-                    MaThuocTinh = "TT01",
-                    GiaTri = 0,
-                    DonVi = "AMOLED6.55, Full HD+"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP010",
-                    MaThuocTinh = "TT02",
-                    GiaTri = 0,
-                    DonVi = "Android 11"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP010",
-                    MaThuocTinh = "TT03",
-                    GiaTri = 0,
-                    DonVi = "Chính 50 MP & Phụ 16 MP, 13 MP, 2 MP"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP010",
-                    MaThuocTinh = "TT04",
-                    GiaTri = 0,
-                    DonVi = "32 MP"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP010",
-                    MaThuocTinh = "TT05",
-                    GiaTri = 0,
-                    DonVi = "Snapdragon 870 5G"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP010",
-                    MaThuocTinh = "TT06",
-                    GiaTri = 12,
-                    DonVi = "GB"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP010",
-                    MaThuocTinh = "TT07",
-                    GiaTri = 256,
-                    DonVi = "GB"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP010",
-                    MaThuocTinh = "TT08",
-                    GiaTri = 0,
-                    DonVi = "2 Nano SIM, Hỗ trợ 5G"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP010",
-                    MaThuocTinh = "TT09",
-                    GiaTri = 0,
-                    DonVi = "4500 mAh, 65 W"
-                }
-                //
-                , new DinhLuong()
-                {
-                    MaSanPham = "SP011",
-                    MaThuocTinh = "TT01",
-                    GiaTri = 0,
-                    DonVi = "AMOLED, 6.7, Quad HD+ (2K+)"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP011",
-                    MaThuocTinh = "TT02",
-                    GiaTri = 0,
-                    DonVi = "Android 11"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP011",
-                    MaThuocTinh = "TT03",
-                    GiaTri = 0,
-                    DonVi = "Chính 50 MP & Phụ 50 MP, 13 MP, 3 MP"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP011",
-                    MaThuocTinh = "TT04",
-                    GiaTri = 0,
-                    DonVi = "32 MP"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP011",
-                    MaThuocTinh = "TT05",
-                    GiaTri = 0,
-                    DonVi = "Snapdragon 888"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP011",
-                    MaThuocTinh = "TT06",
-                    GiaTri = 12,
-                    DonVi = "GB"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP011",
-                    MaThuocTinh = "TT07",
-                    GiaTri = 256,
-                    DonVi = "GB"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP011",
-                    MaThuocTinh = "TT08",
-                    GiaTri = 0,
-                    DonVi = "2 Nano SIM, Hỗ trợ 5G"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP011",
-                    MaThuocTinh = "TT09",
-                    GiaTri = 0,
-                    DonVi = "4500 mAh, 65 W"
-                }
-                //
-                , new DinhLuong()
-                {
-                    MaSanPham = "SP012",
-                    MaThuocTinh = "TT01",
-                    GiaTri = 0,
-                    DonVi = "AMOLED, 6.43, Full HD+"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP012",
-                    MaThuocTinh = "TT02",
-                    GiaTri = 0,
-                    DonVi = "Android 11"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP012",
-                    MaThuocTinh = "TT03",
-                    GiaTri = 0,
-                    DonVi = "Chính 64 MP & Phụ 8 MP, 2 MP"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP012",
-                    MaThuocTinh = "TT04",
-                    GiaTri = 0,
-                    DonVi = "32 MP"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP012",
-                    MaThuocTinh = "TT05",
-                    GiaTri = 0,
-                    DonVi = "MediaTek Dimensity 900 5G"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP012",
-                    MaThuocTinh = "TT06",
-                    GiaTri = 8,
-                    DonVi = "GB"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP012",
-                    MaThuocTinh = "TT07",
-                    GiaTri = 128,
-                    DonVi = "GB"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP012",
-                    MaThuocTinh = "TT08",
-                    GiaTri = 0,
-                    DonVi = "2 Nano SIM, Hỗ trợ 5G"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP012",
-                    MaThuocTinh = "TT09",
-                    GiaTri = 0,
-                    DonVi = "4300 mAh, 65 W"
-                }
-                //
-                , new DinhLuong()
-                {
-                    MaSanPham = "SP013",
-                    MaThuocTinh = "TT01",
-                    GiaTri = 0,
-                    DonVi = "AMOLED, 6.43, Full HD + "
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP013",
-                    MaThuocTinh = "TT02",
-                    GiaTri = 0,
-                    DonVi = "Android 11"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP013",
-                    MaThuocTinh = "TT03",
-                    GiaTri = 0,
-                    DonVi = "Chính 64 MP & Phụ 8 MP, 2 MP, 2 MP"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP013",
-                    MaThuocTinh = "TT04",
-                    GiaTri = 0,
-                    DonVi = "32 MP"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP013",
-                    MaThuocTinh = "TT05",
-                    GiaTri = 0,
-                    DonVi = "Snapdragon 765G"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP013",
-                    MaThuocTinh = "TT06",
-                    GiaTri = 8,
-                    DonVi = "GB"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP013",
-                    MaThuocTinh = "TT07",
-                    GiaTri = 128,
-                    DonVi = "GB"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP013",
-                    MaThuocTinh = "TT08",
-                    GiaTri = 0,
-                    DonVi = "2 Nano SIM, Hỗ trợ 5G"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP013",
-                    MaThuocTinh = "TT09",
-                    GiaTri = 0,
-                    DonVi = "4300 mAh, 65 W"
-                }
-                //
-                , new DinhLuong()
-                {
-                    MaSanPham = "SP014",
-                    MaThuocTinh = "TT01",
-                    GiaTri = 0,
-                    DonVi = "AMOLED, 6.5, Full HD + "
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP014",
-                    MaThuocTinh = "TT02",
-                    GiaTri = 0,
-                    DonVi = "Android 10"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP014",
-                    MaThuocTinh = "TT03",
-                    GiaTri = 0,
-                    DonVi = "Chính 48 MP & Phụ 8 MP, 2 MP, 2 MP"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP014",
-                    MaThuocTinh = "TT04",
-                    GiaTri = 0,
-                    DonVi = "32 MP"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP014",
-                    MaThuocTinh = "TT05",
-                    GiaTri = 0,
-                    DonVi = "Snapdragon 720G"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP014",
-                    MaThuocTinh = "TT06",
-                    GiaTri = 8,
-                    DonVi = "GB"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP014",
-                    MaThuocTinh = "TT07",
-                    GiaTri = 256,
-                    DonVi = "GB"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP014",
-                    MaThuocTinh = "TT08",
-                    GiaTri = 0,
-                    DonVi = "2 Nano SIM, Hỗ trợ 4G"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP014",
-                    MaThuocTinh = "TT09",
-                    GiaTri = 0,
-                    DonVi = "4000 mAh, 65 W"
-                }
-                //
-                , new DinhLuong()
-                {
-                    MaSanPham = "SP015",
-                    MaThuocTinh = "TT01",
-                    GiaTri = 0,
-                    DonVi = "IPS LCD, 6.52, HD + "
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP015",
-                    MaThuocTinh = "TT02",
-                    GiaTri = 0,
-                    DonVi = "Android 11"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP015",
-                    MaThuocTinh = "TT03",
-                    GiaTri = 0,
-                    DonVi = "Chính 13 MP & Phụ 2 MP, 2 MP"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP015",
-                    MaThuocTinh = "TT04",
-                    GiaTri = 0,
-                    DonVi = "8 MP"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP015",
-                    MaThuocTinh = "TT05",
-                    GiaTri = 0,
-                    DonVi = "MediaTek Helio G35"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP015",
-                    MaThuocTinh = "TT06",
-                    GiaTri = 3,
-                    DonVi = "GB"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP015",
-                    MaThuocTinh = "TT07",
-                    GiaTri = 32,
-                    DonVi = "GB"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP015",
-                    MaThuocTinh = "TT08",
-                    GiaTri = 0,
-                    DonVi = "2 Nano SIM, Hỗ trợ 4G"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP015",
-                    MaThuocTinh = "TT09",
-                    GiaTri = 0,
-                    DonVi = "5000 mAh, 10 W"
-                }
-                //
-                , new DinhLuong()
-                {
-                    MaSanPham = "SP016",
-                    MaThuocTinh = "TT01",
-                    GiaTri = 0,
-                    DonVi = "IPS LCD, 6.51 HD + "
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP016",
-                    MaThuocTinh = "TT02",
-                    GiaTri = 0,
-                    DonVi = "Android 11"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP016",
-                    MaThuocTinh = "TT03",
-                    GiaTri = 0,
-                    DonVi = "Chính 13 MP & Phụ 2 MP"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP016",
-                    MaThuocTinh = "TT04",
-                    GiaTri = 0,
-                    DonVi = "8 MP"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP016",
-                    MaThuocTinh = "TT05",
-                    GiaTri = 0,
-                    DonVi = "MediaTek Helio P35"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP016",
-                    MaThuocTinh = "TT06",
-                    GiaTri = 4,
-                    DonVi = "GB"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP016",
-                    MaThuocTinh = "TT07",
-                    GiaTri = 64,
-                    DonVi = "GB"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP016",
-                    MaThuocTinh = "TT08",
-                    GiaTri = 0,
-                    DonVi = "2 Nano SIM, Hỗ trợ 4G"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP016",
-                    MaThuocTinh = "TT09",
-                    GiaTri = 0,
-                    DonVi = "5000 mAh, 18 W"
-                }
-                //
-                , new DinhLuong()
-                {
-                    MaSanPham = "SP017",
-                    MaThuocTinh = "TT01",
-                    GiaTri = 0,
-                    DonVi = "IPS LCD, 6.56 HD + "
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP017",
-                    MaThuocTinh = "TT02",
-                    GiaTri = 0,
-                    DonVi = "Android 11"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP017",
-                    MaThuocTinh = "TT03",
-                    GiaTri = 0,
-                    DonVi = "Chính 13 MP & Phụ 2 MP"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP017",
-                    MaThuocTinh = "TT04",
-                    GiaTri = 0,
-                    DonVi = "8 MP"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP017",
-                    MaThuocTinh = "TT05",
-                    GiaTri = 0,
-                    DonVi = "MediaTek Dimensity 1200"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP017",
-                    MaThuocTinh = "TT06",
-                    GiaTri = 12,
-                    DonVi = "GB"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP017",
-                    MaThuocTinh = "TT07",
-                    GiaTri = 256,
-                    DonVi = "GB"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP017",
-                    MaThuocTinh = "TT08",
-                    GiaTri = 0,
-                    DonVi = "2 Nano SIM, Hỗ trợ 5G"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP017",
-                    MaThuocTinh = "TT09",
-                    GiaTri = 0,
-                    DonVi = "4500 mAh, 44 W"
-                }
-                //
-                , new DinhLuong()
-                {
-                    MaSanPham = "SP018",
-                    MaThuocTinh = "TT01",
-                    GiaTri = 0,
-                    DonVi = "IPS LCD, 6.44 HD + "
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP018",
-                    MaThuocTinh = "TT02",
-                    GiaTri = 0,
-                    DonVi = "Android 11"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP018",
-                    MaThuocTinh = "TT03",
-                    GiaTri = 0,
-                    DonVi = "Chính 64 MP & Phụ 8 MP, 2 MP"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP018",
-                    MaThuocTinh = "TT04",
-                    GiaTri = 0,
-                    DonVi = "44 MP"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP018",
-                    MaThuocTinh = "TT05",
-                    GiaTri = 0,
-                    DonVi = "MediaTek Dimensity 800U 5G"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP018",
-                    MaThuocTinh = "TT06",
-                    GiaTri = 8,
-                    DonVi = "GB"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP018",
-                    MaThuocTinh = "TT07",
-                    GiaTri = 128,
-                    DonVi = "GB"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP018",
-                    MaThuocTinh = "TT08",
-                    GiaTri = 0,
-                    DonVi = "2 Nano SIM, Hỗ trợ 5G"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP018",
-                    MaThuocTinh = "TT09",
-                    GiaTri = 0,
-                    DonVi = "4000 mAh, 43 W"
-                }
-                //
-                , new DinhLuong()
-                {
-                    MaSanPham = "SP019",
-                    MaThuocTinh = "TT01",
-                    GiaTri = 0,
-                    DonVi = "IPS LCD, 6.44 HD + "
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP019",
-                    MaThuocTinh = "TT02",
-                    GiaTri = 0,
-                    DonVi = "Android 11"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP019",
-                    MaThuocTinh = "TT03",
-                    GiaTri = 0,
-                    DonVi = "Chính 64 MP & Phụ 8 MP, 2 MP"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP019",
-                    MaThuocTinh = "TT04",
-                    GiaTri = 0,
-                    DonVi = "44 MP"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP019",
-                    MaThuocTinh = "TT05",
-                    GiaTri = 0,
-                    DonVi = "Snapdragon 730"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP019",
-                    MaThuocTinh = "TT06",
-                    GiaTri = 8,
-                    DonVi = "GB"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP019",
-                    MaThuocTinh = "TT07",
-                    GiaTri = 128,
-                    DonVi = "GB"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP019",
-                    MaThuocTinh = "TT08",
-                    GiaTri = 0,
-                    DonVi = "2 Nano SIM, Hỗ trợ 4G"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP019",
-                    MaThuocTinh = "TT09",
-                    GiaTri = 0,
-                    DonVi = "4000 mAh, 33 W"
-                }
-                //
-                , new DinhLuong()
-                {
-                    MaSanPham = "SP020",
-                    MaThuocTinh = "TT01",
-                    GiaTri = 0,
-                    DonVi = "IPS LCD, 6.58 HD + "
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP020",
-                    MaThuocTinh = "TT02",
-                    GiaTri = 0,
-                    DonVi = "Android 11"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP020",
-                    MaThuocTinh = "TT03",
-                    GiaTri = 0,
-                    DonVi = "Chính 64 MP & Phụ 8 MP, 2 MP"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP020",
-                    MaThuocTinh = "TT04",
-                    GiaTri = 0,
-                    DonVi = "16 MP"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP020",
-                    MaThuocTinh = "TT05",
-                    GiaTri = 0,
-                    DonVi = "MediaTek Dimensity 700"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP020",
-                    MaThuocTinh = "TT06",
-                    GiaTri = 8,
-                    DonVi = "GB"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP020",
-                    MaThuocTinh = "TT07",
-                    GiaTri = 128,
-                    DonVi = "GB"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP020",
-                    MaThuocTinh = "TT08",
-                    GiaTri = 0,
-                    DonVi = "2 Nano SIM (SIM 2 chung khe thẻ nhớ) Hỗ trợ 5G"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP020",
-                    MaThuocTinh = "TT09",
-                    GiaTri = 0,
-                    DonVi = "5000 mAh, 18 W"
-                }
-                //
-                , new DinhLuong()
-                {
-                    MaSanPham = "SP021",
-                    MaThuocTinh = "TT01",
-                    GiaTri = 0,
-                    DonVi = "IPS LCD, 6.51 HD + "
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP021",
-                    MaThuocTinh = "TT02",
-                    GiaTri = 0,
-                    DonVi = "Android 11"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP021",
-                    MaThuocTinh = "TT03",
-                    GiaTri = 0,
-                    DonVi = "Chính 50 MP & Phụ 8 MP, 2 MP"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP021",
-                    MaThuocTinh = "TT04",
-                    GiaTri = 0,
-                    DonVi = "8 MP"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP021",
-                    MaThuocTinh = "TT05",
-                    GiaTri = 0,
-                    DonVi = "MediaTek Dimensity G80"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP021",
-                    MaThuocTinh = "TT06",
-                    GiaTri = 6,
-                    DonVi = "GB"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP021",
-                    MaThuocTinh = "TT07",
-                    GiaTri = 128,
-                    DonVi = "GB"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP021",
-                    MaThuocTinh = "TT08",
-                    GiaTri = 0,
-                    DonVi = "2 Nano SIM, Hỗ trợ 4G"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP021",
-                    MaThuocTinh = "TT09",
-                    GiaTri = 0,
-                    DonVi = "5000 mAh, 18 W"
-                },
-                //
-                new DinhLuong()
-                {
-                    MaSanPham = "SP022",
-                    MaThuocTinh = "TT01",
-                    GiaTri = 0,
-                    DonVi = "SUPER AMOLED, 1.36 inch"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP022",
-                    MaThuocTinh = "TT010",
-                    GiaTri = 0,
-                    DonVi = "Khoảng 1.5 ngày"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP022",
-                    MaThuocTinh = "TT011",
-                    GiaTri = 0,
-                    DonVi = "Android dùng Google Mobile Service"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP022",
-                    MaThuocTinh = "TT012",
-                    GiaTri = 0,
-                    DonVi = "Kính cường lực Gorrilla Glass Dx+, 44 mm"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP022",
-                    MaThuocTinh = "TT013",
-                    GiaTri = 0,
-                    DonVi = "Theo dõi giấc ngủ, Đo nhịp tim, Đo nồng độ oxy (SpO2), Đếm số bước chân"
-                },
-                //SP023 Đồng hồ thông minh (TT01, TT010,TT011, TT012, TT013)
-                new DinhLuong()
-                {
-                    MaSanPham = "SP023",
-                    MaThuocTinh = "TT01",
-                    GiaTri = 0,
-                    DonVi = "OLED, 1.57 inch"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP023",
-                    MaThuocTinh = "TT010",
-                    GiaTri = 0,
-                    DonVi = "Khoảng 1.5 ngày"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP023",
-                    MaThuocTinh = "TT011",
-                    GiaTri = 0,
-                    DonVi = "iOS 14 trở lên"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP023",
-                    MaThuocTinh = "TT012",
-                    GiaTri = 0,
-                    DonVi = "Ion-X strengthened glass, 40 mm"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP023",
-                    MaThuocTinh = "TT013",
-                    GiaTri = 0,
-                    DonVi = "Chế độ luyện tập, Theo dõi giấc ngủ, Tính lượng calories tiêu thụ, Tính quãng đường chạy, Điện tâm đồ, Đo nhịp tim, Đo nồng độ oxy (SpO2), Đếm số bước chân"
-                },
-                //SP024
-                new DinhLuong()
-                {
-                    MaSanPham = "SP024",
-                    MaThuocTinh = "TT01",
-                    GiaTri = 0,
-                    DonVi = "OLED, 1.57 inch"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP024",
-                    MaThuocTinh = "TT010",
-                    GiaTri = 0,
-                    DonVi = "Khoảng 1.5 ngày"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP024",
-                    MaThuocTinh = "TT011",
-                    GiaTri = 0,
-                    DonVi = "iOS 14 trở lên"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP024",
-                    MaThuocTinh = "TT012",
-                    GiaTri = 0,
-                    DonVi = "Ion-X strengthened glass, 40 mm"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP024",
-                    MaThuocTinh = "TT013",
-                    GiaTri = 0,
-                    DonVi = "Chế độ luyện tập, Theo dõi giấc ngủ, Tính lượng calories tiêu thụ, Tính quãng đường chạy, Đo nhịp tim, Đếm số bước chân"
-                },
-                //SP025
-                new DinhLuong()
-                {
-                    MaSanPham = "SP025",
-                    MaThuocTinh = "TT01",
-                    GiaTri = 0,
-                    DonVi = "SUPER AMOLED, 1.4 inch"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP025",
-                    MaThuocTinh = "TT010",
-                    GiaTri = 0,
-                    DonVi = "Khoảng 2 ngày"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP025",
-                    MaThuocTinh = "TT011",
-                    GiaTri = 0,
-                    DonVi = "Android 5.0 trở lên, iOS 9 trở lên"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP025",
-                    MaThuocTinh = "TT012",
-                    GiaTri = 0,
-                    DonVi = "Kính cường lực Gorrilla Glass Dx+, 45 mm"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP025",
-                    MaThuocTinh = "TT013",
-                    GiaTri = 0,
-                    DonVi = "Chế độ luyện tập, Theo dõi giấc ngủ, Tính lượng calories tiêu thụ, Tính quãng đường chạy, Đo nhịp tim, Đo nồng độ oxy (SpO2), Đếm số bước chân"
-                },
-                //SP026
-                new DinhLuong()
-                {
-                    MaSanPham = "SP026",
-                    MaThuocTinh = "TT01",
-                    GiaTri = 0,
-                    DonVi = "SUPER AMOLED, 1.36 inch"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP026",
-                    MaThuocTinh = "TT010",
-                    GiaTri = 0,
-                    DonVi = "Khoảng 1.5 ngày"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP026",
-                    MaThuocTinh = "TT011",
-                    GiaTri = 0,
-                    DonVi = "Android dùng Google Mobile Service"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP026",
-                    MaThuocTinh = "TT012",
-                    GiaTri = 0,
-                    DonVi = "Kính cường lực Gorrilla Glass Dx+, 44 mm"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP026",
-                    MaThuocTinh = "TT013",
-                    GiaTri = 0,
-                    DonVi = "Theo dõi giấc ngủ, Đo nhịp tim, Đo nồng độ oxy (SpO2), Đếm số bước chân"
-                },
-                //SP027
-                new DinhLuong()
-                {
-                    MaSanPham = "SP027",
-                    MaThuocTinh = "TT01",
-                    GiaTri = 0,
-                    DonVi = "OLED, 1.57 inch"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP027",
-                    MaThuocTinh = "TT010",
-                    GiaTri = 0,
-                    DonVi = "Khoảng 1.5 ngày"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP027",
-                    MaThuocTinh = "TT011",
-                    GiaTri = 0,
-                    DonVi = "iOS 14 trở lên"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP027",
-                    MaThuocTinh = "TT012",
-                    GiaTri = 0,
-                    DonVi = "Kính cường lực Sapphire40 mm"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP027",
-                    MaThuocTinh = "TT013",
-                    GiaTri = 0,
-                    DonVi = "Chế độ luyện tập, Theo dõi giấc ngủ, Tính lượng calories tiêu thụ, Tính quãng đường chạy, Đo nhịp tim, Đếm số bước chân"
-                },
-                //SP028
-                new DinhLuong()
-                {
-                    MaSanPham = "SP028",
-                    MaThuocTinh = "TT01",
-                    GiaTri = 0,
-                    DonVi = "OLED, 1.77 inch"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP028",
-                    MaThuocTinh = "TT010",
-                    GiaTri = 0,
-                    DonVi = "Khoảng 1.5 ngày"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP028",
-                    MaThuocTinh = "TT011",
-                    GiaTri = 0,
-                    DonVi = "iOS 14 trở lên"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP028",
-                    MaThuocTinh = "TT012",
-                    GiaTri = 0,
-                    DonVi = "Ion-X strengthened glass45 mm"
-                },
-                new DinhLuong()
-                {
-                    MaSanPham = "SP028",
-                    MaThuocTinh = "TT013",
-                    GiaTri = 0,
-                    DonVi = "Chế độ luyện tập, Theo dõi giấc ngủ, Tính lượng calories tiêu thụ, Tính quãng đường chạy, Điện tâm đồ, Đo nhịp tim, Đo nồng độ oxy (SpO2), Đếm số bước chân"
-                }
-                );
+            //modelBuilder.Entity<DinhLuong>().HasData(
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP01",
+            //        MaThuocTinh = "TT01",
+            //        GiaTri = 0,
+            //        DonVi = "Dynamic AMOLED 2X, Chính 7.6 & Phụ 6.2, Full HD+"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP01",
+            //        MaThuocTinh = "TT02",
+            //        GiaTri = 0,
+            //        DonVi = "Android 11"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP01",
+            //        MaThuocTinh = "TT03",
+            //        GiaTri = 0,
+            //        DonVi = "3 camera 12 MP"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP01",
+            //        MaThuocTinh = "TT04",
+            //        GiaTri = 0,
+            //        DonVi = "10 MP & 4 MP"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP01",
+            //        MaThuocTinh = "TT05",
+            //        GiaTri = 0,
+            //        DonVi = "Snapdragon 888"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP01",
+            //        MaThuocTinh = "TT06",
+            //        GiaTri = 12,
+            //        DonVi = "GB"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP01",
+            //        MaThuocTinh = "TT07",
+            //        GiaTri = 512,
+            //        DonVi = "GB"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP01",
+            //        MaThuocTinh = "TT08",
+            //        GiaTri = 0,
+            //        DonVi = "2 Nano SIM, Hỗ trợ 5G"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP01",
+            //        MaThuocTinh = "TT09",
+            //        GiaTri = 0,
+            //        DonVi = "4400 mAh, 25 W"
+            //    },
+            //    //
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP02",
+            //        MaThuocTinh = "TT01",
+            //        GiaTri = 0,
+            //        DonVi = "Dynamic AMOLED 2X, Chính 6.7 & Phụ 1.9, Full HD+"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP02",
+            //        MaThuocTinh = "TT02",
+            //        GiaTri = 0,
+            //        DonVi = "Android 11"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP02",
+            //        MaThuocTinh = "TT03",
+            //        GiaTri = 0,
+            //        DonVi = "2 camera 12 MP"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP02",
+            //        MaThuocTinh = "TT04",
+            //        GiaTri = 0,
+            //        DonVi = "10 MP"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP02",
+            //        MaThuocTinh = "TT05",
+            //        GiaTri = 0,
+            //        DonVi = "Snapdragon 888"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP02",
+            //        MaThuocTinh = "TT06",
+            //        GiaTri = 8,
+            //        DonVi = "GB"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP02",
+            //        MaThuocTinh = "TT07",
+            //        GiaTri = 128,
+            //        DonVi = "GB"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP02",
+            //        MaThuocTinh = "TT08",
+            //        GiaTri = 0,
+            //        DonVi = "1 Nano SIM & 1 eSIM, Hỗ trợ 5G"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP02",
+            //        MaThuocTinh = "TT09",
+            //        GiaTri = 0,
+            //        DonVi = "3300 mAh, 25 W"
+            //    },
+            //    //
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP03",
+            //        MaThuocTinh = "TT01",
+            //        GiaTri = 0,
+            //        DonVi = "OLED, 6.1, Super Retina XDR"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP03",
+            //        MaThuocTinh = "TT02",
+            //        GiaTri = 0,
+            //        DonVi = "iOS 14"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP03",
+            //        MaThuocTinh = "TT03",
+            //        GiaTri = 0,
+            //        DonVi = "2 camera 12 MP"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP03",
+            //        MaThuocTinh = "TT04",
+            //        GiaTri = 0,
+            //        DonVi = "12 MP"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP03",
+            //        MaThuocTinh = "TT05",
+            //        GiaTri = 0,
+            //        DonVi = "Apple A14 Bionic"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP03",
+            //        MaThuocTinh = "TT06",
+            //        GiaTri = 4,
+            //        DonVi = "GB"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP03",
+            //        MaThuocTinh = "TT07",
+            //        GiaTri = 64,
+            //        DonVi = "GB"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP03",
+            //        MaThuocTinh = "TT08",
+            //        GiaTri = 0,
+            //        DonVi = "1 Nano SIM & 1 eSIM, Hỗ trợ 5G"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP03",
+            //        MaThuocTinh = "TT09",
+            //        GiaTri = 0,
+            //        DonVi = "2815 mAh, 20 W"
+            //    },
+            //    //
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP04",
+            //        MaThuocTinh = "TT01",
+            //        GiaTri = 0,
+            //        DonVi = "OLED, 6.7, Super Retina XDR"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP04",
+            //        MaThuocTinh = "TT02",
+            //        GiaTri = 0,
+            //        DonVi = "iOS 14"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP04",
+            //        MaThuocTinh = "TT03",
+            //        GiaTri = 0,
+            //        DonVi = "3 camera 12 MP"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP04",
+            //        MaThuocTinh = "TT04",
+            //        GiaTri = 0,
+            //        DonVi = "12 MP"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP04",
+            //        MaThuocTinh = "TT05",
+            //        GiaTri = 0,
+            //        DonVi = "Apple A14 Bionic"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP04",
+            //        MaThuocTinh = "TT06",
+            //        GiaTri = 6,
+            //        DonVi = "GB"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP04",
+            //        MaThuocTinh = "TT07",
+            //        GiaTri = 128,
+            //        DonVi = "GB"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP04",
+            //        MaThuocTinh = "TT08",
+            //        GiaTri = 0,
+            //        DonVi = "1 Nano SIM & 1 eSIM, Hỗ trợ 5G"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP04",
+            //        MaThuocTinh = "TT09",
+            //        GiaTri = 0,
+            //        DonVi = "3687 mAh, 20 W"
+            //    },
+            //    //
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP05",
+            //        MaThuocTinh = "TT01",
+            //        GiaTri = 0,
+            //        DonVi = "OLED, 5.4, Super Retina XDR"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP05",
+            //        MaThuocTinh = "TT02",
+            //        GiaTri = 0,
+            //        DonVi = "iOS 14"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP05",
+            //        MaThuocTinh = "TT03",
+            //        GiaTri = 0,
+            //        DonVi = "2 camera 12 MP"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP05",
+            //        MaThuocTinh = "TT04",
+            //        GiaTri = 0,
+            //        DonVi = "12 MP"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP05",
+            //        MaThuocTinh = "TT05",
+            //        GiaTri = 0,
+            //        DonVi = "Apple A14 Bionic"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP05",
+            //        MaThuocTinh = "TT06",
+            //        GiaTri = 4,
+            //        DonVi = "GB"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP05",
+            //        MaThuocTinh = "TT07",
+            //        GiaTri = 64,
+            //        DonVi = "GB"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP05",
+            //        MaThuocTinh = "TT08",
+            //        GiaTri = 0,
+            //        DonVi = "1 Nano SIM & 1 eSIM, Hỗ trợ 5G"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP05",
+            //        MaThuocTinh = "TT09",
+            //        GiaTri = 0,
+            //        DonVi = "2227 mAh, 20 W"
+            //    },
+            //    //
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP06",
+            //        MaThuocTinh = "TT01",
+            //        GiaTri = 0,
+            //        DonVi = "IPS LCD, 6.1, Liquid Retina"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP06",
+            //        MaThuocTinh = "TT02",
+            //        GiaTri = 0,
+            //        DonVi = "iOS 14"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP06",
+            //        MaThuocTinh = "TT03",
+            //        GiaTri = 0,
+            //        DonVi = "2 camera 12 MP"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP06",
+            //        MaThuocTinh = "TT04",
+            //        GiaTri = 0,
+            //        DonVi = "12 MP"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP06",
+            //        MaThuocTinh = "TT05",
+            //        GiaTri = 0,
+            //        DonVi = "Apple A13 Bionic"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP06",
+            //        MaThuocTinh = "TT06",
+            //        GiaTri = 4,
+            //        DonVi = "GB"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP06",
+            //        MaThuocTinh = "TT07",
+            //        GiaTri = 64,
+            //        DonVi = "GB"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP06",
+            //        MaThuocTinh = "TT08",
+            //        GiaTri = 0,
+            //        DonVi = "1 Nano SIM & 1 eSIM, Hỗ trợ 4G"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP06",
+            //        MaThuocTinh = "TT09",
+            //        GiaTri = 0,
+            //        DonVi = "3110 mAh, 18 W"
+            //    },
+            //    //
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP07",
+            //        MaThuocTinh = "TT01",
+            //        GiaTri = 0,
+            //        DonVi = "IPS LCD, 6.1, Liquid Retina"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP07",
+            //        MaThuocTinh = "TT02",
+            //        GiaTri = 0,
+            //        DonVi = "iOS 14"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP07",
+            //        MaThuocTinh = "TT03",
+            //        GiaTri = 0,
+            //        DonVi = "12 MP"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP07",
+            //        MaThuocTinh = "TT04",
+            //        GiaTri = 0,
+            //        DonVi = "7 MP"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP07",
+            //        MaThuocTinh = "TT05",
+            //        GiaTri = 0,
+            //        DonVi = "Apple A12 Bionic"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP07",
+            //        MaThuocTinh = "TT06",
+            //        GiaTri = 3,
+            //        DonVi = "GB"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP07",
+            //        MaThuocTinh = "TT07",
+            //        GiaTri = 64,
+            //        DonVi = "GB"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP07",
+            //        MaThuocTinh = "TT08",
+            //        GiaTri = 0,
+            //        DonVi = "1 Nano SIM & 1 eSIM, Hỗ trợ 4G"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP07",
+            //        MaThuocTinh = "TT09",
+            //        GiaTri = 0,
+            //        DonVi = "2942 mAh, 15 W"
+            //    },
+            //    //
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP08",
+            //        MaThuocTinh = "TT01",
+            //        GiaTri = 0,
+            //        DonVi = "AMOLED, 6.43, Full HD + "
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP08",
+            //        MaThuocTinh = "TT02",
+            //        GiaTri = 0,
+            //        DonVi = "Android 11"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP08",
+            //        MaThuocTinh = "TT03",
+            //        GiaTri = 0,
+            //        DonVi = "Chính 64 MP & Phụ 8 MP, 2 MP"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP08",
+            //        MaThuocTinh = "TT04",
+            //        GiaTri = 0,
+            //        DonVi = "32 MP"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP08",
+            //        MaThuocTinh = "TT05",
+            //        GiaTri = 0,
+            //        DonVi = "MediaTek Dimensity 800U 5G"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP08",
+            //        MaThuocTinh = "TT06",
+            //        GiaTri = 8,
+            //        DonVi = "GB"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP08",
+            //        MaThuocTinh = "TT07",
+            //        GiaTri = 128,
+            //        DonVi = "GB"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP08",
+            //        MaThuocTinh = "TT08",
+            //        GiaTri = 0,
+            //        DonVi = "2 Nano SIM, Hỗ trợ 5G"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP08",
+            //        MaThuocTinh = "TT09",
+            //        GiaTri = 0,
+            //        DonVi = "4310 mAh, 30 W"
+            //    },
+            //    //
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP09",
+            //        MaThuocTinh = "TT01",
+            //        GiaTri = 0,
+            //        DonVi = "AMOLED6.43, Full HD + "
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP09",
+            //        MaThuocTinh = "TT02",
+            //        GiaTri = 0,
+            //        DonVi = "Android 11"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP09",
+            //        MaThuocTinh = "TT03",
+            //        GiaTri = 0,
+            //        DonVi = "Chính 48 MP & Phụ 2 MP, 2 MP"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP09",
+            //        MaThuocTinh = "TT04",
+            //        GiaTri = 0,
+            //        DonVi = "16 MP"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP09",
+            //        MaThuocTinh = "TT05",
+            //        GiaTri = 0,
+            //        DonVi = "Snapdragon 662"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP09",
+            //        MaThuocTinh = "TT06",
+            //        GiaTri = 8,
+            //        DonVi = "GB"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP09",
+            //        MaThuocTinh = "TT07",
+            //        GiaTri = 128,
+            //        DonVi = "GB"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP09",
+            //        MaThuocTinh = "TT08",
+            //        GiaTri = 0,
+            //        DonVi = "2 Nano SIM, Hỗ trợ 4G"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP09",
+            //        MaThuocTinh = "TT09",
+            //        GiaTri = 0,
+            //        DonVi = "5000 mAh, 30 W"
+            //    }
+            //    //
+            //    , new DinhLuong()
+            //    {
+            //        MaSanPham = "SP010",
+            //        MaThuocTinh = "TT01",
+            //        GiaTri = 0,
+            //        DonVi = "AMOLED6.55, Full HD+"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP010",
+            //        MaThuocTinh = "TT02",
+            //        GiaTri = 0,
+            //        DonVi = "Android 11"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP010",
+            //        MaThuocTinh = "TT03",
+            //        GiaTri = 0,
+            //        DonVi = "Chính 50 MP & Phụ 16 MP, 13 MP, 2 MP"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP010",
+            //        MaThuocTinh = "TT04",
+            //        GiaTri = 0,
+            //        DonVi = "32 MP"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP010",
+            //        MaThuocTinh = "TT05",
+            //        GiaTri = 0,
+            //        DonVi = "Snapdragon 870 5G"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP010",
+            //        MaThuocTinh = "TT06",
+            //        GiaTri = 12,
+            //        DonVi = "GB"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP010",
+            //        MaThuocTinh = "TT07",
+            //        GiaTri = 256,
+            //        DonVi = "GB"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP010",
+            //        MaThuocTinh = "TT08",
+            //        GiaTri = 0,
+            //        DonVi = "2 Nano SIM, Hỗ trợ 5G"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP010",
+            //        MaThuocTinh = "TT09",
+            //        GiaTri = 0,
+            //        DonVi = "4500 mAh, 65 W"
+            //    }
+            //    //
+            //    , new DinhLuong()
+            //    {
+            //        MaSanPham = "SP011",
+            //        MaThuocTinh = "TT01",
+            //        GiaTri = 0,
+            //        DonVi = "AMOLED, 6.7, Quad HD+ (2K+)"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP011",
+            //        MaThuocTinh = "TT02",
+            //        GiaTri = 0,
+            //        DonVi = "Android 11"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP011",
+            //        MaThuocTinh = "TT03",
+            //        GiaTri = 0,
+            //        DonVi = "Chính 50 MP & Phụ 50 MP, 13 MP, 3 MP"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP011",
+            //        MaThuocTinh = "TT04",
+            //        GiaTri = 0,
+            //        DonVi = "32 MP"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP011",
+            //        MaThuocTinh = "TT05",
+            //        GiaTri = 0,
+            //        DonVi = "Snapdragon 888"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP011",
+            //        MaThuocTinh = "TT06",
+            //        GiaTri = 12,
+            //        DonVi = "GB"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP011",
+            //        MaThuocTinh = "TT07",
+            //        GiaTri = 256,
+            //        DonVi = "GB"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP011",
+            //        MaThuocTinh = "TT08",
+            //        GiaTri = 0,
+            //        DonVi = "2 Nano SIM, Hỗ trợ 5G"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP011",
+            //        MaThuocTinh = "TT09",
+            //        GiaTri = 0,
+            //        DonVi = "4500 mAh, 65 W"
+            //    }
+            //    //
+            //    , new DinhLuong()
+            //    {
+            //        MaSanPham = "SP012",
+            //        MaThuocTinh = "TT01",
+            //        GiaTri = 0,
+            //        DonVi = "AMOLED, 6.43, Full HD+"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP012",
+            //        MaThuocTinh = "TT02",
+            //        GiaTri = 0,
+            //        DonVi = "Android 11"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP012",
+            //        MaThuocTinh = "TT03",
+            //        GiaTri = 0,
+            //        DonVi = "Chính 64 MP & Phụ 8 MP, 2 MP"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP012",
+            //        MaThuocTinh = "TT04",
+            //        GiaTri = 0,
+            //        DonVi = "32 MP"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP012",
+            //        MaThuocTinh = "TT05",
+            //        GiaTri = 0,
+            //        DonVi = "MediaTek Dimensity 900 5G"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP012",
+            //        MaThuocTinh = "TT06",
+            //        GiaTri = 8,
+            //        DonVi = "GB"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP012",
+            //        MaThuocTinh = "TT07",
+            //        GiaTri = 128,
+            //        DonVi = "GB"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP012",
+            //        MaThuocTinh = "TT08",
+            //        GiaTri = 0,
+            //        DonVi = "2 Nano SIM, Hỗ trợ 5G"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP012",
+            //        MaThuocTinh = "TT09",
+            //        GiaTri = 0,
+            //        DonVi = "4300 mAh, 65 W"
+            //    }
+            //    //
+            //    , new DinhLuong()
+            //    {
+            //        MaSanPham = "SP013",
+            //        MaThuocTinh = "TT01",
+            //        GiaTri = 0,
+            //        DonVi = "AMOLED, 6.43, Full HD + "
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP013",
+            //        MaThuocTinh = "TT02",
+            //        GiaTri = 0,
+            //        DonVi = "Android 11"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP013",
+            //        MaThuocTinh = "TT03",
+            //        GiaTri = 0,
+            //        DonVi = "Chính 64 MP & Phụ 8 MP, 2 MP, 2 MP"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP013",
+            //        MaThuocTinh = "TT04",
+            //        GiaTri = 0,
+            //        DonVi = "32 MP"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP013",
+            //        MaThuocTinh = "TT05",
+            //        GiaTri = 0,
+            //        DonVi = "Snapdragon 765G"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP013",
+            //        MaThuocTinh = "TT06",
+            //        GiaTri = 8,
+            //        DonVi = "GB"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP013",
+            //        MaThuocTinh = "TT07",
+            //        GiaTri = 128,
+            //        DonVi = "GB"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP013",
+            //        MaThuocTinh = "TT08",
+            //        GiaTri = 0,
+            //        DonVi = "2 Nano SIM, Hỗ trợ 5G"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP013",
+            //        MaThuocTinh = "TT09",
+            //        GiaTri = 0,
+            //        DonVi = "4300 mAh, 65 W"
+            //    }
+            //    //
+            //    , new DinhLuong()
+            //    {
+            //        MaSanPham = "SP014",
+            //        MaThuocTinh = "TT01",
+            //        GiaTri = 0,
+            //        DonVi = "AMOLED, 6.5, Full HD + "
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP014",
+            //        MaThuocTinh = "TT02",
+            //        GiaTri = 0,
+            //        DonVi = "Android 10"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP014",
+            //        MaThuocTinh = "TT03",
+            //        GiaTri = 0,
+            //        DonVi = "Chính 48 MP & Phụ 8 MP, 2 MP, 2 MP"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP014",
+            //        MaThuocTinh = "TT04",
+            //        GiaTri = 0,
+            //        DonVi = "32 MP"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP014",
+            //        MaThuocTinh = "TT05",
+            //        GiaTri = 0,
+            //        DonVi = "Snapdragon 720G"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP014",
+            //        MaThuocTinh = "TT06",
+            //        GiaTri = 8,
+            //        DonVi = "GB"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP014",
+            //        MaThuocTinh = "TT07",
+            //        GiaTri = 256,
+            //        DonVi = "GB"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP014",
+            //        MaThuocTinh = "TT08",
+            //        GiaTri = 0,
+            //        DonVi = "2 Nano SIM, Hỗ trợ 4G"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP014",
+            //        MaThuocTinh = "TT09",
+            //        GiaTri = 0,
+            //        DonVi = "4000 mAh, 65 W"
+            //    }
+            //    //
+            //    , new DinhLuong()
+            //    {
+            //        MaSanPham = "SP015",
+            //        MaThuocTinh = "TT01",
+            //        GiaTri = 0,
+            //        DonVi = "IPS LCD, 6.52, HD + "
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP015",
+            //        MaThuocTinh = "TT02",
+            //        GiaTri = 0,
+            //        DonVi = "Android 11"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP015",
+            //        MaThuocTinh = "TT03",
+            //        GiaTri = 0,
+            //        DonVi = "Chính 13 MP & Phụ 2 MP, 2 MP"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP015",
+            //        MaThuocTinh = "TT04",
+            //        GiaTri = 0,
+            //        DonVi = "8 MP"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP015",
+            //        MaThuocTinh = "TT05",
+            //        GiaTri = 0,
+            //        DonVi = "MediaTek Helio G35"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP015",
+            //        MaThuocTinh = "TT06",
+            //        GiaTri = 3,
+            //        DonVi = "GB"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP015",
+            //        MaThuocTinh = "TT07",
+            //        GiaTri = 32,
+            //        DonVi = "GB"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP015",
+            //        MaThuocTinh = "TT08",
+            //        GiaTri = 0,
+            //        DonVi = "2 Nano SIM, Hỗ trợ 4G"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP015",
+            //        MaThuocTinh = "TT09",
+            //        GiaTri = 0,
+            //        DonVi = "5000 mAh, 10 W"
+            //    }
+            //    //
+            //    , new DinhLuong()
+            //    {
+            //        MaSanPham = "SP016",
+            //        MaThuocTinh = "TT01",
+            //        GiaTri = 0,
+            //        DonVi = "IPS LCD, 6.51 HD + "
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP016",
+            //        MaThuocTinh = "TT02",
+            //        GiaTri = 0,
+            //        DonVi = "Android 11"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP016",
+            //        MaThuocTinh = "TT03",
+            //        GiaTri = 0,
+            //        DonVi = "Chính 13 MP & Phụ 2 MP"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP016",
+            //        MaThuocTinh = "TT04",
+            //        GiaTri = 0,
+            //        DonVi = "8 MP"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP016",
+            //        MaThuocTinh = "TT05",
+            //        GiaTri = 0,
+            //        DonVi = "MediaTek Helio P35"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP016",
+            //        MaThuocTinh = "TT06",
+            //        GiaTri = 4,
+            //        DonVi = "GB"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP016",
+            //        MaThuocTinh = "TT07",
+            //        GiaTri = 64,
+            //        DonVi = "GB"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP016",
+            //        MaThuocTinh = "TT08",
+            //        GiaTri = 0,
+            //        DonVi = "2 Nano SIM, Hỗ trợ 4G"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP016",
+            //        MaThuocTinh = "TT09",
+            //        GiaTri = 0,
+            //        DonVi = "5000 mAh, 18 W"
+            //    }
+            //    //
+            //    , new DinhLuong()
+            //    {
+            //        MaSanPham = "SP017",
+            //        MaThuocTinh = "TT01",
+            //        GiaTri = 0,
+            //        DonVi = "IPS LCD, 6.56 HD + "
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP017",
+            //        MaThuocTinh = "TT02",
+            //        GiaTri = 0,
+            //        DonVi = "Android 11"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP017",
+            //        MaThuocTinh = "TT03",
+            //        GiaTri = 0,
+            //        DonVi = "Chính 13 MP & Phụ 2 MP"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP017",
+            //        MaThuocTinh = "TT04",
+            //        GiaTri = 0,
+            //        DonVi = "8 MP"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP017",
+            //        MaThuocTinh = "TT05",
+            //        GiaTri = 0,
+            //        DonVi = "MediaTek Dimensity 1200"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP017",
+            //        MaThuocTinh = "TT06",
+            //        GiaTri = 12,
+            //        DonVi = "GB"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP017",
+            //        MaThuocTinh = "TT07",
+            //        GiaTri = 256,
+            //        DonVi = "GB"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP017",
+            //        MaThuocTinh = "TT08",
+            //        GiaTri = 0,
+            //        DonVi = "2 Nano SIM, Hỗ trợ 5G"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP017",
+            //        MaThuocTinh = "TT09",
+            //        GiaTri = 0,
+            //        DonVi = "4500 mAh, 44 W"
+            //    }
+            //    //
+            //    , new DinhLuong()
+            //    {
+            //        MaSanPham = "SP018",
+            //        MaThuocTinh = "TT01",
+            //        GiaTri = 0,
+            //        DonVi = "IPS LCD, 6.44 HD + "
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP018",
+            //        MaThuocTinh = "TT02",
+            //        GiaTri = 0,
+            //        DonVi = "Android 11"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP018",
+            //        MaThuocTinh = "TT03",
+            //        GiaTri = 0,
+            //        DonVi = "Chính 64 MP & Phụ 8 MP, 2 MP"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP018",
+            //        MaThuocTinh = "TT04",
+            //        GiaTri = 0,
+            //        DonVi = "44 MP"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP018",
+            //        MaThuocTinh = "TT05",
+            //        GiaTri = 0,
+            //        DonVi = "MediaTek Dimensity 800U 5G"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP018",
+            //        MaThuocTinh = "TT06",
+            //        GiaTri = 8,
+            //        DonVi = "GB"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP018",
+            //        MaThuocTinh = "TT07",
+            //        GiaTri = 128,
+            //        DonVi = "GB"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP018",
+            //        MaThuocTinh = "TT08",
+            //        GiaTri = 0,
+            //        DonVi = "2 Nano SIM, Hỗ trợ 5G"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP018",
+            //        MaThuocTinh = "TT09",
+            //        GiaTri = 0,
+            //        DonVi = "4000 mAh, 43 W"
+            //    }
+            //    //
+            //    , new DinhLuong()
+            //    {
+            //        MaSanPham = "SP019",
+            //        MaThuocTinh = "TT01",
+            //        GiaTri = 0,
+            //        DonVi = "IPS LCD, 6.44 HD + "
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP019",
+            //        MaThuocTinh = "TT02",
+            //        GiaTri = 0,
+            //        DonVi = "Android 11"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP019",
+            //        MaThuocTinh = "TT03",
+            //        GiaTri = 0,
+            //        DonVi = "Chính 64 MP & Phụ 8 MP, 2 MP"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP019",
+            //        MaThuocTinh = "TT04",
+            //        GiaTri = 0,
+            //        DonVi = "44 MP"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP019",
+            //        MaThuocTinh = "TT05",
+            //        GiaTri = 0,
+            //        DonVi = "Snapdragon 730"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP019",
+            //        MaThuocTinh = "TT06",
+            //        GiaTri = 8,
+            //        DonVi = "GB"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP019",
+            //        MaThuocTinh = "TT07",
+            //        GiaTri = 128,
+            //        DonVi = "GB"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP019",
+            //        MaThuocTinh = "TT08",
+            //        GiaTri = 0,
+            //        DonVi = "2 Nano SIM, Hỗ trợ 4G"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP019",
+            //        MaThuocTinh = "TT09",
+            //        GiaTri = 0,
+            //        DonVi = "4000 mAh, 33 W"
+            //    }
+            //    //
+            //    , new DinhLuong()
+            //    {
+            //        MaSanPham = "SP020",
+            //        MaThuocTinh = "TT01",
+            //        GiaTri = 0,
+            //        DonVi = "IPS LCD, 6.58 HD + "
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP020",
+            //        MaThuocTinh = "TT02",
+            //        GiaTri = 0,
+            //        DonVi = "Android 11"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP020",
+            //        MaThuocTinh = "TT03",
+            //        GiaTri = 0,
+            //        DonVi = "Chính 64 MP & Phụ 8 MP, 2 MP"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP020",
+            //        MaThuocTinh = "TT04",
+            //        GiaTri = 0,
+            //        DonVi = "16 MP"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP020",
+            //        MaThuocTinh = "TT05",
+            //        GiaTri = 0,
+            //        DonVi = "MediaTek Dimensity 700"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP020",
+            //        MaThuocTinh = "TT06",
+            //        GiaTri = 8,
+            //        DonVi = "GB"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP020",
+            //        MaThuocTinh = "TT07",
+            //        GiaTri = 128,
+            //        DonVi = "GB"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP020",
+            //        MaThuocTinh = "TT08",
+            //        GiaTri = 0,
+            //        DonVi = "2 Nano SIM (SIM 2 chung khe thẻ nhớ) Hỗ trợ 5G"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP020",
+            //        MaThuocTinh = "TT09",
+            //        GiaTri = 0,
+            //        DonVi = "5000 mAh, 18 W"
+            //    }
+            //    //
+            //    , new DinhLuong()
+            //    {
+            //        MaSanPham = "SP021",
+            //        MaThuocTinh = "TT01",
+            //        GiaTri = 0,
+            //        DonVi = "IPS LCD, 6.51 HD + "
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP021",
+            //        MaThuocTinh = "TT02",
+            //        GiaTri = 0,
+            //        DonVi = "Android 11"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP021",
+            //        MaThuocTinh = "TT03",
+            //        GiaTri = 0,
+            //        DonVi = "Chính 50 MP & Phụ 8 MP, 2 MP"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP021",
+            //        MaThuocTinh = "TT04",
+            //        GiaTri = 0,
+            //        DonVi = "8 MP"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP021",
+            //        MaThuocTinh = "TT05",
+            //        GiaTri = 0,
+            //        DonVi = "MediaTek Dimensity G80"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP021",
+            //        MaThuocTinh = "TT06",
+            //        GiaTri = 6,
+            //        DonVi = "GB"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP021",
+            //        MaThuocTinh = "TT07",
+            //        GiaTri = 128,
+            //        DonVi = "GB"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP021",
+            //        MaThuocTinh = "TT08",
+            //        GiaTri = 0,
+            //        DonVi = "2 Nano SIM, Hỗ trợ 4G"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP021",
+            //        MaThuocTinh = "TT09",
+            //        GiaTri = 0,
+            //        DonVi = "5000 mAh, 18 W"
+            //    },
+            //    //
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP022",
+            //        MaThuocTinh = "TT01",
+            //        GiaTri = 0,
+            //        DonVi = "SUPER AMOLED, 1.36 inch"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP022",
+            //        MaThuocTinh = "TT010",
+            //        GiaTri = 0,
+            //        DonVi = "Khoảng 1.5 ngày"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP022",
+            //        MaThuocTinh = "TT011",
+            //        GiaTri = 0,
+            //        DonVi = "Android dùng Google Mobile Service"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP022",
+            //        MaThuocTinh = "TT012",
+            //        GiaTri = 0,
+            //        DonVi = "Kính cường lực Gorrilla Glass Dx+, 44 mm"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP022",
+            //        MaThuocTinh = "TT013",
+            //        GiaTri = 0,
+            //        DonVi = "Theo dõi giấc ngủ, Đo nhịp tim, Đo nồng độ oxy (SpO2), Đếm số bước chân"
+            //    },
+            //    //SP023 Đồng hồ thông minh (TT01, TT010,TT011, TT012, TT013)
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP023",
+            //        MaThuocTinh = "TT01",
+            //        GiaTri = 0,
+            //        DonVi = "OLED, 1.57 inch"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP023",
+            //        MaThuocTinh = "TT010",
+            //        GiaTri = 0,
+            //        DonVi = "Khoảng 1.5 ngày"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP023",
+            //        MaThuocTinh = "TT011",
+            //        GiaTri = 0,
+            //        DonVi = "iOS 14 trở lên"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP023",
+            //        MaThuocTinh = "TT012",
+            //        GiaTri = 0,
+            //        DonVi = "Ion-X strengthened glass, 40 mm"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP023",
+            //        MaThuocTinh = "TT013",
+            //        GiaTri = 0,
+            //        DonVi = "Chế độ luyện tập, Theo dõi giấc ngủ, Tính lượng calories tiêu thụ, Tính quãng đường chạy, Điện tâm đồ, Đo nhịp tim, Đo nồng độ oxy (SpO2), Đếm số bước chân"
+            //    },
+            //    //SP024
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP024",
+            //        MaThuocTinh = "TT01",
+            //        GiaTri = 0,
+            //        DonVi = "OLED, 1.57 inch"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP024",
+            //        MaThuocTinh = "TT010",
+            //        GiaTri = 0,
+            //        DonVi = "Khoảng 1.5 ngày"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP024",
+            //        MaThuocTinh = "TT011",
+            //        GiaTri = 0,
+            //        DonVi = "iOS 14 trở lên"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP024",
+            //        MaThuocTinh = "TT012",
+            //        GiaTri = 0,
+            //        DonVi = "Ion-X strengthened glass, 40 mm"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP024",
+            //        MaThuocTinh = "TT013",
+            //        GiaTri = 0,
+            //        DonVi = "Chế độ luyện tập, Theo dõi giấc ngủ, Tính lượng calories tiêu thụ, Tính quãng đường chạy, Đo nhịp tim, Đếm số bước chân"
+            //    },
+            //    //SP025
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP025",
+            //        MaThuocTinh = "TT01",
+            //        GiaTri = 0,
+            //        DonVi = "SUPER AMOLED, 1.4 inch"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP025",
+            //        MaThuocTinh = "TT010",
+            //        GiaTri = 0,
+            //        DonVi = "Khoảng 2 ngày"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP025",
+            //        MaThuocTinh = "TT011",
+            //        GiaTri = 0,
+            //        DonVi = "Android 5.0 trở lên, iOS 9 trở lên"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP025",
+            //        MaThuocTinh = "TT012",
+            //        GiaTri = 0,
+            //        DonVi = "Kính cường lực Gorrilla Glass Dx+, 45 mm"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP025",
+            //        MaThuocTinh = "TT013",
+            //        GiaTri = 0,
+            //        DonVi = "Chế độ luyện tập, Theo dõi giấc ngủ, Tính lượng calories tiêu thụ, Tính quãng đường chạy, Đo nhịp tim, Đo nồng độ oxy (SpO2), Đếm số bước chân"
+            //    },
+            //    //SP026
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP026",
+            //        MaThuocTinh = "TT01",
+            //        GiaTri = 0,
+            //        DonVi = "SUPER AMOLED, 1.36 inch"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP026",
+            //        MaThuocTinh = "TT010",
+            //        GiaTri = 0,
+            //        DonVi = "Khoảng 1.5 ngày"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP026",
+            //        MaThuocTinh = "TT011",
+            //        GiaTri = 0,
+            //        DonVi = "Android dùng Google Mobile Service"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP026",
+            //        MaThuocTinh = "TT012",
+            //        GiaTri = 0,
+            //        DonVi = "Kính cường lực Gorrilla Glass Dx+, 44 mm"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP026",
+            //        MaThuocTinh = "TT013",
+            //        GiaTri = 0,
+            //        DonVi = "Theo dõi giấc ngủ, Đo nhịp tim, Đo nồng độ oxy (SpO2), Đếm số bước chân"
+            //    },
+            //    //SP027
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP027",
+            //        MaThuocTinh = "TT01",
+            //        GiaTri = 0,
+            //        DonVi = "OLED, 1.57 inch"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP027",
+            //        MaThuocTinh = "TT010",
+            //        GiaTri = 0,
+            //        DonVi = "Khoảng 1.5 ngày"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP027",
+            //        MaThuocTinh = "TT011",
+            //        GiaTri = 0,
+            //        DonVi = "iOS 14 trở lên"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP027",
+            //        MaThuocTinh = "TT012",
+            //        GiaTri = 0,
+            //        DonVi = "Kính cường lực Sapphire40 mm"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP027",
+            //        MaThuocTinh = "TT013",
+            //        GiaTri = 0,
+            //        DonVi = "Chế độ luyện tập, Theo dõi giấc ngủ, Tính lượng calories tiêu thụ, Tính quãng đường chạy, Đo nhịp tim, Đếm số bước chân"
+            //    },
+            //    //SP028
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP028",
+            //        MaThuocTinh = "TT01",
+            //        GiaTri = 0,
+            //        DonVi = "OLED, 1.77 inch"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP028",
+            //        MaThuocTinh = "TT010",
+            //        GiaTri = 0,
+            //        DonVi = "Khoảng 1.5 ngày"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP028",
+            //        MaThuocTinh = "TT011",
+            //        GiaTri = 0,
+            //        DonVi = "iOS 14 trở lên"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP028",
+            //        MaThuocTinh = "TT012",
+            //        GiaTri = 0,
+            //        DonVi = "Ion-X strengthened glass45 mm"
+            //    },
+            //    new DinhLuong()
+            //    {
+            //        MaSanPham = "SP028",
+            //        MaThuocTinh = "TT013",
+            //        GiaTri = 0,
+            //        DonVi = "Chế độ luyện tập, Theo dõi giấc ngủ, Tính lượng calories tiêu thụ, Tính quãng đường chạy, Điện tâm đồ, Đo nhịp tim, Đo nồng độ oxy (SpO2), Đếm số bước chân"
+            //    }
+            //    );
             //Mẫu mã sản phẩm
             modelBuilder.Entity<MauMaSanPham>().HasData(
                new MauMaSanPham()

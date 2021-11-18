@@ -23,7 +23,7 @@ namespace EcommerceWebsite.Api.Controllers
         {
             try
             {
-                var result = await _khuyenMaiServices.layKhuyenMai();
+                var result = await _khuyenMaiServices.LayKhuyenMaiChoTrangChu();
                 if (result == null)
                     return BadRequest(Messages.API_EmptyResult);
                 else return Ok(result);

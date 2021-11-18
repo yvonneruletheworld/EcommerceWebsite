@@ -13,6 +13,12 @@ namespace EcommerceWebsite.Services.Services.Main
     public class MauMaServices : IMauMaServices
     {
         private readonly EcomWebDbContext _context;
+
+        public MauMaServices(EcomWebDbContext context)
+        {
+            _context = context;
+        }
+
         public async Task<List<MauMaSanPham>> LayListMauMaTheoSanPham(string prdId)
         {
             return await _context.MauMaSanPhams

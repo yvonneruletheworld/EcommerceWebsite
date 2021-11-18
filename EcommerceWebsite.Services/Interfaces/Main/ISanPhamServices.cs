@@ -18,6 +18,7 @@ namespace EcommerceWebsite.Services.Interfaces.Main
         Task<SanPham> GetSanPhamTheoMa(string id, string tensanpham);
         Task<bool> KiemTraGia(string value);
         Task<List<SanPhamOutput>> LaySanPham();
+        Task<List<SanPhamOutput>> LaySanPhamTheoLoai(string loaiSanPham, int take);
 
         //Task<List<SanPhamOutput>> laySanPham();
         //Xóa sản phẩm

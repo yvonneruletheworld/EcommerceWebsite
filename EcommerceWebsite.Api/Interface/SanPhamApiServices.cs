@@ -73,5 +73,10 @@ namespace EcommerceWebsite.Api.Interface
 
             return response.IsSuccessStatusCode;
         }
+
+        public async Task<SanPhamOutput> LayChiTietSanPham(string prdId)
+        {
+            return await GetAsync<SanPhamOutput>($"/api/SanPham/ChiTiet/{prdId}");
+        }
     }
 }

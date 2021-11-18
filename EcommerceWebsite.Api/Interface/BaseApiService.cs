@@ -46,6 +46,22 @@ namespace EcommerceWebsite.Api.Interface
                 : null;
         }
 
+        public async Task<TResponse> GetAsync<TResponse> (string url)
+        {
+            var session = _httpContextAccessor.HttpContext
+                .Session.GetString(SystemConstant.Token);
+
+            var client = _httpClietnFactory.CreateClient();
+            client.BaseAddress = new Uri(_config[SystemConstant.BaseAddress]);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", session);
+
+            var response = await client.GetAsync(url);
+            var body = await response.Content.ReadAsStringAsync();
+
+            return response.IsSuccessStatusCode ?
+                (TResponse)JsonConvert.DeserializeObject(body, typeof(TResponse)) 
+                : JsonConvert.DeserializeObject<TResponse>(body);
+        }
         //public async Task<bool> Modify(string url, SanPhamInput input)
         //{
         //    var sessions = _httpContextAccessor

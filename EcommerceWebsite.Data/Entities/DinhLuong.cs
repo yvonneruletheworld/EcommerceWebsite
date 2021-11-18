@@ -7,7 +7,7 @@ namespace EcommerceWebsite.Data.Entities
   public  class DinhLuong
     {
         public string DonVi { get; set; }
-        public float GiaTri { get; set; }
+        public string GiaTri { get; set; }
         public string MaSanPham { get; set; }
         public string MaThuocTinh { get; set; }
         //Khóa ngoại

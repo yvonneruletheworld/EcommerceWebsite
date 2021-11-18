@@ -1,0 +1,159 @@
+﻿@using EcommerceWebsite.Utilities.ViewModel
+@using EcommerceWebsite.Data.Enum
+@model HomeVM
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "TRIPLE V - Điện thoại, Máy tính,..";
+    var slides = Model.BannerOutputs.Take(4);
+    var subSlides = Model.BannerOutputs.Skip(4).Take(3);
+}
+<!-- Begin Slider With Category Menu Area -->
+<div class="slider-with-banner">
+    <div class="container">
+        <div class="row">
+            <!-- Begin Category Menu Area -->
+            <div class="col-lg-3">
+                <!--Category Menu Start-->
+                @(await Html.PartialAsync("/Views/Home/_Categories.cshtml", Model.DanhMucOutputs))
+                <!--Category Menu End-->
+            </div>
+            <!-- Category Menu Area End Here -->
+            <!-- Begin Slider Area -->
+            <div class="col-lg-9">
+                <div class="slider-area pt-sm-30 pt-xs-30">
+                    <div class="slider-active owl-carousel">
+                        <!-- Begin Single Slide Area -->
+                        @foreach (var sld in slides)
+                        {
+                            <a href="#">
+                                <div class="single-slide align-center-left animation-style-01 bg-7" style="background-image: url(@sld.HinhAnh)">
+                                    <div class="slider-progress"></div>
+                                    <div class="slider-content">
+                                        @if (!string.IsNullOrEmpty(sld.Content))
+                                        {
+                                            <h5>Giảm sốc <span>-@sld.Value% Off</span> @sld.Time</h5>
+                                            <h2>@sld.Content</h2>
+                                            <h3>Chỉ từ <span>$589.00</span></h3>
+                                            <div class="default-btn slide-btn">
+                                                Mua ngay
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </a>
+                        }
+                        <!-- Single Slide Area End Here -->
+                    </div>
+                </div>
+            </div>
+            <!-- Slider Area End Here -->
+
+        </div>
+    </div>
+</div>
+<!-- Slider With Category Menu Area End Here -->
+<!-- Begin Li's Static Banner Area -->
+<div class="li-static-banner pt-20 pt-sm-30 pt-xs-30">
+    <div class="container">
+        <div class="row">
+            <!-- Begin Single Banner Area -->
+            @foreach (var bn in subSlides)
+            {
+                <div class="col-lg-4 col-md-4">
+                    <div class="single-banner pb-xs-30">
+                        <a href="#">
+                            <img src="@bn.HinhAnh" alt="@bn.Url">
+                        </a>
+                    </div>
+                </div>
+            }
+            <!-- Single Banner Area End Here -->
+        </div>
+    </div>
+</div>
+<!-- Li's Static Banner Area End Here -->
+<!-- Begin Li's Special Product Area -->
+<section class="product-area li-laptop-product Special-product pt-60 pb-45">
+    <div class="container">
+        <div class="row">
+            <!-- Begin Li's Section Area -->
+            <div class="col-lg-12">
+                <div class="li-section-title">
+                    <h2>
+                        <span class="font-weight-bold">Ưu đãi cực Hot</span>
+                    </h2>
+                </div>
+                <div class="row">
+                    <div class="special-product-active owl-carousel">
+                        @foreach (var prd in Model.SanPhamHUIDons)
+                        {
+                            <div class="col-lg-12">
+                                <!-- single-product-wrap start -->
+
+                                <div class="single-product-wrap">
+                                    <div class="product-image">
+                                        <a href="#">
+                                            <img src="@prd.HinhAnh" alt="@prd.TenSanPham">
+                                        </a>
+                                        <span class="sticker">@(nameof(Status.Hot))</span>
+                                    </div>
+                                    <div class="product_desc">
+                                        <div class="product_desc_info">
+                                            <div class="product-review">
+                                                <h5 class="manufacturer">
+                                                    <a href="#">@prd.LoaiSanPham</a>
+                                                </h5>
+                                                <div class="rating-box">
+                                                    <ul class="rating">
+                                                        <li><i class="fa fa-star-o"></i></li>
+                                                        <li><i class="fa fa-star-o"></i></li>
+                                                        <li><i class="fa fa-star-o"></i></li>
+                                                        <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                                        <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <h4><a class="product_name" href="#">@prd.TenSanPham</a></h4>
+                                            <div class="price-box">
+                                                <span class="new-price">@prd.GiaBan</span>
+                                            </div>
+                                            <div class="countersection">
+                                                <div class="li-countdown"></div>
+                                            </div>
+                                        </div>
+                                        <div class="add-actions">
+                                            <ul class="add-actions-link">
+                                                <li class="add-cart active"><a href="#">Thêm vào giỏ</a></li>
+                                                <li><a class="links-details" href="wishlist.html"><i class="fa fa-heart-o"></i></a></li>
+                                                <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- single-product-wrap end -->
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <!-- Li's Section Area End Here -->
+        </div>
+    </div>
+</section>
+<!-- Li's Special Product Area End Here -->
+<!-- Begin Li's Laptops Product | Home V2 Area -->
+@(await Html.PartialAsync("/Views/Home/_ProductsOfType.cshtml",Model.LoaiVaSanPham))
+<!-- Li's Laptops Product | Home V2 Area End Here -->
+
+<script>
+    $(function () {
+        var _categories = $("#cate-toggle .left-category-ul .left-category-li");
+        var _length = _categories.length;
+        if (_length > 8) {
+            for (var i = 8; i < _length; i++) {
+                _categories[i].classList.add("rx-child");
+            }
+        }
+    });
+</script>

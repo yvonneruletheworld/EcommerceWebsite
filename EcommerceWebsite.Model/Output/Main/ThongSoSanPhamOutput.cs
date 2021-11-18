@@ -8,6 +8,6 @@ namespace EcommerceWebsite.Utilities.Output.Main
     {
         public string ThuocTinh { get; set; }
         public string DonVi { get; set; }
-        public float GiaTri { get; set; }
+        public string GiaTri { get; set; }
     }
 }

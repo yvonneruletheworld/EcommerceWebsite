@@ -139,9 +139,10 @@ namespace EcommerceWebsite.Api.Controllers
                 if (obj == null)
                     return BadRequest(Messages.API_EmptyResult);
                 // list Hinh anh, Thong so, Gia, Danh gia
-                obj.ListHinhAnh = await _mauMaServices.LayListMauMaTheoSanPham(productId);
-                obj.ListThongSo = await _dinhLuongServices.LayThongSoTheoSanPham(productId);
-                obj.GiaBan = (await _bangGiaServices.GetGiaSanPhamMoiNhat(productId)).GiaMoi;
+                obj.ListHinhAnh = await _mauMaServices.LayListMauMaTheoSanPham(productId)??null;
+                obj.ListThongSo = await _dinhLuongServices.LayThongSoTheoSanPham(productId)??null;
+                //var giaBan = await _bangGiaServices.GetGiaSanPhamMoiNhat(productId);
+                //obj.GiaBan = giaBan == null ? 0 : giaBan.GiaMoi;
                 return Ok(obj); 
             }    
         }

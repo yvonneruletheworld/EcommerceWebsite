@@ -1,4 +1,5 @@
 ﻿using EcommerceWebsite.Data.Entities;
+using EcommerceWebsite.Utilities.Output.Main;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,6 @@ namespace EcommerceWebsite.Api.Interface
 {
   public  interface IKhuyenMaiApiServices
     {
-        Task<List<KhuyenMai>> laykhuyenMais();
+        Task<List<BannerOutput>> LaykhuyenMais();
     }
 }
