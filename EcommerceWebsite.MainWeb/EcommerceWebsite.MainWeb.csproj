@@ -12,4 +12,8 @@
     <ProjectReference Include="..\EcommerceWebsite.Api\EcommerceWebsite.Api.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Detail\" />
+  </ItemGroup>
+
 </Project>

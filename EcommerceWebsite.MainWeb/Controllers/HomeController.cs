@@ -55,7 +55,7 @@ namespace EcommerceWebsite.MainWeb.Controllers
             var rs = new List<SanPhamVM>();
             foreach(var hui in lstHuiDon)
             {
-                var data = await _sanPhamServices.LayChiTietSanPham(hui.Itemsets[0]);
+                var data = await _sanPhamServices.LayChiTietSanPham(hui.Itemsets[0].Trim());
                 var prd = _mapper.Map<SanPhamVM>(data);
                 rs.Add(prd);
             }
