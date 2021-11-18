@@ -11,14 +11,9 @@
 <div class="slider-with-banner">
     <div class="container">
         <div class="row">
-            <!-- Begin Category Menu Area -->
             <div class="col-lg-3">
-                <!--Category Menu Start-->
                 @(await Html.PartialAsync("/Views/Home/_Categories.cshtml", Model.DanhMucOutputs))
-                <!--Category Menu End-->
             </div>
-            <!-- Category Menu Area End Here -->
-            <!-- Begin Slider Area -->
             <div class="col-lg-9">
                 <div class="slider-area pt-sm-30 pt-xs-30">
                     <div class="slider-active owl-carousel">
@@ -92,7 +87,7 @@
 
                                 <div class="single-product-wrap">
                                     <div class="product-image">
-                                        <a href="@Url.Action("Index", "Detail",prd.MaSanPham)">
+                                        <a href="@Url.Action("Index", "Detail", new { prdId = prd.MaSanPham })">
                                             <img src="@prd.HinhAnh" alt="@prd.TenSanPham">
                                         </a>
                                         <span class="sticker">@(nameof(Status.Hot))</span>
@@ -113,9 +108,9 @@
                                                     </ul>
                                                 </div>
                                             </div>
-                                            <h4><a class="product_name" href="@Url.Action("Index", "Detail",prd.MaSanPham)">@prd.TenSanPham</a></h4>
+                                            <h4><a class="product_name" href="@Url.Action("Index", "Detail",new { prdId = prd.MaSanPham })">@prd.TenSanPham</a></h4>
                                             <div class="price-box">
-                                                <span class="new-price">@prd.GiaBan</span>
+                                                <span class="new-price">@string.Format("{0:0,0}", prd.GiaBan) VNĐ</span>
                                             </div>
                                             <div class="countersection">
                                                 <div class="li-countdown"></div>

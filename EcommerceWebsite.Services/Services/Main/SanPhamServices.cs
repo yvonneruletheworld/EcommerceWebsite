@@ -211,14 +211,14 @@ namespace EcommerceWebsite.Services.Services.Main
 
         public async Task<List<SanPhamOutput>> LaySanPhamTheoLoai(string loaiSanPham, int take)
         {
-            return await (from sp in _context.SanPhams
+            return await (from sp in _context.SanPhams .Distinct().OrderByDescending(s => s.NgayTao)
                        join dm in _context.DanhMucs on sp.MaLoaiSanPham equals dm.MaDanhMuc into sp_dm_group
                        from sp_dm in sp_dm_group.DefaultIfEmpty()
                        join nh in _context.NhanHieus on sp.MaHang equals nh.MaHang into sp_nh_group
                        from sp_nh in sp_nh_group.DefaultIfEmpty()
                        from gb in _context.LichSuGias
                             .Where(lsg => !lsg.DaXoa && lsg.MaSanPham.Equals(sp.MaSanPham))
-                            .OrderByDescending(lsg => lsg.NgayTao.Date)
+                            .OrderBy(lsg => lsg.NgayTao.Date)
                             .ThenByDescending(d => d.NgayTao.TimeOfDay).Take(1)
                           where !sp.DaXoa && sp.MaLoaiSanPham == loaiSanPham
                        select new SanPhamOutput()
