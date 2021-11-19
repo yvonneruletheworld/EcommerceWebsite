@@ -22,8 +22,13 @@ namespace EcommerceWebsite.Data.Configurations
             builder.Property(nx => nx.HinhAnhBanner)
                  .IsRequired();
 
-            builder.Property(nx => nx.TenBanner)
-                 .IsRequired();
+            builder.Property(nx => nx.MaKhuyenMai)
+                 .HasMaxLength(100);
+
+            builder.HasOne(xl => xl.KhuyenMai)
+                .WithMany(xl => xl.Banners)
+                .HasForeignKey(xl => xl.MaKhuyenMai);
+
         }
     }
 }

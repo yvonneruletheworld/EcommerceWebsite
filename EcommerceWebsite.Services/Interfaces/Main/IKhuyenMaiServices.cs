@@ -1,4 +1,5 @@
 ﻿using EcommerceWebsite.Data.Entities;
+using EcommerceWebsite.Utilities.Output.Main;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,6 +9,6 @@ namespace EcommerceWebsite.Services.Interfaces.Main
 {
    public interface IKhuyenMaiServices
     {
-        Task<List<KhuyenMai>> layKhuyenMai();
+        Task<List<BannerOutput>> LayKhuyenMaiChoTrangChu();
     }
 }

@@ -1,0 +1,50 @@
+﻿@using EcommerceWebsite.Utilities.Output.Main
+@model List<DanhMucOutput>
+
+<!--Category Menu Start-->
+<div class="category-menu category-menu-2">
+    <div class="category-heading">
+        <h2 class="categories-toggle font-weight-bold"><span>Danh mục</span></h2>
+    </div>
+    <div id="cate-toggle" class="category-menu-list">
+        <ul class="left-category-ul">
+            @foreach (var dm in Model)
+            {
+                @if (dm.DanhMucCon != null && dm.DanhMucCon.Count > 0)
+                {
+                    <li class="right-menu left-category-li">
+                        <a href="#">@dm.TenDanhMuc</a>
+
+                        <ul class="cat-mega-menu">
+                            @foreach (var item in dm.DanhMucCon)
+                            {
+                                <li class="right-menu cat-mega-title">
+                                    <a href="#">@item.TenDanhMuc</a>
+                                    <ul>
+                                        @foreach (var item2 in item.DanhMucCon)
+                                        {
+                                            <li><a href="#">@item2.TenDanhMuc</a></li>
+                                        }
+                                    </ul>
+                                </li>
+                            }
+
+                        </ul>
+                    </li>
+                }
+
+                else
+                {
+                    <li class="left-category-li"><a href="#">@dm.TenDanhMuc</a></li>
+                }
+            }
+            @*<li class="rx-child"><a href="#">Mobile & Tablets</a></li>
+            <li class="rx-child"><a href="#">Accessories</a></li>*@
+            <li class="rx-parent ">
+                <a class="rx-default">More Categories</a>
+                <a class="rx-show">Less Categories</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<!--Category Menu End-->

@@ -11,5 +11,6 @@ namespace EcommerceWebsite.Data.Entities
         public string HinhAnh { get; set; }
         public string MaSanPham { get; set; }
         public SanPham SanPham { get; set; }
+        public List<LichSuGia>  LichSuGias { get; set; }
     }
 }

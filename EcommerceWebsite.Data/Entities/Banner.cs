@@ -8,6 +8,7 @@ namespace EcommerceWebsite.Data.Entities
     {
         public string MaBanner { get; set; }
         public string HinhAnhBanner { get; set; }
-        public string TenBanner { get; set; }
+        public string MaKhuyenMai { get; set; }
+        public KhuyenMai KhuyenMai { get; set; }
     }
 }

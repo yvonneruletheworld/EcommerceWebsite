@@ -13,7 +13,10 @@ namespace EcommerceWebsite.Data.Configurations
         {
             builder.ToTable("DINHLUONG");
 
-            builder.HasKey(dl => new { dl.MaThuocTinh, dl.MaSanPham });
+            builder.HasKey(dl => new { dl.MaDinhLuong, dl.MaSanPham, dl.MaThuocTinh});
+
+            builder.Property(dl => dl.MaDinhLuong)
+                .HasMaxLength(100);
 
             builder.Property(dl => dl.MaSanPham)
                 .HasMaxLength(100);

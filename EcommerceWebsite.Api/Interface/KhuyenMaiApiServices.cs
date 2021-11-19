@@ -1,4 +1,5 @@
 ﻿using EcommerceWebsite.Data.Entities;
+using EcommerceWebsite.Utilities.Output.Main;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -15,9 +16,9 @@ namespace EcommerceWebsite.Api.Interface
            : base(httpClientFactory, configuration, httpContextAccessor)
         {
         }
-        public async Task<List<KhuyenMai>> laykhuyenMais()
+        public async Task<List<BannerOutput>> LaykhuyenMais()
         {
-            return await GetListAsync<KhuyenMai>("/api/KhuyenMai/lay-khuyenmai");
+            return await GetListAsync<BannerOutput>("/api/KhuyenMai/lay-khuyenmai");
         }
     }
 }

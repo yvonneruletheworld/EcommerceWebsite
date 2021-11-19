@@ -29,11 +29,13 @@ namespace EcommerceWebsite.Data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("TenBanner")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("MaKhuyenMai")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("MaBanner");
+
+                    b.HasIndex("MaKhuyenMai");
 
                     b.ToTable("BANNER");
                 });
@@ -254,7 +256,7 @@ namespace EcommerceWebsite.Data.Migrations
                             DaXoa = false,
                             HienThiTrangHome = true,
                             HinhAnh = "https://i.ibb.co/NSBhk4f/E5wft-Ni-Vk-AQHbh-S.jpg",
-                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 522, DateTimeKind.Utc).AddTicks(5947),
+                            NgayTao = new DateTime(2021, 11, 19, 13, 13, 11, 663, DateTimeKind.Utc).AddTicks(9886),
                             NguoiTao = "admin",
                             Status = 1,
                             TenDanhMuc = "Điện thoại"
@@ -265,7 +267,7 @@ namespace EcommerceWebsite.Data.Migrations
                             DaXoa = false,
                             HienThiTrangHome = true,
                             HinhAnh = "https://i.ibb.co/QHfCkK1/28-11-2020-0-16065566805fc21c0855b09-0.jpg",
-                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 522, DateTimeKind.Utc).AddTicks(7767),
+                            NgayTao = new DateTime(2021, 11, 19, 13, 13, 11, 664, DateTimeKind.Utc).AddTicks(1261),
                             NguoiTao = "admin",
                             ParentId = "DM01",
                             Status = 1,
@@ -277,7 +279,7 @@ namespace EcommerceWebsite.Data.Migrations
                             DaXoa = false,
                             HienThiTrangHome = true,
                             HinhAnh = "https://i.ibb.co/3fWbd3c/Dong-ho-haylou-h3.jpg",
-                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 522, DateTimeKind.Utc).AddTicks(7838),
+                            NgayTao = new DateTime(2021, 11, 19, 13, 13, 11, 664, DateTimeKind.Utc).AddTicks(1320),
                             NguoiTao = "admin",
                             ParentId = "DM01",
                             Status = 1,
@@ -289,7 +291,7 @@ namespace EcommerceWebsite.Data.Migrations
                             DaXoa = false,
                             HienThiTrangHome = true,
                             HinhAnh = "https://i.ibb.co/sHxtWdf/Song-toi-gian-may-tinh-1.jpg",
-                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 522, DateTimeKind.Utc).AddTicks(7844),
+                            NgayTao = new DateTime(2021, 11, 19, 13, 13, 11, 664, DateTimeKind.Utc).AddTicks(1336),
                             NguoiTao = "admin",
                             ParentId = "DM01",
                             Status = 1,
@@ -372,7 +374,7 @@ namespace EcommerceWebsite.Data.Migrations
                             DiaChi = "Hẻm 1 Bùi Xuân Phái, Tây Thạnh, Tân Phú, HCM",
                             LoaiDiaChi = 0,
                             MacDinh = false,
-                            NgayTao = new DateTime(2021, 11, 13, 8, 17, 5, 564, DateTimeKind.Local).AddTicks(8239),
+                            NgayTao = new DateTime(2021, 11, 19, 20, 13, 11, 709, DateTimeKind.Local).AddTicks(7085),
                             SDT = "0376437459"
                         },
                         new
@@ -383,18 +385,14 @@ namespace EcommerceWebsite.Data.Migrations
                             DiaChi = "140 Lê Trọng Tấn,",
                             LoaiDiaChi = 0,
                             MacDinh = false,
-                            NgayTao = new DateTime(2021, 11, 13, 8, 17, 5, 564, DateTimeKind.Local).AddTicks(8292),
+                            NgayTao = new DateTime(2021, 11, 19, 20, 13, 11, 709, DateTimeKind.Local).AddTicks(7222),
                             SDT = "0376437459"
                         });
                 });
 
             modelBuilder.Entity("EcommerceWebsite.Data.Entities.DinhLuong", b =>
                 {
-                    b.Property<string>("MaThuocTinh")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("MaSanPham")
+                    b.Property<string>("MaDinhLuong")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -402,1584 +400,24 @@ namespace EcommerceWebsite.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<float>("GiaTri")
-                        .HasColumnType("real");
+                    b.Property<int>("GiaTri")
+                        .HasColumnType("int");
 
-                    b.HasKey("MaThuocTinh", "MaSanPham");
+                    b.Property<string>("MaSanPham")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("MaThuocTinh")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("MaDinhLuong");
 
                     b.HasIndex("MaSanPham");
 
-                    b.ToTable("DINHLUONG");
+                    b.HasIndex("MaThuocTinh");
 
-                    b.HasData(
-                        new
-                        {
-                            MaThuocTinh = "TT01",
-                            MaSanPham = "SP01",
-                            DonVi = "Dynamic AMOLED 2X, Chính 7.6 & Phụ 6.2, Full HD+",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT02",
-                            MaSanPham = "SP01",
-                            DonVi = "Android 11",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT03",
-                            MaSanPham = "SP01",
-                            DonVi = "3 camera 12 MP",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT04",
-                            MaSanPham = "SP01",
-                            DonVi = "10 MP & 4 MP",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT05",
-                            MaSanPham = "SP01",
-                            DonVi = "Snapdragon 888",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT06",
-                            MaSanPham = "SP01",
-                            DonVi = "GB",
-                            GiaTri = 12f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT07",
-                            MaSanPham = "SP01",
-                            DonVi = "GB",
-                            GiaTri = 512f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT08",
-                            MaSanPham = "SP01",
-                            DonVi = "2 Nano SIM, Hỗ trợ 5G",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT09",
-                            MaSanPham = "SP01",
-                            DonVi = "4400 mAh, 25 W",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT01",
-                            MaSanPham = "SP02",
-                            DonVi = "Dynamic AMOLED 2X, Chính 6.7 & Phụ 1.9, Full HD+",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT02",
-                            MaSanPham = "SP02",
-                            DonVi = "Android 11",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT03",
-                            MaSanPham = "SP02",
-                            DonVi = "2 camera 12 MP",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT04",
-                            MaSanPham = "SP02",
-                            DonVi = "10 MP",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT05",
-                            MaSanPham = "SP02",
-                            DonVi = "Snapdragon 888",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT06",
-                            MaSanPham = "SP02",
-                            DonVi = "GB",
-                            GiaTri = 8f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT07",
-                            MaSanPham = "SP02",
-                            DonVi = "GB",
-                            GiaTri = 128f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT08",
-                            MaSanPham = "SP02",
-                            DonVi = "1 Nano SIM & 1 eSIM, Hỗ trợ 5G",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT09",
-                            MaSanPham = "SP02",
-                            DonVi = "3300 mAh, 25 W",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT01",
-                            MaSanPham = "SP03",
-                            DonVi = "OLED, 6.1, Super Retina XDR",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT02",
-                            MaSanPham = "SP03",
-                            DonVi = "iOS 14",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT03",
-                            MaSanPham = "SP03",
-                            DonVi = "2 camera 12 MP",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT04",
-                            MaSanPham = "SP03",
-                            DonVi = "12 MP",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT05",
-                            MaSanPham = "SP03",
-                            DonVi = "Apple A14 Bionic",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT06",
-                            MaSanPham = "SP03",
-                            DonVi = "GB",
-                            GiaTri = 4f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT07",
-                            MaSanPham = "SP03",
-                            DonVi = "GB",
-                            GiaTri = 64f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT08",
-                            MaSanPham = "SP03",
-                            DonVi = "1 Nano SIM & 1 eSIM, Hỗ trợ 5G",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT09",
-                            MaSanPham = "SP03",
-                            DonVi = "2815 mAh, 20 W",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT01",
-                            MaSanPham = "SP04",
-                            DonVi = "OLED, 6.7, Super Retina XDR",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT02",
-                            MaSanPham = "SP04",
-                            DonVi = "iOS 14",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT03",
-                            MaSanPham = "SP04",
-                            DonVi = "3 camera 12 MP",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT04",
-                            MaSanPham = "SP04",
-                            DonVi = "12 MP",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT05",
-                            MaSanPham = "SP04",
-                            DonVi = "Apple A14 Bionic",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT06",
-                            MaSanPham = "SP04",
-                            DonVi = "GB",
-                            GiaTri = 6f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT07",
-                            MaSanPham = "SP04",
-                            DonVi = "GB",
-                            GiaTri = 128f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT08",
-                            MaSanPham = "SP04",
-                            DonVi = "1 Nano SIM & 1 eSIM, Hỗ trợ 5G",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT09",
-                            MaSanPham = "SP04",
-                            DonVi = "3687 mAh, 20 W",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT01",
-                            MaSanPham = "SP05",
-                            DonVi = "OLED, 5.4, Super Retina XDR",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT02",
-                            MaSanPham = "SP05",
-                            DonVi = "iOS 14",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT03",
-                            MaSanPham = "SP05",
-                            DonVi = "2 camera 12 MP",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT04",
-                            MaSanPham = "SP05",
-                            DonVi = "12 MP",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT05",
-                            MaSanPham = "SP05",
-                            DonVi = "Apple A14 Bionic",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT06",
-                            MaSanPham = "SP05",
-                            DonVi = "GB",
-                            GiaTri = 4f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT07",
-                            MaSanPham = "SP05",
-                            DonVi = "GB",
-                            GiaTri = 64f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT08",
-                            MaSanPham = "SP05",
-                            DonVi = "1 Nano SIM & 1 eSIM, Hỗ trợ 5G",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT09",
-                            MaSanPham = "SP05",
-                            DonVi = "2227 mAh, 20 W",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT01",
-                            MaSanPham = "SP06",
-                            DonVi = "IPS LCD, 6.1, Liquid Retina",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT02",
-                            MaSanPham = "SP06",
-                            DonVi = "iOS 14",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT03",
-                            MaSanPham = "SP06",
-                            DonVi = "2 camera 12 MP",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT04",
-                            MaSanPham = "SP06",
-                            DonVi = "12 MP",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT05",
-                            MaSanPham = "SP06",
-                            DonVi = "Apple A13 Bionic",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT06",
-                            MaSanPham = "SP06",
-                            DonVi = "GB",
-                            GiaTri = 4f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT07",
-                            MaSanPham = "SP06",
-                            DonVi = "GB",
-                            GiaTri = 64f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT08",
-                            MaSanPham = "SP06",
-                            DonVi = "1 Nano SIM & 1 eSIM, Hỗ trợ 4G",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT09",
-                            MaSanPham = "SP06",
-                            DonVi = "3110 mAh, 18 W",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT01",
-                            MaSanPham = "SP07",
-                            DonVi = "IPS LCD, 6.1, Liquid Retina",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT02",
-                            MaSanPham = "SP07",
-                            DonVi = "iOS 14",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT03",
-                            MaSanPham = "SP07",
-                            DonVi = "12 MP",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT04",
-                            MaSanPham = "SP07",
-                            DonVi = "7 MP",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT05",
-                            MaSanPham = "SP07",
-                            DonVi = "Apple A12 Bionic",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT06",
-                            MaSanPham = "SP07",
-                            DonVi = "GB",
-                            GiaTri = 3f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT07",
-                            MaSanPham = "SP07",
-                            DonVi = "GB",
-                            GiaTri = 64f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT08",
-                            MaSanPham = "SP07",
-                            DonVi = "1 Nano SIM & 1 eSIM, Hỗ trợ 4G",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT09",
-                            MaSanPham = "SP07",
-                            DonVi = "2942 mAh, 15 W",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT01",
-                            MaSanPham = "SP08",
-                            DonVi = "AMOLED, 6.43, Full HD + ",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT02",
-                            MaSanPham = "SP08",
-                            DonVi = "Android 11",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT03",
-                            MaSanPham = "SP08",
-                            DonVi = "Chính 64 MP & Phụ 8 MP, 2 MP",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT04",
-                            MaSanPham = "SP08",
-                            DonVi = "32 MP",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT05",
-                            MaSanPham = "SP08",
-                            DonVi = "MediaTek Dimensity 800U 5G",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT06",
-                            MaSanPham = "SP08",
-                            DonVi = "GB",
-                            GiaTri = 8f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT07",
-                            MaSanPham = "SP08",
-                            DonVi = "GB",
-                            GiaTri = 128f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT08",
-                            MaSanPham = "SP08",
-                            DonVi = "2 Nano SIM, Hỗ trợ 5G",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT09",
-                            MaSanPham = "SP08",
-                            DonVi = "4310 mAh, 30 W",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT01",
-                            MaSanPham = "SP09",
-                            DonVi = "AMOLED6.43, Full HD + ",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT02",
-                            MaSanPham = "SP09",
-                            DonVi = "Android 11",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT03",
-                            MaSanPham = "SP09",
-                            DonVi = "Chính 48 MP & Phụ 2 MP, 2 MP",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT04",
-                            MaSanPham = "SP09",
-                            DonVi = "16 MP",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT05",
-                            MaSanPham = "SP09",
-                            DonVi = "Snapdragon 662",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT06",
-                            MaSanPham = "SP09",
-                            DonVi = "GB",
-                            GiaTri = 8f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT07",
-                            MaSanPham = "SP09",
-                            DonVi = "GB",
-                            GiaTri = 128f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT08",
-                            MaSanPham = "SP09",
-                            DonVi = "2 Nano SIM, Hỗ trợ 4G",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT09",
-                            MaSanPham = "SP09",
-                            DonVi = "5000 mAh, 30 W",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT01",
-                            MaSanPham = "SP010",
-                            DonVi = "AMOLED6.55, Full HD+",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT02",
-                            MaSanPham = "SP010",
-                            DonVi = "Android 11",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT03",
-                            MaSanPham = "SP010",
-                            DonVi = "Chính 50 MP & Phụ 16 MP, 13 MP, 2 MP",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT04",
-                            MaSanPham = "SP010",
-                            DonVi = "32 MP",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT05",
-                            MaSanPham = "SP010",
-                            DonVi = "Snapdragon 870 5G",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT06",
-                            MaSanPham = "SP010",
-                            DonVi = "GB",
-                            GiaTri = 12f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT07",
-                            MaSanPham = "SP010",
-                            DonVi = "GB",
-                            GiaTri = 256f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT08",
-                            MaSanPham = "SP010",
-                            DonVi = "2 Nano SIM, Hỗ trợ 5G",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT09",
-                            MaSanPham = "SP010",
-                            DonVi = "4500 mAh, 65 W",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT01",
-                            MaSanPham = "SP011",
-                            DonVi = "AMOLED, 6.7, Quad HD+ (2K+)",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT02",
-                            MaSanPham = "SP011",
-                            DonVi = "Android 11",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT03",
-                            MaSanPham = "SP011",
-                            DonVi = "Chính 50 MP & Phụ 50 MP, 13 MP, 3 MP",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT04",
-                            MaSanPham = "SP011",
-                            DonVi = "32 MP",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT05",
-                            MaSanPham = "SP011",
-                            DonVi = "Snapdragon 888",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT06",
-                            MaSanPham = "SP011",
-                            DonVi = "GB",
-                            GiaTri = 12f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT07",
-                            MaSanPham = "SP011",
-                            DonVi = "GB",
-                            GiaTri = 256f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT08",
-                            MaSanPham = "SP011",
-                            DonVi = "2 Nano SIM, Hỗ trợ 5G",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT09",
-                            MaSanPham = "SP011",
-                            DonVi = "4500 mAh, 65 W",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT01",
-                            MaSanPham = "SP012",
-                            DonVi = "AMOLED, 6.43, Full HD+",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT02",
-                            MaSanPham = "SP012",
-                            DonVi = "Android 11",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT03",
-                            MaSanPham = "SP012",
-                            DonVi = "Chính 64 MP & Phụ 8 MP, 2 MP",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT04",
-                            MaSanPham = "SP012",
-                            DonVi = "32 MP",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT05",
-                            MaSanPham = "SP012",
-                            DonVi = "MediaTek Dimensity 900 5G",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT06",
-                            MaSanPham = "SP012",
-                            DonVi = "GB",
-                            GiaTri = 8f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT07",
-                            MaSanPham = "SP012",
-                            DonVi = "GB",
-                            GiaTri = 128f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT08",
-                            MaSanPham = "SP012",
-                            DonVi = "2 Nano SIM, Hỗ trợ 5G",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT09",
-                            MaSanPham = "SP012",
-                            DonVi = "4300 mAh, 65 W",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT01",
-                            MaSanPham = "SP013",
-                            DonVi = "AMOLED, 6.43, Full HD + ",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT02",
-                            MaSanPham = "SP013",
-                            DonVi = "Android 11",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT03",
-                            MaSanPham = "SP013",
-                            DonVi = "Chính 64 MP & Phụ 8 MP, 2 MP, 2 MP",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT04",
-                            MaSanPham = "SP013",
-                            DonVi = "32 MP",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT05",
-                            MaSanPham = "SP013",
-                            DonVi = "Snapdragon 765G",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT06",
-                            MaSanPham = "SP013",
-                            DonVi = "GB",
-                            GiaTri = 8f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT07",
-                            MaSanPham = "SP013",
-                            DonVi = "GB",
-                            GiaTri = 128f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT08",
-                            MaSanPham = "SP013",
-                            DonVi = "2 Nano SIM, Hỗ trợ 5G",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT09",
-                            MaSanPham = "SP013",
-                            DonVi = "4300 mAh, 65 W",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT01",
-                            MaSanPham = "SP014",
-                            DonVi = "AMOLED, 6.5, Full HD + ",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT02",
-                            MaSanPham = "SP014",
-                            DonVi = "Android 10",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT03",
-                            MaSanPham = "SP014",
-                            DonVi = "Chính 48 MP & Phụ 8 MP, 2 MP, 2 MP",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT04",
-                            MaSanPham = "SP014",
-                            DonVi = "32 MP",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT05",
-                            MaSanPham = "SP014",
-                            DonVi = "Snapdragon 720G",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT06",
-                            MaSanPham = "SP014",
-                            DonVi = "GB",
-                            GiaTri = 8f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT07",
-                            MaSanPham = "SP014",
-                            DonVi = "GB",
-                            GiaTri = 256f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT08",
-                            MaSanPham = "SP014",
-                            DonVi = "2 Nano SIM, Hỗ trợ 4G",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT09",
-                            MaSanPham = "SP014",
-                            DonVi = "4000 mAh, 65 W",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT01",
-                            MaSanPham = "SP015",
-                            DonVi = "IPS LCD, 6.52, HD + ",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT02",
-                            MaSanPham = "SP015",
-                            DonVi = "Android 11",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT03",
-                            MaSanPham = "SP015",
-                            DonVi = "Chính 13 MP & Phụ 2 MP, 2 MP",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT04",
-                            MaSanPham = "SP015",
-                            DonVi = "8 MP",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT05",
-                            MaSanPham = "SP015",
-                            DonVi = "MediaTek Helio G35",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT06",
-                            MaSanPham = "SP015",
-                            DonVi = "GB",
-                            GiaTri = 3f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT07",
-                            MaSanPham = "SP015",
-                            DonVi = "GB",
-                            GiaTri = 32f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT08",
-                            MaSanPham = "SP015",
-                            DonVi = "2 Nano SIM, Hỗ trợ 4G",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT09",
-                            MaSanPham = "SP015",
-                            DonVi = "5000 mAh, 10 W",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT01",
-                            MaSanPham = "SP016",
-                            DonVi = "IPS LCD, 6.51 HD + ",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT02",
-                            MaSanPham = "SP016",
-                            DonVi = "Android 11",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT03",
-                            MaSanPham = "SP016",
-                            DonVi = "Chính 13 MP & Phụ 2 MP",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT04",
-                            MaSanPham = "SP016",
-                            DonVi = "8 MP",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT05",
-                            MaSanPham = "SP016",
-                            DonVi = "MediaTek Helio P35",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT06",
-                            MaSanPham = "SP016",
-                            DonVi = "GB",
-                            GiaTri = 4f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT07",
-                            MaSanPham = "SP016",
-                            DonVi = "GB",
-                            GiaTri = 64f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT08",
-                            MaSanPham = "SP016",
-                            DonVi = "2 Nano SIM, Hỗ trợ 4G",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT09",
-                            MaSanPham = "SP016",
-                            DonVi = "5000 mAh, 18 W",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT01",
-                            MaSanPham = "SP017",
-                            DonVi = "IPS LCD, 6.56 HD + ",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT02",
-                            MaSanPham = "SP017",
-                            DonVi = "Android 11",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT03",
-                            MaSanPham = "SP017",
-                            DonVi = "Chính 13 MP & Phụ 2 MP",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT04",
-                            MaSanPham = "SP017",
-                            DonVi = "8 MP",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT05",
-                            MaSanPham = "SP017",
-                            DonVi = "MediaTek Dimensity 1200",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT06",
-                            MaSanPham = "SP017",
-                            DonVi = "GB",
-                            GiaTri = 12f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT07",
-                            MaSanPham = "SP017",
-                            DonVi = "GB",
-                            GiaTri = 256f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT08",
-                            MaSanPham = "SP017",
-                            DonVi = "2 Nano SIM, Hỗ trợ 5G",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT09",
-                            MaSanPham = "SP017",
-                            DonVi = "4500 mAh, 44 W",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT01",
-                            MaSanPham = "SP018",
-                            DonVi = "IPS LCD, 6.44 HD + ",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT02",
-                            MaSanPham = "SP018",
-                            DonVi = "Android 11",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT03",
-                            MaSanPham = "SP018",
-                            DonVi = "Chính 64 MP & Phụ 8 MP, 2 MP",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT04",
-                            MaSanPham = "SP018",
-                            DonVi = "44 MP",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT05",
-                            MaSanPham = "SP018",
-                            DonVi = "MediaTek Dimensity 800U 5G",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT06",
-                            MaSanPham = "SP018",
-                            DonVi = "GB",
-                            GiaTri = 8f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT07",
-                            MaSanPham = "SP018",
-                            DonVi = "GB",
-                            GiaTri = 128f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT08",
-                            MaSanPham = "SP018",
-                            DonVi = "2 Nano SIM, Hỗ trợ 5G",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT09",
-                            MaSanPham = "SP018",
-                            DonVi = "4000 mAh, 43 W",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT01",
-                            MaSanPham = "SP019",
-                            DonVi = "IPS LCD, 6.44 HD + ",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT02",
-                            MaSanPham = "SP019",
-                            DonVi = "Android 11",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT03",
-                            MaSanPham = "SP019",
-                            DonVi = "Chính 64 MP & Phụ 8 MP, 2 MP",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT04",
-                            MaSanPham = "SP019",
-                            DonVi = "44 MP",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT05",
-                            MaSanPham = "SP019",
-                            DonVi = "Snapdragon 730",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT06",
-                            MaSanPham = "SP019",
-                            DonVi = "GB",
-                            GiaTri = 8f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT07",
-                            MaSanPham = "SP019",
-                            DonVi = "GB",
-                            GiaTri = 128f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT08",
-                            MaSanPham = "SP019",
-                            DonVi = "2 Nano SIM, Hỗ trợ 4G",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT09",
-                            MaSanPham = "SP019",
-                            DonVi = "4000 mAh, 33 W",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT01",
-                            MaSanPham = "SP020",
-                            DonVi = "IPS LCD, 6.58 HD + ",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT02",
-                            MaSanPham = "SP020",
-                            DonVi = "Android 11",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT03",
-                            MaSanPham = "SP020",
-                            DonVi = "Chính 64 MP & Phụ 8 MP, 2 MP",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT04",
-                            MaSanPham = "SP020",
-                            DonVi = "16 MP",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT05",
-                            MaSanPham = "SP020",
-                            DonVi = "MediaTek Dimensity 700",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT06",
-                            MaSanPham = "SP020",
-                            DonVi = "GB",
-                            GiaTri = 8f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT07",
-                            MaSanPham = "SP020",
-                            DonVi = "GB",
-                            GiaTri = 128f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT08",
-                            MaSanPham = "SP020",
-                            DonVi = "2 Nano SIM (SIM 2 chung khe thẻ nhớ) Hỗ trợ 5G",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT09",
-                            MaSanPham = "SP020",
-                            DonVi = "5000 mAh, 18 W",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT01",
-                            MaSanPham = "SP021",
-                            DonVi = "IPS LCD, 6.51 HD + ",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT02",
-                            MaSanPham = "SP021",
-                            DonVi = "Android 11",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT03",
-                            MaSanPham = "SP021",
-                            DonVi = "Chính 50 MP & Phụ 8 MP, 2 MP",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT04",
-                            MaSanPham = "SP021",
-                            DonVi = "8 MP",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT05",
-                            MaSanPham = "SP021",
-                            DonVi = "MediaTek Dimensity G80",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT06",
-                            MaSanPham = "SP021",
-                            DonVi = "GB",
-                            GiaTri = 6f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT07",
-                            MaSanPham = "SP021",
-                            DonVi = "GB",
-                            GiaTri = 128f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT08",
-                            MaSanPham = "SP021",
-                            DonVi = "2 Nano SIM, Hỗ trợ 4G",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT09",
-                            MaSanPham = "SP021",
-                            DonVi = "5000 mAh, 18 W",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT01",
-                            MaSanPham = "SP022",
-                            DonVi = "SUPER AMOLED, 1.36 inch",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT010",
-                            MaSanPham = "SP022",
-                            DonVi = "Khoảng 1.5 ngày",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT011",
-                            MaSanPham = "SP022",
-                            DonVi = "Android dùng Google Mobile Service",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT012",
-                            MaSanPham = "SP022",
-                            DonVi = "Kính cường lực Gorrilla Glass Dx+, 44 mm",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT013",
-                            MaSanPham = "SP022",
-                            DonVi = "Theo dõi giấc ngủ, Đo nhịp tim, Đo nồng độ oxy (SpO2), Đếm số bước chân",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT01",
-                            MaSanPham = "SP023",
-                            DonVi = "OLED, 1.57 inch",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT010",
-                            MaSanPham = "SP023",
-                            DonVi = "Khoảng 1.5 ngày",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT011",
-                            MaSanPham = "SP023",
-                            DonVi = "iOS 14 trở lên",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT012",
-                            MaSanPham = "SP023",
-                            DonVi = "Ion-X strengthened glass, 40 mm",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT013",
-                            MaSanPham = "SP023",
-                            DonVi = "Chế độ luyện tập, Theo dõi giấc ngủ, Tính lượng calories tiêu thụ, Tính quãng đường chạy, Điện tâm đồ, Đo nhịp tim, Đo nồng độ oxy (SpO2), Đếm số bước chân",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT01",
-                            MaSanPham = "SP024",
-                            DonVi = "OLED, 1.57 inch",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT010",
-                            MaSanPham = "SP024",
-                            DonVi = "Khoảng 1.5 ngày",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT011",
-                            MaSanPham = "SP024",
-                            DonVi = "iOS 14 trở lên",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT012",
-                            MaSanPham = "SP024",
-                            DonVi = "Ion-X strengthened glass, 40 mm",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT013",
-                            MaSanPham = "SP024",
-                            DonVi = "Chế độ luyện tập, Theo dõi giấc ngủ, Tính lượng calories tiêu thụ, Tính quãng đường chạy, Đo nhịp tim, Đếm số bước chân",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT01",
-                            MaSanPham = "SP025",
-                            DonVi = "SUPER AMOLED, 1.4 inch",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT010",
-                            MaSanPham = "SP025",
-                            DonVi = "Khoảng 2 ngày",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT011",
-                            MaSanPham = "SP025",
-                            DonVi = "Android 5.0 trở lên, iOS 9 trở lên",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT012",
-                            MaSanPham = "SP025",
-                            DonVi = "Kính cường lực Gorrilla Glass Dx+, 45 mm",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT013",
-                            MaSanPham = "SP025",
-                            DonVi = "Chế độ luyện tập, Theo dõi giấc ngủ, Tính lượng calories tiêu thụ, Tính quãng đường chạy, Đo nhịp tim, Đo nồng độ oxy (SpO2), Đếm số bước chân",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT01",
-                            MaSanPham = "SP026",
-                            DonVi = "SUPER AMOLED, 1.36 inch",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT010",
-                            MaSanPham = "SP026",
-                            DonVi = "Khoảng 1.5 ngày",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT011",
-                            MaSanPham = "SP026",
-                            DonVi = "Android dùng Google Mobile Service",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT012",
-                            MaSanPham = "SP026",
-                            DonVi = "Kính cường lực Gorrilla Glass Dx+, 44 mm",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT013",
-                            MaSanPham = "SP026",
-                            DonVi = "Theo dõi giấc ngủ, Đo nhịp tim, Đo nồng độ oxy (SpO2), Đếm số bước chân",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT01",
-                            MaSanPham = "SP027",
-                            DonVi = "OLED, 1.57 inch",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT010",
-                            MaSanPham = "SP027",
-                            DonVi = "Khoảng 1.5 ngày",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT011",
-                            MaSanPham = "SP027",
-                            DonVi = "iOS 14 trở lên",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT012",
-                            MaSanPham = "SP027",
-                            DonVi = "Kính cường lực Sapphire40 mm",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT013",
-                            MaSanPham = "SP027",
-                            DonVi = "Chế độ luyện tập, Theo dõi giấc ngủ, Tính lượng calories tiêu thụ, Tính quãng đường chạy, Đo nhịp tim, Đếm số bước chân",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT01",
-                            MaSanPham = "SP028",
-                            DonVi = "OLED, 1.77 inch",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT010",
-                            MaSanPham = "SP028",
-                            DonVi = "Khoảng 1.5 ngày",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT011",
-                            MaSanPham = "SP028",
-                            DonVi = "iOS 14 trở lên",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT012",
-                            MaSanPham = "SP028",
-                            DonVi = "Ion-X strengthened glass45 mm",
-                            GiaTri = 0f
-                        },
-                        new
-                        {
-                            MaThuocTinh = "TT013",
-                            MaSanPham = "SP028",
-                            DonVi = "Chế độ luyện tập, Theo dõi giấc ngủ, Tính lượng calories tiêu thụ, Tính quãng đường chạy, Điện tâm đồ, Đo nhịp tim, Đo nồng độ oxy (SpO2), Đếm số bước chân",
-                            GiaTri = 0f
-                        });
+                    b.ToTable("DINHLUONG");
                 });
 
             modelBuilder.Entity("EcommerceWebsite.Data.Entities.GiaoHang", b =>
@@ -2213,7 +651,7 @@ namespace EcommerceWebsite.Data.Migrations
                             MaKhuyenMai = "KM01",
                             DaXoa = true,
                             HinhAnh = "https://cdn.tgdd.vn/2021/11/banner/830-300(1)-830x300.png",
-                            NgayTao = new DateTime(2021, 11, 13, 8, 17, 5, 565, DateTimeKind.Local).AddTicks(155),
+                            NgayTao = new DateTime(2021, 11, 19, 20, 13, 11, 709, DateTimeKind.Local).AddTicks(9782),
                             PhanTram = 35f,
                             TenKhuyenMai = "Đồng hồ thời trang giảm 35%"
                         },
@@ -2222,7 +660,7 @@ namespace EcommerceWebsite.Data.Migrations
                             MaKhuyenMai = "KM02",
                             DaXoa = true,
                             HinhAnh = "https://cdn.tgdd.vn/2021/10/banner/830-300-830x300-29.png",
-                            NgayTao = new DateTime(2021, 11, 13, 8, 17, 5, 565, DateTimeKind.Local).AddTicks(205),
+                            NgayTao = new DateTime(2021, 11, 19, 20, 13, 11, 709, DateTimeKind.Local).AddTicks(9867),
                             PhanTram = 15f,
                             TenKhuyenMai = "Apple Watch S6 giảm đến 15%"
                         },
@@ -2231,7 +669,7 @@ namespace EcommerceWebsite.Data.Migrations
                             MaKhuyenMai = "KM03",
                             DaXoa = true,
                             HinhAnh = "https://cdn.tgdd.vn/2021/11/banner/big11-pk-830-300-830x300.png",
-                            NgayTao = new DateTime(2021, 11, 13, 8, 17, 5, 565, DateTimeKind.Local).AddTicks(209),
+                            NgayTao = new DateTime(2021, 11, 19, 20, 13, 11, 709, DateTimeKind.Local).AddTicks(9875),
                             PhanTram = 50f,
                             TenKhuyenMai = "Phụ kiện giảm đến 50%"
                         },
@@ -2240,7 +678,7 @@ namespace EcommerceWebsite.Data.Migrations
                             MaKhuyenMai = "KM04",
                             DaXoa = true,
                             HinhAnh = "https://cdn.tgdd.vn/2021/11/banner/830-300-830x300-6.png",
-                            NgayTao = new DateTime(2021, 11, 13, 8, 17, 5, 565, DateTimeKind.Local).AddTicks(223),
+                            NgayTao = new DateTime(2021, 11, 19, 20, 13, 11, 709, DateTimeKind.Local).AddTicks(9880),
                             PhanTram = 25f,
                             TenKhuyenMai = "Apple Watch S6 giảm đến 25%"
                         });
@@ -2248,12 +686,9 @@ namespace EcommerceWebsite.Data.Migrations
 
             modelBuilder.Entity("EcommerceWebsite.Data.Entities.LichSuGia", b =>
                 {
-                    b.Property<string>("MaSanPham")
+                    b.Property<string>("MaLichSuGia")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
-
-                    b.Property<DateTime>("NgayTao")
-                        .HasColumnType("datetime2");
 
                     b.Property<bool>("DaXoa")
                         .HasColumnType("bit");
@@ -2261,7 +696,22 @@ namespace EcommerceWebsite.Data.Migrations
                     b.Property<decimal>("GiaMoi")
                         .HasColumnType("money");
 
+                    b.Property<string>("MaDinhLuong")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("MaMauMa")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("MaSanPham")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
                     b.Property<DateTime?>("NgaySuaCuoi")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("NgayTao")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("NgayXoa")
@@ -2276,208 +726,19 @@ namespace EcommerceWebsite.Data.Migrations
                     b.Property<string>("NguoiXoa")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("MaSanPham", "NgayTao");
+                    b.HasKey("MaLichSuGia");
+
+                    b.HasIndex("MaDinhLuong");
+
+                    b.HasIndex("MaMauMa");
+
+                    b.HasIndex("MaSanPham");
 
                     b.ToTable("LICHSUGIA");
-
-                    b.HasData(
-                        new
-                        {
-                            MaSanPham = "SP01",
-                            NgayTao = new DateTime(2021, 10, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DaXoa = true,
-                            GiaMoi = 43990000m
-                        },
-                        new
-                        {
-                            MaSanPham = "SP02",
-                            NgayTao = new DateTime(2021, 10, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DaXoa = true,
-                            GiaMoi = 24990000m
-                        },
-                        new
-                        {
-                            MaSanPham = "SP03",
-                            NgayTao = new DateTime(2021, 10, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DaXoa = true,
-                            GiaMoi = 18700000m
-                        },
-                        new
-                        {
-                            MaSanPham = "SP04",
-                            NgayTao = new DateTime(2021, 10, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DaXoa = true,
-                            GiaMoi = 31490000m
-                        },
-                        new
-                        {
-                            MaSanPham = "SP05",
-                            NgayTao = new DateTime(2021, 10, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DaXoa = true,
-                            GiaMoi = 16490000m
-                        },
-                        new
-                        {
-                            MaSanPham = "SP06",
-                            NgayTao = new DateTime(2021, 10, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DaXoa = true,
-                            GiaMoi = 16990000m
-                        },
-                        new
-                        {
-                            MaSanPham = "SP07",
-                            NgayTao = new DateTime(2021, 10, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DaXoa = true,
-                            GiaMoi = 13490000m
-                        },
-                        new
-                        {
-                            MaSanPham = "SP08",
-                            NgayTao = new DateTime(2021, 10, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DaXoa = true,
-                            GiaMoi = 9990000m
-                        },
-                        new
-                        {
-                            MaSanPham = "SP09",
-                            NgayTao = new DateTime(2021, 10, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DaXoa = true,
-                            GiaMoi = 6990000m
-                        },
-                        new
-                        {
-                            MaSanPham = "SP010",
-                            NgayTao = new DateTime(2021, 10, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DaXoa = true,
-                            GiaMoi = 18490000m
-                        },
-                        new
-                        {
-                            MaSanPham = "SP011",
-                            NgayTao = new DateTime(2021, 10, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DaXoa = true,
-                            GiaMoi = 23990000m
-                        },
-                        new
-                        {
-                            MaSanPham = "SP012",
-                            NgayTao = new DateTime(2021, 10, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DaXoa = true,
-                            GiaMoi = 12990000m
-                        },
-                        new
-                        {
-                            MaSanPham = "SP013",
-                            NgayTao = new DateTime(2021, 10, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DaXoa = true,
-                            GiaMoi = 10990000m
-                        },
-                        new
-                        {
-                            MaSanPham = "SP014",
-                            NgayTao = new DateTime(2021, 10, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DaXoa = true,
-                            GiaMoi = 10490000m
-                        },
-                        new
-                        {
-                            MaSanPham = "SP015",
-                            NgayTao = new DateTime(2021, 10, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DaXoa = true,
-                            GiaMoi = 3990000m
-                        },
-                        new
-                        {
-                            MaSanPham = "SP016",
-                            NgayTao = new DateTime(2021, 10, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DaXoa = true,
-                            GiaMoi = 4290000m
-                        },
-                        new
-                        {
-                            MaSanPham = "SP018",
-                            NgayTao = new DateTime(2021, 10, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DaXoa = true,
-                            GiaMoi = 9490000m
-                        },
-                        new
-                        {
-                            MaSanPham = "SP019",
-                            NgayTao = new DateTime(2021, 10, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DaXoa = true,
-                            GiaMoi = 7790000m
-                        },
-                        new
-                        {
-                            MaSanPham = "SP020",
-                            NgayTao = new DateTime(2021, 10, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DaXoa = true,
-                            GiaMoi = 7590000m
-                        },
-                        new
-                        {
-                            MaSanPham = "SP021",
-                            NgayTao = new DateTime(2021, 10, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DaXoa = true,
-                            GiaMoi = 5990000m
-                        },
-                        new
-                        {
-                            MaSanPham = "SP022",
-                            NgayTao = new DateTime(2021, 10, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DaXoa = true,
-                            GiaMoi = 750000m
-                        },
-                        new
-                        {
-                            MaSanPham = "SP023",
-                            NgayTao = new DateTime(2021, 10, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DaXoa = false,
-                            GiaMoi = 9592000m
-                        },
-                        new
-                        {
-                            MaSanPham = "SP024",
-                            NgayTao = new DateTime(2021, 10, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DaXoa = false,
-                            GiaMoi = 8450000m
-                        },
-                        new
-                        {
-                            MaSanPham = "SP025",
-                            NgayTao = new DateTime(2021, 10, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DaXoa = false,
-                            GiaMoi = 4990000m
-                        },
-                        new
-                        {
-                            MaSanPham = "SP026",
-                            NgayTao = new DateTime(2021, 10, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DaXoa = false,
-                            GiaMoi = 6990000m
-                        },
-                        new
-                        {
-                            MaSanPham = "SP027",
-                            NgayTao = new DateTime(2021, 10, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DaXoa = false,
-                            GiaMoi = 16792000m
-                        },
-                        new
-                        {
-                            MaSanPham = "SP028",
-                            NgayTao = new DateTime(2021, 10, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DaXoa = false,
-                            GiaMoi = 12990000m
-                        });
                 });
 
             modelBuilder.Entity("EcommerceWebsite.Data.Entities.MauMaSanPham", b =>
                 {
-                    b.Property<string>("MaSanPham")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
                     b.Property<string>("MaMauMa")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
@@ -2485,545 +746,544 @@ namespace EcommerceWebsite.Data.Migrations
                     b.Property<string>("HinhAnh")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("MaSanPham")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
                     b.Property<string>("TenMauMa")
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.HasKey("MaSanPham", "MaMauMa");
+                    b.HasKey("MaMauMa");
+
+                    b.HasIndex("MaSanPham");
 
                     b.ToTable("MAUMASANPHAM");
 
                     b.HasData(
                         new
                         {
-                            MaSanPham = "SP01",
                             MaMauMa = "MM01",
                             HinhAnh = "https://i.ibb.co/9WvYqLR/Samsung-galaxy-z-fold3-5g-1.jpg",
+                            MaSanPham = "SP01",
                             TenMauMa = "Xanh riêu"
                         },
                         new
                         {
-                            MaSanPham = "SP01",
                             MaMauMa = "MM02",
                             HinhAnh = "https://i.ibb.co/T2Ywg8N/Samsung-galaxy-z-fold-3-silver-gc-org.jpg",
+                            MaSanPham = "SP01",
                             TenMauMa = "Bạc"
                         },
                         new
                         {
-                            MaSanPham = "SP01",
                             MaMauMa = "MM03",
                             HinhAnh = "https://i.ibb.co/qyCNcw6/Samsung-galaxy-z-fold-3-1-org.jpg",
+                            MaSanPham = "SP01",
                             TenMauMa = "Đen"
                         },
                         new
                         {
-                            MaSanPham = "SP02",
                             MaMauMa = "MM04",
                             HinhAnh = "https://i.ibb.co/CPq556s/Samsung-galaxy-z-flip-3-kem-1-org.jpg",
+                            MaSanPham = "SP02",
                             TenMauMa = "Kem"
                         },
                         new
                         {
-                            MaSanPham = "SP02",
                             MaMauMa = "MM05",
                             HinhAnh = "https://i.ibb.co/0tXPPWn/Samsung-galaxy-z-flip-3-black-gc-org.jpg",
+                            MaSanPham = "SP02",
                             TenMauMa = "Đen"
                         },
                         new
                         {
-                            MaSanPham = "SP02",
                             MaMauMa = "MM06",
                             HinhAnh = "https://i.ibb.co/9WvYqLR/Samsung-galaxy-z-fold3-5g-1.jpg",
+                            MaSanPham = "SP02",
                             TenMauMa = "Xanh riêu"
                         },
                         new
                         {
-                            MaSanPham = "SP03",
                             MaMauMa = "MM07",
                             HinhAnh = "https://i.ibb.co/0qYwZ5c/Iphone-12-64-GB-en.jpg",
+                            MaSanPham = "SP03",
                             TenMauMa = "Đen"
                         },
                         new
                         {
-                            MaSanPham = "SP03",
                             MaMauMa = "MM08",
                             HinhAnh = "https://i.ibb.co/RNz8N1G/Iphone-12-64-GB.jpg",
+                            MaSanPham = "SP03",
                             TenMauMa = "Đỏ"
                         },
                         new
                         {
-                            MaSanPham = "SP03",
                             MaMauMa = "MM09",
                             HinhAnh = "https://i.ibb.co/GC6Tdwd/Iphone-12-64-GB-T-m.jpg",
+                            MaSanPham = "SP03",
                             TenMauMa = "Tím"
                         },
                         new
                         {
-                            MaSanPham = "SP03",
                             MaMauMa = "MM010",
                             HinhAnh = "https://i.ibb.co/vsLZ8km/Iphone-12-mini-64-GB.jpg",
+                            MaSanPham = "SP03",
                             TenMauMa = "Trắng"
                         },
                         new
                         {
-                            MaSanPham = "SP03",
                             MaMauMa = "MM011",
                             HinhAnh = "https://i.ibb.co/6XtyJbM/Iphone-12-64-GB-Xanh.jpg",
+                            MaSanPham = "SP03",
                             TenMauMa = "Xanh"
                         },
                         new
                         {
-                            MaSanPham = "SP03",
                             MaMauMa = "MM012",
                             HinhAnh = "https://i.ibb.co/D5Xg9sQ/Iphone-12-64-GB-Xanh-l.jpg",
+                            MaSanPham = "SP03",
                             TenMauMa = "Xanh lá"
                         },
                         new
                         {
-                            MaSanPham = "SP04",
                             MaMauMa = "MM013",
                             HinhAnh = "https://i.ibb.co/pW2nvth/Iphone-12-pro-max-bac-1-org.jpg",
+                            MaSanPham = "SP04",
                             TenMauMa = "Bạc"
                         },
                         new
                         {
-                            MaSanPham = "SP04",
                             MaMauMa = "MM014",
                             HinhAnh = "https://i.ibb.co/JQNGCzb/Iphone-12-pro-max-128-GB.jpg",
+                            MaSanPham = "SP04",
                             TenMauMa = "Vàng"
                         },
                         new
                         {
-                            MaSanPham = "SP04",
                             MaMauMa = "MM015",
                             HinhAnh = "https://i.ibb.co/5LvRhJ4/Iphone-12-pro-max-xanh-duong-1-org.jpg",
+                            MaSanPham = "SP04",
                             TenMauMa = "Xanh"
                         },
                         new
                         {
-                            MaSanPham = "SP05",
                             MaMauMa = "MM016",
                             HinhAnh = "https://i.ibb.co/crZFrkD/Iphone-12-mini-den-1-1-org.jpg",
-                            TenMauMa = "Đen"
+                            MaSanPham = "SP05",
+                            TenMauMa = "Hologram"
                         },
                         new
                         {
-                            MaSanPham = "SP05",
                             MaMauMa = "MM017",
                             HinhAnh = "https://i.ibb.co/jkmt501/Iphone-12-mini-1-1-org.jpg",
+                            MaSanPham = "SP05",
                             TenMauMa = "Đỏ"
                         },
                         new
                         {
-                            MaSanPham = "SP05",
                             MaMauMa = "MM018",
                             HinhAnh = "https://i.ibb.co/30KH8b2/Iphone-12-mini-tim-gc-1-org.jpg",
+                            MaSanPham = "SP05",
                             TenMauMa = "Tím"
                         },
                         new
                         {
-                            MaSanPham = "SP05",
                             MaMauMa = "MM019",
                             HinhAnh = "https://i.ibb.co/5LRj1Wh/Iphone-12-mini-trang-1-1-org.jpg",
+                            MaSanPham = "SP05",
                             TenMauMa = "Trắng"
                         },
                         new
                         {
-                            MaSanPham = "SP05",
                             MaMauMa = "MM020",
                             HinhAnh = "https://i.ibb.co/Np97nN6/Iphone-12-mini-xanh-duong-1-1-org.jpg",
+                            MaSanPham = "SP05",
                             TenMauMa = "Xanh dương"
                         },
                         new
                         {
-                            MaSanPham = "SP05",
                             MaMauMa = "MM021",
                             HinhAnh = "https://i.ibb.co/0stYCyp/Iphone-11-den-1-1-1-org.jpg",
+                            MaSanPham = "SP05",
                             TenMauMa = "Đen"
                         },
                         new
                         {
-                            MaSanPham = "SP06",
                             MaMauMa = "MM022",
                             HinhAnh = "https://i.ibb.co/WBH28Zh/Iphone-11-do-1-1-1-org.jpg",
+                            MaSanPham = "SP06",
                             TenMauMa = "Đỏ"
                         },
                         new
                         {
-                            MaSanPham = "SP06",
                             MaMauMa = "MM023",
                             HinhAnh = "https://i.ibb.co/Lnt4WzS/Iphone-11-tim-1-1-1-org.jpg",
+                            MaSanPham = "SP06",
                             TenMauMa = "Tím"
                         },
                         new
                         {
-                            MaSanPham = "SP06",
                             MaMauMa = "MM024",
                             HinhAnh = "https://i.ibb.co/pLyJDFG/Iphone-11-trang-1-2-org.jpg",
+                            MaSanPham = "SP06",
                             TenMauMa = "Trắng"
                         },
                         new
                         {
-                            MaSanPham = "SP06",
                             MaMauMa = "MM025",
                             HinhAnh = "https://i.ibb.co/26xpZH9/Iphone-11-vang-1-2-org.jpg",
+                            MaSanPham = "SP06",
                             TenMauMa = "Vàng"
                         },
                         new
                         {
-                            MaSanPham = "SP06",
                             MaMauMa = "MM026",
                             HinhAnh = "https://i.ibb.co/hZS5MJ3/Iphone-11-64-GB.jpg",
+                            MaSanPham = "SP06",
                             TenMauMa = "Xanh lá"
                         },
                         new
                         {
-                            MaSanPham = "SP07",
                             MaMauMa = "MM027",
                             HinhAnh = "https://i.ibb.co/8d4VJxn/mo-hop-iphone-xr-ban-mau-cam.jpg",
+                            MaSanPham = "SP07",
                             TenMauMa = "Cam"
                         },
                         new
                         {
-                            MaSanPham = "SP07",
                             MaMauMa = "MM028",
                             HinhAnh = "https://i.ibb.co/yWZQJPt/Iphone-XR-en.jpg",
+                            MaSanPham = "SP07",
                             TenMauMa = "Đen"
                         },
                         new
                         {
-                            MaSanPham = "SP07",
                             MaMauMa = "MM029",
                             HinhAnh = "https://i.ibb.co/6y40G5v/20210416-6cec022bdb9abc311894b08e71bd0769-1618550179.jpg",
+                            MaSanPham = "SP07",
                             TenMauMa = "Vàng"
                         },
                         new
                         {
-                            MaSanPham = "SP07",
                             MaMauMa = "MM030",
                             HinhAnh = "https://i.ibb.co/2v36jLV/iphone-XR-64-GB.jpg",
+                            MaSanPham = "SP07",
                             TenMauMa = "Xanh"
                         },
                         new
                         {
-                            MaSanPham = "SP08",
                             MaMauMa = "MM031",
                             HinhAnh = "https://i.ibb.co/MNpLvHY/Oppo-reno6-z-5g-bac-1-org.jpg",
+                            MaSanPham = "SP08",
                             TenMauMa = "Bạc"
                         },
                         new
                         {
-                            MaSanPham = "SP08",
                             MaMauMa = "MM032",
                             HinhAnh = "https://i.ibb.co/KXWZfKL/Oppo-reno6-z-5g-den-1-org.jpg",
+                            MaSanPham = "SP08",
                             TenMauMa = "Đen"
                         },
                         new
                         {
-                            MaSanPham = "SP09",
                             MaMauMa = "MM033",
                             HinhAnh = "https://i.ibb.co/zRQB86R/Oppo-a74-xanh-duong-1-org.jpg",
+                            MaSanPham = "SP09",
                             TenMauMa = "Xanh dương"
                         },
                         new
                         {
-                            MaSanPham = "SP09",
                             MaMauMa = "MM034",
                             HinhAnh = "https://i.ibb.co/M5Mk64X/Oppo-a74-den-5-org.jpg",
+                            MaSanPham = "SP09",
                             TenMauMa = "Đen"
                         },
                         new
                         {
-                            MaSanPham = "SP010",
                             MaMauMa = "MM035",
                             HinhAnh = "https://i.ibb.co/jJ1XBWq/Oppo-reno6-pro-5g-xanh-duong-1.jpg",
+                            MaSanPham = "SP010",
                             TenMauMa = "Xanh dương"
                         },
                         new
                         {
-                            MaSanPham = "SP010",
                             MaMauMa = "MM036",
                             HinhAnh = "https://i.ibb.co/yVs3g8T/Oppo-reno6-pro-5g-xam-1.jpg",
+                            MaSanPham = "SP010",
                             TenMauMa = "Xám"
                         },
                         new
                         {
-                            MaSanPham = "SP011",
                             MaMauMa = "MM037",
                             HinhAnh = "https://i.ibb.co/pw2Kqcp/Oppo-find-x3-pro-den-1-org.jpg",
+                            MaSanPham = "SP011",
                             TenMauMa = "Đen"
                         },
                         new
                         {
-                            MaSanPham = "SP011",
                             MaMauMa = "MM038",
                             HinhAnh = "https://i.ibb.co/Rp3jcB3/Oppo-find-x3-pro-xanh-1-org.jpg",
+                            MaSanPham = "SP011",
                             TenMauMa = "Xanh đen"
                         },
                         new
                         {
-                            MaSanPham = "SP012",
                             MaMauMa = "MM039",
                             HinhAnh = "https://i.ibb.co/7YG6TFH/Oppo-reno6-bac-1-org.jpg",
+                            MaSanPham = "SP012",
                             TenMauMa = "Bạc"
                         },
                         new
                         {
-                            MaSanPham = "SP012",
                             MaMauMa = "MM040",
                             HinhAnh = "https://i.ibb.co/zbPGb0s/Oppo-reno6-den-1-org.jpg",
+                            MaSanPham = "SP012",
                             TenMauMa = "Đen"
                         },
                         new
                         {
-                            MaSanPham = "SP013",
                             MaMauMa = "MM041",
                             HinhAnh = "https://i.ibb.co/55BgPLp/Oppo-reno5-5g-bac-1-org.jpg",
+                            MaSanPham = "SP013",
                             TenMauMa = "Bạc"
                         },
                         new
                         {
-                            MaSanPham = "SP013",
                             MaMauMa = "MM042",
                             HinhAnh = "https://i.ibb.co/MhHDY3L/Oppo-reno5-5g-den-org.jpg",
+                            MaSanPham = "SP013",
                             TenMauMa = "Đen"
                         },
                         new
                         {
-                            MaSanPham = "SP014",
                             MaMauMa = "MM043",
                             HinhAnh = "https://i.ibb.co/94LDnqK/Oppo-reno4-pro-trang-1-org.jpg",
+                            MaSanPham = "SP014",
                             TenMauMa = "Trắng"
                         },
                         new
                         {
-                            MaSanPham = "SP014",
                             MaMauMa = "MM044",
                             HinhAnh = "https://i.ibb.co/RBQ3zwg/Oppo-reno4-pro-den-1-org.jpg",
+                            MaSanPham = "SP014",
                             TenMauMa = "Đen"
                         },
                         new
                         {
-                            MaSanPham = "SP015",
                             MaMauMa = "MM045",
                             HinhAnh = "https://i.ibb.co/vVV9xVR/Oppo-a16-1-2.jpg",
+                            MaSanPham = "SP015",
                             TenMauMa = "Bạc"
                         },
                         new
                         {
-                            MaSanPham = "SP015",
-                            MaMauMa = "MM044",
-                            HinhAnh = "https://i.ibb.co/2M6JLdw/Oppo-a16-1-1.jpg",
-                            TenMauMa = "Đen"
-                        },
-                        new
-                        {
-                            MaSanPham = "SP016",
                             MaMauMa = "MM046",
                             HinhAnh = "https://i.ibb.co/XWGXkDf/Vivo-y21-1-2.jpg",
+                            MaSanPham = "SP016",
                             TenMauMa = "Trắng"
                         },
                         new
                         {
-                            MaSanPham = "SP016",
                             MaMauMa = "MM047",
                             HinhAnh = "https://i.ibb.co/XYj2R7d/Vivo-y21-blue-gc-1-org.jpg",
+                            MaSanPham = "SP016",
                             TenMauMa = "Xanh tím"
                         },
                         new
                         {
-                            MaSanPham = "SP017",
                             MaMauMa = "MM048",
                             HinhAnh = "https://i.ibb.co/TcQYYxs/Vivo-x70-pro-xanh-1-1.jpg",
+                            MaSanPham = "SP017",
                             TenMauMa = "Xanh hồng"
                         },
                         new
                         {
-                            MaSanPham = "SP017",
                             MaMauMa = "MM049",
                             HinhAnh = "https://i.ibb.co/NrnVRWj/Vivo-x70-pro-black-gc-org.jpg",
+                            MaSanPham = "SP017",
                             TenMauMa = "Đen"
                         },
                         new
                         {
-                            MaSanPham = "SP018",
                             MaMauMa = "MM050",
                             HinhAnh = "https://i.ibb.co/S7Xy2TM/Vivo-v21-5g-tim-hong-1-3-org.jpg",
+                            MaSanPham = "SP018",
                             TenMauMa = "Tím hồng"
                         },
                         new
                         {
-                            MaSanPham = "SP018",
                             MaMauMa = "MM051",
                             HinhAnh = "https://i.ibb.co/wwT6MVD/Vivo-v21-5g-xanh-den-1-org.jpg",
+                            MaSanPham = "SP018",
                             TenMauMa = "Đen"
                         },
                         new
                         {
-                            MaSanPham = "SP019",
                             MaMauMa = "MM052",
                             HinhAnh = "https://i.ibb.co/tcNjPQL/Vivo-v20-2021-den-1-org.jpg",
+                            MaSanPham = "SP019",
                             TenMauMa = "Đen"
                         },
                         new
                         {
-                            MaSanPham = "SP019",
                             MaMauMa = "MM053",
                             HinhAnh = "https://i.ibb.co/TLdWMdd/Vivo-v20-2021-xanh-hong-1-org.jpg",
+                            MaSanPham = "SP019",
                             TenMauMa = "Xanh hồng"
                         },
                         new
                         {
-                            MaSanPham = "SP020",
                             MaMauMa = "MM054",
                             HinhAnh = "https://i.ibb.co/mCbyxk9/Vivo-y72-5g-den-1-org.jpg",
+                            MaSanPham = "SP020",
                             TenMauMa = "Đen"
                         },
                         new
                         {
-                            MaSanPham = "SP020",
                             MaMauMa = "MM055",
                             HinhAnh = "https://i.ibb.co/swGN954/Vivo-y72-5g-xanh-hong-1-1-org.jpg",
+                            MaSanPham = "SP020",
                             TenMauMa = "Xanh hồng"
                         },
                         new
                         {
-                            MaSanPham = "SP021",
                             MaMauMa = "MM056",
                             HinhAnh = "https://i.ibb.co/Yd1wV4H/Vivo-y21s-trang-1-1.jpg",
+                            MaSanPham = "SP021",
                             TenMauMa = "Trắng"
                         },
                         new
                         {
-                            MaSanPham = "SP021",
                             MaMauMa = "MM057",
                             HinhAnh = "https://i.ibb.co/5hkXcM1/Vivo-y21s-blue-gc-org.jpg",
+                            MaSanPham = "SP021",
                             TenMauMa = "Xanh"
                         },
                         new
                         {
-                            MaSanPham = "SP023",
                             MaMauMa = "MM058",
                             HinhAnh = "https://i.ibb.co/whQPQYR/Apple-watch-s6-40mm-vien-nhom-day-cao-su-hong-cont-1-org.jpg",
+                            MaSanPham = "SP023",
                             TenMauMa = "Hồng"
                         },
                         new
                         {
-                            MaSanPham = "SP023",
                             MaMauMa = "MM059",
                             HinhAnh = "https://i.ibb.co/bHRpNch/Apple-watch-s6-40mm-vien-nhom-day-cao-su-xanh-cont-1-org.jpg",
+                            MaSanPham = "SP023",
                             TenMauMa = "Xanh dương đậm"
                         },
                         new
                         {
-                            MaSanPham = "SP023",
                             MaMauMa = "MM060",
                             HinhAnh = "https://i.ibb.co/vV2zr9s/Apple-watch-s6-40mm-vien-nhom-day-cao-su-trang-cont-1-org.jpg",
+                            MaSanPham = "SP023",
                             TenMauMa = "Trắng"
                         },
                         new
                         {
-                            MaSanPham = "SP023",
                             MaMauMa = "MM061",
                             HinhAnh = "https://i.ibb.co/sPCkGSb/Apple-watch-s6-40mm-vien-nhom-day-cao-su-den-cont-1-org.jpg",
+                            MaSanPham = "SP023",
                             TenMauMa = "Đen"
                         },
                         new
                         {
-                            MaSanPham = "SP023",
                             MaMauMa = "MM062",
                             HinhAnh = "https://i.ibb.co/4TQV8yv/Apple-watch-s6-40mm-vien-nhom-day-cao-su-red-do-cont-1-org-org.jp",
+                            MaSanPham = "SP023",
                             TenMauMa = "Đỏ"
                         },
                         new
                         {
-                            MaSanPham = "SP024",
                             MaMauMa = "MM063",
                             HinhAnh = "https://i.ibb.co/rcfS9Nm/Untitled-1-org.jpg",
+                            MaSanPham = "SP024",
                             TenMauMa = "Hồng"
                         },
                         new
                         {
-                            MaSanPham = "SP024",
                             MaMauMa = "MM064",
                             HinhAnh = "https://i.ibb.co/3dBt9bj/Se-40mm-vien-nhom-day-cao-su-hong-glr-1-org.jpg",
+                            MaSanPham = "SP024",
                             TenMauMa = "Đen"
                         },
                         new
                         {
-                            MaSanPham = "SP025",
                             MaMauMa = "MM065",
                             HinhAnh = "https://i.ibb.co/9yR299t/Samsung-galaxy-watch-3-45mm-bac-2-org.jpg",
+                            MaSanPham = "SP025",
                             TenMauMa = "Bạc"
                         },
                         new
                         {
-                            MaSanPham = "SP026",
                             MaMauMa = "MM066",
                             HinhAnh = "https://i.ibb.co/ydJ9XY5/Samsung-galaxy-watch-4-44mm-den-1-org.jpg",
+                            MaSanPham = "SP026",
                             TenMauMa = "Đen"
                         },
                         new
                         {
-                            MaSanPham = "SP026",
                             MaMauMa = "MM067",
                             HinhAnh = "https://i.ibb.co/s2mSnhK/Samsung-galaxy-watch-4-44mm-1-1.jpg",
+                            MaSanPham = "SP026",
                             TenMauMa = "Xanh lá"
                         },
                         new
                         {
-                            MaSanPham = "SP026",
                             MaMauMa = "MM068",
                             HinhAnh = "https://i.ibb.co/XVM9Mxj/Samsung-galaxy-watch-4-44mm-bac-1-org.jpg",
+                            MaSanPham = "SP026",
                             TenMauMa = "Bạc"
                         },
                         new
                         {
-                            MaSanPham = "SP027",
                             MaMauMa = "MM069",
                             HinhAnh = "https://i.ibb.co/2YttfZB/Apple-watch-s6-lte-40mm-vien-thep-day-thep-vang-cont-1-org.jpg",
+                            MaSanPham = "SP027",
                             TenMauMa = "vàng"
                         },
                         new
                         {
-                            MaSanPham = "SP027",
                             MaMauMa = "MM070",
                             HinhAnh = "https://i.ibb.co/JH2Fshs/Apple-watch-s6-lte-40mm-vien-thep-day-thep-den-cont-1-org.jpg",
+                            MaSanPham = "SP027",
                             TenMauMa = "Đen"
                         },
                         new
                         {
-                            MaSanPham = "SP028",
                             MaMauMa = "MM071",
                             HinhAnh = "https://i.ibb.co/mDSQcPD/Apple-watch-s7-45mm-gps-den-1.jpg",
+                            MaSanPham = "SP028",
                             TenMauMa = "Đen"
                         },
                         new
                         {
-                            MaSanPham = "SP028",
                             MaMauMa = "MM072",
                             HinhAnh = "https://i.ibb.co/BrWrjZh/Apple-watch-s7-45mm-gps-vang-1.jp",
+                            MaSanPham = "SP028",
                             TenMauMa = "Vàng"
                         },
                         new
                         {
-                            MaSanPham = "SP028",
                             MaMauMa = "MM073",
                             HinhAnh = "https://i.ibb.co/ZW5Wqpk/Apple-watch-s7-45mm-gps-do-1.jpg",
+                            MaSanPham = "SP028",
                             TenMauMa = "Đỏ"
                         },
                         new
                         {
-                            MaSanPham = "SP028",
                             MaMauMa = "MM074",
                             HinhAnh = "https://i.ibb.co/Qjbqcqf/Apple-watch-s7-45mm-gps-xanh-duong-1.jpg",
+                            MaSanPham = "SP028",
                             TenMauMa = "Xanh Dương"
                         },
                         new
                         {
-                            MaSanPham = "SP028",
                             MaMauMa = "MM075",
                             HinhAnh = "ttps://i.ibb.co/V9d5FLq/apple-watch-s7-45mm-gps-xanh-la-1.jpg",
+                            MaSanPham = "SP028",
                             TenMauMa = "Xanh Lá"
                         });
                 });
@@ -3216,7 +1476,7 @@ namespace EcommerceWebsite.Data.Migrations
                             DiaChi = "Quảng Ngãi",
                             Mail = "phamthivi459@gmail.com",
                             NgaySinh = new DateTime(2000, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NgayTao = new DateTime(2021, 11, 13, 8, 17, 5, 564, DateTimeKind.Local).AddTicks(2496),
+                            NgayTao = new DateTime(2021, 11, 19, 20, 13, 11, 708, DateTimeKind.Local).AddTicks(8968),
                             SDT = "0376437459",
                             Status = 1,
                             TenNhanVien = "Phạm Thị Vi",
@@ -3229,7 +1489,7 @@ namespace EcommerceWebsite.Data.Migrations
                             DiaChi = "Quảng Ngãi",
                             Mail = "danhvu@gmail.com",
                             NgaySinh = new DateTime(2000, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NgayTao = new DateTime(2021, 11, 13, 8, 17, 5, 564, DateTimeKind.Local).AddTicks(6118),
+                            NgayTao = new DateTime(2021, 11, 19, 20, 13, 11, 709, DateTimeKind.Local).AddTicks(3563),
                             SDT = "123456789",
                             Status = 1,
                             TenNhanVien = "Lê Danh Vũ",
@@ -3242,7 +1502,7 @@ namespace EcommerceWebsite.Data.Migrations
                             DiaChi = "Quảng Ngãi",
                             Mail = "havy@gmail.com",
                             NgaySinh = new DateTime(2000, 7, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NgayTao = new DateTime(2021, 11, 13, 8, 17, 5, 564, DateTimeKind.Local).AddTicks(6141),
+                            NgayTao = new DateTime(2021, 11, 19, 20, 13, 11, 709, DateTimeKind.Local).AddTicks(3598),
                             SDT = "123456789",
                             Status = 1,
                             TenNhanVien = "Trần Nhật Hạ Vy",
@@ -3369,7 +1629,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/T2Ywg8N/Samsung-galaxy-z-fold-3-silver-gc-org.jpg",
                             MaHang = "MH02",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 524, DateTimeKind.Utc).AddTicks(1823),
+                            NgayTao = new DateTime(2021, 11, 19, 13, 13, 11, 665, DateTimeKind.Utc).AddTicks(3542),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3383,7 +1643,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/CPq556s/Samsung-galaxy-z-flip-3-kem-1-org.jpg",
                             MaHang = "MH02",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 524, DateTimeKind.Utc).AddTicks(2825),
+                            NgayTao = new DateTime(2021, 11, 19, 13, 13, 11, 665, DateTimeKind.Utc).AddTicks(4405),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3397,7 +1657,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/RNz8N1G/Iphone-12-64-GB.jpg",
                             MaHang = "MH01",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 524, DateTimeKind.Utc).AddTicks(2867),
+                            NgayTao = new DateTime(2021, 11, 19, 13, 13, 11, 665, DateTimeKind.Utc).AddTicks(4440),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3411,7 +1671,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/JQNGCzb/Iphone-12-pro-max-128-GB.jpg",
                             MaHang = "MH01",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 524, DateTimeKind.Utc).AddTicks(2871),
+                            NgayTao = new DateTime(2021, 11, 19, 13, 13, 11, 665, DateTimeKind.Utc).AddTicks(4453),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3425,7 +1685,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/vsLZ8km/Iphone-12-mini-64-GB.jpg",
                             MaHang = "MH01",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 524, DateTimeKind.Utc).AddTicks(2875),
+                            NgayTao = new DateTime(2021, 11, 19, 13, 13, 11, 665, DateTimeKind.Utc).AddTicks(4457),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3439,7 +1699,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/hZS5MJ3/Iphone-11-64-GB.jpg",
                             MaHang = "MH01",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 524, DateTimeKind.Utc).AddTicks(2893),
+                            NgayTao = new DateTime(2021, 11, 19, 13, 13, 11, 665, DateTimeKind.Utc).AddTicks(4461),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3453,7 +1713,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/2v36jLV/iphone-XR-64-GB.jpg",
                             MaHang = "MH01",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 524, DateTimeKind.Utc).AddTicks(2898),
+                            NgayTao = new DateTime(2021, 11, 19, 13, 13, 11, 665, DateTimeKind.Utc).AddTicks(4464),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3467,7 +1727,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/1rp5mbM/Oppo-reno6-z-5g-bac-1-org.jpg",
                             MaHang = "MH03",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 524, DateTimeKind.Utc).AddTicks(2902),
+                            NgayTao = new DateTime(2021, 11, 19, 13, 13, 11, 665, DateTimeKind.Utc).AddTicks(4468),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3481,7 +1741,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/zRQB86R/Oppo-a74-xanh-duong-1-org.jpg",
                             MaHang = "MH03",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 524, DateTimeKind.Utc).AddTicks(2907),
+                            NgayTao = new DateTime(2021, 11, 19, 13, 13, 11, 665, DateTimeKind.Utc).AddTicks(4471),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3495,7 +1755,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/ydCdghQ/Oppo-reno6-pro-5g-xanh-duong-1.jpg",
                             MaHang = "MH03",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 524, DateTimeKind.Utc).AddTicks(2914),
+                            NgayTao = new DateTime(2021, 11, 19, 13, 13, 11, 665, DateTimeKind.Utc).AddTicks(4475),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3509,7 +1769,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/pw2Kqcp/Oppo-find-x3-pro-den-1-org.jpg",
                             MaHang = "MH03",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 524, DateTimeKind.Utc).AddTicks(2918),
+                            NgayTao = new DateTime(2021, 11, 19, 13, 13, 11, 665, DateTimeKind.Utc).AddTicks(4479),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3523,7 +1783,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/zbPGb0s/Oppo-reno6-den-1-org.jpg",
                             MaHang = "MH03",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 524, DateTimeKind.Utc).AddTicks(2922),
+                            NgayTao = new DateTime(2021, 11, 19, 13, 13, 11, 665, DateTimeKind.Utc).AddTicks(4486),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3537,7 +1797,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/55BgPLp/Oppo-reno5-5g-bac-1-org.jpg",
                             MaHang = "MH03",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 524, DateTimeKind.Utc).AddTicks(2927),
+                            NgayTao = new DateTime(2021, 11, 19, 13, 13, 11, 665, DateTimeKind.Utc).AddTicks(4489),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3551,7 +1811,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/94LDnqK/Oppo-reno4-pro-trang-1-org.jpg",
                             MaHang = "MH03",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 524, DateTimeKind.Utc).AddTicks(2931),
+                            NgayTao = new DateTime(2021, 11, 19, 13, 13, 11, 665, DateTimeKind.Utc).AddTicks(4492),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3565,7 +1825,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/vVV9xVR/Oppo-a16-1-2.jpg",
                             MaHang = "MH03",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 524, DateTimeKind.Utc).AddTicks(2935),
+                            NgayTao = new DateTime(2021, 11, 19, 13, 13, 11, 665, DateTimeKind.Utc).AddTicks(4496),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3579,7 +1839,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/XWGXkDf/Vivo-y21-1-2.jpg",
                             MaHang = "MH04",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 524, DateTimeKind.Utc).AddTicks(2939),
+                            NgayTao = new DateTime(2021, 11, 19, 13, 13, 11, 665, DateTimeKind.Utc).AddTicks(4500),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3593,7 +1853,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/NrnVRWj/Vivo-x70-pro-black-gc-org.jpg",
                             MaHang = "MH04",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 524, DateTimeKind.Utc).AddTicks(2943),
+                            NgayTao = new DateTime(2021, 11, 19, 13, 13, 11, 665, DateTimeKind.Utc).AddTicks(4503),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3607,7 +1867,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/S7Xy2TM/Vivo-v21-5g-tim-hong-1-3-org.jpg",
                             MaHang = "MH04",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 524, DateTimeKind.Utc).AddTicks(2951),
+                            NgayTao = new DateTime(2021, 11, 19, 13, 13, 11, 665, DateTimeKind.Utc).AddTicks(4516),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3621,7 +1881,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/TLdWMdd/Vivo-v20-2021-xanh-hong-1-org.jpg",
                             MaHang = "MH04",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 524, DateTimeKind.Utc).AddTicks(2955),
+                            NgayTao = new DateTime(2021, 11, 19, 13, 13, 11, 665, DateTimeKind.Utc).AddTicks(4520),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3635,7 +1895,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/swGN954/Vivo-y72-5g-xanh-hong-1-1-org.jpg",
                             MaHang = "MH04",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 524, DateTimeKind.Utc).AddTicks(2959),
+                            NgayTao = new DateTime(2021, 11, 19, 13, 13, 11, 665, DateTimeKind.Utc).AddTicks(4526),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3649,7 +1909,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/swGN954/Vivo-y72-5g-xanh-hong-1-1-org.jpg",
                             MaHang = "MH04",
                             MaLoaiSanPham = "DM01",
-                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 524, DateTimeKind.Utc).AddTicks(2964),
+                            NgayTao = new DateTime(2021, 11, 19, 13, 13, 11, 665, DateTimeKind.Utc).AddTicks(4529),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3663,7 +1923,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/k5rV9Vg/Samsung-galaxy-watch-4-44mm-den-1-org.jpg",
                             MaHang = "MH02",
                             MaLoaiSanPham = "DM03",
-                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 524, DateTimeKind.Utc).AddTicks(2968),
+                            NgayTao = new DateTime(2021, 11, 19, 13, 13, 11, 665, DateTimeKind.Utc).AddTicks(4533),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3677,7 +1937,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/bHRpNch/Apple-watch-s6-40mm-vien-nhom-day-cao-su-xanh-cont-1-org.jpg",
                             MaHang = "MH01",
                             MaLoaiSanPham = "DM03",
-                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 524, DateTimeKind.Utc).AddTicks(2973),
+                            NgayTao = new DateTime(2021, 11, 19, 13, 13, 11, 665, DateTimeKind.Utc).AddTicks(4536),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3691,7 +1951,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/rcfS9Nm/Untitled-1-org.jpg",
                             MaHang = "MH01",
                             MaLoaiSanPham = "DM03",
-                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 524, DateTimeKind.Utc).AddTicks(2977),
+                            NgayTao = new DateTime(2021, 11, 19, 13, 13, 11, 665, DateTimeKind.Utc).AddTicks(4539),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3705,7 +1965,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/9yR299t/Samsung-galaxy-watch-3-45mm-bac-2-org.jpg",
                             MaHang = "MH02",
                             MaLoaiSanPham = "DM03",
-                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 524, DateTimeKind.Utc).AddTicks(2981),
+                            NgayTao = new DateTime(2021, 11, 19, 13, 13, 11, 665, DateTimeKind.Utc).AddTicks(4543),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3719,7 +1979,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/ydJ9XY5/Samsung-galaxy-watch-4-44mm-den-1-org.jpg",
                             MaHang = "MH02",
                             MaLoaiSanPham = "DM03",
-                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 524, DateTimeKind.Utc).AddTicks(2987),
+                            NgayTao = new DateTime(2021, 11, 19, 13, 13, 11, 665, DateTimeKind.Utc).AddTicks(4546),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3733,7 +1993,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/2YttfZB/Apple-watch-s6-lte-40mm-vien-thep-day-thep-vang-cont-1-org.jpg",
                             MaHang = "MH01",
                             MaLoaiSanPham = "DM03",
-                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 524, DateTimeKind.Utc).AddTicks(2991),
+                            NgayTao = new DateTime(2021, 11, 19, 13, 13, 11, 665, DateTimeKind.Utc).AddTicks(4551),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -3747,7 +2007,7 @@ namespace EcommerceWebsite.Data.Migrations
                             HinhAnh = "https://i.ibb.co/ZW5Wqpk/Apple-watch-s7-45mm-gps-do-1.jpg",
                             MaHang = "MH01",
                             MaLoaiSanPham = "DM03",
-                            NgayTao = new DateTime(2021, 11, 13, 1, 17, 5, 524, DateTimeKind.Utc).AddTicks(2995),
+                            NgayTao = new DateTime(2021, 11, 19, 13, 13, 11, 665, DateTimeKind.Utc).AddTicks(4556),
                             NguoiTao = "admin",
                             SoLuongTon = 1,
                             Status = 1,
@@ -4256,13 +2516,13 @@ namespace EcommerceWebsite.Data.Migrations
                         {
                             Id = "8d04dce2-969a-435d-bba4-df3f325983dc",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "af7ba4bb-f603-439f-9e3f-cf2995d76d16",
+                            ConcurrencyStamp = "82bcc2cf-3035-4ef1-900b-287a2896b042",
                             Email = "yvonnetran.work@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "yvonnetran.work@gmail.com",
                             NormalizedUserName = "havyclient1",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJ1iuWC34zwgkjpP2Z/GCLqH2s6CERixLp8m8WPx9Ef3GSp9K4hIJ0I2O6TwWxVZSA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKy9axqkn7DM1DDQdRmngixY8f1G/a53wMMdcyDFRfZ6gTbdw4+HmPWEhDO1b0hdcg==",
                             PhoneNumber = "0905187524",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
@@ -4276,13 +2536,13 @@ namespace EcommerceWebsite.Data.Migrations
                         {
                             Id = "04052000",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "78a7d96d-c1af-410f-bfd6-4aeac7f07871",
+                            ConcurrencyStamp = "c3bb1c87-1ab5-4c6c-a0a1-11adfbc41cec",
                             Email = "phamthivi459@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "phamthivi459@gmail.com",
                             NormalizedUserName = "phamTVi0405",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPgtHQclacizGt8phXGUqfOFWLZ5Ck3Gy3QqRd3CmLTWp2oC0CGB4ku7l8qODPsd0Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEP6nSMkSdohshf87cK7PtTOwGX2PmQQY5J6dgnMD9BInLuM7UL7HrVNKHnWDlSP9yQ==",
                             PhoneNumber = "0376437459",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
@@ -4296,13 +2556,13 @@ namespace EcommerceWebsite.Data.Migrations
                         {
                             Id = "123456789",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "52efe294-d096-4133-a02c-c470b35f5af1",
+                            ConcurrencyStamp = "0aa41cef-f45b-4dd9-b039-eaab3b242859",
                             Email = "danhVu@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "danhVu@gmail.com",
                             NormalizedUserName = "danhVu",
-                            PasswordHash = "AQAAAAEAACcQAAAAED1tEFdvwjBqi1jOysBSw4EpU4fCI3VaXaaayfjEW3U2u15xzNumgjL/DR3vfFuvMg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGLwLGqK3PcMk3KSZogeLl51b978hUIipB7K9vRfHhtN6wSLv8FjevX4W+9qXJbJjw==",
                             PhoneNumber = "0376437459",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
@@ -4312,6 +2572,15 @@ namespace EcommerceWebsite.Data.Migrations
                             IsDeleted = false,
                             Status = 1
                         });
+                });
+
+            modelBuilder.Entity("EcommerceWebsite.Data.Entities.Banner", b =>
+                {
+                    b.HasOne("EcommerceWebsite.Data.Entities.KhuyenMai", "KhuyenMai")
+                        .WithMany("Banners")
+                        .HasForeignKey("MaKhuyenMai");
+
+                    b.Navigation("KhuyenMai");
                 });
 
             modelBuilder.Entity("EcommerceWebsite.Data.Entities.BinhLuan", b =>
@@ -4395,15 +2664,11 @@ namespace EcommerceWebsite.Data.Migrations
                 {
                     b.HasOne("EcommerceWebsite.Data.Entities.SanPham", "SanPham")
                         .WithMany("DinhLuongs")
-                        .HasForeignKey("MaSanPham")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("MaSanPham");
 
                     b.HasOne("EcommerceWebsite.Data.Entities.ThuocTinh", "ThuocTinh")
                         .WithMany("DinhLuongs")
-                        .HasForeignKey("MaThuocTinh")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("MaThuocTinh");
 
                     b.Navigation("SanPham");
 
@@ -4442,11 +2707,21 @@ namespace EcommerceWebsite.Data.Migrations
 
             modelBuilder.Entity("EcommerceWebsite.Data.Entities.LichSuGia", b =>
                 {
+                    b.HasOne("EcommerceWebsite.Data.Entities.DinhLuong", "DinhLuong")
+                        .WithMany("LichSuGias")
+                        .HasForeignKey("MaDinhLuong");
+
+                    b.HasOne("EcommerceWebsite.Data.Entities.MauMaSanPham", "MauMaSanPham")
+                        .WithMany("LichSuGias")
+                        .HasForeignKey("MaMauMa");
+
                     b.HasOne("EcommerceWebsite.Data.Entities.SanPham", "SanPham")
                         .WithMany("LichSuGias")
-                        .HasForeignKey("MaSanPham")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("MaSanPham");
+
+                    b.Navigation("DinhLuong");
+
+                    b.Navigation("MauMaSanPham");
 
                     b.Navigation("SanPham");
                 });
@@ -4455,9 +2730,7 @@ namespace EcommerceWebsite.Data.Migrations
                 {
                     b.HasOne("EcommerceWebsite.Data.Entities.SanPham", "SanPham")
                         .WithMany("MauMaSanPhams")
-                        .HasForeignKey("MaSanPham")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("MaSanPham");
 
                     b.Navigation("SanPham");
                 });
@@ -4601,6 +2874,11 @@ namespace EcommerceWebsite.Data.Migrations
                     b.Navigation("HoaDons");
                 });
 
+            modelBuilder.Entity("EcommerceWebsite.Data.Entities.DinhLuong", b =>
+                {
+                    b.Navigation("LichSuGias");
+                });
+
             modelBuilder.Entity("EcommerceWebsite.Data.Entities.GiaoHang", b =>
                 {
                     b.Navigation("TinhTrangGiaoHangs");
@@ -4626,7 +2904,14 @@ namespace EcommerceWebsite.Data.Migrations
 
             modelBuilder.Entity("EcommerceWebsite.Data.Entities.KhuyenMai", b =>
                 {
+                    b.Navigation("Banners");
+
                     b.Navigation("HoaDons");
+                });
+
+            modelBuilder.Entity("EcommerceWebsite.Data.Entities.MauMaSanPham", b =>
+                {
+                    b.Navigation("LichSuGias");
                 });
 
             modelBuilder.Entity("EcommerceWebsite.Data.Entities.NhaCungCap", b =>

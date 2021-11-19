@@ -16,5 +16,6 @@ namespace EcommerceWebsite.Data.Entities
         public float PhanTram { get; set; }
         public string HinhAnh { get; set; }
         public List<HoaDon> HoaDons { get; set; }
+        public List<Banner> Banners { get; set; }
     }
 }

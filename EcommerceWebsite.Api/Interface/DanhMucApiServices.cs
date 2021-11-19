@@ -1,4 +1,5 @@
 ﻿using EcommerceWebsite.Utilities.Output.Main;
+using EcommerceWebsite.Utilities.ViewModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -19,6 +20,11 @@ namespace EcommerceWebsite.Api.Interface
         public async Task<List<DanhMucOutput>> GetCategories()
         {
             return await GetListAsync<DanhMucOutput>("/api/DanhMuc/get-categories");
+        }
+
+        public async Task<List<CategorySetVM>> GetDanhMucVaSanPhams(int count)
+        {
+            return await GetListAsync<CategorySetVM>($"/api/DanhMuc/get-danhmuc-sanpham/{count}");
         }
     }
 }

@@ -93,8 +93,6 @@ namespace EcommerceWebsite.Api
 
             });
 
-
-
             //Email
             var emailConfig = Configuration
                 .GetSection("EmailSenderConfig")
@@ -115,6 +113,8 @@ namespace EcommerceWebsite.Api
             services.AddScoped<IBangGiaServices, BangGiaServices>();
             services.AddScoped<IKhuyenMaiServices, KhuyenMaiServices>();
             services.AddScoped<INhanHieuServices, NhanHieuServices>();
+            services.AddScoped<IMauMaServices, MauMaServices>();
+            services.AddScoped<IDinhLuongServices, DinhLuongServices>();
           
         }
 
