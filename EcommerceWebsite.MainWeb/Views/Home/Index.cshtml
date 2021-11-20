@@ -108,7 +108,14 @@
                                                     </ul>
                                                 </div>
                                             </div>
-                                            <h4><a class="product_name" href="@Url.Action("Index", "Detail",new { prdId = prd.MaSanPham })">@prd.TenSanPham</a></h4>
+                                            @if (prd.TenSanPham.Length > 25)
+                                            {
+                                                <h4><a class="product_name" href="@Url.Action("Index", "Detail", new { prdId = prd.MaSanPham })">@prd.TenSanPham.Substring(0, 25)...</a></h4>
+                                            }
+                                            else
+                                            {
+                                                <h4><a class="product_name" href="@Url.Action("Index", "Detail", new { prdId = prd.MaSanPham })">@prd.TenSanPham</a></h4>
+                                            }
                                             <div class="price-box">
                                                 <span class="new-price">@string.Format("{0:0,0}", prd.GiaBan) VNĐ</span>
                                             </div>

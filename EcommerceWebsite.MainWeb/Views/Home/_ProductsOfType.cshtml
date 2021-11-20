@@ -73,9 +73,16 @@
                                                         </ul>
                                                     </div>
                                                 </div>
-                                                <h4><a class="product_name" href="@Url.Action("Index", "Detail", new { prdId = sp.MaSanPham })">@sp.TenSanPham</a></h4>
+                                                @if (sp.TenSanPham.Length > 25)
+                                                {
+                                                    <h4><a class="product_name" href="@Url.Action("Index", "Detail", new { prdId = sp.MaSanPham })">@sp.TenSanPham.Substring(0, 25)...</a></h4>
+                                                }
+                                                else
+                                                {
+                                                    <h4><a class="product_name" href="@Url.Action("Index", "Detail", new { prdId = sp.MaSanPham })">@sp.TenSanPham</a></h4>
+                                                }
                                                 <div class="price-box">
-                                                    <span class="new-price">@string.Format("{0:0,0}",sp.GiaBan) VNĐ</span>
+                                                    <span class="new-price">@string.Format("{0:0,0}", sp.GiaBan) VNĐ</span>
                                                 </div>
                                             </div>
                                             <div class="add-actions">

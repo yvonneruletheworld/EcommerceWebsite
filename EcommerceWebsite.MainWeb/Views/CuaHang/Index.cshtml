@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "TRIPLE V - Cửa hàng";
+    ViewData["Title"] = "Cửa hàng";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var queryPageIndex = Context.Request.Query["pageIndex"];
     var valPageIndex = queryPageIndex.Count > 0 ? (int.TryParse(queryPageIndex[0], out int idx) ? idx : 1) : 1;

@@ -144,51 +144,32 @@
                             <!-- Begin Header Middle Searchbox Area -->
                             <form action="#" class="hm-searchbox">
                                 <select class="nice-select select-search-category">
-                                    <option value="0">Tất cả</option>
-                                    <option value="1">Điện thoại</option>
-                                    <!-- Load cac item de tim kiem-->
-
-                                    @*<option value="10">Viết code load các item tìm kiếm</option>
-                                    <option value="17">- -  Prime Video</option>
-                                    <option value="20">- - - -  All Videos</option>
-                                    <option value="21">- - - -  Blouses</option>*@
+                                    <option value="0">All</option>
+                                    <option value="2">Điện thoại</option>
                                 </select>
-                                <input type="text" placeholder="Sản phẩm tìm kiếm ..."/>
+                                <input type="text" placeholder="Sản phẩm tìm kiếm ...">
                                 <button class="li-btn" type="submit"><i class="fa fa-search"></i></button>
                             </form>
-                            <!-- Header Middle Searchbox Area End Here -->
-                            <!-- Begin Header Middle Right Area -->
                             <div class="header-middle-right">
                                 <ul class="hm-menu">
-                                    <!-- Begin Header Middle Wishlist Area -->
                                     <li class="hm-wishlist">
-                                        <a href="#">
-                                            <!--Lien ket den trang yeu thich-->
-                                            <!-- Load san pham yeu thich cua khach hang-->
+                                        <a href="wishlist.html">
                                             <span class="cart-item-count wishlist-item-count">0</span>
                                             <i class="fa fa-heart-o"></i>
                                         </a>
                                     </li>
-                                    <!-- Header Middle Wishlist Area End Here -->
-                                    <!-- Begin Header Mini Cart Area -->
                                     <li class="hm-minicart">
                                         <div class="hm-minicart-trigger">
                                             <span class="item-icon"></span>
                                             <span class="item-text">
-                                                <!-- Load tong tien trong gio hang -->
-                                                0,000 VND
-                                                <!-- Load so san pham trong gio hang -->
-                                                <span class="cart-item-count">0</span>
+                                                0 VNĐ
+                                                <span class="cart-item-count">2</span>
                                             </span>
                                         </div>
                                         <span></span>
-                                   
                                         @(await Html.PartialAsync("~/Views/Home/_MiniCart.cshtml"))
-                                    </li>
-                                    <!-- Header Mini Cart Area End Here -->
                                 </ul>
                             </div>
-                            <!-- Header Middle Right Area End Here -->
                         </div>
                         <!-- Header Middle Right Area End Here -->
                     </div>
@@ -531,7 +512,7 @@
                             <!-- Footer Payment Area End Here -->
                             <!-- Begin Copyright Area -->
                             <div class="copyright text-center pt-30 pb-50">
-                                <span><a target="_blank" href="https://www.templateshub.net">Templates Hub</a></span>
+                                <span>Copyright © 2021 <a target="_blank" href="https://www.templateshub.net"> Triple V</a>. All rights reserved.</span>
                             </div>
                             <!-- Copyright Area End Here -->
                         </div>
