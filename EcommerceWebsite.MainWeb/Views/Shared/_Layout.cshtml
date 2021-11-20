@@ -134,7 +134,7 @@
                         <div class="col-lg-3">
                             <div class="logo pb-sm-30 pb-xs-30">
                                 <a href="@Url.Action("Index","Home")">
-                                    <img src="~/images/menu/logo/1.jpg" alt="TRIPLE V" />
+                                    <img src="https://i.ibb.co/fXSZd8V/Ecoleaf-800x800-5.png" alt="TRIPLE V" />
                                 </a>
                             </div>
                         </div>
@@ -145,15 +145,15 @@
                             <form action="#" class="hm-searchbox">
                                 <select class="nice-select select-search-category">
                                     <option value="0">Tất cả</option>
-
+                                    <option value="1">Điện thoại</option>
                                     <!-- Load cac item de tim kiem-->
 
-                                    <option value="10">Viết code load các item tìm kiếm</option>
+                                    @*<option value="10">Viết code load các item tìm kiếm</option>
                                     <option value="17">- -  Prime Video</option>
                                     <option value="20">- - - -  All Videos</option>
-                                    <option value="21">- - - -  Blouses</option>
+                                    <option value="21">- - - -  Blouses</option>*@
                                 </select>
-                                <input type="text" placeholder="Enter your search key ...">
+                                <input type="text" placeholder="Sản phẩm tìm kiếm ..."/>
                                 <button class="li-btn" type="submit"><i class="fa fa-search"></i></button>
                             </form>
                             <!-- Header Middle Searchbox Area End Here -->
@@ -182,7 +182,7 @@
                                             </span>
                                         </div>
                                         <span></span>
-
+                                   
                                         @(await Html.PartialAsync("~/Views/Home/_MiniCart.cshtml"))
                                     </li>
                                     <!-- Header Mini Cart Area End Here -->
@@ -204,13 +204,14 @@
                             <div class="hb-menu hb-menu-2">
                                 <nav>
                                     <ul class="main-menu-ul">
-                                        <li><a href="@Url.Action("Index","Home")"  >Trang chủ</a></li>
+                                        <li><a href="@Url.Action("Index","Home")">Trang chủ</a></li>
                                         <li class="megamenu-holder">
                                             <a href="#">Cửa hàng</a>
                                             <ul class="megamenu hb-megamenu">
                                                 <li>
                                                     <a href="#">SẢN PHẨM</a>
                                                     <ul>
+                                                        <li><a href="@Url.Action("Index","CuaHang")">Tất cả sản phẩm</a></li>
                                                         <li><a href="#">Hàng mới về</a></li>
                                                         <li><a href="#">Sản phẩm nổi bật</a></li>
                                                         <li><a href="#">Săn Sale cực HOT</a></li>
@@ -279,8 +280,8 @@
                                             </ul>
                                         </li>
                                         <li><a href="#">Khuyến Mãi</a></li>
-                                        <li><a href="#">Giới thiệu</a></li>
-                                        <li><a href="#">Liên hệ</a></li>
+                                        <li><a href="@Url.Action("Index","GioiThieu")">Giới thiệu</a></li>
+                                        <li><a href="@Url.Action("Index","LienHe")">Liên hệ</a></li>
                                         <!-- Begin Header Bottom Menu Information Area -->
                                         <li class="hb-info f-right p-0 d-sm-none d-lg-block">
                                             <span>140 Lê Trọng Tấn, Tân Phú, HCM</span>
@@ -388,9 +389,9 @@
                             <!-- Begin Footer Logo Area -->
                             <div class="col-lg-4 col-md-6">
                                 <div class="footer-logo">
-                                    <img src="~/images/menu/logo/1.jpg" alt="Footer Logo">
+                                    <img src="https://i.ibb.co/8dv7JC0/Ecoleaf-800x800-5-1.png" alt="Footer Logo">
                                     <p class="info">
-                                        © 2018. Công ty cổ phần TRIPLE V. GPDKKD: 0303217354 do sở KH & ĐT TP.HCM cấp ngày 02/01/2007. GPMXH: 238/GP-BTTTT do Bộ Thông Tin và Truyền Thông cấp ngày 04/06/2020..
+                                        © 2018. Công ty cổ phần TRIPLE V. GPDKKD: (+84) 0908070605 do sở KH & ĐT TP.HCM cấp ngày 02/01/2007. GPMXH: 238/GP-BTTTT do Bộ Thông Tin và Truyền Thông cấp ngày 04/06/2020..
                                     </p>
                                 </div>
                                 <ul class="des">
@@ -545,7 +546,17 @@
 
 
     <!-- Body Wrapper End Here -->
-
+    <script type="text/javascript">
+        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+        (function () {
+            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/6197213c6bb0760a49434ff9/1fkr5jm2k';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+    </script>
     <script>
         $(function () {
             var mainMenuItem = $('.main-menu-ul li a');
@@ -553,7 +564,6 @@
                 mainMenuItem[i].classList.add("font-weight-bold");
             }
         });
-
     </script>
 
     <!-- jQuery-V1.12.4 -->
