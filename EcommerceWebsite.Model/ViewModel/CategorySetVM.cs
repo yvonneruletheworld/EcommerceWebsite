@@ -9,6 +9,6 @@ namespace EcommerceWebsite.Utilities.ViewModel
     {
         public string TenDanhMuc { get; set; }
         public List<DanhMucOutput> ListDanhMucCon { get; set;}
-        public List<SanPhamOutput> ListSanPham { get; set;}
+        public List<SanPhamVM> ListSanPham { get; set;}
     }
 }

@@ -136,7 +136,7 @@ namespace EcommerceWebsite.Data.Migrations
                 {
                     MaBanner = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     HinhAnhBanner = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    TenBanner = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    MaKhuyenMai = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {

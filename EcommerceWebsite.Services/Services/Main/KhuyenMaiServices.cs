@@ -23,7 +23,7 @@ namespace EcommerceWebsite.Services.Services.Main
         public async Task<List<BannerOutput>> LayKhuyenMaiChoTrangChu()
         {
             var data = await (from km in _context.KhuyenMais
-                              from bn in _context.Banners.Where(bn => bn.TenBanner.Equals(km.MaKhuyenMai)).Take(1)
+                              from bn in _context.Banners.Where(bn => bn.MaKhuyenMai.Equals(km.MaKhuyenMai)).Take(1)
                               where !km.DaXoa
                               select new BannerOutput()
                               {

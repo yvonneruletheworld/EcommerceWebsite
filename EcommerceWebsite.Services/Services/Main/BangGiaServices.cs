@@ -1,6 +1,7 @@
 ﻿using EcommerceWebsite.Data.EF;
 using EcommerceWebsite.Data.Entities;
 using EcommerceWebsite.Services.Interfaces.Main;
+using EcommerceWebsite.Utilities.Output.Main;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -18,16 +19,27 @@ namespace EcommerceWebsite.Services.Services.Main
         {
             _context = context;
         }
-
-        public async Task<LichSuGia> GetGiaSanPhamMoiNhat(string id)
+        /// <summary>
+        /// De hien thi VM san pham: Get gia san pham moi nhat. Điều kiện: Mỗi sản phẩm có các thông số định lượng tương ứng sẽ có các mức giá khác nhau.
+        /// Lấy giá mowist nhất bằng cách: Join định lượng và giá => Lọc bằng mã sản phẩm, Group by mã đ
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<BangGiaOutput> GetGiaSanPhamMoiNhat(string maDinhLuong)
         {
             try
             {
-                var data = await _context.LichSuGias
-                    .Where(lsg => !lsg.DaXoa && lsg.MaSanPham.Equals(id))
-                    .OrderByDescending(lsg => lsg.NgayTao.Date)
-                    .ThenByDescending(d => d.NgayTao.TimeOfDay)
-                    .FirstOrDefaultAsync();
+                var data = await (from dl in _context.DinhLuongs
+                                  join lsg in _context.LichSuGias on dl.MaDinhLuong equals lsg.MaDinhLuong into dl_lsg_group
+                                  from dl_lsg in dl_lsg_group.DefaultIfEmpty()
+                                                            .OrderByDescending(lsg => lsg.NgayTao.Date)
+                                                            .ThenByDescending(d => d.NgayTao.TimeOfDay)
+                                  where dl.MaDinhLuong == maDinhLuong && !dl_lsg.DaXoa && dl.GiaTri != "0"
+                                  select new BangGiaOutput
+                                  {
+                                      MaDinhLuong = dl.MaDinhLuong, // Dinh luong
+                                      GiaBan = dl_lsg.GiaMoi
+                                  }).FirstOrDefaultAsync();
                 return data;
             }
             catch (Exception ex)
@@ -36,6 +48,34 @@ namespace EcommerceWebsite.Services.Services.Main
             }
         }
          
+        /// <summary>
+        /// Dung de hien thi gia o trang chi tiet
+        /// </summary>
+        /// <param name="prdId"></param>
+        /// <returns></returns>
+        public async Task<List<BangGiaOutput>> LayBangGiaSanPham (string prdId)
+        {
+            try
+            {
+                var data = await (from dl in _context.DinhLuongs
+                                  join lsg in _context.LichSuGias on dl.MaDinhLuong equals lsg.MaDinhLuong into dl_lsg_group
+                                  from dl_lsg in dl_lsg_group.DefaultIfEmpty()
+                                  where dl.MaSanPham == prdId && !dl_lsg.DaXoa && dl.GiaTri != "0"
+                                  select new BangGiaOutput
+                                  {
+                                      MaThuocTinh = dl.MaThuocTinh,
+                                      MaDinhLuong = dl.MaDinhLuong, // Dinh luong
+                                      TenDinhLuong =  dl.GiaTri + " " + dl.DonVi,
+                                      GiaBan = dl_lsg.GiaMoi
+                                  }).ToListAsync();
+                return data;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public async Task<bool> ThemGia(LichSuGia input)
         {
             //begin transaction

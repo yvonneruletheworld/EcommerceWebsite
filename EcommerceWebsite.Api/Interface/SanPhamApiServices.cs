@@ -2,6 +2,7 @@
 using EcommerceWebsite.Application.Pagination;
 using EcommerceWebsite.Utilities.Input;
 using EcommerceWebsite.Utilities.Output.Main;
+using EcommerceWebsite.Utilities.ViewModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
@@ -37,7 +38,7 @@ namespace EcommerceWebsite.Api.Interface
            return await GetListAsync<SanPhamOutput>("/api/SanPham/lay-sanpham");
         }
 
-        public async Task<bool> ThemSanPham(SanPhamInput input)
+        public async Task<bool> ThemSanPham(SanPhamOutput input)
         {
             //for auth
             // phai set truoc thi moi lay dc
@@ -57,7 +58,7 @@ namespace EcommerceWebsite.Api.Interface
             return response.IsSuccessStatusCode;
         }
 
-        public async Task<bool> Modify(bool laXoa, SanPhamInput input)
+        public async Task<bool> Modify(bool laXoa, SanPhamOutput input)
         {
             var sessions = _httpContextAccessor
                 .HttpContext.Session.GetString(SystemConstant.Token);
@@ -72,6 +73,11 @@ namespace EcommerceWebsite.Api.Interface
             var response = await client.PutAsync($"/api/SanPham/them-san-pham/{laXoa}", httpContent);
 
             return response.IsSuccessStatusCode;
+        }
+
+        public async Task<SanPhamVM> LayViewSanPham(string prdId)
+        {
+            return await GetAsync<SanPhamVM>($"/api/SanPham/Views/{prdId}");
         }
 
         public async Task<SanPhamOutput> LayChiTietSanPham(string prdId)

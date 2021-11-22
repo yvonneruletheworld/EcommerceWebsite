@@ -2,6 +2,7 @@
 using EcommerceWebsite.Data.Entities;
 using EcommerceWebsite.Data.Identity;
 using EcommerceWebsite.Utilities.Output.Main;
+using EcommerceWebsite.Utilities.ViewModel;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace EcommerceWebsite.Services.Interfaces.Main
         Task<SanPham> GetSanPhamTheoMa(string id, string tensanpham);
         Task<bool> KiemTraGia(string value);
         Task<List<SanPhamOutput>> LaySanPham();
-        Task<List<SanPhamOutput>> LaySanPhamTheoLoai(string loaiSanPham, int take);
+        Task<List<SanPhamVM>> LaySanPhamTheoLoai(int take = 1, string loaiSanPham = null, string maSanPham = null);
 
         //Task<List<SanPhamOutput>> laySanPham();
         //Xóa sản phẩm

@@ -33,7 +33,6 @@ namespace EcommerceWebsite.Data.Entities
         public NhanHieu NhanHieu {get; set; }
         //Khóa ngoại
         public List<DinhLuong> DinhLuongs { get; set; }
-        public List<MauMaSanPham> MauMaSanPhams { get; set; }
         public List<LichSuGia> LichSuGias { get; set; }
         public List<BinhLuan> BinhLuans { get; set; }
         public List<SanPhamYeuThich> SanPhamYeus { get; set; }

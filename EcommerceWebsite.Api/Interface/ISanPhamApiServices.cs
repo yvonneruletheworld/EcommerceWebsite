@@ -1,6 +1,7 @@
 ﻿using EcommerceWebsite.Application.Pagination;
 using EcommerceWebsite.Utilities.Input;
 using EcommerceWebsite.Utilities.Output.Main;
+using EcommerceWebsite.Utilities.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,8 +15,9 @@ namespace EcommerceWebsite.Api.Interface
 
         Task<List<SanPhamOutput>> laySanPham2();
 
-        Task<bool> ThemSanPham(SanPhamInput input);
-        Task<bool> Modify(bool laXoa, SanPhamInput input);
+        Task<bool> ThemSanPham(SanPhamOutput input);
+        Task<bool> Modify(bool laXoa, SanPhamOutput input);
+        Task<SanPhamVM> LayViewSanPham(string prdId);
         Task<SanPhamOutput> LayChiTietSanPham(string prdId);
     }
 }

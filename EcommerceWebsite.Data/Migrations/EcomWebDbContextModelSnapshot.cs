@@ -29,7 +29,7 @@ namespace EcommerceWebsite.Data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("TenBanner")
+                    b.Property<string>("MaKhuyenMai")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

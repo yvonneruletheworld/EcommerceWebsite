@@ -22,7 +22,7 @@ namespace EcommerceWebsite.Data.Configurations
             builder.Property(nx => nx.HinhAnhBanner)
                  .IsRequired();
 
-            builder.Property(nx => nx.TenBanner)
+            builder.Property(nx => nx.MaKhuyenMai)
                  .IsRequired();
         }
     }

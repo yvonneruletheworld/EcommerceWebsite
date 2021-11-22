@@ -28,7 +28,6 @@ namespace EcommerceWebsite.Data.EF
         public DbSet<DanhMuc> DanhMucs { get; set; }
         public DbSet<ThuocTinh> ThuocTinhs { get; set; }
         public DbSet<DinhLuong> DinhLuongs { get; set; }
-        public DbSet<MauMaSanPham> MauMaSanPhams { get; set; }
         public DbSet<LichSuGia> LichSuGias { get; set; }
         public DbSet<NhanHieu> NhanHieus { get; set; }
         public DbSet<DiaChiKhachHang> DiaChiKhaches { get; set; }
@@ -57,7 +56,6 @@ namespace EcommerceWebsite.Data.EF
             modelBuilder.ApplyConfiguration(new DanhMucConfiguration());
             modelBuilder.ApplyConfiguration(new ThuocTinhConfiguration());
             modelBuilder.ApplyConfiguration(new DinhLuongConfiguration());
-            modelBuilder.ApplyConfiguration(new MauSanPhamConfiguration());
             modelBuilder.ApplyConfiguration(new LichSuGiaConfiguration());
             modelBuilder.ApplyConfiguration(new NhanHieuConfiguration());
             modelBuilder.ApplyConfiguration(new KhachHangConfiguration());

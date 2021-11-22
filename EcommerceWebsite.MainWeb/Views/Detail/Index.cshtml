@@ -1,4 +1,5 @@
 ﻿@using EcommerceWebsite.Utilities.ViewModel
+@using EcommerceWebsite.Data.Enum
 @model DetailVM
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -8,9 +9,15 @@
 @{
     //var pre = (Dictionary<string, string>)ViewData["PreviousPage"];
     var sanPham = Model.SanPham;
+    var bangDinhLuong = Model.SanPham.BangGia.Where(dl => dl.MaThuocTinh == nameof(ProductPorpertyCode.TT07)).ToList();
     //var demision = Model.SanPham.
 }
 
+
+<script>
+    var model = @Json.Serialize(Model);
+
+</script>
 <!-- Begin Li's Breadcrumb Area -->
 <div class="breadcrumb-area">
     <div class="container">
@@ -35,8 +42,8 @@
                         @foreach (var img in sanPham.ListHinhAnh)
                         {
                             <div class="lg-image">
-                                <a class="popup-img venobox vbox-item" href="@img.HinhAnh" data-gall="myGallery">
-                                    <img src="@img.HinhAnh" alt="@img.TenMauMa">
+                                <a class="popup-img venobox vbox-item" href="@img.GiaTri" data-gall="myGallery">
+                                    <img src="@img.GiaTri" alt="@img.DonVi">
                                 </a>
                             </div>
                         }
@@ -44,7 +51,7 @@
                     <div class="product-details-thumbs slider-thumbs-1">
                         @foreach (var img in sanPham.ListHinhAnh)
                         {
-                            <div class="sm-image"><img src="@img.HinhAnh" alt="@img.TenMauMa"></div>
+                            <div class="sm-image"><img src="@img.GiaTri" alt="@img.DonVi"></div>
                         }
                     </div>
                 </div>
@@ -68,7 +75,7 @@
                             </ul>
                         </div>
                         <div class="price-box pt-20">
-                            <span class="new-price new-price-2">@sanPham.GiaBan</span>
+                            <span class="new-price new-price-2 product-pride-id"></span>
                         </div>
                         <div class="product-desc">
                             <p>
@@ -80,25 +87,30 @@
                         </div>
                         <div class="product-variants">
                             <div class="produt-variants-size">
-                                <label>Dimension</label>
-                                <select class="nice-select">
+                                <label for="">Dung lượng</label>
+                                @Html.DropDownListFor(sp => sp.SanPham.BangGia , new SelectList(bangDinhLuong, "MaDinhLuong", "TenDinhLuong"), new {
+                               @class = "nice-select",
+                               @onchange = "dinhLuongChanged(this)",
+                               placeholder = "Dung lượng"
+                           })
+                                @*<select class="nice-select">
                                     <option value="1" title="S" selected="selected">40x60cm</option>
                                     <option value="2" title="M">60x90cm</option>
                                     <option value="3" title="L">80x120cm</option>
-                                </select>
+                                </select>*@
                             </div>
                         </div>
                         <div class="single-add-to-cart">
                             <form action="#" class="cart-quantity">
                                 <div class="quantity">
-                                    <label>Quantity</label>
+                                    <label>Số lượng</label>
                                     <div class="cart-plus-minus">
                                         <input class="cart-plus-minus-box" value="1" type="text">
                                         <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
                                         <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
                                     </div>
                                 </div>
-                                <button class="add-to-cart" type="submit">Add to cart</button>
+                                <button class="add-to-cart" type="submit">Thêm vào giỏ hàng</button>
                             </form>
                         </div>
                         <div class="product-additional-info pt-25">
@@ -119,7 +131,7 @@
                                         <div class="reassurance-icon">
                                             <i class="fa fa-check-square-o"></i>
                                         </div>
-                                        <p>Security policy (edit with Customer reassurance module)</p>
+                                        <p> Đảm bảo chất lượng hàng hóa</p>
                                     </div>
                                 </li>
                                 <li>
@@ -127,7 +139,7 @@
                                         <div class="reassurance-icon">
                                             <i class="fa fa-truck"></i>
                                         </div>
-                                        <p>Delivery policy (edit with Customer reassurance module)</p>
+                                        <p> Giao hàng nhanh chóng và an toàn</p>
                                     </div>
                                 </li>
                                 <li>
@@ -135,7 +147,7 @@
                                         <div class="reassurance-icon">
                                             <i class="fa fa-exchange"></i>
                                         </div>
-                                        <p> Return policy (edit with Customer reassurance module)</p>
+                                        <p> Hỗ trợ đổi trả hàng hóa </p>
                                     </div>
                                 </li>
                             </ul>
@@ -147,3 +159,17 @@
     </div>
 </div>
 <!-- content-wraper end -->
+
+<script>
+    $(function () {
+        var dft_price = model.sanPham.bangGia[0].giaBan;
+        $('.product-pride-id').text(dft_price + ' VNĐ');
+    });
+
+    function dinhLuongChanged(e) {
+        var valueDemission = e.value;
+        var prd_pride = model.sanPham.bangGia.find(x => x.maDinhLuong === valueDemission);
+        console.log(prd_pride);
+        $('.product-pride-id').text(prd_pride.giaBan + ' VNĐ');
+    };
+</script>

@@ -13,9 +13,9 @@ namespace EcommerceWebsite.Data.Configurations
         {
             builder.ToTable("LICHSUGIA");
 
-            builder.HasKey(xl => new { xl.MaSanPham, xl.NgayTao });
+            builder.HasKey(xl => new { xl.MaDinhLuong, xl.NgayTao });
 
-            builder.Property(xl => xl.MaSanPham)
+            builder.Property(xl => xl.MaDinhLuong)
                 .HasMaxLength(100);
 
             builder.Property(xl => xl.GiaMoi)
@@ -23,9 +23,9 @@ namespace EcommerceWebsite.Data.Configurations
                    .IsRequired();
 
             //Khóa ngoại
-            builder.HasOne(xl => xl.SanPham)
+            builder.HasOne(xl => xl.DinhLuong)
                  .WithMany(xl => xl.LichSuGias)
-                 .HasForeignKey(xl => xl.MaSanPham);
+                 .HasForeignKey(xl => xl.MaDinhLuong);
         }
     }
 }

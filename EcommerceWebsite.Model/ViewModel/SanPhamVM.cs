@@ -13,6 +13,8 @@ namespace EcommerceWebsite.Utilities.ViewModel
         public string LoaiSanPham { get; set; }
         public string XepHang { get; set; }
         public decimal GiaBan { get; set; }
+        public int SoLuongTon { get; set; }
+        public string NhanHieu { get; set; }
         public Status Status { get; set; }
     }
 }

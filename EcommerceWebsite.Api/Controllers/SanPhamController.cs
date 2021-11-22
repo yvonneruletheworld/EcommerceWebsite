@@ -2,8 +2,10 @@
 using EcommerceWebsite.Application.Constants;
 using EcommerceWebsite.Application.Pagination;
 using EcommerceWebsite.Data.Entities;
+using EcommerceWebsite.Data.Enum;
 using EcommerceWebsite.Services.Interfaces.Main;
 using EcommerceWebsite.Utilities.Input;
+using EcommerceWebsite.Utilities.Output.Main;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -20,13 +22,11 @@ namespace EcommerceWebsite.Api.Controllers
         private readonly ISanPhamServices _sanPhamServices;
         private readonly IMapper _mapper;
         private readonly IBangGiaServices _bangGiaServices;
-        private readonly IMauMaServices _mauMaServices;
         private readonly IDinhLuongServices _dinhLuongServices;
-        public SanPhamController(ISanPhamServices sanPhamServices, IMapper mapper, IMauMaServices mauMaServices, IBangGiaServices bangGiaServices, IDinhLuongServices dinhLuongServices)
+        public SanPhamController(ISanPhamServices sanPhamServices, IMapper mapper, IBangGiaServices bangGiaServices, IDinhLuongServices dinhLuongServices)
         {
             _sanPhamServices = sanPhamServices;
             _mapper = mapper;
-            _mauMaServices = mauMaServices;
             _bangGiaServices = bangGiaServices;
             _dinhLuongServices = dinhLuongServices;
         }
@@ -47,7 +47,7 @@ namespace EcommerceWebsite.Api.Controllers
         }
 
         [HttpPost("them-san-pham")]
-        public async Task<IActionResult> ThemSanPham (SanPhamInput input)
+        public async Task<IActionResult> ThemSanPham (SanPhamOutput input)
         {
             try
             {
@@ -62,13 +62,22 @@ namespace EcommerceWebsite.Api.Controllers
                     var result = await _sanPhamServices.ThemSanPham(obj);
                     if (result)
                     {
+                        //var lstDinhLuong = new Lis 
+                        //foreach(var dl in input.ListThongSo)
+                        //{
+                        //    var newDinhLuong = new DinhLuong()
+                        //    {
+                        //        MaSanPham = input.MaSanPham,
+                        //        DonVi = input.
+                        //}    
+                        ////them dinh luong 
+                        
                         //them gia 
                         var newGia = new LichSuGia()
                         {
                             DaXoa = false,
                             NgayTao =  DateTime.UtcNow,
-                            GiaMoi = input.GiaBan,
-                            MaSanPham = input.MaSanPham,
+                            
                             NguoiTao = input.NguoiTao
                         };
                         var resultGia = await _bangGiaServices.ThemGia(newGia);
@@ -89,7 +98,7 @@ namespace EcommerceWebsite.Api.Controllers
         }
 
         [HttpPut("sua-san-pham/{laXoa}")]
-        public async Task<IActionResult> SuaHoacXoaSanPham (SanPhamInput input, bool laXoa)
+        public async Task<IActionResult> SuaHoacXoaSanPham (SanPhamOutput input, bool laXoa)
         {
             if(ModelState.IsValid)
             {
@@ -114,7 +123,7 @@ namespace EcommerceWebsite.Api.Controllers
 
             var obj = new LichSuGia()
             {
-                MaSanPham = productId,
+                //MaSanPham = productId,
                 GiaMoi = newPrice,
                 NguoiTao = editor
             };
@@ -139,11 +148,27 @@ namespace EcommerceWebsite.Api.Controllers
                 if (obj == null)
                     return BadRequest(Messages.API_EmptyResult);
                 // list Hinh anh, Thong so, Gia, Danh gia
-                obj.ListHinhAnh = await _mauMaServices.LayListMauMaTheoSanPham(productId)??null;
-                obj.ListThongSo = await _dinhLuongServices.LayThongSoTheoSanPham(productId)??null;
-                var giaBan = await _bangGiaServices.GetGiaSanPhamMoiNhat(productId);
-                obj.GiaBan = giaBan == null ? 0 : giaBan.GiaMoi;
+                var listThongSo = await _dinhLuongServices.LayThongSoTheoSanPham(productId) ?? null;
+                obj.ListHinhAnh = listThongSo.Where(ts => ts.MaThuocTinh == (nameof(ProductPorpertyCode.TT014))).ToList();
+                obj.ListThongSo = listThongSo.Where(ts => ts.MaThuocTinh != (nameof(ProductPorpertyCode.TT014))
+                || ts.MaThuocTinh != (nameof(ProductPorpertyCode.TT07))).ToList();
+                obj.BangGia = await _bangGiaServices.LayBangGiaSanPham(productId);
                 return Ok(obj); 
+            }    
+        }
+        
+        [HttpGet("Views/{productId}")]
+        public async Task<IActionResult> GetViewProduct (string productId)
+        {
+            if (String.IsNullOrEmpty(productId))
+                return BadRequest(Messages.API_EmptyInput);
+            else
+            {
+                // lay san pham
+                var listObj = await _sanPhamServices.LaySanPhamTheoLoai(1, null, productId);
+                if (listObj == null )
+                    return BadRequest(Messages.API_EmptyResult);
+                return Ok(listObj.FirstOrDefault()); 
             }    
         }
     }

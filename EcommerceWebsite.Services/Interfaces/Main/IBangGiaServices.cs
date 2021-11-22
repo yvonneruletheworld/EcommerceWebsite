@@ -9,8 +9,9 @@ namespace EcommerceWebsite.Services.Interfaces.Main
 {
     public interface IBangGiaServices
     {
-        Task<LichSuGia> GetGiaSanPhamMoiNhat(string id);
+        Task<BangGiaOutput> GetGiaSanPhamMoiNhat(string id);
         Task<bool> ThemGia(LichSuGia input);
         Task<bool> ModifyPrice(LichSuGia ls);
+        Task<List<BangGiaOutput>> LayBangGiaSanPham(string prdId);
     }
 }

@@ -29,6 +29,8 @@ namespace EcommerceWebsite.Services.Services.Main
                             where dl.MaSanPham == maSanPham
                             select new ThongSoSanPhamOutput
                             {
+                                MaDinhLuong = dl.MaDinhLuong,
+                                MaThuocTinh = dl.MaThuocTinh,
                                 ThuocTinh = dl_tt.TenThuocTinh,
                                 DonVi = dl.DonVi,
                                 GiaTri = dl.GiaTri
