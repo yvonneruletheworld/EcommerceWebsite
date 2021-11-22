@@ -1,0 +1,19 @@
+﻿@using EcommerceWebsite.Utilities.Output.Main
+@model List<DanhMucOutput>
+
+@if (Model.Any())
+{
+    <div class="filter-sub-area">
+        <h5 class="filter-sub-titel">Danh mục</h5>
+        <div class="categori-checkbox">
+            <form action="#">
+                <ul>
+                    @foreach (var item in Model)
+                    {
+                        <li><input type="checkbox" name="product-categori"><a href="#">@item.TenDanhMuc</a></li>
+                    }
+                    </ul>
+            </form>
+        </div>
+    </div>
+}
