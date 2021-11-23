@@ -80,8 +80,8 @@ namespace EcommerceWebsite.Services.Services.Main
                 //lấy những thông số k phải list
                 var obj = await (from sp in _context.SanPhams
                                  // Sản phẩm - Đánh giá 1 - 1
-                                 join dg in _context.DanhGiaSanPhams on (sp == null ? string.Empty : sp.MaSanPham) equals dg.MaSanPham into sp_dg_group
-                                 from sp_dg in sp_dg_group.DefaultIfEmpty()
+                                 //join dg in _context.DanhGiaSanPhams on (sp == null ? string.Empty : sp.MaSanPham) equals dg.MaSanPham into sp_dg_group
+                                 //from sp_dg in sp_dg_group.DefaultIfEmpty()
                                  // Sản phẩm - Danh mục 1 - 1 
                                  join dm in _context.DanhMucs on (sp == null ? string.Empty : sp.MaLoaiSanPham) equals dm.MaDanhMuc into sp_dm_group
                                  from sp_dm in sp_dm_group.DefaultIfEmpty()
@@ -96,11 +96,13 @@ namespace EcommerceWebsite.Services.Services.Main
                                      TenSanPham = sp.TenSanPham,
                                      Status = sp.Status,
                                      HinhAnh = sp.HinhAnh,
-                                     DanhGia = sp_dg,
+                                     //DanhGia = sp_dg,
                                      LoaiSanPham = sp_dm.TenDanhMuc,
                                      NhanHieu = sp_nh.TenHang,
                                      //GiaBan = gb.GiaMoi
                                  }).FirstOrDefaultAsync();
+                obj.DanhGia = await _context.DanhGiaSanPhams.Where(dg => dg.MaSanPham.Equals(obj.MaSanPham)).ToListAsync();
+
                 return obj;
             }
             catch (Exception ex)
