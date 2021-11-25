@@ -61,5 +61,20 @@ namespace EcommerceWebsite.MainWeb.Controllers
             }
             return rs;
         }
+
+        [HttpGet]
+        public async Task<IActionResult> layDanhMuc()
+        {
+            try
+            {
+                List<DanhMucOutput> data = new List<DanhMucOutput>();
+                 data = await _danhMucServices.GetCategories();
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

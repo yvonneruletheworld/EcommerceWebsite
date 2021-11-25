@@ -5,7 +5,7 @@
         @foreach (var item in Model.ToList())
         {
             <li>
-                <a href="#" data-id="@item.MaHang" onclick="loadSanPhamTheoHang()">@item.TenHang</a>
+                <a href="#" data-id="@item.MaHang" class="btn-hienthisanpham-hang">@item.TenHang</a>
             </li>
         }
     </ul>

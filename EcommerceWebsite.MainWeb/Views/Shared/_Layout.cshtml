@@ -142,14 +142,7 @@
                         <!-- Begin Header Middle Right Area -->
                         <div class="col-lg-9">
                             <!-- Begin Header Middle Searchbox Area -->
-                            <form action="#" class="hm-searchbox">
-                                <select class="nice-select select-search-category">
-                                    <option value="0">All</option>
-                                    <option value="2">Điện thoại</option>
-                                </select>
-                                <input type="text" placeholder="Sản phẩm tìm kiếm ...">
-                                <button class="li-btn" type="submit"><i class="fa fa-search"></i></button>
-                            </form>
+                                @(await Html.PartialAsync("~/Views/Home/_danhMucTimKiem.cshtml"))
                             <div class="header-middle-right">
                                 <ul class="hm-menu">
                                     <li class="hm-wishlist">
@@ -265,7 +258,7 @@
                                         <li><a href="@Url.Action("Index","LienHe")">Liên hệ</a></li>
                                         <!-- Begin Header Bottom Menu Information Area -->
                                         <li class="hb-info f-right p-0 d-sm-none d-lg-block">
-                                            <span>140 Lê Trọng Tấn, Tân Phú, HCM</span>
+                                            <span style="color:white">140 Lê Trọng Tấn, Tân Phú, HCM</span>
                                         </li>
                                         <!-- Header Bottom Menu Information Area End Here -->
                                     </ul>
@@ -549,6 +542,7 @@
 
     <!-- jQuery-V1.12.4 -->
     <script src="~/js/vendor/jquery-3.2.1.min.js"></script>
+
     @*<script src="~/js/vendor/jquery-1.12.4.min.js"></script>*@
     <!-- Popper js -->
     <script src="~/js/vendor/popper.min.js"></script>
@@ -593,5 +587,36 @@
     <script src="~/js/giohang.js"></script>
 
     @RenderSection("Scripts", required: false)
+    @*<script>
+    $(document).ready(() => {
+        initResourceFilterQuery();
+
+    })
+    function initResourceFilterQuery() {
+        layDanhMuc();
+    }
+    //Danh mục
+    function layDanhMuc() {
+        $.ajax({
+            url: '@Url.Action("layDanhMuc", "Home")',
+            type: 'GET',
+            success: function (res) {
+                if (res.length === 0) {
+                    alert("Rỗng");
+                }
+                var html = `<option>ALL</option>`;
+                console.log(res);
+                $.each(res, function (i, item) {
+                    html += `<option value="${i}">${item.tenDanhMuc}</option>`;
+                });
+                $(".nice-select").html(html);
+            },
+            error: (err) => {
+                alert('failed');
+                console.log(err);
+            }
+        });
+    }
+    </script>*@
 </body>
 </html>

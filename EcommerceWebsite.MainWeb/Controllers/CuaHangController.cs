@@ -65,7 +65,20 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
         {
             try
             {
-                var data = await _sanPhamApiServices.laySanPhamTheoHang("MH01");
+                var data = await _sanPhamApiServices.laySanPhamTheoHang(prdId);
+                return PartialView("/Views/CuaHang/_ListSanPhamTheoHang.cshtml", data);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        [HttpGet("get-data-sanpham-loai/{prdId}")]
+        public async Task<IActionResult> LaySanPhamTheoDanhMuc(string prdId)
+        {
+            try
+            {
+                var data = await _sanPhamApiServices.laySanPhamTheoDanhMuc(prdId);
                 return PartialView("/Views/CuaHang/_ListSanPhamTheoHang.cshtml", data);
             }
             catch (Exception ex)

@@ -73,8 +73,8 @@
                                 <li><i class="fa fa-star-o"></i></li>
                                 <li class="no-star"><i class="fa fa-star-o"></i></li>
                                 <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                <li class="review-item rating-view"><a href="#reviews">Xem {danhgiacount} đánh giá</a></li>
-                                <li class="review-item"><a href="#reviews" data-target="#mymodal" data-toggle="modal">Viết Đánh giá</a></li>
+                                <li class="review-item rating-view"><a href="#reviews">Xem {@sanPham.ListBinhLuan.Count()} bình luận</a></li>
+                                <li class="review-item"><a href="#reviews" data-target="#mymodal" data-toggle="modal">Bình luận</a></li>
                             </ul>
                         </div>
                         <div class="price-box pt-20">
@@ -85,7 +85,8 @@
                                 <span class="product-desciption-shortcut">
                                     @(sanPham.DanhGia.Count > 0 ? sanPham.DanhGia[0].NoiDung : "Sản phẩm chưa có mô tả")
                                 </span>
-                                <a style="text-decoration: none; color: yellow" href="#description">Xem thêm</a>
+                                <br>
+                                <a style="text-decoration: none; color: black" href="#description">Xem thêm</a>
                             </p>
                         </div>
                         <div class="product-variants">
@@ -216,7 +217,7 @@
                     <div class="cart-table table-responsive">
                         <table class="table table-bordered">
                             <tbody>
-                                @foreach(var ts in bangThongSo)
+                                @foreach (var ts in bangThongSo)
                                 {
                                     <tr>
                                         <td class="pro-title">
@@ -224,8 +225,8 @@
                                         </td>
                                         <td class="pro-price"><span>@ts.DonVi</span></td>
                                     </tr>
-                                 }
-                                
+                                }
+
                             </tbody>
                         </table>
                     </div>
@@ -313,7 +314,7 @@
                                                                     {
                                                                         <p class="feedback-form-author">
                                                                             <label>
-                                                                                Gửi từ: 
+                                                                                Gửi từ:
                                                                             </label>
                                                                             <label class="ml-2">
                                                                                 @khachHang.DanhXung
@@ -344,7 +345,7 @@
                                                                             <label for="email">
                                                                                 Mật khẩu <span class="required">*</span>
                                                                             </label>
-                                                                            <input id="pass-feedback"  name="pass-feedback" value="" size="30" aria-required="true" type="password">
+                                                                            <input id="pass-feedback" name="pass-feedback" value="" size="30" aria-required="true" type="password">
                                                                             <span class="required"><sub>*</sub> Required fields</span>
                                                                         </p>
                                                                         <div class="feedback-btn pb-15">
@@ -375,12 +376,14 @@
         </div>
     </div>
 </div>
-<!-- Product Area End Here -->
+
+@(await Html.PartialAsync("/Views/Detail/_ListSanPhamTuongTu.cshtml", Model.SanPhamOutPut))
+
 <script>
     $(function () {
         var dft_price = model.sanPham.bangGia[0].giaBan;
         $('.product-pride-id').text(dft_price + ' VNĐ');
-                    });
+    });
 
     function dinhLuongChanged(e) {
         var valueDemission = e.value;
@@ -388,4 +391,5 @@
         console.log(prd_pride);
         $('.product-pride-id').text(prd_pride.giaBan + ' VNĐ');
     };
+
 </script>

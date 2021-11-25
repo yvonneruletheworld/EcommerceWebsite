@@ -17,10 +17,8 @@
     });
 })
 
-function loadSanPhamTheoHang() {
-    debugger;
+$('body').on('click', '.btn-hienthisanpham-hang', function () {
     var id = $(this).data('id');
-    alert(id);
     $.ajax({
         url: `/get-data-sanpham-theohang/${id}`,
         type: 'GET',
@@ -33,4 +31,19 @@ function loadSanPhamTheoHang() {
             console.log(err);
         }
     });
-}
+})
+    $('body').on('click', '.btn-hienthisanpham-loai', function () {
+        var id = $(this).data('id');
+        $.ajax({
+            url: `/get-data-sanpham-loai/${id}`,
+            type: 'GET',
+            dataType: 'html',
+            success: (result) => {
+                $("#loadAllSanPham")[0].innerHTML = result;
+            },
+            error: (err) => {
+                alert('failed');
+                console.log(err);
+            }
+        });
+    })

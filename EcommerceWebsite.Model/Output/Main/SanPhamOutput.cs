@@ -29,6 +29,7 @@ namespace EcommerceWebsite.Utilities.Output.Main
         public Status Status { get; set; }
 
         public decimal giaBan { get; set; }
+        public string MaLoai { get; set; }
 
         [JsonProperty("listHinhAnh")]
         public List<ThongSoSanPhamOutput> ListHinhAnh { get; set; }

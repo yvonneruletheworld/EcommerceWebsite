@@ -22,16 +22,25 @@ namespace EcommerceWebsite.MainWeb.Controllers
             _khachHangServices = khachHangServices;
         }
 
-        public async Task<IActionResult> IndexAsync(string prdId)
+        public async Task<IActionResult> IndexAsync(string prdId,string prdMaDanhMuc)
         {
             var vm = new DetailVM();
             vm.SanPham = await _sanPhamServices.LayChiTietSanPham(prdId);
-            //if(User != null)
-            //{
-            //    string id =  _userManager.GetUserId(User);
-            //    vm.KhachHang = await _khachHangServices.GetKhachHangTheoMa(id);
-            //}
+            vm.SanPhamOutPut = await _sanPhamServices.laySanPhamTheoDanhMuc(prdMaDanhMuc);
             return View("Views/Detail/Index.cshtml",vm);
+        }
+        [HttpGet("get-data-sanpham-theodanhmuc/{prdId}")]
+        public async Task<IActionResult> LaySanPhamTheoDanhMuc(string prdId)
+        {
+            try
+            {
+                var data = await _sanPhamServices.laySanPhamTheoDanhMuc(prdId);
+                return PartialView("/Views/Detail/_ListSanPhamTuongTu.cshtml", data);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

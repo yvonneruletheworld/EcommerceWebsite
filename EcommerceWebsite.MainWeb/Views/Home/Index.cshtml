@@ -89,7 +89,7 @@
 
                                     <div class="single-product-wrap">
                                         <div class="product-image">
-                                            <a href="@Url.Action("Index", "Detail", new { prdId = prd.MaSanPham})">
+                                            <a href="@Url.Action("Index", "Detail", new {  prdId = prd.MaSanPham, prdMaDanhMuc = prd.MaLoai})">
                                                 <img src="@prd.HinhAnh" alt="@prd.TenSanPham">
                                             </a>
                                             <span class="sticker">@(nameof(Status.Hot))</span>
@@ -112,14 +112,14 @@
                                                 </div>
                                                 @if (prd.TenSanPham.Length > 25)
                                             {
-                                                <h4><a class="product_name" href="@Url.Action("Index", "Detail", new { prdId = prd.MaSanPham })">@prd.TenSanPham.Substring(0, 25)...</a></h4>
+                                                <h4><a class="product_name" href="@Url.Action("Index", "Detail", new {  prdId = prd.MaSanPham, prdMaDanhMuc = prd.MaLoai })">@prd.TenSanPham.Substring(0, 25)...</a></h4>
                                             }
                                             else
                                             {
-                                                <h4><a class="product_name" href="@Url.Action("Index", "Detail", new { prdId = prd.MaSanPham })">@prd.TenSanPham</a></h4>
+                                                <h4><a class="product_name" href="@Url.Action("Index", "Detail", new {  prdId = prd.MaSanPham, prdMaDanhMuc = prd.MaLoai })">@prd.TenSanPham</a></h4>
                                             }
                                                 <div class="price-box">
-                                                    <span class="new-price">@prd.GiaBan</span>
+                                                    <span class="new-price">@string.Format("{0:0,0}", prd.GiaBan) VNĐ</span>
                                                 </div>
                                                 <div class="countersection">
                                                     <div class="li-countdown"></div>

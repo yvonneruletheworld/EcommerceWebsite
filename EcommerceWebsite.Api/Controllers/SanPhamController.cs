@@ -49,11 +49,11 @@ namespace EcommerceWebsite.Api.Controllers
         }
 
         [HttpPost("them-san-pham")]
-        public async Task<IActionResult> ThemSanPham (SanPhamOutput input)
+        public async Task<IActionResult> ThemSanPham(SanPhamOutput input)
         {
             try
             {
-                if(ModelState.IsValid)
+                if (ModelState.IsValid)
                 {
                     var existObj = _sanPhamServices.GetSanPhamTheoMa(input.MaSanPham, input.TenSanPham);
                     if (existObj == null)
@@ -73,20 +73,20 @@ namespace EcommerceWebsite.Api.Controllers
                         //        DonVi = input.
                         //}    
                         ////them dinh luong 
-                        
+
                         //them gia 
                         var newGia = new LichSuGia()
                         {
                             DaXoa = false,
-                            NgayTao =  DateTime.UtcNow,
-                            
+                            NgayTao = DateTime.UtcNow,
+
                             NguoiTao = input.NguoiTao
                         };
                         var resultGia = await _bangGiaServices.ThemGia(newGia);
-                        if(resultGia)
+                        if (resultGia)
                         {
                             return Ok(Messages.API_Success);
-                        }    
+                        }
                         else return BadRequest(Messages.API_Failed);
                     }
                     else return BadRequest(Messages.API_Failed);
@@ -100,9 +100,9 @@ namespace EcommerceWebsite.Api.Controllers
         }
 
         [HttpPut("sua-san-pham/{laXoa}")]
-        public async Task<IActionResult> SuaHoacXoaSanPham (SanPhamOutput input, bool laXoa)
+        public async Task<IActionResult> SuaHoacXoaSanPham(SanPhamOutput input, bool laXoa)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var obj = _mapper.Map<SanPham>(input);
                 if (obj != null)
@@ -118,7 +118,7 @@ namespace EcommerceWebsite.Api.Controllers
         }
 
         [HttpPatch("{productId}/{editor}/{newPrice}")]
-        public async Task<IActionResult> ModifyPrice (string productId, string editor, decimal newPrice)
+        public async Task<IActionResult> ModifyPrice(string productId, string editor, decimal newPrice)
         {
             if (string.IsNullOrEmpty(productId) || newPrice < 0)
                 return BadRequest(Messages.API_EmptyInput);
@@ -139,7 +139,7 @@ namespace EcommerceWebsite.Api.Controllers
         }
 
         [HttpGet("ChiTiet/{productId}")]
-        public async Task<IActionResult> LayChiTietSanPham (string productId)
+        public async Task<IActionResult> LayChiTietSanPham(string productId)
         {
             if (String.IsNullOrEmpty(productId))
                 return BadRequest(Messages.API_EmptyInput);
@@ -156,12 +156,12 @@ namespace EcommerceWebsite.Api.Controllers
                 || ts.MaThuocTinh != (nameof(ProductPorpertyCode.TT07))).ToList();
                 obj.BangGia = await _bangGiaServices.LayBangGiaSanPham(productId);
                 obj.ListBinhLuan = await _binhLuanServices.LayBinhLuanTheoSanPham(productId);
-                return Ok(obj); 
-            }    
+                return Ok(obj);
+            }
         }
-        
+
         [HttpGet("Views/{productId}")]
-        public async Task<IActionResult> GetViewProduct (string productId)
+        public async Task<IActionResult> GetViewProduct(string productId)
         {
             if (String.IsNullOrEmpty(productId))
                 return BadRequest(Messages.API_EmptyInput);
@@ -169,10 +169,10 @@ namespace EcommerceWebsite.Api.Controllers
             {
                 // lay san pham
                 var listObj = await _sanPhamServices.LaySanPhamTheoLoai(1, null, productId);
-                if (listObj == null )
+                if (listObj == null)
                     return BadRequest(Messages.API_EmptyResult);
-                return Ok(listObj.FirstOrDefault()); 
-            }    
+                return Ok(listObj.FirstOrDefault());
+            }
         }
         [HttpGet("lay-sanpham-theohang/{prdId}")]
         public async Task<IActionResult> LaySanPhamTheoHang(string prdId)
@@ -180,6 +180,21 @@ namespace EcommerceWebsite.Api.Controllers
             try
             {
                 var result = await _sanPhamServices.laySanPhamTheoHang(prdId);
+                if (result == null)
+                    return BadRequest(Messages.API_EmptyResult);
+                else return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(Messages.API_Exception + ex);
+            }
+        }
+        [HttpGet("lay-sanpham-theodanhmuc/{prdId}")]
+        public async Task<IActionResult> laySanPhamTheoDanhMuc(string prdId)
+        {
+            try
+            {
+                var result = await _sanPhamServices.laySanPhamTheoDanhMuc(prdId);
                 if (result == null)
                     return BadRequest(Messages.API_EmptyResult);
                 else return Ok(result);

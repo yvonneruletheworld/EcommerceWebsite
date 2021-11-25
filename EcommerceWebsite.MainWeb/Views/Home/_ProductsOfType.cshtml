@@ -52,7 +52,7 @@
                                     <!-- single-product-wrap start -->
                                     <div class="single-product-wrap">
                                         <div class="product-image">
-                                            <a href="@Url.Action("Index", "Detail",new { prdId = sp.MaSanPham})">
+                                            <a href="@Url.Action("Index", "Detail",new { prdId = sp.MaSanPham, prdMaDanhMuc = sp.MaLoai})">
                                                 <img src="@sp.HinhAnh" alt="@sp.TenSanPham">
                                             </a>
                                             <span class="sticker">Mới</span>
@@ -75,11 +75,11 @@
                                                 </div>
                                                 @if (sp.TenSanPham.Length > 25)
                                                 {
-                                                    <h4><a class="product_name" href="@Url.Action("Index", "Detail", new { prdId = sp.MaSanPham })">@sp.TenSanPham.Substring(0, 25)...</a></h4>
+                                                    <h4><a class="product_name" href="@Url.Action("Index", "Detail", new { prdId = sp.MaSanPham, prdMaDanhMuc = sp.MaLoai })">@sp.TenSanPham.Substring(0, 25)...</a></h4>
                                                 }
                                                 else
                                                 {
-                                                    <h4><a class="product_name" href="@Url.Action("Index", "Detail", new { prdId = sp.MaSanPham })">@sp.TenSanPham</a></h4>
+                                                    <h4><a class="product_name" href="@Url.Action("Index", "Detail", new {  prdId = sp.MaSanPham, prdMaDanhMuc = sp.MaLoai })">@sp.TenSanPham</a></h4>
                                                 }
                                                 <div class="price-box">
                                                     <span class="new-price">@string.Format("{0:0,0}", sp.GiaBan) VNĐ</span>
