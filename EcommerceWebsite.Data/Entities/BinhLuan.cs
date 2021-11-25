@@ -7,7 +7,6 @@ namespace EcommerceWebsite.Data.Entities
    public class BinhLuan : EntityBase
     {
         public string MaSanPham { get; set; }
-        public string MaKhachHang { get; set; }
         public string NoiDung { get; set; }
         public int SoSao { get; set; }
         public SanPham SanPham { get; set; }

@@ -23,12 +23,14 @@ namespace EcommerceWebsite.Api.Controllers
         private readonly IMapper _mapper;
         private readonly IBangGiaServices _bangGiaServices;
         private readonly IDinhLuongServices _dinhLuongServices;
-        public SanPhamController(ISanPhamServices sanPhamServices, IMapper mapper, IBangGiaServices bangGiaServices, IDinhLuongServices dinhLuongServices)
+        private readonly IBinhLuanServices _binhLuanServices;
+        public SanPhamController(ISanPhamServices sanPhamServices, IMapper mapper, IBangGiaServices bangGiaServices, IDinhLuongServices dinhLuongServices, IBinhLuanServices binhLuanServices)
         {
             _sanPhamServices = sanPhamServices;
             _mapper = mapper;
             _bangGiaServices = bangGiaServices;
             _dinhLuongServices = dinhLuongServices;
+            _binhLuanServices = binhLuanServices;
         }
         [HttpGet("lay-sanpham")]
         public async Task<IActionResult> LaySanPhams()
@@ -153,6 +155,7 @@ namespace EcommerceWebsite.Api.Controllers
                 obj.ListThongSo = listThongSo.Where(ts => ts.MaThuocTinh != (nameof(ProductPorpertyCode.TT014))
                 || ts.MaThuocTinh != (nameof(ProductPorpertyCode.TT07))).ToList();
                 obj.BangGia = await _bangGiaServices.LayBangGiaSanPham(productId);
+                obj.ListBinhLuan = await _binhLuanServices.LayBinhLuanTheoSanPham(productId);
                 return Ok(obj); 
             }    
         }

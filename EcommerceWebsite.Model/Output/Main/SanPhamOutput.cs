@@ -36,7 +36,9 @@ namespace EcommerceWebsite.Utilities.Output.Main
         public List<BangGiaOutput> BangGia { get; set; }
 
         [JsonProperty("danhGia")]
-        public List<DanhGiaSanPham> DanhGia { get; set; }
+        public List<DanhGiaSanPham> DanhGia { get; set; } 
+        [JsonProperty("listBinhLuan")]
+        public List<BinhLuanOutput> ListBinhLuan { get; set; }
         //Khóa ngoại
     }
 }

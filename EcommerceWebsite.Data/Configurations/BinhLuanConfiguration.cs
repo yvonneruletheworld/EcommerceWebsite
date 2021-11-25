@@ -13,12 +13,9 @@ namespace EcommerceWebsite.Data.Configurations
         {
             builder.ToTable("BINHLUANSANPHAM");
 
-            builder.HasKey(nx => new { nx.MaKhachHang, nx.MaSanPham });
+            builder.HasKey(nx => new { nx.NguoiTao, nx.NgayTao, nx.MaSanPham });
 
             builder.Property(nx => nx.MaSanPham)
-                .HasMaxLength(100);
-
-            builder.Property(nx => nx.MaKhachHang)
                 .HasMaxLength(100);
 
             builder.Property(nx => nx.NoiDung)
@@ -32,10 +29,7 @@ namespace EcommerceWebsite.Data.Configurations
             builder.HasOne(xl => xl.SanPham)
                  .WithMany(xl => xl.BinhLuans)
                  .HasForeignKey(xl => xl.MaSanPham);
-            //Khóa ngoại
-            builder.HasOne(xl => xl.KhachHang)
-                 .WithMany(xl => xl.BinhLuans)
-                 .HasForeignKey(xl => xl.MaKhachHang);
+            
         }
     }
 }

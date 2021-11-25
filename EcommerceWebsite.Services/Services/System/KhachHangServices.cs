@@ -12,6 +12,7 @@ using System.Linq;
 using EcommerceWebsite.Utilities.Input;
 using System.Security.Claims;
 using AutoMapper;
+using EcommerceWebsite.Utilities.Output.System;
 
 namespace EcommerceWebsite.Services.Services.System
 {
@@ -176,6 +177,19 @@ namespace EcommerceWebsite.Services.Services.System
 
                 throw ex;
             }
+        }
+
+        public async Task<KhachHangOutput> GetKhachHangTheoMa(string maKhachHang)
+        {
+            return await (from kh in _context.KhachHangs
+                          join ap in _context.ApplicationUsers on (kh == null ? string.Empty : kh.MaKhachHang) equals ap.Id
+                          where !ap.IsDeleted && kh.MaKhachHang == maKhachHang
+                          select new KhachHangOutput
+                            {
+                                TenKhachHang = kh.HoTen,
+                                Email = ap.Email,
+                                GioiTinh = kh.GioiTinh
+                            }).FirstOrDefaultAsync();
         }
 
 

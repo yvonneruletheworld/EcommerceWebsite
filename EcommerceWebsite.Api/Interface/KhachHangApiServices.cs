@@ -1,5 +1,6 @@
 ﻿using EcommerceWebsite.Application.Constants;
 using EcommerceWebsite.Utilities.Input;
+using EcommerceWebsite.Utilities.Output.System;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
@@ -13,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace EcommerceWebsite.Api.Interface
 {
-    public class KhachHangApiServices : IKhachHangServices
+    public class KhachHangApiServices : IKhachHangApiServices
     {
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly IConfiguration _config;
@@ -24,6 +25,33 @@ namespace EcommerceWebsite.Api.Interface
             _httpClientFactory = httpClientFactory;
             _config = config;
             _httpContextAccessor = httpContextAccessor;
+        }
+
+        public async Task<KhachHangOutput> GetKhachHangTheoMa(string maKhachHang)
+        {
+            try
+            {
+                var session = _httpContextAccessor
+                .HttpContext
+                .Session
+                .GetString(SystemConstant.Token);
+
+                var client = _httpClientFactory.CreateClient();
+                client.BaseAddress = new Uri(_config[SystemConstant.BaseAddress]);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", session);
+
+                var response = await client.GetAsync($"api/KhachHang/get-khach-hang/{maKhachHang}");
+                var body = await response.Content.ReadAsStringAsync();
+
+                return response.IsSuccessStatusCode ?
+                 (KhachHangOutput)JsonConvert.DeserializeObject(body, typeof(KhachHangOutput))
+                 : JsonConvert.DeserializeObject<KhachHangOutput>(body);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
         }
 
         public async Task<ApiResult<string>> GetLoginToken(ThongTinKhachHangInput input)

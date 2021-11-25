@@ -94,5 +94,16 @@ namespace EcommerceWebsite.Api.Controllers
             }
             return BadRequest(ModelState);
         }
+
+        [HttpGet("get-khach-hang/{maKhachHang}")] 
+        public async Task<IActionResult> GetKhachHang (string maKhachHang)
+        {
+            if(string.IsNullOrEmpty(maKhachHang))
+                return BadRequest(Messages.API_EmptyInput);
+            var data = await _khachHangServices.GetKhachHangTheoMa(maKhachHang);
+            if (data == null)
+                return BadRequest(Messages.API_EmptyResult);
+            return Ok(data);
+        }
     }
 }

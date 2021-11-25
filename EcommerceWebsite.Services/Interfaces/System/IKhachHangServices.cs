@@ -1,6 +1,7 @@
 ﻿using EcommerceWebsite.Data.Entities;
 using EcommerceWebsite.Data.Identity;
 using EcommerceWebsite.Utilities.Input;
+using EcommerceWebsite.Utilities.Output.System;
 using System;
 using System.Collections.Generic;
 using System.Security.Claims;
@@ -14,6 +15,7 @@ namespace EcommerceWebsite.Services.Interfaces.System
         Task<ThongTinKhachHangInput> GetKhachHangInputTheoSdt(string sdt);
         Task<ApplicationUser> GetKhachHangTheoUsername(string userName);
         Task<ApplicationUser> GetKhachHangTheoId(string id);
+        Task<KhachHangOutput> GetKhachHangTheoMa(string maKhachHang);
         Task<ApplicationUser> GetKhachHangTheoEmail(string email);
         Task<bool> CheckLoginPass(ApplicationUser obj, string pwd);
         //Task<Dictionary<string, KhachHang>> LoginAsync(string usernameOrPhone, string pass);

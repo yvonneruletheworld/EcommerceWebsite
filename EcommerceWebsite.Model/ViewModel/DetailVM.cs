@@ -1,4 +1,5 @@
 ﻿using EcommerceWebsite.Utilities.Output.Main;
+using EcommerceWebsite.Utilities.Output.System;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -10,5 +11,6 @@ namespace EcommerceWebsite.Utilities.ViewModel
     {
         [JsonProperty("sanPham")]
         public SanPhamOutput SanPham { get; set; }
+        public KhachHangOutput KhachHang { get; set; }
     }
 }
