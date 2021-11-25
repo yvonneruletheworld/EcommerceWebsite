@@ -174,5 +174,20 @@ namespace EcommerceWebsite.Api.Controllers
                 return Ok(listObj.FirstOrDefault()); 
             }    
         }
+        [HttpGet("lay-sanpham-theohang/{prdId}")]
+        public async Task<IActionResult> LaySanPhamTheoHang(string prdId)
+        {
+            try
+            {
+                var result = await _sanPhamServices.laySanPhamTheoHang(prdId);
+                if (result == null)
+                    return BadRequest(Messages.API_EmptyResult);
+                else return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(Messages.API_Exception + ex);
+            }
+        }
     }
 }

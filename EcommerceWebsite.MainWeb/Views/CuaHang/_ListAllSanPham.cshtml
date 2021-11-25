@@ -61,7 +61,7 @@
                                             <div class="product_desc_info">
                                                 <div class="product-review">
                                                     <h5 class="manufacturer">
-                                                        <a href="product-details.html">Graphic Corner</a>
+                                                        <a href="product-details.html">@item.LoaiSanPham</a>
                                                     </h5>
                                                     <div class="rating-box">
                                                         <ul class="rating">
@@ -75,7 +75,7 @@
                                                 </div>
                                                 <h4><a class="product_name" href="@Url.Action("Index", "Detail", new { prdId = item.MaSanPham })">@item.TenSanPham</a></h4>
                                                 <div class="price-box">
-                                                    @*<span class="new-price"> @string.Format("{0:0,0}", item.GiaBan) VNĐ</span>*@
+                                                    <span class="new-price"> @string.Format("{0:0,0}", item.giaBan) VNĐ</span>
                                                 </div>
                                             </div>
                                             <div class="add-actions">
@@ -114,7 +114,7 @@
                                             <div class="product_desc_info">
                                                 <div class="product-review">
                                                     <h5 class="manufacturer">
-                                                        <a href="product-details.html">Graphic Corner</a>
+                                                        <a href="product-details.html">@item.LoaiSanPham</a>
                                                     </h5>
                                                     <div class="rating-box">
                                                         <ul class="rating">
@@ -128,7 +128,7 @@
                                                 </div>
                                                 <h4><a class="product_name" href="@Url.Action("Index", "Detail", new { prdId = item.MaSanPham })">@item.TenSanPham</a></h4>
                                                 <div class="price-box">
-                                                    <span class="new-price">@*@string.Format("{0:0,0}", item.GiaBan) VNĐ*@</span>
+                                                    <span class="new-price">@string.Format("{0:0,0}", item.giaBan) VNĐ</span>
                                                 </div>
                                                 @*<p>Beach Camera Exclusive Bundle - Includes Two Samsung Radiant 360 R3 Wi-Fi Bluetooth Speakers. Fill The Entire Room With Exquisite Sound via Ring Radiator Technology. Stream And Control R3 Speakers Wirelessly With Your Smartphone. Sophisticated, Modern Desig</p>*@
                                             </div>

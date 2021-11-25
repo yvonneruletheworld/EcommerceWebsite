@@ -84,5 +84,10 @@ namespace EcommerceWebsite.Api.Interface
         {
             return await GetAsync<SanPhamOutput>($"/api/SanPham/ChiTiet/{prdId}");
         }
+
+        public async Task<SanPhamOutput> laySanPhamTheoHang(string prdId)
+        {
+            return await GetAsync<SanPhamOutput>($"/api/SanPham/lay-sanpham-theohang/{prdId}");
+        }
     }
 }

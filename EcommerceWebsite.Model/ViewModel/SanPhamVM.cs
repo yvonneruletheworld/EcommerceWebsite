@@ -15,6 +15,7 @@ namespace EcommerceWebsite.Utilities.ViewModel
         public decimal GiaBan { get; set; }
         public int SoLuongTon { get; set; }
         public string NhanHieu { get; set; }
+        public DateTime ngayTao { get; set; }
         public Status Status { get; set; }
     }
 }

@@ -28,6 +28,8 @@ namespace EcommerceWebsite.Utilities.Output.Main
         [JsonProperty("trangThai")]
         public Status Status { get; set; }
 
+        public decimal giaBan { get; set; }
+
         [JsonProperty("listHinhAnh")]
         public List<ThongSoSanPhamOutput> ListHinhAnh { get; set; }
         [JsonProperty("listThongSo")]

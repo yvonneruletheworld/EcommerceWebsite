@@ -33,10 +33,10 @@ namespace EcommerceWebsite.MainWeb.Controllers
             _mapper = mapper;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string keyword)
         {
             //get HUI
-
+           
             var fileName = "output1";
             var listHUI = await _huiServices.GetListHUIFromOutput(fileName);
             

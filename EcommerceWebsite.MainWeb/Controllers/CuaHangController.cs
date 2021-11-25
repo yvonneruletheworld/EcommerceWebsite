@@ -60,5 +60,18 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
                 throw ex;
             }
         }
+        [HttpGet("get-data-sanpham-theohang/{prdId}")]
+        public async Task<IActionResult> LaySanPhamTheoHang(string prdId)
+        {
+            try
+            {
+                var data = await _sanPhamApiServices.laySanPhamTheoHang("MH01");
+                return PartialView("/Views/CuaHang/_ListSanPhamTheoHang.cshtml", data);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

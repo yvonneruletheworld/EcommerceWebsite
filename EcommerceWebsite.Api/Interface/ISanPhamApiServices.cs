@@ -19,5 +19,9 @@ namespace EcommerceWebsite.Api.Interface
         Task<bool> Modify(bool laXoa, SanPhamOutput input);
         Task<SanPhamVM> LayViewSanPham(string prdId);
         Task<SanPhamOutput> LayChiTietSanPham(string prdId);
+
+        Task<SanPhamOutput> laySanPhamTheoHang(string prdId);
+
+
     }
 }

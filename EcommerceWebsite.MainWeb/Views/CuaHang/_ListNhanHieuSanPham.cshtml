@@ -1,12 +1,15 @@
 ﻿@using EcommerceWebsite.Data.Entities
 @model List<NhanHieu>
-    <div class="category-sub-menu">
-        <ul>
-            @foreach (var item in Model.ToList())
-            {
+<div class="category-sub-menu">
+    <ul>
+        @foreach (var item in Model.ToList())
+        {
             <li>
-                <a href="# ">@item.TenHang</a>
-                </li>
-            }
-            </ul>
-    </div>
+                <a href="#" data-id="@item.MaHang" onclick="loadSanPhamTheoHang()">@item.TenHang</a>
+            </li>
+        }
+    </ul>
+</div>
+<script>
+  
+</script>

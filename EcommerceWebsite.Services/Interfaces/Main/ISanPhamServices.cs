@@ -29,6 +29,9 @@ namespace EcommerceWebsite.Services.Interfaces.Main
 
         Task<SanPhamOutput> LayChiTietSanPham(string id);
 
+        Task<List<SanPhamOutput>> laySanPhamTheoHang(string idHang);
+
+
 
     }
 }
