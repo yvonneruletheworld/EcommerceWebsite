@@ -15,7 +15,7 @@
     var bangDinhLuong = sanPham.BangGia.Where(dl => dl.MaThuocTinh == nameof(ProductPorpertyCode.TT07)).ToList();
     //var demision = Model.SanPham.
 }
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <link href="~/css/detail/style.css" rel="stylesheet" />
 <script>
     var model = @Json.Serialize(Model);
@@ -180,27 +180,39 @@
                     @if (sanPham.DanhGia.Count > 0)
                     {
                         <div class="article__content showall review-post">
-
                             <h2 class="font-weight-bold">@sanPham.DanhGia[0].TieuDe</h2>
                         </div>
-                        @foreach (var dg in sanPham.DanhGia)
-                        {
-                            var title = dg.NoiDung.Split('|');
-                            @if (title.Length > 1)
+                        <p style="text-align: center;">
+                            <a class="popup-img venobox vbox-item" href="@sanPham.DanhGia[0].HinhAnhDanhGia" data-gall="myGallery">
+                                <img src="@sanPham.DanhGia[0].HinhAnhDanhGia" alt="@sanPham.DanhGia[0].NoiDung">
+                            </a>
+                        </p>
+                        <div class="container" style="display: flex; justify-content: center;">
+                            <a href="#" data-bs-toggle="collapse" class="li-btn" data-bs-target="#collapseTodo" aria-expanded="false" aria-controls="collapseTodo" style="position: absolute;">
+                                Xem Thêm
+                            </a>
+                        </div>
+                        <div class="collapse" id="collapseTodo">
+                            @foreach (var dg in sanPham.DanhGia)
                             {
-                                <h3>@title[0]</h3>
-                                <p>@title[1]</p>
+                                var title = dg.NoiDung.Split('|');
+                                @if (title.Length > 1)
+                                {
+                                    <h3>@title[0]</h3>
+                                    <p>@title[1]</p>
+                                }
+                                else
+                                {
+                                    <p>@title[0]</p>
+                                }
+                                <p style="text-align: center;">
+                                    <a class="popup-img venobox vbox-item" href="@dg.HinhAnhDanhGia" data-gall="myGallery">
+                                        <img src="@dg.HinhAnhDanhGia" alt="@dg.TieuDe">
+                                    </a>
+                                </p>
                             }
-                            else
-                            {
-                                <p>@title[0]</p>
-                            }
-                            <p style="text-align: center;">
-                                <a class="popup-img venobox vbox-item" href="@dg.HinhAnhDanhGia" data-gall="myGallery">
-                                    <img src="@dg.HinhAnhDanhGia" alt="@dg.TieuDe">
-                                </a>
-                            </p>
-                        }
+
+                        </div>
                     }
                     else
                     {
