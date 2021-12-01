@@ -94,5 +94,14 @@ namespace EcommerceWebsite.Api.Interface
         {
             return await GetListAsync<SanPhamOutput>($"/api/SanPham/lay-sanpham-theodanhmuc/{prdId}");
         }
+
+        public async Task<List<SanPhamOutput>> timKiemSanPhamTheoTen(string keyword)
+        {
+            return await GetListAsync<SanPhamOutput>($"/api/SanPham/lay-sanpham-theoten/{keyword}");
+        }
+        public Task<SanPhamVM> laySanPhamTheoMa(string prdId)
+        {
+            return  GetAsync<SanPhamVM>($"/api/SanPham/lay-sanpham-Ma/{prdId}");
+        }
     }
 }

@@ -1,18 +1,30 @@
 ﻿$('body').on('click', '.btn-add-cart', function () {
-    e.preventDefault();
     const id = $(this).data('id');
     $.ajax({
-        type: "POST",
         url: '/GioHang/AddGioHang',
         data: {
             id: id,
+            soLuong: 1,
+            type: "ajax"
         },
-        success: function (res) {
-            alert(OK);
-            $('#lbl_number_items_header').text(res.length);
+        success: function (data) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Thêm giỏ hàng thành công',
+                showConfirmButton: false,
+                timer: 2500
+            });
+            console.log(data.soLuong);
+            $("#soLuongGioHang").html(data.soLuong);
         },
-        error: function (err) {
-            console.log(err);
+        error: function () {
+            Swal.fire({
+                icon: 'error',
+                title: 'Thêm giỏ hàng thất bại',
+                text: 'Vui lòng thử lại',
+                showConfirmButton: false,
+                timer: 2500
+            });
         }
     });
 })
@@ -47,3 +59,18 @@ $('body').on('click', '.btn-hienthisanpham-hang', function () {
             }
         });
     })
+$('body').on('click', '.btn-timkiem', function () {
+    var id = $('#keyword').val();
+    $.ajax({
+        url: `/timKiemsanPham/${id}`,
+        type: 'GET',
+        dataType: 'html',
+        success: (result) => {
+            
+        },
+        error: (err) => {
+            alert('failed');
+            console.log(err);
+        }
+    });
+})

@@ -35,8 +35,7 @@ namespace EcommerceWebsite.MainWeb.Controllers
 
         public async Task<IActionResult> Index(string keyword)
         {
-            //get HUI
-           
+             
             var fileName = "output1";
             var listHUI = await _huiServices.GetListHUIFromOutput(fileName);
             
@@ -75,6 +74,24 @@ namespace EcommerceWebsite.MainWeb.Controllers
             {
                 throw ex;
             }
+        }
+        public async Task<IActionResult> TimKiemSanPham(string keyword)
+        {
+            try
+            {
+                if(string.IsNullOrEmpty(keyword))
+                {
+                    keyword = "";
+                }    
+                    var data = await _sanPhamServices.timKiemSanPhamTheoTen(keyword);
+                    return View("~/Views/Home/TimKiem.cshtml", data);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+           
+        
         }
     }
 }

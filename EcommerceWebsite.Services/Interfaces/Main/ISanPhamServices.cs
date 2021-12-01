@@ -33,6 +33,10 @@ namespace EcommerceWebsite.Services.Interfaces.Main
 
         Task<List<SanPhamOutput>> laySanPhamTheoDanhMuc(string idDanhMuc);
 
+        Task<List<SanPhamOutput>> timKiemSanPhamTheoTen(string idTen);
+
+        Task<SanPhamVM> laySanPhamTheoMa(string id);
+
 
 
     }

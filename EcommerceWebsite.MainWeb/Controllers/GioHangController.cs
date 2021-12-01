@@ -1,12 +1,10 @@
 ﻿using EcommerceWebsite.Api.Interface;
-using EcommerceWebsite.Application.Constants;
+using EcommerceWebsite.Data.EF;
 using EcommerceWebsite.MainWeb.Models;
+using EcommerceWebsite.Services.Interfaces.ExtraServices;
 using EcommerceWebsite.Utilities.Output.Main;
-using EcommerceWebsite.Utilities.Output.System;
-using Microsoft.AspNetCore.Http;
+using EcommerceWebsite.Utilities.ViewModel;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,36 +20,54 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
         }
         public IActionResult Index()
         {
-            return View("/Views/GioHang/Index.cshtml");
+            return View("/Views/GioHang/Index.cshtml", dSGioHang);
         }
-        // lấy giỏ hàng
-        [HttpPost("{id}")]
-        public async Task<IActionResult> AddGioHang(string id)
+       
+        public List<GioHang> dSGioHang
         {
-            var sanPham = await _sanPhamApiServices.LayViewSanPham(id);
-            var session = HttpContext.Session.GetString(SystemConstants.CartSession);
-            List<GioHang> currentCart = new List<GioHang>();
-            if (session != null)
-                currentCart = JsonConvert.DeserializeObject<List<GioHang>>(session);
+            get {
 
-            int quantity = 1;
-            if (currentCart.Any(x => x.MaSanPham == id))
-            {
-                quantity = currentCart.First(x => x.MaSanPham == id).soLuong + 1;
+                var data = HttpContext.Session.Get<List<GioHang>>("GioHang");
+                if(data == null)
+                {
+                    data = new List<GioHang>();
+                }   
+                return data;
             }
-            var cartItem = new GioHang()
+        }
+        public IActionResult AddGioHang(string id, int soLuong, string type = "Normal")
+        {
+            var myCart = dSGioHang;
+            var item = myCart.SingleOrDefault(p => p.MaSanPham == id);
+
+            if (item == null)//chưa có
             {
-                MaSanPham = id,
-                tenSanPham = sanPham.TenSanPham,
-                hinhAnh = sanPham.HinhAnh,
-                giaSanPham = sanPham.GiaBan,
-                soLuong = quantity,
+                var data =  _sanPhamApiServices.laySanPhamTheoMa(id);////lấy sản phaair dưới data
+                SanPhamVM sp = data;
+                item = new GioHang
+                {
+                    MaSanPham = id,
+                    tenSanPham = sp.TenSanPham,
+                    giaSanPham = 120000,
+                    soLuong = soLuong,
+                    hinhAnh = sp.HinhAnh
+                };
+                myCart.Add(item);
+            }
+            else
+            {
+                item.soLuong += soLuong;
+            }
+            HttpContext.Session.Set("GioHang", myCart);
 
-            };
-            currentCart.Add(cartItem);
-
-            HttpContext.Session.SetString(SystemConstants.CartSession, JsonConvert.SerializeObject(currentCart));
-            return Ok(currentCart);
+            if (type == "ajax")
+            {
+                return Json(new
+                {
+                    SoLuong = dSGioHang.Sum(c => c.soLuong)
+                });
+            }
+            return RedirectToAction("Index", "GioHang");
         }
     }
 }

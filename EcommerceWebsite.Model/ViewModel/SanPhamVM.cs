@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace EcommerceWebsite.Utilities.ViewModel
 {
@@ -18,5 +19,10 @@ namespace EcommerceWebsite.Utilities.ViewModel
         public string MaLoai { get; set; }
         public DateTime ngayTao { get; set; }
         public Status Status { get; set; }
+
+        public static implicit operator SanPhamVM(Task<SanPhamVM> v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

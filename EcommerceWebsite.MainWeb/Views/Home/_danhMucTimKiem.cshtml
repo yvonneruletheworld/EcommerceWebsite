@@ -1,9 +1,13 @@
-﻿
+﻿@using EcommerceWebsite.Utilities.Output.Main
+@model List<DanhMucOutput>
+
 <form action="#" class="hm-searchbox">
     <select class="nice-select select-search-category">
-        
-        
-    </select>
+        @foreach (var dm in Model)
+        {
+            <option>@dm.TenDanhMuc</option>
+        }
+        </select>
     <input type="text" placeholder="Enter your search key ...">
     <button class="li-btn" type="submit"><i class="fa fa-search"></i></button>
 </form>

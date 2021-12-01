@@ -204,5 +204,35 @@ namespace EcommerceWebsite.Api.Controllers
                 return BadRequest(Messages.API_Exception + ex);
             }
         }
+        [HttpGet("lay-sanpham-theoten/{keyword}")]
+        public async Task<IActionResult> timKiemSanPhamTheoTen(string keyword)
+        {
+            try
+            {
+                var result = await _sanPhamServices.timKiemSanPhamTheoTen(keyword);
+                if (result == null)
+                    return BadRequest(Messages.API_EmptyResult);
+                else return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(Messages.API_Exception + ex);
+            }
+        }
+        [HttpGet("lay-sanpham-Ma/{keyword}")]
+        public async Task<IActionResult> LaySanPhamTheoMa(string keyword)
+        {
+            try
+            {
+                var result = await _sanPhamServices.LayChiTietSanPham(keyword);
+                if (result == null)
+                    return null;
+                else return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(Messages.API_Exception + ex);
+    }
+}
     }
 }

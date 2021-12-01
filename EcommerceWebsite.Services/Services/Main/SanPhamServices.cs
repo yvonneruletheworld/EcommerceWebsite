@@ -329,5 +329,78 @@ namespace EcommerceWebsite.Services.Services.Main
                 throw ex;
             }
         }
+
+        public async Task<List<SanPhamOutput>> timKiemSanPhamTheoTen(string idTen)
+        {
+            try
+            {
+                var data = await(from sp in _context.SanPhams.Where(s => s.TenSanPham.Contains(idTen))
+                                 join nhanHieu in _context.NhanHieus on sp.MaHang equals nhanHieu.MaHang
+                                 join loaiSanPham in _context.DanhMucs on sp.MaLoaiSanPham equals loaiSanPham.MaDanhMuc
+                                 from sp_dl in _context.DinhLuongs
+                                                        .Where(dl => dl.MaSanPham.Equals(sp.MaSanPham)
+                                                        && (dl.MaThuocTinh == (nameof(ProductPorpertyCode.TT07))
+                                                        || dl.MaThuocTinh == (nameof(ProductPorpertyCode.TT014)))).Take(1)
+                                     //join lsg in _context.LichSuGias on sp_dl.MaDinhLuong equals lsg.MaDinhLuong into dl_lsg_group
+                                 from dl_lsg in _context.LichSuGias.Where(lsg => lsg.MaDinhLuong.Equals(sp_dl.MaDinhLuong))
+                                                               .OrderByDescending(lsg => lsg.NgayTao.Date).Take(1)
+
+                                 where !sp.DaXoa
+                                 select new SanPhamOutput
+                                 {
+                                     MaSanPham = sp.MaSanPham,
+                                     TenSanPham = sp.TenSanPham,
+                                     SoLuongTon = sp.SoLuongTon,
+                                     HinhAnh = sp.HinhAnh,
+                                     NhanHieu = nhanHieu.TenHang,
+                                     LoaiSanPham = loaiSanPham.TenDanhMuc,
+                                     giaBan = dl_lsg.GiaMoi,
+                                     MaLoai = loaiSanPham.MaDanhMuc,
+                                 }).ToListAsync();
+                return data;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<SanPhamVM> laySanPhamTheoMa(string id)
+        {
+            try
+            {
+                //lấy những thông số k phải list
+                SanPhamVM obj = await (from sp in _context.SanPhams
+                                     // Sản phẩm - Đánh giá 1 - 1
+                                     //join dg in _context.DanhGiaSanPhams on (sp == null ? string.Empty : sp.MaSanPham) equals dg.MaSanPham into sp_dg_group
+                                     //from sp_dg in sp_dg_group.DefaultIfEmpty()
+                                     // Sản phẩm - Danh mục 1 - 1 
+                                 join dm in _context.DanhMucs on (sp == null ? string.Empty : sp.MaLoaiSanPham) equals dm.MaDanhMuc into sp_dm_group
+                                 from sp_dm in sp_dm_group.DefaultIfEmpty()
+                                     // Sản phẩm  - Nhãn hiệu 1 - 1
+                                 join nh in _context.NhanHieus on (sp == null ? string.Empty : sp.MaHang) equals nh.MaHang into sp_nh_group
+                                 from sp_nh in sp_nh_group.DefaultIfEmpty()
+                                 where !sp.DaXoa && sp.MaSanPham == id
+                                 select new SanPhamVM()
+                                 {
+                                     MaSanPham = sp.MaSanPham,
+                                     SoLuongTon = sp.SoLuongTon,
+                                     TenSanPham = sp.TenSanPham,
+                                     Status = sp.Status,
+                                     HinhAnh = sp.HinhAnh,
+                                     //DanhGia = sp_dg,
+                                     LoaiSanPham = sp_dm.TenDanhMuc,
+                                     NhanHieu = sp_nh.TenHang,
+                                     //GiaBan = gb.GiaMoi
+                                 }).FirstOrDefaultAsync();
+
+                return obj;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
     }
 }
