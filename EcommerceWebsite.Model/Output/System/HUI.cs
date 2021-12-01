@@ -10,4 +10,9 @@ namespace EcommerceWebsite.Utilities.Output.System
         public double Utility { get; set; }
         public string[] Itemsets { get; set; }
     }
+
+    public static class HUIConfiguration
+    {
+        public static List<HUI> ListHUI { get; set; }
+    }
 }

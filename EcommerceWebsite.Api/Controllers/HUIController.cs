@@ -33,5 +33,17 @@ namespace EcommerceWebsite.Api.Controllers
                 return BadRequest(Messages.API_EmptyResult);
             else return Ok(result);
         }
+
+        //[AllowAnonymous]
+        //[HttpGet("read-list-hui")]
+        //public async Task<IActionResult> ReadListHUI()
+        //{
+        //    var _path = $"D:\\Applications\\eclipse-workspace\\java.huiminer_190921\\output1.txt";
+        //    var list = _huiServices.ReadFromTextToList(_path);
+        //    //var result = _huiServices.ModifyListOutput();
+        //    if (result == null)
+        //        return BadRequest(Messages.API_EmptyResult);
+        //    else return Ok(result);
+        //}
     }
 }

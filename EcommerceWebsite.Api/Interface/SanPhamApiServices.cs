@@ -84,5 +84,16 @@ namespace EcommerceWebsite.Api.Interface
         {
             return await GetAsync<SanPhamOutput>($"/api/SanPham/ChiTiet/{prdId}");
         }
+
+        public async Task<List<SanPhamVM>> GetViewWithMultipleIds(string[] prdIds)
+        {
+            var url = "/api/SanPham/get-mulpitple-id/?";
+            for(int i = 0; i< prdIds.Length; i++)
+            {
+                url +=  i == prdIds.Length - 1 ?  $"productIds={prdIds[i]}" :  $"productIds={prdIds[i]}&";
+            }
+
+            return await GetListAsync<SanPhamVM>(url);
+        }
     }
 }

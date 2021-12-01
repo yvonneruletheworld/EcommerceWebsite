@@ -12,6 +12,7 @@ using EcommerceWebsite.Api.Interface;
 using EcommerceWebsite.Data.Identity;
 using Microsoft.AspNetCore.Identity;
 using EcommerceWebsite.Api.Mapper;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace EcommerceWebsite.MainWeb
 {
@@ -28,19 +29,17 @@ namespace EcommerceWebsite.MainWeb
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddHttpClient();
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.LoginPath = "/Login/Index";
+                    options.AccessDeniedPath = "/User/Forbidden/";
+                });
+
 
             services.AddHttpContextAccessor();
             services.AddControllersWithViews();
-
-            //var str = Configuration.GetConnectionString("EcommerceWebsiteDatabase");
-            //services.AddDbContext<EcomWebDbContext>(options =>
-            //    options.UseSqlServer(str));
-
-            //services.AddIdentity<ApplicationUser, IdentityRole>()
-            //    .AddEntityFrameworkStores<EcomWebDbContext>()
-            //    .AddClaimsPrincipalFactory<MyUserClaimsPrincipalFactoryService>()
-            //    .AddDefaultTokenProviders();
-
+            
             services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromMinutes(30);
@@ -79,12 +78,13 @@ namespace EcommerceWebsite.MainWeb
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseAuthentication();
 
             app.UseRouting();
 
-            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseSession();

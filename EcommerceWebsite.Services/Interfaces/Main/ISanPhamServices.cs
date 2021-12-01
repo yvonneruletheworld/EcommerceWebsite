@@ -20,6 +20,7 @@ namespace EcommerceWebsite.Services.Interfaces.Main
         Task<bool> KiemTraGia(string value);
         Task<List<SanPhamOutput>> LaySanPham();
         Task<List<SanPhamVM>> LaySanPhamTheoLoai(int take = 1, string loaiSanPham = null, string maSanPham = null);
+        Task<List<SanPhamVM>> GetProductWithMultipleId(string [] idArray);
 
         //Task<List<SanPhamOutput>> laySanPham();
         //Xóa sản phẩm

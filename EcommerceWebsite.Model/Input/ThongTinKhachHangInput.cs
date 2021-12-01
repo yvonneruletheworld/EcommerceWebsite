@@ -9,16 +9,20 @@ namespace EcommerceWebsite.Utilities.Input
 {
     public class ThongTinKhachHangInput :EntityBase
     {
-        [Required]
-        [StringLength(12, ErrorMessage = Messages.KhachHang_LoiDoDaiTenDangNhap)]
+        
+        [StringLength(20, ErrorMessage = Messages.KhachHang_LoiDoDaiTenDangNhap)]
         public string TenDangNhap { get; set; }
 
         [Required]
         public string MatKhau { get; set; }
 
         public string HoTen { get; set; }
+        [Required(ErrorMessage = "Tên đăng nhập hoặc email không được trống")]
+        [StringLength(20, ErrorMessage = Messages.KhachHang_LoiDoDaiTenDangNhap)]
         public string Email { get; set; }
         public string Ip { get; set; }
+        //[Required]
+        //[StringLength(12, ErrorMessage =  "Số điện thoại không hợp lệ")]
         public string SDT { get; set; }
         public string ChuoiDangNhap { get; set; }
         public bool GioiTinh { get; set; }

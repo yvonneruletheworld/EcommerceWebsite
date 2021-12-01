@@ -10,6 +10,7 @@
     //var pre = (Dictionary<string, string>)ViewData["PreviousPage"];
     var sanPham = Model.SanPham;
     var khachHang = Model.KhachHang;
+    var huis = Model.HUIItems;
     var bangThongSo = sanPham.ListThongSo.Where(ts => ts.MaThuocTinh != nameof(ProductPorpertyCode.TT07)
     && ts.MaThuocTinh != nameof(ProductPorpertyCode.TT014)).ToList();
     var bangDinhLuong = sanPham.BangGia.Where(dl => dl.MaThuocTinh == nameof(ProductPorpertyCode.TT07)).ToList();
@@ -58,6 +59,67 @@
                         }
                     </div>
                 </div>
+
+                <!-- Product HUI Left -->
+                
+                <div class="row">
+                    <div class="product-active owl-carousel">
+                        @foreach (var sp in huis)
+                        {
+                            <div class="col-lg-12">
+                                <!-- single-product-wrap start -->
+                                <div class="single-product-wrap">
+                                    <div class="product-image">
+                                        <a href="@Url.Action("Index", "Detail",new { prdId = sp.MaSanPham})">
+                                            <img src="@sp.HinhAnh" alt="@sp.TenSanPham">
+                                        </a>
+                                        <span class="sticker">Mới</span>
+                                    </div>
+                                    <div class="product_desc">
+                                        <div class="product_desc_info">
+                                            <div class="product-review">
+                                                <h5 class="manufacturer">
+                                                    <a href="#">@sp.LoaiSanPham</a>
+                                                </h5>
+                                                <div class="rating-box">
+                                                    <ul class="rating">
+                                                        <li><i class="fa fa-star-o"></i></li>
+                                                        <li><i class="fa fa-star-o"></i></li>
+                                                        <li><i class="fa fa-star-o"></i></li>
+                                                        <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                                        <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            @if (sp.TenSanPham.Length > 25)
+                                            {
+                                                <h4><a class="product_name" href="@Url.Action("Index", "Detail", new { prdId = sp.MaSanPham })">@sp.TenSanPham.Substring(0, 25)...</a></h4>
+                                            }
+                                            else
+                                            {
+                                                <h4><a class="product_name" href="@Url.Action("Index", "Detail", new { prdId = sp.MaSanPham })">@sp.TenSanPham</a></h4>
+                                            }
+                                            <div class="price-box">
+                                                <span class="new-price">@string.Format("{0:0,0}", sp.GiaBan) VNĐ</span>
+                                            </div>
+                                        </div>
+                                        <div class="add-actions">
+                                            <ul class="add-actions-link">
+                                                <li class="add-cart active"><a href="#">Thêm vào giỏ</a></li>
+                                                <li><a class="links-details" href="wishlist.html"><i class="fa fa-heart-o"></i></a></li>
+                                                <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- single-product-wrap end -->
+                            </div>
+                        }
+
+                    </div>
+                </div>
+
+                <!--// Product HUI Left -->
                 <!--// Product Details Left -->
             </div>
 

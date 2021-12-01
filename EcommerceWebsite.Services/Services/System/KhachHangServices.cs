@@ -47,7 +47,7 @@ namespace EcommerceWebsite.Services.Services.System
 
         public Task<ApplicationUser> GetKhachHangTheoEmail(string email)
         {
-            return _context.ApplicationUsers.Where(u => u.Email.Equals(email))
+            return _context.ApplicationUsers.Where(u => u.Email.Equals(email) && !u.IsDeleted)
                                             .FirstOrDefaultAsync();
         }
 
@@ -190,6 +190,30 @@ namespace EcommerceWebsite.Services.Services.System
                                 Email = ap.Email,
                                 GioiTinh = kh.GioiTinh
                             }).FirstOrDefaultAsync();
+        }
+
+        public async Task<Dictionary<string, ApplicationUser>> LoginAsync(string usernameOrEmail, string password)
+        {
+            var user = await GetKhachHangTheoEmail(usernameOrEmail);
+            user ??= await GetKhachHangTheoUsername(usernameOrEmail);
+
+            var result = new Dictionary<string, ApplicationUser>();
+            if(user ==  null)
+            {
+                result.Add("NotRegister", user);
+            }    
+            if (string.IsNullOrEmpty(password) || !(await CheckLoginPass(user,password)  ))
+            {
+                result.Add("PasswordIncorrect", user);
+            }
+            if (user.Status == Data.Enum.Status.InActive)
+            {
+                result.Add("UserInactive", user);
+            }
+            else
+                result.Add("Success", user);
+
+            return result;
         }
 
 

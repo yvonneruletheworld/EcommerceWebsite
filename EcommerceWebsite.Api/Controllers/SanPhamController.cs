@@ -174,5 +174,20 @@ namespace EcommerceWebsite.Api.Controllers
                 return Ok(listObj.FirstOrDefault()); 
             }    
         }
+        
+        [HttpGet("get-mulpitple-id")]
+        public async Task<IActionResult> GetProductWithMultipleId ([FromQuery] string[] productIds)
+        {
+            if (productIds == null || productIds.Length == 0)
+                return BadRequest(Messages.API_EmptyInput);
+            else
+            {
+                // lay san pham
+                var listObj = await _sanPhamServices.GetProductWithMultipleId(productIds);
+                if (listObj == null )
+                    return BadRequest(Messages.API_EmptyResult);
+                return Ok(listObj); 
+            }    
+        }
     }
 }

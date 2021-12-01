@@ -37,47 +37,62 @@ namespace EcommerceWebsite.Api.Controllers
         [HttpPost("user-login")]
         public async Task<IActionResult> UserLogin (ThongTinKhachHangInput input)
         {
-            if (input == null || string.IsNullOrEmpty(input.TenDangNhap) || string.IsNullOrEmpty(input.MatKhau))
-                return BadRequest(Messages.API_EmptyInput);
-
-            var user = await _userManager.FindByNameAsync(input.TenDangNhap);
-            user ??= await _khachHangServices.GetKhachHangTheoUsername(input.TenDangNhap);
-
-            if (user == null)
-                return BadRequest(Messages.API_EmptyResult);
-            if (user.Status == Data.Enum.Status.InActive)
-                return BadRequest(Messages.KhachHang_NguoiDungKhongHoatDong);
-            if (!await _khachHangServices.CheckLoginPass(user, input.MatKhau))
-                return BadRequest(Messages.KhachHang_MatKhauKhongDung);
-
-            var result = await _signInManager.PasswordSignInAsync(user, input.MatKhau, input.GhiNhoDangNhap, lockoutOnFailure: false);
-            if(result.Succeeded)
+            if(!ModelState.IsValid)
             {
-                //Claim
-                var roles = await _userManager.GetRolesAsync(user);
+                return BadRequest(ModelState.Values.SelectMany(er => er.Errors));
+            }
+            else
+            {
+                var result = await _khachHangServices.LoginAsync(input.Email, input.MatKhau);
 
-                var claims = new[]
+                if(result.ContainsKey("NotRegister"))
                 {
+                    return BadRequest(Messages.KhachHang_NguoiDungKhongTonTai);
+                }
+                if(result.ContainsKey("PasswordIncorrect"))
+                {
+                    return BadRequest(Messages.KhachHang_MatKhauKhongDung);
+                }
+                if(result.ContainsKey("UserInactive"))
+                {
+                    return BadRequest(Messages.KhachHang_NguoiDungKhongHoatDong);
+                }
+                if (result.ContainsKey("Success"))
+                {
+                    var user = result["Success"];
+                    var testPass = await _signInManager.PasswordSignInAsync(user, input.MatKhau, input.GhiNhoDangNhap, lockoutOnFailure: false);
+
+                    if(testPass.Succeeded)
+                    {
+                        //Claim
+                        var roles = await _userManager.GetRolesAsync(user);
+
+                        var claims = new[]
+                        {
                     new Claim(ClaimTypes.Email, user.Email),
                     new Claim(ClaimTypes.GivenName, user.UserName),
-                    new Claim(ClaimTypes.Role, string.Join(";", roles))
+                    new Claim(ClaimTypes.Role, string.Join(";", roles)),
+                    new Claim(ClaimTypes.Name, user.UserName)
                 };
 
-                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Tokens:Key"]));
-                var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+                        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Tokens:Key"]));
+                        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-                var issuer = _config["JwtToken:Issuer"];
-                var audience = _config["JwtToken:Audience"];
-                var jwtValidity = DateTime.Now.AddMinutes(Convert.ToDouble(_config["JwtToken:TokenExpiry"]));
+                        var issuer = _config["JwtToken:Issuer"];
+                        var audience = _config["JwtToken:Audience"];
+                        var jwtValidity = DateTime.Now.AddMinutes(Convert.ToDouble(_config["JwtToken:TokenExpiry"]));
 
-                var token = new JwtSecurityToken(issuer,
-                  audience,
-                  expires: jwtValidity,
-                  signingCredentials: creds);
+                        var token = new JwtSecurityToken(issuer,
+                          audience,
+                          expires: jwtValidity,
+                          signingCredentials: creds);
 
-                return Ok(new { token = new JwtSecurityTokenHandler().WriteToken(token) });
+                        return Ok(new { token = new JwtSecurityTokenHandler().WriteToken(token) });
+                    }
+                    return BadRequest(Messages.KhachHang_MatKhauKhongDung);
+                }
             }
-
+           
             return BadRequest("Could not create token");
         }
 

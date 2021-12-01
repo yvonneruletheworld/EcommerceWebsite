@@ -12,6 +12,7 @@ namespace EcommerceWebsite.Application.Constants
         public const string KhachHang_MatKhauKhongDung = "Mật khẩu không đúng";
         public const string KhachHang_NguoiDungKhongHoatDong = "Người dùng chưa được kích hoạt";
         public const string KhachHang_NguoiDungKhongTonTai = "Người dùng không tồn tại";
+        public const string KhachHang_InputError = "Thông tin đăng nhập không hợp lệ";
 
         //JSON
         public const string Login_PhoneNumEmpty = "phone-num-is-empty";
@@ -19,6 +20,8 @@ namespace EcommerceWebsite.Application.Constants
         public const string Login_LoadFormSuccess = "load-form-success";
         public const string Login_LoadFormFailed = "load-form-failed";
         public const string Login_EmailNull = "email-null";
+        public const string Model_Invalid = "model-invalid";
+        public const string Result_error = "result_error";
 
         //OTP
         public const string OTP_Invalid = "otp-invalid";

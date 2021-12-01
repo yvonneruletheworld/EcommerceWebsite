@@ -8,5 +8,7 @@ namespace EcommerceWebsite.Application.Constants
     {
         public const string Token = "Token";
         public const string BaseAddress = "BaseAddress";
+
+        
     }
 }
