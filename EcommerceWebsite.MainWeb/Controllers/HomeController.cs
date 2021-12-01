@@ -82,7 +82,8 @@ namespace EcommerceWebsite.MainWeb.Controllers
                 if(string.IsNullOrEmpty(keyword))
                 {
                     keyword = "";
-                }    
+                }
+                    ViewBag.timKiem = keyword;
                     var data = await _sanPhamServices.timKiemSanPhamTheoTen(keyword);
                     return View("~/Views/Home/TimKiem.cshtml", data);
             }
