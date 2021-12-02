@@ -127,6 +127,7 @@ namespace EcommerceWebsite.Services.Services.Main
                                       HinhAnh = sp.HinhAnh,
                                       NhanHieu = nhanHieu.TenHang,
                                       LoaiSanPham = loaiSanPham.TenDanhMuc,
+                                      Status = sp.Status,
                                   }).ToListAsync();
                 return data;
             }

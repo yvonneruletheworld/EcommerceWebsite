@@ -1,4 +1,5 @@
-using EcommerceWebsite.Api.Interface;
+    using EcommerceWebsite.Api.Interface;
+using EcommerceWebsite.Api.Mapper;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -43,11 +44,14 @@ namespace EcommerceWebsite.Admin
             });
             //DI
             DependencyInjectionSystemConfig(services);
+            ///
+            services.AddAutoMapper(typeof(AutoMapping));
         }
 
         private void DependencyInjectionSystemConfig(IServiceCollection services)
         {
             services.AddScoped<IKhachHangApiServices, KhachHangApiServices>();
+            services.AddScoped<ISanPhamApiServices, SanPhamApiServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -63,7 +67,7 @@ namespace EcommerceWebsite.Admin
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseAuthentication();

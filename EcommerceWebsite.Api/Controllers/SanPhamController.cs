@@ -47,7 +47,6 @@ namespace EcommerceWebsite.Api.Controllers
                 return BadRequest(Messages.API_Exception + ex);
             }
         }
-
         [HttpPost("them-san-pham")]
         public async Task<IActionResult> ThemSanPham (SanPhamOutput input)
         {
