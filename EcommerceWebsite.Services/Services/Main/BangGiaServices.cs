@@ -111,5 +111,27 @@ namespace EcommerceWebsite.Services.Services.Main
                 throw ex;
             }
         }
+
+        public async Task<bool> ThemBangGia(List<LichSuGia> input)
+        {
+            try
+            {
+                //begin transaction
+                await _context.Database.BeginTransactionAsync();
+
+                //add
+
+                await _context.LichSuGias.AddRangeAsync(input);
+                var result = await _context.SaveChangesAsync();
+
+                await _context.Database.CommitTransactionAsync();
+                return result > 0;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            
+        }
     }
 }

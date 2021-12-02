@@ -56,7 +56,7 @@ namespace EcommerceWebsite.Api.Controllers
                 if(ModelState.IsValid)
                 {
                     var existObj = _sanPhamServices.GetSanPhamTheoMa(input.MaSanPham, input.TenSanPham);
-                    if (existObj == null)
+                    if (existObj != null)
                         return BadRequest(Messages.API_Exist);
                     var obj = _mapper.Map<SanPham>(input);
 
@@ -64,34 +64,41 @@ namespace EcommerceWebsite.Api.Controllers
                     var result = await _sanPhamServices.ThemSanPham(obj);
                     if (result)
                     {
-                        //var lstDinhLuong = new Lis 
-                        //foreach(var dl in input.ListThongSo)
-                        //{
-                        //    var newDinhLuong = new DinhLuong()
-                        //    {
-                        //        MaSanPham = input.MaSanPham,
-                        //        DonVi = input.
-                        //}    
-                        ////them dinh luong 
-                        
-                        //them gia 
-                        var newGia = new LichSuGia()
+                        //dinh luong
+                        var listDinhLuong = input.ListThongSo
+                            .Select(item => new DinhLuong () { 
+                                DonVi = item.DonVi,
+                                GiaTri = item.GiaTri,
+                                MaSanPham = obj.MaSanPham,
+                                MaThuocTinh = item.MaThuocTinh,
+                        }).ToList();
+
+                        if (listDinhLuong != null && listDinhLuong.Count > 0)
                         {
-                            DaXoa = false,
-                            NgayTao =  DateTime.UtcNow,
-                            
-                            NguoiTao = input.NguoiTao
-                        };
-                        var resultGia = await _bangGiaServices.ThemGia(newGia);
-                        if(resultGia)
-                        {
-                            return Ok(Messages.API_Success);
-                        }    
-                        else return BadRequest(Messages.API_Failed);
+                            var rsDl = await _dinhLuongServices.AddRangeAsync(listDinhLuong);
+                            if (rsDl)
+                            {
+                                //gia ban
+                                var listGiaBan = input.BangGia
+                                .Select(item => new LichSuGia
+                                {
+                                    MaDinhLuong = item.MaDinhLuong,
+                                    GiaMoi = item.GiaBan,
+                                    DaXoa = false,
+                                    NgayTao = DateTime.Now,
+                                }).ToList();
+
+                                if (listGiaBan != null && listGiaBan.Count > 0)
+                                {
+                                    var rdGB = await _bangGiaServices.ThemBangGia(listGiaBan);
+                                    if(rdGB)
+                                        return Ok(Messages.API_Success);
+                                }
+                            }
+                        }
                     }
-                    else return BadRequest(Messages.API_Failed);
                 }
-                else return BadRequest(Messages.API_Failed);
+                return BadRequest(Messages.API_Failed);
             }
             catch (Exception ex)
             {

@@ -29,13 +29,7 @@ namespace EcommerceWebsite.MainWeb
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddHttpClient();
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(options =>
-                {
-                    options.LoginPath = "/Login/Index";
-                    options.AccessDeniedPath = "/User/Forbidden/";
-                });
-
+            
 
             services.AddHttpContextAccessor();
             services.AddControllersWithViews();

@@ -1,4 +1,5 @@
-﻿using EcommerceWebsite.Utilities.Output.Main;
+﻿using EcommerceWebsite.Data.Entities;
+using EcommerceWebsite.Utilities.Output.Main;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,5 +10,6 @@ namespace EcommerceWebsite.Services.Interfaces.Main
     public interface IDinhLuongServices
     {
         Task<List<ThongSoSanPhamOutput>> LayThongSoTheoSanPham(string maSanPham);
+        Task<bool> AddRangeAsync(List<DinhLuong> input);
     }
 }
