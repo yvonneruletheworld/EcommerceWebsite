@@ -18,7 +18,7 @@ namespace EcommerceWebsite.Utilities.Input
 
         public string HoTen { get; set; }
         [Required(ErrorMessage = "Tên đăng nhập hoặc email không được trống")]
-        [StringLength(20, ErrorMessage = Messages.KhachHang_LoiDoDaiTenDangNhap)]
+        [StringLength(30, ErrorMessage = Messages.KhachHang_LoiDoDaiTenDangNhap)]
         public string Email { get; set; }
         public string Ip { get; set; }
         //[Required]

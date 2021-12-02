@@ -48,6 +48,8 @@ namespace EcommerceWebsite.Admin
         private void DependencyInjectionSystemConfig(IServiceCollection services)
         {
             services.AddScoped<IKhachHangApiServices, KhachHangApiServices>();
+            services.AddScoped<ISanPhamApiServices, SanPhamApiServices>();
+            services.AddScoped<IKhuyenMaiApiServices, KhuyenMaiApiServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

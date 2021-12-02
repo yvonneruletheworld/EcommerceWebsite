@@ -33,7 +33,13 @@ namespace EcommerceWebsite.MainWeb
 
             services.AddHttpContextAccessor();
             services.AddControllersWithViews();
-            
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+             .AddCookie(options =>
+             {
+                 options.LoginPath = "/Account/Login";
+                 options.AccessDeniedPath = "/User/Forbidden/";
+             });
+
             services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromMinutes(30);

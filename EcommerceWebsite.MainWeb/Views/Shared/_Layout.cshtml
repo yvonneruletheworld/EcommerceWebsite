@@ -80,15 +80,15 @@
                                         <div class="ht-setting-trigger"><span>Thiết lập chung</span></div>
                                         <div class="setting ht-setting">
                                             <ul class="ht-setting-list">
-                                                @if (User != null)
+                                                @if (User.Identity.Name != null)
                                                 {
                                                     <li><a href="#">Cá nhân</a></li>
                                                     <li><a href="#">Ví Online</a></li>
                                                 }
                                                 else
                                                 {
-                                                    <li><a href="#">Đăng nhập</a></li>
-                                                    <li><a href="#">Đăng kí</a></li>
+                                                    <li><a asp-controller="KhachHang" asp-action="Index" >Đăng nhập</a></li>
+                                                    <li><a asp-controller="KhachHang" asp-action="Index">Đăng kí</a></li>
                                                 }
                                             </ul>
                                         </div>

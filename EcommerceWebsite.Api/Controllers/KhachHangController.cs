@@ -65,25 +65,27 @@ namespace EcommerceWebsite.Api.Controllers
                     if(testPass.Succeeded)
                     {
                         //Claim
-                        var roles = await _userManager.GetRolesAsync(user);
+                        //var roles = await _userManager.GetRolesAsync(user);
 
                         var claims = new[]
                         {
                     new Claim(ClaimTypes.Email, user.Email),
                     new Claim(ClaimTypes.GivenName, user.UserName),
-                    new Claim(ClaimTypes.Role, string.Join(";", roles)),
+                    //new Claim(ClaimTypes.Role, string.Join(";", roles)),
                     new Claim(ClaimTypes.Name, user.UserName)
                 };
 
                         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Tokens:Key"]));
+                        key.KeyId = _config["Tokens:Key"];
                         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-                        var issuer = _config["JwtToken:Issuer"];
-                        var audience = _config["JwtToken:Audience"];
-                        var jwtValidity = DateTime.Now.AddMinutes(Convert.ToDouble(_config["JwtToken:TokenExpiry"]));
+                        var issuer = _config["Tokens:Issuer"];
+                        //var audience = _config["Tokens:Audience"];
+                        var jwtValidity = DateTime.Now.AddMinutes(Convert.ToDouble(_config["Tokens:TokenExpiry"]));
 
                         var token = new JwtSecurityToken(issuer,
-                          audience,
+                          issuer,
+                          claims,
                           expires: jwtValidity,
                           signingCredentials: creds);
 

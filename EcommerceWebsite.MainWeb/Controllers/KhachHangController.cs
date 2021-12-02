@@ -18,6 +18,8 @@ using System.Threading.Tasks;
 
 namespace EcommerceWebsite.MainWeb.Controllers
 {
+    [Route("/KhachHang")]
+    //[ApiExplorerSettings(IgnoreApi = true)]
     public class KhachHangController : Controller
     {
         private readonly IKhachHangApiServices _khachHangServices;
@@ -30,10 +32,10 @@ namespace EcommerceWebsite.MainWeb.Controllers
         }
 
         //get
-        [HttpGet]
+        [HttpGet("client-login")]
         public async Task<IActionResult> Index()
         {
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            //await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return View();
         }
 
@@ -74,20 +76,29 @@ namespace EcommerceWebsite.MainWeb.Controllers
 
         private ClaimsPrincipal ValidateToken(string jwtToken)
         {
-            IdentityModelEventSource.ShowPII = true;
+            try
+            {
+                IdentityModelEventSource.ShowPII = true;
 
-            SecurityToken validatedToken;
-            TokenValidationParameters validationParameters = new TokenValidationParameters();
+                SecurityToken validatedToken;
+                TokenValidationParameters validationParameters = new TokenValidationParameters();
 
-            validationParameters.ValidateLifetime = true;
+                validationParameters.ValidateLifetime = true;
 
-            validationParameters.ValidAudience = _configuration["Tokens:Issuer"];
-            validationParameters.ValidIssuer = _configuration["Tokens:Issuer"];
-            validationParameters.IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Tokens:Key"]));
+                validationParameters.ValidAudience = _configuration["Tokens:Issuer"];
+                validationParameters.ValidIssuer = _configuration["Tokens:Issuer"];
+                validationParameters.IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Tokens:Key"]));
+                validationParameters.IssuerSigningKey.KeyId = _configuration["Tokens:Key"];
+                ClaimsPrincipal principal = new JwtSecurityTokenHandler().ValidateToken(jwtToken, validationParameters, out validatedToken);
 
-            ClaimsPrincipal principal = new JwtSecurityTokenHandler().ValidateToken(jwtToken, validationParameters, out validatedToken);
+                return principal;
+            }
+            catch (Exception ex)
+            {
 
-            return principal;
+                throw ex;
+            }
+            
         }
     }
 }

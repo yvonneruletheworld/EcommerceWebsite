@@ -71,7 +71,9 @@ namespace EcommerceWebsite.Api.Interface
 
             if(response.IsSuccessStatusCode)
             {
-                return JsonConvert.DeserializeObject<ApiSuccessResult<string>>(await response.Content.ReadAsStringAsync());
+                var content = await response.Content.ReadAsStringAsync();
+                var rs = JsonConvert.DeserializeObject<ApiSuccessResult<string>>(content);
+                return rs;
             }
 
             return JsonConvert.DeserializeObject<ApiErrorResult<string>>(await response.Content.ReadAsStringAsync());
