@@ -25,7 +25,9 @@ namespace EcommerceWebsite.Admin
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews(); services.AddHttpClient();
+            services.AddHttpClient();
+            services.AddHttpContextAccessor();
+            services.AddControllersWithViews();
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
@@ -34,7 +36,6 @@ namespace EcommerceWebsite.Admin
                     options.AccessDeniedPath = "/User/Forbidden/";
                 });
 
-            services.AddControllersWithViews();
 
             services.AddSession(options =>
             {
