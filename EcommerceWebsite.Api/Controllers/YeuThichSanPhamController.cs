@@ -19,22 +19,25 @@ namespace EcommerceWebsite.Api.Controllers
             _yeuThichSanPhamServices = yeuThichSanPhamServices;
             _mapper = mapper;
         }
-        [HttpPost("them-sanphamyeuthich")]
-        public async Task<IActionResult> ThemYeuThichSanPham(SanPhamYeuThich input)
+        [HttpPost("them-san-pham-yeu-thich/{maSanPham}/{maKhachHang}")]
+        public async Task<IActionResult> ThemYeuThichSanPham(string maSanPham, string maKhachHang)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    var existObj = _yeuThichSanPhamServices.LaySPYeuThich(input.MaSanPham, input.MaKhachHang);
+                    var existObj = _yeuThichSanPhamServices.LaySPYeuThich(maSanPham, maKhachHang);
                     if (existObj != null)
                         return BadRequest(Messages.API_Exist);
-                    var result = await _yeuThichSanPhamServices.ThemYeuThich(input);
-                    if(result)
+                    var obj = new SanPhamYeuThich()
                     {
+                        MaKhachHang = maKhachHang,
+                        MaSanPham = maSanPham,
+                        TrangThai = true
+                    };
+                    var result = await _yeuThichSanPhamServices.ThemYeuThich(obj);
+                    if(result)
                         return Ok(Messages.API_Success);
-                    }    
-                  
                 }
                 return BadRequest(Messages.API_Failed);
             }

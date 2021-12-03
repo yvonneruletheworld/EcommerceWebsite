@@ -8,7 +8,7 @@ namespace EcommerceWebsite.Data.Entities
     {
         public string MaSanPham { get; set; }
         public string MaKhachHang { get; set; }
-        public bool trangThai { get; set; }
+        public bool TrangThai { get; set; }
         public SanPham SanPham { get; set; }
         public KhachHang KhachHang { get; set; }
     }

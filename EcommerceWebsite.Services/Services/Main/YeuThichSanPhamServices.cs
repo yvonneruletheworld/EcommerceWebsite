@@ -25,7 +25,7 @@ namespace EcommerceWebsite.Services.Services.Main
         public async Task<SanPhamYeuThich> LaySPYeuThich(string MaSanPham, string maKhachHang)
         {
             return await _context.SanPhamYeuThiches
-                .Where(x => !x.trangThai
+                .Where(x => !x.TrangThai
                 && x.MaSanPham == MaSanPham && x.MaKhachHang == maKhachHang)
                 .FirstOrDefaultAsync();
         }
