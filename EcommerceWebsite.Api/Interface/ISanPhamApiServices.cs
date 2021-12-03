@@ -20,5 +20,15 @@ namespace EcommerceWebsite.Api.Interface
         Task<SanPhamVM> LayViewSanPham(string prdId);
         Task<List<SanPhamVM>> GetViewWithMultipleIds(string[] prdIds);
         Task<SanPhamOutput> LayChiTietSanPham(string prdId);
+
+        Task<List<SanPhamOutput>> laySanPhamTheoHang(string prdId);
+
+        Task<List<SanPhamOutput>> laySanPhamTheoDanhMuc(string prdId);
+
+        Task<List<SanPhamOutput>> timKiemSanPhamTheoTen(string keyword);
+
+        Task<SanPhamVM> laySanPhamTheoMa(string prdId);
+
+
     }
 }

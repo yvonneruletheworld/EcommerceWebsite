@@ -10,7 +10,7 @@
                 <ul>
                     @foreach (var item in Model)
                     {
-                        <li><input type="checkbox" name="product-categori"><a href="#">@item.TenDanhMuc</a></li>
+                        <li><input type="checkbox" name="product-categori" data-id="@item.MaDanhMuc" class="btn-hienthisanpham-loai"><a href="#">@item.TenDanhMuc</a></li>
                     }
                     </ul>
             </form>

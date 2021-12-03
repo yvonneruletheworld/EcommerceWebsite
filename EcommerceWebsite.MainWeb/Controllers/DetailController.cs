@@ -25,7 +25,7 @@ namespace EcommerceWebsite.MainWeb.Controllers
             _huiServices = huiServices;
         }
 
-        public async Task<IActionResult> IndexAsync(string prdId)
+        public async Task<IActionResult> IndexAsync(string prdId,string prdMaDanhMuc)
         {
             var vm = new DetailVM();
             vm.SanPham = await _sanPhamServices.LayChiTietSanPham(prdId);
@@ -47,6 +47,7 @@ namespace EcommerceWebsite.MainWeb.Controllers
                     break;
                 }
             }
+            vm.SanPhamOutPut = await _sanPhamServices.laySanPhamTheoDanhMuc(prdMaDanhMuc);
             return View("Views/Detail/Index.cshtml",vm);
         }
     }

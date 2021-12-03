@@ -13,7 +13,7 @@
                 <div class="col-lg-12" style="padding-top: 60px">
                     <div class="li-section-title">
                         <h2>
-                            <span class="font-weight-bold"> @dataSet.TenDanhMuc</span>
+                            <a class="font-weight-bold" > @dataSet.TenDanhMuc</a>
                         </h2>
                         <ul class="li-sub-category-list">
                             @foreach (var dmc in dataSet.ListDanhMucCon)
@@ -28,7 +28,7 @@
                             <div class="col-lg-6 col-md-6">
                                 <div class="single-banner">
                                     <a href="#">
-                                        <img src="images/banner/2_1.jpg" alt="Li's Static Banner">
+                                        <img src="~/images/banner/2_1.jpg" alt="Li's Static Banner">
                                     </a>
                                 </div>
                             </div>
@@ -37,7 +37,7 @@
                             <div class="col-lg-6 col-md-6">
                                 <div class="single-banner pt-xs-30">
                                     <a href="#">
-                                        <img src="images/banner/2_2.jpg" alt="Li's Static Banner">
+                                        <img src="~/images/banner/2_2.jpg" alt="Li's Static Banner">
                                     </a>
                                 </div>
                             </div>
@@ -52,7 +52,7 @@
                                     <!-- single-product-wrap start -->
                                     <div class="single-product-wrap">
                                         <div class="product-image">
-                                            <a href="@Url.Action("Index", "Detail",new { prdId = sp.MaSanPham})">
+                                            <a href="@Url.Action("Index", "Detail",new { prdId = sp.MaSanPham, prdMaDanhMuc = sp.MaLoai})">
                                                 <img src="@sp.HinhAnh" alt="@sp.TenSanPham">
                                             </a>
                                             <span class="sticker">Mới</span>
@@ -75,11 +75,11 @@
                                                 </div>
                                                 @if (sp.TenSanPham.Length > 25)
                                                 {
-                                                    <h4><a class="product_name" href="@Url.Action("Index", "Detail", new { prdId = sp.MaSanPham })">@sp.TenSanPham.Substring(0, 25)...</a></h4>
+                                                    <h4><a class="product_name" href="@Url.Action("Index", "Detail", new { prdId = sp.MaSanPham, prdMaDanhMuc = sp.MaLoai })">@sp.TenSanPham.Substring(0, 25)...</a></h4>
                                                 }
                                                 else
                                                 {
-                                                    <h4><a class="product_name" href="@Url.Action("Index", "Detail", new { prdId = sp.MaSanPham })">@sp.TenSanPham</a></h4>
+                                                    <h4><a class="product_name" href="@Url.Action("Index", "Detail", new {  prdId = sp.MaSanPham, prdMaDanhMuc = sp.MaLoai })">@sp.TenSanPham</a></h4>
                                                 }
                                                 <div class="price-box">
                                                     <span class="new-price">@string.Format("{0:0,0}", sp.GiaBan) VNĐ</span>
@@ -87,7 +87,7 @@
                                             </div>
                                             <div class="add-actions">
                                                 <ul class="add-actions-link">
-                                                    <li class="add-cart active"><a href="#">Thêm vào giỏ</a></li>
+                                                    <li class="add-cart active"><a href="#" class="btn-add-cart" data-id="@sp.MaSanPham">Thêm vào giỏ</a></li>
                                                     <li><a class="links-details" href="wishlist.html"><i class="fa fa-heart-o"></i></a></li>
                                                     <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>
                                                 </ul>

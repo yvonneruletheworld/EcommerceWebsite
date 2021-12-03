@@ -33,7 +33,7 @@ namespace EcommerceWebsite.MainWeb.Controllers
             _mapper = mapper;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string keyword)
         {
             if(HUIConfiguration.ListHUI == null)
             {
@@ -90,6 +90,40 @@ namespace EcommerceWebsite.MainWeb.Controllers
                 rs.Add(prd);
             }
             return rs;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> layDanhMuc()
+        {
+            try
+            {
+                List<DanhMucOutput> data = new List<DanhMucOutput>();
+                 data = await _danhMucServices.GetCategories();
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public async Task<IActionResult> TimKiemSanPham(string keyword)
+        {
+            try
+            {
+                if(string.IsNullOrEmpty(keyword))
+                {
+                    keyword = "";
+                }
+                    ViewBag.timKiem = keyword;
+                    var data = await _sanPhamServices.timKiemSanPhamTheoTen(keyword);
+                    return View("~/Views/Home/TimKiem.cshtml", data);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+           
+        
         }
     }
 }

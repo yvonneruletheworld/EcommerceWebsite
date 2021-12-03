@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace EcommerceWebsite.Utilities.Output.Main
 {
@@ -28,6 +29,9 @@ namespace EcommerceWebsite.Utilities.Output.Main
         [JsonProperty("trangThai")]
         public Status Status { get; set; }
 
+        public decimal giaBan { get; set; }
+        public string MaLoai { get; set; }
+
         [JsonProperty("listHinhAnh")]
         public List<ThongSoSanPhamOutput> ListHinhAnh { get; set; }
         [JsonProperty("listThongSo")]
@@ -39,6 +43,11 @@ namespace EcommerceWebsite.Utilities.Output.Main
         public List<DanhGiaSanPham> DanhGia { get; set; } 
         [JsonProperty("listBinhLuan")]
         public List<BinhLuanOutput> ListBinhLuan { get; set; }
+
+        public static implicit operator SanPhamOutput(Task<SanPhamOutput> v)
+        {
+            throw new NotImplementedException();
+        }
         //Khóa ngoại
     }
 }

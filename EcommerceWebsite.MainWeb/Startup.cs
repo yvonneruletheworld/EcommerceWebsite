@@ -47,7 +47,7 @@ namespace EcommerceWebsite.MainWeb
             //DI
             DependencyInjectionSystemConfig(services);
             services.AddAutoMapper(typeof(AutoMapping));
-
+            services.AddSession();
             //var emailConfig = Configuration
             //    .GetSection("EmailSenderConfig")
             //    .Get<EmailConfiguration>();
@@ -86,13 +86,12 @@ namespace EcommerceWebsite.MainWeb
             app.UseRouting();
 
             app.UseAuthorization();
-
             app.UseSession();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{type=Main}/{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
 
         }

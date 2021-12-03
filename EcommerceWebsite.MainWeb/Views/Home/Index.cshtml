@@ -66,90 +66,93 @@
         </div>
     </div>
 </div>
-<!-- Li's Static Banner Area End Here -->
-<!-- Begin Li's Special Product Area -->
-<section class="product-area li-laptop-product Special-product pt-60 pb-45">
-    <div class="container">
-        <div class="row">
-            <!-- Begin Li's Section Area -->
-            <div class="col-lg-12">
-                <div class="li-section-title">
-                    <h2>
-                        <span class="font-weight-bold">Ưu đãi cực Hot</span>
-                    </h2>
-                </div>
-                <div class="row">
-                    <div class="special-product-active owl-carousel">
-                        @foreach (var prd in Model.SanPhamHUIDons)
-                        {
-                            if (prd != null)
+<div id="loadAllSanPham">
+    <!-- Li's Static Banner Area End Here -->
+    <!-- Begin Li's Special Product Area -->
+    <section class="product-area li-laptop-product Special-product pt-60 pb-45">
+        <div class="container">
+            <div class="row">
+                <!-- Begin Li's Section Area -->
+                <div class="col-lg-12">
+                    <div class="li-section-title">
+                        <h2>
+                            <span class="font-weight-bold">Ưu đãi cực Hot</span>
+                        </h2>
+                    </div>
+                    <div class="row">
+                        <div class="special-product-active owl-carousel">
+                            @foreach (var prd in Model.SanPhamHUIDons)
                             {
-                                <div class="col-lg-12">
-                                    <!-- single-product-wrap start -->
+                                if (prd != null)
+                                {
+                                    <div class="col-lg-12">
+                                        <!-- single-product-wrap start -->
 
-                                    <div class="single-product-wrap">
-                                        <div class="product-image">
-                                            <a href="@Url.Action("Index", "Detail", new { prdId = prd.MaSanPham})">
-                                                <img src="@prd.HinhAnh" alt="@prd.TenSanPham">
-                                            </a>
-                                            <span class="sticker">@(nameof(Status.Hot))</span>
-                                        </div>
-                                        <div class="product_desc">
-                                            <div class="product_desc_info">
-                                                <div class="product-review">
-                                                    <h5 class="manufacturer">
-                                                        <a href="#">@prd.LoaiSanPham</a>
-                                                    </h5>
-                                                    <div class="rating-box">
-                                                        <ul class="rating">
-                                                            <li><i class="fa fa-star-o"></i></li>
-                                                            <li><i class="fa fa-star-o"></i></li>
-                                                            <li><i class="fa fa-star-o"></i></li>
-                                                            <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                                            <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                                        </ul>
+                                        <div class="single-product-wrap">
+                                            <div class="product-image">
+                                                <a href="@Url.Action("Index", "Detail", new {  prdId = prd.MaSanPham, prdMaDanhMuc = prd.MaLoai})">
+                                                    <img src="@prd.HinhAnh" alt="@prd.TenSanPham">
+                                                </a>
+                                                <span class="sticker">@(nameof(Status.Hot))</span>
+                                            </div>
+                                            <div class="product_desc">
+                                                <div class="product_desc_info">
+                                                    <div class="product-review">
+                                                        <h5 class="manufacturer">
+                                                            <a href="#">@prd.LoaiSanPham</a>
+                                                        </h5>
+                                                        <div class="rating-box">
+                                                            <ul class="rating">
+                                                                <li><i class="fa fa-star-o"></i></li>
+                                                                <li><i class="fa fa-star-o"></i></li>
+                                                                <li><i class="fa fa-star-o"></i></li>
+                                                                <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                                                <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    @if (prd.TenSanPham.Length > 25)
+                                                    {
+                                                        <h4><a class="product_name" href="@Url.Action("Index", "Detail", new {  prdId = prd.MaSanPham, prdMaDanhMuc = prd.MaLoai })">@prd.TenSanPham.Substring(0, 25)...</a></h4>
+                                                    }
+                                                    else
+                                                    {
+                                                        <h4><a class="product_name" href="@Url.Action("Index", "Detail", new {  prdId = prd.MaSanPham, prdMaDanhMuc = prd.MaLoai })">@prd.TenSanPham</a></h4>
+                                                    }
+                                                    <div class="price-box">
+                                                        <span class="new-price">@string.Format("{0:0,0}", prd.GiaBan) VNĐ</span>
+                                                    </div>
+                                                    <div class="countersection">
+                                                        <div class="li-countdown"></div>
                                                     </div>
                                                 </div>
-                                                @if (prd.TenSanPham.Length > 25)
-                                            {
-                                                <h4><a class="product_name" href="@Url.Action("Index", "Detail", new { prdId = prd.MaSanPham })">@prd.TenSanPham.Substring(0, 25)...</a></h4>
-                                            }
-                                            else
-                                            {
-                                                <h4><a class="product_name" href="@Url.Action("Index", "Detail", new { prdId = prd.MaSanPham })">@prd.TenSanPham</a></h4>
-                                            }
-                                                <div class="price-box">
-                                                    <span class="new-price">@prd.GiaBan</span>
+                                                <div class="add-actions">
+                                                    <ul class="add-actions-link">
+                                                        <li class="add-cart active"><a href="#" data-id="@prd.MaSanPham" class="btn-add-cart">Thêm vào giỏ</a></li>
+                                                        <li><a class="links-details" href="wishlist.html"><i class="fa fa-heart-o"></i></a></li>
+                                                        <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>
+                                                    </ul>
                                                 </div>
-                                                <div class="countersection">
-                                                    <div class="li-countdown"></div>
-                                                </div>
-                                            </div>
-                                            <div class="add-actions">
-                                                <ul class="add-actions-link">
-                                                    <li class="add-cart active"><a href="#">Thêm vào giỏ</a></li>
-                                                    <li><a class="links-details" href="wishlist.html"><i class="fa fa-heart-o"></i></a></li>
-                                                    <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>
-                                                </ul>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    <!-- single-product-wrap end -->
-                                </div>
+                                        <!-- single-product-wrap end -->
+                                    </div>
+                                }
                             }
-                        }
+                        </div>
                     </div>
                 </div>
+                <!-- Li's Section Area End Here -->
             </div>
-            <!-- Li's Section Area End Here -->
         </div>
-    </div>
-</section>
-<!-- Li's Special Product Area End Here -->
-<!-- Begin Li's Laptops Product | Home V2 Area -->
-@(await Html.PartialAsync("/Views/Home/_ProductsOfType.cshtml",Model.LoaiVaSanPham))
-<!-- Li's Laptops Product | Home V2 Area End Here -->
+    </section>
+    <!-- Li's Special Product Area End Here -->
+    <!-- Begin Li's Laptops Product | Home V2 Area -->
+    @(await Html.PartialAsync("/Views/Home/_ProductsOfType.cshtml",Model.LoaiVaSanPham))
+    <!-- Li's Laptops Product | Home V2 Area End Here -->
+
+</div>
 
 <script>
     $(function () {

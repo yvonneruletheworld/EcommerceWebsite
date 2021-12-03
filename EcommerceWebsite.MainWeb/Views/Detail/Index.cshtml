@@ -16,7 +16,7 @@
     var bangDinhLuong = sanPham.BangGia.Where(dl => dl.MaThuocTinh == nameof(ProductPorpertyCode.TT07)).ToList();
     //var demision = Model.SanPham.
 }
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <link href="~/css/detail/style.css" rel="stylesheet" />
 <script>
     var model = @Json.Serialize(Model);
@@ -135,8 +135,8 @@
                                 <li><i class="fa fa-star-o"></i></li>
                                 <li class="no-star"><i class="fa fa-star-o"></i></li>
                                 <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                <li class="review-item rating-view"><a href="#reviews">Xem {danhgiacount} đánh giá</a></li>
-                                <li class="review-item"><a href="#reviews" data-target="#mymodal" data-toggle="modal">Viết Đánh giá</a></li>
+                                <li class="review-item rating-view"><a href="#reviews">Xem {@sanPham.ListBinhLuan.Count()} bình luận</a></li>
+                                <li class="review-item"><a href="#reviews" data-target="#mymodal" data-toggle="modal">Bình luận</a></li>
                             </ul>
                         </div>
                         <div class="price-box pt-20">
@@ -147,7 +147,8 @@
                                 <span class="product-desciption-shortcut">
                                     @(sanPham.DanhGia.Count > 0 ? sanPham.DanhGia[0].NoiDung : "Sản phẩm chưa có mô tả")
                                 </span>
-                                <a style="text-decoration: none; color: yellow" href="#description">Xem thêm</a>
+                                <br>
+                                <a style="text-decoration: none; color: black" href="#description">Xem thêm</a>
                             </p>
                         </div>
                         <div class="product-variants">
@@ -241,27 +242,39 @@
                     @if (sanPham.DanhGia.Count > 0)
                     {
                         <div class="article__content showall review-post">
-
                             <h2 class="font-weight-bold">@sanPham.DanhGia[0].TieuDe</h2>
                         </div>
-                        @foreach (var dg in sanPham.DanhGia)
-                        {
-                            var title = dg.NoiDung.Split('|');
-                            @if (title.Length > 1)
+                        <p style="text-align: center;">
+                            <a class="popup-img venobox vbox-item" href="@sanPham.DanhGia[0].HinhAnhDanhGia" data-gall="myGallery">
+                                <img src="@sanPham.DanhGia[0].HinhAnhDanhGia" alt="@sanPham.DanhGia[0].NoiDung">
+                            </a>
+                        </p>
+                        <div class="container" style="display: flex; justify-content: center;">
+                            <a href="#" data-bs-toggle="collapse" class="li-btn" data-bs-target="#collapseTodo" aria-expanded="false" aria-controls="collapseTodo" style="position: absolute;">
+                                Xem Thêm
+                            </a>
+                        </div>
+                        <div class="collapse" id="collapseTodo">
+                            @foreach (var dg in sanPham.DanhGia)
                             {
-                                <h3>@title[0]</h3>
-                                <p>@title[1]</p>
+                                var title = dg.NoiDung.Split('|');
+                                @if (title.Length > 1)
+                                {
+                                    <h3>@title[0]</h3>
+                                    <p>@title[1]</p>
+                                }
+                                else
+                                {
+                                    <p>@title[0]</p>
+                                }
+                                <p style="text-align: center;">
+                                    <a class="popup-img venobox vbox-item" href="@dg.HinhAnhDanhGia" data-gall="myGallery">
+                                        <img src="@dg.HinhAnhDanhGia" alt="@dg.TieuDe">
+                                    </a>
+                                </p>
                             }
-                            else
-                            {
-                                <p>@title[0]</p>
-                            }
-                            <p style="text-align: center;">
-                                <a class="popup-img venobox vbox-item" href="@dg.HinhAnhDanhGia" data-gall="myGallery">
-                                    <img src="@dg.HinhAnhDanhGia" alt="@dg.TieuDe">
-                                </a>
-                            </p>
-                        }
+
+                        </div>
                     }
                     else
                     {
@@ -278,7 +291,7 @@
                     <div class="cart-table table-responsive">
                         <table class="table table-bordered">
                             <tbody>
-                                @foreach(var ts in bangThongSo)
+                                @foreach (var ts in bangThongSo)
                                 {
                                     <tr>
                                         <td class="pro-title">
@@ -286,8 +299,8 @@
                                         </td>
                                         <td class="pro-price"><span>@ts.DonVi</span></td>
                                     </tr>
-                                 }
-                                
+                                }
+
                             </tbody>
                         </table>
                     </div>
@@ -375,7 +388,7 @@
                                                                     {
                                                                         <p class="feedback-form-author">
                                                                             <label>
-                                                                                Gửi từ: 
+                                                                                Gửi từ:
                                                                             </label>
                                                                             <label class="ml-2">
                                                                                 @khachHang.DanhXung
@@ -406,7 +419,7 @@
                                                                             <label for="email">
                                                                                 Mật khẩu <span class="required">*</span>
                                                                             </label>
-                                                                            <input id="pass-feedback"  name="pass-feedback" value="" size="30" aria-required="true" type="password">
+                                                                            <input id="pass-feedback" name="pass-feedback" value="" size="30" aria-required="true" type="password">
                                                                             <span class="required"><sub>*</sub> Required fields</span>
                                                                         </p>
                                                                         <div class="feedback-btn pb-15">
@@ -437,12 +450,14 @@
         </div>
     </div>
 </div>
-<!-- Product Area End Here -->
+
+@(await Html.PartialAsync("/Views/Detail/_ListSanPhamTuongTu.cshtml", Model.SanPhamOutPut))
+
 <script>
     $(function () {
         var dft_price = model.sanPham.bangGia[0].giaBan;
         $('.product-pride-id').text(dft_price + ' VNĐ');
-                    });
+    });
 
     function dinhLuongChanged(e) {
         var valueDemission = e.value;
@@ -450,4 +465,5 @@
         console.log(prd_pride);
         $('.product-pride-id').text(prd_pride.giaBan + ' VNĐ');
     };
+
 </script>

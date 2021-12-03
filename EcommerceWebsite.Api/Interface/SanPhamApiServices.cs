@@ -85,12 +85,30 @@ namespace EcommerceWebsite.Api.Interface
             return await GetAsync<SanPhamOutput>($"/api/SanPham/ChiTiet/{prdId}");
         }
 
+        public async Task<List<SanPhamOutput>> laySanPhamTheoHang(string prdId)
+        {
+            return await GetListAsync<SanPhamOutput>($"/api/SanPham/lay-sanpham-theohang/{prdId}");
+        }
+
+        public async Task<List<SanPhamOutput>> laySanPhamTheoDanhMuc(string prdId)
+        {
+            return await GetListAsync<SanPhamOutput>($"/api/SanPham/lay-sanpham-theodanhmuc/{prdId}");
+        }
+
+        public async Task<List<SanPhamOutput>> timKiemSanPhamTheoTen(string keyword)
+        {
+            return await GetListAsync<SanPhamOutput>($"/api/SanPham/lay-sanpham-theoten/{keyword}");
+        }
+        public Task<SanPhamVM> laySanPhamTheoMa(string prdId)
+        {
+            return  GetAsync<SanPhamVM>($"/api/SanPham/lay-sanpham-Ma/{prdId}");
+        }
         public async Task<List<SanPhamVM>> GetViewWithMultipleIds(string[] prdIds)
         {
             var url = "/api/SanPham/get-mulpitple-id/?";
-            for(int i = 0; i< prdIds.Length; i++)
+            for (int i = 0; i < prdIds.Length; i++)
             {
-                url +=  i == prdIds.Length - 1 ?  $"productIds={prdIds[i]}" :  $"productIds={prdIds[i]}&";
+                url += i == prdIds.Length - 1 ? $"productIds={prdIds[i]}" : $"productIds={prdIds[i]}&";
             }
 
             return await GetListAsync<SanPhamVM>(url);
