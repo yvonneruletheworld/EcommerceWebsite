@@ -34,7 +34,8 @@ namespace EcommerceWebsite.MainWeb.Controllers
             //    string id =  _userManager.GetUserId(User);
             //    vm.KhachHang = await _khachHangServices.GetKhachHangTheoMa(id);
             //}
-            var lstHUI = HUIConfiguration.ListHUI;
+            var lstHUI = HUIConfiguration.ListHUI.Where(hui => hui.Itemsets.Length > 1)
+                    .OrderByDescending(hui => hui.Utility).ToList();
             lstHUI??= await _huiServices.GetListHUIFromOutput("output1");
 
             foreach(var hui in lstHUI)

@@ -35,20 +35,21 @@ namespace EcommerceWebsite.MainWeb.Controllers
 
         public async Task<IActionResult> Index(string keyword)
         {
-            if(HUIConfiguration.ListHUI == null)
-            {
-                var fileName = "output1";
-                var listHUI = await _huiServices.GetListHUIFromOutput(fileName);
-                //save constant
-                HUIConfiguration.ListHUI = listHUI.Where(hui => hui.Itemsets.Length > 1)
-                    .OrderByDescending(hui => hui.Utility).ToList();
-            }    
+            
             //get HUI
             
             var vm = new HomeVM();
             vm.DanhMucOutputs = await _danhMucServices.GetCategories();
             vm.BannerOutputs = await _khuyenMaiServices.LaykhuyenMais();
             vm.LoaiVaSanPham = await _danhMucServices.GetDanhMucVaSanPhams(5);
+            if (HUIConfiguration.ListHUI == null)
+            {
+                var fileName = "output1";
+                HUIConfiguration.ListHUI = await _huiServices.GetListHUIFromOutput(fileName);
+                //save constant
+                //HUIConfiguration.ListHUI = listHUI.Where(hui => hui.Itemsets.Length > 1)
+                //    .OrderByDescending(hui => hui.Utility).ToList();
+            }
             var lstHuiDon = (HUIConfiguration.ListHUI.Where(h => h.Itemsets.Count() == 1).ToList());
             vm.SanPhamHUIDons = await GetSanPhamTheoHUIDonAsync(lstHuiDon);
 
