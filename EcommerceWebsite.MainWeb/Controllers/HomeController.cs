@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace EcommerceWebsite.MainWeb.Controllers
@@ -35,9 +36,14 @@ namespace EcommerceWebsite.MainWeb.Controllers
 
         public async Task<IActionResult> Index()
         {
-            
-            //get HUI
-            
+
+            //get HUI'
+            if(User.Claims != null&& User.Claims.Count() > 1)
+            {
+                var userId = User.Claims.Where(claim => claim.Type == ClaimTypes.Sid)
+                                        .FirstOrDefault()
+                                        .Value;
+            }
             var vm = new HomeVM();
             vm.DanhMucOutputs = await _danhMucServices.GetCategories();
             vm.BannerOutputs = await _khuyenMaiServices.LaykhuyenMais();
