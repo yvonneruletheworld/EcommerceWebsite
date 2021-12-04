@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using EcommerceWebsite.Application.Constants;
+using EcommerceWebsite.Data.EF;
 using EcommerceWebsite.Data.Entities;
 using EcommerceWebsite.Services.Interfaces.Main;
 using Microsoft.AspNetCore.Mvc;
@@ -10,14 +11,14 @@ using System.Threading.Tasks;
 
 namespace EcommerceWebsite.Api.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class YeuThichSanPhamController : Controller
     {
         private readonly IYeuThichSanPhamServices _yeuThichSanPhamServices;
-        private readonly IMapper _mapper;
-        public YeuThichSanPhamController(IYeuThichSanPhamServices yeuThichSanPhamServices, IMapper mapper)
+        public YeuThichSanPhamController(IYeuThichSanPhamServices yeuThichSanPhamServices)
         {
             _yeuThichSanPhamServices = yeuThichSanPhamServices;
-            _mapper = mapper;
         }
         [HttpPost("them-san-pham-yeu-thich/{maSanPham}/{maKhachHang}")]
         public async Task<IActionResult> ThemYeuThichSanPham(string maSanPham, string maKhachHang)
@@ -26,9 +27,6 @@ namespace EcommerceWebsite.Api.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var existObj = _yeuThichSanPhamServices.LaySPYeuThich(maSanPham, maKhachHang);
-                    if (existObj != null)
-                        return BadRequest(Messages.API_Exist);
                     var obj = new SanPhamYeuThich()
                     {
                         MaKhachHang = maKhachHang,
@@ -36,14 +34,38 @@ namespace EcommerceWebsite.Api.Controllers
                         TrangThai = true
                     };
                     var result = await _yeuThichSanPhamServices.ThemYeuThich(obj);
-                    if(result)
+                    if (!result)
+                    {
+                       return BadRequest(Messages.API_Failed);
+                    }
+                    else
+                    {
                         return Ok(Messages.API_Success);
+                    }
+
+
                 }
                 return BadRequest(Messages.API_Failed);
             }
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+       
+        [HttpGet("lay-sanpham-yeuthich/{MaKH}")]
+        public async Task<IActionResult> laySanPhamYeuThich(string MaKH)
+        {
+            try
+            {
+                var result = await _yeuThichSanPhamServices.laySanPhamYeuThich(MaKH);
+                if (result == null)
+                    return BadRequest(Messages.API_EmptyResult);
+                else return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(Messages.API_Exception + ex);
             }
         }
     }

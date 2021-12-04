@@ -19,10 +19,6 @@ namespace EcommerceWebsite.Utilities.ViewModel
         public string MaLoai { get; set; }
         public DateTime ngayTao { get; set; }
         public Status Status { get; set; }
-
-        public static implicit operator SanPhamVM(Task<SanPhamVM> v)
-        {
-            throw new NotImplementedException();
-        }
+        public bool TrangThaiYeuThich { get; set; }
     }
 }

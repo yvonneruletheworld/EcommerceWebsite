@@ -1,4 +1,5 @@
 ﻿using EcommerceWebsite.Application.Pagination;
+using EcommerceWebsite.Data.Entities;
 using EcommerceWebsite.Utilities.Input;
 using EcommerceWebsite.Utilities.Output.Main;
 using EcommerceWebsite.Utilities.ViewModel;
@@ -13,7 +14,7 @@ namespace EcommerceWebsite.Api.Interface
     {
         Task<PageResponse<List<SanPhamOutput>>> laySanPham(PaginationFilter pagination);
 
-        Task<List<SanPhamOutput>> laySanPham2();
+        Task<List<SanPhamVM>> laySanPham2();
 
         Task<bool> ThemSanPham(SanPhamOutput input);
         Task<bool> Modify(bool laXoa, SanPhamOutput input);
@@ -28,7 +29,5 @@ namespace EcommerceWebsite.Api.Interface
         Task<List<SanPhamOutput>> timKiemSanPhamTheoTen(string keyword);
 
         Task<SanPhamVM> laySanPhamTheoMa(string prdId);
-
-
     }
 }

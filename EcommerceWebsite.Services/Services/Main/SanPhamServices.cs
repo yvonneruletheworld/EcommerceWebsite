@@ -112,12 +112,13 @@ namespace EcommerceWebsite.Services.Services.Main
             }
         }
 
-        public async Task<List<SanPhamOutput>> LaySanPham()
+        public async Task<List<SanPhamVM>> LaySanPham()
         {
             try
             {
                 var data = await (from sp in _context.SanPhams
                                   join nhanHieu in _context.NhanHieus on sp.MaHang equals nhanHieu.MaHang
+                          
                                   join loaiSanPham in _context.DanhMucs on sp.MaLoaiSanPham equals loaiSanPham.MaDanhMuc
                                   from sp_dl in _context.DinhLuongs
                                                          .Where(dl => dl.MaSanPham.Equals(sp.MaSanPham)
@@ -128,7 +129,7 @@ namespace EcommerceWebsite.Services.Services.Main
                                                                 .OrderByDescending(lsg => lsg.NgayTao.Date).Take(1)
 
                                   where !sp.DaXoa
-                                  select new SanPhamOutput
+                                  select new SanPhamVM
                                   {
                                       MaSanPham = sp.MaSanPham,
                                       TenSanPham = sp.TenSanPham,
@@ -136,7 +137,7 @@ namespace EcommerceWebsite.Services.Services.Main
                                       HinhAnh = sp.HinhAnh,
                                       NhanHieu = nhanHieu.TenHang,
                                       LoaiSanPham = loaiSanPham.TenDanhMuc,
-                                      giaBan = dl_lsg.GiaMoi,
+                                      GiaBan = dl_lsg.GiaMoi,
                                       MaLoai = loaiSanPham.MaDanhMuc,
                                   }).ToListAsync();
                 return data;

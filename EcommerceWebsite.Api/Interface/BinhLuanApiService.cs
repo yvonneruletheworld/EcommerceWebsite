@@ -16,19 +16,19 @@ using System.Threading.Tasks;
 
 namespace EcommerceWebsite.Api.Interface
 {
-    public class YeuThichSanPhamApiServices : BaseApiService, IYeuThichSanPhamApiServices
+    public class BinhLuanApiService : BaseApiService, IBinhLuanApiService
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly IConfiguration _configuration;
-        public YeuThichSanPhamApiServices(IHttpClientFactory httpClientFactory, IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
+        public BinhLuanApiService(IHttpClientFactory httpClientFactory, IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
            : base(httpClientFactory, configuration, httpContextAccessor)
         {
             _httpContextAccessor = httpContextAccessor;
             _configuration = configuration;
             _httpClientFactory = httpClientFactory;
         }
-        public async Task<bool> ThemYeuThichSanPham(SanPhamYeuThich input)
+        public async Task<bool> ThemBinhLuan(BinhLuan input)
         {
             // phai set truoc thi moi lay dc
             var sessions = _httpContextAccessor
@@ -43,12 +43,8 @@ namespace EcommerceWebsite.Api.Interface
             var requestItem = JsonConvert.SerializeObject(input);
             var httpContent = new StringContent(requestItem, Encoding.UTF8, "application/json");
 
-            var response = await client.PostAsync($"/api/YeuThichSanPham/them-san-pham-yeu-thich/{input.MaSanPham}/{input.MaKhachHang}", httpContent);
+            var response = await client.PostAsync($"/api/BinhLuan/them-binhluan/{input.MaSanPham}/{input.NgayTao}/{input.NoiDung}/{input.SoSao}", httpContent);
             return response.IsSuccessStatusCode;
-        }
-        public async Task<List<SanPhamVM>> laySanPhamYeuThich(string MaKH)
-        {
-            return await GetListAsync<SanPhamVM>($"/api/YeuThichSanPham/lay-sanpham-yeuthich/{MaKH}");
         }
     }
 }

@@ -29,9 +29,9 @@ namespace EcommerceWebsite.MainWeb.Controllers
         {
             var vm = new DetailVM();
             vm.SanPham = await _sanPhamServices.LayChiTietSanPham(prdId);
-            //if(User != null)
+            //if (User != null)
             //{
-            //    string id =  _userManager.GetUserId(User);
+            //    string id = _userManager.GetUserId(User);
             //    vm.KhachHang = await _khachHangServices.GetKhachHangTheoMa(id);
             //}
             var lstHUI = HUIConfiguration.ListHUI.Where(hui => hui.Itemsets.Length > 1)

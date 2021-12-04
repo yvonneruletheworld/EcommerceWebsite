@@ -1,4 +1,5 @@
 ﻿using EcommerceWebsite.Data.Entities;
+using EcommerceWebsite.Utilities.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,6 +10,6 @@ namespace EcommerceWebsite.Services.Interfaces.Main
    public interface IYeuThichSanPhamServices
     {
         Task<bool> ThemYeuThich(SanPhamYeuThich input);
-        Task<SanPhamYeuThich> LaySPYeuThich(string MaSanPham, string maKhachHang);
+        Task<List<SanPhamVM>> laySanPhamYeuThich(string MaKH);
     }
 }

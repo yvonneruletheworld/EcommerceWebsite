@@ -66,13 +66,14 @@ namespace EcommerceWebsite.Api.Controllers
                     {
                         //Claim
                         //var roles = await _userManager.GetRolesAsync(user);
-
+                        var currentUser = await _userManager.FindByEmailAsync(user.Email);
                         var claims = new[]
                         {
                     new Claim(ClaimTypes.Email, user.Email),
                     new Claim(ClaimTypes.GivenName, user.UserName),
                     //new Claim(ClaimTypes.Role, string.Join(";", roles)),
-                    new Claim(ClaimTypes.Name, user.UserName)
+                    new Claim(ClaimTypes.Name, user.UserName),
+                      new Claim(ClaimTypes.Sid, currentUser.Id),
                 };
 
                         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Tokens:Key"]));

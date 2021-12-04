@@ -1,5 +1,6 @@
 ﻿using EcommerceWebsite.Application.Constants;
 using EcommerceWebsite.Application.Pagination;
+using EcommerceWebsite.Data.Entities;
 using EcommerceWebsite.Utilities.Input;
 using EcommerceWebsite.Utilities.Output.Main;
 using EcommerceWebsite.Utilities.ViewModel;
@@ -33,9 +34,9 @@ namespace EcommerceWebsite.Api.Interface
             throw new NotImplementedException();
         }
 
-        public async Task<List<SanPhamOutput>> laySanPham2()
+        public async Task<List<SanPhamVM>> laySanPham2()
         {
-           return await GetListAsync<SanPhamOutput>("/api/SanPham/lay-sanpham");
+           return await GetListAsync<SanPhamVM>("/api/SanPham/lay-sanpham");
         }
 
         public async Task<bool> ThemSanPham(SanPhamOutput input)

@@ -34,7 +34,7 @@ namespace EcommerceWebsite.MainWeb.Controllers
         //get
         [HttpGet("client-login")]
         public async Task<IActionResult> Index()
-        {
+        {   
             //await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return View();
         }

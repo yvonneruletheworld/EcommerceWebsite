@@ -33,16 +33,10 @@ namespace EcommerceWebsite.Services.Services.System
             _mapper = mapper;
         }
 
-        public async Task<ThongTinKhachHangInput> GetKhachHangInputTheoSdt(string sdt)
+        public async Task<ApplicationUser> GetKhachHangInputTheoSdt(string sdt)
         {
-            return await (from au in _context.ApplicationUsers 
-                          where !au.IsDeleted && au.PhoneNumber == sdt
-                          select new ThongTinKhachHangInput()
-                          {
-                              TenDangNhap = au.UserName,
-                              MatKhau = au.PasswordHash,
-                              SDT = au.PhoneNumber
-                          } ).FirstOrDefaultAsync();
+            return await _context.ApplicationUsers.Where(x => !x.IsDeleted && x.PhoneNumber == sdt)
+                .FirstOrDefaultAsync();
         }
 
         public Task<ApplicationUser> GetKhachHangTheoEmail(string email)
@@ -195,7 +189,7 @@ namespace EcommerceWebsite.Services.Services.System
         public async Task<Dictionary<string, ApplicationUser>> LoginAsync(string usernameOrEmail, string password)
         {
             var user = await GetKhachHangTheoEmail(usernameOrEmail);
-            user ??= await GetKhachHangTheoUsername(usernameOrEmail);
+            user ??= await GetKhachHangInputTheoSdt(usernameOrEmail);
 
             var result = new Dictionary<string, ApplicationUser>();
             if(user ==  null)

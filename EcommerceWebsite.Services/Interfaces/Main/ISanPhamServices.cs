@@ -18,7 +18,7 @@ namespace EcommerceWebsite.Services.Interfaces.Main
         Task<bool> ThemSanPham(SanPham input);
         Task<SanPham> GetSanPhamTheoMa(string id, string tensanpham);
         Task<bool> KiemTraGia(string value);
-        Task<List<SanPhamOutput>> LaySanPham();
+        Task<List<SanPhamVM>> LaySanPham();
         Task<List<SanPhamVM>> LaySanPhamTheoLoai(int take = 1, string loaiSanPham = null, string maSanPham = null);
         Task<List<SanPhamVM>> GetProductWithMultipleId(string [] idArray);
 
