@@ -1,5 +1,6 @@
 ﻿@using EcommerceWebsite.Utilities.ViewModel
 @using EcommerceWebsite.Data.Enum
+@using System.Security.Claims
 @model DetailVM
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -61,7 +62,7 @@
                 </div>
                 <!-- Product HUI Left -->
                 <div class="product-additional-info pt-25">
-                    <a class="wishlist-btn btn-them-yeuthich"  data-id="@sanPham.MaSanPham"><i class="fa fa-heart-o"></i>Thêm vào danh sách yêu thích</a>
+                    <a class="wishlist-btn btn-them-yeuthich" data-id="@sanPham.MaSanPham"><i class="fa fa-heart-o"></i>Thêm vào danh sách yêu thích</a>
                     <div class="product-social-sharing pt-25">
                         <ul>
                             <li class="facebook"><a href="#"><i class="fa fa-facebook"></i>Facebook</a></li>
@@ -257,13 +258,47 @@
                         <div class="product-details-comment-block">
                             <div class="comment-review">
                                 <span>Đánh giá</span>
-                                <ul class="rating">
-                                    <li class="product-rating-comment"><i class="fa fa-star-o"></i></li>
-                                    <li class="product-rating-comment"><i class="fa fa-star-o"></i></li>
-                                    <li class="product-rating-comment"><i class="fa fa-star-o"></i></li>
-                                    <li class="product-rating-comment"><i class="fa fa-star-o"></i></li>
-                                    <li class="product-rating-comment"><i class="fa fa-star-o"></i></li>
-                                </ul>
+                                @if (bl.SoSao == 1)
+                                {
+                                    <ul class="rating">
+                                        <li class="product-rating-comment"><i class="fa fa-star-o"></i></li>
+                                    </ul>
+                                }
+                                else if (bl.SoSao == 2)
+                                {
+                                    <ul class="rating">
+                                        <li class="product-rating-comment"><i class="fa fa-star-o"></i></li>
+                                        <li class="product-rating-comment"><i class="fa fa-star-o"></i></li>
+                                    </ul>
+                                }
+                                else if (bl.SoSao == 3)
+                                {
+                                    <ul class="rating">
+                                        <li class="product-rating-comment"><i class="fa fa-star-o"></i></li>
+                                        <li class="product-rating-comment"><i class="fa fa-star-o"></i></li>
+                                        <li class="product-rating-comment"><i class="fa fa-star-o"></i></li>
+                                    </ul>
+                                }
+                                else if (bl.SoSao == 4)
+                                {
+                                    <ul class="rating" id="@bl.SoSao">
+                                        <li class="product-rating-comment"><i class="fa fa-star-o"></i></li>
+                                        <li class="product-rating-comment"><i class="fa fa-star-o"></i></li>
+                                        <li class="product-rating-comment"><i class="fa fa-star-o"></i></li>
+                                        <li class="product-rating-comment"><i class="fa fa-star-o"></i></li>
+                                        <li class="product-rating-comment"><i class="fa fa-star-o"></i></li>
+                                    </ul>
+                                }
+                                else if (bl.SoSao == 5)
+                                {
+                                    <ul class="rating" id="@bl.SoSao">
+                                        <li class="product-rating-comment"><i class="fa fa-star-o"></i></li>
+                                        <li class="product-rating-comment"><i class="fa fa-star-o"></i></li>
+                                        <li class="product-rating-comment"><i class="fa fa-star-o"></i></li>
+                                        <li class="product-rating-comment"><i class="fa fa-star-o"></i></li>
+                                        <li class="product-rating-comment"><i class="fa fa-star-o"></i></li>
+                                    </ul>
+                                }
                             </div>
                             <div class="comment-author-infos pt-25">
                                 <span>@bl.NguoiTao</span>
@@ -281,8 +316,19 @@
                     <!-- Begin Footer | Modal Area -->
 
                     <div class="product-details-comment-block">
+
                         <div class="review-btn">
                             <a class="review-links" href="#" data-toggle="modal" data-target="#mymodal">Viết bình luận</a>
+
+                            @*@if (User.Identity.Name != null)
+                                {
+                                    <a class="review-links" href="#" data-toggle="modal" data-target="#mymodal">Viết bình luận</a>
+                                }
+                                else
+                                {
+                                    <a class="review-links" href="@Url.Action("Index", "KhachHang")">Viết bình luận</a>
+                                }*@
+
                         </div>
                         <!-- Begin Quick View | Modal Area -->
                         <div class="modal fade modal-wrapper" id="mymodal">
@@ -312,7 +358,7 @@
                                                                 <p class="your-opinion">
                                                                     <label>Đánh giá</label>
                                                                     <span>
-                                                                        <select class="star-rating">
+                                                                        <select class="star-rating" id="soSao">
                                                                             <option value="1">1</option>
                                                                             <option value="2">2</option>
                                                                             <option value="3">3</option>
@@ -323,17 +369,17 @@
                                                                 </p>
                                                                 <p class="feedback-form">
                                                                     <label for="feedback">Nội dung</label>
-                                                                    <textarea id="feedback" name="comment" cols="45" rows="8" aria-required="true"></textarea>
+                                                                    <textarea id="noiDung" name="comment" cols="45" rows="8" aria-required="true"></textarea>
                                                                 </p>
                                                                 <div class="feedback-input">
-                                                                    @if (khachHang != null)
+                                                                    @if (User.Identity.Name != null)
                                                                     {
                                                                         <p class="feedback-form-author">
                                                                             <label>
                                                                                 Gửi từ:
                                                                             </label>
                                                                             <label class="ml-2">
-                                                                                @khachHang.DanhXung
+                                                                                @User.Identity.Name
                                                                             </label>
                                                                         </p>
                                                                         <p class="feedback-form-author feedback-form-email">
@@ -341,13 +387,9 @@
                                                                                 Email<span class="required">*</span>
                                                                             </label>
                                                                             <label class="ml-2">
-                                                                                @khachHang.Email
+                                                                                @User.Claims.Where(claim => claim.Type == ClaimTypes.Email).FirstOrDefault().Value
                                                                             </label>
                                                                         </p>
-                                                                        <div class="feedback-btn pb-15">
-                                                                            <a href="#" class="close" data-dismiss="modal" aria-label="Close">Hủy</a>
-                                                                            <a href="#">Gửi Đánh giá</a>
-                                                                        </div>
                                                                     }
                                                                     else
                                                                     {
@@ -364,11 +406,11 @@
                                                                             <input id="pass-feedback" name="pass-feedback" value="" size="30" aria-required="true" type="password">
                                                                             <span class="required"><sub>*</sub> Required fields</span>
                                                                         </p>
-                                                                        <div class="feedback-btn pb-15">
-                                                                            <a href="#" class="close" data-dismiss="modal" aria-label="Close">Hủy</a>
-                                                                            <a href="#">Gửi Đánh giá</a>
-                                                                        </div>
                                                                     }
+                                                                    <div class="feedback-btn pb-15">
+                                                                        <a href="#" class="close" data-dismiss="modal" aria-label="Close">Hủy</a>
+                                                                        <a href="#" class="btn-them-binhluan" data-id="@sanPham.MaSanPham">Gửi Đánh giá</a>
+                                                                    </div>
 
                                                                 </div>
                                                             </form>
@@ -392,84 +434,87 @@
         </div>
     </div>
 </div>
-<section class="product-area li-laptop-product pt-30 pb-50">
-    <div class="container">
-        <div class="li-section-title">
-            <h2>
-                <span class="font-weight-bold">Sản phẩm thường mua cùng</span>
+@if (huis != null)
+{
+    <section class="product-area li-laptop-product pt-30 pb-50">
+        <div class="container">
+            <div class="li-section-title">
+                <h2>
+                    <span class="font-weight-bold">Sản phẩm thường mua cùng</span>
                 </h2>
-        </div>
-        <div class="row">
+            </div>
+            <div class="row">
 
-            <div class="product-active owl-carousel">
-                @foreach (var sp in huis)
-                {
-                    <div class="col-lg-12">
-                        <!-- single-product-wrap start -->
-                        <div class="single-product-wrap">
-                            <div class="product-image">
-                                <a href="@Url.Action("Index", "Detail",new { prdId = sp.MaSanPham})">
-                                    <img src="@sp.HinhAnh" alt="@sp.TenSanPham">
-                                </a>
-                                <span class="sticker">Mới</span>
-                            </div>
-                            <div class="product_desc">
-                                <div class="product_desc_info">
-                                    <div class="product-review">
-                                        <h5 class="manufacturer">
-                                            <a href="#">@sp.LoaiSanPham</a>
-                                        </h5>
-                                        <div class="rating-box">
-                                            <ul class="rating">
-                                                <li><i class="fa fa-star-o"></i></li>
-                                                <li><i class="fa fa-star-o"></i></li>
-                                                <li><i class="fa fa-star-o"></i></li>
-                                                <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                                <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                            </ul>
+                <div class="product-active owl-carousel">
+                    @foreach (var sp in huis)
+                    {
+                        <div class="col-lg-12">
+                            <!-- single-product-wrap start -->
+                            <div class="single-product-wrap">
+                                <div class="product-image">
+                                    <a href="@Url.Action("Index", "Detail", new { prdId = sp.MaSanPham })">
+                                        <img src="@sp.HinhAnh" alt="@sp.TenSanPham">
+                                    </a>
+                                    <span class="sticker">Mới</span>
+                                </div>
+                                <div class="product_desc">
+                                    <div class="product_desc_info">
+                                        <div class="product-review">
+                                            <h5 class="manufacturer">
+                                                <a href="#">@sp.LoaiSanPham</a>
+                                            </h5>
+                                            <div class="rating-box">
+                                                <ul class="rating">
+                                                    <li><i class="fa fa-star-o"></i></li>
+                                                    <li><i class="fa fa-star-o"></i></li>
+                                                    <li><i class="fa fa-star-o"></i></li>
+                                                    <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                                    <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        @if (sp.TenSanPham.Length > 10)
+                                        {
+                                            <h4><a class="product_name" href="@Url.Action("Index", "Detail", new { prdId = sp.MaSanPham })">@sp.TenSanPham.Substring(0, 10)...</a></h4>
+                                        }
+                                        else
+                                        {
+                                            <h4><a class="product_name" href="@Url.Action("Index", "Detail", new { prdId = sp.MaSanPham })">@sp.TenSanPham</a></h4>
+                                        }
+                                        <div class="price-box">
+                                            <span class="new-price">@string.Format("{0:0,0}", sp.GiaBan) VNĐ</span>
                                         </div>
                                     </div>
-                                    @if (sp.TenSanPham.Length > 10)
-                                    {
-                                        <h4><a class="product_name" href="@Url.Action("Index", "Detail", new { prdId = sp.MaSanPham })">@sp.TenSanPham.Substring(0, 10)...</a></h4>
-                                    }
-                                    else
-                                    {
-                                        <h4><a class="product_name" href="@Url.Action("Index", "Detail", new { prdId = sp.MaSanPham })">@sp.TenSanPham</a></h4>
-                                    }
-                                    <div class="price-box">
-                                        <span class="new-price">@string.Format("{0:0,0}", sp.GiaBan) VNĐ</span>
+                                    <div class="add-actions">
+                                        <ul class="add-actions-link">
+                                            <li class="add-cart active"><a href="#">Thêm vào giỏ</a></li>
+                                            <li><a class="links-details" href="wishlist.html"><i class="fa fa-heart-o"></i></a></li>
+                                            <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>
+                                        </ul>
                                     </div>
                                 </div>
-                                <div class="add-actions">
-                                    <ul class="add-actions-link">
-                                        <li class="add-cart active"><a href="#">Thêm vào giỏ</a></li>
-                                        <li><a class="links-details" href="wishlist.html"><i class="fa fa-heart-o"></i></a></li>
-                                        <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>
-                                    </ul>
-                                </div>
                             </div>
+                            <!-- single-product-wrap end -->
                         </div>
-                        <!-- single-product-wrap end -->
-                    </div>
-                }
+                    }
+                </div>
             </div>
         </div>
-    </div>
     </section>
-    @(await Html.PartialAsync("/Views/Detail/_ListSanPhamTuongTu.cshtml", Model.SanPhamOutPut))
+}
+@(await Html.PartialAsync("/Views/Detail/_ListSanPhamTuongTu.cshtml", Model.SanPhamOutPut))
 
-    <script>
-        $(function () {
-            var dft_price = model.sanPham.bangGia[0].giaBan;
-            $('.product-pride-id').text(dft_price + ' VNĐ');
-        });
+<script>
+    $(function () {
+        var dft_price = model.sanPham.bangGia[0].giaBan;
+        $('.product-pride-id').text(dft_price + ' VNĐ');
+    });
 
-        function dinhLuongChanged(e) {
-            var valueDemission = e.value;
-            var prd_pride = model.sanPham.bangGia.find(x => x.maDinhLuong === valueDemission);
-            console.log(prd_pride);
-            $('.product-pride-id').text(prd_pride.giaBan + ' VNĐ');
-        };
+    function dinhLuongChanged(e) {
+        var valueDemission = e.value;
+        var prd_pride = model.sanPham.bangGia.find(x => x.maDinhLuong === valueDemission);
+        console.log(prd_pride);
+        $('.product-pride-id').text(prd_pride.giaBan + ' VNĐ');
+    };
 
-    </script>
+</script>

@@ -81,7 +81,6 @@ $('body').on('click', '.btn-them-yeuthich', function () {
         url: '/YeuThich/ThemSanPhamYeuThich',
         data: {
             id: id,
-            soLuong: 1,
             type: "ajax"
         },
         success: function (data) {
@@ -117,6 +116,55 @@ $('body').on('click', '.btn-them-yeuthich', function () {
             Swal.fire({
                 icon: 'error',
                 title: 'Thêm giỏ hàng thất bại',
+                text: 'Vui lòng thử lại',
+                showConfirmButton: false,
+                timer: 2500
+            });
+        }
+    });
+})
+$('body').on('click', '.btn-them-binhluan', function () {
+    const sp = {};
+    sp.id = $(this).data('id');
+    sp.NoiDung = $('#noiDung').val();
+    sp.soSao = $('#soSao').val();
+    $.ajax({
+        url: '/Detail/ThemBinhLuan',
+        data: sp,
+        success: function (data) {
+            if (data.code == 1) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Vui lòng đăng nhập',
+                    showConfirmButton: false,
+                    timer: 2500
+                });
+            }
+            else if (data.code == 2) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Vui lòng kiểm tra lại',
+                    showConfirmButton: false,
+                    timer: 2500
+                });
+            }
+            else {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Bình luận thành công',
+                    showConfirmButton: false,
+                    timer: 2500
+                });
+                $('#mymodal').modal('hide');
+            }
+
+            //console.log(data.soLuong);
+            //$("#soLuongGioHang").html(data.soLuong);
+        },
+        error: function () {
+            Swal.fire({
+                icon: 'error',
+                title: 'Bình luận thất bại',
                 text: 'Vui lòng thử lại',
                 showConfirmButton: false,
                 timer: 2500

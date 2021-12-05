@@ -1,4 +1,5 @@
 ﻿using EcommerceWebsite.Api.Interface;
+using EcommerceWebsite.Data.Entities;
 using EcommerceWebsite.Data.Identity;
 using EcommerceWebsite.Utilities.Output.System;
 using EcommerceWebsite.Utilities.ViewModel;
@@ -7,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace EcommerceWebsite.MainWeb.Controllers
@@ -14,15 +16,17 @@ namespace EcommerceWebsite.MainWeb.Controllers
     public class DetailController : Controller
     {
         private readonly ISanPhamApiServices _sanPhamServices;
+        private readonly IBinhLuanApiService _binhLuanApiService;
         private readonly IKhachHangApiServices _khachHangServices;
         private readonly IHUIApiServices _huiServices;
         //private readonly UserManager<ApplicationUser> _userManager;
 
-        public DetailController(ISanPhamApiServices sanPhamServices, IKhachHangApiServices khachHangServices, IHUIApiServices huiServices)
+        public DetailController(ISanPhamApiServices sanPhamServices, IKhachHangApiServices khachHangServices, IHUIApiServices huiServices, IBinhLuanApiService binhLuanApiService)
         {
             _sanPhamServices = sanPhamServices;
             _khachHangServices = khachHangServices;
             _huiServices = huiServices;
+            _binhLuanApiService = binhLuanApiService;
         }
 
         public async Task<IActionResult> IndexAsync(string prdId,string prdMaDanhMuc)
@@ -50,6 +54,57 @@ namespace EcommerceWebsite.MainWeb.Controllers
             }
             vm.SanPhamOutPut = await _sanPhamServices.laySanPhamTheoDanhMuc(prdMaDanhMuc);
             return View("Views/Detail/Index.cshtml",vm);
+        }
+        public IActionResult ThemBinhLuan(string id, string NoiDung, int soSao)
+        {
+            try
+            {
+
+                if (User.Claims != null && User.Claims.Count() > 1)
+                {
+                    var userId = User.Claims.Where(claim => claim.Type == ClaimTypes.Sid)
+                                          .FirstOrDefault()
+                                          .Value;
+                    BinhLuan bt = new BinhLuan();
+                    bt.MaSanPham = id;
+                    bt.NguoiTao = userId;
+                    bt.NoiDung = NoiDung;
+                    bt.SoSao = soSao;
+                    var them = _binhLuanApiService.ThemBinhLuan(bt);
+                    if (them.Result)// thêm thành công
+                    {
+                        return Json(new
+                        {
+                            status = true
+                        });
+                    }
+                    else
+                    {
+                        return Json(new
+                        {
+                            code = 2,
+                            msg = "Lỗi rồi",
+                        });
+                    }
+
+                }
+                else// chưa đăng nhập
+                {
+                    return Json(new
+                    {
+                        code = 1,
+                        msg = "Lỗi rồi",
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    code = 500,
+                    msg = "Lỗi rồi" + ex.Message
+                });
+            }
         }
     }
 }

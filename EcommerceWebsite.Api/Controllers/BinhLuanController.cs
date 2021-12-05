@@ -34,15 +34,16 @@ namespace EcommerceWebsite.Api.Controllers
                         NgayTao = DateTime.UtcNow,
                         NguoiTao = maKH,
                         DaXoa = false,
-                    };
+                    };  
                     var result = await _binhLuanServices.ThemBinhLuan(obj);
                     if (result)
                     {
-                        return BadRequest(Messages.API_Failed);
+                        return Ok(Messages.API_Success);
+                     
                     }
                     else
                     {
-                        return Ok(Messages.API_Success);
+                        return BadRequest(Messages.API_Failed);
                     }
 
 

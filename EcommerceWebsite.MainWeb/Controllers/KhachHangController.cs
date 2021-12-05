@@ -63,7 +63,7 @@ namespace EcommerceWebsite.MainWeb.Controllers
                                 CookieAuthenticationDefaults.AuthenticationScheme,
                                 userPrincipal,
                                 authProperties);
-
+                    
                     return RedirectToAction("Index", "Home");
                 }    
             }

@@ -10,6 +10,8 @@ namespace EcommerceWebsite.Services.Interfaces.Main
    public interface IYeuThichSanPhamServices
     {
         Task<bool> ThemYeuThich(SanPhamYeuThich input);
+        //Task<int> laySoLuongYeuThich(SanPhamYeuThich input);
         Task<List<SanPhamVM>> laySanPhamYeuThich(string MaKH);
+
     }
 }

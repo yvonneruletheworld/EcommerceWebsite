@@ -43,7 +43,7 @@ namespace EcommerceWebsite.Api.Interface
             var requestItem = JsonConvert.SerializeObject(input);
             var httpContent = new StringContent(requestItem, Encoding.UTF8, "application/json");
 
-            var response = await client.PostAsync($"/api/BinhLuan/them-binhluan/{input.MaSanPham}/{input.NgayTao}/{input.NoiDung}/{input.SoSao}", httpContent);
+            var response = await client.PostAsync($"/api/BinhLuan/them-binhluan/{input.MaSanPham}/{input.NguoiTao}/{input.NoiDung}/{input.SoSao}", httpContent);
             return response.IsSuccessStatusCode;
         }
     }
