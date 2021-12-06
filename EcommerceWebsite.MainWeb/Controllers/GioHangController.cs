@@ -6,6 +6,7 @@ using EcommerceWebsite.Utilities.Output.Main;
 using EcommerceWebsite.Utilities.ViewModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,9 +22,21 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
         }
         public IActionResult Index()
         {
-            return View("/Views/GioHang/Index.cshtml", dSGioHang);
+            return View("/Views/GioHang/Index.cshtml");
         }
-       
+        [HttpGet("get-data-giohang")]
+        public  IActionResult layHangSanPham()
+        {
+            try
+            {
+                var data =  dSGioHang;
+                return PartialView("/Views/GioHang/_ListGioHang.cshtml", data);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public List<GioHang> dSGioHang
         {
             get {
@@ -37,7 +50,7 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
             }
         }
         //Thêm
-        public IActionResult AddGioHang(string id, int soLuong, string type = "Normal")
+        public IActionResult AddGioHang(string id, int soLuong, decimal giaSP, string type = "Normal")
         {
             var myCart = dSGioHang;
             var item = myCart.SingleOrDefault(p => p.MaSanPham == id);
@@ -50,7 +63,7 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
                 {
                     MaSanPham = id,
                     tenSanPham = sp.TenSanPham,
-                    giaSanPham = sp.GiaBan,
+                    giaSanPham = giaSP,
                     soLuong = soLuong,
                     hinhAnh = sp.HinhAnh
                 };
@@ -63,6 +76,7 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
            
             HttpContext.Session.Set("GioHang", myCart);
             HttpContext.Session.SetString("SoLuongGH", dSGioHang.Sum(c => c.soLuong) +"");
+            HttpContext.Session.SetString("TongTienGH", dSGioHang.Sum(c => c.dThanhTien) + "");
             if (type == "ajax")
             {
                 return Json(new
@@ -86,8 +100,10 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
             if (sp != null)
             {
                 listGHang.RemoveAll(s => s.MaSanPham == id);
+                //cập nhật lại 
                 HttpContext.Session.Set("GioHang", listGHang);
                 HttpContext.Session.SetString("SoLuongGH", dSGioHang.Sum(c => c.soLuong) + "");
+                HttpContext.Session.SetString("TongTienGH", dSGioHang.Sum(c => c.dThanhTien) + "");
                 return Json(new { slGH = dSGioHang.Sum(c => c.soLuong),
                     Message = "Thành công"});
             }
@@ -97,6 +113,29 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
                 return RedirectToAction("index", "Home");
             }
             return RedirectToAction("index", "Home");
+        }
+
+        //updat giỏ hàng
+        public ActionResult suaGioHang(string id, int soLuong)
+        {
+            //Lấy giỏ hàng
+            List<GioHang> listGHang = dSGioHang;
+            //Kiểm tra xem scah cần cập nhật có trong hàng không?
+            GioHang sp = listGHang.Single(s => s.MaSanPham == id);
+            //nếu có cập nhật
+            if (sp != null)
+            {
+
+                sp.soLuong = soLuong;
+                HttpContext.Session.Set("GioHang", listGHang);
+                HttpContext.Session.SetString("SoLuongGH", dSGioHang.Sum(c => c.soLuong) + "");
+                HttpContext.Session.SetString("TongTienGH", dSGioHang.Sum(c => c.dThanhTien) + "");
+                return Json(new { code = 200, Message = "Thành công", slGH = dSGioHang.Sum(c => c.soLuong) });
+            }
+            else
+            {
+                return Json(new { code = 500, Message = "Thành công" });
+            }    
         }
     }
 }

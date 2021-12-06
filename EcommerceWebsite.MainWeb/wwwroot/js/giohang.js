@@ -1,10 +1,38 @@
-﻿$('body').on('click', '.btn-add-cart', function () {
+﻿$(document).ready(() => {
+    initResourceFilterQuery();
+
+})
+function initResourceFilterQuery() {
+    layGioHang();
+}
+
+//Hãng
+function layGioHang() {
+    $.ajax({
+        url: '/get-data-giohang',
+        type: 'GET',
+        success: (result) => {
+            $("#gioHang")[0].innerHTML = result;
+        },
+        error: (err) => {
+            alert('failed');
+            console.log(err);
+        }
+    });
+}
+$('body').on('click', '.btn-add-cart', function () {
     const id = $(this).data('id');
+    const giaSP = $("#giaSanPham").val();
+    let soLuong = 1;
+    if ($("#soLuongThemGH").val() != null) {
+        soLuong = $("#soLuongThemGH").val();
+    }
     $.ajax({
         url: '/GioHang/AddGioHang',
         data: {
             id: id,
-            soLuong: 1,
+            soLuong: soLuong,
+            giaSP: giaSP,
             type: "ajax"
         },
         success: function (data) {
@@ -33,7 +61,8 @@ $('body').on('click', '.btn-xoa-gioHang', function () {
     $.ajax({
         url: `/GioHang/XoaGioHang`,
         data: {
-            id: id
+            id: id,
+          
         },
         success: function (data) {
             Swal.fire({
@@ -44,6 +73,7 @@ $('body').on('click', '.btn-xoa-gioHang', function () {
             });
             console.log(data.slGH);
             $("#soLuonggh").html(data.slGH);
+            layGioHang()
         },
         error: function () {
             Swal.fire({
@@ -56,6 +86,38 @@ $('body').on('click', '.btn-xoa-gioHang', function () {
         }
     });
 })
+$('body').on('click', '.btn-sua-gioHang', function () {
+    const id = $(this).data('id');
+    const soLuong = $("#soLuongGH-"+id+"").val();
+    $.ajax({
+        url: `/GioHang/suaGioHang`,
+        data: {
+            id: id,
+            soLuong: soLuong,
+        },
+        success: function (data) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Cập nhật giỏ hàng thành công',
+                showConfirmButton: false,
+                timer: 2500
+            });
+            console.log(data.slGH);
+            $("#soLuonggh").html(data.slGH);
+            layGioHang()
+        },
+        error: function () {
+            Swal.fire({
+                icon: 'error',
+                title: 'Cập nhật giỏ hàng thất bại',
+                text: 'Vui lòng thử lại',
+                showConfirmButton: false,
+                timer: 2500
+            });
+        }
+    });
+})
+
 $('body').on('click', '.btn-hienthisanpham-hang', function () {
     var id = $(this).data('id');
     $.ajax({

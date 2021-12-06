@@ -97,7 +97,7 @@ namespace EcommerceWebsite.MainWeb.Controllers
                 }
                 else// chưa đăng nhập
                 {
-                    
+                    return Json(new { code = 1, msg = "Lỗi rồi" });
                 }
             }
             catch (Exception ex)

@@ -41,7 +41,7 @@
         <div class="row single-product-area">
             <div class="col-lg-5 col-md-6">
                 <!-- Product Details Left -->
-                <div class="product-details-left">
+                <div class="product-details-left" >
                     <div class="product-details-images slider-navigation-1">
 
                         @foreach (var img in sanPham.ListHinhAnh)
@@ -53,15 +53,14 @@
                             </div>
                         }
                     </div>
-                    <div class="product-details-thumbs slider-thumbs-1">
+                    <div class="product-details-thumbs slider-thumbs-1" style="padding-top: 20px">
                         @foreach (var img in sanPham.ListHinhAnh)
                         {
                             <div class="sm-image"><img src="@img.GiaTri" alt="@img.DonVi"></div>
                         }
                     </div>
                 </div>
-                <!-- Product HUI Left -->
-                <div class="product-additional-info pt-25">
+                <div class="product-additional-info pt-25" style="margin-top: 20px">
                     <a class="wishlist-btn btn-them-yeuthich" data-id="@sanPham.MaSanPham"><i class="fa fa-heart-o"></i>Thêm vào danh sách yêu thích</a>
                     <div class="product-social-sharing pt-25">
                         <ul>
@@ -149,12 +148,13 @@
                                 <div class="quantity">
                                     <label>Số lượng</label>
                                     <div class="cart-plus-minus">
-                                        <input class="cart-plus-minus-box" value="1" type="text">
+                                        <input class="cart-plus-minus-box" id="soLuongThemGH" value="1" type="text">
                                         <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
                                         <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
                                     </div>
                                 </div>
-                                <button class="add-to-cart" type="submit">Thêm vào giỏ hàng</button>
+                                <input id="giaSanPham" value="120000000" hidden />
+                                <a href="#" class="btn-add-cart" data-id="@sanPham.MaSanPham">Thêm vào giỏ</a>
                             </form>
                         </div>
                     </div>
