@@ -58,6 +58,7 @@ namespace EcommerceWebsite.Api.Controllers
         {
             try
             {
+              
                 var result = await _yeuThichSanPhamServices.laySanPhamYeuThich(MaKH);
                 if (result == null)
                     return BadRequest(Messages.API_EmptyResult);

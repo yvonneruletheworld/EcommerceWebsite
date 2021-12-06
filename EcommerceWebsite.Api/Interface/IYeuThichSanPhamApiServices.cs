@@ -11,5 +11,6 @@ namespace EcommerceWebsite.Api.Interface
     {
         Task<bool> ThemYeuThichSanPham(SanPhamYeuThich input);
         Task<List<SanPhamVM>> laySanPhamYeuThich(string MaKH);
+
     }
 }

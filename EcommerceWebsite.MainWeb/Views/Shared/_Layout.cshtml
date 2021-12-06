@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http;
+<!DOCTYPE html>
 <html lang="en" class="no-js">
 <head>
     <meta charset="utf-8" />
@@ -53,7 +54,8 @@
             font-family: 'Varela Round', sans-serif;
         }
     </style>
-    </head>
+</head>
+
 <body>
     <div class="body-wrapper">
         <!-- Begin Header Area -->
@@ -88,7 +90,7 @@
                                                 }
                                                 else
                                                 {
-                                                    <li><a asp-controller="KhachHang" asp-action="Index" >Đăng nhập</a></li>
+                                                    <li><a asp-controller="KhachHang" asp-action="Index">Đăng nhập</a></li>
                                                     <li><a asp-controller="KhachHang" asp-action="Index">Đăng kí</a></li>
                                                 }
                                             </ul>
@@ -161,7 +163,16 @@
                                 <ul class="hm-menu">
                                     <li class="hm-wishlist">
                                         <a href="@Url.Action("Index", "YeuThich")">
-                                            <span class="cart-item-count wishlist-item-count">0</span>
+                                            @if (Context.Session.GetString("_SoLuong") != null)
+                                            {
+
+                                                <span class="cart-item-count wishlist-item-count" id="soLuongyt">@Context.Session.GetString("_SoLuong")</span>
+
+                                            }
+                                            else
+                                            {
+                                                <span class="cart-item-count wishlist-item-count" id="soLuongyt">0</span>
+                                            }
                                             <i class="fa fa-heart-o"></i>
                                         </a>
                                     </li>
@@ -170,7 +181,17 @@
                                             <span class="item-icon"></span>
                                             <span class="item-text">
                                                 0 VNĐ
-                                                <span class="cart-item-count">2</span>
+                                                @if (Context.Session.GetString("SoLuongGH") != null)
+                                                {
+
+                                                    <span class="cart-item-count wishlist-item-count" style=" margin-top: -14px; margin-left: -55px;" id="soLuonggh">@Context.Session.GetString("SoLuongGH")</span>
+
+                                                }
+                                                else
+                                                {
+                                                    <span class="cart-item-count wishlist-item-count" style=" margin-top: -14px; margin-left: -55px;" id="soLuonggh">0</span>
+
+                                                }
                                             </span>
                                         </div>
                                         <span></span>

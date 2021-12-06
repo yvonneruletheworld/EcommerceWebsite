@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace EcommerceWebsite.WebApp.Controllers.Main
@@ -26,8 +27,21 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
         {
             try
             {
-                var data = await _sanPhamApiServices.laySanPham2();
-                return PartialView("/Views/CuaHang/_ListAllSanPham.cshtml", data);
+                if (User.Claims != null && User.Claims.Count() > 1)
+                {
+                    var userId = User.Claims.Where(claim => claim.Type == ClaimTypes.Sid)
+                                          .FirstOrDefault()
+                                          .Value;
+
+                    var data = await _sanPhamApiServices.LaySPYeuThichKH(userId);
+                    return PartialView("/Views/CuaHang/_ListAllSanPham.cshtml", data);
+                }
+                else
+                {
+                    var data = await _sanPhamApiServices.laySanPham2();
+                    return PartialView("/Views/CuaHang/_ListAllSanPham.cshtml", data);
+                }    
+               
             }
             catch (Exception ex)
             {

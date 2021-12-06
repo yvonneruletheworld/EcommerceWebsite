@@ -24,11 +24,13 @@ namespace EcommerceWebsite.MainWeb.Controllers
     {
         private readonly IKhachHangApiServices _khachHangServices;
         private readonly IConfiguration _configuration;
+     
 
         public KhachHangController(IKhachHangApiServices khachHangServices, IConfiguration configuration)
         {
             _khachHangServices = khachHangServices;
             _configuration = configuration;
+
         }
 
         //get
@@ -63,7 +65,7 @@ namespace EcommerceWebsite.MainWeb.Controllers
                                 CookieAuthenticationDefaults.AuthenticationScheme,
                                 userPrincipal,
                                 authProperties);
-                    
+                   
                     return RedirectToAction("Index", "Home");
                 }    
             }

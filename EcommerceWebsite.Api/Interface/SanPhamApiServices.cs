@@ -36,7 +36,7 @@ namespace EcommerceWebsite.Api.Interface
 
         public async Task<List<SanPhamVM>> laySanPham2()
         {
-           return await GetListAsync<SanPhamVM>("/api/SanPham/lay-sanpham");
+           return await GetListAsync<SanPhamVM>($"/api/SanPham/lay-sanpham");
         }
 
         public async Task<bool> ThemSanPham(SanPhamOutput input)
@@ -113,6 +113,11 @@ namespace EcommerceWebsite.Api.Interface
             }
 
             return await GetListAsync<SanPhamVM>(url);
+        }
+
+        public async Task<List<SanPhamVM>> LaySPYeuThichKH(string maKH)
+        {
+           return await GetListAsync<SanPhamVM>($"/api/SanPham/lay-sanphamyt/{maKH}");
         }
     }
 }

@@ -14,8 +14,8 @@
                 showConfirmButton: false,
                 timer: 2500
             });
-            console.log(data.soLuong);
-            $("#soLuongGioHang").html(data.soLuong);
+            console.log(data.slGH);
+            $("#soLuonggh").html(data.slGH);
         },
         error: function () {
             Swal.fire({
@@ -28,7 +28,34 @@
         }
     });
 })
-
+$('body').on('click', '.btn-xoa-gioHang', function () {
+    const id = $(this).data('id');
+    $.ajax({
+        url: `/GioHang/XoaGioHang`,
+        data: {
+            id: id
+        },
+        success: function (data) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Xóa giỏ hàng thành công',
+                showConfirmButton: false,
+                timer: 2500
+            });
+            console.log(data.slGH);
+            $("#soLuonggh").html(data.slGH);
+        },
+        error: function () {
+            Swal.fire({
+                icon: 'error',
+                title: 'Xóa giỏ hàng thất bại',
+                text: 'Vui lòng thử lại',
+                showConfirmButton: false,
+                timer: 2500
+            });
+        }
+    });
+})
 $('body').on('click', '.btn-hienthisanpham-hang', function () {
     var id = $(this).data('id');
     $.ajax({
@@ -93,24 +120,29 @@ $('body').on('click', '.btn-them-yeuthich', function () {
                 });
             }
             else if (data.code == 2) {
+                console.log(data.sl);
+                $("#soLuongyt").html(data.sl);
                 Swal.fire({
                     icon: 'error',
                     title: 'OKe ',
                     showConfirmButton: false,
                     timer: 2500
                 });
+               
             }
             else {
+                console.log(data.sl);
+                $("#soLuongyt").html(data.sl);
                 Swal.fire({
                     icon: 'success',
                     title: 'Thêm sản phẩm yêu thích thành công',
                     showConfirmButton: false,
                     timer: 2500
                 });
+               
             }
            
-            console.log(data.soLuong);
-            $("#soLuongGioHang").html(data.soLuong);
+           
         },
         error: function () {
             Swal.fire({
@@ -157,9 +189,6 @@ $('body').on('click', '.btn-them-binhluan', function () {
                 });
                 $('#mymodal').modal('hide');
             }
-
-            //console.log(data.soLuong);
-            //$("#soLuongGioHang").html(data.soLuong);
         },
         error: function () {
             Swal.fire({

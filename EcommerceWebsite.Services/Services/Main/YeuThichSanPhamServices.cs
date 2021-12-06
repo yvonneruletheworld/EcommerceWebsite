@@ -68,14 +68,6 @@ namespace EcommerceWebsite.Services.Services.Main
                 throw ex;
             }
         }
-
-        //public async Task<int> laySoLuongYeuThich(SanPhamYeuThich input)
-        //{
-        //    var duLieu = await _context.SanPhamYeuThiches.FirstOrDefault(x => x.MaSanPham == input.MaSanPham && x.MaKhachHang == input.MaKhachHang);
-        //    if (duLieu != null)
-        //    {
-        //    }
-        //}
         public async Task<bool> ThemYeuThich(SanPhamYeuThich input)
         {
             var duLieu = _context.SanPhamYeuThiches.FirstOrDefault(x => x.MaSanPham == input.MaSanPham && x.MaKhachHang == input.MaKhachHang);

@@ -1,5 +1,8 @@
 ﻿using EcommerceWebsite.Api.Interface;
 using EcommerceWebsite.Data.Entities;
+using EcommerceWebsite.Utilities.ViewModel;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -14,12 +17,12 @@ namespace EcommerceWebsite.MainWeb.Controllers
     {
         private readonly ILogger<YeuThichController> _logger;
         private readonly IYeuThichSanPhamApiServices _yeuThichSanPhamApiServices;
+        public const string SessionSoLuongYT = "_SoLuong";
         public YeuThichController(IYeuThichSanPhamApiServices yeuThichSanPhamApiServices, ILogger<YeuThichController> logger)
         {
             _yeuThichSanPhamApiServices = yeuThichSanPhamApiServices;
             _logger = logger;
         }
-
         public async Task<IActionResult> Index()
         {
             var userId = "";
@@ -29,6 +32,16 @@ namespace EcommerceWebsite.MainWeb.Controllers
                                         .FirstOrDefault()
                                         .Value;
                 var data = await _yeuThichSanPhamApiServices.laySanPhamYeuThich(userId);
+                HttpContext.Session.SetString(SessionSoLuongYT, data.Count() + "");
+                // create claims
+                //var soLuongYeuThich = new[]
+                //       {
+                //    new Claim(ClaimTypes.Locality,  HttpContext.Session.GetString("_SoLuong")),
+                //};
+                //var claimsIdentity = new ClaimsIdentity(
+                //soLuongYeuThich, CookieAuthenticationDefaults.AuthenticationScheme);
+
+                ViewBag.soLuong = HttpContext.Session.GetString("_SoLuong");
                 return View(data);
             }
             else
@@ -37,7 +50,7 @@ namespace EcommerceWebsite.MainWeb.Controllers
             }    
            
         }
-        public IActionResult ThemSanPhamYeuThich(string id)
+        public async Task<IActionResult> ThemSanPhamYeuThich(string id)
         {
             try
             {
@@ -51,10 +64,13 @@ namespace EcommerceWebsite.MainWeb.Controllers
                     spyt.MaSanPham = id;
                     spyt.MaKhachHang = userId;
                     var them =  _yeuThichSanPhamApiServices.ThemYeuThichSanPham(spyt);
+                    var soLuong = await _yeuThichSanPhamApiServices.laySanPhamYeuThich(userId);
+                    HttpContext.Session.SetString(SessionSoLuongYT, soLuong.Count() + "");
                     if (them.Result)// thêm thành công
                     {
                         return Json(new
                         {
+                           sl = soLuong.Count(),
                             status = true
                         });
                     }
@@ -62,6 +78,7 @@ namespace EcommerceWebsite.MainWeb.Controllers
                     {
                         return Json(new
                         {
+                            sl = soLuong.Count(),
                             code = 2,
                             msg = "Lỗi rồi",
                         }) ;

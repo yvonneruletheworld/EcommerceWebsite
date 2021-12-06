@@ -10,7 +10,9 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace EcommerceWebsite.MainWeb.Controllers
 {
@@ -22,8 +24,11 @@ namespace EcommerceWebsite.MainWeb.Controllers
         private readonly IHUIApiServices _huiServices;
         private readonly ISanPhamApiServices _sanPhamServices;
         private readonly IMapper _mapper;
+        public const string SessionSoLuongYT = "_SoLuong";
+        private readonly IYeuThichSanPhamApiServices _yeuThichSanPhamApiServices;
 
-        public HomeController(ILogger<HomeController> logger, IDanhMucApiServices danhMucServices, IKhuyenMaiApiServices khuyenMaiServices, IHUIApiServices huiServices, ISanPhamApiServices sanPhamServices, IMapper mapper)
+        public HomeController(ILogger<HomeController> logger, IDanhMucApiServices danhMucServices, IKhuyenMaiApiServices khuyenMaiServices, IHUIApiServices huiServices,
+            ISanPhamApiServices sanPhamServices, IMapper mapper, IYeuThichSanPhamApiServices yeuThichSanPhamApiServices)
         {
             _logger = logger;
             _danhMucServices = danhMucServices;
@@ -31,6 +36,7 @@ namespace EcommerceWebsite.MainWeb.Controllers
             _huiServices = huiServices;
             _sanPhamServices = sanPhamServices;
             _mapper = mapper;
+            _yeuThichSanPhamApiServices = yeuThichSanPhamApiServices;
         }
 
         public async Task<IActionResult> Index(string keyword)
@@ -52,7 +58,14 @@ namespace EcommerceWebsite.MainWeb.Controllers
             }
             var lstHuiDon = (HUIConfiguration.ListHUI.Where(h => h.Itemsets.Count() == 1).ToList());
             vm.SanPhamHUIDons = await GetSanPhamTheoHUIDonAsync(lstHuiDon);
-
+            if (User.Claims != null && User.Claims.Count() > 1)
+            {
+                var userId = User.Claims.Where(claim => claim.Type == ClaimTypes.Sid)
+                               .FirstOrDefault()
+                               .Value;
+                var data = await _yeuThichSanPhamApiServices.laySanPhamYeuThich(userId);
+                HttpContext.Session.SetString(SessionSoLuongYT, data.Count() + "");
+            }
             return View("~/Views/Home/Index.cshtml", vm);
         }
 
