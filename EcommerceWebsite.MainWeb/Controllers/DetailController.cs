@@ -1,4 +1,5 @@
 ﻿using EcommerceWebsite.Api.Interface;
+using EcommerceWebsite.Application.Constants;
 using EcommerceWebsite.Data.Entities;
 using EcommerceWebsite.Data.Identity;
 using EcommerceWebsite.Utilities.Input;
@@ -6,6 +7,8 @@ using EcommerceWebsite.Utilities.Output.System;
 using EcommerceWebsite.Utilities.ViewModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,22 +17,27 @@ using System.Threading.Tasks;
 
 namespace EcommerceWebsite.MainWeb.Controllers
 {
-    public class DetailController : Controller
+    [Route("/ChiTiet")]
+    public class DetailController : BackgroudController
     {
         private readonly ISanPhamApiServices _sanPhamServices;
         private readonly IBinhLuanApiService _binhLuanApiService;
-        private readonly IKhachHangApiServices _khachHangServices;
+        //private readonly IKhachHangApiServices _khachHangServices;
         private readonly IHUIApiServices _huiServices;
         //private readonly UserManager<ApplicationUser> _userManager;
 
-        public DetailController(ISanPhamApiServices sanPhamServices, IKhachHangApiServices khachHangServices, IHUIApiServices huiServices, IBinhLuanApiService binhLuanApiService)
+        public DetailController(ISanPhamApiServices sanPhamServices,
+            IKhachHangApiServices khachHangServices,
+            IHUIApiServices huiServices,
+            IBinhLuanApiService binhLuanApiService, IConfiguration configuration) : base(khachHangServices, configuration)
         {
             _sanPhamServices = sanPhamServices;
-            _khachHangServices = khachHangServices;
+            //_khachHangServices = khachHangServices;
             _huiServices = huiServices;
             _binhLuanApiService = binhLuanApiService;
         }
 
+        [HttpGet("Detail")]
         public async Task<IActionResult> IndexAsync(string prdId,string prdMaDanhMuc)
         {
             var vm = new DetailVM();
@@ -69,36 +77,39 @@ namespace EcommerceWebsite.MainWeb.Controllers
             }
             return View("Views/Detail/Index.cshtml",vm);
         }
-        public IActionResult ThemBinhLuan(BinhLuanInput input)
+
+        [HttpPost("post-cmt")]
+        public async Task<IActionResult> ThemBinhLuanAsync(BinhLuanInput input)
         {
             try
             {
-
-                if (string.IsNullOrEmpty(input.Email) || string.IsNullOrEmpty(input.MatKhau) )
+                if (!string.IsNullOrEmpty(input.Email) || !string.IsNullOrEmpty(input.MatKhau))
                 {
-                    var userId = User.Claims.Where(claim => claim.Type == ClaimTypes.Sid)
+                    var obj = new ThongTinKhachHangInput
+                    {
+                        Email = input.Email,
+                        MatKhau = input.MatKhau
+                    };
+                    var rs = (JsonResult)await this.Index(obj, "Detail");
+                    if (!rs.Value.ToString().Contains(Messages.Login_Success))
+                    {
+                        return Json(new { status = false });
+                    }
+                    //return rs.Value.ToString().Contains(Messages.Login_Success) ?
+                    //    Json(new { status = true }) : 
+                }
+
+                var userId = User.Claims.Where(claim => claim.Type == ClaimTypes.Sid)
                                           .FirstOrDefault()
                                           .Value;
-                    BinhLuan bt = new BinhLuan();
-                    bt.MaSanPham = input.MaSanPham;
-                    bt.NguoiTao = userId;
-                    bt.NoiDung = input.NoiDung;
-                    bt.SoSao = input.SoSao;
-                    var them = _binhLuanApiService.ThemBinhLuan(bt);
-                    if (them.Result)// thêm thành công
-                    {
-                        return Json(new{status = true });
-                    }
-                    else
-                    {
-                        return Json(new{ code = 2,msg = "Lỗi rồi"});
-                    }
-
-                }
-                else// chưa đăng nhập
-                {
-                    return Json(new { code = 1, msg = "Lỗi rồi" });
-                }
+                BinhLuan bt = new BinhLuan();
+                bt.MaSanPham = input.MaSanPham;
+                bt.NguoiTao = userId;
+                bt.NoiDung = input.NoiDung;
+                bt.SoSao = input.SoSao;
+                var them = _binhLuanApiService.ThemBinhLuan(bt);
+                return them.Result? Json(new { status = true }) 
+                    :  Json(new { code = 2, msg = "Lỗi rồi" });
             }
             catch (Exception ex)
             {

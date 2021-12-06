@@ -238,7 +238,9 @@ $('body').on('click', '.btn-them-binhluan', function () {
     fd.append('NoiDung', _nodung);
     fd.append('MaSanPham', _masp);
     $.ajax({
-        url: '/Detail/ThemBinhLuan',
+        type: 'POST',
+        url: '/Detail/post-cmt',
+        dataType: 'JSON',
         data: fd,
         contentType: false, // Not to set any content header
         processData: false, // Not to process data
@@ -269,14 +271,15 @@ $('body').on('click', '.btn-them-binhluan', function () {
                 $('#mymodal').modal('hide');
             }
         },
-        error: function () {
+        error: function (err) {
             Swal.fire({
                 icon: 'error',
-                title: 'Bình luận thất bại',
+                title: 'Đã xảy ra lỗi',
                 text: 'Vui lòng thử lại',
                 showConfirmButton: false,
                 timer: 2500
             });
+            console.log(err);
         }
     });
 })
