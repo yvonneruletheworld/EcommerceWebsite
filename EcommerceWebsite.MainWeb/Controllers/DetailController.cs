@@ -1,6 +1,7 @@
 ﻿using EcommerceWebsite.Api.Interface;
 using EcommerceWebsite.Data.Entities;
 using EcommerceWebsite.Data.Identity;
+using EcommerceWebsite.Utilities.Input;
 using EcommerceWebsite.Utilities.Output.System;
 using EcommerceWebsite.Utilities.ViewModel;
 using Microsoft.AspNetCore.Identity;
@@ -53,48 +54,50 @@ namespace EcommerceWebsite.MainWeb.Controllers
                 }
             }
             vm.SanPhamOutPut = await _sanPhamServices.laySanPhamTheoDanhMuc(prdMaDanhMuc);
+            if (User.Claims != null && User.Claims.Count() > 1)
+            {
+                var user = new KhachHangOutput()
+                {
+                    Email = User.Claims.Where(claim => claim.Type == ClaimTypes.Email)
+                                       .FirstOrDefault()
+                                       .Value,
+                    TenKhachHang = User.Claims.Where(claim => claim.Type == ClaimTypes.Name)
+                                       .FirstOrDefault()
+                                       .Value
+                };
+                vm.KhachHang = user;
+            }
             return View("Views/Detail/Index.cshtml",vm);
         }
-        public IActionResult ThemBinhLuan(string id, string NoiDung, int soSao)
+        public IActionResult ThemBinhLuan(BinhLuanInput input)
         {
             try
             {
 
-                if (User.Claims != null && User.Claims.Count() > 1)
+                if (string.IsNullOrEmpty(input.Email) || string.IsNullOrEmpty(input.MatKhau) )
                 {
                     var userId = User.Claims.Where(claim => claim.Type == ClaimTypes.Sid)
                                           .FirstOrDefault()
                                           .Value;
                     BinhLuan bt = new BinhLuan();
-                    bt.MaSanPham = id;
+                    bt.MaSanPham = input.MaSanPham;
                     bt.NguoiTao = userId;
-                    bt.NoiDung = NoiDung;
-                    bt.SoSao = soSao;
+                    bt.NoiDung = input.NoiDung;
+                    bt.SoSao = input.SoSao;
                     var them = _binhLuanApiService.ThemBinhLuan(bt);
                     if (them.Result)// thêm thành công
                     {
-                        return Json(new
-                        {
-                            status = true
-                        });
+                        return Json(new{status = true });
                     }
                     else
                     {
-                        return Json(new
-                        {
-                            code = 2,
-                            msg = "Lỗi rồi",
-                        });
+                        return Json(new{ code = 2,msg = "Lỗi rồi"});
                     }
 
                 }
                 else// chưa đăng nhập
                 {
-                    return Json(new
-                    {
-                        code = 1,
-                        msg = "Lỗi rồi",
-                    });
+                    
                 }
             }
             catch (Exception ex)

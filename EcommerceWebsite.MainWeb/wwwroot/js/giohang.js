@@ -156,13 +156,30 @@ $('body').on('click', '.btn-them-yeuthich', function () {
     });
 })
 $('body').on('click', '.btn-them-binhluan', function () {
-    const sp = {};
-    sp.id = $(this).data('id');
-    sp.NoiDung = $('#noiDung').val();
-    sp.soSao = $('#soSao').val();
+
+    //const sp = {};
+    var fd = new FormData();
+    //sp.id = $(this).data('id');
+    //sp.NoiDung = $('#noiDung').val();
+    //sp.soSao = $('#soSao').val();
+    if (!model.khachHang) {
+        var _pass = $("#pass-feedback-id").val();
+        var _email = $("#email-feedback-id").val();
+
+        fd.append('MatKhau', _pass);
+        fd.append('Email', _email);
+    }
+    var _masp = $(this).data('id');
+    var _nodung = $('#noiDung').val();
+    var _sosao = $('#soSao').val();
+    fd.append('SoSao', _sosao);
+    fd.append('NoiDung', _nodung);
+    fd.append('MaSanPham', _masp);
     $.ajax({
         url: '/Detail/ThemBinhLuan',
-        data: sp,
+        data: fd,
+        contentType: false, // Not to set any content header
+        processData: false, // Not to process data
         success: function (data) {
             if (data.code == 1) {
                 Swal.fire({
