@@ -40,12 +40,12 @@ namespace EcommerceWebsite.MainWeb.Controllers
         }
 
         [HttpPost("client-login")]
-        public async Task<IActionResult> Index(ThongTinKhachHangInput input)
+        public async Task<IActionResult> Index(ThongTinKhachHangInput input, string previousPage = null)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var token = await _khachHangServices.GetLoginToken(input);
-                if(!token.IsSuccessed)
+                if (!token.IsSuccessed)
                 {
                     ModelState.AddModelError("", token.Message);
                     return View();
@@ -63,9 +63,11 @@ namespace EcommerceWebsite.MainWeb.Controllers
                                 CookieAuthenticationDefaults.AuthenticationScheme,
                                 userPrincipal,
                                 authProperties);
-                    
-                    return RedirectToAction("Index", "Home");
-                }    
+                    if (string.IsNullOrEmpty(previousPage))
+                        return RedirectToAction("Index", "Home");
+                    else
+                        return Json(new { code = 200, msg = Messages.Login_Success });
+                }
             }
             else
             {
