@@ -178,14 +178,15 @@ $('body').on('click', '.btn-them-binhluan', function () {
             //console.log(data.soLuong);
             //$("#soLuongGioHang").html(data.soLuong);
         },
-        error: function () {
+        error: function (err) {
             Swal.fire({
                 icon: 'error',
-                title: 'Bình luận thất bại',
+                title: 'Đã xảy ra lỗi',
                 text: 'Vui lòng thử lại',
                 showConfirmButton: false,
                 timer: 2500
             });
+            console.log(err);
         }
     });
 })
