@@ -56,7 +56,7 @@ namespace EcommerceWebsite.MainWeb.Controllers
                     if (string.IsNullOrEmpty(previousPage))
                         return RedirectToAction("Index", "Home");
                     else
-                        return Json(new { code = 200, msg = Messages.Login_Success });
+                        return Json(Messages.Login_Success);
                 }
             }
             else

@@ -144,7 +144,9 @@ $('body').on('click', '.btn-them-binhluan', function () {
     fd.append('NoiDung', _nodung);
     fd.append('MaSanPham', _masp);
     $.ajax({
-        url: '/Detail/ThemBinhLuan',
+        type: 'POST',
+        url: '/Detail/post-cmt',
+        dataType: 'JSON',
         data: fd,
         contentType: false, // Not to set any content header
         processData: false, // Not to process data

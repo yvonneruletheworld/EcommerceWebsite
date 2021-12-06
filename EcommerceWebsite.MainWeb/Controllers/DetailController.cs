@@ -77,42 +77,39 @@ namespace EcommerceWebsite.MainWeb.Controllers
             }
             return View("Views/Detail/Index.cshtml",vm);
         }
+
+        [HttpPost("post-cmt")]
         public async Task<IActionResult> ThemBinhLuanAsync(BinhLuanInput input)
         {
             try
             {
-                if (string.IsNullOrEmpty(input.Email) || string.IsNullOrEmpty(input.MatKhau) )
-                {
-                    var userId = User.Claims.Where(claim => claim.Type == ClaimTypes.Sid)
-                                          .FirstOrDefault()
-                                          .Value;
-                    BinhLuan bt = new BinhLuan();
-                    bt.MaSanPham = input.MaSanPham;
-                    bt.NguoiTao = userId;
-                    bt.NoiDung = input.NoiDung;
-                    bt.SoSao = input.SoSao;
-                    var them = _binhLuanApiService.ThemBinhLuan(bt);
-                    if (them.Result)// thêm thành công
-                    {
-                        return Json(new{status = true });
-                    }
-                    else
-                    {
-                        return Json(new{ code = 2,msg = "Lỗi rồi"});
-                    }
-
-                }
-                else// chưa đăng nhập
+                if (!string.IsNullOrEmpty(input.Email) || !string.IsNullOrEmpty(input.MatKhau))
                 {
                     var obj = new ThongTinKhachHangInput
                     {
                         Email = input.Email,
                         MatKhau = input.MatKhau
                     };
-                   var rs = await this.Index(obj,"Detail");
-                    //return JsonConvert.DeserializeObject<string>(rs) == Messages.Login_Success;
-                    return Json(new { status = true });
+                    var rs = (JsonResult)await this.Index(obj, "Detail");
+                    if (!rs.Value.ToString().Contains(Messages.Login_Success))
+                    {
+                        return Json(new { status = false });
+                    }
+                    //return rs.Value.ToString().Contains(Messages.Login_Success) ?
+                    //    Json(new { status = true }) : 
                 }
+
+                var userId = User.Claims.Where(claim => claim.Type == ClaimTypes.Sid)
+                                          .FirstOrDefault()
+                                          .Value;
+                BinhLuan bt = new BinhLuan();
+                bt.MaSanPham = input.MaSanPham;
+                bt.NguoiTao = userId;
+                bt.NoiDung = input.NoiDung;
+                bt.SoSao = input.SoSao;
+                var them = _binhLuanApiService.ThemBinhLuan(bt);
+                return them.Result? Json(new { status = true }) 
+                    :  Json(new { code = 2, msg = "Lỗi rồi" });
             }
             catch (Exception ex)
             {
