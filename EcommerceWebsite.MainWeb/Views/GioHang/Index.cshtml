@@ -1,3 +1,37 @@
 ﻿<div id="gioHang">
 
 </div>
+<script>
+    $(document).ready(() => {
+        initResourceFilterQuery();
+
+    })
+    function initResourceFilterQuery() {
+        layGioHang();
+    }
+    function layGioHang() {
+        $.ajax({
+            url: '/get-data-giohang',
+            type: 'GET',
+            success: (result) => {
+                if (result.code == 500) {
+                    location.href = "/Home/Index";
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Giỏ hàng trống',
+                        showConfirmButton: false,
+                        timer: 2500
+                    });
+ 
+                }
+                else {
+                    $("#gioHang")[0].innerHTML = result;
+                }
+            },
+            error: (err) => {
+                alert('failed');
+                console.log(err);
+            }
+        });
+    }
+</script>

@@ -1,0 +1,231 @@
+﻿@using EcommerceWebsite.MainWeb.Models;
+@using Microsoft.AspNetCore.Http;
+@model List<GioHang>
+<div class="breadcrumb-area">
+    <div class="container">
+        <div class="breadcrumb-content">
+            <ul>
+                <li><a href="index.html">Giỏ Hàng</a></li>
+                <li class="active">Thanh toán</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Li's Breadcrumb Area End Here -->
+<!--Checkout Area Strat-->
+<div class="checkout-area pt-60 pb-30">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="coupon-accordion">
+                    <!--Accordion Start-->
+                    <h3>
+                        Địa chỉ nhận hàng
+                        <br />
+                        <br />
+                        @if (Context.Session.GetString("HotenKH") != null)
+                        {
+                            var hoTen = @Context.Session.GetString("HotenKH");
+                            var diaChi = @Context.Session.GetString("DiaChiKH");
+                            var SDT = @Context.Session.GetString("SDTKH");
+                            <span>@hoTen - @SDT - @diaChi</span>
+                            <a href="#" onclick="danhSachDiaChiKH()" style="float:right">
+                                THAY ĐỔI
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="#" onclick="danhSachDiaChiKH()" style="float:right">
+                               THÊM ĐỊA CHỈ
+                            </a>
+                        }
+
+                    </h3>
+                    <br />
+
+                </div>
+                <div class="modal fade modal-wrapper" id="dsDiaChi">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <h3 class="review-page-title">Danh sách địa chỉ của @User.Identity.Name</h3>
+                            </div>
+                            <div id="DsDiaChiKH">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-12">
+                <form action="#">
+                    <div class="checkbox-form">
+                        <h3>THÔNG TIN NHẬN ĐƠN HÀNG</h3>
+                        @if (Context.Session.GetString("HotenKH") != null)
+                        {
+                            var hoTen = @Context.Session.GetString("HotenKH");
+                            var diaChi = @Context.Session.GetString("DiaChiKH");
+                            var SDT = @Context.Session.GetString("SDTKH");
+                            var madc = @Context.Session.GetString("MaDiaChiKH");
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="checkout-form-list">
+
+                                <input hidden value="@madc" id="maDiaChiKH" />
+                                <label>Họ Tên Người nhận: @hoTen</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="checkout-form-list">
+                                <label>Số điện thoại: @SDT</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="checkout-form-list">
+                                <label>Địa chỉ nhận: @diaChi</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="checkout-form-list">
+                                <label>Ngày đặt hàng: @DateTime.Now</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="country-select clearfix">
+                                <label>Phương thức thanh toán <span class="required">*</span></label>
+                                <select class="nice-select wide" id="pTThanhToan">
+                                    <option value="Thanh toán khi nhận hàng">Thanh toán khi nhận hàng</option>
+                                    <option value="Ví Triple V Store">Ví Triple V Store</option>
+                                    <option value="Thẻ tín dụng/ghi nợ">Thẻ tín dụng/ghi nợ</option>
+                                    <option value="MoMo">MoMo</option>
+                                </select>
+                            </div>
+                        </div>
+                            <div class="col-md-12">
+                                <div class="coupon-all">
+                                    <div class="coupon">
+                                        <input id="maKhuyenMai" class="input-text" value="NULL" placeholder="Mã giảm giá" type="text">
+                                        <input class="button" name="apply_coupon" value="Áp dụng phiếu giảm giá" type="submit">
+                                    </div>
+                                </div>
+                            </div>
+
+                    </div>
+                        }
+                        else
+                        {
+                        }
+
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-6 col-12">
+                <div class="your-order">
+                    <h3>Đơn đặt hàng của bạn</h3>
+                    <div class="your-order-table table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="cart-product-name">Sản phẩm</th>
+                                    <th class="cart-product-total">Giá</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                <tr class="cart_item">
+                                    @if (item.tenSanPham.Length > 25)
+                                    {
+                                        <td class="cart-product-name">@item.tenSanPham.Substring(0, 25) ...<strong class="product-quantity"> × @item.soLuong</strong></td>
+                                    }
+                                    else
+                                    {
+                                        <td class="cart-product-name">@item.tenSanPham<strong class="product-quantity"> × @item.soLuong</strong></td>
+                                    }
+                                    <td class="cart-product-total"><span class="amount">@string.Format("{0:0,0}", item.giaSanPham) VNĐ</span></td>
+                                </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr class="cart-subtotal">
+                                    <th >Tổng tiền hàng</th>
+                                    @if (Context.Session.GetString("TongTienGH") != null)
+                                    {
+                                        var tongTien = decimal.Parse(Context.Session.GetString("TongTienGH"));
+                                        <td><span class="amount">@string.Format("{0:0,0}", tongTien) VNĐ</span></td>
+                                    }
+
+                                </tr>
+                                <tr class="cart-subtotal">
+                                    <th >Phí vận chuyển</th>
+                                    
+                                        <td><span class="amount">15000 VNĐ</span></td>
+
+                                </tr>
+                                <tr class="order-total">
+                                    <th>Tổng thanh toán</th>
+                                    @if (Context.Session.GetString("TongTienGH") != null)
+                                    {
+                                        var tongTien = decimal.Parse(Context.Session.GetString("TongTienGH")) + 15000;
+                                        <td><span class="amount">@string.Format("{0:0,0}", tongTien) VNĐ</span></td>
+                                    }
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    @*<div class="payment-method">
+                        <div class="payment-accordion">
+                            <div id="accordion">
+                                <div class="card">
+                                    <div class="card-header" id="#payment-1">
+                                        <h5 class="panel-title">
+                                            <a class="" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                Direct Bank Transfer.
+                                            </a>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                                        <div class="card-body">
+                                            <p>Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header" id="#payment-2">
+                                        <h5 class="panel-title">
+                                            <a class="collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                Cheque Payment
+                                            </a>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseTwo" class="collapse" data-parent="#accordion">
+                                        <div class="card-body">
+                                            <p>Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header" id="#payment-3">
+                                        <h5 class="panel-title">
+                                            <a class="collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                PayPal
+                                            </a>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseThree" class="collapse" data-parent="#accordion">
+                                        <div class="card-body">
+                                            <p>Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>*@
+                            <div class="order-button-payment">
+                                <input value="Đặt hàng" type="submit" onclick="ThanhToan()">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>

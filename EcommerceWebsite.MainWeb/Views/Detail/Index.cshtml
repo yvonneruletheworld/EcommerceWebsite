@@ -154,7 +154,7 @@
                                     </div>
                                 </div>
                                 <input id="giaSanPham" value="120000000" hidden />
-                                <a href="#" class="btn-add-cart" data-id="@sanPham.MaSanPham">Thêm vào giỏ</a>
+                                <a href="#" class="btn-add-cart" type="button" data-id="@sanPham.MaSanPham">Thêm vào giỏ</a>
                             </form>
                         </div>
                     </div>
@@ -338,6 +338,7 @@
                                         <h3 class="review-page-title">Đánh giá sản phẩm</h3>
                                         <div class="modal-inner-area row">
                                             <div class="col-lg-6">
+                                        
                                                 <div class="li-review-product">
                                                     <img src="@Model.SanPham.ListHinhAnh[0].GiaTri" alt="@Model.SanPham.TenSanPham" style="max-width: 400px">
                                                     <div class="li-review-product-desc">
@@ -407,10 +408,11 @@
                                                                             <span class="required"><sub>*</sub> Required fields</span>
                                                                         </p>
                                                                     }
-                                                                    <div class="feedback-btn pb-15">
-                                                                        <button type ="button"  class="close" data-dismiss="modal" aria-label="Close">Hủy</button>
-                                                                        <button type ="button"  @*class="btn-them-binhluan"*@ onclick="submitComment()" data-id="@sanPham.MaSanPham">Gửi Đánh giá</button>
-                                                                    </div>
+                                                                <div class="feedback-btn pb-15">
+                                                                    <input id="MaSP" value="@sanPham.MaSanPham" hidden />
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">Hủy</button>
+                                                                    <a href="#" onclick="submitComment()">Bình luận</a>
+                                                                </div>
 
                                                                 </div>
                                                             </form>
@@ -486,6 +488,7 @@
                                         </div>
                                     </div>
                                     <div class="add-actions">
+                                       
                                         <ul class="add-actions-link">
                                             <li class="add-cart active"><a href="#">Thêm vào giỏ</a></li>
                                             <li><a class="links-details" href="wishlist.html"><i class="fa fa-heart-o"></i></a></li>
@@ -531,8 +534,8 @@
             fd.append('MatKhau', _pass);
             fd.append('Email', _email);
         }
-        var _masp = $(this).data('id');
         var _nodung = $('#noiDung').val();
+        var _masp = $('#MaSP').val();
         var _sosao = $('#soSao').val();
         fd.append('SoSao', _sosao);
         fd.append('NoiDung', _nodung);
@@ -568,7 +571,9 @@
                         showConfirmButton: false,
                         timer: 2500
                     });
-                    $('#mymodal').modal('hide');
+                    $('#noiDung').val('');
+                    $('#MaSP').val('');
+                    $('#soSao').val('');
                 }
 
                 //console.log(data.soLuong);

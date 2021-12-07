@@ -1,4 +1,5 @@
 ﻿using EcommerceWebsite.Application.Constants;
+using EcommerceWebsite.Data.Entities;
 using EcommerceWebsite.Utilities.Input;
 using EcommerceWebsite.Utilities.Output.System;
 using System;
@@ -12,5 +13,6 @@ namespace EcommerceWebsite.Api.Interface
     {
         Task<ApiResult<string>> GetLoginToken(ThongTinKhachHangInput input);
         Task<KhachHangOutput> GetKhachHangTheoMa(string maKhachHang);
+        Task<List<DiaChiKhachHang>> layDiaChiKhachHang(string MaKH);
     }
 }

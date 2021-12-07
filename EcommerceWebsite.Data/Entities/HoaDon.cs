@@ -17,7 +17,7 @@ namespace EcommerceWebsite.Data.Entities
         public string MaKhuyenMai { get; set; }
         public string MaDiaChi { get; set; }
         public decimal ThanhTien { get; set; }
-        public Status TinhTrang { get; set; }
+        public string TinhTrang { get; set; }
         public decimal PhiGiaoHang { get; set; }
         public string PhuongThucThanhToan { get; set; }
 

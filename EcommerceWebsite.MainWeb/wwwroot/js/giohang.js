@@ -1,18 +1,22 @@
-﻿$(document).ready(() => {
-    initResourceFilterQuery();
-
-})
-function initResourceFilterQuery() {
-    layGioHang();
-}
-
-//Hãng
+﻿
 function layGioHang() {
     $.ajax({
         url: '/get-data-giohang',
         type: 'GET',
         success: (result) => {
-            $("#gioHang")[0].innerHTML = result;
+            if (result.code == 500) {
+                location.href = "/Home/Index";
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Giỏ hàng trống',
+                    showConfirmButton: false,
+                    timer: 2500
+                });
+   
+            }
+            else {
+                $("#gioHang")[0].innerHTML = result;
+            }
         },
         error: (err) => {
             alert('failed');
@@ -283,3 +287,79 @@ $('body').on('click', '.btn-them-binhluan', function () {
         }
     });
 })
+function layThanhToan() {
+    $.ajax({
+        url: '/get-data-thanhtoan',
+        type: 'GET',
+        success: (result) => {
+            if (result.code == 500) {
+                location.href = "/KhachHang/client-login";
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Vui lòng bạn đăng nhập',
+                    showConfirmButton: false,
+                    timer: 2500
+                });
+            }
+            else {
+                $("#gioHang")[0].innerHTML = result;
+            }
+        },
+        error: (err) => {
+            alert('failed');
+            console.log(err);
+        }
+    });
+}
+///KHÁCH HÀNG
+function danhSachDiaChiKH() {
+    $('#dsDiaChi').modal('show');
+    layDiaChiKH();
+}
+function layDiaChiKH() {
+    $.ajax({
+        url: '/get-data-diachikhachhang',
+        type: 'GET',
+        success: (result) => {
+           $("#DsDiaChiKH")[0].innerHTML = result;
+        },
+        error: (err) => {
+            alert('failed');
+            console.log(err);
+        }
+    });
+}
+//THANH TOÁN
+function ThanhToan() {
+    const MaDC = $('#maDiaChiKH').val();
+    const PtThanhToan = $('#pTThanhToan').val();
+    const MaKM = $('#maKhuyenMai').val();
+    $.ajax({
+        url: '/GioHang/ThanhToan',
+        data: {
+            MaKM: MaKM,
+            MaDC: MaDC,
+            PtThanhToan: PtThanhToan,
+            type: "ajax"
+        },
+        success: function (data) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Đặt hàng thành công',
+                showConfirmButton: false,
+                timer: 2500
+            });
+            console.log(data.slGH);
+            $("#soLuonggh").html(data.slGH);
+        },
+        error: function () {
+            Swal.fire({
+                icon: 'error',
+                title: 'Thêm giỏ hàng thất bại',
+                text: 'Vui lòng thử lại',
+                showConfirmButton: false,
+                timer: 2500
+            });
+        }
+    });
+}

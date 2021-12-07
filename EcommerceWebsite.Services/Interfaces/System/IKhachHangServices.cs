@@ -25,5 +25,6 @@ namespace EcommerceWebsite.Services.Interfaces.System
         Task<bool> UpdateOTPCode(string id, string v);
 
         Task<bool> SubmitUser(ThongTinKhachHangInput input);
+        Task<List<DiaChiKhachHang>> layDiaChiKhachHang(string MaKH);
     }
 }

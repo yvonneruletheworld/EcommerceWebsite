@@ -1,0 +1,16 @@
+﻿@using EcommerceWebsite.Data.Entities
+@model List<DiaChiKhachHang>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-lg-1" style="text-align:center">
+               <input  type="radio" style="width:25px"/>
+        </div>
+        <div class="col-lg-11">
+            <p>
+                <h6>@item.Hoten - @item.SDT</h6>&ensp;@item.DiaChi
+            </p>
+        </div>
+       
+    }
+</div>

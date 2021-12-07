@@ -26,6 +26,9 @@ namespace EcommerceWebsite.Data.Configurations
             builder.Property(hd => hd.MaDiaChi)
                 .HasMaxLength(100);
 
+            builder.Property(hd => hd.MaKhachHang)
+               .HasMaxLength(100);
+
             builder.Property(hd => hd.PhiGiaoHang)
                 .HasColumnType("money");
 

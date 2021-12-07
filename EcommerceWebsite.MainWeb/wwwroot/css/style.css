@@ -1333,7 +1333,7 @@ textarea {
 		font-weight: 600;
 	}
 
-	.cart-quantity .add-to-cart {
+	.cart-quantity .btn-add-cart {
 		border: none;
 		font-size: 14px;
 		color: #242424;
@@ -1347,7 +1347,7 @@ textarea {
 		transition: all 0.3s ease-in-out;
 	}
 
-		.cart-quantity .add-to-cart:hover {
+		.cart-quantity .btn-add-cart:hover {
 			background: #242424;
 			color: #ffffff;
 		}
@@ -5839,7 +5839,7 @@ span.required {
 		margin-bottom: 20px;
 	}
 
-.single-add-to-cart {
+.single-btn-add-cart {
 	float: left;
 	width: 100%;
 }
@@ -6071,7 +6071,7 @@ span.required {
 	text-align: center;
 }
 
-	.sp-carousel-content .single-add-to-cart {
+	.sp-carousel-content .single-btn-add-cart {
 		width: 100%;
 	}
 

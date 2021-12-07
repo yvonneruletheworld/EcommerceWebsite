@@ -1,5 +1,6 @@
 ﻿using EcommerceWebsite.Api.Interface;
 using EcommerceWebsite.Data.EF;
+using EcommerceWebsite.Data.Entities;
 using EcommerceWebsite.MainWeb.Models;
 using EcommerceWebsite.Services.Interfaces.ExtraServices;
 using EcommerceWebsite.Utilities.Output.Main;
@@ -9,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace EcommerceWebsite.WebApp.Controllers.Main
@@ -16,21 +18,97 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
     public class GioHangController : Controller
     {
         private readonly ISanPhamApiServices _sanPhamApiServices;
-        public GioHangController(ISanPhamApiServices sanPhamApiService)
+        private readonly IGioHangApiServices _gioHangApiServices;
+        private readonly IKhachHangApiServices _khachHangApiServices;
+        public GioHangController(ISanPhamApiServices sanPhamApiService, IKhachHangApiServices khachHangApiServices, IGioHangApiServices gioHangApiServices)
         {
             _sanPhamApiServices = sanPhamApiService;
+            _khachHangApiServices = khachHangApiServices;
+            _gioHangApiServices = gioHangApiServices;
         }
         public IActionResult Index()
         {
             return View("/Views/GioHang/Index.cshtml");
         }
         [HttpGet("get-data-giohang")]
-        public  IActionResult layHangSanPham()
+        public  IActionResult layGioHang()
         {
             try
             {
                 var data =  dSGioHang;
+                if(data.Count == 0)
+                {
+                    return Json(new
+                    {
+                        code = 500,
+                        Message = "Giỏ hàng trống"
+                    });
+                }    
                 return PartialView("/Views/GioHang/_ListGioHang.cshtml", data);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        [HttpGet("get-data-diachikhachhang")]
+        public async Task<IActionResult> layDiaChiKhachHang()
+        {
+            try
+            {
+                if (User.Claims != null && User.Claims.Count() > 1)
+                {
+                    var userId = User.Claims.Where(claim => claim.Type == ClaimTypes.Sid)
+                                             .FirstOrDefault()
+                                             .Value;
+                    var data = await _khachHangApiServices.layDiaChiKhachHang(userId);
+                    return PartialView("/Views/GioHang/_ListDiaChiKhachHang.cshtml", data);
+                }
+                else
+                {
+                    return Json(new
+                    {
+                        code = 500,
+                        Message = "Vui lòng đăng nhập"
+                    });
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        [HttpGet("get-data-thanhtoan")]
+        public async Task<IActionResult> ThanhToanGioHangAsync()
+        {
+            try
+            {
+                if (User.Claims != null && User.Claims.Count() > 1)
+                {
+                    var userId = User.Claims.Where(claim => claim.Type == ClaimTypes.Sid)
+                                             .FirstOrDefault()
+                                             .Value;
+                    var data = dSGioHang;
+                    var KH = await _khachHangApiServices.layDiaChiKhachHang(userId);
+                    if(KH.Count != 0)
+                    {
+                        HttpContext.Session.SetString("HotenKH", KH[0].Hoten );
+                        HttpContext.Session.SetString("SDTKH", KH[0].SDT );
+                        HttpContext.Session.SetString("DiaChiKH", KH[0].DiaChi);
+                        HttpContext.Session.SetString("MaDiaChiKH", KH[0].MaDiaChi);
+                        
+                    }
+                    return PartialView("/Views/GioHang/_ListThanhToan.cshtml", data);
+                }
+                else
+                {
+                    return Json(new
+                    {
+                        code = 500,
+                        Message = "Vui lòng đăng nhập"
+                    });
+                }    
             }
             catch (Exception ex)
             {
@@ -136,6 +214,78 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
             {
                 return Json(new { code = 500, Message = "Thành công" });
             }    
+        }
+
+        //Tiến hành thanh toán
+        public IActionResult ThanhToan(string MaKM, string MaDC, string PtThanhToan, string type = "Normal")
+        {
+            try
+            {
+
+                if (User.Claims != null && User.Claims.Count() > 1)
+                {
+                    var userId = User.Claims.Where(claim => claim.Type == ClaimTypes.Sid)
+                                          .FirstOrDefault()
+                                          .Value;
+                    HoaDon hd = new HoaDon();
+                    MaKM = "KM01";
+                    string MaHD = "HD02";
+                    decimal thanhTien = decimal.Parse(HttpContext.Session.GetString("TongTienGH"));
+                    decimal phiShip = 15000;
+                    decimal tongTien = thanhTien + phiShip;
+                    hd.MaHoaDon = MaHD;
+                    hd.MaKhachHang = userId;
+                    hd.MaKhuyenMai = MaKM;
+                    hd.MaDiaChi = MaDC;
+                    hd.PhuongThucThanhToan = PtThanhToan;
+                    hd.TongCong = tongTien;
+                    hd.ThanhTien = thanhTien;
+                    hd.PhiGiaoHang = phiShip;
+                    var them = _gioHangApiServices.ThemHoaDon(hd);
+                    if (them.Result)// thêm thành công
+                    {
+                        foreach(var gh in dSGioHang)
+                        {
+                            ChiTietHoaDon ct = new ChiTietHoaDon();
+                            ct.HoaDonId = MaHD;
+                            ct.ProductId = gh.MaSanPham;
+                            ct.SoLuong = gh.soLuong;
+                            ct.GiaBan = (decimal)gh.dThanhTien/gh.soLuong;
+                            _gioHangApiServices.ThemCTHoaDon(ct);
+                        }    
+                        return Json(new
+                        {
+                            status = true
+                        });
+                    }
+                    else//Đã thêm
+                    {
+                        return Json(new
+                        {
+                         
+                            code = 2,
+                            msg = "Lỗi rồi",
+                        });
+                    }
+
+                }
+                else// chưa đăng nhập
+                {
+                    return Json(new
+                    {
+                        code = 1,
+                        msg = "Lỗi rồi",
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    code = 500,
+                    msg = "Lỗi rồi" + ex.Message
+                });
+            }
         }
     }
 }

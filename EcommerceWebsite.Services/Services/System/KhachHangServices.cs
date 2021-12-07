@@ -210,6 +210,21 @@ namespace EcommerceWebsite.Services.Services.System
             return result;
         }
 
+        public async Task<List<DiaChiKhachHang>> layDiaChiKhachHang(string MaKH)
+        {
+            try
+            {
+
+                var data = await _context.DiaChiKhaches.Where(s => s.MaKhachHang == MaKH).ToListAsync();
+                return data;
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
 
 
         //public Task<Dictionary<string, KhachHang>> LoginAsync(string usernameOrPhone, string pass)

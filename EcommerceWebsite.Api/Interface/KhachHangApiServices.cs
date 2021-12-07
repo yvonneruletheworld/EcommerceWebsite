@@ -1,4 +1,5 @@
 ﻿using EcommerceWebsite.Application.Constants;
+using EcommerceWebsite.Data.Entities;
 using EcommerceWebsite.Utilities.Input;
 using EcommerceWebsite.Utilities.Output.System;
 using Microsoft.AspNetCore.Http;
@@ -14,13 +15,14 @@ using System.Threading.Tasks;
 
 namespace EcommerceWebsite.Api.Interface
 {
-    public class KhachHangApiServices : IKhachHangApiServices
+    public class KhachHangApiServices : BaseApiService, IKhachHangApiServices
     {
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly IConfiguration _config;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
         public KhachHangApiServices(IHttpClientFactory httpClientFactory, IConfiguration config, IHttpContextAccessor httpContextAccessor)
+             : base(httpClientFactory, config, httpContextAccessor)
         {
             _httpClientFactory = httpClientFactory;
             _config = config;
@@ -77,6 +79,11 @@ namespace EcommerceWebsite.Api.Interface
             }
 
             return JsonConvert.DeserializeObject<ApiErrorResult<string>>(await response.Content.ReadAsStringAsync());
+        }
+
+        public async Task<List<DiaChiKhachHang>> layDiaChiKhachHang(string MaKH)
+        {
+            return await GetListAsync<DiaChiKhachHang>($"/api/KhachHang/lay-diachiKhachHang/{MaKH}");
         }
     }
 }

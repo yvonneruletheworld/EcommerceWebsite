@@ -33,6 +33,11 @@
                                             <td class="li-product-name"><a href="#">@item.tenSanPham</a></td>
                                             <td class="li-product-price"><span class="amount">@string.Format("{0:0,0}", item.giaSanPham) VNĐ</span></td>
                                             <td class="quantity">
+                                                @*<div class="cart-plus-minus">
+                                                    <input class="cart-plus-minus-box" id="soLuongGH-@item.MaSanPham" value="@item.soLuong" type="text">
+                                                    <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
+                                                    <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
+                                                </div>*@
                                                 <div class="cart-plus-minus">
                                                     <input class="cart-plus-minus-box" id="soLuongGH-@item.MaSanPham" value="@item.soLuong" type="number" min="1">
                                                 </div>
@@ -45,16 +50,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="coupon-all">
-                                <div class="coupon">
-                                    <input id="coupon_code" class="input-text" name="coupon_code" value="" placeholder="Nhập mã giảm giá" type="text">
-                                    <input class="button" name="apply_coupon" value="Áp dụng phiếu giảm giá" type="submit">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                  
                     <div class="row">
                         <div class="col-md-5 ml-auto">
                             <div class="cart-page-total">
@@ -62,14 +58,19 @@
                                     Tổng số giỏ hàng
                                 </h2>
                                 <ul>
-                                    <li>Phí ship <span>15.000 VNĐ</span></li>
                                     @if (Context.Session.GetString("TongTienGH") != null)
                                     {
-                                        var tongTien = Context.Session.GetString("TongTienGH").Split('.')[0];
+                                        var tongTien = decimal.Parse(Context.Session.GetString("TongTienGH"));
+                                    <li>Tổng tiền hàng <span>@string.Format("{0:0,0}", tongTien) VNĐ</span></li>
+                                    }
+                                    <li>Phí vận chuyển<span>15.000 VNĐ</span></li>
+                                    @if (Context.Session.GetString("TongTienGH") != null)
+                                    {
+                                        var tongTien = decimal.Parse(Context.Session.GetString("TongTienGH")) + 15000;
                                         <li>Tổng tiền <span>@string.Format("{0:0,0}", tongTien) VNĐ</span></li>
                                     }
                                 </ul>
-                                <a href="#">Tiến hành kiểm tra</a>
+                                <a href="#" onclick="layThanhToan()">Tiến hành kiểm tra</a>
                             </div>
                         </div>
                     </div>

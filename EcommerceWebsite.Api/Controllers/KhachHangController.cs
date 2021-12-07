@@ -123,5 +123,21 @@ namespace EcommerceWebsite.Api.Controllers
                 return BadRequest(Messages.API_EmptyResult);
             return Ok(data);
         }
+
+        [HttpGet("lay-diachiKhachHang/{maKH}")]
+        public async Task<IActionResult> layDiaChiKhachHang(string maKH)
+        {
+            try
+            {
+                var result = await _khachHangServices.layDiaChiKhachHang(maKH);
+                if (result == null)
+                    return BadRequest(Messages.API_EmptyResult);
+                else return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(Messages.API_Exception + ex);
+            }
+        }
     }
 }
