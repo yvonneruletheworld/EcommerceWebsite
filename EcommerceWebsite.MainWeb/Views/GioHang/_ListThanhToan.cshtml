@@ -106,7 +106,7 @@
                         <div class="col-md-12">
                             <div class="coupon-all">
                                 <div class="coupon">
-                                    <input id="maKhuyenMai" class="input-text" placeholder="Mã giảm giá" type="text">
+                                    <input id="maKhuyenMai" class="input-text" placeholder="Mã giảm giá" type="text" readonly>
                                     <input class="button" onclick="danhSachKhuyenMai()" value="KHUYẾN MÃI" type="button">
                                 </div>
                             </div>
@@ -162,28 +162,31 @@
                             </tbody>
                             <tfoot>
                                 <tr class="cart-subtotal">
-                                    <th >Tổng tiền hàng</th>
+                                    <th>Tổng tiền hàng</th>
                                     @if (Context.Session.GetString("TongTienGH") != null)
                                     {
                                         var tongTien = decimal.Parse(Context.Session.GetString("TongTienGH"));
-                                        <td><span class="amount">@string.Format("{0:0,0}", tongTien) VNĐ</span></td>
+                                        <td><span><span class="amount" id="thanhTienHang">@string.Format("{0:0,0}", tongTien)</span> VNĐ</span></td>
                                     }
 
                                 </tr>
                                 <tr class="cart-subtotal">
-                                    <th >Phí vận chuyển</th>
-                                    
-                                        <td><span class="amount">15000 VNĐ</span></td>
+                                    <th>Phí vận chuyển</th>
 
+                                    <td><span><span class="amount" id="phiShip">15,000</span> VNĐ</span></td>
+
+                                </tr>
+                                <tr class="tienGiam">
                                 </tr>
                                 <tr class="order-total">
                                     <th>Tổng thanh toán</th>
                                     @if (Context.Session.GetString("TongTienGH") != null)
                                     {
                                         var tongTien = decimal.Parse(Context.Session.GetString("TongTienGH")) + 15000;
-                                        <td><span class="amount">@string.Format("{0:0,0}", tongTien) VNĐ</span></td>
+                                       <td><span><span class="amount" id="tongTienKhuyenMai">@string.Format("{0:0,0}", tongTien)</span> VNĐ</span><br /><strike id="tienTruocDo" style="font:10px;font-weight:bold;"></strike></td>
                                     }
                                 </tr>
+
                             </tfoot>
                         </table>
                     </div>

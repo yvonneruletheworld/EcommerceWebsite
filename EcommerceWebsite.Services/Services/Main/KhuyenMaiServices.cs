@@ -20,6 +20,19 @@ namespace EcommerceWebsite.Services.Services.Main
             _context = context;
         }
 
+        public async Task<List<KhuyenMai>> layChiTietKhuyenMai(string MaKM)
+        {
+            try
+            {
+                var data = await _context.KhuyenMais.Where(x => x.MaKhuyenMai == MaKM).ToListAsync();
+                return data;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public async Task<List<KhuyenMai>> layKhuyenMai()
         {
             try

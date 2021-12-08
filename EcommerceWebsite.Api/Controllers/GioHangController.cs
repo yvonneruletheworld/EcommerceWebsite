@@ -60,7 +60,7 @@ namespace EcommerceWebsite.Api.Controllers
                 throw ex;
             }
         }
-        [HttpPost("them-hoadonkkm/{maHD}/{maKH}/{maKM}/{maDC}/{pthucThanhToan}/{tongCong}/{thanhTien}/{phiShip}")]
+        [HttpPost("them-hoadonkkm/{maHD}/{maKH}/{maDC}/{pthucThanhToan}/{tongCong}/{thanhTien}/{phiShip}")]
         public async Task<IActionResult> ThemHoaDonKhongKM(string maHD, string maKH, string maDC, string pthucThanhToan, decimal tongCong, decimal thanhTien, decimal phiShip)
         {
             try

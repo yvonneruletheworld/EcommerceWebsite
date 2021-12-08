@@ -328,11 +328,17 @@ function ThanhToan() {
     const MaDC = $('#maDiaChiKH').val();
     const PtThanhToan = $('#pTThanhToan').val();
     const MaKM = $('#maKhuyenMai').val();
+    const TongTien = $('#tongTienKhuyenMai').text();
+    const ThanhTien = $('#thanhTienHang').text();
+    const PhiShip = $('#phiShip').text();
     $.ajax({
         url: '/GioHang/ThanhToan',
         data: {
             MaKM: MaKM,
             MaDC: MaDC,
+            TongTien: TongTien,
+            ThanhTien: ThanhTien,
+            PhiShip: PhiShip,
             PtThanhToan: PtThanhToan,
             type: "ajax"
         },
@@ -401,4 +407,44 @@ function layKhuyenMai() {
             console.log(err);
         }
     });
+}
+$('body').on('click', '.layChiTietKhuyenMai', function () {
+    var maKM = $(this).data('id');
+    $.ajax({
+        url: `/get-data-chitietkhuyenmai/${maKM}`,
+        type: 'GET',
+        success: (result) => {
+            $("#CTKhuyemMai")[0].innerHTML = result;
+        },
+        error: (err) => {
+            alert('failed');
+            console.log(err);
+        }
+    });
+});
+//Áp dụng khuyến mãi
+function format2(n) {
+    return n.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+}
+function  ApDungKhuyenMai() {
+    var maKM = $('#maKhuyenMaiCT').val();
+    $('#maKhuyenMai').val(maKM);
+    $('#dsKhuyenMai').modal('hide');
+    var tienGiamGia = parseFloat($('#tienGiam').val());
+    var tienGiamGia2 = format2(tienGiamGia).split(".")[0];
+
+    var TongTien = parseFloat($('#tienTongTien').val());
+    
+    var TongTien2 = format2(TongTien).split(".")[0];
+    console.log(TongTien2);
+    var TienTra = parseFloat($('#tienPhaiTra').val());
+   
+    var TienTra2 = format2(TienTra).split(".")[0];
+    console.log(TienTra2);
+    $('#tienTruocDo').text(TongTien2 + " VNĐ ");
+    $('#tongTienKhuyenMai').text(TienTra2 );
+    console.log(format2(tienGiamGia));
+    var html = `<th >Giảm giá</th>
+                 <td><span class="amount">${tienGiamGia2} VNĐ</span></td>`;
+    $(".tienGiam").html(html);
 }

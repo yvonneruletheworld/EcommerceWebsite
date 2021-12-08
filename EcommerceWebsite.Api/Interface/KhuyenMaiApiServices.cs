@@ -17,6 +17,11 @@ namespace EcommerceWebsite.Api.Interface
         {
         }
 
+        public async Task<List<KhuyenMai>> layChiTietKhuyenMai(string MaKM)
+        {
+            return await GetListAsync<KhuyenMai>($"/api/KhuyenMai/lay-chitietkhuyenmai/{MaKM}");
+        }
+
         public async Task<List<KhuyenMai>> layKhuyenMai()
         {
             return await GetListAsync<KhuyenMai>("/api/KhuyenMai/lay-khuyenmai2");

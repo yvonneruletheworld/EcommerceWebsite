@@ -510,14 +510,18 @@
 <script>
     $(function () {
         var dft_price = model.sanPham.bangGia[0].giaBan;
-        $('.product-pride-id').text(dft_price + ' VNĐ');
+        var giaSP = parseFloat(dft_price);
+        var giaSP2 = format2(giaSP).split(".")[0];
+        $('.product-pride-id').text(giaSP2 + ' VNĐ');
     });
 
     function dinhLuongChanged(e) {
         var valueDemission = e.value;
         var prd_pride = model.sanPham.bangGia.find(x => x.maDinhLuong === valueDemission);
+        var giaSPDL = parseFloat(prd_pride.giaBan);
+        var giaSPDL2 = format2(giaSPDL).split(".")[0];
         console.log(prd_pride);
-        $('.product-pride-id').text(prd_pride.giaBan + ' VNĐ');
+        $('.product-pride-id').text(giaSPDL2 + ' VNĐ');
     };
 
     function submitComment() {

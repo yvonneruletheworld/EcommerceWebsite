@@ -115,6 +115,19 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
                 throw ex;
             }
         }
+        [HttpGet("get-data-chitietkhuyenmai/{maKM}")]
+        public async Task<IActionResult> layChiTietKhuyenMai(string maKM)
+        {
+            try
+            {
+                var data = await _khuyenMaiApiServices.layChiTietKhuyenMai(maKM);
+                return PartialView("/Views/GioHang/_ListChiTietKhuyenMai.cshtml", data);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         [HttpGet("get-data-thanhtoan")]
         public async Task<IActionResult> ThanhToanGioHangAsync()
         {
@@ -253,7 +266,7 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
         }
 
         //Tiến hành thanh toán
-        public IActionResult ThanhToan(string MaKM, string MaDC, string PtThanhToan, string type = "Normal")
+        public IActionResult ThanhToan(string MaKM, string MaDC, string PtThanhToan,decimal TongTien, decimal ThanhTien, decimal PhiShip, string type = "Normal")
         {
             try
             {
@@ -264,16 +277,12 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
                                           .FirstOrDefault()
                                           .Value;
                     HoaDon hd = new HoaDon();
-                    MaKM = "KM01";
-                    decimal thanhTien = decimal.Parse(HttpContext.Session.GetString("TongTienGH"));
-                    decimal phiShip = 15000;
-                    decimal tongTien = thanhTien + phiShip;
                     hd.MaKhachHang = userId;
                     hd.MaDiaChi = MaDC;
                     hd.PhuongThucThanhToan = PtThanhToan;
-                    hd.TongCong = tongTien;
-                    hd.ThanhTien = thanhTien;
-                    hd.PhiGiaoHang = phiShip;
+                    hd.TongCong = TongTien;
+                    hd.ThanhTien = ThanhTien;
+                    hd.PhiGiaoHang = PhiShip;
                     if (!string.IsNullOrEmpty(MaKM))
                     {
                         hd.MaKhuyenMai = MaKM;
