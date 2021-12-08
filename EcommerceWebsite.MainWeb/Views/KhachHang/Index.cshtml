@@ -140,11 +140,13 @@ else
     //Mật khẩu
     $('#MatKhauKT').on('blur', function () {
         var kTMatKhau = $('#MatKhauKT').val();
-        var matkhau = "^(?=.*[0-9])"
-            + "(?=.*[a-z])(?=.*[A-Z])"
-            + "(?=.*[@@#$%^&+=])"
-            + "(?=\\S+$).{8,16}$";
-        if (!matkhau.match(kTMatKhau)) {
+        //var matkhau = "^(?=.*[0-9])"
+        //    + "(?=.*[a-z])(?=.*[A-Z])"
+        //    + "(?=.*[@@#$%^&+=])"
+        //    + "(?=\\S+$).{8,16}$";
+
+        var matkhau = /^.*(?=.{8,16})(?=.*[a-zA-Z])(?=.*\d)(?=.*[!#$ %&?"]).*$/;
+        if (!matkhau.test(kTMatKhau)) {
             $('#trangThaiMatKhau').text('Mật khẩu phải từ 8-16 kí tự và có chứa kí tự hoa, đặc biệt.')
         }
         else {
@@ -192,10 +194,11 @@ else
             var _pass = $("#MatKhau").val();
             //var _repass = $("#XacNhanMatKhau").val();
 
-            var regex = "^(?=.*[0-9])"
-                + "(?=.*[a-z])(?=.*[A-Z])"
-                + "(?=.*[@@#$%^&+=])"
-                + "(?=\\S+$).{8,16}$";
+            //var regex = "^(?=.*[0-9])"
+            //    + "(?=.*[a-z])(?=.*[A-Z])"
+            //    + "(?=.*[@@#$%^&+=])"
+            //    + "(?=\\S+$).{8,16}$";
+            var regex = '^.*(?=.{8,16})(?=.*[a-zA-Z])(?=.*\d)(?=.*[!#$ %&?"]).*$';
             var isValid = regex.test(_pass);
             return isValid;
         }, 'Mật khẩu phải từ 8-16 kí tự và có chứa kí tự hoa, đặc biệt.');
