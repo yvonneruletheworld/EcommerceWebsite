@@ -215,72 +215,72 @@ $('body').on('click', '.btn-them-yeuthich', function () {
         }
     });
 })
-$('body').on('click', '.btn-them-binhluan', function () {
+//$('body').on('click', '.btn-them-binhluan', function () {
 
-    //const sp = {};
-    var fd = new FormData();
-    //sp.id = $(this).data('id');
-    //sp.NoiDung = $('#noiDung').val();
-    //sp.soSao = $('#soSao').val();
-    if (!model.khachHang) {
-        var _pass = $("#pass-feedback-id").val();
-        var _email = $("#email-feedback-id").val();
+//    //const sp = {};
+//    var fd = new FormData();
+//    //sp.id = $(this).data('id');
+//    //sp.NoiDung = $('#noiDung').val();
+//    //sp.soSao = $('#soSao').val();
+//    if (!model.khachHang) {
+//        var _pass = $("#pass-feedback-id").val();
+//        var _email = $("#email-feedback-id").val();
 
-        fd.append('MatKhau', _pass);
-        fd.append('Email', _email);
-    }
-    var _masp = $(this).data('id');
-    var _nodung = $('#noiDung').val();
-    var _sosao = $('#soSao').val();
-    fd.append('SoSao', _sosao);
-    fd.append('NoiDung', _nodung);
-    fd.append('MaSanPham', _masp);
-    $.ajax({
-        type: 'POST',
-        url: '/Detail/post-cmt',
-        dataType: 'JSON',
-        data: fd,
-        contentType: false, // Not to set any content header
-        processData: false, // Not to process data
-        success: function (data) {
-            if (data.code == 1) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Vui lòng đăng nhập',
-                    showConfirmButton: false,
-                    timer: 2500
-                });
-            }
-            else if (data.code == 2) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Vui lòng kiểm tra lại',
-                    showConfirmButton: false,
-                    timer: 2500
-                });
-            }
-            else {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Bình luận thành công',
-                    showConfirmButton: false,
-                    timer: 2500
-                });
-                $('#mymodal').modal('hide');
-            }
-        },
-        error: function (err) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Đã xảy ra lỗi',
-                text: 'Vui lòng thử lại',
-                showConfirmButton: false,
-                timer: 2500
-            });
-            console.log(err);
-        }
-    });
-})
+//        fd.append('MatKhau', _pass);
+//        fd.append('Email', _email);
+//    }
+//    var _masp = $(this).data('id');
+//    var _nodung = $('#noiDung').val();
+//    var _sosao = $('#soSao').val();
+//    fd.append('SoSao', _sosao);
+//    fd.append('NoiDung', _nodung);
+//    fd.append('MaSanPham', _masp);
+//    $.ajax({
+//        type: 'POST',
+//        url: '/Detail/post-cmt',
+//        dataType: 'JSON',
+//        data: fd,
+//        contentType: false, // Not to set any content header
+//        processData: false, // Not to process data
+//        success: function (data) {
+//            if (data.code == 1) {
+//                Swal.fire({
+//                    icon: 'error',
+//                    title: 'Vui lòng đăng nhập',
+//                    showConfirmButton: false,
+//                    timer: 2500
+//                });
+//            }
+//            else if (data.code == 2) {
+//                Swal.fire({
+//                    icon: 'error',
+//                    title: 'Vui lòng kiểm tra lại',
+//                    showConfirmButton: false,
+//                    timer: 2500
+//                });
+//            }
+//            else {
+//                Swal.fire({
+//                    icon: 'success',
+//                    title: 'Bình luận thành công',
+//                    showConfirmButton: false,
+//                    timer: 2500
+//                });
+//                $('#mymodal').modal('hide');
+//            }
+//        },
+//        error: function (err) {
+//            Swal.fire({
+//                icon: 'error',
+//                title: 'Đã xảy ra lỗi',
+//                text: 'Vui lòng thử lại',
+//                showConfirmButton: false,
+//                timer: 2500
+//            });
+//            console.log(err);
+//        }
+//    });
+//})
 function layThanhToan() {
     $.ajax({
         url: '/get-data-thanhtoan',

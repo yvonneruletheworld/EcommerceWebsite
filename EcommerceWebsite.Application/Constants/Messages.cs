@@ -7,6 +7,7 @@ namespace EcommerceWebsite.Application.Constants
     public static class Messages
     {
         //KhachHang - NhanVien
+        public const string KhachHang_HoTenKhongHopLe = "Họ tên không hợp lệ";
         public const string KhachHang_LoiDoDaiTenDangNhap = "Tên đăng nhập có độ dài không hợp lệ";
         public const string KhachHang_TenDangNhapKhongHopLe = "Tên đăng nhập/ Số điện thoại không đúng";
         public const string KhachHang_MatKhauKhongDung = "Mật khẩu không đúng";
@@ -43,5 +44,8 @@ namespace EcommerceWebsite.Application.Constants
         public const string API_Failed = "api-failed";
         public const string API_Exist = "api-exist";
 
+        //CODE 
+        public const string User  = "ALL";
+        
     }
 }

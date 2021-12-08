@@ -15,4 +15,14 @@ namespace EcommerceWebsite.Data.Enum
         [Description("Địa chỉ công ty")]
         CongTy = 2
     }
+    
+    public enum LoaiTruyCap
+    {
+        [Display(Name ="Login")]
+        [Description("Đăng nhập khách hàng")]
+        Login = 1,
+        [Display(Name = "Register")]
+        [Description("Đăng ký khách hàng")]
+        Register = 2
+    }
 }

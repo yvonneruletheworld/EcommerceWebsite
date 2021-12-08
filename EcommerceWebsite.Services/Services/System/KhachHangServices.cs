@@ -195,19 +195,21 @@ namespace EcommerceWebsite.Services.Services.System
             if(user ==  null)
             {
                 result.Add("NotRegister", user);
+                return result;
             }    
             if (string.IsNullOrEmpty(password) || !(await CheckLoginPass(user,password)  ))
             {
                 result.Add("PasswordIncorrect", user);
+                return result;
             }
             if (user.Status == Data.Enum.Status.InActive)
             {
                 result.Add("UserInactive", user);
+                return result;
             }
             else
                 result.Add("Success", user);
-
-            return result;
+           return result;
         }
 
         public async Task<List<DiaChiKhachHang>> layDiaChiKhachHang(string MaKH)
