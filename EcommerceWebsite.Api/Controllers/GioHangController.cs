@@ -20,7 +20,7 @@ namespace EcommerceWebsite.Api.Controllers
             _gioHangServices = gioHangServices;
         }
         [HttpPost("them-hoadon/{maHD}/{maKH}/{maKM}/{maDC}/{pthucThanhToan}/{tongCong}/{thanhTien}/{phiShip}")]
-        public async Task<IActionResult> ThemHoaDon(string maHD, string maKH, string maKM, string maDC, string pthucThanhToan, decimal tongCong, decimal thanhTien, decimal phiShip)
+        public async Task<IActionResult> ThemHoaDon(string maHD,string maKH, string maKM, string maDC, string pthucThanhToan, decimal tongCong, decimal thanhTien, decimal phiShip)
         {
             try
             {
@@ -32,6 +32,46 @@ namespace EcommerceWebsite.Api.Controllers
                         MaKhachHang = maKH,
                         TongCong = tongCong,
                         MaKhuyenMai = maKM,
+                        MaDiaChi = maDC,
+                        ThanhTien = thanhTien,
+                        TinhTrang = "Đang xử lý",
+                        PhiGiaoHang = phiShip,
+                        PhuongThucThanhToan = pthucThanhToan,
+                        DaXoa = false,
+                        NgayTao = DateTime.UtcNow,
+
+                    };
+                    var result = await _gioHangServices.ThemHoaDon(obj);
+                    if (!result)
+                    {
+                        return BadRequest(Messages.API_Failed);
+                    }
+                    else
+                    {
+                        return Ok(Messages.API_Success);
+                    }
+
+
+                }
+                return BadRequest(Messages.API_Failed);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        [HttpPost("them-hoadonkkm/{maHD}/{maKH}/{maKM}/{maDC}/{pthucThanhToan}/{tongCong}/{thanhTien}/{phiShip}")]
+        public async Task<IActionResult> ThemHoaDonKhongKM(string maHD, string maKH, string maDC, string pthucThanhToan, decimal tongCong, decimal thanhTien, decimal phiShip)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var obj = new HoaDon()
+                    {
+                        MaHoaDon = maHD,
+                        MaKhachHang = maKH,
+                        TongCong = tongCong,
                         MaDiaChi = maDC,
                         ThanhTien = thanhTien,
                         TinhTrang = "Đang xử lý",

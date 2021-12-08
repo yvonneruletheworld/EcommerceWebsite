@@ -20,6 +20,20 @@ namespace EcommerceWebsite.Services.Services.Main
             _context = context;
         }
 
+        public async Task<List<KhuyenMai>> layKhuyenMai()
+        {
+            try
+            {
+                var data = await _context.KhuyenMais.ToListAsync();
+                return data;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+          
+        }
+
         public async Task<List<BannerOutput>> LayKhuyenMaiChoTrangChu()
         {
             var data = await (from km in _context.KhuyenMais

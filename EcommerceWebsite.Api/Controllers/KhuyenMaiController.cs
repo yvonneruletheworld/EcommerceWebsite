@@ -33,5 +33,20 @@ namespace EcommerceWebsite.Api.Controllers
                 return BadRequest(Messages.API_Exception + ex);
             }
         }
+        [HttpGet("lay-khuyenmai2")]
+        public async Task<IActionResult> laykhuyenMai()
+        {
+            try
+            {
+                var result = await _khuyenMaiServices.layKhuyenMai();
+                if (result == null)
+                    return BadRequest(Messages.API_EmptyResult);
+                else return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(Messages.API_Exception + ex);
+            }
+        }
     }
 }

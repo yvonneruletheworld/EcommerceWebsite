@@ -17,6 +17,7 @@ namespace EcommerceWebsite.Data.Configurations
 
             builder.Property(hd => hd.MaHoaDon)
                 .HasMaxLength(100);
+
             builder.Property(hd => hd.NgayTao)
                 .IsRequired();
 

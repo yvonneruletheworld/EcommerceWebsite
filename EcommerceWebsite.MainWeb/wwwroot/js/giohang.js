@@ -187,14 +187,8 @@ $('body').on('click', '.btn-them-yeuthich', function () {
             }
             else if (data.code == 2) {
                 console.log(data.sl);
+                location.href = "/CuaHang/Index";
                 $("#soLuongyt").html(data.sl);
-                Swal.fire({
-                    icon: 'error',
-                    title: 'OKe ',
-                    showConfirmButton: false,
-                    timer: 2500
-                });
-               
             }
             else {
                 console.log(data.sl);
@@ -343,6 +337,7 @@ function ThanhToan() {
             type: "ajax"
         },
         success: function (data) {
+            location.href = "/Home/Index";
             Swal.fire({
                 icon: 'success',
                 title: 'Đặt hàng thành công',
@@ -360,6 +355,50 @@ function ThanhToan() {
                 showConfirmButton: false,
                 timer: 2500
             });
+        }
+    });
+}
+///Hiện thi gio hàng Mini
+function layGioHangMini() {
+    $.ajax({
+        url: '/get-data-minigiohang',
+        type: 'GET',
+        success: (result) => {
+            if (result.code == 500) {
+                location.href = "/Home/Index";
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Giỏ hàng trống',
+                    showConfirmButton: false,
+                    timer: 2500
+                });
+
+            }
+            else {
+                $(".minicart")[0].innerHTML = result;
+            }
+        },
+        error: (err) => {
+            alert('failed');
+            console.log(err);
+        }
+    });
+}
+//Khuyến mãi
+function danhSachKhuyenMai() {
+    $('#dsKhuyenMai').modal('show');
+    layKhuyenMai();
+}
+function layKhuyenMai() {
+    $.ajax({
+        url: '/get-data-khuyenmaigiohang',
+        type: 'GET',
+        success: (result) => {
+            $("#danhSachKhuyenMai")[0].innerHTML = result;
+        },
+        error: (err) => {
+            alert('failed');
+            console.log(err);
         }
     });
 }

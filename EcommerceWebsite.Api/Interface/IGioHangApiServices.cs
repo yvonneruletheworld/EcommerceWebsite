@@ -10,5 +10,6 @@ namespace EcommerceWebsite.Api.Interface
     {
         Task<bool> ThemHoaDon(HoaDon hD);
         Task<bool> ThemCTHoaDon(ChiTietHoaDon hD);
+        Task<bool> ThemHoaDonKhongKM(HoaDon hD);
     }
 }

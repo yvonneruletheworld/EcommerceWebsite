@@ -63,5 +63,24 @@ namespace EcommerceWebsite.Api.Interface
             var response = await client.PostAsync($"/api/GioHang/them-hoadon/{hD.MaHoaDon}/{hD.MaKhachHang}/{hD.MaKhuyenMai}/{hD.MaDiaChi}/{hD.PhuongThucThanhToan}/{hD.TongCong}/{hD.ThanhTien}/{hD.PhiGiaoHang}", httpContent);
             return response.IsSuccessStatusCode;
         }
+        //Thêm xóa đơn không có khuyên mãi
+        public async Task<bool> ThemHoaDonKhongKM(HoaDon hD)
+        {
+            // phai set truoc thi moi lay dc
+            var sessions = _httpContextAccessor
+                .HttpContext
+                .Session
+                .GetString(SystemConstant.Token);
+
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_configuration[SystemConstant.BaseAddress]);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+
+            var requestItem = JsonConvert.SerializeObject(hD);
+            var httpContent = new StringContent(requestItem, Encoding.UTF8, "application/json");
+
+            var response = await client.PostAsync($"/api/GioHang/them-hoadonkkm/{hD.MaHoaDon}/{hD.MaKhachHang}/{hD.MaDiaChi}/{hD.PhuongThucThanhToan}/{hD.TongCong}/{hD.ThanhTien}/{hD.PhiGiaoHang}", httpContent);
+            return response.IsSuccessStatusCode;
+        }
     }
 }

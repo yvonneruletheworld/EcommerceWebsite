@@ -1,0 +1,40 @@
+﻿@using EcommerceWebsite.Data.Entities
+@using Microsoft.AspNetCore.Http;
+@model List<KhuyenMai>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        @if (Context.Session.GetString("TongTienGH") != null)
+        {
+            var tongTien = decimal.Parse(Context.Session.GetString("TongTienGH"));
+            if (tongTien > item.DieuKienKM)
+            {
+                <div class="col-lg-1" style="text-align:center">
+                    <input type="radio" style="width:25px" />
+                </div>
+
+                <div class="col-lg-11">
+                    <p>
+                        <h6>@item.TenKhuyenMai - @item.TenKhuyenMai</h6>&ensp;@item.DieuKienKM
+                    </p>
+                </div>
+            }
+            else
+            {
+                <div class="col-lg-12" style="opacity: 0.5;">
+                    <div class="row">
+                        <div class="col-lg-1" style="text-align:center">
+                            <input type="radio" style="width:25px" disabled />
+                        </div>
+                        <div class="col-lg-11">
+                            <p>
+                                <h6>@item.TenKhuyenMai - @item.TenKhuyenMai</h6>&ensp;@item.DieuKienKM
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                  
+            }
+        }
+    }
+</div>

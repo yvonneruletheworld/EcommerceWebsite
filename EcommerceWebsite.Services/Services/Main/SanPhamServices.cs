@@ -456,54 +456,34 @@ namespace EcommerceWebsite.Services.Services.Main
 
             try
             {
-                var data = await(from sp in _context.SanPhams
-                                 join nhanHieu in _context.NhanHieus on sp.MaHang equals nhanHieu.MaHang
-                                 join loaiSanPham in _context.DanhMucs on sp.MaLoaiSanPham equals loaiSanPham.MaDanhMuc
-                                 from sp_dl in _context.DinhLuongs
-                                                        .Where(dl => dl.MaSanPham.Equals(sp.MaSanPham)
-                                                        && (dl.MaThuocTinh == (nameof(ProductPorpertyCode.TT07))
-                                                        || dl.MaThuocTinh == (nameof(ProductPorpertyCode.TT014)))).Take(1)
-                                     //join lsg in _context.LichSuGias on sp_dl.MaDinhLuong equals lsg.MaDinhLuong into dl_lsg_group
-                                 from dl_lsg in _context.LichSuGias.Where(lsg => lsg.MaDinhLuong.Equals(sp_dl.MaDinhLuong))
-                                                               .OrderByDescending(lsg => lsg.NgayTao.Date).Take(1)
+                var data = await (from sp in _context.SanPhams
+                                  join nhanHieu in _context.NhanHieus on sp.MaHang equals nhanHieu.MaHang
+                                  join loaiSanPham in _context.DanhMucs on sp.MaLoaiSanPham equals loaiSanPham.MaDanhMuc
+                                  from sp_dl in _context.DinhLuongs
+                                                         .Where(dl => dl.MaSanPham.Equals(sp.MaSanPham)
+                                                         && (dl.MaThuocTinh == (nameof(ProductPorpertyCode.TT07))
+                                                         || dl.MaThuocTinh == (nameof(ProductPorpertyCode.TT014)))).Take(1)
+                                      //join lsg in _context.LichSuGias on sp_dl.MaDinhLuong equals lsg.MaDinhLuong into dl_lsg_group
+                                  from dl_lsg in _context.LichSuGias.Where(lsg => lsg.MaDinhLuong.Equals(sp_dl.MaDinhLuong))
+                                                                .OrderByDescending(lsg => lsg.NgayTao.Date).Take(1)
 
-                                 where !sp.DaXoa
-                                 select new SanPhamVM
-                                 {
-                                     MaSanPham = sp.MaSanPham,
-                                     TenSanPham = sp.TenSanPham,
-                                     SoLuongTon = sp.SoLuongTon,
-                                     HinhAnh = sp.HinhAnh,
-                                     NhanHieu = nhanHieu.TenHang,
-                                     LoaiSanPham = loaiSanPham.TenDanhMuc,
-                                     GiaBan = dl_lsg.GiaMoi,
-                                     MaLoai = loaiSanPham.MaDanhMuc,
-
-                                     TrangThaiYeuThich = KiemTraYeuThich(sp.MaSanPham, maKH)
-                                 }).ToListAsync();
+                                  where !sp.DaXoa
+                                  select new SanPhamVM
+                                  {
+                                      MaSanPham = sp.MaSanPham,
+                                      TenSanPham = sp.TenSanPham,
+                                      SoLuongTon = sp.SoLuongTon,
+                                      HinhAnh = sp.HinhAnh,
+                                      NhanHieu = nhanHieu.TenHang,
+                                      LoaiSanPham = loaiSanPham.TenDanhMuc,
+                                      GiaBan = dl_lsg.GiaMoi,
+                                      MaLoai = loaiSanPham.MaDanhMuc,
+                                      
+                                      TrangThaiYeuThich = _context.SanPhamYeuThiches.FirstOrDefault(x => x.MaKhachHang == maKH && x.MaSanPham == sp.MaSanPham && x.TrangThai).TrangThai == null ? false : true,
+                                  }).ToListAsync();
                 return data;
 
 
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-        private bool KiemTraYeuThich(string maSanPham, string MaKH)
-        {
-            try
-            {
-                var data =  _context.SanPhamYeuThiches.FirstOrDefault(x => x.MaKhachHang == MaKH && x.MaSanPham == maSanPham && x.TrangThai);
-                if( data != null)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }    
             }
             catch (Exception ex)
             {
