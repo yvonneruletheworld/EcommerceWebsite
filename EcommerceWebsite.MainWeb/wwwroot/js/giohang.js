@@ -1,7 +1,7 @@
-﻿$(document).ready(() => {
-    initResourceFilterQuery();
+﻿////$(document).ready(() => {
+////    initResourceFilterQuery();
 
-})
+////})
 function initResourceFilterQuery() {
     layGioHang();
 }

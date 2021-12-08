@@ -16,7 +16,8 @@ namespace EcommerceWebsite.Admin.Controllers
         }
         public async Task<IActionResult> DanhSachSanPhamAsync()
         {
-            var data = await _sanPhamApiServices.laySanPham2();
+
+            var data = await _sanPhamApiServices.laySanPham2(string.Empty);
             return View(data);
         }
     }

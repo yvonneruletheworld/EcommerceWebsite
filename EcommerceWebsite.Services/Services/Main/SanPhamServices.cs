@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using EcommerceWebsite.Application.Constants;
 using EcommerceWebsite.Application.Pagination;
 using EcommerceWebsite.Data.EF;
 using EcommerceWebsite.Data.Entities;
@@ -112,37 +113,77 @@ namespace EcommerceWebsite.Services.Services.Main
             }
         }
 
-        public async Task<List<SanPhamVM>> LaySanPham()
+        //public async Task<List<SanPhamVM>> LaySPYeuThichKH(string maKH)
+        //{
+
+        //    try
+        //    {
+        //        var data = await (from sp in _context.SanPhams
+        //                          join nhanHieu in _context.NhanHieus on sp.MaHang equals nhanHieu.MaHang
+        //                          join loaiSanPham in _context.DanhMucs on sp.MaLoaiSanPham equals loaiSanPham.MaDanhMuc
+        //                          from sp_dl in _context.DinhLuongs
+        //                                                 .Where(dl => dl.MaSanPham.Equals(sp.MaSanPham)
+        //                                                 && (dl.MaThuocTinh == (nameof(ProductPorpertyCode.TT07))
+        //                                                 || dl.MaThuocTinh == (nameof(ProductPorpertyCode.TT014)))).Take(1)
+        //                              //join lsg in _context.LichSuGias on sp_dl.MaDinhLuong equals lsg.MaDinhLuong into dl_lsg_group
+        //                          from dl_lsg in _context.LichSuGias.Where(lsg => lsg.MaDinhLuong.Equals(sp_dl.MaDinhLuong))
+        //                                                        .OrderByDescending(lsg => lsg.NgayTao.Date).Take(1)
+
+        //                          where !sp.DaXoa
+        //                          select new SanPhamVM
+        //                          {
+        //                              MaSanPham = sp.MaSanPham,
+        //                              TenSanPham = sp.TenSanPham,
+        //                              SoLuongTon = sp.SoLuongTon,
+        //                              HinhAnh = sp.HinhAnh,
+        //                              NhanHieu = nhanHieu.TenHang,
+        //                              LoaiSanPham = loaiSanPham.TenDanhMuc,
+        //                              GiaBan = dl_lsg.GiaMoi,
+        //                              MaLoai = loaiSanPham.MaDanhMuc,
+
+        //                              TrangThaiYeuThich = KiemTraYeuThich(sp.MaSanPham, maKH)
+        //                          }).ToListAsync();
+        //        return data;
+
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
+
+
+        public async Task<List<SanPhamVM>> LaySanPham(string maKhachHang = null)
         {
             try
             {
-              
-                    var data = await (from sp in _context.SanPhams
-                                      join nhanHieu in _context.NhanHieus on sp.MaHang equals nhanHieu.MaHang
-                                      join loaiSanPham in _context.DanhMucs on sp.MaLoaiSanPham equals loaiSanPham.MaDanhMuc
-                                     
-                                      from sp_dl in _context.DinhLuongs
-                                                             .Where(dl => dl.MaSanPham.Equals(sp.MaSanPham)
-                                                             && (dl.MaThuocTinh == (nameof(ProductPorpertyCode.TT07))
-                                                             || dl.MaThuocTinh == (nameof(ProductPorpertyCode.TT014)))).Take(1)
-                                          //join lsg in _context.LichSuGias on sp_dl.MaDinhLuong equals lsg.MaDinhLuong into dl_lsg_group
-                                      from dl_lsg in _context.LichSuGias.Where(lsg => lsg.MaDinhLuong.Equals(sp_dl.MaDinhLuong))
-                                                                    .OrderByDescending(lsg => lsg.NgayTao.Date).Take(1)
+                var data = await (from sp in _context.SanPhams
+                                  join nhanHieu in _context.NhanHieus on sp.MaHang equals nhanHieu.MaHang
+                                  join loaiSanPham in _context.DanhMucs on sp.MaLoaiSanPham equals loaiSanPham.MaDanhMuc
 
-                                      where !sp.DaXoa
-                                      select new SanPhamVM
-                                      {
-                                          MaSanPham = sp.MaSanPham,
-                                          TenSanPham = sp.TenSanPham,
-                                          SoLuongTon = sp.SoLuongTon,
-                                          HinhAnh = sp.HinhAnh,
-                                          NhanHieu = nhanHieu.TenHang,
-                                          LoaiSanPham = loaiSanPham.TenDanhMuc,
-                                          GiaBan = dl_lsg.GiaMoi,
-                                          MaLoai = loaiSanPham.MaDanhMuc,
+                                  from sp_dl in _context.DinhLuongs
+                                                         .Where(dl => dl.MaSanPham.Equals(sp.MaSanPham)
+                                                         && (dl.MaThuocTinh == (nameof(ProductPorpertyCode.TT07))
+                                                         || dl.MaThuocTinh == (nameof(ProductPorpertyCode.TT014)))).Take(1)
+                                      //join lsg in _context.LichSuGias on sp_dl.MaDinhLuong equals lsg.MaDinhLuong into dl_lsg_group
+                                  from dl_lsg in _context.LichSuGias.Where(lsg => lsg.MaDinhLuong.Equals(sp_dl.MaDinhLuong))
+                                                                .OrderByDescending(lsg => lsg.NgayTao.Date).Take(1)
 
-                                          TrangThaiYeuThich = false
-                                      }).ToListAsync();
+                                  where !sp.DaXoa
+                                  select new SanPhamVM
+                                  {
+                                      MaSanPham = sp.MaSanPham,
+                                      TenSanPham = sp.TenSanPham,
+                                      SoLuongTon = sp.SoLuongTon,
+                                      HinhAnh = sp.HinhAnh,
+                                      NhanHieu = nhanHieu.TenHang,
+                                      LoaiSanPham = loaiSanPham.TenDanhMuc,
+                                      GiaBan = dl_lsg.GiaMoi,
+                                      MaLoai = loaiSanPham.MaDanhMuc,
+
+                                      TrangThaiYeuThich = KiemTraYeuThich(sp.MaSanPham, maKhachHang, _context)
+                                  }).ToListAsync();
                     return data;
               
 
@@ -451,59 +492,16 @@ namespace EcommerceWebsite.Services.Services.Main
 
         }
 
-        public async Task<List<SanPhamVM>> LaySPYeuThichKH(string maKH)
-        {
 
-            try
-            {
-                var data = await(from sp in _context.SanPhams
-                                 join nhanHieu in _context.NhanHieus on sp.MaHang equals nhanHieu.MaHang
-                                 join loaiSanPham in _context.DanhMucs on sp.MaLoaiSanPham equals loaiSanPham.MaDanhMuc
-                                 from sp_dl in _context.DinhLuongs
-                                                        .Where(dl => dl.MaSanPham.Equals(sp.MaSanPham)
-                                                        && (dl.MaThuocTinh == (nameof(ProductPorpertyCode.TT07))
-                                                        || dl.MaThuocTinh == (nameof(ProductPorpertyCode.TT014)))).Take(1)
-                                     //join lsg in _context.LichSuGias on sp_dl.MaDinhLuong equals lsg.MaDinhLuong into dl_lsg_group
-                                 from dl_lsg in _context.LichSuGias.Where(lsg => lsg.MaDinhLuong.Equals(sp_dl.MaDinhLuong))
-                                                               .OrderByDescending(lsg => lsg.NgayTao.Date).Take(1)
-
-                                 where !sp.DaXoa
-                                 select new SanPhamVM
-                                 {
-                                     MaSanPham = sp.MaSanPham,
-                                     TenSanPham = sp.TenSanPham,
-                                     SoLuongTon = sp.SoLuongTon,
-                                     HinhAnh = sp.HinhAnh,
-                                     NhanHieu = nhanHieu.TenHang,
-                                     LoaiSanPham = loaiSanPham.TenDanhMuc,
-                                     GiaBan = dl_lsg.GiaMoi,
-                                     MaLoai = loaiSanPham.MaDanhMuc,
-
-                                     TrangThaiYeuThich = KiemTraYeuThich(sp.MaSanPham, maKH)
-                                 }).ToListAsync();
-                return data;
-
-
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-        private bool KiemTraYeuThich(string maSanPham, string MaKH)
+        private bool KiemTraYeuThich(string maSanPham, string MaKH, EcomWebDbContext db)
         {
             try
             {
-                var data =  _context.SanPhamYeuThiches.FirstOrDefault(x => x.MaKhachHang == MaKH && x.MaSanPham == maSanPham && x.TrangThai);
-                if( data != null)
-                {
-                    return true;
-                }
-                else
-                {
+                if (string.IsNullOrEmpty(MaKH) || MaKH.Equals(Messages.User))
                     return false;
-                }    
+                var data =  db.SanPhamYeuThiches
+                    .FirstOrDefault(x => x.MaKhachHang == MaKH && x.MaSanPham == maSanPham && x.TrangThai);
+                return data == null;
             }
             catch (Exception ex)
             {

@@ -69,14 +69,15 @@ namespace EcommerceWebsite.Api.Interface
 
             var response = await client.PostAsync("/api/KhachHang/user-login", httpContext);
 
-            if(response.IsSuccessStatusCode)
+            var content = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
             {
-                var content = await response.Content.ReadAsStringAsync();
+                
                 var rs = JsonConvert.DeserializeObject<ApiSuccessResult<string>>(content);
                 return rs;
             }
 
-            return JsonConvert.DeserializeObject<ApiErrorResult<string>>(await response.Content.ReadAsStringAsync());
+            return JsonConvert.DeserializeObject<ApiErrorResult<string>>(content);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using EcommerceWebsite.Api.Interface;
+using EcommerceWebsite.Application.Constants;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -33,12 +34,12 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
                                           .FirstOrDefault()
                                           .Value;
 
-                    var data = await _sanPhamApiServices.LaySPYeuThichKH(userId);
+                    var data = await _sanPhamApiServices.laySanPham2(userId);
                     return PartialView("/Views/CuaHang/_ListAllSanPham.cshtml", data);
                 }
                 else
                 {
-                    var data = await _sanPhamApiServices.laySanPham2();
+                    var data = await _sanPhamApiServices.laySanPham2(Messages.User);
                     return PartialView("/Views/CuaHang/_ListAllSanPham.cshtml", data);
                 }    
                

@@ -47,15 +47,15 @@ namespace EcommerceWebsite.Api.Controllers
 
                 if (result.ContainsKey("NotRegister"))
                 {
-                    return BadRequest(Messages.KhachHang_NguoiDungKhongTonTai);
+                    return BadRequest(new { message = Messages.KhachHang_NguoiDungKhongTonTai });
                 }
                 if (result.ContainsKey("PasswordIncorrect"))
                 {
-                    return BadRequest(Messages.KhachHang_MatKhauKhongDung);
+                    return BadRequest(new { message = Messages.KhachHang_MatKhauKhongDung });
                 }
                 if (result.ContainsKey("UserInactive"))
                 {
-                    return BadRequest(Messages.KhachHang_NguoiDungKhongHoatDong);
+                    return BadRequest(new { message = Messages.KhachHang_NguoiDungKhongHoatDong });
                 }
                 if (result.ContainsKey("Success"))
                 {
@@ -92,11 +92,11 @@ namespace EcommerceWebsite.Api.Controllers
 
                         return Ok(new { token = new JwtSecurityTokenHandler().WriteToken(token) });
                     }
-                    return BadRequest(Messages.KhachHang_MatKhauKhongDung);
+                    return BadRequest(new { message = Messages.KhachHang_MatKhauKhongDung });
                 }
             }
 
-            return BadRequest("Could not create token");
+            return BadRequest(new { message = "Đã xảy ra lỗi." });
         }
 
         [HttpPost("user-resigter")]

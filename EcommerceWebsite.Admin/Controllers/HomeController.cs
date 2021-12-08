@@ -1,5 +1,6 @@
 ﻿using EcommerceWebsite.Admin.Models;
 using EcommerceWebsite.Api.Interface;
+using EcommerceWebsite.Application.Constants;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -27,7 +28,7 @@ namespace EcommerceWebsite.Admin.Controllers
         public async Task<IActionResult> IndexAsync()
         {
             //var rs = await _khachHangService.GetKhachHangTheoMa("KH01");
-            var rs = await _sanPhamService.laySanPham2();
+            var rs = await _sanPhamService.laySanPham2(Messages.User);
             return View();
         }
 

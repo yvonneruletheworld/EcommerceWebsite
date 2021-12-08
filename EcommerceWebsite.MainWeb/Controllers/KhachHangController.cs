@@ -1,4 +1,8 @@
 ﻿using EcommerceWebsite.Api.Interface;
+using EcommerceWebsite.Data.Enum;
+using EcommerceWebsite.Utilities.Input;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -30,9 +34,19 @@ namespace EcommerceWebsite.MainWeb.Controllers
         //get
         [HttpGet("client-login")]
         public async Task<IActionResult> Index()
-        {   
-            //await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return View();
+        {
+            var vm = new ThongTinKhachHangInput();
+            vm.Type = (int)LoaiTruyCap.Login;
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return View(vm);
+        }
+        [HttpGet("client-register")]
+        public async Task<IActionResult> Register()
+        {
+            var vm = new ThongTinKhachHangInput();
+            vm.Type = (int)LoaiTruyCap.Register;
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return View("/Views/KhachHang/Index.cshtml", vm);
         }
 
     }
