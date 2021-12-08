@@ -7,34 +7,43 @@
         @if (Context.Session.GetString("TongTienGH") != null)
         {
             var tongTien = decimal.Parse(Context.Session.GetString("TongTienGH"));
-            if (tongTien > item.DieuKienKM)
+            DateTime ngay = DateTime.UtcNow;
+            if (tongTien >= item.DieuKienKM)
             {
-                <div class="col-lg-1" style="text-align:center">
-                    <input type="radio" style="width:25px" />
-                </div>
-
-                <div class="col-lg-11">
-                    <p>
-                        <h6>@item.TenKhuyenMai - @item.TenKhuyenMai</h6>&ensp;@item.DieuKienKM
-                    </p>
+                <div class="col-lg-6">
+                    <div class="row">
+                        <div class="col-lg-1" style="text-align:center">
+                            <input type="radio" style="width:25px" />
+                        </div>
+                        <div class="col-lg-11">
+                            <p>
+                                <h6>Ưu đãi @item.PhanTram%, cho đơn từ @string.Format("{0:0,0}", item.DieuKienKM) VNĐ</h6>
+                                <span>Từ ngày:<span style="color:red"> @item.NgayTao.ToShortDateString()</span> -> <span style="color:red">@DateTime.Parse(item.NgayXoa.ToString()).ToShortDateString()</span> </span>
+                            </p>
+                        </div>
+                    </div>
                 </div>
             }
             else
             {
-                <div class="col-lg-12" style="opacity: 0.5;">
+                <div class="col-lg-6" style="opacity: 0.5;">
                     <div class="row">
                         <div class="col-lg-1" style="text-align:center">
                             <input type="radio" style="width:25px" disabled />
                         </div>
                         <div class="col-lg-11">
                             <p>
-                                <h6>@item.TenKhuyenMai - @item.TenKhuyenMai</h6>&ensp;@item.DieuKienKM
+                                <h6>Ưu đãi @item.PhanTram%, cho đơn từ @string.Format("{0:0,0}", item.DieuKienKM) VNĐ</h6>
+                                <span>Từ ngày:<span style="color:red"> @item.NgayTao.ToShortDateString()</span> -> <span style="color:red">@DateTime.Parse(item.NgayXoa.ToString()).ToShortDateString()</span> </span>
                             </p>
                         </div>
                     </div>
                 </div>
-                  
+
             }
+            <div class="col-lg-6">
+                <img src=""/>
+            </div>
         }
     }
 </div>

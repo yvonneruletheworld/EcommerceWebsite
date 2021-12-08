@@ -24,7 +24,7 @@ namespace EcommerceWebsite.Services.Services.Main
         {
             try
             {
-                var data = await _context.KhuyenMais.ToListAsync();
+                var data = await _context.KhuyenMais.Where(x => x.NgayTao < DateTime.UtcNow && x.NgayXoa >= DateTime.UtcNow).ToListAsync();
                 return data;
             }
             catch(Exception ex)
