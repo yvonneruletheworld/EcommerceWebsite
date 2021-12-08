@@ -27,23 +27,11 @@ namespace EcommerceWebsite.Api.Controllers
         {
             if (string.IsNullOrEmpty(fileName)) return BadRequest(Messages.API_EmptyInput);
 
-            var _path = $"D:\\KhoaLuan\\BaiLam\\{fileName}.txt";
+            var _path = $"D:\\Applications\\eclipse-workspace\\java.huiminer_190921\\{fileName}.txt";
             var result =  _huiServices.ReadFromTextToList(_path);
             if (result == null)
                 return BadRequest(Messages.API_EmptyResult);
             else return Ok(result);
         }
-
-        //[AllowAnonymous]
-        //[HttpGet("read-list-hui")]
-        //public async Task<IActionResult> ReadListHUI()
-        //{
-        //    var _path = $"D:\\Applications\\eclipse-workspace\\java.huiminer_190921\\output1.txt";
-        //    var list = _huiServices.ReadFromTextToList(_path);
-        //    //var result = _huiServices.ModifyListOutput();
-        //    if (result == null)
-        //        return BadRequest(Messages.API_EmptyResult);
-        //    else return Ok(result);
-        //}
     }
 }
