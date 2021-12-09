@@ -58,7 +58,7 @@ namespace EcommerceWebsite.Api.Interface
 
         public async Task<ApiResult<string>> GetLoginToken(ThongTinKhachHangInput input)
         {
-            //pass data into json
+            //convert data into json
             var json = JsonConvert.SerializeObject(input);
 
             //create httpContext
@@ -85,6 +85,19 @@ namespace EcommerceWebsite.Api.Interface
         public async Task<List<DiaChiKhachHang>> layDiaChiKhachHang(string MaKH)
         {
             return await GetListAsync<DiaChiKhachHang>($"/api/KhachHang/lay-diachiKhachHang/{MaKH}");
+        }
+
+        public async Task<bool> Resgister(ThongTinKhachHangInput input)
+        {
+            var dataJson = JsonConvert.SerializeObject(input);
+
+            var httpContext = new StringContent(dataJson, Encoding.UTF8, "application/json");
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_config[SystemConstant.BaseAddress]);
+            var response = await client.PostAsync("/api/KhachHang/user-login", httpContext);
+
+            var content = await response.Content.ReadAsStringAsync();
+            return response.IsSuccessStatusCode;
         }
     }
 }

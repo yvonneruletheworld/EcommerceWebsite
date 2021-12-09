@@ -83,25 +83,30 @@ namespace EcommerceWebsite.MainWeb.Controllers
         {
             try
             {
+                var userId = string.Empty;
                 if (!string.IsNullOrEmpty(input.Email) || !string.IsNullOrEmpty(input.MatKhau))
                 {
                     var obj = new ThongTinKhachHangInput
                     {
                         Email = input.Email,
-                        MatKhau = input.MatKhau
+                        MatKhau = input.MatKhau,
+                        
                     };
                     var rs = (JsonResult)await this.Index(obj, "Detail");
-                    if (!rs.Value.ToString().Contains(Messages.Login_Success))
+                    if (rs.StatusCode != 200)
                     {
                         return Json(new { status = false });
                     }
+                    userId = rs.Value.ToString();
                     //return rs.Value.ToString().Contains(Messages.Login_Success) ?
                     //    Json(new { status = true }) : 
-                }
-
-                var userId = User.Claims.Where(claim => claim.Type == ClaimTypes.Sid)
+                }else
+                {
+                     userId = User.Claims.Where(claim => claim.Type == ClaimTypes.Sid)
                                           .FirstOrDefault()
                                           .Value;
+                }    
+
                 BinhLuan bt = new BinhLuan();
                 bt.MaSanPham = input.MaSanPham;
                 bt.NguoiTao = userId;

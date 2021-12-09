@@ -39,7 +39,7 @@ namespace EcommerceWebsite.MainWeb.Controllers
             _yeuThichSanPhamApiServices = yeuThichSanPhamApiServices;
         }
 
-        public async Task<IActionResult> Index(string keyword)
+        public async Task<IActionResult> Index()
         {
             
             //get HUI

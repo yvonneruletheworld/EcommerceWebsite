@@ -33,5 +33,13 @@ namespace EcommerceWebsite.Utilities.Input
 
         public DiaChiKhachHangInput DiaChi { get; set; }
         public bool GhiNhoDangNhap { get; set; }
+
+        public ThongTinKhachHangInput()
+        {
+            XacNhanMatKhau = "123";
+            HoTen = "user";
+        }
     }
+
+
 }

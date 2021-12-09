@@ -18,6 +18,7 @@ namespace EcommerceWebsite.Application.Constants
         //JSON
         public const string Login_PhoneNumEmpty = "phone-num-is-empty";
         public const string Login_Success = "login_success";
+        public const string Login_Fail = "login_fail";
         public const string Login_PhoneNumIsNotExist = "phone-num-is-not-exist";
         public const string Login_LoadFormSuccess = "load-form-success";
         public const string Login_LoadFormFailed = "load-form-failed";

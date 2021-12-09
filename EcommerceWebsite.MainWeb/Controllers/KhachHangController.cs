@@ -1,4 +1,5 @@
 ﻿using EcommerceWebsite.Api.Interface;
+using EcommerceWebsite.Application.Constants;
 using EcommerceWebsite.Data.Enum;
 using EcommerceWebsite.Utilities.Input;
 using Microsoft.AspNetCore.Authentication;
@@ -47,6 +48,25 @@ namespace EcommerceWebsite.MainWeb.Controllers
             vm.Type = (int)LoaiTruyCap.Register;
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return View("/Views/KhachHang/Index.cshtml", vm);
+        }
+
+        [HttpPost("post-client-register")]
+        public async Task<IActionResult> Register(ThongTinKhachHangInput input)
+        {
+            if(ModelState.IsValid)
+            {
+                var rs = await _khachHangServices.Resgister(input);
+                return rs ? await this.Index(input) : Json(Messages.Login_Fail);
+            }
+            ModelState.AddModelError("", Messages.KhachHang_InputError);
+            return View("/Views/KhachHang/Index.cshtml", input);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync(
+                        CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Index", "Home");
         }
 
     }

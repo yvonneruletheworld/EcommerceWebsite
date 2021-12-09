@@ -1,5 +1,6 @@
 ﻿using EcommerceWebsite.Api.Interface;
 using EcommerceWebsite.Application.Constants;
+using EcommerceWebsite.Data.Enum;
 using EcommerceWebsite.Utilities.Input;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -20,8 +21,8 @@ namespace EcommerceWebsite.MainWeb.Controllers
 {
     public class BackgroudController : Controller
     {
-        private readonly IKhachHangApiServices _khachHangServices;
-        private readonly IConfiguration _configuration;
+        public readonly IKhachHangApiServices _khachHangServices;
+        public readonly IConfiguration _configuration;
 
         public BackgroudController(IKhachHangApiServices khachHangServices, IConfiguration configuration)
         {
@@ -32,13 +33,15 @@ namespace EcommerceWebsite.MainWeb.Controllers
         [HttpPost("client-login")]
         public async Task<IActionResult> Index(ThongTinKhachHangInput input, string previousPage = null)
         {
+            input.XacNhanMatKhau = input.MatKhau;
+            input.HoTen = "user";
             if (ModelState.IsValid)
             {
                 var token = await _khachHangServices.GetLoginToken(input);
                 if (!token.IsSuccessed)
                 {
                     ModelState.AddModelError("", token.Message);
-                    return View();
+                    return View(new ThongTinKhachHangInput() { Type = ((int)LoaiTruyCap.Login) }) ;
                 }
                 else
                 {
@@ -53,16 +56,24 @@ namespace EcommerceWebsite.MainWeb.Controllers
                                 CookieAuthenticationDefaults.AuthenticationScheme,
                                 userPrincipal,
                                 authProperties);
+                    var s = User.Identity;
                     if (string.IsNullOrEmpty(previousPage))
                         return RedirectToAction("Index", "Home");
                     else
-                        return Json(Messages.Login_Success);
+                    {
+                        //get user id
+                        var id = userPrincipal.Claims.Where(claim => claim.Type == ClaimTypes.Sid)
+                                          .FirstOrDefault()
+                                          .Value;
+                        return new JsonResult(id) { StatusCode = 200 };
+                    }    
+                        
                 }
             }
             else
             {
-                ModelState.AddModelError("", Messages.KhachHang_InputError);
-                return View();
+                //ModelState.AddModelError("", Messages.KhachHang_InputError);
+                return View(new ThongTinKhachHangInput() { Type = ((int)LoaiTruyCap.Login) }); 
             }
         }
 
