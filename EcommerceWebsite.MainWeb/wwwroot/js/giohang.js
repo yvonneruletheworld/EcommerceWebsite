@@ -26,7 +26,7 @@ function layGioHang() {
 }
 $('body').on('click', '.btn-add-cart', function () {
     const id = $(this).data('id');
-    const giaSP = $("#giaSanPham").val();
+    const giaSP = $("#giaSanPham-"+id).val();
     let soLuong = 1;
     if ($("#soLuongThemGH").val() != null) {
         soLuong = $("#soLuongThemGH").val();
@@ -450,4 +450,19 @@ function  ApDungKhuyenMai() {
     var html = `<th >Giảm giá</th>
                  <td><span class="amount">${tienGiamGia2} VNĐ</span></td>`;
     $(".tienGiam").html(html);
+}
+//Sản phẩm mới nhât
+function sanPhamMoiNhat() {
+    
+    $.ajax({
+        url: '/get-data-laySanPhamMoiNhat',
+        type: 'GET',
+        success: (result) => {
+            $("#loadAllSanPham")[0].innerHTML = result;
+        },
+        error: (err) => {
+            alert('failed');
+            console.log(err);
+        }
+    });
 }

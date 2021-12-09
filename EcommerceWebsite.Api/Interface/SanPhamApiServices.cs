@@ -119,5 +119,10 @@ namespace EcommerceWebsite.Api.Interface
         {
            return await GetListAsync<SanPhamVM>($"/api/SanPham/lay-sanphamyt/{maKH}");
         }
+
+        public async Task<List<SanPhamVM>> LaySanPhamMoiNhat()
+        {
+            return await GetListAsync<SanPhamVM>($"/api/SanPham/lay-sanphammoinhat");
+        }
     }
 }

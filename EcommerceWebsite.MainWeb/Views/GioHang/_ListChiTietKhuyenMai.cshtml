@@ -17,7 +17,7 @@
         <span>@item.TenKhuyenMai</span>
     </div>
     <div class="col-md-12">
-        <div class="coupon-all">s
+        <div class="coupon-all">
             <input hidden id="maKhuyenMaiCT" value="@item.MaKhuyenMai" />
             @{
                 var tienGiam = decimal.Parse(Context.Session.GetString("TongTienGH")) * decimal.Parse((item.PhanTram / 100).ToString());
@@ -32,4 +32,4 @@
             </div>
         </div>
     </div>
-                }
+}

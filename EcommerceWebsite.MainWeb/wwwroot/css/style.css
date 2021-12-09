@@ -2838,6 +2838,11 @@ textarea {
 
 .product-image {
 	position: relative;
+	width: 200px;
+	height: 200px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .section-title-3 > h2 {
