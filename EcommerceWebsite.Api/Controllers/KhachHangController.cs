@@ -139,5 +139,21 @@ namespace EcommerceWebsite.Api.Controllers
                 return BadRequest(Messages.API_Exception + ex);
             }
         }
+        
+        [HttpPatch("update-otp/{maKhachHang}/{otpCode}")]
+        public async Task<IActionResult> UpdateOtp(string maKhachHang, string otpCode)
+        {
+            try
+            {
+                var result = await _khachHangServices.UpdateOTPCode(maKhachHang,otpCode);
+                if (result)
+                    return Ok(result);
+                return BadRequest(Messages.OTP_Invalid);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(Messages.API_Exception + ex);
+            }
+        }
     }
 }

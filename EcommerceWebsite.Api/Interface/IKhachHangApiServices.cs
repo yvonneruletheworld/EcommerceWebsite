@@ -12,6 +12,7 @@ namespace EcommerceWebsite.Api.Interface
     public interface IKhachHangApiServices
     {
         Task<bool> Resgister(ThongTinKhachHangInput input);
+        Task<bool> UpdateOTP(string maKhachHang, string otp);
         Task<ApiResult<string>> GetLoginToken(ThongTinKhachHangInput input);
         Task<KhachHangOutput> GetKhachHangTheoMa(string maKhachHang);
         Task<List<DiaChiKhachHang>> layDiaChiKhachHang(string MaKH);

@@ -99,5 +99,20 @@ namespace EcommerceWebsite.Api.Interface
             var content = await response.Content.ReadAsStringAsync();
             return response.IsSuccessStatusCode;
         }
+
+        public async Task<bool> UpdateOTP(string maKhachHang, string otp)
+        {
+            var session = _httpContextAccessor
+                .HttpContext
+                .Session
+                .GetString(SystemConstant.Token);
+
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_config[SystemConstant.BaseAddress]);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", session); 
+            
+            var response = await client.GetAsync($"/api/KhachHang/update-otp/{maKhachHang}/{otp}");
+            return response.IsSuccessStatusCode;
+        }
     }
 }

@@ -325,6 +325,9 @@ function layDiaChiKH() {
 }
 //THANH TOÁN
 function ThanhToan() {
+
+    location.href = '/'
+
     const MaDC = $('#maDiaChiKH').val();
     const PtThanhToan = $('#pTThanhToan').val();
     const MaKM = $('#maKhuyenMai').val();

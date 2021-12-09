@@ -1,8 +1,10 @@
 ﻿using EcommerceWebsite.Api.Interface;
+using EcommerceWebsite.Application.Constants;
 using EcommerceWebsite.Data.EF;
 using EcommerceWebsite.Data.Entities;
 using EcommerceWebsite.MainWeb.Models;
 using EcommerceWebsite.Services.Interfaces.ExtraServices;
+using EcommerceWebsite.Utilities.Email;
 using EcommerceWebsite.Utilities.Output.Main;
 using EcommerceWebsite.Utilities.ViewModel;
 using Microsoft.AspNetCore.Http;
@@ -263,6 +265,31 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
             {
                 return Json(new { code = 500, Message = "Thành công" });
             }    
+        }
+
+        public async Task<JsonResult> SendOTPAsync ()
+        {
+            var userId = User.Claims.Where(claim => claim.Type == ClaimTypes.Sid)
+                                             .FirstOrDefault()
+                                             .Value;
+            //gen otp
+            var otpCode = Randoms.RandomString().ToUpper();
+            var updateOtpCode = await _khachHangApiServices.UpdateOTP(userId, otpCode ??= "OTCODENULL");
+            if (updateOtpCode)
+            {
+                var mailAddress = User.Claims.Where(claim => claim.Type == ClaimTypes.Email)
+                                             .FirstOrDefault()
+                                             .Value;
+                var recvs = new List<string>() { mailAddress };
+                var title = EmailTemplate.OTPLogin.Title;
+                var content = EmailTemplate.OTPLogin.Content.Replace("{email}", mailAddress)
+                                                            .Replace("{OTPCode}", otpCode);
+                var email = new EmailMessageSender(recvs, title, content);
+                if (_emailServices.SendMail(email))
+                    msg = Messages.OTP_SentSuccess;
+                else
+                    msg = Messages.OTP_SentFailed;
+            }
         }
 
         //Tiến hành thanh toán
