@@ -270,5 +270,20 @@ namespace EcommerceWebsite.Api.Controllers
                 return Ok(listObj);
             }
         }
+        [HttpGet("lay-sanphammoinhat")]
+        public async Task<IActionResult> LaySanPhamMoiNhat()
+        {
+            try
+            {
+                var result = await _sanPhamServices.LaySanPhamMoiNhat();
+                if (result == null)
+                    return BadRequest(Messages.API_EmptyResult);
+                else return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(Messages.API_Exception + ex);
+            }
+        }
     }
 }

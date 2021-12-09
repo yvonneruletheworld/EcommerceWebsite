@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -489,6 +490,50 @@ namespace EcommerceWebsite.Services.Services.Main
             {
                 throw ex;
             }
+        }
+
+        public async Task<List<SanPhamVM>> LaySanPhamMoiNhat()
+        {
+            try
+            {
+
+                var data = await(from sp in _context.SanPhams
+                                 join nhanHieu in _context.NhanHieus on sp.MaHang equals nhanHieu.MaHang
+                                 join loaiSanPham in _context.DanhMucs on sp.MaLoaiSanPham equals loaiSanPham.MaDanhMuc
+
+                                 from sp_dl in _context.DinhLuongs
+                                                        .Where(dl => dl.MaSanPham.Equals(sp.MaSanPham)
+                                                        && (dl.MaThuocTinh == (nameof(ProductPorpertyCode.TT07))
+                                                        || dl.MaThuocTinh == (nameof(ProductPorpertyCode.TT014)))).Take(1)
+                                     //join lsg in _context.LichSuGias on sp_dl.MaDinhLuong equals lsg.MaDinhLuong into dl_lsg_group
+                                 from dl_lsg in _context.LichSuGias.Where(lsg => lsg.MaDinhLuong.Equals(sp_dl.MaDinhLuong))
+                                                               .OrderByDescending(lsg => lsg.NgayTao.Date).Take(1)
+
+                                 where !sp.DaXoa && sp.NgayTao >= NgayHienTai()
+
+                                 select new SanPhamVM
+                                 {
+                                     MaSanPham = sp.MaSanPham,
+                                     TenSanPham = sp.TenSanPham,
+                                     SoLuongTon = sp.SoLuongTon,
+                                     HinhAnh = sp.HinhAnh,
+                                     NhanHieu = nhanHieu.TenHang,
+                                     LoaiSanPham = loaiSanPham.TenDanhMuc,
+                                     GiaBan = dl_lsg.GiaMoi,
+                                     MaLoai = loaiSanPham.MaDanhMuc,
+
+                                     TrangThaiYeuThich = false
+                                 }).ToListAsync();
+                return data;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        private DateTime NgayHienTai()
+        {
+           return DateTime.Now.Subtract(new TimeSpan(7, 0, 0, 0, 0));
         }
     }
 }

@@ -40,5 +40,7 @@ namespace EcommerceWebsite.Services.Interfaces.Main
 
         Task<List<SanPhamVM>> LaySPYeuThichKH(string maKH);
 
+        Task<List<SanPhamVM>> LaySanPhamMoiNhat();
+
     }
 }
