@@ -153,7 +153,7 @@
                                         <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
                                     </div>
                                 </div>
-                                <input id="giaSanPham" value="120000000" hidden />
+                                <input id="giaSanPham-@sanPham.MaSanPham"  hidden/>
                                 <a href="#" class="btn-add-cart" type="button" data-id="@sanPham.MaSanPham">Thêm vào giỏ</a>
                             </form>
                         </div>
@@ -510,9 +510,12 @@
 <script>
     $(function () {
         var dft_price = model.sanPham.bangGia[0].giaBan;
+        var id = $('#MaSP').val();
         var giaSP = parseFloat(dft_price);
         var giaSP2 = format2(giaSP).split(".")[0];
         $('.product-pride-id').text(giaSP2 + ' VNĐ');
+        $('#giaSanPham-' + id).val(giaSP2);
+        
     });
 
     function dinhLuongChanged(e) {
@@ -520,6 +523,8 @@
         var prd_pride = model.sanPham.bangGia.find(x => x.maDinhLuong === valueDemission);
         var giaSPDL = parseFloat(prd_pride.giaBan);
         var giaSPDL2 = format2(giaSPDL).split(".")[0];
+        var id = $('#MaSP').val();
+        $('#giaSanPham-' + id).val(giaSPDL2);
         console.log(prd_pride);
         $('.product-pride-id').text(giaSPDL2 + ' VNĐ');
     };

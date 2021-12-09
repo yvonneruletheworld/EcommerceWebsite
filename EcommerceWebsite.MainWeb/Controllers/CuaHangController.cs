@@ -61,6 +61,19 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
                 throw ex;
             }
         }
+        [HttpGet("get-data-laySanPhamMoiNhat")]
+        public async Task<IActionResult> laySanPhamMoiNhat()
+        {
+            try
+            {
+                var data = await _sanPhamApiServices.LaySanPhamMoiNhat();
+                return PartialView("/Views/CuaHang/_ListAllSanPham.cshtml", data);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         [HttpGet("list-danh-muc-CH")]
         public async Task<IActionResult> LayDanhMucSanPham()
         {
