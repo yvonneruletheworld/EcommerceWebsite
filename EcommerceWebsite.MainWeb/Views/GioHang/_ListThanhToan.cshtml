@@ -194,7 +194,7 @@
                         </table>
                     </div>
                     <div class="order-button-payment">
-                        <button value="Đặt hàng" type="button"  onclick="sendEmail()">Thanh toán</button>
+                        <input value="Đặt hàng" type="submit"  onclick="sendEmail()"/>
                         @*<button value="Đặt hàng" data-toggle="modal" data-target="#OTPValidate" />*@
                     </div>
                 </div>
@@ -228,13 +228,11 @@
                                                 <input class="otp-input" type="text" id="fifth" maxlength="1" onkeyup="clickOTPEvent(this,'sixth')">
                                                 <input class="otp-input" type="text" id="sixth" maxlength="1">
                                             </div>
-                                           
-                                            <div class="feedback-btn pb-15">
-                                                <button href="#" onclick="xacNhanOTP()">Xác nhận</button>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">Hủy</button>
+                                            <div class="order-button-payment">
+                                                <input value="Xác nhận" type="submit" style="color:black" onclick="xacNhanOTP()" />
                                             </div>
-
                                         </div>
+                                       
                                     </form>
                                 </div>
                             </div>
