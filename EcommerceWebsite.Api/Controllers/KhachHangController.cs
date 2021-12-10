@@ -1,6 +1,8 @@
 ﻿using EcommerceWebsite.Application.Constants;
 using EcommerceWebsite.Data.Identity;
+using EcommerceWebsite.Services.Interfaces.ExtraServices;
 using EcommerceWebsite.Services.Interfaces.System;
+using EcommerceWebsite.Utilities.Email;
 using EcommerceWebsite.Utilities.Input;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -22,16 +24,18 @@ namespace EcommerceWebsite.Api.Controllers
     public class KhachHangController : ControllerBase
     {
         private readonly IKhachHangServices _khachHangServices;
+        private readonly IEmailSenderServices _emailServices;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IConfiguration _config;
 
-        public KhachHangController(IKhachHangServices khachHangServices, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IConfiguration config)
+        public KhachHangController(IKhachHangServices khachHangServices, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IConfiguration config, IEmailSenderServices emailServices)
         {
             _khachHangServices = khachHangServices;
             _userManager = userManager;
             _signInManager = signInManager;
             _config = config;
+            _emailServices = emailServices;
         }
 
         [HttpPost("user-login")]
@@ -140,7 +144,7 @@ namespace EcommerceWebsite.Api.Controllers
             }
         }
         
-        [HttpPatch("update-otp/{maKhachHang}/{otpCode}")]
+        [HttpGet("update-otp/{maKhachHang}/{otpCode}")]
         public async Task<IActionResult> UpdateOtp(string maKhachHang, string otpCode)
         {
             try
@@ -149,6 +153,27 @@ namespace EcommerceWebsite.Api.Controllers
                 if (result)
                     return Ok(result);
                 return BadRequest(Messages.OTP_Invalid);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(Messages.API_Exception + ex);
+            }
+        }
+
+        [HttpGet("send-mail/{mailAddress}/{otpCode}")]
+        public async Task<IActionResult> SendMail(string mailAddress, string otpCode)
+        {
+            try
+            {
+                var recvs = new List<string>() { mailAddress };
+                var title = EmailTemplate.OTPLogin.Title;
+                var content = EmailTemplate.OTPLogin.Content.Replace("{email}", mailAddress)
+                                                            .Replace("{OTPCode}", otpCode);
+                var email = new EmailMessageSender(recvs, title, content);
+                if (_emailServices.SendMail(email))
+                    return Ok( Messages.OTP_SentSuccess);
+                else
+                    return BadRequest( Messages.OTP_SentFailed);
             }
             catch (Exception ex)
             {

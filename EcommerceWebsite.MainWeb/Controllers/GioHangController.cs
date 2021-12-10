@@ -32,6 +32,13 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
         }
         public IActionResult Index()
         {
+            if (User.Claims != null && User.Claims.Count() > 1)
+            {
+                var userEmail = User.Claims.Where(claim => claim.Type == ClaimTypes.Email)
+                                         .FirstOrDefault()
+                                         .Value;
+                ViewBag.Email = userEmail;
+            }
             return View("/Views/GioHang/Index.cshtml");
         }
         [HttpGet("get-data-giohang")]
@@ -267,6 +274,7 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
             }    
         }
 
+        [HttpGet("send-otp")]
         public async Task<JsonResult> SendOTPAsync ()
         {
             var userId = User.Claims.Where(claim => claim.Type == ClaimTypes.Sid)
@@ -274,22 +282,17 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
                                              .Value;
             //gen otp
             var otpCode = Randoms.RandomString().ToUpper();
+            //TempData["OTPCode"] = otpCode;
             var updateOtpCode = await _khachHangApiServices.UpdateOTP(userId, otpCode ??= "OTCODENULL");
             if (updateOtpCode)
             {
                 var mailAddress = User.Claims.Where(claim => claim.Type == ClaimTypes.Email)
                                              .FirstOrDefault()
                                              .Value;
-                var recvs = new List<string>() { mailAddress };
-                var title = EmailTemplate.OTPLogin.Title;
-                var content = EmailTemplate.OTPLogin.Content.Replace("{email}", mailAddress)
-                                                            .Replace("{OTPCode}", otpCode);
-                var email = new EmailMessageSender(recvs, title, content);
-                if (_emailServices.SendMail(email))
-                    msg = Messages.OTP_SentSuccess;
-                else
-                    msg = Messages.OTP_SentFailed;
+                var sendMailResult = await _khachHangApiServices.SendMail(mailAddress, otpCode);
+                return sendMailResult ? Json(otpCode) : Json(Messages.OTP_SentFailed);
             }
+            return Json(Messages.OTP_Invalid);
         }
 
         //Tiến hành thanh toán

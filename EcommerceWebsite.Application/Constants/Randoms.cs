@@ -9,7 +9,7 @@ namespace EcommerceWebsite.Application.Constants
     {
         public static Random random = new Random();
 
-        public static string RandomString (int length = 8)
+        public static string RandomString (int length = 6)
         {
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 

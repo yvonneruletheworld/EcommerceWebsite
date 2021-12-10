@@ -144,6 +144,7 @@ namespace EcommerceWebsite.Api
             services.AddScoped<IBinhLuanServices, BinhLuanServices>();
             services.AddScoped<IYeuThichSanPhamServices, YeuThichSanPhamServices>();
             services.AddScoped<IGioHangServices, GioHangServices>();
+            services.AddScoped<IEmailSenderServices, EmailSenderServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

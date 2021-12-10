@@ -1,4 +1,7 @@
 ﻿
+
+
+
 function layGioHang() {
     $.ajax({
         url: '/get-data-giohang',
@@ -281,30 +284,7 @@ $('body').on('click', '.btn-them-yeuthich', function () {
 //        }
 //    });
 //})
-function layThanhToan() {
-    $.ajax({
-        url: '/get-data-thanhtoan',
-        type: 'GET',
-        success: (result) => {
-            if (result.code == 500) {
-                location.href = "/KhachHang/client-login";
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Vui lòng bạn đăng nhập',
-                    showConfirmButton: false,
-                    timer: 2500
-                });
-            }
-            else {
-                $("#gioHang")[0].innerHTML = result;
-            }
-        },
-        error: (err) => {
-            alert('failed');
-            console.log(err);
-        }
-    });
-}
+
 ///KHÁCH HÀNG
 function danhSachDiaChiKH() {
     $('#dsDiaChi').modal('show');
@@ -325,8 +305,6 @@ function layDiaChiKH() {
 }
 //THANH TOÁN
 function ThanhToan() {
-
-    location.href = '/'
 
     const MaDC = $('#maDiaChiKH').val();
     const PtThanhToan = $('#pTThanhToan').val();

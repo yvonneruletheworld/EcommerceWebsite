@@ -1,7 +1,16 @@
-﻿<div id="gioHang">
+﻿@{ 
+//var otp = TempData["OTPCode"];
+}
+
+<link href="~/css/otp/style.css" rel="stylesheet" />
+
+<div id="gioHang">
 
 </div>
 <script>
+
+    var otpcode = 0;
+
     $(document).ready(() => {
         initResourceFilterQuery();
 
@@ -30,6 +39,75 @@
             },
             error: (err) => {
                 alert('failed');
+                console.log(err);
+            }
+        });
+    }
+
+    function clickOTPEvent(first, last) {
+        if (first.value.length) {
+            document.getElementById(last).focus();
+        }
+    }
+
+    function xacNhanOTP() {
+        var otpInput = '';
+
+        otpInput += $('#ist').val();
+        otpInput += $('#sec').val();
+        otpInput += $('#third').val();
+        otpInput += $('#fourth').val();
+        otpInput += $('#fifth').val();
+        otpInput += $('#sixth').val();
+
+        if (otpInput === otpcode) {
+            ThanhToan();
+        }
+        else {
+            alert('Mã OTP không đúng.');
+        }
+    }
+
+    function layThanhToan() {
+        $.ajax({
+            url: '/get-data-thanhtoan',
+            type: 'GET',
+            success: (result) => {
+                if (result.code == 500) {
+                    location.href = "/KhachHang/client-login";
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Vui lòng bạn đăng nhập',
+                        showConfirmButton: false,
+                        timer: 2500
+                    });
+                }
+                else {
+                    $("#gioHang")[0].innerHTML = result;
+                }
+            },
+            error: (err) => {
+                alert('failed');
+                console.log(err);
+            }
+        });
+    }
+
+    function sendEmail() {
+        $.ajax({
+            url: '/send-otp',
+            type: 'GET',
+            success: (result) => {
+                if (result === 'otp-sent-failed') {
+                    alert('Không thể gửi mã OTP');
+                }
+                else {
+                    otpcode = result;
+                    $("#OTPModal").modal('show');
+                }
+            },
+            error: (err) => {
+                alert('Lỗi gửi email');
                 console.log(err);
             }
         });

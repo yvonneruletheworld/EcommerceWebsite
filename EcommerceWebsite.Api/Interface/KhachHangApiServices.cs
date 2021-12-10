@@ -114,5 +114,20 @@ namespace EcommerceWebsite.Api.Interface
             var response = await client.GetAsync($"/api/KhachHang/update-otp/{maKhachHang}/{otp}");
             return response.IsSuccessStatusCode;
         }
+        
+        public async Task<bool> SendMail(string mailAddress, string otpCode)
+        {
+            var session = _httpContextAccessor
+                .HttpContext
+                .Session
+                .GetString(SystemConstant.Token);
+
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_config[SystemConstant.BaseAddress]);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", session); 
+            
+            var response = await client.GetAsync($"/api/KhachHang/send-mail/{mailAddress}/{otpCode}");
+            return response.IsSuccessStatusCode;
+        }
     }
 }
