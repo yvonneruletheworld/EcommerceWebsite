@@ -53,6 +53,7 @@ namespace EcommerceWebsite.Admin
             services.AddScoped<IKhachHangApiServices, KhachHangApiServices>();
             services.AddScoped<ISanPhamApiServices, SanPhamApiServices>();
             services.AddScoped<IKhuyenMaiApiServices, KhuyenMaiApiServices>();
+            services.AddScoped<IGioHangApiServices, GioHangApiServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

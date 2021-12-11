@@ -26,6 +26,34 @@ namespace EcommerceWebsite.Api.Interface
             _httpClientFactory = httpClientFactory;
         }
 
+        public async Task<bool> DuyetDonHang(string MaHD)
+        {
+            // phai set truoc thi moi lay dc
+            var session = _httpContextAccessor
+               .HttpContext
+               .Session
+               .GetString(SystemConstant.Token);
+
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_configuration[SystemConstant.BaseAddress]);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", session);
+            //var requestItem = JsonConvert.SerializeObject();
+            //var httpContent = new StringContent(requestItem, Encoding.UTF8, "application/json");
+
+            var response = await client.GetAsync($"/api/GioHang/duyetdonhang/{MaHD}");
+            return response.IsSuccessStatusCode;
+        }
+
+        public async Task<List<HoaDon>> LayDonHangDaDuyet()
+        {
+            return await GetListAsync<HoaDon>($"/api/GioHang/lay-donhangdaduyet");
+        }
+
+        public async Task<List<HoaDon>> LayDonHangDangDuyet()
+        {
+            return await GetListAsync<HoaDon>($"/api/GioHang/lay-sanPhamduyetdon");
+        }
+
         public async Task<bool> ThemCTHoaDon(ChiTietHoaDon hD)
         {
             // phai set truoc thi moi lay dc

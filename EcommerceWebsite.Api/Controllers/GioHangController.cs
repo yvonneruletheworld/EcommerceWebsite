@@ -15,9 +15,11 @@ namespace EcommerceWebsite.Api.Controllers
     public class GioHangController : ControllerBase
     {
         private readonly IGioHangServices _gioHangServices;
-        public GioHangController(IGioHangServices gioHangServices)
+        private readonly IKhuyenMaiServices khuyenMai;
+        public GioHangController(IGioHangServices gioHangServices, IKhuyenMaiServices khuye)
         {
             _gioHangServices = gioHangServices;
+            khuyenMai = khuye;
         }
         [HttpPost("them-hoadon/{maHD}/{maKH}/{maKM}/{maDC}/{pthucThanhToan}/{tongCong}/{thanhTien}/{phiShip}")]
         public async Task<IActionResult> ThemHoaDon(string maHD,string maKH, string maKM, string maDC, string pthucThanhToan, decimal tongCong, decimal thanhTien, decimal phiShip)
@@ -126,6 +128,56 @@ namespace EcommerceWebsite.Api.Controllers
                     }
 
 
+                }
+                return BadRequest(Messages.API_Failed);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        [HttpGet("lay-donhangdaduyet")]
+        public async Task<IActionResult> layDonHangDaDuyet()
+        {
+            try
+            {
+                var result = await _gioHangServices.LayDonHangDaDuyet();
+                if (result == null)
+                    return BadRequest(Messages.API_EmptyResult);
+                else return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(Messages.API_Exception + ex);
+            }
+        }
+        [HttpGet("lay-sanPhamduyetdon")]
+        public async Task<IActionResult> LayDonHangDangDuyet()
+        {
+            try
+            {
+                var result = await _gioHangServices.LayDonHangDangDuyet();
+                if (result == null)
+                    return BadRequest(Messages.API_EmptyResult);
+                else return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(Messages.API_Exception + ex);
+            }
+        }
+        [HttpGet("duyetdonhang/{MaDH}")]
+        public async Task<IActionResult> DuyetDonHang(string MaDH)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var result = await _gioHangServices.DuyetDonHang(MaDH);
+                    if (result)
+                    {
+                         return Ok(Messages.API_Success);
+                    }
                 }
                 return BadRequest(Messages.API_Failed);
             }
