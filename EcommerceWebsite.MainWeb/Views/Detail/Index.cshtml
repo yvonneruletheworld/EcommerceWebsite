@@ -501,30 +501,14 @@
                 <div class="site-section bg-left-half mb-5">
                     <div class="container owl-2-style">
                         <div class="owl-carousel owl-2">
-                            <div class="media-29101">
-                                <a href="#"><img src="images/img_1.jpg" alt="Image" class="img-fluid"></a>
-                                <h3><a href="#">Consectetur Adipisicing Elit</a></h3>
-                            </div>
-                            <div class="media-29101">
-                                <a href="#"><img src="images/img_2.jpg" alt="Image" class="img-fluid"></a>
-                                <h3><a href="#">Beatae Doloribu</a></h3>
-                            </div>
-                            <div class="media-29101">
-                                <a href="#"><img src="images/img_3.jpg" alt="Image" class="img-fluid"></a>
-                                <h3><a href="#">Accusantium Eius Soluta</a></h3>
-                            </div>
-                            <div class="media-29101">
-                                <a href="#"><img src="images/img_4.jpg" alt="Image" class="img-fluid"></a>
-                                <h3><a href="#">Consectetur Adipisicing Elit</a></h3>
-                            </div>
-                            <div class="media-29101">
-                                <a href="#"><img src="images/img_5.jpg" alt="Image" class="img-fluid"></a>
-                                <h3><a href="#">Beatae Doloribu</a></h3>
-                            </div>
-                            <div class="media-29101">
-                                <a href="#"><img src="images/img_6.jpg" alt="Image" class="img-fluid"></a>
-                                <h3><a href="#">Accusantium Eius Soluta</a></h3>
-                            </div>
+                            @foreach (var sp in huis)
+                            {
+                                <div class="media-29101">
+                                    <a href="#"><img src="@sp.HinhAnh" alt="Image" class="img-fluid"></a>
+                                    <h3><a href="#">Consectetur Adipisicing Elit</a></h3>
+                                </div>
+                            }
+
                         </div>
 
                     </div>
@@ -536,7 +520,8 @@
                     <span>Tổng tiền: <span id="tongTieninHUI"></span></span>
                     <br />
                 </div>
-                
+
+
                 <div class="order-button-payment" style="width:100%; align-items: center; display: flex; justify-content: center;">
                     <a href="@Url.Action("ThemVaoGioHangHUI", "Detail")">Thêm vào giỏ hàng</a>
                     </div>
