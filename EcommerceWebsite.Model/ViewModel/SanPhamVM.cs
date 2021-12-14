@@ -8,7 +8,9 @@ namespace EcommerceWebsite.Utilities.ViewModel
 {
     public class SanPhamVM
     {
+
         public string MaSanPham { get; set; }
+        public string ComboCode { get; set; }
         public string TenSanPham { get; set; }
         public string HinhAnh { get; set; }
         public string LoaiSanPham { get; set; }

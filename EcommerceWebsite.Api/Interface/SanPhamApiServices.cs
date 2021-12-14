@@ -104,9 +104,9 @@ namespace EcommerceWebsite.Api.Interface
         {
             return  GetAsync<SanPhamVM>($"/api/SanPham/lay-sanpham-Ma/{prdId}");
         }
-        public async Task<List<SanPhamVM>> GetViewWithMultipleIds(string[] prdIds)
+        public async Task<List<SanPhamVM>> GetViewWithMultipleIds(string[] prdIds, string comboCode)
         {
-            var url = "/api/SanPham/get-mulpitple-id/?";
+            var url = "/api/SanPham/get-mulpitple-id/?comboCode=" + comboCode;
             for (int i = 0; i < prdIds.Length; i++)
             {
                 url += i == prdIds.Length - 1 ? $"productIds={prdIds[i]}" : $"productIds={prdIds[i]}&";

@@ -46,8 +46,8 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
         {
             try
             {
-                var data =  dSGioHang;
-                if(data.Count == 0)
+                var data = HttpContext.Session.Get<GioHangOutput>("GioHang");
+                if(data.NormalCart.Count == 0 && data.HUICart.Count == 0)
                 {
                     return Json(new
                     {
@@ -177,12 +177,12 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
         {
             get {
 
-                var data = HttpContext.Session.Get<List<GioHang>>("GioHang");
+                var data = HttpContext.Session.Get<GioHangOutput>("GioHang");
                 if (data == null)
                 {
-                    data = new List<GioHang>();
+                    data.NormalCart = new List<GioHang>();
                 }   
-                return data;
+                return data.NormalCart;
             }
         }
         //Thêm
@@ -209,8 +209,10 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
             {
                 item.soLuong += soLuong;
             }
-           
-            HttpContext.Session.Set("GioHang", myCart);
+
+            var gioHang = new GioHangOutput();
+            gioHang.NormalCart = myCart;
+            HttpContext.Session.Set("GioHang", gioHang);
             HttpContext.Session.SetString("SoLuongGH", dSGioHang.Sum(c => c.soLuong) +"");
             HttpContext.Session.SetString("TongTienGH", dSGioHang.Sum(c => c.dThanhTien) + "");
             if (type == "ajax")

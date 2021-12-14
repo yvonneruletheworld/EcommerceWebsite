@@ -2,9 +2,12 @@
 using EcommerceWebsite.Application.Constants;
 using EcommerceWebsite.Data.Entities;
 using EcommerceWebsite.Data.Identity;
+using EcommerceWebsite.MainWeb.Models;
+using EcommerceWebsite.Services.Interfaces.ExtraServices;
 using EcommerceWebsite.Utilities.Input;
 using EcommerceWebsite.Utilities.Output.System;
 using EcommerceWebsite.Utilities.ViewModel;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -25,6 +28,7 @@ namespace EcommerceWebsite.MainWeb.Controllers
         //private readonly IKhachHangApiServices _khachHangServices;
         private readonly IHUIApiServices _huiServices;
         //private readonly UserManager<ApplicationUser> _userManager;
+        private List<SanPhamVM> listSanPhamHUI;
 
         public DetailController(ISanPhamApiServices sanPhamServices,
             IKhachHangApiServices khachHangServices,
@@ -35,6 +39,7 @@ namespace EcommerceWebsite.MainWeb.Controllers
             //_khachHangServices = khachHangServices;
             _huiServices = huiServices;
             _binhLuanApiService = binhLuanApiService;
+            listSanPhamHUI = new List<SanPhamVM>();
         }
 
         [HttpGet("Detail")]
@@ -56,8 +61,9 @@ namespace EcommerceWebsite.MainWeb.Controllers
                 var itemSet = hui.Itemsets;
                 if (itemSet.Contains(prdId))
                 {
-                    itemSet = itemSet.Where(i => i != prdId).ToArray();
-                    vm.HUIItems = await _sanPhamServices.GetViewWithMultipleIds(itemSet);
+                    //itemSet = itemSet.Where(i => i != prdId).ToArray();
+                    vm.HUIItems = await _sanPhamServices.GetViewWithMultipleIds(itemSet, hui.Id);
+                    listSanPhamHUI = vm.HUIItems;
                     break;
                 }
             }
@@ -124,6 +130,35 @@ namespace EcommerceWebsite.MainWeb.Controllers
                     msg = "Lỗi rồi" + ex.Message
                 });
             }
+        }
+
+        public IActionResult ThemVaoGioHangHUI ()
+        {
+            if(listSanPhamHUI != null || listSanPhamHUI.Count > 0)
+            {
+                var data = HttpContext.Session.Get<List<GioHang>>("GioHang");
+                if(data != null)
+                {
+                    var listCart = listSanPhamHUI.Select(
+                        item => new GioHang()
+                        {
+                            MaSanPham = item.MaSanPham,
+                            giaSanPham = item.GiaBan,
+                            hinhAnh = item.HinhAnh,
+                            soLuong = 1,
+                            tenSanPham = item.TenSanPham,
+                            comboCode = item.ComboCode
+                        }).ToList();
+                    data.AddRange(listCart);
+
+                    HttpContext.Session.Set("GioHang", data);
+                    HttpContext.Session.SetString("SoLuongGH", data.Sum(c => c.soLuong) + "");
+                    HttpContext.Session.SetString("TongTienGH", data.Sum(c => c.dThanhTien) + "");
+
+                    return Json("OK");
+                }
+            }
+            return Json("Fail");
         }
     }
 }
