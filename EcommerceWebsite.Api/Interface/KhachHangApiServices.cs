@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace EcommerceWebsite.Api.Interface
 {
-    public class KhachHangApiServices : BaseApiService, IKhachHangApiServices //ua code xong rui ma @@
+    public class KhachHangApiServices : BaseApiService, IKhachHangApiServices
     {
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly IConfiguration _config;
@@ -128,6 +128,11 @@ namespace EcommerceWebsite.Api.Interface
             
             var response = await client.GetAsync($"/api/KhachHang/send-mail/{mailAddress}/{otpCode}");
             return response.IsSuccessStatusCode;
+        }
+
+        public async Task<KhachHang> LayThongTinKhachHang(string maKH)
+        {
+            return await GetAsync<KhachHang>($"api/KhachHang/LayThongTinKhachHang/{maKH}");
         }
     }
 }

@@ -181,12 +181,12 @@ namespace EcommerceWebsite.Api.Controllers
             }
         }
 
-        [HttpGet("thong-tin-khach-hang/{maKhachHang}")]
-        public async Task<IActionResult> LayThongTinKhachHang(string maKhachHang)
+        [HttpGet("thong-tin-khach-hang/{maKH}")]
+        public async Task<IActionResult> LayThongTinKhachHang(string maKH)
         {
             try
             {
-                var result = await _khachHangServices.LayThongTinKhachHang(maKH);
+                var result = await _khachHangServices.LayThongTinKhachHang(maKH.ToString().Trim());
                 if (result == null)
                     return BadRequest(Messages.API_EmptyResult);
                 else
