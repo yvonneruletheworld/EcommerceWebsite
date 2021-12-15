@@ -180,5 +180,22 @@ namespace EcommerceWebsite.Api.Controllers
                 return BadRequest(Messages.API_Exception + ex);
             }
         }
+
+        [HttpGet("thong-tin-khach-hang/{maKhachHang}")]
+        public async Task<IActionResult> LayThongTinKhachHang(string maKhachHang)
+        {
+            try
+            {
+                var result = await _khachHangServices.LayThongTinKhachHang(maKH);
+                if (result == null)
+                    return BadRequest(Messages.API_EmptyResult);
+                else
+                    return Ok(result);
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(Messages.API_Exception + ex);
+            }
+        }
     }
 }

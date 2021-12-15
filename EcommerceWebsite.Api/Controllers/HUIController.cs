@@ -27,7 +27,7 @@ namespace EcommerceWebsite.Api.Controllers
         {
             if (string.IsNullOrEmpty(fileName)) return BadRequest(Messages.API_EmptyInput);
 
-            var _path = $"D:\\KhoaLuan\\BaiLam\\{fileName}.txt";
+            var _path = $"D:\\{fileName}.txt";
             var result =  _huiServices.ReadFromTextToList(_path);
             if (result == null)
                 return BadRequest(Messages.API_EmptyResult);

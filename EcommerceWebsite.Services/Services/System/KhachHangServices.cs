@@ -227,6 +227,19 @@ namespace EcommerceWebsite.Services.Services.System
             }
         }
 
+        public async Task<KhachHang> LayThongTinKhachHang(string maKH)
+        {
+            try
+            {
+                var duLieu = await _context.KhachHangs.Where(x => x.MaKhachHang == maKH).FirstOrDefaultAsync();
+                return duLieu;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
 
 
         //public Task<Dictionary<string, KhachHang>> LoginAsync(string usernameOrPhone, string pass)

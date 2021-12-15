@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace EcommerceWebsite.Api.Interface
 {
-    public class KhachHangApiServices : BaseApiService, IKhachHangApiServices
+    public class KhachHangApiServices : BaseApiService, IKhachHangApiServices //ua code xong rui ma @@
     {
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly IConfiguration _config;

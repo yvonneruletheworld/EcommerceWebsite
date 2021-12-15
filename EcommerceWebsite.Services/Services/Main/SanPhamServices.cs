@@ -535,5 +535,22 @@ namespace EcommerceWebsite.Services.Services.Main
         {
            return DateTime.Now.Subtract(new TimeSpan(7, 0, 0, 0, 0));
         }
+
+        private int TinhSoSao(string maSP)
+        {
+            var data = _context.BinhLuans.Where(s => s.MaSanPham == maSP.ToString().Trim()).ToList();
+            if(data != null)
+            {
+                int tongSao = 0, dem = 0, kq = 0;
+                foreach(var getData in data)
+                {
+                    tongSao += getData.SoSao;
+                    dem++;
+                }
+                kq = tongSao / dem;
+                return kq;
+            }
+            return 0;
+        }
     }
 }
