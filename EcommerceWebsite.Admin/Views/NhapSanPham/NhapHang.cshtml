@@ -1,0 +1,121 @@
+﻿@using EcommerceWebsite.Data.Entities;
+@model List<NhaCungCap>
+<div class="pcoded-content">
+    <!-- [ breadcrumb ] start -->
+    <div class="page-header">
+        <div class="page-block">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="page-header-title">
+                        <h5 class="m-b-10">Danh sách nhập hàng</h5>
+                    </div>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Sản phẩm</a></li>
+                        <li class="breadcrumb-item">Nhập sản phẩm</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <h5 class="mb-3">CHI TIẾT NHẬP HÀNG</h5>
+            <hr>
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-body table-border-style">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Mã sản phẩm</th>
+                                        <th>Số lượng </th>
+                                        @*<th>Hình ảnh</th>*@
+                                        <th>Đơn giá</th>
+                                        <th>Thành tiền</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <h5 class="mb-3">THÔNG TIN ĐƠN HÀNG</h5>
+            <hr>
+            <form>
+                <div class="form-group">
+                    <h5 style="color: #0094ff">Tên Nhân Viên: Lê Thị Bánh Bèo</h5>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="inputAddress">Thông tin đối tác</label>
+                    <select class="form-select" id="inlineFormSelectPref">
+                        @foreach (var item in Model)
+                        {
+                            <option value="@item.MaNhaCungCap">@item.TenNhaCungCap</option>
+                        }
+
+
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="inlineFormInputName">Ngày nhập hàng</label>
+                    <input type="date" class="form-control" placeholder="Nhập ngày">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="inlineFormInputName">Tổng Tiền: 0 VNĐ</label>
+                </div>
+                <button class="btn mb-1 btn-primary"><i data-feather="save"></i> Thêm </button>
+                <button class="btn mb-1 btn-primary"><i data-feather="delete"></i> Xóa</button>
+                <button class="btn mb-1 btn-primary"><i data-feather="edit"></i> Sửa</button>
+                <button class="btn mb-1 btn-primary"><i data-feather="edit"></i>Nhập</button>
+            </form>
+
+        </div>
+        <hr />
+        <div class="col-xl-12">
+            <div class="card">
+                <div class="card-body table-border-style">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Mã phiếu nhập</th>
+                                    <th>Tên nhà cung cấp</th>
+                                    @*<th>Hình ảnh</th>*@
+                                    <th>Tổng Tiền</th>
+                                    <th>Ngày Tạo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <hr />
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-end">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#!" tabindex="-1">Previous</a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#!">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#!">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#!">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#!">Next</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+

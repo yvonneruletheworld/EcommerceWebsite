@@ -217,9 +217,10 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
             {
                 return Json(new
                 {
-                    slGH = dSGioHang.Sum(c => c.soLuong)
-               
-            });
+                    slGH = dSGioHang.Sum(c => c.soLuong),
+                    slTien = dSGioHang.Sum(c => c.dThanhTien),
+
+                });
             }
             return RedirectToAction("Index", "GioHang");
         }
@@ -240,7 +241,9 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
                 HttpContext.Session.Set("GioHang", listGHang);
                 HttpContext.Session.SetString("SoLuongGH", dSGioHang.Sum(c => c.soLuong) + "");
                 HttpContext.Session.SetString("TongTienGH", dSGioHang.Sum(c => c.dThanhTien) + "");
-                return Json(new { slGH = dSGioHang.Sum(c => c.soLuong),
+                return Json(new
+                { slGH = dSGioHang.Sum(c => c.soLuong),
+                    slTien = dSGioHang.Sum( c=> c.dThanhTien),
                     Message = "Thành công"});
             }
             //Nếu giỏ hàng rỗng
@@ -266,7 +269,10 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
                 HttpContext.Session.Set("GioHang", listGHang);
                 HttpContext.Session.SetString("SoLuongGH", dSGioHang.Sum(c => c.soLuong) + "");
                 HttpContext.Session.SetString("TongTienGH", dSGioHang.Sum(c => c.dThanhTien) + "");
-                return Json(new { code = 200, Message = "Thành công", slGH = dSGioHang.Sum(c => c.soLuong) });
+                return Json(new { 
+                    code = 200, Message = "Thành công", 
+                    slGH = dSGioHang.Sum(c => c.soLuong),
+                    slTien = dSGioHang.Sum(c => c.dThanhTien), });
             }
             else
             {
@@ -333,6 +339,7 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
                             listGHang.Clear();
                             HttpContext.Session.Set("GioHang", listGHang);
                             HttpContext.Session.SetString("SoLuongGH", 0 + "");
+                            HttpContext.Session.SetString("TongTienGH", 0 + "");
                             return Json(new
                             {
                                 status = true
@@ -367,6 +374,7 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
                             listGHang.Clear();
                             HttpContext.Session.Set("GioHang", listGHang);
                             HttpContext.Session.SetString("SoLuongGH", 0 + "");
+                            HttpContext.Session.SetString("TongTienGH", 0 + "");
                             return Json(new
                             {
                                 status = true

@@ -65,6 +65,7 @@ namespace EcommerceWebsite.MainWeb
             services.AddScoped<IYeuThichSanPhamApiServices, YeuThichSanPhamApiServices>();
             services.AddScoped<IBinhLuanApiService, BinhLuanApiService>();
             services.AddScoped<IGioHangApiServices, GioHangApiServices>();
+            services.AddScoped<IHoaDonApiSerivce, HoaDonApiSerivce>();
             //services.AddScoped<IEmailSenderServices, EmailSenderServices>();
         }
 

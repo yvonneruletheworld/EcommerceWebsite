@@ -51,6 +51,9 @@ $('body').on('click', '.btn-add-cart', function () {
             });
             console.log(data.slGH);
             $("#soLuonggh").html(data.slGH);
+            var TongTien = parseFloat(data.slTien);
+            var TongTien2 = format2(TongTien).split(".")[0];
+            $("#sotienGH").html(TongTien2 + " VNĐ");
         },
         error: function () {
             Swal.fire({
@@ -80,6 +83,9 @@ $('body').on('click', '.btn-xoa-gioHang', function () {
             });
             console.log(data.slGH);
             $("#soLuonggh").html(data.slGH);
+            var TongTien = parseFloat(data.slTien);
+            var TongTien2 = format2(TongTien).split(".")[0];
+            $("#sotienGH").html(TongTien2 + " VNĐ");
             layGioHang()
         },
         error: function () {
@@ -111,6 +117,9 @@ $('body').on('click', '.btn-sua-gioHang', function () {
             });
             console.log(data.slGH);
             $("#soLuonggh").html(data.slGH);
+            var TongTien = parseFloat(data.slTien);
+            var TongTien2 = format2(TongTien).split(".")[0];
+            $("#sotienGH").html(TongTien2 + " VNĐ");
             layGioHang()
         },
         error: function () {

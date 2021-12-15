@@ -34,10 +34,10 @@
                                     foreach (var item in Model)
                                     {
                                         <tr>
-                                            <td class="li-product-remove"><a  class="btn-them-yeuthich"  data-id="@item.MaSanPham"><i class="fa fa-times"></i></a></td>s
-                                            <td class="li-product-thumbnail" style="width: 200px"><a href="#"><img src="@item.HinhAnh" alt="@item.TenSanPham" width="100%"></a></td>
+                                            <td class="li-product-remove"><a  class="btn-them-yeuthich"  data-id="@item.MaSanPham"><i class="fa fa-trash-o"></i></a></td>
+                                            <td class="li-product-thumbnail" style="width: 150px"><a href="#"><img src="@item.HinhAnh" alt="@item.TenSanPham" width="100%"></a></td>
                                             <td class="li-product-name"><a href="@Url.Action("Index", "Detail", new {  prdId = item.MaSanPham, prdMaDanhMuc = item.MaLoai })">@item.TenSanPham</a></td>
-                                            <td class="li-product-stock-status"><span class="in-stock">@string.Format("{0:0,0}", item.GiaBan)</span></td>
+                                            <td class="li-product-stock-status"><span class="in-stock">@string.Format("{0:0,0}", item.GiaBan) VNĐ</span></td>
                                             <td class="li-product-add-cart"><a href="#">Thêm vào giỏ</a></td>
                                         </tr>
                                     }
