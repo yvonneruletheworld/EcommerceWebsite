@@ -129,5 +129,24 @@ namespace EcommerceWebsite.Api.Interface
             var response = await client.GetAsync($"/api/KhachHang/send-mail/{mailAddress}/{otpCode}");
             return response.IsSuccessStatusCode;
         }
+
+        public async Task<bool> ThemDiaChiKhachHang(DiaChiKhachHang input)
+        {
+            // phai set truoc thi moi lay dc
+            var sessions = _httpContextAccessor
+                .HttpContext
+                .Session
+                .GetString(SystemConstant.Token);
+
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_config[SystemConstant.BaseAddress]);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+
+            var requestItem = JsonConvert.SerializeObject(input);
+            var httpContent = new StringContent(requestItem, Encoding.UTF8, "application/json");
+
+            var response = await client.PostAsync($"/api/KhachHang/them-diachikhachhang/{input.MaDiaChi}/{input.MaKhachHang}/{input.SDT}/{input.Hoten}/{input.DiaChi}", httpContent);
+            return response.IsSuccessStatusCode;
+        }
     }
 }

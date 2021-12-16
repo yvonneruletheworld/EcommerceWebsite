@@ -1,16 +1,58 @@
 ﻿@using EcommerceWebsite.Data.Entities
 @model List<DiaChiKhachHang>
-<div class="row">
-    @foreach (var item in Model)
-    {
-        <div class="col-lg-1" style="text-align:center">
-               <input  type="radio" style="width:25px"/>
+    <div class="col-lg-12">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+
+                <div class="col-lg-10">
+                    <p>
+                        <h6>@item.Hoten - @item.SDT</h6>&ensp;@item.DiaChi
+                    </p>
+                </div>
+                <div class="col-lg-2" style="text-align:center">
+                    <input value="@item.Hoten" id="hoTenKH-@item.MaDiaChi" hidden />
+                    <input value="@item.SDT" id="sodienTKH-@item.MaDiaChi" hidden />
+                    <input value="@item.DiaChi" id="diachiGiuKH-@item.MaDiaChi" hidden />
+                    <a href="#" class="apDungDiaChi" data-id="@item.MaDiaChi">Áp dụng</a>
+                </div>
+            }
         </div>
-        <div class="col-lg-11">
-            <p>
-                <h6>@item.Hoten - @item.SDT</h6>&ensp;@item.DiaChi
-            </p>
         </div>
-       
-    }
-</div>
+        <div class="col-lg-12">
+            <div class="li-review-content">
+                <!-- Begin Feedback Area -->
+                <div class="feedback-area">
+                    <div class="feedback">
+                        <h3 class="feedback-title">THÊM ĐỊA CHỈ</h3>
+                        <form action="#">
+                            <p class="feedback-form">
+                                <label for="feedback">Địa chỉ cụ thể</label>
+                                <textarea id="Diachicuthe" name="comment" cols="45" rows="2" aria-required="true"></textarea>
+                            </p>
+                            <div class="feedback-input">
+                                <p class="feedback-form-author">
+                                    <label for="author">
+                                        Họ tên người nhận <span class="required"  style="color:red">*</span>
+                                    </label>
+                                    <input id="nguoinhan" name="email-feedback" value="" size="30" aria-required="true" type="text" >
+                                </p>
+                                <p class="feedback-form-author feedback-form-email">
+                                    <label for="email">
+                                        Số điện thoại <span class="required"  style="color:red">*</span>
+                                    </label>
+                                    <input id="sodienthoai" class="sdtnhanhang" name="pass-feedback" value="" size="30" aria-required="true" type="text">
+                                    <span id="trangThaiSDTKH" style="color:red"></span>
+                                </p>
+                                <div class="feedback-btn pb-15">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">Hủy</button>
+                                    <a href="#" onclick="ThemDiaChiKhachHang()">Thêm</a>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- Feedback Area End Here -->
+            </div>
+        </div>

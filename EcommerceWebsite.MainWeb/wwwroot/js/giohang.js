@@ -316,6 +316,15 @@ function layDiaChiKH() {
 function ThanhToan() {
 
     const MaDC = $('#maDiaChiKH').val();
+    if (MaDC == null) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Vui lòng chọn địa chỉ',
+            text: 'Vui lòng thử lại',
+            showConfirmButton: false,
+            timer: 2500
+        });
+    }
     const PtThanhToan = $('#pTThanhToan').val();
     const MaKM = $('#maKhuyenMai').val();
     const TongTien = $('#tongTienKhuyenMai').text();
@@ -334,14 +343,13 @@ function ThanhToan() {
         },
         success: function (data) {
             location.href = "/Home/Index";
+        
             Swal.fire({
                 icon: 'success',
                 title: 'Đặt hàng thành công',
                 showConfirmButton: false,
                 timer: 2500
             });
-            console.log(data.slGH);
-            $("#soLuonggh").html(data.slGH);
         },
         error: function () {
             Swal.fire({
@@ -353,6 +361,52 @@ function ThanhToan() {
             });
         }
     });
+}
+function ThemDiaChiKhachHang() {
+
+    const sDT = $('#sodienthoai').val();
+    const hoTen = $('#nguoinhan').val();
+    const diachi = $('#Diachicuthe').val();
+    if (sDT == "" || hoTen == "" || diachi == "" || trangThaisdtdichKH == false)
+    {
+        Swal.fire({
+            icon: 'error',
+            title: 'Nhập liệu không hợp lệ',
+            text: 'Vui lòng thử lại',
+            showConfirmButton: false,
+            timer: 2500
+        });
+    }
+    else
+    {
+        $.ajax({
+            url: '/GioHang/ThemDiaChiKhachHang',
+            data: {
+                sDT: sDT,
+                hoTen: hoTen,
+                diachi: diachi,
+            },
+            success: function (data) {
+                layDiaChiKH();
+                //Swal.fire({
+                //    icon: 'success',
+                //    title: 'Đặt hàng thành công',
+                //    showConfirmButton: false,
+                //    timer: 2500
+                //});
+            },
+            error: function () {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Thêm địa chỉ thất bại',
+                    text: 'Vui lòng thử lại',
+                    showConfirmButton: false,
+                    timer: 2500
+                });
+            }
+        });
+    }
+   
 }
 ///Hiện thi gio hàng Mini
 function layGioHangMini() {
@@ -453,3 +507,28 @@ function sanPhamMoiNhat() {
         }
     });
 }
+$('body').on('click', '.apDungDiaChi', function () {
+    var maDC = $(this).data('id');
+    $('#dsDiaChi').modal('hide');
+    var hotenKH = $('#hoTenKH-' + maDC).val();
+    var sdt = $('#sodienTKH-' + maDC).val();
+    var diachi = $('#diachiGiuKH-' + maDC).val();
+    $('.hoTenKH').text(hotenKH);
+    $('.sodienTKH').text(sdt);
+    $('.diachiGiuKH').text(diachi);
+    $('#maDiaChiKH').val(maDC);
+ 
+})
+var trangThaisdtdichKH = true;
+$('body').on('blur', '.sdtnhanhang', function () {
+    var KTPhone = $('#sodienthoai').val();
+    var phoneno = /((^(\+84|84|0|0084){1})(3|5|7|8|9))+([0-9]{8})$/;
+    if (!phoneno.test(KTPhone)) {
+        $('#trangThaiSDTKH').text('Số điện thoại không hợp lệ.');
+        trangThaisdtdichKH = false;
+    }
+    else {
+        $('#trangThaiSDTKH').text('');
+    }
+
+});

@@ -3,7 +3,12 @@
 @model List<GioHang>
 @{ 
     var userEmail = ViewBag.Email;
+    var hoTen = @Context.Session.GetString("HotenKH");
+    var diaChi = @Context.Session.GetString("DiaChiKH");
+    var SDT = @Context.Session.GetString("SDTKH");
+    var madc = @Context.Session.GetString("MaDiaChiKH");
 }
+
 <div class="breadcrumb-area">
     <div class="container">
         <div class="breadcrumb-content">
@@ -28,16 +33,15 @@
                         <br />
                         @if (Context.Session.GetString("HotenKH") != null)
                         {
-                            var hoTen = @Context.Session.GetString("HotenKH");
-                            var diaChi = @Context.Session.GetString("DiaChiKH");
-                            var SDT = @Context.Session.GetString("SDTKH");
-                            <span>@hoTen - @SDT - @diaChi</span>
+
+                            <span><span class="hoTenKH">@hoTen</span> - <span class="sodienTKH">@SDT</span> - <span class="diachiGiuKH">@diaChi</span></span>
                             <a href="#" onclick="danhSachDiaChiKH()" style="float:right">
                                 THAY ĐỔI
                             </a>
                         }
                         else
                         {
+                            <span><span class="hoTenKH"></span> - <span class="sodienTKH"></span> - <span class="diachiGiuKH"></span></span>
                             <a href="#" onclick="danhSachDiaChiKH()" style="float:right">
                                 THÊM ĐỊA CHỈ
                             </a>
@@ -66,28 +70,23 @@
                 <form action="#">
                     <div class="checkbox-form">
                         <h3>THÔNG TIN NHẬN ĐƠN HÀNG</h3>
-                        @if (Context.Session.GetString("HotenKH") != null)
-                        {
-                            var hoTen = @Context.Session.GetString("HotenKH");
-                            var diaChi = @Context.Session.GetString("DiaChiKH");
-                            var SDT = @Context.Session.GetString("SDTKH");
-                            var madc = @Context.Session.GetString("MaDiaChiKH");
+                          
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="checkout-form-list">
 
-                                        <input hidden value="@madc" id="maDiaChiKH" />
-                                        <label>Họ Tên Người nhận: @hoTen</label>
+                                        <input hidden id="maDiaChiKH" value="@madc"/>
+                                        <label>Họ Tên Người nhận: <span class="hoTenKH">@hoTen</span></label>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="checkout-form-list">
-                                        <label>Số điện thoại: @SDT</label>
+                                        <label>Số điện thoại: <span class="sodienTKH">@SDT</span> </label>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="checkout-form-list">
-                                        <label>Địa chỉ nhận: @diaChi</label>
+                                        <label>Địa chỉ nhận: <span class="diachiGiuKH">@diaChi</span></label>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -128,10 +127,6 @@
                                     </div>
                                 </div>
                             </div>
-                        }
-                        else
-                        {
-                        }
 
                     </div>
                 </form>

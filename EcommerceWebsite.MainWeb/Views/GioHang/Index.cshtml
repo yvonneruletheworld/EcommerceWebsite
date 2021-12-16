@@ -94,22 +94,36 @@
     }
 
     function sendEmail() {
-        $.ajax({
-            url: '/send-otp',
-            type: 'GET',
-            success: (result) => {
-                if (result === 'otp-sent-failed') {
-                    alert('Không thể gửi mã OTP');
+        const MaDC = $('#maDiaChiKH').val();
+        alert(MaDC);
+        if (MaDC == "") {
+            Swal.fire({
+                icon: 'error',
+                title: 'Vui lòng chọn địa chỉ',
+                text: 'Vui lòng thử lại',
+                showConfirmButton: false,
+                timer: 2500
+            });
+        }
+        else {
+            $.ajax({
+                url: '/send-otp',
+                type: 'GET',
+                success: (result) => {
+                    if (result === 'otp-sent-failed') {
+                        alert('Không thể gửi mã OTP');
+                    }
+                    else {
+                        otpcode = result;
+                        $("#OTPModal").modal('show');
+                    }
+                },
+                error: (err) => {
+                    alert('Lỗi gửi email');
+                    console.log(err);
                 }
-                else {
-                    otpcode = result;
-                    $("#OTPModal").modal('show');
-                }
-            },
-            error: (err) => {
-                alert('Lỗi gửi email');
-                console.log(err);
-            }
-        });
+            });
+        }
+       
     }
 </script>

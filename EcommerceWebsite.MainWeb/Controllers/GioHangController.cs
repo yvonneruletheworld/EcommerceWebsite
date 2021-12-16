@@ -42,19 +42,19 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
             return View("/Views/GioHang/Index.cshtml");
         }
         [HttpGet("get-data-giohang")]
-        public  IActionResult layGioHang()
+        public IActionResult layGioHang()
         {
             try
             {
-                var data =  dSGioHang;
-                if(data.Count == 0)
+                var data = dSGioHang;
+                if (data.Count == 0)
                 {
                     return Json(new
                     {
                         code = 500,
                         Message = "Giỏ hàng trống"
                     });
-                }    
+                }
                 return PartialView("/Views/GioHang/_ListGioHang.cshtml", data);
             }
             catch (Exception ex)
@@ -116,8 +116,8 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
         {
             try
             {
-                 var data = await _khuyenMaiApiServices.layKhuyenMai();
-                 return PartialView("/Views/GioHang/_ListKhuyenMai.cshtml", data);
+                var data = await _khuyenMaiApiServices.layKhuyenMai();
+                return PartialView("/Views/GioHang/_ListKhuyenMai.cshtml", data);
             }
             catch (Exception ex)
             {
@@ -149,13 +149,13 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
                                              .Value;
                     var data = dSGioHang;
                     var KH = await _khachHangApiServices.layDiaChiKhachHang(userId);
-                    if(KH.Count != 0)
+                    if (KH.Count != 0)
                     {
-                        HttpContext.Session.SetString("HotenKH", KH[0].Hoten );
-                        HttpContext.Session.SetString("SDTKH", KH[0].SDT );
+                        HttpContext.Session.SetString("HotenKH", KH[0].Hoten);
+                        HttpContext.Session.SetString("SDTKH", KH[0].SDT);
                         HttpContext.Session.SetString("DiaChiKH", KH[0].DiaChi);
                         HttpContext.Session.SetString("MaDiaChiKH", KH[0].MaDiaChi);
-                        
+
                     }
                     return PartialView("/Views/GioHang/_ListThanhToan.cshtml", data);
                 }
@@ -166,7 +166,7 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
                         code = 500,
                         Message = "Vui lòng đăng nhập"
                     });
-                }    
+                }
             }
             catch (Exception ex)
             {
@@ -181,7 +181,7 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
                 if (data == null)
                 {
                     data = new List<GioHang>();
-                }   
+                }
                 return data;
             }
         }
@@ -209,9 +209,9 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
             {
                 item.soLuong += soLuong;
             }
-           
+
             HttpContext.Session.Set("GioHang", myCart);
-            HttpContext.Session.SetString("SoLuongGH", dSGioHang.Sum(c => c.soLuong) +"");
+            HttpContext.Session.SetString("SoLuongGH", dSGioHang.Sum(c => c.soLuong) + "");
             HttpContext.Session.SetString("TongTienGH", dSGioHang.Sum(c => c.dThanhTien) + "");
             if (type == "ajax")
             {
@@ -242,9 +242,11 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
                 HttpContext.Session.SetString("SoLuongGH", dSGioHang.Sum(c => c.soLuong) + "");
                 HttpContext.Session.SetString("TongTienGH", dSGioHang.Sum(c => c.dThanhTien) + "");
                 return Json(new
-                { slGH = dSGioHang.Sum(c => c.soLuong),
-                    slTien = dSGioHang.Sum( c=> c.dThanhTien),
-                    Message = "Thành công"});
+                {
+                    slGH = dSGioHang.Sum(c => c.soLuong),
+                    slTien = dSGioHang.Sum(c => c.dThanhTien),
+                    Message = "Thành công"
+                });
             }
             //Nếu giỏ hàng rỗng
             if (listGHang.Count == 0)
@@ -269,19 +271,22 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
                 HttpContext.Session.Set("GioHang", listGHang);
                 HttpContext.Session.SetString("SoLuongGH", dSGioHang.Sum(c => c.soLuong) + "");
                 HttpContext.Session.SetString("TongTienGH", dSGioHang.Sum(c => c.dThanhTien) + "");
-                return Json(new { 
-                    code = 200, Message = "Thành công", 
+                return Json(new
+                {
+                    code = 200,
+                    Message = "Thành công",
                     slGH = dSGioHang.Sum(c => c.soLuong),
-                    slTien = dSGioHang.Sum(c => c.dThanhTien), });
+                    slTien = dSGioHang.Sum(c => c.dThanhTien),
+                });
             }
             else
             {
                 return Json(new { code = 500, Message = "Thành công" });
-            }    
+            }
         }
 
         [HttpGet("send-otp")]
-        public async Task<JsonResult> SendOTPAsync ()
+        public async Task<JsonResult> SendOTPAsync()
         {
             var userId = User.Claims.Where(claim => claim.Type == ClaimTypes.Sid)
                                              .FirstOrDefault()
@@ -300,9 +305,62 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
             }
             return Json(Messages.OTP_Invalid);
         }
+       
+        public IActionResult ThemDiaChiKhachHang(string sDT, string hoTen, string diachi)
+        {
+            try
+            {
 
+                if (User.Claims != null && User.Claims.Count() > 1)
+                {
+                    var userId = User.Claims.Where(claim => claim.Type == ClaimTypes.Sid)
+                                          .FirstOrDefault()
+                                          .Value;
+                    DiaChiKhachHang hd = new DiaChiKhachHang();
+                    hd.MaKhachHang = userId;
+                    hd.SDT = sDT;
+                    hd.Hoten = hoTen;
+                    hd.DiaChi = diachi;
+                    var them = _khachHangApiServices.ThemDiaChiKhachHang(hd);
+                    if (them.Result)// thêm thành công
+                    {
+
+                        return Json(new
+                        {
+                            status = true
+                        });
+                    }
+                    else
+                    {
+                        return Json(new
+                        {
+
+                            code = 2,
+                            msg = "Lỗi rồi",
+                        });
+                    }
+
+                }
+                else// chưa đăng nhập
+                {
+                    return Json(new
+                    {
+                        code = 1,
+                        msg = "Lỗi rồi",
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    code = 500,
+                    msg = "Lỗi rồi" + ex.Message
+                });
+            }
+        }
         //Tiến hành thanh toán
-        public IActionResult ThanhToan(string MaKM, string MaDC, string PtThanhToan,decimal TongTien, decimal ThanhTien, decimal PhiShip, string type = "Normal")
+        public IActionResult ThanhToan(string MaKM, string MaDC, string PtThanhToan, decimal TongTien, decimal ThanhTien, decimal PhiShip, string type = "Normal")
         {
             try
             {
@@ -354,7 +412,7 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
                                 msg = "Lỗi rồi",
                             });
                         }
-                    }    
+                    }
                     else
                     {
                         var them = _gioHangApiServices.ThemHoaDonKhongKM(hd);
@@ -389,7 +447,7 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
                                 msg = "Lỗi rồi",
                             });
                         }
-                    }    
+                    }
                 }
                 else// chưa đăng nhập
                 {

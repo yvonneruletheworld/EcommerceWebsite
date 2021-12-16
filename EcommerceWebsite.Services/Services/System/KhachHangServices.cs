@@ -228,7 +228,27 @@ namespace EcommerceWebsite.Services.Services.System
         }
 
 
+        public async Task<bool> ThemDiaChiKhachHang(DiaChiKhachHang input)
+        {
+            var duLieu = _context.DiaChiKhaches.FirstOrDefault(x => x.MaDiaChi == input.MaDiaChi && x.MaKhachHang == input.MaKhachHang);
+            if (duLieu != null)
+            {
+              
+                    return false;
+            }
+            else
+            {
+                //begin transaction
+                await _context.Database.BeginTransactionAsync();
+                //add
+                await _context.DiaChiKhaches.AddAsync(input);
+                var result = await _context.SaveChangesAsync();
 
+                await _context.Database.CommitTransactionAsync();
+
+                return true;
+            }
+        }
         //public Task<Dictionary<string, KhachHang>> LoginAsync(string usernameOrPhone, string pass)
         //{
         //    var result = new Dictionary<string, KhachHang>();

@@ -17,5 +17,6 @@ namespace EcommerceWebsite.Api.Interface
         Task<KhachHangOutput> GetKhachHangTheoMa(string maKhachHang);
         Task<List<DiaChiKhachHang>> layDiaChiKhachHang(string MaKH);
         Task<bool> SendMail(string mailAddress, string otpCode);
+        Task<bool> ThemDiaChiKhachHang(DiaChiKhachHang input);
     }
 }

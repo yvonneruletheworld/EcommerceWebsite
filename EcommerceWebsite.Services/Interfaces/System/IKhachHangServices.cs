@@ -26,5 +26,6 @@ namespace EcommerceWebsite.Services.Interfaces.System
 
         Task<bool> SubmitUser(ThongTinKhachHangInput input);
         Task<List<DiaChiKhachHang>> layDiaChiKhachHang(string MaKH);
+        Task<bool> ThemDiaChiKhachHang(DiaChiKhachHang input);
     }
 }

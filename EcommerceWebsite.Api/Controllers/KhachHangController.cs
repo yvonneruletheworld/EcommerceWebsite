@@ -1,4 +1,5 @@
 ﻿using EcommerceWebsite.Application.Constants;
+using EcommerceWebsite.Data.Entities;
 using EcommerceWebsite.Data.Identity;
 using EcommerceWebsite.Services.Interfaces.ExtraServices;
 using EcommerceWebsite.Services.Interfaces.System;
@@ -178,6 +179,43 @@ namespace EcommerceWebsite.Api.Controllers
             catch (Exception ex)
             {
                 return BadRequest(Messages.API_Exception + ex);
+            }
+        }
+        [HttpPost("them-diachikhachhang/{madiachi}/{maKhachHang}/{sdt}/{hoten}/{diachi}")]
+        public async Task<IActionResult> ThemDiaChiKhachHang(string madiachi, string maKhachHang, string sdt, string hoten, string diachi )
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var obj = new DiaChiKhachHang()
+                    {
+                        MaKhachHang = maKhachHang,
+                        MaDiaChi = madiachi,
+                        DiaChi = diachi,
+                        Hoten = hoten,
+                        SDT = sdt,
+                        DaXoa = false,
+                        LoaiDiaChi = 0,
+                        NgayTao = DateTime.UtcNow,
+                    };
+                    var result = await _khachHangServices.ThemDiaChiKhachHang(obj);
+                    if (!result)
+                    {
+                        return BadRequest(Messages.API_Failed);
+                    }
+                    else
+                    {
+                        return Ok(Messages.API_Success);
+                    }
+
+
+                }
+                return BadRequest(Messages.API_Failed);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
     }
