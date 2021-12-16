@@ -207,7 +207,8 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
             {
                 return Json(new
                 {
-                    slGH = GioHangOutput.CountCart()
+                    slGH = GioHangOutput.CountCart(),
+                    slTien = GioHangOutput.Cash()
 
                 });
             }
@@ -242,8 +243,8 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
                 GioHangOutput.HUICart[comboCode] = huiCart;
             }
             //HttpContext.Session.Set("GioHang", CurrentGioHang);
-            //HttpContext.Session.SetString("SoLuongGH", CurrentGioHang.CountCart() + "");
-            //HttpContext.Session.SetString("TongTienGH", CurrentGioHang.Cash() + "");
+            HttpContext.Session.SetString("SoLuongGH", GioHangOutput.CountCart() + "");
+            HttpContext.Session.SetString("TongTienGH", GioHangOutput.Cash() + "");
             if (GioHangOutput.CountCart() == 0)
                 return RedirectToAction("index", "Home");
            else
@@ -281,9 +282,8 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
                     updateObj.soLuong = soLuong;
                 GioHangOutput.HUICart[comboCode] = huiCart;
             }
-            //HttpContext.Session.Set("GioHang", GioHangOutput);
-            //HttpContext.Session.SetString("SoLuongGH", CurrentGioHang.CountCart() + "");
-            //HttpContext.Session.SetString("TongTienGH", CurrentGioHang.Cash() + "");
+            HttpContext.Session.SetString("SoLuongGH", GioHangOutput.CountCart() + "");
+            HttpContext.Session.SetString("TongTienGH", GioHangOutput.Cash() + "");
             if (GioHangOutput.CountCart() == 0)
                 return RedirectToAction("index", "Home");
             else

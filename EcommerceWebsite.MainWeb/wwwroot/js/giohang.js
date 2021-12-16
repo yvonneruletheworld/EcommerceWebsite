@@ -53,7 +53,7 @@ $('body').on('click', '.btn-add-cart', function () {
             $("#soLuonggh").html(data.slGH);
             var TongTien = parseFloat(data.slTien);
             var TongTien2 = format2(TongTien).split(".")[0];
-            $("#sotienGH").html(TongTien2 + " VNĐ");
+            $("#sotienGH").text(TongTien2 + " VNĐ");
         },
         error: function () {
             Swal.fire({

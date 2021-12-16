@@ -161,11 +161,7 @@
                             <tfoot>
                                 <tr class="cart-subtotal">
                                     <th>Tổng tiền hàng</th>
-                                    @if (Context.Session.GetString("TongTienGH") != null)
-                                    {
-                                        var tongTien = decimal.Parse(Context.Session.GetString("TongTienGH"));
-                                        <td><span><span class="amount" id="thanhTienHang">@string.Format("{0:0,0}", tongTien)</span> VNĐ</span></td>
-                                    }
+                                        <td><span><span class="amount" id="thanhTienHang">@string.Format("{0:0,0}", GioHangOutput.Cash())</span> VNĐ</span></td>
 
                                 </tr>
                                 <tr class="cart-subtotal">
@@ -178,9 +174,8 @@
                                 </tr>
                                 <tr class="order-total">
                                     <th>Tổng thanh toán</th>
-                                    @if (Context.Session.GetString("TongTienGH") != null)
-                                    {
-                                        var tongTien = decimal.Parse(Context.Session.GetString("TongTienGH")) + 15000;
+                                    @{
+                                        var tongTien = GioHangOutput.Cash() + 15000;
                                         <td><span><span class="amount" id="tongTienKhuyenMai">@string.Format("{0:0,0}", tongTien)</span> VNĐ</span><br /><strike id="tienTruocDo" style="font:10px;font-weight:bold;"></strike></td>
                                     }
                                 </tr>
