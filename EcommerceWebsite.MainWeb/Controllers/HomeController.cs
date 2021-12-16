@@ -37,13 +37,13 @@ namespace EcommerceWebsite.MainWeb.Controllers
             _sanPhamServices = sanPhamServices;
             _mapper = mapper;
             _yeuThichSanPhamApiServices = yeuThichSanPhamApiServices;
+            GioHangOutput.HUICart??= new Dictionary<string, List<GioHang>>();
+            GioHangOutput.NormalCart??= new List<GioHang>();
         }
 
         public async Task<IActionResult> Index()
         {
-            
             //get HUI
-            
             var vm = new HomeVM();
             vm.DanhMucOutputs = await _danhMucServices.GetCategories();
             vm.BannerOutputs = await _khuyenMaiServices.LaykhuyenMais();

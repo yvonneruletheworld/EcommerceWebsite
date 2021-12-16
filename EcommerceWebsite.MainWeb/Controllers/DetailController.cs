@@ -28,7 +28,6 @@ namespace EcommerceWebsite.MainWeb.Controllers
         //private readonly IKhachHangApiServices _khachHangServices;
         private readonly IHUIApiServices _huiServices;
         //private readonly UserManager<ApplicationUser> _userManager;
-        private List<SanPhamVM> listSanPhamHUI;
 
         public DetailController(ISanPhamApiServices sanPhamServices,
             IKhachHangApiServices khachHangServices,
@@ -39,7 +38,6 @@ namespace EcommerceWebsite.MainWeb.Controllers
             //_khachHangServices = khachHangServices;
             _huiServices = huiServices;
             _binhLuanApiService = binhLuanApiService;
-            listSanPhamHUI = new List<SanPhamVM>();
         }
 
         [HttpGet("Detail")]
@@ -63,7 +61,8 @@ namespace EcommerceWebsite.MainWeb.Controllers
                 {
                     //itemSet = itemSet.Where(i => i != prdId).ToArray();
                     vm.HUIItems = await _sanPhamServices.GetViewWithMultipleIds(itemSet, hui.Id);
-                    listSanPhamHUI = vm.HUIItems;
+                    HttpContext.Session.Set<List<SanPhamVM>>("HUIS", vm.HUIItems);
+                    //TempData["HUIITEMS"] = vm.HUIItems;
                     break;
                 }
             }
@@ -131,34 +130,36 @@ namespace EcommerceWebsite.MainWeb.Controllers
                 });
             }
         }
-
-        public IActionResult ThemVaoGioHangHUI ()
+        [HttpPost("add-hui")]
+        public IActionResult ThemVaoGioHangHUI()
         {
-            if(listSanPhamHUI != null || listSanPhamHUI.Count > 0)
+            var listSanPhamHUI = HttpContext.Session.Get<List<SanPhamVM>>("HUIS");
+            if (listSanPhamHUI != null || listSanPhamHUI.Count > 0)
             {
-                var data = HttpContext.Session.Get<List<GioHang>>("GioHang");
-                if(data != null)
+                var huiCart = GioHangOutput.HUICart;
+                if (huiCart.Count() <= 0)
+                    //Add new
+                    GioHangOutput.AddHUI(listSanPhamHUI);
+                else
                 {
-                    var listCart = listSanPhamHUI.Select(
-                        item => new GioHang()
-                        {
-                            MaSanPham = item.MaSanPham,
-                            giaSanPham = item.GiaBan,
-                            hinhAnh = item.HinhAnh,
-                            soLuong = 1,
-                            tenSanPham = item.TenSanPham,
-                            comboCode = item.ComboCode
-                        }).ToList();
-                    data.AddRange(listCart);
-
-                    HttpContext.Session.Set("GioHang", data);
-                    HttpContext.Session.SetString("SoLuongGH", data.Sum(c => c.soLuong) + "");
-                    HttpContext.Session.SetString("TongTienGH", data.Sum(c => c.dThanhTien) + "");
-
-                    return Json("OK");
+                    //Find
+                    var cbCode = listSanPhamHUI[0].ComboCode;
+                    var objExist = huiCart.Where(cart => cart.Key == cbCode)
+                        .FirstOrDefault().Value;
+                    //Case Exist
+                    if (objExist != null && objExist.Count() > 0)
+                    {
+                        objExist.ForEach(item => item.soLuong++);
+                        GioHangOutput.UpdateHUICart(objExist, cbCode);
+                    }
+                    //Case New
+                    else
+                        GioHangOutput.AddHUI(listSanPhamHUI);
                 }
+                return Json(new{slGH = GioHangOutput.CountCart()});
             }
             return Json("Fail");
         }
+       
     }
 }

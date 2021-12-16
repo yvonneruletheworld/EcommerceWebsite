@@ -523,7 +523,7 @@
 
 
                 <div class="order-button-payment" style="width:100%; align-items: center; display: flex; justify-content: center;">
-                    <a href="@Url.Action("ThemVaoGioHangHUI", "Detail")">Thêm vào giỏ hàng</a>
+                    <button type="button" onclick="addHuiItemsToCart()" >Thêm vào giỏ hàng</button>
                     </div>
                 </div>
             </div>
@@ -534,6 +534,9 @@
         @(await Html.PartialAsync("/Views/Detail/_ListSanPhamTuongTu.cshtml", Model.SanPhamOutPut))
 
 <script>
+
+    
+
     var tongTien = parseFloat(@tongTienHui);
             $(function () {
 
@@ -548,6 +551,31 @@
                 $('#tongTieninHUI').text(tongTien1 + ' VNĐ');
             });
 
+    function addHuiItemsToCart() {
+        $.ajax({
+            url: 'add-hui',
+            type: 'POST',
+            success: function (data) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Thêm giỏ hàng thành công',
+                    showConfirmButton: false,
+                    timer: 2500
+                });
+                console.log(data.slGH);
+                $("#soLuonggh").html(data.slGH);
+            },
+            error: function () {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Thêm giỏ hàng thất bại',
+                    text: 'Vui lòng thử lại',
+                    showConfirmButton: false,
+                    timer: 2500
+                });
+            }
+        });
+    }
             function dinhLuongChanged(e) {
                 var valueDemission = e.value;
                 var prd_pride = model.sanPham.bangGia.find(x => x.maDinhLuong === valueDemission);

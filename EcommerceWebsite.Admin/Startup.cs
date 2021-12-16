@@ -27,9 +27,6 @@ namespace EcommerceWebsite.Admin
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddHttpClient();
-            services.AddHttpContextAccessor();
-            services.AddControllersWithViews();
-
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
                 {
@@ -37,6 +34,10 @@ namespace EcommerceWebsite.Admin
                     options.AccessDeniedPath = "/User/Forbidden/";
                 });
 
+            services.AddHttpContextAccessor();
+            services.AddControllersWithViews();
+
+            
 
             services.AddSession(options =>
             {

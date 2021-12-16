@@ -439,7 +439,8 @@ namespace EcommerceWebsite.Services.Services.Main
                                       LoaiSanPham = sp_dm.TenDanhMuc,
                                       NhanHieu = sp_nh.TenHang,
                                       GiaBan = dl_lsg.GiaMoi,
-                                      ComboCode = comboCode
+                                      ComboCode = comboCode,
+                                      GiaHUI = sp.GiaHUI
                                       //XepHang = sp_dl.MaDinhLuong
                                   }).ToListAsync();
 

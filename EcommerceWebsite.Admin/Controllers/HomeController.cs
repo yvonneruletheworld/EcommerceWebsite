@@ -1,5 +1,6 @@
 ﻿using EcommerceWebsite.Admin.Models;
 using EcommerceWebsite.Api.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace EcommerceWebsite.Admin.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -30,7 +32,6 @@ namespace EcommerceWebsite.Admin.Controllers
             var rs = await _sanPhamService.laySanPham2();
             return View();
         }
-
 
     }
 }

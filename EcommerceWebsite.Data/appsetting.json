@@ -1,5 +1,6 @@
 {
   "ConnectionStrings": {
-    "EcommerceWebsiteDatabase": "Data Source=DESKTOP-VC3ISFJ\\SQLEXPRESS;Initial Catalog=EcommerceWebsite;User ID=sa;Password=sa2019"
+    "EcommerceWebsiteDatabase": "Data Source=DESKTOP-4NBM1DU;Initial Catalog=EcommerceWebsite;User ID=sa;Password=sa2019"
   }
+
 }
