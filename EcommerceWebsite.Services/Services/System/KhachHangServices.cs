@@ -236,7 +236,7 @@ namespace EcommerceWebsite.Services.Services.System
                           select new ThongTinKhachHangVM
                           {
                               HoTen = kh.HoTen.ToString(),
-                              GioiTinh = GioiTinh(kh.GioiTinh),
+                              //GioiTinh = GioiTinh(kh.GioiTinh),
                               SoDienThoai = kh2.PhoneNumber.ToString(),
                               Email = kh2.Email.ToString()
                           }).FirstOrDefaultAsync();
