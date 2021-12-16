@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -69,5 +70,23 @@ namespace EcommerceWebsite.MainWeb.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public async Task<IActionResult> LayThongTinKhachHang()
+        {
+            try
+            {
+                if(User.Claims != null && User.Claims.Count() > 1)
+                {
+                    var userId = User.Claims.Where(claim => claim.Type == ClaimTypes.Sid)
+                        .FirstOrDefault().Value;
+                    var duLieu = await _khachHangServices.LayThongTinKhachHang(userId);
+                    return View("/Views/KhachHang/LayThongTinKhachHang.cshtml", duLieu);
+                }
+                return RedirectToAction("Index", "KhachHang");
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

@@ -2,6 +2,7 @@
 using EcommerceWebsite.Data.Entities;
 using EcommerceWebsite.Utilities.Input;
 using EcommerceWebsite.Utilities.Output.System;
+using EcommerceWebsite.Utilities.ViewModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
@@ -147,6 +148,11 @@ namespace EcommerceWebsite.Api.Interface
 
             var response = await client.PostAsync($"/api/KhachHang/them-diachikhachhang/{input.MaDiaChi}/{input.MaKhachHang}/{input.SDT}/{input.Hoten}/{input.DiaChi}", httpContent);
             return response.IsSuccessStatusCode;
+        }
+
+        public async Task<ThongTinKhachHangVM> LayThongTinKhachHang(string maKH)
+        {
+            return await GetAsync<ThongTinKhachHangVM>($"api/KhachHang/LayThongTinKhachHang/{maKH}");
         }
     }
 }
