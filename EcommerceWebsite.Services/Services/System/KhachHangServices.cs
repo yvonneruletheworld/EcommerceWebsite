@@ -13,6 +13,7 @@ using EcommerceWebsite.Utilities.Input;
 using System.Security.Claims;
 using AutoMapper;
 using EcommerceWebsite.Utilities.Output.System;
+using EcommerceWebsite.Utilities.ViewModel;
 
 namespace EcommerceWebsite.Services.Services.System
 {
@@ -227,25 +228,27 @@ namespace EcommerceWebsite.Services.Services.System
             }
         }
 
-        public async Task<KhachHang> LayThongTinKhachHang(string maKH)
+        public async Task<ThongTinKhachHangVM> LayThongTinKhachHang(string maKH)
         {
-            try
-            {
-                var duLieu = await _context.KhachHangs.Where(x => x.MaKhachHang == maKH).FirstOrDefaultAsync();
-                return duLieu;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            return await (from kh in _context.KhachHangs
+                          from kh2 in _context.AspNetUsers
+                          where kh.MaKhachHang == kh2.Id
+                          select new ThongTinKhachHangVM
+                          {
+                              HoTen = kh.HoTen.ToString(),
+                              GioiTinh = GioiTinh(kh.GioiTinh),
+                              SoDienThoai = kh2.PhoneNumber.ToString(),
+                              Email = kh2.Email.ToString()
+                          }).FirstOrDefaultAsync();
         }
 
-
-
-        //public Task<Dictionary<string, KhachHang>> LoginAsync(string usernameOrPhone, string pass)
-        //{
-        //    var result = new Dictionary<string, KhachHang>();
-        //    var obj = await 
-        //}
+        public string GioiTinh(bool data)
+        {
+            if(data.ToString().Trim() == "Nam")
+            {
+                return "Nam";
+            }
+            return "Nữ";
+        }
     }
 }

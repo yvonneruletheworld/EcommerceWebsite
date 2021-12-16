@@ -2,6 +2,7 @@
 using EcommerceWebsite.Data.Identity;
 using EcommerceWebsite.Utilities.Input;
 using EcommerceWebsite.Utilities.Output.System;
+using EcommerceWebsite.Utilities.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Security.Claims;
@@ -25,6 +26,6 @@ namespace EcommerceWebsite.Services.Interfaces.System
         Task<bool> UpdateOTPCode(string id, string v);
         Task<bool> SubmitUser(ThongTinKhachHangInput input);
         Task<List<DiaChiKhachHang>> layDiaChiKhachHang(string MaKH);
-        Task<KhachHang> LayThongTinKhachHang(string maKH);
+        Task<ThongTinKhachHangVM> LayThongTinKhachHang(string maKH);
     }
 }

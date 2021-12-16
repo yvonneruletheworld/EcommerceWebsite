@@ -181,7 +181,7 @@ namespace EcommerceWebsite.Api.Controllers
             }
         }
 
-        [HttpGet("thong-tin-khach-hang/{maKH}")]
+        [HttpGet("LayThongTinKhachHang/{maKH}")]
         public async Task<IActionResult> LayThongTinKhachHang(string maKH)
         {
             try

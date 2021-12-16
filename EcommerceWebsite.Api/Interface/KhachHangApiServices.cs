@@ -2,6 +2,7 @@
 using EcommerceWebsite.Data.Entities;
 using EcommerceWebsite.Utilities.Input;
 using EcommerceWebsite.Utilities.Output.System;
+using EcommerceWebsite.Utilities.ViewModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
@@ -130,9 +131,9 @@ namespace EcommerceWebsite.Api.Interface
             return response.IsSuccessStatusCode;
         }
 
-        public async Task<KhachHang> LayThongTinKhachHang(string maKH)
+        public async Task<ThongTinKhachHangVM> LayThongTinKhachHang(string maKH)
         {
-            return await GetAsync<KhachHang>($"api/KhachHang/LayThongTinKhachHang/{maKH}");
+            return await GetAsync<ThongTinKhachHangVM>($"api/KhachHang/LayThongTinKhachHang/{maKH}");
         }
     }
 }

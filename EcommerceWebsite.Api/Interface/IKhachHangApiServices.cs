@@ -2,6 +2,7 @@
 using EcommerceWebsite.Data.Entities;
 using EcommerceWebsite.Utilities.Input;
 using EcommerceWebsite.Utilities.Output.System;
+using EcommerceWebsite.Utilities.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,6 @@ namespace EcommerceWebsite.Api.Interface
         Task<KhachHangOutput> GetKhachHangTheoMa(string maKhachHang);
         Task<List<DiaChiKhachHang>> layDiaChiKhachHang(string MaKH);
         Task<bool> SendMail(string mailAddress, string otpCode);
-        Task<KhachHang> LayThongTinKhachHang(string maKH);
+        Task<ThongTinKhachHangVM> LayThongTinKhachHang(string maKH);
     }
 }
