@@ -20,7 +20,5 @@ namespace EcommerceWebsite.Api.Interface
         {
             return await GetListAsync<HoaDon>($"/api/HoaDon/lay-hoaDonTheoKH/{maKH}");
         }
-
-      
     }
 }

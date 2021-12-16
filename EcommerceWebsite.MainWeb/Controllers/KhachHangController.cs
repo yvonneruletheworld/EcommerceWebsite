@@ -77,7 +77,8 @@ namespace EcommerceWebsite.MainWeb.Controllers
                 if(User.Claims != null && User.Claims.Count() > 1)
                 {
                     var userId = User.Claims.Where(claim => claim.Type == ClaimTypes.Sid)
-                        .FirstOrDefault().Value;
+                        .FirstOrDefault()
+                        .Value;
                     var duLieu = await _khachHangServices.LayThongTinKhachHang(userId);
                     return View("/Views/KhachHang/LayThongTinKhachHang.cshtml", duLieu);
                 }

@@ -186,7 +186,7 @@ namespace EcommerceWebsite.Api.Controllers
         {
             try
             {
-                var result = await _khachHangServices.LayThongTinKhachHang(maKH.ToString().Trim());
+                var result = await _khachHangServices.LayThongTinKhachHang(maKH);
                 if (result == null)
                     return BadRequest(Messages.API_EmptyResult);
                 else

@@ -7,8 +7,8 @@ namespace EcommerceWebsite.Utilities.ViewModel
     public class ThongTinKhachHangVM
     {
         public string HoTen { get; set; }
-        public string GioiTinh { get; set; }
-        public string SoDienThoai { get; set; }
+        public bool GioiTinh { get; set; }
+        public string PhoneNumber { get; set; }
         public string Email { get; set; }
     }
 }

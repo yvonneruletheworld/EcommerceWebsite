@@ -25,5 +25,6 @@ namespace EcommerceWebsite.Data.Identity
         public string AccountNumber { get; set; }
         public Status Status { get; set; }
         public string IdAuto { get; set; }
+        public string PhoneNumber { get; set; }
     }
 }
