@@ -17,7 +17,8 @@ namespace EcommerceWebsite.Utilities.Input
         public decimal ThanhTien { get; set; }
         public decimal Ship { get; set; }
         public DiaChiKhachHangInput DiaChiMoi { get; set; }
-        public List<string> ListCheckoutCart { get; set; }
+        public List<string> ListCheckoutNormalCart { get; set; }
+        public List<string> ListCheckoutHUICart { get; set; }
         public bool GhiNhoDangNhap { get; set; }
     }
 

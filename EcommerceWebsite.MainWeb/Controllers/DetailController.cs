@@ -144,8 +144,7 @@ namespace EcommerceWebsite.MainWeb.Controllers
                 {
                     //Find
                     var cbCode = listSanPhamHUI[0].ComboCode;
-                    var objExist = huiCart.Where(cart => cart.Key == cbCode)
-                        .FirstOrDefault().Value;
+                    var objExist = huiCart[cbCode];
                     //Case Exist
                     if (objExist != null && objExist.Count() > 0)
                     {

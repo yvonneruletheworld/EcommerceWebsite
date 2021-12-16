@@ -218,76 +218,35 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
         //xóa giỏ hàng
         public ActionResult XoaGioHang(string id, string comboCode = null)
         {
-            //Normal Cart 
-            if(string.IsNullOrEmpty(comboCode))
-            {
-                //Lấy giỏ hàng
-                List<GioHang> listGHang = GioHangOutput.NormalCart;
-                //KIểm tra giỏ hàng
-                GioHang sp = listGHang.Single(s => s.MaSanPham == id);
-                //nếu có thì xóa nè
-                if (sp != null)
-                {
-                    listGHang.RemoveAll(s => s.MaSanPham == id);
-                    //cập nhật lại 
-                    GioHangOutput.NormalCart = listGHang;
-                }
-            } 
-            //HUI cart
-            else
-            {
-                var huiCart = GioHangOutput.HUICart.Where(hc => hc.Key == comboCode)
-                    .FirstOrDefault().Value;
-                huiCart.RemoveAll(ci => ci.MaSanPham == id);
-                GioHangOutput.HUICart[comboCode] = huiCart;
-            }
-            //HttpContext.Session.Set("GioHang", CurrentGioHang);
-            //HttpContext.Session.SetString("SoLuongGH", CurrentGioHang.CountCart() + "");
-            //HttpContext.Session.SetString("TongTienGH", CurrentGioHang.Cash() + "");
             if (GioHangOutput.CountCart() == 0)
                 return RedirectToAction("index", "Home");
-           else
-            return Json(new
+            else
             {
-                slGH = GioHangOutput.CountCart(),
-                Message = "Thành công"
-            });
+                GioHangOutput.XoaGioHang(id, comboCode);
+                return Json(new
+                {
+                    slGH = GioHangOutput.CountCart(),
+                    Message = "Thành công"
+                });
+            }    
         }
 
         //updat giỏ hàng
-        public ActionResult suaGioHang(string id, int soLuong, string comboCode = null)
+        public ActionResult suaGioHang(string id,string comboCode = null, bool isAdd = true)
         {
-            //Normal Cart 
-            if (string.IsNullOrEmpty(comboCode))
-            {
-                //Lấy giỏ hàng
-                List<GioHang> listGHang = GioHangOutput.NormalCart;
-                GioHang sp = listGHang.Single(s => s.MaSanPham == id);
-                if (sp != null)
-                {
-                    sp.soLuong = soLuong;
-                    //cập nhật lại 
-                    GioHangOutput.NormalCart = listGHang;
-                }
-            }
-            //HUI cart
-            else
-            {
-                var huiCart = GioHangOutput.HUICart.Where(hc => hc.Key == comboCode)
-                    .FirstOrDefault().Value;
-                var dict = huiCart.ToDictionary(ci => ci.MaSanPham);
-                GioHang updateObj;
-                if (dict.TryGetValue(id, out updateObj))
-                    updateObj.soLuong = soLuong;
-                GioHangOutput.HUICart[comboCode] = huiCart;
-            }
-            //HttpContext.Session.Set("GioHang", GioHangOutput);
-            //HttpContext.Session.SetString("SoLuongGH", CurrentGioHang.CountCart() + "");
-            //HttpContext.Session.SetString("TongTienGH", CurrentGioHang.Cash() + "");
             if (GioHangOutput.CountCart() == 0)
                 return RedirectToAction("index", "Home");
-            else
-                return Json(new { code = 200, Message = "Thành công", slGH = GioHangOutput.CountCart() });
+            else if(isAdd)
+            {
+               return GioHangOutput.ThemMot(id, comboCode)?
+                Json(new { code = 200, Message = "Thành công", slGH = GioHangOutput.CountCart() })
+                : Json(new { code = 500, Message = "Lỗi", slGH = GioHangOutput.CountCart() });
+            }else
+            {
+                return GioHangOutput.XoaMot(id, comboCode) ?
+                                Json(new { code = 200, Message = "Thành công", slGH = GioHangOutput.CountCart() })
+                                : Json(new { code = 500, Message = "Lỗi", slGH = GioHangOutput.CountCart() });
+            }
         }
 
         [HttpGet("send-otp")]
@@ -365,115 +324,128 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
             }
         }
         //Tiến hành thanh toán
-        //public IActionResult ThanhToan(HoaDonInput input)
-        //{
-        //    try
-        //    {
-        //        if (User.Claims != null && User.Claims.Count() > 1)
-        //        {
-        //            var userId = User.Claims.Where(claim => claim.Type == ClaimTypes.Sid)
-        //                                  .FirstOrDefault()
-        //                                  .Value;
-        //            HoaDon hd = new HoaDon();
-        //            hd.MaKhachHang = userId;
-        //            hd.MaDiaChi = input.MaDiaChi;
-        //            hd.PhuongThucThanhToan = input.PhuongThucThanhToan;
-        //            hd.TongCong = input.TongTien;
-        //            hd.ThanhTien = input.ThanhTien;
-        //            hd.PhiGiaoHang = input.Ship;
-        //            if (!string.IsNullOrEmpty(input.MaKhuyenMai))
-        //            {
-        //                hd.MaKhuyenMai = input.MaKhuyenMai;
-        //                var them = _gioHangApiServices.ThemHoaDon(hd);
-        //                string maHoaDon = hd.MaHoaDon;
-        //                if (them.Result)// thêm thành công
-        //                {
-        //                    foreach (var cartId in input.ListCheckoutCart)
-        //                    {
-        //                        var checkOutItem = GetCheckoutItems(cartId);
-        //                        if(checkOutItem != null)
-        //                        {
-        //                            ChiTietHoaDon ct = new ChiTietHoaDon();
-        //                            ct.HoaDonId = maHoaDon;
-        //                            ct.ProductId = gh;
-        //                            ct.SoLuong = gh.soLuong;
-        //                            ct.GiaBan = (decimal)gh.dThanhTien / gh.soLuong;
-        //                            _gioHangApiServices.ThemCTHoaDon(ct);
-        //                        }    
-                                
-        //                    }
-        //                    List<GioHang> listGHang = dSGioHang;
-        //                    listGHang.Clear();
-        //                    HttpContext.Session.Set("GioHang", listGHang);
-        //                    HttpContext.Session.SetString("SoLuongGH", 0 + "");
-        //                    return Json(new
-        //                    {
-        //                        status = true
-        //                    });
-        //                }
-        //                else
-        //                {
-        //                    return Json(new
-        //                    {
+        public async Task<IActionResult> ThanhToanAsync(HoaDonInput input)
+        {
+            try
+            {
+                if (User.Claims != null && User.Claims.Count() > 1)
+                {
+                    var userId = User.Claims.Where(claim => claim.Type == ClaimTypes.Sid)
+                                          .FirstOrDefault()
+                                          .Value;
+                    HoaDon hd = new HoaDon();
+                    hd.MaKhachHang = userId;
+                    hd.MaDiaChi = input.MaDiaChi;
+                    hd.PhuongThucThanhToan = input.PhuongThucThanhToan;
+                    hd.TongCong = input.TongTien;
+                    hd.ThanhTien = input.ThanhTien;
+                    hd.PhiGiaoHang = input.Ship;
+                    if (!string.IsNullOrEmpty(input.MaKhuyenMai))
+                    {
+                        hd.MaKhuyenMai = input.MaKhuyenMai;
+                        var them = await _gioHangApiServices.ThemHoaDon(hd);
+                        string maHoaDon = hd.MaHoaDon;
+                        if (them)// thêm thành công
+                        {
+                            //Kiem tra gio hang normal va gio hang HUI
+                            if(input.ListCheckoutHUICart != null && input.ListCheckoutNormalCart != null
+                                && (input.ListCheckoutHUICart.Count() != 0 || input.ListCheckoutNormalCart.Count() != 0))
+                            {
+                                //Normal cart 
+                                if(input.ListCheckoutNormalCart.Count() != 0)
+                                {
+                                    foreach (var cartId in input.ListCheckoutNormalCart)
+                                    {
+                                        var checkOutItem = GioHangOutput.Find(cartId);
+                                        if (checkOutItem != null)
+                                        {
+                                            ChiTietHoaDon ct = new ChiTietHoaDon();
+                                            ct.HoaDonId = maHoaDon;
+                                            ct.ProductId = checkOutItem.MaSanPham;
+                                            ct.SoLuong = checkOutItem.soLuong;
+                                            ct.GiaBan = (decimal)checkOutItem.giaBan;
+                                            var rs = await _gioHangApiServices.ThemCTHoaDon(ct);
+                                            //cap nhat gio hang
+                                            if (rs) GioHangOutput.XoaGioHang(cartId);
+                                        }
 
-        //                        code = 2,
-        //                        msg = "Lỗi rồi",
-        //                    });
-        //                }
-        //            }    
-        //            else
-        //            {
-        //                var them = _gioHangApiServices.ThemHoaDonKhongKM(hd);
-        //                string maHoaDon = hd.MaHoaDon;
-        //                if (them.Result)// thêm thành công
-        //                {
-        //                    foreach (var gh in dSGioHang)
-        //                    {
-        //                        ChiTietHoaDon ct = new ChiTietHoaDon();
-        //                        ct.HoaDonId = maHoaDon;
-        //                        ct.ProductId = gh.MaSanPham;
-        //                        ct.SoLuong = gh.soLuong;
-        //                        ct.GiaBan = (decimal)gh.dThanhTien / gh.soLuong;
-        //                        _gioHangApiServices.ThemCTHoaDon(ct);
-        //                    }
-        //                    List<GioHang> listGHang = dSGioHang;
-        //                    listGHang.Clear();
-        //                    HttpContext.Session.Set("GioHang", listGHang);
-        //                    HttpContext.Session.SetString("SoLuongGH", 0 + "");
-        //                    return Json(new
-        //                    {
-        //                        status = true
-        //                    });
-        //                }
-        //                else
-        //                {
-        //                    return Json(new
-        //                    {
+                                    }
+                                }    
+                               
+                            }    
+                            
+                            List<GioHang> listGHang = dSGioHang;
+                            listGHang.Clear();
+                            HttpContext.Session.Set("GioHang", listGHang);
+                            HttpContext.Session.SetString("SoLuongGH", 0 + "");
+                            return Json(new
+                            {
+                                status = true
+                            });
+                        }
+                        else
+                        {
+                            return Json(new
+                            {
 
-        //                        code = 2,
-        //                        msg = "Lỗi rồi",
-        //                    });
-        //                }
-        //            }    
-        //        }
-        //        else// chưa đăng nhập
-        //        {
-        //            return Json(new
-        //            {
-        //                code = 1,
-        //                msg = "Lỗi rồi",
-        //            });
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return Json(new
-        //        {
-        //            code = 500,
-        //            msg = "Lỗi rồi" + ex.Message
-        //        });
-        //    }
-        //}
+                                code = 2,
+                                msg = "Lỗi rồi",
+                            });
+                        }
+                    }
+                    else
+                    {
+                        var them = _gioHangApiServices.ThemHoaDonKhongKM(hd);
+                        string maHoaDon = hd.MaHoaDon;
+                        if (them.Result)// thêm thành công
+                        {
+                            foreach (var gh in dSGioHang)
+                            {
+                                ChiTietHoaDon ct = new ChiTietHoaDon();
+                                ct.HoaDonId = maHoaDon;
+                                ct.ProductId = gh.MaSanPham;
+                                ct.SoLuong = gh.soLuong;
+                                ct.GiaBan = (decimal)gh.dThanhTien / gh.soLuong;
+                                _gioHangApiServices.ThemCTHoaDon(ct);
+                            }
+                            List<GioHang> listGHang = dSGioHang;
+                            listGHang.Clear();
+                            HttpContext.Session.Set("GioHang", listGHang);
+                            HttpContext.Session.SetString("SoLuongGH", 0 + "");
+                            return Json(new
+                            {
+                                status = true
+                            });
+                        }
+                        else
+                        {
+                            return Json(new
+                            {
+
+                                code = 2,
+                                msg = "Lỗi rồi",
+                            });
+                        }
+                    }
+                }
+                else// chưa đăng nhập
+                {
+                    return Json(new
+                    {
+                        code = 1,
+                        msg = "Lỗi rồi",
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    code = 500,
+                    msg = "Lỗi rồi" + ex.Message
+                });
+            }
+        }
 
         //private GioHang GetCheckoutItems(string cartId)
         //{
