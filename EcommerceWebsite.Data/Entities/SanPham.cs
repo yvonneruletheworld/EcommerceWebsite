@@ -24,6 +24,7 @@ namespace EcommerceWebsite.Data.Entities
         public string HinhAnh { get; set; }
         public string MaLoaiSanPham { get; set; }
         public string MaHang { get; set; }
+        public decimal GiaHUI { get; set; }
         public Status Status { get; set; }
 
         public DanhGiaSanPham DanhGiaSanPham { get; set; }

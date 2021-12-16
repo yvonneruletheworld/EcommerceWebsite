@@ -410,7 +410,7 @@ namespace EcommerceWebsite.Services.Services.Main
             }
         }
 
-        public async Task<List<SanPhamVM>> GetProductWithMultipleId(string[] idArray)
+        public async Task<List<SanPhamVM>> GetProductWithMultipleId(string[] idArray, string comboCode)
         {
             try
             {
@@ -438,7 +438,9 @@ namespace EcommerceWebsite.Services.Services.Main
                                       HinhAnh = sp.HinhAnh,
                                       LoaiSanPham = sp_dm.TenDanhMuc,
                                       NhanHieu = sp_nh.TenHang,
-                                      GiaBan = dl_lsg.GiaMoi
+                                      GiaBan = dl_lsg.GiaMoi,
+                                      ComboCode = comboCode,
+                                      GiaHUI = sp.GiaHUI
                                       //XepHang = sp_dl.MaDinhLuong
                                   }).ToListAsync();
 

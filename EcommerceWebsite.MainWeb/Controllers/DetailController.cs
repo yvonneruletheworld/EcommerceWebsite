@@ -2,9 +2,12 @@
 using EcommerceWebsite.Application.Constants;
 using EcommerceWebsite.Data.Entities;
 using EcommerceWebsite.Data.Identity;
+using EcommerceWebsite.MainWeb.Models;
+using EcommerceWebsite.Services.Interfaces.ExtraServices;
 using EcommerceWebsite.Utilities.Input;
 using EcommerceWebsite.Utilities.Output.System;
 using EcommerceWebsite.Utilities.ViewModel;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -56,8 +59,10 @@ namespace EcommerceWebsite.MainWeb.Controllers
                 var itemSet = hui.Itemsets;
                 if (itemSet.Contains(prdId))
                 {
-                    itemSet = itemSet.Where(i => i != prdId).ToArray();
-                    vm.HUIItems = await _sanPhamServices.GetViewWithMultipleIds(itemSet);
+                    //itemSet = itemSet.Where(i => i != prdId).ToArray();
+                    vm.HUIItems = await _sanPhamServices.GetViewWithMultipleIds(itemSet, hui.Id);
+                    HttpContext.Session.Set<List<SanPhamVM>>("HUIS", vm.HUIItems);
+                    //TempData["HUIITEMS"] = vm.HUIItems;
                     break;
                 }
             }
@@ -125,5 +130,36 @@ namespace EcommerceWebsite.MainWeb.Controllers
                 });
             }
         }
+        [HttpPost("add-hui")]
+        public IActionResult ThemVaoGioHangHUI()
+        {
+            var listSanPhamHUI = HttpContext.Session.Get<List<SanPhamVM>>("HUIS");
+            if (listSanPhamHUI != null || listSanPhamHUI.Count > 0)
+            {
+                var huiCart = GioHangOutput.HUICart;
+                if (huiCart.Count() <= 0)
+                    //Add new
+                    GioHangOutput.AddHUI(listSanPhamHUI);
+                else
+                {
+                    //Find
+                    var cbCode = listSanPhamHUI[0].ComboCode;
+                    var objExist = huiCart.Where(cart => cart.Key == cbCode)
+                        .FirstOrDefault().Value;
+                    //Case Exist
+                    if (objExist != null && objExist.Count() > 0)
+                    {
+                        objExist.ForEach(item => item.soLuong++);
+                        GioHangOutput.UpdateHUICart(objExist, cbCode);
+                    }
+                    //Case New
+                    else
+                        GioHangOutput.AddHUI(listSanPhamHUI);
+                }
+                return Json(new{slGH = GioHangOutput.CountCart()});
+            }
+            return Json("Fail");
+        }
+       
     }
 }

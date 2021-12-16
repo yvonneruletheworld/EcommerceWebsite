@@ -19,5 +19,10 @@ namespace EcommerceWebsite.Admin.Controllers
             var data = await _sanPhamApiServices.laySanPham2();
             return View(data);
         }
+        //public async Task<IActionResult> InputExcel()
+        //{
+            
+        //}
+
     }
 }

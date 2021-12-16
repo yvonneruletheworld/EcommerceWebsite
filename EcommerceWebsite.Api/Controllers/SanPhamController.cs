@@ -257,14 +257,14 @@ namespace EcommerceWebsite.Api.Controllers
         }
 
         [HttpGet("get-mulpitple-id")]
-        public async Task<IActionResult> GetProductWithMultipleId([FromQuery] string[] productIds)
+        public async Task<IActionResult> GetProductWithMultipleId(string comboCode, [FromQuery] string[] productIds)
         {
             if (productIds == null || productIds.Length == 0)
                 return BadRequest(Messages.API_EmptyInput);
             else
             {
                 // lay san pham
-                var listObj = await _sanPhamServices.GetProductWithMultipleId(productIds);
+                var listObj = await _sanPhamServices.GetProductWithMultipleId(productIds, comboCode);
                 if (listObj == null)
                     return BadRequest(Messages.API_EmptyResult);
                 return Ok(listObj);

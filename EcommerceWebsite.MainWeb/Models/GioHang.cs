@@ -8,14 +8,17 @@ namespace EcommerceWebsite.MainWeb.Models
 {
     public class GioHang
     {
+        public string comboCode { get; set; }
         public string MaSanPham { get; set; }
         public int soLuong { get; set; }
         public string tenSanPham { get; set; }
         public string hinhAnh { get; set; }
         public decimal giaSanPham { get; set; }
+        public decimal giaBan { get; set; }
         public decimal? dThanhTien
         {
-            get { return soLuong * giaSanPham; }
+            get { return soLuong * giaBan; }
         }
+
     }
 }
