@@ -323,6 +323,12 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
                 });
             }
         }
+        /// <summary>
+        /// Ý tưởng chung: Nhận vào HoaDonInput có chứa danh sách những mặt hàng bthuong và  hang HUI muốn thanh toán. 
+        /// Tìm trong GioHangOutPut lọc ra những mặt hàng có mã giống rồi tạo hóa đơn
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         //Tiến hành thanh toán
         public async Task<IActionResult> ThanhToanAsync(HoaDonInput input)
         {
@@ -340,93 +346,65 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
                     hd.TongCong = input.TongTien;
                     hd.ThanhTien = input.ThanhTien;
                     hd.PhiGiaoHang = input.Ship;
-                    if (!string.IsNullOrEmpty(input.MaKhuyenMai))
+                    hd.MaKhuyenMai = input.MaKhuyenMai;
+                    var them = string.IsNullOrEmpty(input.MaKhuyenMai)?
+                        await _gioHangApiServices.ThemHoaDon(hd)
+                        : await _gioHangApiServices.ThemHoaDonKhongKM(hd); ;
+                    string maHoaDon = hd.MaHoaDon;
+                    if (them)// thêm thành công
                     {
-                        hd.MaKhuyenMai = input.MaKhuyenMai;
-                        var them = await _gioHangApiServices.ThemHoaDon(hd);
-                        string maHoaDon = hd.MaHoaDon;
-                        if (them)// thêm thành công
+                        //Kiem tra gio hang binh thuong va gio hang HUI
+                        if(input.ListCheckoutHUICart != null && input.ListCheckoutNormalCart != null
+                            && (input.ListCheckoutHUICart.Count() != 0 || input.ListCheckoutNormalCart.Count() != 0))
                         {
-                            //Kiem tra gio hang normal va gio hang HUI
-                            if(input.ListCheckoutHUICart != null && input.ListCheckoutNormalCart != null
-                                && (input.ListCheckoutHUICart.Count() != 0 || input.ListCheckoutNormalCart.Count() != 0))
+                            //loc giỏ hàng bình thường 
+                            if(input.ListCheckoutNormalCart.Count() != 0)
                             {
-                                //Normal cart 
-                                if(input.ListCheckoutNormalCart.Count() != 0)
+                                foreach (var cartId in input.ListCheckoutNormalCart)
                                 {
-                                    foreach (var cartId in input.ListCheckoutNormalCart)
+                                    var checkOutItem = GioHangOutput.Find(cartId);
+                                    if (checkOutItem != null)
                                     {
-                                        var checkOutItem = GioHangOutput.Find(cartId);
-                                        if (checkOutItem != null)
-                                        {
-                                            ChiTietHoaDon ct = new ChiTietHoaDon();
-                                            ct.HoaDonId = maHoaDon;
-                                            ct.ProductId = checkOutItem.MaSanPham;
-                                            ct.SoLuong = checkOutItem.soLuong;
-                                            ct.GiaBan = (decimal)checkOutItem.giaBan;
-                                            var rs = await _gioHangApiServices.ThemCTHoaDon(ct);
-                                            //cap nhat gio hang
-                                            if (rs) GioHangOutput.XoaGioHang(cartId);
-                                        }
-
+                                        ChiTietHoaDon ct = new ChiTietHoaDon();
+                                        ct.HoaDonId = maHoaDon;
+                                        ct.ProductId = checkOutItem.MaSanPham;
+                                        ct.SoLuong = checkOutItem.soLuong;
+                                        ct.GiaBan = (decimal)checkOutItem.giaBan;
+                                        var rs = await _gioHangApiServices.ThemCTHoaDon(ct);
+                                        //cap nhat gio hang
+                                        if (rs) GioHangOutput.XoaGioHang(cartId);
                                     }
-                                }    
-                               
-                            }    
-                            
-                            List<GioHang> listGHang = dSGioHang;
-                            listGHang.Clear();
-                            HttpContext.Session.Set("GioHang", listGHang);
-                            HttpContext.Session.SetString("SoLuongGH", 0 + "");
-                            return Json(new
-                            {
-                                status = true
-                            });
-                        }
-                        else
-                        {
-                            return Json(new
-                            {
 
-                                code = 2,
-                                msg = "Lỗi rồi",
-                            });
-                        }
-                    }
-                    else
-                    {
-                        var them = _gioHangApiServices.ThemHoaDonKhongKM(hd);
-                        string maHoaDon = hd.MaHoaDon;
-                        if (them.Result)// thêm thành công
-                        {
-                            foreach (var gh in dSGioHang)
-                            {
-                                ChiTietHoaDon ct = new ChiTietHoaDon();
-                                ct.HoaDonId = maHoaDon;
-                                ct.ProductId = gh.MaSanPham;
-                                ct.SoLuong = gh.soLuong;
-                                ct.GiaBan = (decimal)gh.dThanhTien / gh.soLuong;
-                                _gioHangApiServices.ThemCTHoaDon(ct);
+                                }
                             }
-                            List<GioHang> listGHang = dSGioHang;
-                            listGHang.Clear();
-                            HttpContext.Session.Set("GioHang", listGHang);
-                            HttpContext.Session.SetString("SoLuongGH", 0 + "");
-                            return Json(new
-                            {
-                                status = true
-                            });
-                        }
-                        else
-                        {
-                            return Json(new
-                            {
 
-                                code = 2,
-                                msg = "Lỗi rồi",
-                            });
-                        }
+                            //lọc giỏ hàng HUI
+                            if (input.ListCheckoutHUICart.Count() != 0)
+                            {
+                                foreach (var idAndCode in input.ListCheckoutHUICart)
+                                {
+                                    var cartId = idAndCode.Split('_')[1];
+                                    var code = idAndCode.Split('_')[0];
+                                    var checkOutItem = GioHangOutput.Find(cartId,code);
+                                    if (checkOutItem != null)
+                                    {
+                                        ChiTietHoaDon ct = new ChiTietHoaDon();
+                                        ct.HoaDonId = maHoaDon;
+                                        ct.ProductId = checkOutItem.MaSanPham;
+                                        ct.SoLuong = checkOutItem.soLuong;
+                                        ct.GiaBan = (decimal)checkOutItem.giaBan;
+                                        var rs = await _gioHangApiServices.ThemCTHoaDon(ct);
+                                        //cap nhat gio hang
+                                        if (rs) GioHangOutput.XoaGioHang(cartId,code);
+                                    }
+
+                                }
+                            }
+                            return Json(new{ status = true});
+                        }else //Gio hang trong
+                            return Json(new{ status = false});
                     }
+                    else return Json(new{code = 2,msg = "Lỗi rồi",});
                 }
                 else// chưa đăng nhập
                 {
