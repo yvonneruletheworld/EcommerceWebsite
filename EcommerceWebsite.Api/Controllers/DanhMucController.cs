@@ -15,10 +15,12 @@ namespace EcommerceWebsite.Api.Controllers
     public class DanhMucController : ControllerBase
     {
         private readonly IDanhMucServices _danhMucServices;
+        private readonly IDanhMucThuocTinhServices _danhMucThuocTinhServices;
 
-        public DanhMucController(IDanhMucServices danhMucServices)
+        public DanhMucController(IDanhMucServices danhMucServices, IDanhMucThuocTinhServices danhMucThuocTinhServices)
         {
             _danhMucServices = danhMucServices;
+            _danhMucThuocTinhServices = danhMucThuocTinhServices;
         }
 
         [HttpGet("get-categories")]
@@ -43,6 +45,23 @@ namespace EcommerceWebsite.Api.Controllers
             try
             {
                 var rs = await _danhMucServices.GetDanhMucVaSanPhams(count);
+                if (rs == null)
+                    return BadRequest(Messages.API_EmptyResult);
+                else
+                    return Ok(rs);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(Messages.API_Exception + ex);
+            }
+        }
+        
+        [HttpGet("get-danhmuc-thuoctinh/{maDanhMuc}")]
+        public async Task<IActionResult> GetThuocTinhTheoDanhMuc (string maDanhMuc)
+        {
+            try
+            {
+                var rs = await _danhMucThuocTinhServices.LayThuocTinhTheoDanhMuc(maDanhMuc);
                 if (rs == null)
                     return BadRequest(Messages.API_EmptyResult);
                 else

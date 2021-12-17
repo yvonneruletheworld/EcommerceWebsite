@@ -14619,7 +14619,7 @@ pre[class*="language-"] > code {
 .pc-sidebar {
     background: #1c232f;
     box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
-    width: 280px;
+    width: 230px;
     position: fixed;
     top: 0;
     bottom: 0;
@@ -14944,7 +14944,7 @@ body:not(.minimenu) .pc-sidebar .pc-submenu .pc-submenu .pc-submenu > .pc-item:b
     color: #525b69;
     min-height: 70px;
     position: fixed;
-    left: 280px;
+    left: 230px;
     right: 0;
     z-index: 1025;
 }
@@ -15338,7 +15338,7 @@ body:not(.minimenu) .pc-sidebar .pc-submenu .pc-submenu .pc-submenu > .pc-item:b
 .pc-container {
     position: relative;
     top: 70px;
-    margin-left: 280px;
+    margin-left: 230px;
     min-height: calc(100vh - 70px);
 }
 
@@ -15371,7 +15371,7 @@ body:not(.minimenu) .pc-sidebar .pc-submenu .pc-submenu .pc-submenu > .pc-item:b
     display: flex;
     align-items: center;
     top: 70px;
-    left: 280px;
+    left: 230px;
     right: 0;
     z-index: 1023;
     min-height: 55px;

@@ -1,5 +1,11 @@
-﻿@using EcommerceWebsite.Data.Entities;
-@model List<NhaCungCap>
+﻿@using Microsoft.AspNetCore.Http
+@using EcommerceWebsite.Utilities.ViewModel
+@model NhapHangVM
+
+@{ 
+    var tongThanhTien = 0.0m;
+    var tongSoNhap = 0;
+}
 <div class="pcoded-content">
     <!-- [ breadcrumb ] start -->
     <div class="page-header">
@@ -18,8 +24,8 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-6">
-            <h5 class="mb-3">CHI TIẾT NHẬP HÀNG</h5>
+        <div class="col-sm-8">
+            <h5 class="mb-3">CHI TIẾT PHIẾU NHẬP</h5>
             <hr>
             <div class="col-xl-12">
                 <div class="card">
@@ -28,14 +34,32 @@
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th>Mã sản phẩm</th>
-                                        <th>Số lượng </th>
-                                        @*<th>Hình ảnh</th>*@
+                                        <th>Tên sản phẩm</th>
+                                        <th>Nhãn hiệu</th>
+                                        <th>Mẫu mã </th>
+                                        <th>Số lượng nhập</th>
                                         <th>Đơn giá</th>
                                         <th>Thành tiền</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @if (Model.SanPhamInputs != null)
+                                    {
+                                        @foreach (var sp in Model.SanPhamInputs)
+                                        {
+                                            tongThanhTien += sp.ThanhTien;
+                                            tongSoNhap += sp.SoLuongNhap;
+                                            <tr>
+                                                <td>@sp.TenSanPham</td>
+                                                <td>@sp.NhanHieu</td>
+                                                <td>@sp.TenMauMa</td>
+                                                <td>@sp.SoLuongNhap</td>
+                                                <td>@sp.GiaNhap</td>
+                                                <td>@sp.ThanhTien</td>
+                                            </tr>
+                                        }
+                                    }
+
                                 </tbody>
                             </table>
                         </div>
@@ -44,18 +68,18 @@
 
             </div>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-4">
             <h5 class="mb-3">THÔNG TIN ĐƠN HÀNG</h5>
             <hr>
-            <form>
+            <form id="form-import-id" asp-controller="NhapSanPham" asp-action="ReadInputExcel" method="post" enctype="multipart/form-data">
                 <div class="form-group">
-                    <h5 style="color: #0094ff">Tên Nhân Viên: Lê Thị Bánh Bèo</h5>
+                    <h5 style="color: #0094ff">Tên Nhân Viên: @Context.Session.GetString("HoTenAdmin")</h5>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label" for="inputAddress">Thông tin đối tác</label>
-                    <select class="form-select" id="inlineFormSelectPref">
-                        @foreach (var item in Model)
+                    <label class="form-label" for="nha-cungcap-selection">Thông tin đối tác</label>
+                    <select class="form-select" id="nha-cungcap-selection">
+                        @foreach (var item in Model.NhaCungCaps)
                         {
                             <option value="@item.MaNhaCungCap">@item.TenNhaCungCap</option>
                         }
@@ -63,17 +87,42 @@
 
                     </select>
                 </div>
+                
                 <div class="form-group">
-                    <label class="form-label" for="inlineFormInputName">Ngày nhập hàng</label>
-                    <input type="date" class="form-control" placeholder="Nhập ngày">
+                    <label class="form-label" for="loai-hang-hoa-selection">Loại hàng hóa</label>
+                    <select class="form-select" id="loai-hang-hoa-selection">
+                        @foreach (var item in Model.DanhMucs)
+                        {
+                            @if (item.DanhMucCon != null && item.DanhMucCon.Count() > 0)
+                            {
+                                <optgroup label="@item.TenDanhMuc">
+                                    @foreach (var dmc in item.DanhMucCon)
+                                    {
+                                        <option value="@dmc.MaDanhMuc">@dmc.TenDanhMuc</option>
+                                    }
+                                </optgroup>
+                            }
+                            else
+                            {
+                                <option value="@item.MaDanhMuc">@item.TenDanhMuc</option>
+
+                            }
+                        }
+
+                    </select>
                 </div>
                 <div class="form-group">
-                    <label class="form-label" for="inlineFormInputName">Tổng Tiền: 0 VNĐ</label>
+                    <label class="form-label" >Ngày nhập hàng</label>
+                    <input type="date" id="ngay-nhap-id" class="form-control" placeholder="Nhập ngày">
                 </div>
-                <button class="btn mb-1 btn-primary"><i data-feather="save"></i> Thêm </button>
-                <button class="btn mb-1 btn-primary"><i data-feather="delete"></i> Xóa</button>
-                <button class="btn mb-1 btn-primary"><i data-feather="edit"></i> Sửa</button>
-                <button class="btn mb-1 btn-primary"><i data-feather="edit"></i>Nhập</button>
+                <div class="form-group">
+                    <label class="form-label" >Số Lượng : @tongSoNhap Sản phẩm</label>
+                    <label class="form-label" >Tổng Tiền: @tongThanhTien VNĐ</label>
+                </div>
+                <input type="file" name="importSanPham" onchange="onImportChange()" id="importSanPham" style="display: none" />
+                <button class="btn mb-1 btn-primary" onclick="onInputClick()"><i data-feather="edit"></i> Chọn</button>
+                <button class="btn mb-1 btn-primary" onclick="cleanInput()"><i data-feather="delete"></i> Xóa</button>
+                <button type="submit" class="btn mb-1 btn-primary"><i data-feather="save"></i> Lưu</button>
             </form>
 
         </div>
@@ -118,4 +167,29 @@
     </div>
 
 </div>
+
+<script>
+
+    //$(document).ready(function () {
+    //    $('#importSanPham').change(function () {
+    //        var files = $('#importSanPham')[0].files[0];
+    //        if (files) {
+    //            $('#form-import-id').submit();
+    //        }
+    //    });
+    //});
+
+    function onInputClick() {
+        $('#importSanPham').click();
+    }
+    
+    function onImportChange(){
+        var files = $('#importSanPham')[0].files[0];
+        if (files) {
+            $('#form-import-id').submit();
+        }
+    }
+
+
+</script>
 

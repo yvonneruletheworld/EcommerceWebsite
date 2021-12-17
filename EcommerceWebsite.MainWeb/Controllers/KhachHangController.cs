@@ -23,15 +23,6 @@ namespace EcommerceWebsite.MainWeb.Controllers
         {
         }
 
-        //private readonly IKhachHangApiServices _khachHangServices;
-        //private readonly IConfiguration _configuration;
-
-        //public KhachHangController(IKhachHangApiServices khachHangServices, IConfiguration configuration)
-        //{
-        //    _khachHangServices = khachHangServices;
-        //    _configuration = configuration;
-        //}
-
 
         //get
         [HttpGet("client-login")]

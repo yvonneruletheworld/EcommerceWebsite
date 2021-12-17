@@ -43,6 +43,7 @@ namespace EcommerceWebsite.Data.EF
         public DbSet<DanhGiaSanPham> DanhGiaSanPhams { get; set; }
         public DbSet<SanPhamYeuThich> SanPhamYeuThiches { get; set; }
         public DbSet<Banner> Banners { get; set; }
+        public DbSet<DanhMucThuocTinh> DanhMucThuocTinhs { get; set; }
         
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -75,6 +76,7 @@ namespace EcommerceWebsite.Data.EF
             modelBuilder.ApplyConfiguration(new DanhGiaSanPhamConfiguration());
             modelBuilder.ApplyConfiguration(new SanPhamYeuThichConfiguration());
             modelBuilder.ApplyConfiguration(new BannerConfiguration());
+            modelBuilder.ApplyConfiguration(new DanhMucThuocTinhConfiguration());
             
             base.OnModelCreating(modelBuilder);
 
