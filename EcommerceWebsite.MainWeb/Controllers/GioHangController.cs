@@ -207,7 +207,8 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
             {
                 return Json(new
                 {
-                    slGH = GioHangOutput.CountCart()
+                    slGH = GioHangOutput.CountCart(),
+                    slTien = GioHangOutput.Cash()
 
                 });
             }

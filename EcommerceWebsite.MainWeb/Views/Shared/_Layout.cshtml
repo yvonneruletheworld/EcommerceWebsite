@@ -62,7 +62,7 @@
         <header>
             <!-- Begin Header Top Area -->
             <div class="header-top">
-                <div class="container">
+                <div class="container" id="thanhcongCu1">
                     <div class="row">
                         <!-- Begin Header Top Left Area -->
                         <div class="col-lg-3 col-md-4">
@@ -138,7 +138,7 @@
                         <div class="col-lg-3">
                             <div class="logo pb-sm-30 pb-xs-30">
                                 <a href="@Url.Action("Index","Home")">
-                                    <img src="https://i.ibb.co/jzN4xyb/Blue-with-Gold-Laurel-Education-Logo-9-1-removebg-preview.png" alt="TRIPLE V" />
+                                    <img src="https://i.ibb.co/jzN4xyb/Blue-with-Gold-Laurel-Education-Logo-9-1-removebg-preview.png" alt="TRIPLE V" id="hinhanhlogo"/>
                                     @*<img src="https://i.ibb.co/7r7rdmv/Blue-with-Gold-Laurel-Education-Logo-4-1.png" alt="TRIPLE V" />*@
                                 </a>
                             </div>
@@ -182,15 +182,14 @@
                                             <span class="item-icon"></span>
 
 
-                                            @if (Context.Session.GetString("SoLuongGH") != null)
+                                            @if (GioHangOutput.CountCart() != 0)
                                             {
-                                                var tongTien = decimal.Parse(Context.Session.GetString("TongTienGH"));
-                                        <span class="item-text">
-                                           
-                                            <span id="sotienGH">@string.Format("{0:0,0}", tongTien) VNĐ </span>
+                                               
+                                             <span class="item-text">
+                                            <span id="sotienGH">@string.Format("{0:0,0}", GioHangOutput.Cash()) VNĐ </span>
 
 
-                                            <span class="cart-item-count wishlist-item-count" style=" margin-top: -14px; margin-left: -55px;" id="soLuonggh">@Context.Session.GetString("SoLuongGH")</span>
+                                            <span class="cart-item-count wishlist-item-count" style=" margin-top: -14px; margin-left: -55px;" id="soLuonggh">@GioHangOutput.CountCart()</span>
                                         </span>
                                             }
                                             else
@@ -214,7 +213,7 @@
             <!-- Header Middle Area End Here -->
             <!-- Begin Header Bottom Area -->
             <div class="header-bottom header-sticky stick d-none d-lg-block d-xl-block">
-                <div class="container">
+                <div class="container" id="thanhcongCu2">
                     <div class="row">
                         <div class="col-lg-12">
                             <!-- Begin Header Bottom Menu Area -->
