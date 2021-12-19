@@ -1,4 +1,5 @@
 ﻿using EcommerceWebsite.Data.Entities;
+using EcommerceWebsite.Utilities.Output.Main;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -6,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace EcommerceWebsite.Services.Interfaces.Main
 {
-    public interface ILichSuGiaServices
+   public interface IDanhMucThuocTinhServices
     {
-        Task<bool> ThemGiaMoiTheoMaSanPham(BangGiaSanPham input);
+        Task<List<ThuocTinh>> LayThuocTinhTheoDanhMuc(string maDanhMuc);
     }
 }

@@ -9,14 +9,20 @@ using System.Threading.Tasks;
 
 namespace EcommerceWebsite.Utilities.Output.Main
 {
-    public class SanPhamOutput : EntityBase
+    public class SanPhamOutput : EntityBase 
     {
-        [Required]
+        public SanPhamOutput()
+        {
+            ListThongSo = new List<ThongSoSanPhamOutput>();
+            BangGia = new List<BangGiaOutput>();
+        }
+
+        //[Required]
         [JsonProperty("maSanPham")]
         public string MaSanPham { get; set; }
         [JsonProperty("tenSanPham")]
         public string TenSanPham { get; set; }
-        [JsonProperty("soLuongTon")] 
+        [JsonProperty("soLuongTon")]
         public int SoLuongTon { get; set; }
         [JsonProperty("hinhAnh")]
         public string HinhAnh { get; set; }
@@ -30,6 +36,9 @@ namespace EcommerceWebsite.Utilities.Output.Main
         public Status Status { get; set; }
 
         public decimal giaBan { get; set; }
+        [JsonProperty("thanhTien")]
+        public decimal ThanhTien { get; set; }
+        [JsonProperty("maLoai")]
         public string MaLoai { get; set; }
 
         [JsonProperty("listHinhAnh")]
@@ -40,14 +49,10 @@ namespace EcommerceWebsite.Utilities.Output.Main
         public List<BangGiaOutput> BangGia { get; set; }
 
         [JsonProperty("danhGia")]
-        public List<DanhGiaSanPham> DanhGia { get; set; } 
+        public List<DanhGiaSanPham> DanhGia { get; set; }
         [JsonProperty("listBinhLuan")]
         public List<BinhLuanOutput> ListBinhLuan { get; set; }
 
-        public static implicit operator SanPhamOutput(Task<SanPhamOutput> v)
-        {
-            throw new NotImplementedException();
-        }
         //Khóa ngoại
     }
 }

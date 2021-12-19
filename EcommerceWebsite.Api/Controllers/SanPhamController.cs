@@ -24,13 +24,15 @@ namespace EcommerceWebsite.Api.Controllers
         private readonly IBangGiaServices _bangGiaServices;
         private readonly IDinhLuongServices _dinhLuongServices;
         private readonly IBinhLuanServices _binhLuanServices;
-        public SanPhamController(ISanPhamServices sanPhamServices, IMapper mapper, IBangGiaServices bangGiaServices, IDinhLuongServices dinhLuongServices, IBinhLuanServices binhLuanServices)
+        private readonly IPhieuNhapServices _phieuNhapServices;
+        public SanPhamController(ISanPhamServices sanPhamServices, IMapper mapper, IBangGiaServices bangGiaServices, IDinhLuongServices dinhLuongServices, IBinhLuanServices binhLuanServices, IPhieuNhapServices phieuNhapServices)
         {
             _sanPhamServices = sanPhamServices;
             _mapper = mapper;
             _bangGiaServices = bangGiaServices;
             _dinhLuongServices = dinhLuongServices;
             _binhLuanServices = binhLuanServices;
+            _phieuNhapServices = phieuNhapServices;
         }
         [HttpGet("lay-sanpham")]
         public async Task<IActionResult> LaySanPhams()
@@ -63,27 +65,28 @@ namespace EcommerceWebsite.Api.Controllers
             }
         }
         [HttpPost("them-san-pham")]
-        public async Task<IActionResult> ThemSanPham(SanPhamOutput input)
+        public async Task<IActionResult> ThemSanPham(SanPhamOutput input, string creatorId)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    var existObj = _sanPhamServices.GetSanPhamTheoMa(input.MaSanPham, input.TenSanPham);
-                    if (existObj != null)
-                        return BadRequest(Messages.API_Exist);
+                    //var existObj = _sanPhamServices.GetSanPhamTheoMa(input.MaSanPham, input.TenSanPham);
+                    //if (existObj != null)
+                    //    return BadRequest(Messages.API_Exist);
                     var obj = _mapper.Map<SanPham>(input);
-
+                    //obj.MaSanPham = Guid.NewGuid().ToString();
+                    obj.NguoiTao = creatorId;
                     //add
                     var result = await _sanPhamServices.ThemSanPham(obj);
-                    if (result)
+                    if (result != null)
                     {
                         //dinh luong
                         var listDinhLuong = input.ListThongSo
-                            .Select(item => new DinhLuong () { 
+                            .Select(item => new DinhLuong (item.MaDinhLuong) { 
                                 DonVi = item.DonVi,
                                 GiaTri = item.GiaTri,
-                                MaSanPham = obj.MaSanPham,
+                                MaSanPham = result,
                                 MaThuocTinh = item.MaThuocTinh,
                         }).ToList();
 
@@ -94,12 +97,13 @@ namespace EcommerceWebsite.Api.Controllers
                             {
                                 //gia ban
                                 var listGiaBan = input.BangGia
-                                .Select(item => new LichSuGia
+                                .Select(item => new BangGiaSanPham
                                 {
                                     MaDinhLuong = item.MaDinhLuong,
                                     GiaMoi = item.GiaBan,
                                     DaXoa = false,
                                     NgayTao = DateTime.Now,
+                                    NguoiTao = creatorId
                                 }).ToList();
 
                                 if (listGiaBan != null && listGiaBan.Count > 0)
@@ -112,14 +116,68 @@ namespace EcommerceWebsite.Api.Controllers
                         }
                     }
                 }
-                return BadRequest(Messages.API_Failed);
+                return BadRequest("Lỗi thêm sản phẩm: " + input.TenSanPham);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
+        [HttpPost("them-phieu-nhap")]
+        public async Task<IActionResult> ThemPhieuNhap(PhieuNhapInput input)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    int isError = 0;
+                    var listProduct = input.ListSanPhamInput;
+                    foreach (var sp in listProduct)
+                    {
+                        var rsExec = await ThemSanPham(sp, input.CreatorId);
+                        if (rsExec.GetType() == typeof(BadRequestObjectResult))
+                        {
+                            isError++;
+                            continue;
+                        }
+                    }
+                    if (isError < listProduct.Count())
+                    {
+                        //them phieu nhap
+                        //prepare data 
+                        var newInventory = new PhieuNhap()
+                        {
+                            MaNhanVien = input.CreatorId,
+                            TongTien = decimal.Parse(input.Totalvalue),
+                            MaNhaCungCap = input.Investor,
+                        };
+                        var listChiTiet = new List<ChiTietNhapSanPham>();
+                        foreach (var prd in listProduct)
+                        {
+                            var ctpn = _mapper.Map<ChiTietNhapSanPham>(prd);
+                            ctpn.DonGia = prd.BangGia[0].GiaBan;
+                            ctpn.MaNhap = newInventory.MaPhieuNhap;
+                            listChiTiet.Add(ctpn);
+                        }
+                        newInventory.ChiTietNhapSanPhams = listChiTiet;
 
+                        var rsInputInventory = await _phieuNhapServices
+                            .CreateNewInventoryVoucher(newInventory);
+                        isError = rsInputInventory ? isError : isError++;
+                    }
+                    if (isError > 0)
+                        return BadRequest(Messages.API_CointainError);
+                    else
+                        return Ok();
+                }
+                return BadRequest(Messages.API_EmptyInput);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        
         [HttpPut("sua-san-pham/{laXoa}")]
         public async Task<IActionResult> SuaHoacXoaSanPham(SanPhamOutput input, bool laXoa)
         {
@@ -144,7 +202,7 @@ namespace EcommerceWebsite.Api.Controllers
             if (string.IsNullOrEmpty(productId) || newPrice < 0)
                 return BadRequest(Messages.API_EmptyInput);
 
-            var obj = new LichSuGia()
+            var obj = new BangGiaSanPham()
             {
                 //MaSanPham = productId,
                 GiaMoi = newPrice,

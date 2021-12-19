@@ -44,6 +44,7 @@ namespace EcommerceWebsite.Application.Constants
         public const string API_Success = "api-success";
         public const string API_Failed = "api-failed";
         public const string API_Exist = "api-exist";
+        public const string API_CointainError = "api-contain-error";
 
         //CODE 
         public const string User  = "ALL";

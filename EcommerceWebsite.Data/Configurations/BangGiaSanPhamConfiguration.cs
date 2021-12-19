@@ -7,11 +7,11 @@ using System.Text;
 
 namespace EcommerceWebsite.Data.Configurations
 {
-    public class LichSuGiaConfiguration : IEntityTypeConfiguration<LichSuGia>
+    public class BangGiaSanPhamConfiguration : IEntityTypeConfiguration<BangGiaSanPham>
     {
-        public void Configure(EntityTypeBuilder<LichSuGia> builder)
+        public void Configure(EntityTypeBuilder<BangGiaSanPham> builder)
         {
-            builder.ToTable("LICHSUGIA");
+            builder.ToTable("BANGGIASANPHAM");
 
             builder.HasKey(xl => new { xl.MaDinhLuong, xl.NgayTao });
 
@@ -24,7 +24,7 @@ namespace EcommerceWebsite.Data.Configurations
 
             //Khóa ngoại
             builder.HasOne(xl => xl.DinhLuong)
-                 .WithMany(xl => xl.LichSuGias)
+                 .WithMany(xl => xl.BangGiaSanPhams)
                  .HasForeignKey(xl => xl.MaDinhLuong);
         }
     }

@@ -28,7 +28,7 @@ namespace EcommerceWebsite.Data.EF
         public DbSet<DanhMuc> DanhMucs { get; set; }
         public DbSet<ThuocTinh> ThuocTinhs { get; set; }
         public DbSet<DinhLuong> DinhLuongs { get; set; }
-        public DbSet<LichSuGia> LichSuGias { get; set; }
+        public DbSet<BangGiaSanPham> BangGiaSanPhams { get; set; }
         public DbSet<NhanHieu> NhanHieus { get; set; }
         public DbSet<DiaChiKhachHang> DiaChiKhaches { get; set; }
         public DbSet<BinhLuan> BinhLuans { get; set; }
@@ -43,6 +43,7 @@ namespace EcommerceWebsite.Data.EF
         public DbSet<DanhGiaSanPham> DanhGiaSanPhams { get; set; }
         public DbSet<SanPhamYeuThich> SanPhamYeuThiches { get; set; }
         public DbSet<Banner> Banners { get; set; }
+        public DbSet<DanhMucThuocTinh> DanhMucThuocTinhs { get; set; }
         
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -57,7 +58,7 @@ namespace EcommerceWebsite.Data.EF
             modelBuilder.ApplyConfiguration(new DanhMucConfiguration());
             modelBuilder.ApplyConfiguration(new ThuocTinhConfiguration());
             modelBuilder.ApplyConfiguration(new DinhLuongConfiguration());
-            modelBuilder.ApplyConfiguration(new LichSuGiaConfiguration());
+            modelBuilder.ApplyConfiguration(new BangGiaSanPhamConfiguration());
             modelBuilder.ApplyConfiguration(new NhanHieuConfiguration());
             modelBuilder.ApplyConfiguration(new KhachHangConfiguration());
             modelBuilder.ApplyConfiguration(new DiaChiKhachHangConfiguration());
@@ -75,6 +76,7 @@ namespace EcommerceWebsite.Data.EF
             modelBuilder.ApplyConfiguration(new DanhGiaSanPhamConfiguration());
             modelBuilder.ApplyConfiguration(new SanPhamYeuThichConfiguration());
             modelBuilder.ApplyConfiguration(new BannerConfiguration());
+            modelBuilder.ApplyConfiguration(new DanhMucThuocTinhConfiguration());
             
             base.OnModelCreating(modelBuilder);
 

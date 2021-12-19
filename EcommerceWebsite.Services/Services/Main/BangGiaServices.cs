@@ -30,7 +30,7 @@ namespace EcommerceWebsite.Services.Services.Main
             try
             {
                 var data = await (from dl in _context.DinhLuongs
-                                  join lsg in _context.LichSuGias on dl.MaDinhLuong equals lsg.MaDinhLuong into dl_lsg_group
+                                  join lsg in _context.BangGiaSanPhams on dl.MaDinhLuong equals lsg.MaDinhLuong into dl_lsg_group
                                   from dl_lsg in dl_lsg_group.DefaultIfEmpty()
                                                             .OrderByDescending(lsg => lsg.NgayTao.Date)
                                                             .ThenByDescending(d => d.NgayTao.TimeOfDay)
@@ -58,7 +58,7 @@ namespace EcommerceWebsite.Services.Services.Main
             try
             {
                 var data = await (from dl in _context.DinhLuongs
-                                  join lsg in _context.LichSuGias on dl.MaDinhLuong equals lsg.MaDinhLuong into dl_lsg_group
+                                  join lsg in _context.BangGiaSanPhams on dl.MaDinhLuong equals lsg.MaDinhLuong into dl_lsg_group
                                   from dl_lsg in dl_lsg_group.DefaultIfEmpty()
                                   where dl.MaSanPham == prdId && !dl_lsg.DaXoa && dl.GiaTri != "0"
                                   select new BangGiaOutput
@@ -76,21 +76,21 @@ namespace EcommerceWebsite.Services.Services.Main
             }
         }
 
-        public async Task<bool> ThemGia(LichSuGia input)
+        public async Task<bool> ThemGia(BangGiaSanPham input)
         {
             //begin transaction
             await _context.Database.BeginTransactionAsync();
 
             //add
 
-            await _context.LichSuGias.AddAsync(input);
+            await _context.BangGiaSanPhams.AddAsync(input);
             var result = await _context.SaveChangesAsync();
 
             await _context.Database.CommitTransactionAsync();
             return result > 0;
         }
 
-        public async Task<bool> ModifyPrice(LichSuGia ls)
+        public async Task<bool> ModifyPrice(BangGiaSanPham ls)
         {
             try
             {
@@ -99,7 +99,7 @@ namespace EcommerceWebsite.Services.Services.Main
                 await _context.Database.BeginTransactionAsync();
                 ls.DaXoa = false;
                 ls.NgayTao = DateTime.UtcNow;
-                 _context.LichSuGias.Update(ls);
+                 _context.BangGiaSanPhams.Update(ls);
                 _context.Entry(ls).State = EntityState.Modified;
                 var rs = await _context.SaveChangesAsync();
                 await _context.Database.CommitTransactionAsync();
@@ -112,7 +112,7 @@ namespace EcommerceWebsite.Services.Services.Main
             }
         }
 
-        public async Task<bool> ThemBangGia(List<LichSuGia> input)
+        public async Task<bool> ThemBangGia(List<BangGiaSanPham> input)
         {
             try
             {
@@ -121,7 +121,7 @@ namespace EcommerceWebsite.Services.Services.Main
 
                 //add
 
-                await _context.LichSuGias.AddRangeAsync(input);
+                await _context.BangGiaSanPhams.AddRangeAsync(input);
                 var result = await _context.SaveChangesAsync();
 
                 await _context.Database.CommitTransactionAsync();
