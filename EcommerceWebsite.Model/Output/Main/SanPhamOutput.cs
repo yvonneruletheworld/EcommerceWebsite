@@ -17,7 +17,7 @@ namespace EcommerceWebsite.Utilities.Output.Main
             BangGia = new List<BangGiaOutput>();
         }
 
-        [Required]
+        //[Required]
         [JsonProperty("maSanPham")]
         public string MaSanPham { get; set; }
         [JsonProperty("tenSanPham")]

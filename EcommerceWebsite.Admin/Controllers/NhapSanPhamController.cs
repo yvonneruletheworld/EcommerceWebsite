@@ -70,6 +70,7 @@ namespace EcommerceWebsite.Admin.Controllers
             foreach(var prdImport in listProducts)
             {
                 var ct = _mapper.Map<SanPhamOutput>(prdImport);
+                ct.MaSanPham = Guid.NewGuid().ToString();
                 if(ct != null)
                 {
                     //prepare data

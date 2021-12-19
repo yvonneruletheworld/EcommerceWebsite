@@ -135,7 +135,7 @@ namespace EcommerceWebsite.Api.Interface
             var requestItem = JsonConvert.SerializeObject(input);
             var httpContent = new StringContent(requestItem, Encoding.UTF8, "application/json");
 
-                                                 
+           
             var response = await client
                 .PostAsync($"/api/SanPham/them-phieu-nhap", httpContent);
             return response.IsSuccessStatusCode;

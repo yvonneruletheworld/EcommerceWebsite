@@ -31,10 +31,9 @@ namespace EcommerceWebsite.Data.Entities
         public decimal Utility { get; set; }
 
         public DanhMuc DanhMuc { get; set; }
-        public NhanHieu NhanHieu {get; set; }
+        public NhanHieu NhanHieuEnti {get; set; }
         //Khóa ngoại
         public List<DinhLuong> DinhLuongs { get; set; }
-        public List<LichSuGia> LichSuGias { get; set; }
         public List<BinhLuan> BinhLuans { get; set; }
         public List<SanPhamYeuThich> SanPhamYeus { get; set; }
         public List<ChiTietNhapSanPham> ChiTietNhapSanPhams { get; set; }

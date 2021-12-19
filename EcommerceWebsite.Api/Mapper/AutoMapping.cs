@@ -14,8 +14,12 @@ namespace EcommerceWebsite.Api.Mapper
     {
         public AutoMapping()
         {
-            CreateMap<SanPham, SanPhamOutput>();
-           
+            //CreateMap<SanPham, SanPhamOutput>()
+            //    .ForMember(op => op.NhanHieu, op => op.MapFrom(sp => sp.MaHang));
+            CreateMap<SanPhamOutput, SanPham>()
+                .ForMember(sp => sp.MaHang, sp => sp.MapFrom(op => op.NhanHieu))
+                .ForMember(sp => sp.MaLoaiSanPham, sp => sp.MapFrom(op => op.MaLoai));
+
             CreateMap<SanPhamOutput, SanPhamVM>();
 
             CreateMap<SanPhamInput, SanPhamOutput>()

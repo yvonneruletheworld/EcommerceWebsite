@@ -8,6 +8,6 @@ namespace EcommerceWebsite.Services.Interfaces.Main
 {
     public interface ILichSuGiaServices
     {
-        Task<bool> ThemGiaMoiTheoMaSanPham(LichSuGia input);
+        Task<bool> ThemGiaMoiTheoMaSanPham(BangGiaSanPham input);
     }
 }

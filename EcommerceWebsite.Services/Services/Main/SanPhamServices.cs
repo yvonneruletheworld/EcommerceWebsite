@@ -71,7 +71,7 @@ namespace EcommerceWebsite.Services.Services.Main
 
         public async Task<bool> KiemTraGia(string prdId)
         {
-            return (await _context.LichSuGias.FindAsync(prdId) == null);
+            return (await _context.BangGiaSanPhams.FindAsync(prdId) == null);
         }
 
         public async Task<SanPhamOutput> LayChiTietSanPham(string id)
@@ -126,8 +126,8 @@ namespace EcommerceWebsite.Services.Services.Main
                                                              .Where(dl => dl.MaSanPham.Equals(sp.MaSanPham)
                                                              && (dl.MaThuocTinh == (nameof(ProductPorpertyCode.TT07))
                                                              || dl.MaThuocTinh == (nameof(ProductPorpertyCode.TT014)))).Take(1)
-                                          //join lsg in _context.LichSuGias on sp_dl.MaDinhLuong equals lsg.MaDinhLuong into dl_lsg_group
-                                      from dl_lsg in _context.LichSuGias.Where(lsg => lsg.MaDinhLuong.Equals(sp_dl.MaDinhLuong))
+                                          //join lsg in _context.BangGiaSanPhams on sp_dl.MaDinhLuong equals lsg.MaDinhLuong into dl_lsg_group
+                                      from dl_lsg in _context.BangGiaSanPhams.Where(lsg => lsg.MaDinhLuong.Equals(sp_dl.MaDinhLuong))
                                                                     .OrderByDescending(lsg => lsg.NgayTao.Date).Take(1)
 
                                       where !sp.DaXoa
@@ -153,7 +153,7 @@ namespace EcommerceWebsite.Services.Services.Main
                 throw ex;
             }
         }
-        public async Task<bool> ThemSanPham(SanPham input)
+        public async Task<string> ThemSanPham(SanPham input)
         {
             //begin transaction
             await _context.Database.BeginTransactionAsync();
@@ -170,7 +170,9 @@ namespace EcommerceWebsite.Services.Services.Main
 
             await _context.Database.CommitTransactionAsync();
 
-            return result > 0;
+            if (result > 0)
+                return (await GetSanPhamTheoMa("", input.TenSanPham)).MaSanPham;
+            else return null;
         }
         private async Task<SanPham> GetByIdAsync(string maSP)
         {
@@ -238,8 +240,8 @@ namespace EcommerceWebsite.Services.Services.Main
                                                            .Where(dl => dl.MaSanPham.Equals(sp.MaSanPham)
                                                            && (dl.MaThuocTinh == (nameof(ProductPorpertyCode.TT07))
                                                            || dl.MaThuocTinh == (nameof(ProductPorpertyCode.TT014)))).Take(1)
-                                      //join lsg in _context.LichSuGias on sp_dl.MaDinhLuong equals lsg.MaDinhLuong into dl_lsg_group
-                                  from dl_lsg in _context.LichSuGias.Where(lsg => lsg.MaDinhLuong.Equals(sp_dl.MaDinhLuong))
+                                      //join lsg in _context.BangGiaSanPhams on sp_dl.MaDinhLuong equals lsg.MaDinhLuong into dl_lsg_group
+                                  from dl_lsg in _context.BangGiaSanPhams.Where(lsg => lsg.MaDinhLuong.Equals(sp_dl.MaDinhLuong))
                                                                 .OrderByDescending(lsg => lsg.NgayTao.Date)
                                                                 .ThenByDescending(d => d.NgayTao.TimeOfDay).Take(1)
                                   where !sp.DaXoa && (string.IsNullOrEmpty(loaiSanPham) ? sp.MaSanPham == maSanPham : sp.MaLoaiSanPham == loaiSanPham)
@@ -279,8 +281,8 @@ namespace EcommerceWebsite.Services.Services.Main
                                                          .Where(dl => dl.MaSanPham.Equals(sp.MaSanPham)
                                                          && (dl.MaThuocTinh == (nameof(ProductPorpertyCode.TT07))
                                                          || dl.MaThuocTinh == (nameof(ProductPorpertyCode.TT014)))).Take(1)
-                                      //join lsg in _context.LichSuGias on sp_dl.MaDinhLuong equals lsg.MaDinhLuong into dl_lsg_group
-                                  from dl_lsg in _context.LichSuGias.Where(lsg => lsg.MaDinhLuong.Equals(sp_dl.MaDinhLuong))
+                                      //join lsg in _context.BangGiaSanPhams on sp_dl.MaDinhLuong equals lsg.MaDinhLuong into dl_lsg_group
+                                  from dl_lsg in _context.BangGiaSanPhams.Where(lsg => lsg.MaDinhLuong.Equals(sp_dl.MaDinhLuong))
                                                                 .OrderByDescending(lsg => lsg.NgayTao.Date).Take(1)
 
                                   where !sp.DaXoa
@@ -313,8 +315,8 @@ namespace EcommerceWebsite.Services.Services.Main
                                                          .Where(dl => dl.MaSanPham.Equals(sp.MaSanPham)
                                                          && (dl.MaThuocTinh == (nameof(ProductPorpertyCode.TT07))
                                                          || dl.MaThuocTinh == (nameof(ProductPorpertyCode.TT014)))).Take(1)
-                                      //join lsg in _context.LichSuGias on sp_dl.MaDinhLuong equals lsg.MaDinhLuong into dl_lsg_group
-                                  from dl_lsg in _context.LichSuGias.Where(lsg => lsg.MaDinhLuong.Equals(sp_dl.MaDinhLuong))
+                                      //join lsg in _context.BangGiaSanPhams on sp_dl.MaDinhLuong equals lsg.MaDinhLuong into dl_lsg_group
+                                  from dl_lsg in _context.BangGiaSanPhams.Where(lsg => lsg.MaDinhLuong.Equals(sp_dl.MaDinhLuong))
                                                                 .OrderByDescending(lsg => lsg.NgayTao.Date).Take(1)
 
                                   where !sp.DaXoa
@@ -348,8 +350,8 @@ namespace EcommerceWebsite.Services.Services.Main
                                                          .Where(dl => dl.MaSanPham.Equals(sp.MaSanPham)
                                                          && (dl.MaThuocTinh == (nameof(ProductPorpertyCode.TT07))
                                                          || dl.MaThuocTinh == (nameof(ProductPorpertyCode.TT014)))).Take(1)
-                                      //join lsg in _context.LichSuGias on sp_dl.MaDinhLuong equals lsg.MaDinhLuong into dl_lsg_group
-                                  from dl_lsg in _context.LichSuGias.Where(lsg => lsg.MaDinhLuong.Equals(sp_dl.MaDinhLuong))
+                                      //join lsg in _context.BangGiaSanPhams on sp_dl.MaDinhLuong equals lsg.MaDinhLuong into dl_lsg_group
+                                  from dl_lsg in _context.BangGiaSanPhams.Where(lsg => lsg.MaDinhLuong.Equals(sp_dl.MaDinhLuong))
                                                                 .OrderByDescending(lsg => lsg.NgayTao.Date).Take(1)
 
                                   where !sp.DaXoa
@@ -424,8 +426,8 @@ namespace EcommerceWebsite.Services.Services.Main
                                                            .Where(dl => dl.MaSanPham.Equals(sp.MaSanPham)
                                                            && (dl.MaThuocTinh == (nameof(ProductPorpertyCode.TT07))
                                                            || dl.MaThuocTinh == (nameof(ProductPorpertyCode.TT014)))).Take(1)
-                                      //join lsg in _context.LichSuGias on sp_dl.MaDinhLuong equals lsg.MaDinhLuong into dl_lsg_group
-                                  from dl_lsg in _context.LichSuGias.Where(lsg => lsg.MaDinhLuong.Equals(sp_dl.MaDinhLuong))
+                                      //join lsg in _context.BangGiaSanPhams on sp_dl.MaDinhLuong equals lsg.MaDinhLuong into dl_lsg_group
+                                  from dl_lsg in _context.BangGiaSanPhams.Where(lsg => lsg.MaDinhLuong.Equals(sp_dl.MaDinhLuong))
                                                                 .OrderByDescending(lsg => lsg.NgayTao.Date)
                                                                 .ThenByDescending(d => d.NgayTao.TimeOfDay).Take(1)
                                   where !sp.DaXoa && idArray.Contains(sp.MaSanPham)
@@ -466,8 +468,8 @@ namespace EcommerceWebsite.Services.Services.Main
                                                          .Where(dl => dl.MaSanPham.Equals(sp.MaSanPham)
                                                          && (dl.MaThuocTinh == (nameof(ProductPorpertyCode.TT07))
                                                          || dl.MaThuocTinh == (nameof(ProductPorpertyCode.TT014)))).Take(1)
-                                      //join lsg in _context.LichSuGias on sp_dl.MaDinhLuong equals lsg.MaDinhLuong into dl_lsg_group
-                                  from dl_lsg in _context.LichSuGias.Where(lsg => lsg.MaDinhLuong.Equals(sp_dl.MaDinhLuong))
+                                      //join lsg in _context.BangGiaSanPhams on sp_dl.MaDinhLuong equals lsg.MaDinhLuong into dl_lsg_group
+                                  from dl_lsg in _context.BangGiaSanPhams.Where(lsg => lsg.MaDinhLuong.Equals(sp_dl.MaDinhLuong))
                                                                 .OrderByDescending(lsg => lsg.NgayTao.Date).Take(1)
 
                                   where !sp.DaXoa
@@ -507,8 +509,8 @@ namespace EcommerceWebsite.Services.Services.Main
                                                         .Where(dl => dl.MaSanPham.Equals(sp.MaSanPham)
                                                         && (dl.MaThuocTinh == (nameof(ProductPorpertyCode.TT07))
                                                         || dl.MaThuocTinh == (nameof(ProductPorpertyCode.TT014)))).Take(1)
-                                     //join lsg in _context.LichSuGias on sp_dl.MaDinhLuong equals lsg.MaDinhLuong into dl_lsg_group
-                                 from dl_lsg in _context.LichSuGias.Where(lsg => lsg.MaDinhLuong.Equals(sp_dl.MaDinhLuong))
+                                     //join lsg in _context.BangGiaSanPhams on sp_dl.MaDinhLuong equals lsg.MaDinhLuong into dl_lsg_group
+                                 from dl_lsg in _context.BangGiaSanPhams.Where(lsg => lsg.MaDinhLuong.Equals(sp_dl.MaDinhLuong))
                                                                .OrderByDescending(lsg => lsg.NgayTao.Date).Take(1)
 
                                  where !sp.DaXoa && sp.NgayTao >= NgayHienTai()

@@ -10,9 +10,9 @@ namespace EcommerceWebsite.Services.Interfaces.Main
     public interface IBangGiaServices
     {
         Task<BangGiaOutput> GetGiaSanPhamMoiNhat(string id);
-        Task<bool> ThemGia(LichSuGia input);
-        Task<bool> ThemBangGia(List<LichSuGia> input);
-        Task<bool> ModifyPrice(LichSuGia ls);
+        Task<bool> ThemGia(BangGiaSanPham input);
+        Task<bool> ThemBangGia(List<BangGiaSanPham> input);
+        Task<bool> ModifyPrice(BangGiaSanPham ls);
         Task<List<BangGiaOutput>> LayBangGiaSanPham(string prdId);
     }
 }
