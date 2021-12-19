@@ -6,6 +6,9 @@
     var tongThanhTien = 0.0m;
     var tongSoNhap = 0;
 }
+<script>
+    var model = @Json.Serialize(Model);
+</script>
 <div class="pcoded-content">
     <!-- [ breadcrumb ] start -->
     <div class="page-header">
@@ -118,11 +121,12 @@
                 <div class="form-group">
                     <label class="form-label" >Số Lượng : @tongSoNhap Sản phẩm</label>
                     <label class="form-label" >Tổng Tiền: @tongThanhTien VNĐ</label>
+                    <p class="form-label" id="file-name" ></p>
                 </div>
-                <input type="file" name="importSanPham" onchange="onImportChange()" id="importSanPham" style="display: none" />
-                <button class="btn mb-1 btn-primary" onclick="onInputClick()"><i data-feather="edit"></i> Chọn</button>
-                <button class="btn mb-1 btn-primary" onclick="cleanInput()"><i data-feather="delete"></i> Xóa</button>
-                <button type="submit" class="btn mb-1 btn-primary"><i data-feather="save"></i> Lưu</button>
+                <input type="file" name="file" @*onchange="onImportChange()"*@ id="importSanPham" style="display: none" />
+                <button type="button" class="btn mb-1 btn-primary" onclick="onInputClick()"><i data-feather="edit"></i> Chọn</button>
+                <button type="button" class="btn mb-1 btn-primary" onclick="cleanInput()"><i data-feather="delete"></i> Xóa</button>
+                <button type="button" class="btn mb-1 btn-primary" onclick="luuImport()"><i data-feather="save"></i> Lưu</button>
             </form>
 
         </div>
@@ -170,26 +174,49 @@
 
 <script>
 
-    //$(document).ready(function () {
-    //    $('#importSanPham').change(function () {
-    //        var files = $('#importSanPham')[0].files[0];
-    //        if (files) {
-    //            $('#form-import-id').submit();
-    //        }
-    //    });
-    //});
-
+    $(document).ready(function () {
+        $('#importSanPham').change(function (e) {
+            var files = e.target.files[0];
+            if (files) {
+                $('#form-import-id').submit();
+                $('#file-name').text('File được chọn: ' + files.name);
+            }
+        });
+    });
     function onInputClick() {
         $('#importSanPham').click();
     }
-    
-    function onImportChange(){
-        var files = $('#importSanPham')[0].files[0];
-        if (files) {
-            $('#form-import-id').submit();
+    function luuImport() {
+        var ncc = $('#nha-cungcap-selection').val();
+        var ml = $('#loai-hang-hoa-selection').val();
+        var tt = '@tongThanhTien';
+        var listImport = model.sanPhamInputs;
+
+        var fd = new FormData();
+        fd.append('listImport', listImport);
+
+        if (model.sanPhamInputs) {
+            $.ajax({
+                url: 'SaveInputExcel?maNhaCungCap=' + ncc + '&total=' + tt + '&maLoai=' + ml,
+                type: 'POST',
+                data: fd,
+                contentType: false, // Not to set any content header
+                processData: false, // Not to process data
+                success: (result) => {
+                    if (result.code === 500)
+                        alert("Một số sản phẩm đã xảy ra lỗi trong quá trình lưu. Hãy kiểm tra danh sách hiển thị sản phẩm.");
+                    else
+                        alert("Thêm thành công");
+                    fd = new FormData();
+                },
+                error: (err) => {
+                    alert("Server không phản hồi! ");
+                    fd = new FormData();
+                }
+            });
         }
     }
-
+    
 
 </script>
 

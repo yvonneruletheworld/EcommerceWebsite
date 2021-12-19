@@ -9,8 +9,14 @@ using System.Threading.Tasks;
 
 namespace EcommerceWebsite.Utilities.Output.Main
 {
-    public class SanPhamOutput : EntityBase
+    public class SanPhamOutput : EntityBase 
     {
+        public SanPhamOutput()
+        {
+            ListThongSo = new List<ThongSoSanPhamOutput>();
+            BangGia = new List<BangGiaOutput>();
+        }
+
         [Required]
         [JsonProperty("maSanPham")]
         public string MaSanPham { get; set; }
@@ -30,7 +36,9 @@ namespace EcommerceWebsite.Utilities.Output.Main
         public Status Status { get; set; }
 
         public decimal giaBan { get; set; }
+        [JsonProperty("thanhTien")]
         public decimal ThanhTien { get; set; }
+        [JsonProperty("maLoai")]
         public string MaLoai { get; set; }
 
         [JsonProperty("listHinhAnh")]

@@ -17,6 +17,26 @@ namespace EcommerceWebsite.Api.Mapper
             CreateMap<SanPham, SanPhamOutput>();
            
             CreateMap<SanPhamOutput, SanPhamVM>();
+
+            CreateMap<SanPhamInput, SanPhamOutput>()
+                .ForMember(op => op.SoLuongTon, op => op.MapFrom(ip => ip.SoLuongNhap));
+            //    .ForMember(op => op.BangGia.FirstOrDefault().GiaBan, op => op.MapFrom(ip => ip.GiaNhap))
+            //    .ForMember(op => op.SoLuongTon, op => op.MapFrom(ip => ip.SoLuongNhap))
+            //    .ForMember(op => op.ListThongSo.FirstOrDefault().MaThuocTinh, op => op.MapFrom(ip => ip.MaThuocTinh))
+            //    .ForMember(op => op.ListThongSo.FirstOrDefault().GiaTri, op => op.MapFrom(ip => ip.HinhAnh))
+            //    .ForMember(op => op.ListThongSo.FirstOrDefault().DonVi, op => op.MapFrom(ip => ip.TenMauMa))
+            //    .ForMember(op => op.ListThongSo.FirstOrDefault().GiaTri, op => op.MapFrom(ip => ip.HinhAnh));
+
+            //CreateMap<SanPhamInput, SanPhamOutput>()
+            //    .ForMember(ip => ip.GiaNhap)
+
+            CreateMap<SanPhamOutput, ChiTietNhapSanPham>()
+                .ForMember(ct => ct.SoLuong, ct => ct.MapFrom(sp => sp.SoLuongTon))
+                .ForMember(ct => ct.MaSanPham, ct => ct.MapFrom(sp => sp.MaSanPham))
+                //.ForMember(ct => ct.DonGia, ct => ct.MapFrom(sp => sp.BangGia.FirstOrDefault().GiaBan))
+                .ForMember(ct => ct.ThanhTien, ct => ct.MapFrom(sp => sp.ThanhTien));
+
+
         }
     }
 }

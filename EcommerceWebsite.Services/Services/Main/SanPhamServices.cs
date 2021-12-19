@@ -554,5 +554,24 @@ namespace EcommerceWebsite.Services.Services.Main
             }
             return 0;
         }
+
+        public async Task<bool> ThemSanPham(List<SanPham> input)
+        {
+            try
+            {
+                await _context.Database.BeginTransactionAsync();
+                await _context.SanPhams.AddRangeAsync(input);
+
+                var rs = await _context.SaveChangesAsync();
+
+                await _context.Database.CommitTransactionAsync();
+                return  rs > 0;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
     }
 }

@@ -45,7 +45,8 @@ namespace EcommerceWebsite.MainWeb.Controllers
         {
             //get HUI
             var vm = new HomeVM();
-            vm.DanhMucOutputs = await _danhMucServices.GetCategories();
+            var danhMucHienThi = await _danhMucServices.GetCategories();
+            vm.DanhMucOutputs = danhMucHienThi.Where(dm =>dm.HienThiTrangHome == true).ToList() ;
             vm.BannerOutputs = await _khuyenMaiServices.LaykhuyenMais();
             vm.LoaiVaSanPham = await _danhMucServices.GetDanhMucVaSanPhams(5);
             if (HUIConfiguration.ListHUI == null)

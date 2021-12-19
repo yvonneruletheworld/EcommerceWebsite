@@ -24,13 +24,15 @@ namespace EcommerceWebsite.Api.Controllers
         private readonly IBangGiaServices _bangGiaServices;
         private readonly IDinhLuongServices _dinhLuongServices;
         private readonly IBinhLuanServices _binhLuanServices;
-        public SanPhamController(ISanPhamServices sanPhamServices, IMapper mapper, IBangGiaServices bangGiaServices, IDinhLuongServices dinhLuongServices, IBinhLuanServices binhLuanServices)
+        private readonly IPhieuNhapServices _phieuNhapServices;
+        public SanPhamController(ISanPhamServices sanPhamServices, IMapper mapper, IBangGiaServices bangGiaServices, IDinhLuongServices dinhLuongServices, IBinhLuanServices binhLuanServices, IPhieuNhapServices phieuNhapServices)
         {
             _sanPhamServices = sanPhamServices;
             _mapper = mapper;
             _bangGiaServices = bangGiaServices;
             _dinhLuongServices = dinhLuongServices;
             _binhLuanServices = binhLuanServices;
+            _phieuNhapServices = phieuNhapServices;
         }
         [HttpGet("lay-sanpham")]
         public async Task<IActionResult> LaySanPhams()
@@ -112,7 +114,109 @@ namespace EcommerceWebsite.Api.Controllers
                         }
                     }
                 }
-                return BadRequest(Messages.API_Failed);
+                return BadRequest("Lỗi thêm sản phẩm: " + input.TenSanPham);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        [HttpPost("them-phieu-nhap")]
+        public async Task<IActionResult> ThemPhieuNhap([FromBody] PhieuNhapInput input)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    int isError = 0;
+                    var listProduct = input.ListSanPhamInput;
+                    foreach (var sp in listProduct)
+                    {
+                        var rsExec = await ThemSanPham(sp);
+                        if (rsExec.GetType() == typeof(BadRequestObjectResult))
+                        {
+                            isError++;
+                            continue;
+                        }
+                        else if(isError < listProduct.Count())
+                        {
+                            //them phieu nhap
+                            //prepare data 
+                            var newInventory = new PhieuNhap()
+                            {
+                                MaNhanVien = input.CreatorId,
+                                TongTien = decimal.Parse(input.Totalvalue),
+                                MaNhaCungCap = input.Investor,
+                            };
+                            foreach(var prd in listProduct)
+                            {
+                                var ctpn = _mapper.Map<ChiTietNhapSanPham>(prd);
+                                ctpn.DonGia = prd.BangGia[0].GiaBan;
+                                newInventory.ChiTietNhapSanPhams.Add(ctpn);
+                            }
+
+                            var rsInputInventory = await _phieuNhapServices
+                                .CreateNewInventoryVoucher(newInventory);
+                            isError = rsInputInventory ? isError : isError++;
+                        }    
+                    }
+                    if (isError > 0)
+                        return BadRequest(Messages.API_CointainError);
+                    else
+                        return Ok();
+                }
+                return BadRequest(Messages.API_EmptyInput);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        
+        [HttpPost("them-phieu-nhap/{creatorId}/{inventor}/{totalValue}")]
+        public async Task<IActionResult> ThemPhieuNhap([FromBody] IEnumerable<SanPhamOutput> ListSanPhamInput, string creatorId, string inventor, string totalValue)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    int isError = 0;
+                    foreach (var sp in ListSanPhamInput)
+                    {
+                        var rsExec = await ThemSanPham(sp);
+                        if (rsExec.GetType() == typeof(BadRequestObjectResult))
+                        {
+                            isError++;
+                            continue;
+                        }
+                        else if(isError < ListSanPhamInput.Count())
+                        {
+                            //them phieu nhap
+                            //prepare data 
+                            var newInventory = new PhieuNhap()
+                            {
+                                MaNhanVien = creatorId,
+                                TongTien = decimal.Parse(totalValue),
+                                MaNhaCungCap = inventor,
+                            };
+                            foreach(var prd in ListSanPhamInput)
+                            {
+                                var ctpn = _mapper.Map<ChiTietNhapSanPham>(prd);
+                                ctpn.DonGia = prd.BangGia[0].GiaBan;
+                                newInventory.ChiTietNhapSanPhams.Add(ctpn);
+                            }
+
+                            var rsInputInventory = await _phieuNhapServices
+                                .CreateNewInventoryVoucher(newInventory);
+                            isError = rsInputInventory ? isError : isError++;
+                        }    
+                    }
+                    if (isError > 0)
+                        return BadRequest(Messages.API_CointainError);
+                    else
+                        return Ok();
+                }
+                return BadRequest(Messages.API_EmptyInput);
             }
             catch (Exception ex)
             {
