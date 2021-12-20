@@ -21,29 +21,29 @@ namespace EcommerceWebsite.Api.Controllers
             _gioHangServices = gioHangServices;
             khuyenMai = khuye;
         }
-        [HttpPost("them-hoadon/{maHD}/{maKH}/{maKM}/{maDC}/{pthucThanhToan}/{tongCong}/{thanhTien}/{phiShip}")]
-        public async Task<IActionResult> ThemHoaDon(string maHD,string maKH, string maKM, string maDC, string pthucThanhToan, decimal tongCong, decimal thanhTien, decimal phiShip)
+        [HttpPost("them-hoadon")]
+        public async Task<IActionResult> ThemHoaDon(HoaDon hoaDon)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    var obj = new HoaDon()
-                    {
-                        MaHoaDon = maHD,
-                        MaKhachHang = maKH,
-                        TongCong = tongCong,
-                        MaKhuyenMai = maKM,
-                        MaDiaChi = maDC,
-                        ThanhTien = thanhTien,
-                        TinhTrang = "Đang xử lý",
-                        PhiGiaoHang = phiShip,
-                        PhuongThucThanhToan = pthucThanhToan,
-                        DaXoa = false,
-                        NgayTao = DateTime.UtcNow,
+                    //var obj = new HoaDon()
+                    //{
+                    //    MaHoaDon = maHD,
+                    //    MaKhachHang = maKH,
+                    //    TongCong = tongCong,
+                    //    MaKhuyenMai = maKM,
+                    //    MaDiaChi = maDC,
+                    //    ThanhTien = thanhTien,
+                    //    TinhTrang = "Đang xử lý",
+                    //    PhiGiaoHang = phiShip,
+                    //    PhuongThucThanhToan = pthucThanhToan,
+                    //    DaXoa = false,
+                    //    NgayTao = DateTime.UtcNow,
 
-                    };
-                    var result = await _gioHangServices.ThemHoaDon(obj);
+                    //};
+                    var result = await _gioHangServices.ThemHoaDon(hoaDon);
                     if (!result)
                     {
                         return BadRequest(Messages.API_Failed);
@@ -52,8 +52,6 @@ namespace EcommerceWebsite.Api.Controllers
                     {
                         return Ok(Messages.API_Success);
                     }
-
-
                 }
                 return BadRequest(Messages.API_Failed);
             }

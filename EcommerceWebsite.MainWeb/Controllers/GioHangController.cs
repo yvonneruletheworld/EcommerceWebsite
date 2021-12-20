@@ -387,8 +387,8 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
                                 var listCheckoutHUICart = input.ListCheckoutHUICart[0].Split(",");
                                 foreach (var idAndCode in listCheckoutHUICart)
                                 {
-                                    var cartId = idAndCode.Split('_')[1];
-                                    var code = idAndCode.Split('_')[0];
+                                    var cartId = idAndCode.Split('_')[0];
+                                    var code = idAndCode.Split('_')[1];
                                     var checkOutItem = GioHangOutput.Find(cartId,code);
                                     if (checkOutItem != null)
                                     {

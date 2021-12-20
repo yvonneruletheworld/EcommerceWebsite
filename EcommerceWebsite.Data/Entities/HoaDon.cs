@@ -10,6 +10,7 @@ namespace EcommerceWebsite.Data.Entities
         public HoaDon()
         {
             this.MaHoaDon = Guid.NewGuid().ToString();
+            this.NgayTao = DateTime.Now;
         }
         public string MaHoaDon { get; set; }
         public string MaKhachHang { get; set; }

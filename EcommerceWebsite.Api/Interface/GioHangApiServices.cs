@@ -88,7 +88,7 @@ namespace EcommerceWebsite.Api.Interface
             var requestItem = JsonConvert.SerializeObject(hD);
             var httpContent = new StringContent(requestItem, Encoding.UTF8, "application/json");
 
-            var response = await client.PostAsync($"/api/GioHang/them-hoadon/{hD.MaHoaDon}/{hD.MaKhachHang}/{hD.MaKhuyenMai}/{hD.MaDiaChi}/{hD.PhuongThucThanhToan}/{hD.TongCong}/{hD.ThanhTien}/{hD.PhiGiaoHang}", httpContent);
+            var response = await client.PostAsync($"/api/GioHang/them-hoadon", httpContent);
             return response.IsSuccessStatusCode;
         }
         //Thêm xóa đơn không có khuyên mãi
