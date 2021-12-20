@@ -86,7 +86,8 @@
                                                 {
                                                     <li><a href="@Url.Action("LayThongTinKhachHang","KhachHang")">Cá nhân</a></li>
                                                     <li><a href="#">Ví Online</a></li>
-                                                    <li><a href="#">Đăng xuất</a></li>
+                                                    <li>@*<a href="@Url.Action("Logout", "KhachHang")">Đăng xuất</a>*@</li>
+                                                    <li><a asp-controller="KhachHang"  asp-action="Logout">Đăng xuất</a></li>
                                                 }
                                                 else
                                                 {

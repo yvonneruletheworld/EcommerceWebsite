@@ -331,6 +331,7 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
         /// <param name="input"></param>
         /// <returns></returns>
         //Tiến hành thanh toán
+        [HttpPost("thanh-toan")]
         public async Task<IActionResult> ThanhToanAsync(HoaDonInput input)
         {
             try

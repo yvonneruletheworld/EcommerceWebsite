@@ -312,56 +312,7 @@ function layDiaChiKH() {
         }
     });
 }
-//THANH TOÁN
-function ThanhToan() {
 
-    const MaDC = $('#maDiaChiKH').val();
-    if (MaDC == null) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Vui lòng chọn địa chỉ',
-            text: 'Vui lòng thử lại',
-            showConfirmButton: false,
-            timer: 2500
-        });
-    }
-    const PtThanhToan = $('#pTThanhToan').val();
-    const MaKM = $('#maKhuyenMai').val();
-    const TongTien = $('#tongTienKhuyenMai').text();
-    const ThanhTien = $('#thanhTienHang').text();
-    const PhiShip = $('#phiShip').text();
-    $.ajax({
-        url: '/GioHang/ThanhToan',
-        data: {
-            MaKM: MaKM,
-            MaDC: MaDC,
-            TongTien: TongTien,
-            ThanhTien: ThanhTien,
-            PhiShip: PhiShip,
-            PtThanhToan: PtThanhToan,
-            type: "ajax"
-        },
-        success: function (data) {
-            location.href = "/Home/Index";
-        
-            Swal.fire({
-                icon: 'success',
-                title: 'Đặt hàng thành công',
-                showConfirmButton: false,
-                timer: 2500
-            });
-        },
-        error: function () {
-            Swal.fire({
-                icon: 'error',
-                title: 'Thêm giỏ hàng thất bại',
-                text: 'Vui lòng thử lại',
-                showConfirmButton: false,
-                timer: 2500
-            });
-        }
-    });
-}
 function ThemDiaChiKhachHang() {
 
     const sDT = $('#sodienthoai').val();

@@ -53,7 +53,7 @@ namespace EcommerceWebsite.MainWeb.Controllers
             ModelState.AddModelError("", Messages.KhachHang_InputError);
             return View("/Views/KhachHang/Index.cshtml", input);
         }
-        [HttpPost]
+        [Route("Logout")]
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(

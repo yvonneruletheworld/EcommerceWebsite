@@ -33,9 +33,7 @@
 
             <div class="_2qN5oG">
                 <div class="_1coJFb">
-                    <label class="stardust-checkbox stardust-checkbox--checked">
-                        <input type="checkbox" style="width: 18px" />
-                    </label>
+                    
                 </div>
                 @if (huiCart.Count() > 0)
                 {
@@ -58,7 +56,10 @@
 
                             <div class="_216OLk MDvvnL">
                                 <div class="_1GcTXp">
-                                    <div class="_1coJFb">
+                                    <div class="_1coJFb checkbox-col">
+                                        <label class="stardust-checkbox stardust-checkbox--checked">
+                                            <input id="@string.Concat(sp.MaSanPham, ",1")" value="@sp.MaSanPham" type="checkbox" onclick="addSelectCartItem(this.id)" style="width: 18px" />
+                                        </label>
                                     </div>
                                     <div class="_2pPbjQ">
                                         <div class="YxpsCR">
@@ -124,91 +125,91 @@
                 }
 
 
-                @foreach (var sp in GioHangOutput.NormalCart)
-                {
+                        @foreach (var sp in GioHangOutput.NormalCart)
+                        {
 
-                    <div class="_216OLk MDvvnL">
-                        <div class="_1GcTXp">
-                            <div class="_1coJFb">
-                                <label class="stardust-checkbox stardust-checkbox--checked">
-                                    <input type="checkbox" style="width:18px" />
-                                </label>
+                            <div class="_216OLk MDvvnL">
+                                <div class="_1GcTXp">
+                                    <div class="_1coJFb checkbox-col">
+                                        <label class="stardust-checkbox stardust-checkbox--checked">
+                                            <input id="@string.Concat(sp.MaSanPham, ",2")" value="@sp.MaSanPham" type="checkbox" onclick="addSelectCartItem(this.id)" style="width: 18px" />
+                                        </label>
+                                    </div>
+                                    <div class="_2pPbjQ">
+                                        <div class="YxpsCR">
+                                            <a title="@sp.tenSanPham" href="@Url.Action("Index", "Detail", new { prdId = sp.MaSanPham, prdMaDanhMuc = "DM01" })">
+                                                <div class="_3SWf-5" style="background-image: url(@sp.hinhAnh);"></div>
+                                            </a>
+                                            <div class="_3OrWGt">
+                                                <a title="@sp.tenSanPham" href="@Url.Action("Index", "Detail", new { prdId = sp.MaSanPham, prdMaDanhMuc = "DM01" })">
+                                                    @sp.tenSanPham
+                                                </a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="_30hIFE">
+                                        <div class="_3b-8ro">
+                                            @*<div class="ns42ir" role="button" tabindex="0">
+                            <div class="aXmvTj">
+                                Phân loại hàng:
+                                <button class="_2Ipt-j"></button>
                             </div>
-                            <div class="_2pPbjQ">
-                                <div class="YxpsCR">
-                                    <a title="@sp.tenSanPham" href="@Url.Action("Index", "Detail", new { prdId = sp.MaSanPham, prdMaDanhMuc = "DM01" })">
-                                        <div class="_3SWf-5" style="background-image: url(@sp.hinhAnh);"></div>
-                                    </a>
-                                    <div class="_3OrWGt">
-                                        <a title="@sp.tenSanPham" href="@Url.Action("Index", "Detail", new { prdId = sp.MaSanPham, prdMaDanhMuc = "DM01" })">
-                                            @sp.tenSanPham
-                                        </a>
+                            <div class="GU_XoN">Trắng hồng</div>
+                        </div>
+                        <div></div>*@
+                                        </div>
+                                    </div>
+                                    <div class="Ra8lP2">
+                                        <div>
+                                            <span class="_1CXksa _1k1Vcm">@sp.giaSanPham</span>
+                                            <span class="_1CXksa">@string.Format("{0:0,0}", sp.giaBan) VNĐ</span>
+                                        </div>
+                                    </div>
+                                    <div class="_2ZUrV7">
+                                        <div class="eLoUcd shopee-input-quantity">
+                                            <button class="_2sBbZC">
+                                                <svg enable-background="new 0 0 10 10" viewBox="0 0 10 10" x="0" y="0" class="shopee-svg-icon ">
+                                                    <polygon points="4.5 4.5 3.5 4.5 0 4.5 0 5.5 3.5 5.5 4.5 5.5 10 5.5 10 4.5"></polygon>
+                                                </svg>
+                                            </button>
+                                            <input class="_2sBbZC k-s4Da" type="text" role="spinbutton" aria-valuenow="@sp.soLuong" value="@sp.soLuong">
+                                            <button class="_2sBbZC">
+                                                <svg enable-background="new 0 0 10 10" viewBox="0 0 10 10" x="0" y="0" class="shopee-svg-icon icon-plus-sign">
+                                                    <polygon points="10 4.5 5.5 4.5 5.5 0 4.5 0 4.5 4.5 0 4.5 0 5.5 4.5 5.5 4.5 10 5.5 10 5.5 5.5 10 5.5"></polygon>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="dn3H7Y"><span>@string.Format("{0:0,0}", sp.dThanhTien) VNĐ</span></div>
+                                    <div class="_2y8iJi _2qPRqW">
+                                        <button class="RCd1Gx"><i class="fa fa-trash-o"></i></button>
 
                                     </div>
                                 </div>
                             </div>
-                            <div class="_30hIFE">
-                                <div class="_3b-8ro">
-                                    @*<div class="ns42ir" role="button" tabindex="0">
-                    <div class="aXmvTj">
-                        Phân loại hàng:
-                        <button class="_2Ipt-j"></button>
-                    </div>
-                    <div class="GU_XoN">Trắng hồng</div>
-                </div>
-                <div></div>*@
-                                </div>
-                            </div>
-                            <div class="Ra8lP2">
-                                <div>
-                                    <span class="_1CXksa _1k1Vcm">@sp.giaSanPham</span>
-                                    <span class="_1CXksa">@string.Format("{0:0,0}", sp.giaBan) VNĐ</span>
-                                </div>
-                            </div>
-                            <div class="_2ZUrV7">
-                                <div class="eLoUcd shopee-input-quantity">
-                                    <button class="_2sBbZC">
-                                        <svg enable-background="new 0 0 10 10" viewBox="0 0 10 10" x="0" y="0" class="shopee-svg-icon ">
-                                            <polygon points="4.5 4.5 3.5 4.5 0 4.5 0 5.5 3.5 5.5 4.5 5.5 10 5.5 10 4.5"></polygon>
-                                        </svg>
-                                    </button>
-                                    <input class="_2sBbZC k-s4Da" type="text" role="spinbutton" aria-valuenow="@sp.soLuong" value="@sp.soLuong">
-                                    <button class="_2sBbZC">
-                                        <svg enable-background="new 0 0 10 10" viewBox="0 0 10 10" x="0" y="0" class="shopee-svg-icon icon-plus-sign">
-                                            <polygon points="10 4.5 5.5 4.5 5.5 0 4.5 0 4.5 4.5 0 4.5 0 5.5 4.5 5.5 4.5 10 5.5 10 5.5 5.5 10 5.5"></polygon>
-                                        </svg>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="dn3H7Y"><span>@string.Format("{0:0,0}", sp.dThanhTien) VNĐ</span></div>
-                            <div class="_2y8iJi _2qPRqW">
-                                <button class="RCd1Gx"><i class="fa fa-trash-o"></i></button>
+                            <div class="_2aRlry"></div>
+                        }
 
+                        <div class="row">
+                            <div class="col-md-5 ml-auto">
+                                <div class="cart-page-total">
+                                    <p>
+                                        Tổng thanh toán (@GioHangOutput.CountCart() Sản phẩm)
+                                    </p>
+                                    <ul>
+
+                                        <li>Tổng tiền hàng <span class="text-danger ">@string.Format("{0:0,0}", GioHangOutput.Cash()) VNĐ</span></li>
+                                        <li>Phí vận chuyển<span>15.000 VNĐ</span></li>
+                                        @{
+                                            var tongTien = GioHangOutput.Cash() + 15000;
+                                            <li>Tổng tiền <span class="text-danger font-weight-bold">@string.Format("{0:0,0}", tongTien) VNĐ</span></li>
+                                        }
+                                    </ul>
+                                    <a href="#" onclick="layThanhToan()">Mua Hàng</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="_2aRlry"></div>
-                }
-
-                <div class="row">
-                    <div class="col-md-5 ml-auto">
-                        <div class="cart-page-total">
-                            <p>
-                                Tổng thanh toán (@GioHangOutput.CountCart() Sản phẩm)
-                            </p>
-                            <ul>
-
-                                <li>Tổng tiền hàng <span class="text-danger ">@string.Format("{0:0,0}", GioHangOutput.Cash()) VNĐ</span></li>
-                                <li>Phí vận chuyển<span>15.000 VNĐ</span></li>
-                                @{
-                                    var tongTien = GioHangOutput.Cash() + 15000;
-                                    <li>Tổng tiền <span class="text-danger font-weight-bold">@string.Format("{0:0,0}", tongTien) VNĐ</span></li>
-                                }
-                            </ul>
-                            <a href="#" onclick="layThanhToan()">Mua Hàng</a>
-                        </div>
-                    </div>
-                </div>
 
             </div>
         </div>
