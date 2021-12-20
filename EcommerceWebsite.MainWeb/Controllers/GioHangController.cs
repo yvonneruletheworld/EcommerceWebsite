@@ -362,7 +362,8 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
                             //loc giỏ hàng bình thường 
                             if(input.ListCheckoutNormalCart.Count() != 0)
                             {
-                                foreach (var cartId in input.ListCheckoutNormalCart)
+                                var listCheckoutNormalCart = input.ListCheckoutNormalCart[0].Split(",");
+                                foreach (var cartId in listCheckoutNormalCart)
                                 {
                                     var checkOutItem = GioHangOutput.Find(cartId);
                                     if (checkOutItem != null)
@@ -383,7 +384,8 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
                             //lọc giỏ hàng HUI
                             if (input.ListCheckoutHUICart.Count() != 0)
                             {
-                                foreach (var idAndCode in input.ListCheckoutHUICart)
+                                var listCheckoutHUICart = input.ListCheckoutHUICart[0].Split(",");
+                                foreach (var idAndCode in listCheckoutHUICart)
                                 {
                                     var cartId = idAndCode.Split('_')[1];
                                     var code = idAndCode.Split('_')[0];

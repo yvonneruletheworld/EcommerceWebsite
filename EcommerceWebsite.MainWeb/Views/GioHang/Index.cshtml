@@ -69,6 +69,11 @@
     }
 
     function layThanhToan() {
+        if (selectItemList.length === 0 || selectItemList === undefined) {
+            alert('Vui lòng chọn mặt hàng để thanh toán');
+            return;
+        }
+
         $.ajax({
             url: '/get-data-thanhtoan',
             type: 'GET',
@@ -170,16 +175,17 @@
             var norCartItems = [];
 
             for (var i = 0; i < lCb.length; i++) {
-                var type = lCb[i].id.split(',')[1];
-                var itemId = lCb[i].value;
+               
+                var type = lCb[i].id.split('_')[1];
 
-                if (type === '1') {
-                    //hui
-                    huiCartItems.push(itemId)
-                } else if (type === '2') {
+                if (type === '2') {
+                    var itemId = lCb[i].value;
                     //normal
                     norCartItems.push(itemId);
-                } else return;
+                } else {
+                    var id = lCb[i].id;
+                    huiCartItems.push(id);
+                }
             }
 
             // prepare data
@@ -207,8 +213,8 @@
             fd.append('ThanhTien', ThanhTien);
             fd.append('TongTien', TongTien);
             fd.append('Ship', PhiShip);
-            fd.append('ListCheckoutNormalCart', huiCartItems);
-            fd.append('ListCheckoutHUICart', norCartItems);
+            fd.append('ListCheckoutNormalCart', norCartItems);
+            fd.append('ListCheckoutHUICart', huiCartItems);
 
             $.ajax({
                 url: '/thanh-toan',
@@ -247,6 +253,7 @@
                     });
                 }
             });
+            selectItemList = [];
         }
 
     }
