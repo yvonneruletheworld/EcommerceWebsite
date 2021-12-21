@@ -48,8 +48,9 @@
                                 {
                                     foreach (var item in Model)
                                     {
+                                        
                                         <tr>
-                                            <td>@item.MaSanPham</td>
+                                            <td><a href="@Url.Action("Index","DoanhThu", new { maSanPham = item.MaSanPham})"> @item.MaSanPham</a></td>
                                             <td>@item.TenSanPham</td>
                                             @*<td><img src="@item.HinhAnh" width="50%" /></td>*@
                                             <td>@item.NhanHieu</td>

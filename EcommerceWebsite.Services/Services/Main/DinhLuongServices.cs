@@ -40,6 +40,19 @@ namespace EcommerceWebsite.Services.Services.Main
             }
         }
 
+        public async Task<List<ThuocTinh>> layDinhLuong()
+        {
+            try
+            {
+                var data = await _context.ThuocTinhs.ToListAsync();
+                return data;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public async Task<List<ThongSoSanPhamOutput>> LayThongSoTheoSanPham(string maSanPham)
         {
             try

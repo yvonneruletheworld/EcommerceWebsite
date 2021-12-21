@@ -33,5 +33,7 @@ namespace EcommerceWebsite.Api.Interface
         Task<SanPhamVM> laySanPhamTheoMa(string prdId);
 
         Task<List<SanPhamVM>> LaySanPhamMoiNhat();
+
+        Task<List<ThuocTinh>> layDinhluong();
     }
 }
