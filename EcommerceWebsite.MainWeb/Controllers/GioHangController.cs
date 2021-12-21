@@ -217,7 +217,7 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
 
 
         //xóa giỏ hàng
-        public ActionResult XoaGioHang(string id, string comboCode = null)
+        public ActionResult XoaGioHang(string id, string comboCode)
         {
             if (GioHangOutput.CountCart() == 0)
                 return RedirectToAction("index", "Home");
@@ -227,6 +227,7 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
                 return Json(new
                 {
                     slGH = GioHangOutput.CountCart(),
+                    slTien = GioHangOutput.Cash(),
                     Message = "Thành công"
                 });
             }    

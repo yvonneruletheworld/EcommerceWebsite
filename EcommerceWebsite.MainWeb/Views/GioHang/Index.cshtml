@@ -74,7 +74,7 @@
 
     function layThanhToan() {
         if (selectItemList.length === 0 || selectItemList === undefined) {
-            alert('Vui lòng chọn mặt hàng để thanh toán');
+            swal("Thất bại!", "Vui lòng chọn mặt hàng để thanh toán!", "error");
             return;
         }
 
@@ -84,12 +84,8 @@
             success: (result) => {
                 if (result.code == 500) {
                     location.href = "/KhachHang/client-login";
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Vui lòng bạn đăng nhập',
-                        showConfirmButton: false,
-                        timer: 2500
-                    });
+                    swal("Thất bại!", "Vui lòng đăng nhập!", "error");
+                  
                 }
                 else {
                     $("#gioHang")[0].innerHTML = result;
@@ -123,7 +119,28 @@
 
     function sendEmail() {
         const MaDC = $('#maDiaChiKH').val();
-        alert("Hệ thống đang xác nhận đơn hàng của bạn. Vui lòng đợi trong giây lát...");
+        swal("Vui lòng đợi trong giây lát!", "Hệ thống đang xác nhận đơn hàng của bạn.", "error", {
+            buttons: false,
+            timer: 4000,
+        });
+        //swal({
+        //    title: 'Vui lòng đợi trong giây lát!',
+        //    text: 'Hệ thống đang xác nhận đơn hàng của bạn.',
+        //    timer: 5000,
+           
+        //    onOpen: function () {
+        //        swal.showLoading()
+        //    }
+        //}).then(
+        //    function () { },
+        //    // handling the promise rejection
+        //    function (dismiss) {
+        //        if (dismiss === 'timer') {
+        //            console.log('I was closed by the timer')
+        //        }
+        //    }
+        //);
+        
         if (MaDC == "") {
             Swal.fire({
                 icon: 'error',
