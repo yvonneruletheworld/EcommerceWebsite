@@ -58,7 +58,7 @@
                                         <div class="_1GcTXp">
                                             <div class="_1coJFb checkbox-col">
                                                 <label class="stardust-checkbox stardust-checkbox--checked">
-                                                    <input id="@string.Concat(sp.MaSanPham, "_"+huiCartKey)" value="@sp.MaSanPham" type="checkbox" onclick="addSelectCartItem(this.id)" style="width: 18px" />
+                                                    <input  id="@string.Concat(sp.MaSanPham, "_"+huiCartKey)" value="@sp.MaSanPham" type="checkbox" onclick="addSelectCartItem(this.id)" style="width: 18px" />
                                                 </label>
                                             </div>
                                             <div class="_2pPbjQ">
@@ -99,7 +99,7 @@
                                                             <polygon points="4.5 4.5 3.5 4.5 0 4.5 0 5.5 3.5 5.5 4.5 5.5 10 5.5 10 4.5"></polygon>
                                                         </svg>
                                                     </button>
-                                                    <input id="@string.Concat(sp.MaSanPham, "_sl1")" class="_2sBbZC k-s4Da" type="text" role="spinbutton" aria-valuenow="@sp.soLuong" value="@sp.soLuong">
+                                                    <input onkeyup="onSoLuongChange(this.id, '@sp.MaSanPham', '@huiCartKey')" id="@string.Concat(sp.MaSanPham, "_sl1")" class="_2sBbZC k-s4Da" type="text" role="spinbutton" aria-valuenow="@sp.soLuong" value="@sp.soLuong">
                                                     <button class="_2sBbZC" onclick="onThemMot('@sp.MaSanPham', '@huiCartKey', '@sp.soLuongTon')">
                                                         <svg enable-background="new 0 0 10 10" viewBox="0 0 10 10" x="0" y="0" class="shopee-svg-icon icon-plus-sign">
                                                             <polygon points="10 4.5 5.5 4.5 5.5 0 4.5 0 4.5 4.5 0 4.5 0 5.5 4.5 5.5 4.5 10 5.5 10 5.5 5.5 10 5.5"></polygon>
@@ -172,7 +172,7 @@
                                                     <polygon points="4.5 4.5 3.5 4.5 0 4.5 0 5.5 3.5 5.5 4.5 5.5 10 5.5 10 4.5"></polygon>
                                                 </svg>
                                             </button>
-                                            <input id="@string.Concat(sp.MaSanPham, "_sl2")" class="_2sBbZC k-s4Da" type="text" role="spinbutton" aria-valuenow="@sp.soLuong" value="@sp.soLuong">
+                                            <input onkeyup="onSoLuongChange(this.id, '@sp.MaSanPham', '1')"  id="@string.Concat(sp.MaSanPham, "_sl2")" class="_2sBbZC k-s4Da" type="text" role="spinbutton" aria-valuenow="@sp.soLuong" value="@sp.soLuong">
                                             <button class="_2sBbZC" onclick="onThemMot('@sp.MaSanPham','1', '@sp.soLuongTon')">
                                                 <svg enable-background="new 0 0 10 10" viewBox="0 0 10 10" x="0" y="0" class="shopee-svg-icon icon-plus-sign">
                                                     <polygon points="10 4.5 5.5 4.5 5.5 0 4.5 0 4.5 4.5 0 4.5 0 5.5 4.5 5.5 4.5 10 5.5 10 5.5 5.5 10 5.5"></polygon>
@@ -193,16 +193,16 @@
                         <div class="row">
                             <div class="col-md-5 ml-auto">
                                 <div class="cart-page-total">
-                                    <p>
+                                    <p id="count-cart-id">
                                         Tổng thanh toán (@GioHangOutput.CountCart() Sản phẩm)
                                     </p>
                                     <ul>
 
-                                        <li>Tổng tiền hàng <span class="text-danger ">@string.Format("{0:0,0}", GioHangOutput.Cash()) VNĐ</span></li>
+                                        <li>Tổng tiền hàng <span id="total-cash-id" class="text-danger ">@string.Format("{0:0,0}", GioHangOutput.Cash()) VNĐ</span></li>
                                         <li>Phí vận chuyển<span>15.000 VNĐ</span></li>
                                         @{
                                             var tongTien = GioHangOutput.Cash() + 15000;
-                                            <li>Tổng tiền <span class="text-danger font-weight-bold">@string.Format("{0:0,0}", tongTien) VNĐ</span></li>
+                                            <li>Tổng tiền <span id="cash-id" class="text-danger font-weight-bold">@string.Format("{0:0,0}", tongTien) VNĐ</span></li>
                                         }
                                     </ul>
                                     <a href="#" onclick="layThanhToan()">Mua Hàng</a>

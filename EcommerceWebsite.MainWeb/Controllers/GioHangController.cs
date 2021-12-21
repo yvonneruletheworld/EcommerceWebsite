@@ -87,6 +87,26 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
                 throw ex;
             }
         }
+        
+        [HttpPost("cap-nhat-giohang")]
+        public IActionResult CapNhatGioHang(string maSanPham, string soLuong, string comboCode)
+        {
+            try
+            {
+                if(comboCode == "n")
+                {
+                    comboCode = string.Empty;
+                }    
+                GioHangOutput.CapNhatGioHang(maSanPham, int.Parse(soLuong), comboCode);
+                var count = GioHangOutput.CountCart();
+                var cash = GioHangOutput.Cash();
+                return Json(new  {count = count, cash = cash });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         [HttpGet("get-data-diachikhachhang")]
         public async Task<IActionResult> layDiaChiKhachHang()
         {

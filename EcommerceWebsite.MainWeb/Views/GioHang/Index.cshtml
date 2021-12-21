@@ -68,22 +68,70 @@
         }
     }
 
+    function capNhatSoLuongGioHang(maSanPham, soLuong, comboCode) {
+        $.ajax({
+            url: '/cap-nhat-giohang?maSanPham=' + maSanPham + '&soLuong=' + soLuong +'&comboCode=' + comboCode,
+            type: 'POST',
+            success: (result) => {
+                if (result.count == 0) {
+
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Giỏ hàng trống',
+                        showConfirmButton: false,
+                        timer: 2500
+                    });
+                    location.href = "/Home/Index";
+                }
+
+                else {
+                    $("#count-cart-id")[0].innerHTML = `Tổng thanh toán (${result.count} Sản phẩm)`;
+                    $("#total-cash-id")[0].innerHTML = result.cash;
+                    var payment = Number(result.cash) - 15000;
+                    $("#cash-id")[0].innerHTML = payment;
+                }
+            },
+            error: (err) => {
+                alert('Server không phẩn hồi!');
+                console.log(err);
+            }
+        });
+    }
+
+    function onSoLuongChange(id, maSanPham, type) {
+        var inputSoLuong = document.getElementById(id);
+        var sl = inputSoLuong.value;
+
+        if (type !== '1') {
+            //hui
+            capNhatSoLuongGioHang(maSanPham, sl, type);
+        }
+        else {
+            capNhatSoLuongGioHang(maSanPham, sl, 'n');
+        }
+    }
+
     function onTruMot(maSanPham, type) {
-        
+
         if (type !== '1') {
             //hui
             var slTxt = document.getElementById(`${maSanPham}_sl1`).value;
             var slNum = Number(slTxt);
             if (slNum > 1) {
-                document.getElementById(`${maSanPham}_sl1`).value = slNum - 1;
+                var rs = slNum - 1;
+                document.getElementById(`${maSanPham}_sl1`).value = rs;
+                capNhatSoLuongGioHang(maSanPham, rs, type);
             }
         }
         else {
             //normal
             var slTxt = document.getElementById(`${maSanPham}_sl2`).value;
             var slNum = Number(slTxt);
-            if (slNum > 1)
-                document.getElementById(`${maSanPham}_sl2`).value = slNum - 1;
+            if (slNum > 1) {
+                var rs = slNum - 1;
+                document.getElementById(`${maSanPham}_sl2`).value = rs;
+                capNhatSoLuongGioHang(maSanPham, rs, 'n');
+            }
         }
 
     } function onThemMot(maSanPham, type, slt) {
@@ -92,14 +140,20 @@
             //hui
             var slTxt = document.getElementById(`${maSanPham}_sl1`).value;
             var slNum = Number(slTxt);
-            if (slNum < max)
-                document.getElementById(`${maSanPham}_sl1`).value = slNum + 1;
+            if (slNum < max) {
+                var rs = slNum + 1;
+                document.getElementById(`${maSanPham}_sl1`).value = rs;
+                capNhatSoLuongGioHang(maSanPham, rs, type);
+            }
         }
         else {
             var slTxt = document.getElementById(`${maSanPham}_sl2`).value;
             var slNum = Number(slTxt);
-            if (slNum < max)
-                document.getElementById(`${maSanPham}_sl2`).value = slNum + 1;
+            if (slNum < max) {
+                var rs = slNum + 1;
+                document.getElementById(`${maSanPham}_sl2`).value = rs;
+                capNhatSoLuongGioHang(maSanPham, rs, 'n');
+            }
         }
     }
 

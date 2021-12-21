@@ -71,7 +71,7 @@ namespace EcommerceWebsite.MainWeb.Models
             {
                 var normalCart = NormalCart.ToDictionary(sp => sp.MaSanPham);
                 GioHang obj;
-                if (normalCart.TryGetValue(MaHangHoa, out obj) && obj.soLuong > 1)
+                if (normalCart.TryGetValue(MaHangHoa, out obj) && obj.soLuong >= 1)
                 {
                     obj.soLuong++;
                     return true;
@@ -81,9 +81,34 @@ namespace EcommerceWebsite.MainWeb.Models
             {
                 var huiCart = HUICart[comboCode].ToDictionary(sp => sp.MaSanPham);
                 GioHang obj;
-                if (huiCart.TryGetValue(MaHangHoa, out obj) && obj.soLuong > 1)
+                if (huiCart.TryGetValue(MaHangHoa, out obj) && obj.soLuong >= 1)
                 {
                     obj.soLuong++;
+                    return true;
+                }
+                else return false;
+            }    
+        }  
+        
+        public static bool CapNhatGioHang (string MaHangHoa, int soLuong, string comboCode = null)
+        {
+            if(string.IsNullOrEmpty(comboCode))
+            {
+                var normalCart = NormalCart.ToDictionary(sp => sp.MaSanPham);
+                GioHang obj;
+                if (normalCart.TryGetValue(MaHangHoa, out obj) && obj.soLuong >= 1)
+                {
+                    obj.soLuong = soLuong;
+                    return true;
+                }
+                else return false;
+            }else
+            {
+                var huiCart = HUICart[comboCode].ToDictionary(sp => sp.MaSanPham);
+                GioHang obj;
+                if (huiCart.TryGetValue(MaHangHoa, out obj) && obj.soLuong >= 1)
+                {
+                    obj.soLuong = soLuong;
                     return true;
                 }
                 else return false;

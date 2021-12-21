@@ -18,8 +18,9 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
             _nhanHieuApiServices = nhanHieuApiServices;
             _danhMucApiServices = danhMucApiServices;
         }
-        public IActionResult Index()
+        public IActionResult Index(string loaiHang = null)
         {
+            ViewBag.LoaiHang = loaiHang;
             return View();
         }
         [HttpGet("get-data-allsanpham")]
