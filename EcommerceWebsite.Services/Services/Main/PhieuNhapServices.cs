@@ -77,7 +77,8 @@ namespace EcommerceWebsite.Services.Services.Main
         {
             try
             {
-                var data = await (from pn in _context.PhieuNhaps
+                var data = await (
+                                   from pn in _context.PhieuNhaps
                                   join ctn in _context.ChiTietNhapSanPhams on pn.MaPhieuNhap equals ctn.MaNhap into pn_ctn_group
                                   from pn_ctn in pn_ctn_group.DefaultIfEmpty()
                                   join sp in _context.SanPhams on pn_ctn.MaSanPham equals sp.MaSanPham

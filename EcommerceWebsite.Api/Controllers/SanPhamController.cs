@@ -366,5 +366,20 @@ namespace EcommerceWebsite.Api.Controllers
                 return BadRequest(Messages.API_Exception + ex);
             }
         }
+        [HttpGet("lay-theodinhluong")]
+        public async Task<IActionResult> layDinhLuong()
+        {
+            try
+            {
+                var result = await _dinhLuongServices.layDinhLuong();
+                if (result == null)
+                    return BadRequest(Messages.API_EmptyResult);
+                else return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(Messages.API_Exception + ex);
+            }
+        }
     }
 }

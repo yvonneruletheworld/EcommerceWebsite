@@ -19,10 +19,11 @@ namespace EcommerceWebsite.Admin.Controllers
 
         public async Task<IActionResult> IndexAsync(string maSanPham)
         {
-            // lay so luong ban va nhap
+            // lay so luong ban va nhap 
             var vm = new DoanhThuVM();
-            vm.ListSanPhamNhapVaBan = await _sanPhamApiServices.LaySoLuongNhapVaBan(maSanPham);
-            return View();
+           // vm.ListSanPhamNhapVaBan = await _sanPhamApiServices.LaySoLuongNhapVaBan(maSanPham);
+            vm.listDinhLuong = await _sanPhamApiServices.layDinhluong();
+            return View(vm);
         }
 
     }
