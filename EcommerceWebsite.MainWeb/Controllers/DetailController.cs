@@ -144,9 +144,10 @@ namespace EcommerceWebsite.MainWeb.Controllers
                 {
                     //Find
                     var cbCode = listSanPhamHUI[0].ComboCode;
-                    var objExist = huiCart[cbCode];
+                    List<GioHang> objExist;
+                    var tryGetObj = huiCart.TryGetValue(cbCode, out objExist);
                     //Case Exist
-                    if (objExist != null && objExist.Count() > 0)
+                    if (tryGetObj && objExist.Count() > 0)
                     {
                         objExist.ForEach(item => item.soLuong++);
                         GioHangOutput.UpdateHUICart(objExist, cbCode);

@@ -88,15 +88,8 @@ namespace EcommerceWebsite.Services.Services.Main
 
         public async Task<bool> ThemChiTietHoaDon(ChiTietHoaDon ct)
         {
-            var duLieu = _context.ChiTietHoaDons.FirstOrDefault(x => x.HoaDonId == ct.HoaDonId && x.ProductId == ct.ProductId);
-            if (duLieu != null)
+            try
             {
-                return false;
-
-            }
-            else
-            {
-                //begin transaction
                 await _context.Database.BeginTransactionAsync();
                 //add
                 await _context.ChiTietHoaDons.AddAsync(ct);
@@ -105,6 +98,10 @@ namespace EcommerceWebsite.Services.Services.Main
                 await _context.Database.CommitTransactionAsync();
 
                 return true;
+            }
+            catch (Exception )
+            {
+                return false;
             }
         }
 

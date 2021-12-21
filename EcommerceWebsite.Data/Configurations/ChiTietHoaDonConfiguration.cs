@@ -13,11 +13,14 @@ namespace EcommerceWebsite.Data.Configurations
         {
             builder.ToTable("CHITIETHOADON");
 
-            builder.HasKey(ct => new { ct.ProductId, ct.HoaDonId });
+            builder.HasKey(ct => new { ct.ProductId, ct.HoaDonId, ct.MaHUI });
 
             builder.Property(ct => ct.ProductId)
                 .HasMaxLength(100);
             builder.Property(ct => ct.HoaDonId)
+                .HasMaxLength(100);
+            
+            builder.Property(ct => ct.MaHUI)
                 .HasMaxLength(100);
 
             builder.Property(ct => ct.SoLuong)

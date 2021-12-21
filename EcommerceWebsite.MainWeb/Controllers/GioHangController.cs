@@ -360,7 +360,7 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
                             && (input.ListCheckoutHUICart.Count() != 0 || input.ListCheckoutNormalCart.Count() != 0))
                         {
                             //loc giỏ hàng bình thường 
-                            if(input.ListCheckoutNormalCart.Count() != 0)
+                            if(input.ListCheckoutNormalCart.Count() != 0 && input.ListCheckoutNormalCart[0] != null)
                             {
                                 var listCheckoutNormalCart = input.ListCheckoutNormalCart[0].Split(",");
                                 foreach (var cartId in listCheckoutNormalCart)
@@ -373,6 +373,7 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
                                         ct.ProductId = checkOutItem.MaSanPham;
                                         ct.SoLuong = checkOutItem.soLuong;
                                         ct.GiaBan = (decimal)checkOutItem.giaBan;
+                                        ct.MaHUI = "n";
                                         var rs = await _gioHangApiServices.ThemCTHoaDon(ct);
                                         //cap nhat gio hang
                                         if (rs) GioHangOutput.XoaGioHang(cartId);
@@ -382,7 +383,7 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
                             }
 
                             //lọc giỏ hàng HUI
-                            if (input.ListCheckoutHUICart.Count() != 0)
+                            if (input.ListCheckoutHUICart.Count() != 0 && input.ListCheckoutHUICart[0] != null)
                             {
                                 var listCheckoutHUICart = input.ListCheckoutHUICart[0].Split(",");
                                 foreach (var idAndCode in listCheckoutHUICart)
@@ -395,6 +396,7 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
                                         ChiTietHoaDon ct = new ChiTietHoaDon();
                                         ct.HoaDonId = maHoaDon;
                                         ct.ProductId = checkOutItem.MaSanPham;
+                                        ct.MaHUI = code;
                                         ct.SoLuong = checkOutItem.soLuong;
                                         ct.GiaBan = (decimal)checkOutItem.giaBan;
                                         var rs = await _gioHangApiServices.ThemCTHoaDon(ct);

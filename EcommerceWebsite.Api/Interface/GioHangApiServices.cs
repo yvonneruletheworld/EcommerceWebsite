@@ -69,7 +69,7 @@ namespace EcommerceWebsite.Api.Interface
             var requestItem = JsonConvert.SerializeObject(hD);
             var httpContent = new StringContent(requestItem, Encoding.UTF8, "application/json");
 
-            var response = await client.PostAsync($"/api/GioHang/them-cthoadon/{hD.HoaDonId}/{hD.ProductId}/{hD.SoLuong}/{hD.GiaBan}", httpContent);
+            var response = await client.PostAsync($"/api/GioHang/them-cthoadon/{hD.HoaDonId}/{hD.ProductId}/{hD.SoLuong}/{hD.GiaBan}/{hD.MaHUI}", httpContent);
             return response.IsSuccessStatusCode;
         }
 

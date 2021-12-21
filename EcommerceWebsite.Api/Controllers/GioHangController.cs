@@ -100,8 +100,8 @@ namespace EcommerceWebsite.Api.Controllers
                 throw ex;
             }
         }
-        [HttpPost("them-cthoadon/{maHD}/{maSP}/{soLuong}/{giaBan}")]
-        public async Task<IActionResult> ThemCTHoaDon(string maHD, string maSP, int soLuong, decimal giaBan)
+        [HttpPost("them-cthoadon/{maHD}/{maSP}/{soLuong}/{giaBan}/{maHUI}")]
+        public async Task<IActionResult> ThemCTHoaDon(string maHD, string maSP, int soLuong, decimal giaBan,string maHUI)
         {
             try
             {
@@ -113,7 +113,7 @@ namespace EcommerceWebsite.Api.Controllers
                         ProductId = maSP,
                         SoLuong = soLuong,
                         GiaBan = giaBan,
-
+                        MaHUI = maHUI
                     };
                     var result = await _gioHangServices.ThemChiTietHoaDon(obj);
                     if (!result)

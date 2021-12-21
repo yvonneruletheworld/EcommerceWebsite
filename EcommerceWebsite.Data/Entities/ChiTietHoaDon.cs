@@ -8,6 +8,7 @@ namespace EcommerceWebsite.Data.Entities
     {
         public string HoaDonId { get; set; }
         public string ProductId { get; set; }
+        public string MaHUI { get; set; }
 
         public int SoLuong { get; set; }
         public decimal GiaBan { get; set; }
