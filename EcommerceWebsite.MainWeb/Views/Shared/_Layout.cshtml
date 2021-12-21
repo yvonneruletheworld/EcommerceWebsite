@@ -87,7 +87,7 @@
                                                     <li><a href="@Url.Action("LayThongTinKhachHang","KhachHang")">Cá nhân</a></li>
                                                     <li><a href="#">Ví Online</a></li>
                                                     <li>@*<a href="@Url.Action("Logout", "KhachHang")">Đăng xuất</a>*@</li>
-                                                    <li><a asp-controller="KhachHang"  asp-action="Logout">Đăng xuất</a></li>
+                                                    <li><a asp-controller="KhachHang" asp-action="Logout">Đăng xuất</a></li>
                                                 }
                                                 else
                                                 {
@@ -139,7 +139,7 @@
                         <div class="col-lg-3">
                             <div class="logo pb-sm-30 pb-xs-30">
                                 <a href="@Url.Action("Index","Home")">
-                                    <img src="https://i.ibb.co/jzN4xyb/Blue-with-Gold-Laurel-Education-Logo-9-1-removebg-preview.png" alt="TRIPLE V" id="hinhanhlogo"/>
+                                    <img src="https://i.ibb.co/jzN4xyb/Blue-with-Gold-Laurel-Education-Logo-9-1-removebg-preview.png" alt="TRIPLE V" id="hinhanhlogo" />
                                     @*<img src="https://i.ibb.co/7r7rdmv/Blue-with-Gold-Laurel-Education-Logo-4-1.png" alt="TRIPLE V" />*@
                                 </a>
                             </div>
@@ -165,7 +165,7 @@
                                 <ul class="hm-menu">
                                     <li class="hm-wishlist">
                                         <a href="@Url.Action("Index", "YeuThich")">
-                                            @if (Context.Session.GetString("_SoLuong") != null )
+                                            @if (Context.Session.GetString("_SoLuong") != null)
                                             {
 
                                                 <span class="cart-item-count wishlist-item-count" id="soLuongyt">@Context.Session.GetString("_SoLuong")</span>
@@ -185,26 +185,26 @@
 
                                             @if (GioHangOutput.CountCart() != 0)
                                             {
-                                               
-                                             <span class="item-text">
-                                            <span id="sotienGH">@string.Format("{0:0,0}", GioHangOutput.Cash()) VNĐ </span>
+
+                                                <span class="item-text">
+                                                    <span id="sotienGH">@string.Format("{0:0,0}", GioHangOutput.Cash()) VNĐ </span>
 
 
-                                            <span class="cart-item-count wishlist-item-count" style=" margin-top: -14px; margin-left: -55px;" id="soLuonggh">@GioHangOutput.CountCart()</span>
-                                        </span>
+                                                    <span class="cart-item-count wishlist-item-count" style=" margin-top: -14px; margin-left: -55px;" id="soLuonggh">@GioHangOutput.CountCart()</span>
+                                                </span>
                                             }
                                             else
                                             {
-                                        <span class="item-text">
-                                            <span id="sotienGH">  0 VNĐ </span>
-                                            <span class="cart-item-count wishlist-item-count" style=" margin-top: -14px; margin-left: -55px;" id="soLuonggh">0</span>
-                                        </span>
+                                                <span class="item-text">
+                                                    <span id="sotienGH">  0 VNĐ </span>
+                                                    <span class="cart-item-count wishlist-item-count" style=" margin-top: -14px; margin-left: -55px;" id="soLuonggh">0</span>
+                                                </span>
                                             }
 
-                                            </div>
+                                        </div>
                                         <span></span>
                                         @(await Html.PartialAsync("~/Views/Home/_MiniCart.cshtml"))
-</ul>
+                                </ul>
                             </div>
                         </div>
                         <!-- Header Middle Right Area End Here -->
@@ -631,7 +631,7 @@
     <script src="~/js/giohang.js"></script>
 
     @RenderSection("Scripts", required: false)
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     @*<script>
         $(document).ready(() => {
             initResourceFilterQuery();

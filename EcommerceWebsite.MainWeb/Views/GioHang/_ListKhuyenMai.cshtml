@@ -5,9 +5,9 @@
     <div class="col-lg-6">
         @foreach (var item in Model)
         {
-            @if (Context.Session.GetString("TongTienGH") != null)
+            @if (GioHangOutput.CountCart() != 0)
             {
-                var tongTien = decimal.Parse(Context.Session.GetString("TongTienGH"));
+                var tongTien = GioHangOutput.Cash();
                 DateTime ngay = DateTime.UtcNow;
                 if (tongTien >= item.DieuKienKM)
                 {

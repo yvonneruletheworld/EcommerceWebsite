@@ -43,12 +43,15 @@ $('body').on('click', '.btn-add-cart', function () {
             type: "ajax"
         },
         success: function (data) {
-            Swal.fire({
-                icon: 'success',
-                title: 'Thêm giỏ hàng thành công',
-                showConfirmButton: false,
-                timer: 2500
-            });
+
+            swal("Thành công!", "Thêm giỏ hàng thành công!", "success");
+           
+            //Swal.fire({
+            //    icon: 'success',
+            //    title: 'Thêm giỏ hàng thành công',
+            //    showConfirmButton: false,
+            //    timer: 2500
+            //});
             console.log(data.slGH);
             $("#soLuonggh").html(data.slGH);
             var TongTien = parseFloat(data.slTien);
@@ -56,31 +59,22 @@ $('body').on('click', '.btn-add-cart', function () {
             $("#sotienGH").text(TongTien2 + " VNĐ");
         },
         error: function () {
-            Swal.fire({
-                icon: 'error',
-                title: 'Thêm giỏ hàng thất bại',
-                text: 'Vui lòng thử lại',
-                showConfirmButton: false,
-                timer: 2500
-            });
+            swal("Thất bại!", "Bạn hãy thử lại xem!", "error");
+           
         }
     });
 })
 $('body').on('click', '.btn-xoa-gioHang', function () {
     const id = $(this).data('id');
+    const comBo = $(this).data('id2');
     $.ajax({
         url: `/GioHang/XoaGioHang`,
         data: {
             id: id,
-          
+            comboCode: comBo,
         },
         success: function (data) {
-            Swal.fire({
-                icon: 'success',
-                title: 'Xóa giỏ hàng thành công',
-                showConfirmButton: false,
-                timer: 2500
-            });
+            swal("Thành công!", "Xóa giỏ hàng thành công!", "success");
             console.log(data.slGH);
             $("#soLuonggh").html(data.slGH);
             var TongTien = parseFloat(data.slTien);
@@ -89,13 +83,7 @@ $('body').on('click', '.btn-xoa-gioHang', function () {
             layGioHang()
         },
         error: function () {
-            Swal.fire({
-                icon: 'error',
-                title: 'Xóa giỏ hàng thất bại',
-                text: 'Vui lòng thử lại',
-                showConfirmButton: false,
-                timer: 2500
-            });
+            swal("Thất bại!", "Xóa giỏ hàng thất bại hãy thử lại xem!", "error");
         }
     });
 })
@@ -109,12 +97,7 @@ $('body').on('click', '.btn-sua-gioHang', function () {
             soLuong: soLuong,
         },
         success: function (data) {
-            Swal.fire({
-                icon: 'success',
-                title: 'Cập nhật giỏ hàng thành công',
-                showConfirmButton: false,
-                timer: 2500
-            });
+            swal("Thành công!", "Cập nhật giỏ hàng thành công!", "success");
             console.log(data.slGH);
             $("#soLuonggh").html(data.slGH);
             var TongTien = parseFloat(data.slTien);
@@ -123,13 +106,7 @@ $('body').on('click', '.btn-sua-gioHang', function () {
             layGioHang()
         },
         error: function () {
-            Swal.fire({
-                icon: 'error',
-                title: 'Cập nhật giỏ hàng thất bại',
-                text: 'Vui lòng thử lại',
-                showConfirmButton: false,
-                timer: 2500
-            });
+            swal("Thất bại!", "Cập nhật giỏ hàng thất bại hãy thử lại xem!", "error");
         }
     });
 })
@@ -190,12 +167,8 @@ $('body').on('click', '.btn-them-yeuthich', function () {
         },
         success: function (data) {
             if (data.code == 1) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Vui lòng đăng nhập',
-                    showConfirmButton: false,
-                    timer: 2500
-                });
+                swal("Thất bại!", "Vui lòng đăng nhập!", "error");
+               
             }
             else if (data.code == 2) {
                 console.log(data.sl);
@@ -205,25 +178,13 @@ $('body').on('click', '.btn-them-yeuthich', function () {
             else {
                 console.log(data.sl);
                 $("#soLuongyt").html(data.sl);
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Thêm sản phẩm yêu thích thành công',
-                    showConfirmButton: false,
-                    timer: 2500
-                });
-               
-            }
+                swal("Thành công!", "Thêm sản phẩm yêu thích thành công!", "success");
+                         }
            
            
         },
         error: function () {
-            Swal.fire({
-                icon: 'error',
-                title: 'Thêm giỏ hàng thất bại',
-                text: 'Vui lòng thử lại',
-                showConfirmButton: false,
-                timer: 2500
-            });
+            swal("Thất bại!", "Thêm sản phẩm yêu thích thất bại hãy thử lại!", "error");
         }
     });
 })
@@ -320,13 +281,8 @@ function ThemDiaChiKhachHang() {
     const diachi = $('#Diachicuthe').val();
     if (sDT == "" || hoTen == "" || diachi == "" || trangThaisdtdichKH == false)
     {
-        Swal.fire({
-            icon: 'error',
-            title: 'Nhập liệu không hợp lệ',
-            text: 'Vui lòng thử lại',
-            showConfirmButton: false,
-            timer: 2500
-        });
+        swal("Thất bại!", "Nhập liệu không hợp lệ hãy thử lại!", "error");
+       
     }
     else
     {
@@ -339,21 +295,10 @@ function ThemDiaChiKhachHang() {
             },
             success: function (data) {
                 layDiaChiKH();
-                //Swal.fire({
-                //    icon: 'success',
-                //    title: 'Đặt hàng thành công',
-                //    showConfirmButton: false,
-                //    timer: 2500
-                //});
             },
             error: function () {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Thêm địa chỉ thất bại',
-                    text: 'Vui lòng thử lại',
-                    showConfirmButton: false,
-                    timer: 2500
-                });
+                swal("Thất bại!", "Thêm địa chỉ thất bại hãy thử lại!", "error");
+               
             }
         });
     }
@@ -367,12 +312,8 @@ function layGioHangMini() {
         success: (result) => {
             if (result.code == 500) {
                 location.href = "/Home/Index";
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Giỏ hàng trống',
-                    showConfirmButton: false,
-                    timer: 2500
-                });
+                swal("Thất bại!", "Giỏ hàng bị trống !", "error");
+                
 
             }
             else {

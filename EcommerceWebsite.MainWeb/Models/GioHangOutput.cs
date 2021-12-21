@@ -141,6 +141,7 @@ namespace EcommerceWebsite.MainWeb.Models
 
         public static bool XoaGioHang (string MaHangHoa, string comboCode = null)
         {
+            //if(string.IsNullOrEmpty(comboCode)
             return string.IsNullOrEmpty(comboCode)?
                 NormalCart.Remove(NormalCart.Single(sp => sp.MaSanPham == MaHangHoa))
                 : HUICart[comboCode].Remove(HUICart[comboCode].Single(sp => sp.MaSanPham == MaHangHoa));
