@@ -367,7 +367,7 @@ namespace EcommerceWebsite.Api.Controllers
             }
         }
         [HttpGet("lay-theodinhluong")]
-        public async Task<IActionResult> layDinhLuong()
+        public async Task<IActionResult> LayDinhLuong()
         {
             try
             {

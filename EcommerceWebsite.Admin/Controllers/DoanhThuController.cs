@@ -11,10 +11,12 @@ namespace EcommerceWebsite.Admin.Controllers
     public class DoanhThuController : Controller
     {
         private readonly ISanPhamApiServices _sanPhamApiServices;
+        private readonly IDanhMucApiServices _danhMucApiServices;
 
-        public DoanhThuController(ISanPhamApiServices sanPhamApiServices)
+        public DoanhThuController(ISanPhamApiServices sanPhamApiServices, IDanhMucApiServices danhMucApiServices)
         {
             _sanPhamApiServices = sanPhamApiServices;
+            _danhMucApiServices = danhMucApiServices;
         }
 
         public async Task<IActionResult> IndexAsync(string maSanPham)
@@ -22,7 +24,8 @@ namespace EcommerceWebsite.Admin.Controllers
             // lay so luong ban va nhap 
             var vm = new DoanhThuVM();
            // vm.ListSanPhamNhapVaBan = await _sanPhamApiServices.LaySoLuongNhapVaBan(maSanPham);
-            vm.listDinhLuong = await _sanPhamApiServices.layDinhluong();
+            vm.ListDinhLuong = await _sanPhamApiServices.layDinhluong();
+            vm.ListDanhMuc = await _danhMucApiServices.GetCategories();
             return View(vm);
         }
 
