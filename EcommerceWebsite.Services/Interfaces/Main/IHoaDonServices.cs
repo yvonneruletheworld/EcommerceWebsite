@@ -9,5 +9,6 @@ namespace EcommerceWebsite.Services.Interfaces.Main
   public  interface IHoaDonServices
     {
         Task<List<HoaDon>> layHoaDonTheoKhachHang(string maKH);
+        Task<int> LaySoLuongBan(string maSanPham, DateTime ngayNhap);
     }
 }

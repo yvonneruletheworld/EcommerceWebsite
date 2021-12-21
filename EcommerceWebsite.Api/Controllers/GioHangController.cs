@@ -78,7 +78,7 @@ namespace EcommerceWebsite.Api.Controllers
                         PhiGiaoHang = phiShip,
                         PhuongThucThanhToan = pthucThanhToan,
                         DaXoa = false,
-                        NgayTao = DateTime.UtcNow,
+                        NgayTao = DateTime.Now,
 
                     };
                     var result = await _gioHangServices.ThemHoaDon(obj);

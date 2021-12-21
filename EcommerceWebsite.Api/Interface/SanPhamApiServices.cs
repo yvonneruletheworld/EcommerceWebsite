@@ -18,7 +18,7 @@ using System.Threading.Tasks;
 namespace EcommerceWebsite.Api.Interface
 {
     public class SanPhamApiServices : BaseApiService, ISanPhamApiServices
-{
+    {
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly IConfiguration _configuration;
@@ -36,7 +36,7 @@ namespace EcommerceWebsite.Api.Interface
 
         public async Task<List<SanPhamVM>> laySanPham2()
         {
-           return await GetListAsync<SanPhamVM>($"/api/SanPham/lay-sanpham");
+            return await GetListAsync<SanPhamVM>($"/api/SanPham/lay-sanpham");
         }
 
         public async Task<bool> ThemSanPham(SanPhamOutput input)
@@ -55,7 +55,7 @@ namespace EcommerceWebsite.Api.Interface
             var requestItem = JsonConvert.SerializeObject(input);
             var httpContent = new StringContent(requestItem, Encoding.UTF8, "application/json");
 
-            var response = await client.PostAsync($"/api/SanPham/them-san-pham", httpContent );
+            var response = await client.PostAsync($"/api/SanPham/them-san-pham", httpContent);
             return response.IsSuccessStatusCode;
         }
 
@@ -102,7 +102,7 @@ namespace EcommerceWebsite.Api.Interface
         }
         public Task<SanPhamVM> laySanPhamTheoMa(string prdId)
         {
-            return  GetAsync<SanPhamVM>($"/api/SanPham/lay-sanpham-Ma/{prdId}");
+            return GetAsync<SanPhamVM>($"/api/SanPham/lay-sanpham-Ma/{prdId}");
         }
         public async Task<List<SanPhamVM>> GetViewWithMultipleIds(string[] prdIds, string comboCode)
         {
@@ -117,7 +117,7 @@ namespace EcommerceWebsite.Api.Interface
 
         public async Task<List<SanPhamVM>> LaySPYeuThichKH(string maKH)
         {
-           return await GetListAsync<SanPhamVM>($"/api/SanPham/lay-sanphamyt/{maKH}");
+            return await GetListAsync<SanPhamVM>($"/api/SanPham/lay-sanphamyt/{maKH}");
         }
 
         public async Task<List<SanPhamVM>> LaySanPhamMoiNhat()
@@ -135,10 +135,15 @@ namespace EcommerceWebsite.Api.Interface
             var requestItem = JsonConvert.SerializeObject(input);
             var httpContent = new StringContent(requestItem, Encoding.UTF8, "application/json");
 
-           
+
             var response = await client
                 .PostAsync($"/api/SanPham/them-phieu-nhap", httpContent);
             return response.IsSuccessStatusCode;
+        }
+
+        public async Task<List<SanPhamNhapOutput>> LaySoLuongNhapVaBan(string maSanPham)
+        {
+            return await GetListAsync<SanPhamNhapOutput>($"/api/SanPham/lay-soluongnhap-va-ban/{maSanPham}");
         }
     }
 }

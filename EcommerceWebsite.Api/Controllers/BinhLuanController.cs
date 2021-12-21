@@ -31,7 +31,7 @@ namespace EcommerceWebsite.Api.Controllers
                         MaSanPham = maSanPham,
                         NoiDung = noiDung,
                         SoSao = soSao,
-                        NgayTao = DateTime.UtcNow,
+                        NgayTao = DateTime.Now,
                         NguoiTao = maKH,
                         DaXoa = false,
                     };  

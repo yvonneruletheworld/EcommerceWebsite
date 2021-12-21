@@ -1,4 +1,5 @@
 ﻿using EcommerceWebsite.Data.Entities;
+using EcommerceWebsite.Utilities.Output.Main;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,5 +13,6 @@ namespace EcommerceWebsite.Services.Interfaces.Main
         //Task<bool> CreateNewInventoryVoucherDetail(List<ChiTietNhapSanPham> inputs);
         Task<List<ChiTietNhapSanPham>> GetAllInventoryVoucherDetail(string maPhieuNhap);
         Task<List<PhieuNhap>> GetAllInventoryVoucher();
+        Task<List<SanPhamNhapOutput>> GetListImportProduct(string maSanPham);
     }
 }

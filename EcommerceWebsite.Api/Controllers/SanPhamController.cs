@@ -25,7 +25,8 @@ namespace EcommerceWebsite.Api.Controllers
         private readonly IDinhLuongServices _dinhLuongServices;
         private readonly IBinhLuanServices _binhLuanServices;
         private readonly IPhieuNhapServices _phieuNhapServices;
-        public SanPhamController(ISanPhamServices sanPhamServices, IMapper mapper, IBangGiaServices bangGiaServices, IDinhLuongServices dinhLuongServices, IBinhLuanServices binhLuanServices, IPhieuNhapServices phieuNhapServices)
+        private readonly IHoaDonServices _hoaDonServices;
+        public SanPhamController(ISanPhamServices sanPhamServices, IMapper mapper, IBangGiaServices bangGiaServices, IDinhLuongServices dinhLuongServices, IBinhLuanServices binhLuanServices, IPhieuNhapServices phieuNhapServices, IHoaDonServices hoaDonServices)
         {
             _sanPhamServices = sanPhamServices;
             _mapper = mapper;
@@ -33,6 +34,7 @@ namespace EcommerceWebsite.Api.Controllers
             _dinhLuongServices = dinhLuongServices;
             _binhLuanServices = binhLuanServices;
             _phieuNhapServices = phieuNhapServices;
+            _hoaDonServices = hoaDonServices;
         }
         [HttpGet("lay-sanpham")]
         public async Task<IActionResult> LaySanPhams()
@@ -337,6 +339,27 @@ namespace EcommerceWebsite.Api.Controllers
                 if (result == null)
                     return BadRequest(Messages.API_EmptyResult);
                 else return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(Messages.API_Exception + ex);
+            }
+        }
+        [HttpGet("lay-soluongnhap-va-ban/{maSanPham}")]
+        public async Task<IActionResult> LaySoLuongNhapVaBan(string maSanPham)
+        {
+            try
+            {
+                var danhSachNhap = await _phieuNhapServices.GetListImportProduct(maSanPham);
+                if(danhSachNhap != null && danhSachNhap.Count() > 0)
+                {
+                    foreach(var spn in danhSachNhap)
+                    {
+                        spn.SoLuongBan = await _hoaDonServices.LaySoLuongBan(spn.MaSanPham, spn.NgayNhap);
+                    }
+                    return Ok(danhSachNhap);
+                }
+                else return BadRequest(Messages.API_EmptyResult);
             }
             catch (Exception ex)
             {

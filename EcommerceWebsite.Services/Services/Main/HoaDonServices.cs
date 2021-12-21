@@ -54,5 +54,24 @@ namespace EcommerceWebsite.Services.Services.Main
                 throw ex;
             }
         }
+
+        public async Task<int> LaySoLuongBan(string maSanPham, DateTime ngayNhap)
+        {
+            try
+            {
+                var data = await (from hd in _context.HoaDons
+                                  join cthd in _context.ChiTietHoaDons on hd.MaHoaDon equals cthd.HoaDonId into hd_cthd_group
+                                  from hd_cthd in hd_cthd_group.DefaultIfEmpty()
+                                  join sp in _context.SanPhams on hd_cthd.ProductId equals sp.MaSanPham
+                                  where sp.MaSanPham == hd_cthd.ProductId && !sp.DaXoa && DateTime.Compare(ngayNhap,hd.NgayTao) <= 0 
+                                  select new SanPham()).ToListAsync();
+
+                return data.Count();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
