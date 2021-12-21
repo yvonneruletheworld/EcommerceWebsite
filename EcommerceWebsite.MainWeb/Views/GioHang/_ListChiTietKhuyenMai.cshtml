@@ -20,9 +20,9 @@
         <div class="coupon-all">
             <input hidden id="maKhuyenMaiCT" value="@item.MaKhuyenMai" />
             @{
-                var tienGiam = decimal.Parse(Context.Session.GetString("TongTienGH")) * decimal.Parse((item.PhanTram / 100).ToString());
-                var TongTien = decimal.Parse(Context.Session.GetString("TongTienGH")) + 15000;
-                var tienPhaiTra = decimal.Parse(Context.Session.GetString("TongTienGH")) - tienGiam;
+                var tienGiam = GioHangOutput.Cash() * decimal.Parse((item.PhanTram / 100).ToString());
+                var TongTien = GioHangOutput.Cash() + 15000;
+                var tienPhaiTra = GioHangOutput.Cash() - tienGiam;
             }
             <input hidden id="tienGiam" value="@tienGiam" />
             <input hidden id="tienPhaiTra" value="@tienPhaiTra" />

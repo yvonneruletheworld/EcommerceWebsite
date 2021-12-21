@@ -57,8 +57,9 @@
                     </div>
                     <div class="product-details-thumbs slider-thumbs-1" style="padding-top: 20px">
                         @foreach (var img in sanPham.ListHinhAnh)
-                        {
-                            <div class="sm-image"><img src="@img.GiaTri" alt="@img.DonVi"></div>
+                                {
+                                    var maDL = "'"+img.MaDinhLuong+"'";
+                                    <div class="sm-image"><img src="@img.GiaTri" alt="@img.DonVi" onclick="giaTienMauSP(@maDL)"></div>
                         }
                     </div>
                 </div>
@@ -603,6 +604,18 @@
                 });
             }
         });
+    }
+    function giaTienMauSP(valueDemission) {
+        var prd_pride = model.sanPham.bangGia.find(x => x.maDinhLuong === valueDemission);
+        var giaSPDL = parseFloat(prd_pride.giaBan);
+        var giaSPDL2 = format2(giaSPDL).split(".")[0];
+        var id = $('#MaSP').val();
+        $('#giaSanPham-' + id).val(giaSPDL2);
+        console.log(prd_pride);
+        $('.product-pride-id').text(giaSPDL2 + ' VNĐ');
+        $('#giaCTSP').text(giaSPDL2 + ' VNĐ');
+        var tongTien1 = format2(tongTien).split(".")[0];
+        $('#tongTieninHUI').text(tongTien1 + ' VNĐ');
     }
             function dinhLuongChanged(e) {
                 var valueDemission = e.value;
