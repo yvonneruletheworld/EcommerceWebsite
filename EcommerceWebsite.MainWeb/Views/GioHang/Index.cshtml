@@ -31,7 +31,7 @@
                         showConfirmButton: false,
                         timer: 2500
                     });
- 
+
                 }
                 else {
                     $("#gioHang")[0].innerHTML = result;
@@ -66,6 +66,10 @@
         else {
             alert('Mã OTP không đúng.');
         }
+    }
+
+    function onTruMot(maSanPham) {
+
     }
 
     function layThanhToan() {
@@ -115,7 +119,7 @@
             selectItemList = selectItemList.filter(cb => cb !== checkItem);
         }
     }
-    
+
 
     function sendEmail() {
         const MaDC = $('#maDiaChiKH').val();
@@ -149,7 +153,7 @@
                 }
             });
         }
-       
+
     }
 
 
@@ -175,7 +179,7 @@
             var norCartItems = [];
 
             for (var i = 0; i < lCb.length; i++) {
-               
+
                 var type = lCb[i].id.split('_')[1];
 
                 if (type === '2') {

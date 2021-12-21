@@ -94,13 +94,13 @@
                                             </div>
                                             <div class="_2ZUrV7">
                                                 <div class="eLoUcd shopee-input-quantity">
-                                                    <button class="_2sBbZC">
+                                                    <button class="_2sBbZC" onclick="onTruMot(@sp.MaSanPham)">
                                                         <svg enable-background="new 0 0 10 10" viewBox="0 0 10 10" x="0" y="0" class="shopee-svg-icon ">
                                                             <polygon points="4.5 4.5 3.5 4.5 0 4.5 0 5.5 3.5 5.5 4.5 5.5 10 5.5 10 4.5"></polygon>
                                                         </svg>
                                                     </button>
-                                                    <input class="_2sBbZC k-s4Da" type="text" role="spinbutton" aria-valuenow="@sp.soLuong" value="@sp.soLuong">
-                                                    <button class="_2sBbZC">
+                                                    <input id="@string.Concat(sp.MaSanPham, "-sl")" class="_2sBbZC k-s4Da" type="text" role="spinbutton" aria-valuenow="@sp.soLuong" value="@sp.soLuong">
+                                                    <button class="_2sBbZC" onclick="onThemMot(@sp.MaSanPham)">
                                                         <svg enable-background="new 0 0 10 10" viewBox="0 0 10 10" x="0" y="0" class="shopee-svg-icon icon-plus-sign">
                                                             <polygon points="10 4.5 5.5 4.5 5.5 0 4.5 0 4.5 4.5 0 4.5 0 5.5 4.5 5.5 4.5 10 5.5 10 5.5 5.5 10 5.5"></polygon>
                                                         </svg>
