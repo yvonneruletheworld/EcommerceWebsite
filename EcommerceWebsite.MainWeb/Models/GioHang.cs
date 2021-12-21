@@ -11,6 +11,7 @@ namespace EcommerceWebsite.MainWeb.Models
         public string comboCode { get; set; }
         public string MaSanPham { get; set; }
         public int soLuong { get; set; }
+        public int soLuongTon { get; set; }
         public string tenSanPham { get; set; }
         public string hinhAnh { get; set; }
         public decimal giaSanPham { get; set; }

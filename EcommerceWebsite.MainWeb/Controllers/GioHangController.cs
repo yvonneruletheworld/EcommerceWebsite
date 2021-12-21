@@ -194,7 +194,8 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
                     giaSanPham = sp.GiaBan,
                     soLuong = soLuong,
                     hinhAnh = sp.HinhAnh,
-                    giaBan = giaSP
+                    giaBan = giaSP,
+                    soLuongTon = sp.SoLuongTon
                 };
                 GioHangOutput.AddNormal(item);
             }

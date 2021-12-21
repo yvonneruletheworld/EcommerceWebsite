@@ -68,8 +68,39 @@
         }
     }
 
-    function onTruMot(maSanPham) {
+    function onTruMot(maSanPham, type) {
+        
+        if (type !== '1') {
+            //hui
+            var slTxt = document.getElementById(`${maSanPham}_sl1`).value;
+            var slNum = Number(slTxt);
+            if (slNum > 1) {
+                document.getElementById(`${maSanPham}_sl1`).value = slNum - 1;
+            }
+        }
+        else {
+            //normal
+            var slTxt = document.getElementById(`${maSanPham}_sl2`).value;
+            var slNum = Number(slTxt);
+            if (slNum > 1)
+                document.getElementById(`${maSanPham}_sl2`).value = slNum - 1;
+        }
 
+    } function onThemMot(maSanPham, type, slt) {
+        var max = Number(slt);
+        if (type !== '1') {
+            //hui
+            var slTxt = document.getElementById(`${maSanPham}_sl1`).value;
+            var slNum = Number(slTxt);
+            if (slNum < max)
+                document.getElementById(`${maSanPham}_sl1`).value = slNum + 1;
+        }
+        else {
+            var slTxt = document.getElementById(`${maSanPham}_sl2`).value;
+            var slNum = Number(slTxt);
+            if (slNum < max)
+                document.getElementById(`${maSanPham}_sl2`).value = slNum + 1;
+        }
     }
 
     function layThanhToan() {

@@ -45,7 +45,8 @@ namespace EcommerceWebsite.MainWeb.Models
                         soLuong = 1,
                         tenSanPham = item.TenSanPham,
                         comboCode = item.ComboCode,
-                        giaBan = item.GiaHUI
+                        giaBan = item.GiaHUI,
+                        soLuongTon = item.SoLuongTon
                     }).ToList();
                 HUICart.Add(cbCode, listCart);
             }
