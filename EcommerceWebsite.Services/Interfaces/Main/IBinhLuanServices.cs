@@ -10,5 +10,6 @@ namespace EcommerceWebsite.Services.Interfaces.Main
     public interface IBinhLuanServices
     {
         Task<List<BinhLuanOutput>> LayBinhLuanTheoSanPham(string maSanPham);
+        Task<bool> ThemBinhLuan(BinhLuan input);
     }
 }

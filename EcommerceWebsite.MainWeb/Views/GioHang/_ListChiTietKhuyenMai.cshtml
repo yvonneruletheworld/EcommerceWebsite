@@ -1,0 +1,35 @@
+﻿@using EcommerceWebsite.Data.Entities
+@using Microsoft.AspNetCore.Http;
+@model List<KhuyenMai>
+@foreach (var item in Model)
+{
+    <h3 style="width: 350px">Chi tiết khuyến mãi</h3>
+    <img src="@item.HinhAnh" width="95%" />
+    <br />
+    <div style="padding-top: 20px">
+        <h6>Ưu đãi</h6>
+        <span>Ưu đãi @item.PhanTram%, cho đơn từ @string.Format("{0:0,0}", item.DieuKienKM) VNĐ</span>
+        <h6>Có hiệu lực</h6>
+        <span><span style="color:red"> @item.NgayTao.ToShortDateString()</span> -> <span style="color:red">@DateTime.Parse(item.NgayXoa.ToString()).ToShortDateString()</span> </span>
+        <h6>Thanh toán:</h6>
+        <span>Tất cả các hình thức thanh toán</span>
+        <h6>Chi tiết</h6>
+        <span>@item.TenKhuyenMai</span>
+    </div>
+    <div class="col-md-12">
+        <div class="coupon-all">
+            <input hidden id="maKhuyenMaiCT" value="@item.MaKhuyenMai" />
+            @{
+                var tienGiam = decimal.Parse(Context.Session.GetString("TongTienGH")) * decimal.Parse((item.PhanTram / 100).ToString());
+                var TongTien = decimal.Parse(Context.Session.GetString("TongTienGH")) + 15000;
+                var tienPhaiTra = decimal.Parse(Context.Session.GetString("TongTienGH")) - tienGiam;
+            }
+            <input hidden id="tienGiam" value="@tienGiam" />
+            <input hidden id="tienPhaiTra" value="@tienPhaiTra" />
+            <input hidden id="tienTongTien" value="@TongTien" />
+            <div class="coupon">
+                <input class="button" value="ÁP DỤNG" onclick="ApDungKhuyenMai()" type="button" style="width:350px" />
+            </div>
+        </div>
+    </div>
+}

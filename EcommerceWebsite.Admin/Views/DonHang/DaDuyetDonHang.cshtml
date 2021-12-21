@@ -1,0 +1,85 @@
+﻿@using EcommerceWebsite.Data.Entities;
+@model List<HoaDon>
+<div class="pcoded-content">
+    <!-- [ breadcrumb ] start -->
+    <div class="page-header">
+        <div class="page-block">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="page-header-title">
+                        <h5 class="m-b-10">Danh sách sản phẩm</h5>
+                    </div>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html">Sản phẩm</a></li>
+                        <li class="breadcrumb-item">Danh sách sản phẩm</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 mb-3">
+            <h5 class="mb-3">THAO TÁC</h5>
+            <hr>
+            <button class="btn mb-1 btn-primary"><i data-feather="save"></i> Thêm </button>
+            <button class="btn mb-1 btn-primary"><i data-feather="delete"></i> Xóa</button>
+            <button class="btn mb-1 btn-primary"><i data-feather="edit"></i> Sửa</button>
+        </div>
+
+        <div class="col-xl-12">
+            <div class="card">
+                <div class="card-body table-border-style">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Mã hóa đơn</th>
+                                    <th>Tên khách hàng</th>
+                                    @*<th>Hình ảnh</th>*@
+                                    <th>Trạng Thái</th>
+                                    <th>Tổng cộng</th>
+                                    <th>Thao tác</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.Any())
+                                {
+
+                                    foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>@item.MaHoaDon</td>
+                                            <td>@item.MaKhachHang</td>
+                                            <td>@item.TinhTrang</td>
+                                            <td>@item.TongCong</td>
+                                            <td> <a href="#" class="btn-xuly-donhang" data-id="@item.MaHoaDon"><i data-feather="check-circle"></i></a></td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <hr />
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-end">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#!" tabindex="-1">Previous</a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#!">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#!">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#!">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#!">Next</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+

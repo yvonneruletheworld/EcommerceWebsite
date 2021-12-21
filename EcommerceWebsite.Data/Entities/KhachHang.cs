@@ -19,7 +19,6 @@ namespace EcommerceWebsite.Data.Entities
         //Khoa ngoai
 
         public List<DiaChiKhachHang> DiaChiKhachHangs { get; set; }
-        public List<BinhLuan> BinhLuans { get; set; }
         public List<HoaDon> HoaDons { get; set; }
         public List<SanPhamYeuThich> SanPhamYeus { get; set; }
     }

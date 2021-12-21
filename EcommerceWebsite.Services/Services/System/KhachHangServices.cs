@@ -13,6 +13,7 @@ using EcommerceWebsite.Utilities.Input;
 using System.Security.Claims;
 using AutoMapper;
 using EcommerceWebsite.Utilities.Output.System;
+using EcommerceWebsite.Utilities.ViewModel;
 
 namespace EcommerceWebsite.Services.Services.System
 {
@@ -33,16 +34,10 @@ namespace EcommerceWebsite.Services.Services.System
             _mapper = mapper;
         }
 
-        public async Task<ThongTinKhachHangInput> GetKhachHangInputTheoSdt(string sdt)
+        public async Task<ApplicationUser> GetKhachHangInputTheoSdt(string sdt)
         {
-            return await (from au in _context.ApplicationUsers 
-                          where !au.IsDeleted && au.PhoneNumber == sdt
-                          select new ThongTinKhachHangInput()
-                          {
-                              TenDangNhap = au.UserName,
-                              MatKhau = au.PasswordHash,
-                              SDT = au.PhoneNumber
-                          } ).FirstOrDefaultAsync();
+            return await _context.ApplicationUsers.Where(x => !x.IsDeleted && x.PhoneNumber == sdt)
+                .FirstOrDefaultAsync();
         }
 
         public Task<ApplicationUser> GetKhachHangTheoEmail(string email)
@@ -195,29 +190,79 @@ namespace EcommerceWebsite.Services.Services.System
         public async Task<Dictionary<string, ApplicationUser>> LoginAsync(string usernameOrEmail, string password)
         {
             var user = await GetKhachHangTheoEmail(usernameOrEmail);
-            user ??= await GetKhachHangTheoUsername(usernameOrEmail);
+            user ??= await GetKhachHangInputTheoSdt(usernameOrEmail);
 
             var result = new Dictionary<string, ApplicationUser>();
             if(user ==  null)
             {
                 result.Add("NotRegister", user);
+                return result;
             }    
             if (string.IsNullOrEmpty(password) || !(await CheckLoginPass(user,password)  ))
             {
                 result.Add("PasswordIncorrect", user);
+                return result;
             }
             if (user.Status == Data.Enum.Status.InActive)
             {
                 result.Add("UserInactive", user);
+                return result;
             }
             else
                 result.Add("Success", user);
-
-            return result;
+           return result;
         }
 
+        public async Task<List<DiaChiKhachHang>> layDiaChiKhachHang(string MaKH)
+        {
+            try
+            {
 
+                var data = await _context.DiaChiKhaches.Where(s => s.MaKhachHang == MaKH).ToListAsync();
+                return data;
 
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<ThongTinKhachHangVM> LayThongTinKhachHang(string maKH)
+        {
+            return await (from kh in _context.KhachHangs
+                          //from kh2 in _context.AspNetUsers
+                          //where kh.MaKhachHang == kh2.Id
+                          select new ThongTinKhachHangVM
+                          {
+                              HoTen = kh.HoTen.ToString(),
+                              //GioiTinh = GioiTinh(kh.GioiTinh),
+                              //SoDienThoai = kh2.PhoneNumber.ToString(),
+                              //Email = kh2.Email.ToString()
+                          }).FirstOrDefaultAsync();
+        }
+
+        public async Task<bool> ThemDiaChiKhachHang(DiaChiKhachHang input)
+        {
+            var duLieu = _context.DiaChiKhaches.FirstOrDefault(x => x.MaDiaChi == input.MaDiaChi && x.MaKhachHang == input.MaKhachHang);
+            if (duLieu != null)
+            {
+              
+                    return false;
+            }
+            else
+            {
+                //begin transaction
+                await _context.Database.BeginTransactionAsync();
+                //add
+                await _context.DiaChiKhaches.AddAsync(input);
+                var result = await _context.SaveChangesAsync();
+
+                await _context.Database.CommitTransactionAsync();
+
+                return true;
+            }
+        }
         //public Task<Dictionary<string, KhachHang>> LoginAsync(string usernameOrPhone, string pass)
         //{
         //    var result = new Dictionary<string, KhachHang>();

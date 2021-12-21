@@ -1,0 +1,222 @@
+﻿@using Microsoft.AspNetCore.Http
+@using EcommerceWebsite.Utilities.ViewModel
+@model NhapHangVM
+
+@{ 
+    var tongThanhTien = 0.0m;
+    var tongSoNhap = 0;
+}
+<script>
+    var model = @Json.Serialize(Model);
+</script>
+<div class="pcoded-content">
+    <!-- [ breadcrumb ] start -->
+    <div class="page-header">
+        <div class="page-block">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="page-header-title">
+                        <h5 class="m-b-10">Danh sách nhập hàng</h5>
+                    </div>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Sản phẩm</a></li>
+                        <li class="breadcrumb-item">Nhập sản phẩm</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-8">
+            <h5 class="mb-3">CHI TIẾT PHIẾU NHẬP</h5>
+            <hr>
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-body table-border-style">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Tên sản phẩm</th>
+                                        <th>Nhãn hiệu</th>
+                                        <th>Mẫu mã </th>
+                                        <th>Số lượng nhập</th>
+                                        <th>Đơn giá</th>
+                                        <th>Thành tiền</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.SanPhamInputs != null)
+                                    {
+                                        @foreach (var sp in Model.SanPhamInputs)
+                                        {
+                                            tongThanhTien += sp.ThanhTien;
+                                            tongSoNhap += sp.SoLuongNhap;
+                                            <tr>
+                                                <td>@sp.TenSanPham</td>
+                                                <td>@sp.NhanHieu</td>
+                                                <td>@sp.TenMauMa</td>
+                                                <td>@sp.SoLuongNhap</td>
+                                                <td>@sp.GiaNhap</td>
+                                                <td>@sp.ThanhTien</td>
+                                            </tr>
+                                        }
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <h5 class="mb-3">THÔNG TIN ĐƠN HÀNG</h5>
+            <hr>
+            <form id="form-import-id" asp-controller="NhapSanPham" asp-action="ReadInputExcel" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <h5 style="color: #0094ff">Tên Nhân Viên: @Context.Session.GetString("HoTenAdmin")</h5>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="nha-cungcap-selection">Thông tin đối tác</label>
+                    <select class="form-select" id="nha-cungcap-selection">
+                        @foreach (var item in Model.NhaCungCaps)
+                        {
+                            <option value="@item.MaNhaCungCap">@item.TenNhaCungCap</option>
+                        }
+
+
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="loai-hang-hoa-selection">Loại hàng hóa</label>
+                    <select class="form-select" id="loai-hang-hoa-selection">
+                        @foreach (var item in Model.DanhMucs)
+                        {
+                            @if (item.DanhMucCon != null && item.DanhMucCon.Count() > 0)
+                            {
+                                <optgroup label="@item.TenDanhMuc">
+                                    @foreach (var dmc in item.DanhMucCon)
+                                    {
+                                        <option value="@dmc.MaDanhMuc">@dmc.TenDanhMuc</option>
+                                    }
+                                </optgroup>
+                            }
+                            else
+                            {
+                                <option value="@item.MaDanhMuc">@item.TenDanhMuc</option>
+
+                            }
+                        }
+
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" >Ngày nhập hàng</label>
+                    <input type="date" id="ngay-nhap-id" class="form-control" placeholder="Nhập ngày">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" >Số Lượng : @tongSoNhap Sản phẩm</label>
+                    <label class="form-label" >Tổng Tiền: @tongThanhTien VNĐ</label>
+                    <p class="form-label" id="file-name" ></p>
+                </div>
+                <input type="file" name="file" @*onchange="onImportChange()"*@ id="importSanPham" style="display: none" />
+                <button type="button" class="btn mb-1 btn-primary" onclick="onInputClick()"><i data-feather="edit"></i> Chọn</button>
+                <button type="button" class="btn mb-1 btn-primary" onclick="cleanInput()"><i data-feather="delete"></i> Xóa</button>
+                <button type="button" class="btn mb-1 btn-primary" onclick="luuImport()"><i data-feather="save"></i> Lưu</button>
+            </form>
+
+        </div>
+        <hr />
+        <div class="col-xl-12">
+            <div class="card">
+                <div class="card-body table-border-style">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Mã phiếu nhập</th>
+                                    <th>Tên nhà cung cấp</th>
+                                    @*<th>Hình ảnh</th>*@
+                                    <th>Tổng Tiền</th>
+                                    <th>Ngày Tạo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <hr />
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-end">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#!" tabindex="-1">Previous</a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#!">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#!">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#!">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#!">Next</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+    $(document).ready(function () {
+        $('#importSanPham').change(function (e) {
+            var files = e.target.files[0];
+            if (files) {
+                $('#form-import-id').submit();
+                $('#file-name').text('File được chọn: ' + files.name);
+            }
+        });
+    });
+    function onInputClick() {
+        $('#importSanPham').click();
+    }
+    function luuImport() {
+        var ncc = $('#nha-cungcap-selection').val();
+        var ml = $('#loai-hang-hoa-selection').val();
+        var tt = '@tongThanhTien';
+        var listImport = model.sanPhamInputs;
+
+        var fd = new FormData();
+        fd.append('listImport', listImport);
+
+        if (model.sanPhamInputs) {
+            $.ajax({
+                url: 'SaveInputExcel?maNhaCungCap=' + ncc + '&total=' + tt + '&maLoai=' + ml,
+                type: 'POST',
+                data: fd,
+                contentType: false, // Not to set any content header
+                processData: false, // Not to process data
+                success: (result) => {
+                    if (result.code === 500)
+                        alert("Một số sản phẩm đã xảy ra lỗi trong quá trình lưu. Hãy kiểm tra danh sách hiển thị sản phẩm.");
+                    else
+                        alert("Thêm thành công");
+                    fd = new FormData();
+                },
+                error: (err) => {
+                    alert("Server không phản hồi! ");
+                    fd = new FormData();
+                }
+            });
+        }
+    }
+    
+
+</script>
+

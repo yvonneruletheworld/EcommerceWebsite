@@ -44,7 +44,7 @@ namespace EcommerceWebsite.Services.Services.System
                 var line = await reader.ReadLineAsync();
                 HUI hui = new HUI()
                 {
-                    Id = "hui_" + stt++,
+                    Id = "hui-" + stt++,
                     Utility = double.Parse(line.Trim().Split(":")[1]),
                     Itemsets = line.Trim()
                                    .Split(":")[0].Split(",")

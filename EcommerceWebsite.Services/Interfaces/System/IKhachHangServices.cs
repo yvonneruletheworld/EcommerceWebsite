@@ -2,6 +2,7 @@
 using EcommerceWebsite.Data.Identity;
 using EcommerceWebsite.Utilities.Input;
 using EcommerceWebsite.Utilities.Output.System;
+using EcommerceWebsite.Utilities.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Security.Claims;
@@ -13,7 +14,7 @@ namespace EcommerceWebsite.Services.Interfaces.System
     public interface IKhachHangServices
     {
         Task<Dictionary<string, ApplicationUser>> LoginAsync(string usernameOrEmail, string password);
-        Task<ThongTinKhachHangInput> GetKhachHangInputTheoSdt(string sdt);
+        Task<ApplicationUser> GetKhachHangInputTheoSdt(string sdt);
         Task<ApplicationUser> GetKhachHangTheoUsername(string userName);
         Task<ApplicationUser> GetKhachHangTheoId(string id);
         Task<KhachHangOutput> GetKhachHangTheoMa(string maKhachHang);
@@ -23,7 +24,9 @@ namespace EcommerceWebsite.Services.Interfaces.System
         string GetUserId(ClaimsPrincipal user);
         string GetUserEmail(ClaimsPrincipal user);
         Task<bool> UpdateOTPCode(string id, string v);
-
         Task<bool> SubmitUser(ThongTinKhachHangInput input);
+        Task<List<DiaChiKhachHang>> layDiaChiKhachHang(string MaKH);
+        Task<bool> ThemDiaChiKhachHang(DiaChiKhachHang input);
+        Task<ThongTinKhachHangVM> LayThongTinKhachHang(string maKH);
     }
 }

@@ -12,18 +12,18 @@
             {
                 @if (dm.DanhMucCon != null && dm.DanhMucCon.Count > 0)
                 {
-                    <li class="right-menu left-category-li">
-                        <a href="#">@dm.TenDanhMuc</a>
+                    <li class="right-menu left-category-li" >
+                        <a href="@Url.Action("Index","CuaHang")" class="btn-hienthisanpham-loai" data-id="@dm.MaDanhMuc"> @dm.TenDanhMuc</a>
 
                         <ul class="cat-mega-menu">
                             @foreach (var item in dm.DanhMucCon)
                             {
                                 <li class="right-menu cat-mega-title">
-                                    <a href="#">@item.TenDanhMuc</a>
+                                    <a href="@Url.Action("Index","CuaHang")" >@item.TenDanhMuc</a>
                                     <ul>
                                         @foreach (var item2 in item.DanhMucCon)
                                         {
-                                            <li><a href="#">@item2.TenDanhMuc</a></li>
+                                            <li><a href="@Url.Action("Index","CuaHang")" class="btn-hienthisanpham-loai" data-id="@item2.MaDanhMuc">@item2.TenDanhMuc</a></li>
                                         }
                                     </ul>
                                 </li>
@@ -35,7 +35,7 @@
 
                 else
                 {
-                    <li class="left-category-li"><a href="#">@dm.TenDanhMuc</a></li>
+                    <li class="left-category-li"><a href="@Url.Action("Index","CuaHang")" class="btn-hienthisanpham-loai" data-id="@dm.MaDanhMuc">@dm.TenDanhMuc</a></li>
                 }
             }
             @*<li class="rx-child"><a href="#">Mobile & Tablets</a></li>

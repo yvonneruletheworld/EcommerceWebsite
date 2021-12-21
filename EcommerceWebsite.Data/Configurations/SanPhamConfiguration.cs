@@ -40,7 +40,7 @@ namespace EcommerceWebsite.Data.Configurations
                   .WithMany(sp => sp.SanPhams)
                   .HasForeignKey(sp => sp.MaLoaiSanPham);
 
-            builder.HasOne(sp => sp.NhanHieu)
+            builder.HasOne(sp => sp.NhanHieuEnti)
                  .WithMany(sp => sp.SanPhams)
                  .HasForeignKey(sp => sp.MaHang);
 

@@ -7,6 +7,7 @@ namespace EcommerceWebsite.Application.Constants
     public static class Messages
     {
         //KhachHang - NhanVien
+        public const string KhachHang_HoTenKhongHopLe = "Họ tên không hợp lệ";
         public const string KhachHang_LoiDoDaiTenDangNhap = "Tên đăng nhập có độ dài không hợp lệ";
         public const string KhachHang_TenDangNhapKhongHopLe = "Tên đăng nhập/ Số điện thoại không đúng";
         public const string KhachHang_MatKhauKhongDung = "Mật khẩu không đúng";
@@ -16,6 +17,8 @@ namespace EcommerceWebsite.Application.Constants
 
         //JSON
         public const string Login_PhoneNumEmpty = "phone-num-is-empty";
+        public const string Login_Success = "login_success";
+        public const string Login_Fail = "login_fail";
         public const string Login_PhoneNumIsNotExist = "phone-num-is-not-exist";
         public const string Login_LoadFormSuccess = "load-form-success";
         public const string Login_LoadFormFailed = "load-form-failed";
@@ -41,6 +44,10 @@ namespace EcommerceWebsite.Application.Constants
         public const string API_Success = "api-success";
         public const string API_Failed = "api-failed";
         public const string API_Exist = "api-exist";
+        public const string API_CointainError = "api-contain-error";
 
+        //CODE 
+        public const string User  = "ALL";
+        
     }
 }

@@ -10,5 +10,7 @@ namespace EcommerceWebsite.Api.Interface
   public  interface IKhuyenMaiApiServices
     {
         Task<List<BannerOutput>> LaykhuyenMais();
+        Task<List<KhuyenMai>> layKhuyenMai();
+        Task<List<KhuyenMai>> layChiTietKhuyenMai(string MaKM);
     }
 }

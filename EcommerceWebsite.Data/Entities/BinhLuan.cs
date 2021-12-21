@@ -10,7 +10,6 @@ namespace EcommerceWebsite.Data.Entities
         public string NoiDung { get; set; }
         public int SoSao { get; set; }
         public SanPham SanPham { get; set; }
-        public KhachHang KhachHang { get; set; }
 
     }
 }

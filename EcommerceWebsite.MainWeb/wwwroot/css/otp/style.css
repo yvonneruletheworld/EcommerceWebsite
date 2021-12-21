@@ -1,0 +1,16 @@
+﻿.user-input {
+    display: flex;
+    justify-content: center;
+}
+
+.otp-input {
+    margin: 10px;
+    height: 35px;
+    width: 65px;
+    border: solid;
+    border-radius: 5px;
+    text-align: center;
+    font-family: arimo;
+    font-size: 1.2rem;
+    background: #eef2f3;
+}

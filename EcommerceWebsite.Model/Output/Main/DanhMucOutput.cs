@@ -10,6 +10,7 @@ namespace EcommerceWebsite.Utilities.Output.Main
     {
         public string TenDanhMuc { get; set; }
         public string MaDanhMuc { get; set; }
+        public bool HienThiTrangHome { get; set; }
         public string HinhAnh { get; set; }
         public List<DanhMucOutput> DanhMucCon { get; set; }
         public Status TinhTrang { get; set; }

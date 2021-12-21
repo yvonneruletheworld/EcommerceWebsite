@@ -10,7 +10,9 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace EcommerceWebsite.MainWeb.Controllers
 {
@@ -22,8 +24,11 @@ namespace EcommerceWebsite.MainWeb.Controllers
         private readonly IHUIApiServices _huiServices;
         private readonly ISanPhamApiServices _sanPhamServices;
         private readonly IMapper _mapper;
+        public const string SessionSoLuongYT = "_SoLuong";
+        private readonly IYeuThichSanPhamApiServices _yeuThichSanPhamApiServices;
 
-        public HomeController(ILogger<HomeController> logger, IDanhMucApiServices danhMucServices, IKhuyenMaiApiServices khuyenMaiServices, IHUIApiServices huiServices, ISanPhamApiServices sanPhamServices, IMapper mapper)
+        public HomeController(ILogger<HomeController> logger, IDanhMucApiServices danhMucServices, IKhuyenMaiApiServices khuyenMaiServices, IHUIApiServices huiServices,
+            ISanPhamApiServices sanPhamServices, IMapper mapper, IYeuThichSanPhamApiServices yeuThichSanPhamApiServices)
         {
             _logger = logger;
             _danhMucServices = danhMucServices;
@@ -31,27 +36,37 @@ namespace EcommerceWebsite.MainWeb.Controllers
             _huiServices = huiServices;
             _sanPhamServices = sanPhamServices;
             _mapper = mapper;
+            _yeuThichSanPhamApiServices = yeuThichSanPhamApiServices;
+            GioHangOutput.HUICart??= new Dictionary<string, List<GioHang>>();
+            GioHangOutput.NormalCart??= new List<GioHang>();
         }
 
         public async Task<IActionResult> Index()
         {
-            if(HUIConfiguration.ListHUI == null)
-            {
-                var fileName = "output1";
-                var listHUI = await _huiServices.GetListHUIFromOutput(fileName);
-                //save constant
-                HUIConfiguration.ListHUI = listHUI.Where(hui => hui.Itemsets.Length > 1)
-                    .OrderByDescending(hui => hui.Utility).ToList();
-            }    
             //get HUI
-            
             var vm = new HomeVM();
-            vm.DanhMucOutputs = await _danhMucServices.GetCategories();
+            var danhMucHienThi = await _danhMucServices.GetCategories();
+            vm.DanhMucOutputs = danhMucHienThi.Where(dm =>dm.HienThiTrangHome == true).ToList() ;
             vm.BannerOutputs = await _khuyenMaiServices.LaykhuyenMais();
             vm.LoaiVaSanPham = await _danhMucServices.GetDanhMucVaSanPhams(5);
+            if (HUIConfiguration.ListHUI == null)
+            {
+                var fileName = "output1";
+                HUIConfiguration.ListHUI = await _huiServices.GetListHUIFromOutput(fileName);
+                //save constant
+                //HUIConfiguration.ListHUI = listHUI.Where(hui => hui.Itemsets.Length > 1)
+                //    .OrderByDescending(hui => hui.Utility).ToList();
+            }
             var lstHuiDon = (HUIConfiguration.ListHUI.Where(h => h.Itemsets.Count() == 1).ToList());
             vm.SanPhamHUIDons = await GetSanPhamTheoHUIDonAsync(lstHuiDon);
-
+            if (User.Claims != null && User.Claims.Count() > 1)
+            {
+                var userId = User.Claims.Where(claim => claim.Type == ClaimTypes.Sid)
+                               .FirstOrDefault()
+                               .Value;
+                var data = await _yeuThichSanPhamApiServices.laySanPhamYeuThich(userId);
+                HttpContext.Session.SetString(SessionSoLuongYT, data.Count() + "");
+            }
             return View("~/Views/Home/Index.cshtml", vm);
         }
 
@@ -90,6 +105,40 @@ namespace EcommerceWebsite.MainWeb.Controllers
                 rs.Add(prd);
             }
             return rs;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> layDanhMuc()
+        {
+            try
+            {
+                List<DanhMucOutput> data = new List<DanhMucOutput>();
+                 data = await _danhMucServices.GetCategories();
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public async Task<IActionResult> TimKiemSanPham(string keyword)
+        {
+            try
+            {
+                if(string.IsNullOrEmpty(keyword))
+                {
+                    keyword = "";
+                }
+                    ViewBag.timKiem = keyword;
+                    var data = await _sanPhamServices.timKiemSanPhamTheoTen(keyword);
+                    return View("~/Views/Home/TimKiem.cshtml", data);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+           
+        
         }
     }
 }

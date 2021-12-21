@@ -16,6 +16,17 @@ namespace EcommerceWebsite.Api.Interface
            : base(httpClientFactory, configuration, httpContextAccessor)
         {
         }
+
+        public async Task<List<KhuyenMai>> layChiTietKhuyenMai(string MaKM)
+        {
+            return await GetListAsync<KhuyenMai>($"/api/KhuyenMai/lay-chitietkhuyenmai/{MaKM}");
+        }
+
+        public async Task<List<KhuyenMai>> layKhuyenMai()
+        {
+            return await GetListAsync<KhuyenMai>("/api/KhuyenMai/lay-khuyenmai2");
+        }
+
         public async Task<List<BannerOutput>> LaykhuyenMais()
         {
             return await GetListAsync<BannerOutput>("/api/KhuyenMai/lay-khuyenmai");

@@ -15,12 +15,13 @@ namespace EcommerceWebsite.Services.Interfaces.Main
     {
         Task<PageResponse<List<SanPhamOutput>>> GetListProductByPage(PaginationFilter filter);
 
-        Task<bool> ThemSanPham(SanPham input);
+        Task<string> ThemSanPham(SanPham input);
+        Task<bool> ThemSanPham(List<SanPham> input);
         Task<SanPham> GetSanPhamTheoMa(string id, string tensanpham);
         Task<bool> KiemTraGia(string value);
-        Task<List<SanPhamOutput>> LaySanPham();
+        Task<List<SanPhamVM>> LaySanPham();
         Task<List<SanPhamVM>> LaySanPhamTheoLoai(int take = 1, string loaiSanPham = null, string maSanPham = null);
-        Task<List<SanPhamVM>> GetProductWithMultipleId(string [] idArray);
+        Task<List<SanPhamVM>> GetProductWithMultipleId(string [] idArray, string comboCode);
 
         //Task<List<SanPhamOutput>> laySanPham();
         //Xóa sản phẩm
@@ -30,6 +31,17 @@ namespace EcommerceWebsite.Services.Interfaces.Main
 
         Task<SanPhamOutput> LayChiTietSanPham(string id);
 
+        Task<List<SanPhamOutput>> laySanPhamTheoHang(string idHang);
+
+        Task<List<SanPhamOutput>> laySanPhamTheoDanhMuc(string idDanhMuc);
+
+        Task<List<SanPhamOutput>> timKiemSanPhamTheoTen(string idTen);
+
+        Task<SanPhamVM> laySanPhamTheoMa(string id);
+
+        Task<List<SanPhamVM>> LaySPYeuThichKH(string maKH);
+
+        Task<List<SanPhamVM>> LaySanPhamMoiNhat();
 
     }
 }

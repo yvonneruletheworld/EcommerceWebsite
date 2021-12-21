@@ -1,5 +1,6 @@
 ﻿@using EcommerceWebsite.Utilities.ViewModel
 @using EcommerceWebsite.Data.Enum
+@using System.Security.Claims
 @model DetailVM
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -14,9 +15,11 @@
     var bangThongSo = sanPham.ListThongSo.Where(ts => ts.MaThuocTinh != nameof(ProductPorpertyCode.TT07)
     && ts.MaThuocTinh != nameof(ProductPorpertyCode.TT014)).ToList();
     var bangDinhLuong = sanPham.BangGia.Where(dl => dl.MaThuocTinh == nameof(ProductPorpertyCode.TT07)).ToList();
+    var bangMau = sanPham.BangGia.Where(dl => dl.MaThuocTinh == nameof(ProductPorpertyCode.TT014)).ToList();
+    var tongTienHui = 0.00;
     //var demision = Model.SanPham.
 }
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <link href="~/css/detail/style.css" rel="stylesheet" />
 <script>
     var model = @Json.Serialize(Model);
@@ -52,71 +55,51 @@
                             </div>
                         }
                     </div>
-                    <div class="product-details-thumbs slider-thumbs-1">
+                    <div class="product-details-thumbs slider-thumbs-1" style="padding-top: 20px">
                         @foreach (var img in sanPham.ListHinhAnh)
                         {
                             <div class="sm-image"><img src="@img.GiaTri" alt="@img.DonVi"></div>
                         }
                     </div>
                 </div>
-
-                <!-- Product HUI Left -->
-                
-                <div class="row">
-                    <div class="product-active owl-carousel">
-                        @foreach (var sp in huis)
-                        {
-                            <div class="col-lg-12">
-                                <!-- single-product-wrap start -->
-                                <div class="single-product-wrap">
-                                    <div class="product-image">
-                                        <a href="@Url.Action("Index", "Detail",new { prdId = sp.MaSanPham})">
-                                            <img src="@sp.HinhAnh" alt="@sp.TenSanPham">
-                                        </a>
-                                        <span class="sticker">Mới</span>
-                                    </div>
-                                    <div class="product_desc">
-                                        <div class="product_desc_info">
-                                            <div class="product-review">
-                                                <h5 class="manufacturer">
-                                                    <a href="#">@sp.LoaiSanPham</a>
-                                                </h5>
-                                                <div class="rating-box">
-                                                    <ul class="rating">
-                                                        <li><i class="fa fa-star-o"></i></li>
-                                                        <li><i class="fa fa-star-o"></i></li>
-                                                        <li><i class="fa fa-star-o"></i></li>
-                                                        <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                                        <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            @if (sp.TenSanPham.Length > 25)
-                                            {
-                                                <h4><a class="product_name" href="@Url.Action("Index", "Detail", new { prdId = sp.MaSanPham })">@sp.TenSanPham.Substring(0, 25)...</a></h4>
-                                            }
-                                            else
-                                            {
-                                                <h4><a class="product_name" href="@Url.Action("Index", "Detail", new { prdId = sp.MaSanPham })">@sp.TenSanPham</a></h4>
-                                            }
-                                            <div class="price-box">
-                                                <span class="new-price">@string.Format("{0:0,0}", sp.GiaBan) VNĐ</span>
-                                            </div>
-                                        </div>
-                                        <div class="add-actions">
-                                            <ul class="add-actions-link">
-                                                <li class="add-cart active"><a href="#">Thêm vào giỏ</a></li>
-                                                <li><a class="links-details" href="wishlist.html"><i class="fa fa-heart-o"></i></a></li>
-                                                <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- single-product-wrap end -->
-                            </div>
-                        }
-
+                <div class="product-additional-info pt-25" style="margin-top: 20px">
+                    <a class="wishlist-btn btn-them-yeuthich" data-id="@sanPham.MaSanPham"><i class="fa fa-heart-o"></i>Thêm vào danh sách yêu thích</a>
+                    <div class="product-social-sharing pt-25">
+                        <ul>
+                            <li class="facebook"><a href="#"><i class="fa fa-facebook"></i>Facebook</a></li>
+                            <li class="twitter"><a href="#"><i class="fa fa-twitter"></i>Twitter</a></li>
+                            <li class="google-plus"><a href="#"><i class="fa fa-google-plus"></i>Google +</a></li>
+                            <li class="instagram"><a href="#"><i class="fa fa-instagram"></i>Instagram</a></li>
+                        </ul>
                     </div>
+                </div>
+                <div class="block-reassurance">
+                    <ul>
+                        <li>
+                            <div class="reassurance-item">
+                                <div class="reassurance-icon">
+                                    <i class="fa fa-check-square-o"></i>
+                                </div>
+                                <p> Đảm bảo chất lượng hàng hóa</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="reassurance-item">
+                                <div class="reassurance-icon">
+                                    <i class="fa fa-truck"></i>
+                                </div>
+                                <p> Giao hàng nhanh chóng và an toàn</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="reassurance-item">
+                                <div class="reassurance-icon">
+                                    <i class="fa fa-exchange"></i>
+                                </div>
+                                <p> Hỗ trợ đổi trả hàng hóa </p>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
 
                 <!--// Product HUI Left -->
@@ -135,8 +118,8 @@
                                 <li><i class="fa fa-star-o"></i></li>
                                 <li class="no-star"><i class="fa fa-star-o"></i></li>
                                 <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                <li class="review-item rating-view"><a href="#reviews">Xem {danhgiacount} đánh giá</a></li>
-                                <li class="review-item"><a href="#reviews" data-target="#mymodal" data-toggle="modal">Viết Đánh giá</a></li>
+                                <li class="review-item rating-view"><a href="#reviews">Xem {@sanPham.ListBinhLuan.Count()} bình luận</a></li>
+                                <li class="review-item"><a href="#reviews" data-target="#mymodal" data-toggle="modal">Bình luận</a></li>
                             </ul>
                         </div>
                         <div class="price-box pt-20">
@@ -147,7 +130,8 @@
                                 <span class="product-desciption-shortcut">
                                     @(sanPham.DanhGia.Count > 0 ? sanPham.DanhGia[0].NoiDung : "Sản phẩm chưa có mô tả")
                                 </span>
-                                <a style="text-decoration: none; color: yellow" href="#description">Xem thêm</a>
+                                <br>
+                                <a style="text-decoration: none; color: black" href="#description">Xem thêm</a>
                             </p>
                         </div>
                         <div class="product-variants">
@@ -166,52 +150,14 @@
                                 <div class="quantity">
                                     <label>Số lượng</label>
                                     <div class="cart-plus-minus">
-                                        <input class="cart-plus-minus-box" value="1" type="text">
+                                        <input class="cart-plus-minus-box" id="soLuongThemGH" value="1" type="text">
                                         <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
                                         <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
                                     </div>
                                 </div>
-                                <button class="add-to-cart" type="submit">Thêm vào giỏ hàng</button>
+                                <input id="giaSanPham-@sanPham.MaSanPham" hidden />
+                                <a href="#" class="btn-add-cart" type="button" data-id="@sanPham.MaSanPham">Thêm vào giỏ</a>
                             </form>
-                        </div>
-                        <div class="product-additional-info pt-25">
-                            <a class="wishlist-btn" href="wishlist.html"><i class="fa fa-heart-o"></i>Add to wishlist</a>
-                            <div class="product-social-sharing pt-25">
-                                <ul>
-                                    <li class="facebook"><a href="#"><i class="fa fa-facebook"></i>Facebook</a></li>
-                                    <li class="twitter"><a href="#"><i class="fa fa-twitter"></i>Twitter</a></li>
-                                    <li class="google-plus"><a href="#"><i class="fa fa-google-plus"></i>Google +</a></li>
-                                    <li class="instagram"><a href="#"><i class="fa fa-instagram"></i>Instagram</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="block-reassurance">
-                            <ul>
-                                <li>
-                                    <div class="reassurance-item">
-                                        <div class="reassurance-icon">
-                                            <i class="fa fa-check-square-o"></i>
-                                        </div>
-                                        <p> Đảm bảo chất lượng hàng hóa</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="reassurance-item">
-                                        <div class="reassurance-icon">
-                                            <i class="fa fa-truck"></i>
-                                        </div>
-                                        <p> Giao hàng nhanh chóng và an toàn</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="reassurance-item">
-                                        <div class="reassurance-icon">
-                                            <i class="fa fa-exchange"></i>
-                                        </div>
-                                        <p> Hỗ trợ đổi trả hàng hóa </p>
-                                    </div>
-                                </li>
-                            </ul>
                         </div>
                     </div>
                 </div>
@@ -241,27 +187,39 @@
                     @if (sanPham.DanhGia.Count > 0)
                     {
                         <div class="article__content showall review-post">
-
                             <h2 class="font-weight-bold">@sanPham.DanhGia[0].TieuDe</h2>
                         </div>
-                        @foreach (var dg in sanPham.DanhGia)
-                        {
-                            var title = dg.NoiDung.Split('|');
-                            @if (title.Length > 1)
+                        <p style="text-align: center;">
+                            <a class="popup-img venobox vbox-item" href="@sanPham.DanhGia[0].HinhAnhDanhGia" data-gall="myGallery">
+                                <img src="@sanPham.DanhGia[0].HinhAnhDanhGia" alt="@sanPham.DanhGia[0].NoiDung">
+                            </a>
+                        </p>
+                        <div class="container" style="display: flex; justify-content: center;">
+                            <a href="#" data-bs-toggle="collapse" class="li-btn" data-bs-target="#collapseTodo" aria-expanded="false" aria-controls="collapseTodo" style="position: absolute;">
+                                Xem Thêm
+                            </a>
+                        </div>
+                        <div class="collapse" id="collapseTodo">
+                            @foreach (var dg in sanPham.DanhGia)
                             {
-                                <h3>@title[0]</h3>
-                                <p>@title[1]</p>
+                                var title = dg.NoiDung.Split('|');
+                                @if (title.Length > 1)
+                                {
+                                    <h3>@title[0]</h3>
+                                    <p>@title[1]</p>
+                                }
+                                else
+                                {
+                                    <p>@title[0]</p>
+                                }
+                                <p style="text-align: center;">
+                                    <a class="popup-img venobox vbox-item" href="@dg.HinhAnhDanhGia" data-gall="myGallery">
+                                        <img src="@dg.HinhAnhDanhGia" alt="@dg.TieuDe">
+                                    </a>
+                                </p>
                             }
-                            else
-                            {
-                                <p>@title[0]</p>
-                            }
-                            <p style="text-align: center;">
-                                <a class="popup-img venobox vbox-item" href="@dg.HinhAnhDanhGia" data-gall="myGallery">
-                                    <img src="@dg.HinhAnhDanhGia" alt="@dg.TieuDe">
-                                </a>
-                            </p>
-                        }
+
+                        </div>
                     }
                     else
                     {
@@ -278,7 +236,7 @@
                     <div class="cart-table table-responsive">
                         <table class="table table-bordered">
                             <tbody>
-                                @foreach(var ts in bangThongSo)
+                                @foreach (var ts in bangThongSo)
                                 {
                                     <tr>
                                         <td class="pro-title">
@@ -286,8 +244,8 @@
                                         </td>
                                         <td class="pro-price"><span>@ts.DonVi</span></td>
                                     </tr>
-                                 }
-                                
+                                }
+
                             </tbody>
                         </table>
                     </div>
@@ -302,13 +260,47 @@
                         <div class="product-details-comment-block">
                             <div class="comment-review">
                                 <span>Đánh giá</span>
-                                <ul class="rating">
-                                    <li class="product-rating-comment"><i class="fa fa-star-o"></i></li>
-                                    <li class="product-rating-comment"><i class="fa fa-star-o"></i></li>
-                                    <li class="product-rating-comment"><i class="fa fa-star-o"></i></li>
-                                    <li class="product-rating-comment"><i class="fa fa-star-o"></i></li>
-                                    <li class="product-rating-comment"><i class="fa fa-star-o"></i></li>
-                                </ul>
+                                @if (bl.SoSao == 1)
+                                {
+                                    <ul class="rating">
+                                        <li class="product-rating-comment"><i class="fa fa-star-o"></i></li>
+                                    </ul>
+                                }
+                                else if (bl.SoSao == 2)
+                                {
+                                    <ul class="rating">
+                                        <li class="product-rating-comment"><i class="fa fa-star-o"></i></li>
+                                        <li class="product-rating-comment"><i class="fa fa-star-o"></i></li>
+                                    </ul>
+                                }
+                                else if (bl.SoSao == 3)
+                                {
+                                    <ul class="rating">
+                                        <li class="product-rating-comment"><i class="fa fa-star-o"></i></li>
+                                        <li class="product-rating-comment"><i class="fa fa-star-o"></i></li>
+                                        <li class="product-rating-comment"><i class="fa fa-star-o"></i></li>
+                                    </ul>
+                                }
+                                else if (bl.SoSao == 4)
+                                {
+                                    <ul class="rating" id="@bl.SoSao">
+                                        <li class="product-rating-comment"><i class="fa fa-star-o"></i></li>
+                                        <li class="product-rating-comment"><i class="fa fa-star-o"></i></li>
+                                        <li class="product-rating-comment"><i class="fa fa-star-o"></i></li>
+                                        <li class="product-rating-comment"><i class="fa fa-star-o"></i></li>
+                                        <li class="product-rating-comment"><i class="fa fa-star-o"></i></li>
+                                    </ul>
+                                }
+                                else if (bl.SoSao == 5)
+                                {
+                                    <ul class="rating" id="@bl.SoSao">
+                                        <li class="product-rating-comment"><i class="fa fa-star-o"></i></li>
+                                        <li class="product-rating-comment"><i class="fa fa-star-o"></i></li>
+                                        <li class="product-rating-comment"><i class="fa fa-star-o"></i></li>
+                                        <li class="product-rating-comment"><i class="fa fa-star-o"></i></li>
+                                        <li class="product-rating-comment"><i class="fa fa-star-o"></i></li>
+                                    </ul>
+                                }
                             </div>
                             <div class="comment-author-infos pt-25">
                                 <span>@bl.NguoiTao</span>
@@ -326,8 +318,19 @@
                     <!-- Begin Footer | Modal Area -->
 
                     <div class="product-details-comment-block">
+
                         <div class="review-btn">
                             <a class="review-links" href="#" data-toggle="modal" data-target="#mymodal">Viết bình luận</a>
+
+                            @*@if (User.Identity.Name != null)
+                                {
+                                    <a class="review-links" href="#" data-toggle="modal" data-target="#mymodal">Viết bình luận</a>
+                                }
+                                else
+                                {
+                                    <a class="review-links" href="@Url.Action("Index", "KhachHang")">Viết bình luận</a>
+                                }*@
+
                         </div>
                         <!-- Begin Quick View | Modal Area -->
                         <div class="modal fade modal-wrapper" id="mymodal">
@@ -337,6 +340,7 @@
                                         <h3 class="review-page-title">Đánh giá sản phẩm</h3>
                                         <div class="modal-inner-area row">
                                             <div class="col-lg-6">
+
                                                 <div class="li-review-product">
                                                     <img src="@Model.SanPham.ListHinhAnh[0].GiaTri" alt="@Model.SanPham.TenSanPham" style="max-width: 400px">
                                                     <div class="li-review-product-desc">
@@ -357,7 +361,7 @@
                                                                 <p class="your-opinion">
                                                                     <label>Đánh giá</label>
                                                                     <span>
-                                                                        <select class="star-rating">
+                                                                        <select class="star-rating" id="soSao">
                                                                             <option value="1">1</option>
                                                                             <option value="2">2</option>
                                                                             <option value="3">3</option>
@@ -368,17 +372,17 @@
                                                                 </p>
                                                                 <p class="feedback-form">
                                                                     <label for="feedback">Nội dung</label>
-                                                                    <textarea id="feedback" name="comment" cols="45" rows="8" aria-required="true"></textarea>
+                                                                    <textarea id="noiDung" name="comment" cols="45" rows="8" aria-required="true"></textarea>
                                                                 </p>
                                                                 <div class="feedback-input">
                                                                     @if (khachHang != null)
                                                                     {
                                                                         <p class="feedback-form-author">
                                                                             <label>
-                                                                                Gửi từ: 
+                                                                                Gửi từ:
                                                                             </label>
                                                                             <label class="ml-2">
-                                                                                @khachHang.DanhXung
+                                                                                @khachHang.TenKhachHang
                                                                             </label>
                                                                         </p>
                                                                         <p class="feedback-form-author feedback-form-email">
@@ -389,10 +393,6 @@
                                                                                 @khachHang.Email
                                                                             </label>
                                                                         </p>
-                                                                        <div class="feedback-btn pb-15">
-                                                                            <a href="#" class="close" data-dismiss="modal" aria-label="Close">Hủy</a>
-                                                                            <a href="#">Gửi Đánh giá</a>
-                                                                        </div>
                                                                     }
                                                                     else
                                                                     {
@@ -400,20 +400,21 @@
                                                                             <label for="author">
                                                                                 Email <span class="required">*</span>
                                                                             </label>
-                                                                            <input id="email-feedback" name="email-feedback" value="" size="30" aria-required="true" type="text">
+                                                                            <input id="email-feedback-id" name="email-feedback" value="" size="30" aria-required="true" type="text">
                                                                         </p>
                                                                         <p class="feedback-form-author feedback-form-email">
                                                                             <label for="email">
                                                                                 Mật khẩu <span class="required">*</span>
                                                                             </label>
-                                                                            <input id="pass-feedback"  name="pass-feedback" value="" size="30" aria-required="true" type="password">
+                                                                            <input id="pass-feedback-id" name="pass-feedback" value="" size="30" aria-required="true" type="password">
                                                                             <span class="required"><sub>*</sub> Required fields</span>
                                                                         </p>
-                                                                        <div class="feedback-btn pb-15">
-                                                                            <a href="#" class="close" data-dismiss="modal" aria-label="Close">Hủy</a>
-                                                                            <a href="#">Gửi Đánh giá</a>
-                                                                        </div>
                                                                     }
+                                                                    <div class="feedback-btn pb-15">
+                                                                        <input id="MaSP" value="@sanPham.MaSanPham" hidden />
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">Hủy</button>
+                                                                        <a href="#" onclick="submitComment()">Bình luận</a>
+                                                                    </div>
 
                                                                 </div>
                                                             </form>
@@ -437,17 +438,258 @@
         </div>
     </div>
 </div>
-<!-- Product Area End Here -->
-<script>
-    $(function () {
-        var dft_price = model.sanPham.bangGia[0].giaBan;
-        $('.product-pride-id').text(dft_price + ' VNĐ');
-                    });
+@if (huis != null)
+{
+    <div class="container">
+        <div class="li-section-title">
+            <h2>
+                <span class="font-weight-bold">Mua thêm deal sốc</span>
+            </h2>
+        </div>
+        <div class="row">
+            <div class="col-lg-2">
+                <!-- single-product-wrap start -->
+                <div class="single-product-wrap">
+                    <div class="product-image" style="width:180px; height:180px">
+                        <a href="@Url.Action("Index", "Detail", new { prdId = sanPham.MaSanPham })">
+                            <img src="@sanPham.HinhAnh" alt="@sanPham.TenSanPham">
+                        </a>
+                    </div>
+                    <div class="product_desc">
+                        <div class="product_desc_info">
+                            <div class="product-review">
+                                <h5 class="manufacturer">
+                                    <a href="#">@sanPham.LoaiSanPham</a>
+                                </h5>
+                                <div class="rating-box">
+                                    <ul class="rating">
+                                        <li><i class="fa fa-star-o"></i></li>
+                                        <li><i class="fa fa-star-o"></i></li>
+                                        <li><i class="fa fa-star-o"></i></li>
+                                        <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                        <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            @if (sanPham.TenSanPham.Length > 30)
+                            {
+                                <h4><a class="product_name" href="@Url.Action("Index", "Detail", new { prdId = sanPham.MaSanPham })">@sanPham.TenSanPham.Substring(0, 30)...</a></h4>
+                            }
+                            else
+                            {
+                                <h4><a class="product_name" href="@Url.Action("Index", "Detail", new { prdId = sanPham.MaSanPham })">@sanPham.TenSanPham</a></h4>
+                            }
+                            <div class="price-box">
+                                <span class="new-price" id="giaCTSP"></span>
+                            </div>
+                        </div>
+                        <div class="add-actions">
 
-    function dinhLuongChanged(e) {
-        var valueDemission = e.value;
-        var prd_pride = model.sanPham.bangGia.find(x => x.maDinhLuong === valueDemission);
-        console.log(prd_pride);
-        $('.product-pride-id').text(prd_pride.giaBan + ' VNĐ');
-    };
+                            <ul class="add-actions-link">
+                                <li class="add-cart active"><a href="#">Thêm vào giỏ</a></li>
+                                <li><a class="links-details" href=""><i class="fa fa-heart-o"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- single-product-wrap end -->
+
+            </div>
+            <div class="col-lg-1" style="width:100%; align-items: center; display: flex; justify-content: center;">
+                <h1>+</h1>
+            </div>
+            <div class="col-lg-7" style="padding-top:25px">
+                <div class="row">
+                    <div class="product-active owl-carousel">
+                        @foreach (var sp in huis)
+                        {
+                            <div class="col-lg-12">
+                                <!-- single-product-wrap start -->
+                                <div class="single-product-wrap">
+                                    <div class="product-image" style="width:130px; height:130px">
+                                        <a href="@Url.Action("Index", "Detail", new { prdId = sp.MaSanPham })">
+                                            <img src="@sp.HinhAnh" alt="@sp.TenSanPham">
+                                        </a>
+                                    </div>
+                                    <div class="product_desc">
+                                        <div class="product_desc_info">
+
+                                            <h4 style="height:57px"><a class="product_name" href="@Url.Action("Index", "Detail", new { prdId = sp.MaSanPham })">@sp.TenSanPham</a></h4>
+                                         
+                                            <div class="price-box">
+                                                <span class="new-price" style="font-size:15px">@string.Format("{0:0,0}", sp.GiaBan)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- single-product-wrap end -->
+                            </div>
+                        }
+                    </div>
+                </div>
+                @*<div class="site-section bg-left-half mb-5">
+                    <div class="container owl-2-style">
+                        <div class="owl-carousel owl-2">
+                            @foreach (var sp in huis)
+                            {
+                                <div class="media-29101">
+                                    <a href="#"><img src="@sp.HinhAnh" alt="Image" class="img-fluid"></a>
+                                    <h3><a href="#">Consectetur Adipisicing Elit</a></h3>
+                                </div>
+                            }
+
+                        </div>
+
+                    </div>
+                </div>*@
+
+            </div>
+            <div class="col-lg-2" style=" text-align:center; padding-top:100px">
+                <div style="width:100%; align-items: center; display: flex; justify-content: center;">
+                    <span>Tổng tiền: <span id="tongTieninHUI"></span></span>
+                    <br />
+                </div>
+
+                <div class="order-button-payment" style="width: 100%; align-items: center; display: flex; justify-content: center; background: #ad172c; height:30px">
+                    <input value="Thêm vào giỏ" type="submit" onclick="addHuiItemsToCart()" style=" font-size: 15px;" />
+                </div>
+                </div>
+            </div>
+        
+        </div>
+
+        }
+        @(await Html.PartialAsync("/Views/Detail/_ListSanPhamTuongTu.cshtml", Model.SanPhamOutPut))
+
+<script>
+
+    
+
+    var tongTien = parseFloat(@tongTienHui);
+            $(function () {
+
+                var dft_price = model.sanPham.bangGia[0].giaBan;
+                var id = $('#MaSP').val();
+                var giaSP = parseFloat(dft_price);
+                var giaSP2 = format2(giaSP).split(".")[0];
+                $('.product-pride-id').text(giaSP2 + ' VNĐ');
+                $('#giaCTSP').text(giaSP2 + ' VNĐ');
+                $('#giaSanPham-' + id).val(giaSP2);
+               var tongTien1 = format2(tongTien).split(".")[0];
+                $('#tongTieninHUI').text(tongTien1 + ' VNĐ');
+            });
+
+    function addHuiItemsToCart() {
+        $.ajax({
+            url: 'add-hui',
+            type: 'POST',
+            success: function (data) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Thêm giỏ hàng thành công',
+                    showConfirmButton: false,
+                    timer: 2500
+                });
+                console.log(data.slGH);
+                $("#soLuonggh").html(data.slGH);
+            },
+            error: function () {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Thêm giỏ hàng thất bại',
+                    text: 'Vui lòng thử lại',
+                    showConfirmButton: false,
+                    timer: 2500
+                });
+            }
+        });
+    }
+            function dinhLuongChanged(e) {
+                var valueDemission = e.value;
+                var prd_pride = model.sanPham.bangGia.find(x => x.maDinhLuong === valueDemission);
+                var giaSPDL = parseFloat(prd_pride.giaBan);
+                var giaSPDL2 = format2(giaSPDL).split(".")[0];
+                var id = $('#MaSP').val();
+                $('#giaSanPham-' + id).val(giaSPDL2);
+                console.log(prd_pride);
+                $('.product-pride-id').text(giaSPDL2 + ' VNĐ');
+                $('#giaCTSP').text(giaSPDL2 + ' VNĐ');
+                var tongTien1 = format2(tongTien).split(".")[0];
+                $('#tongTieninHUI').text(tongTien1 + ' VNĐ');
+               };
+
+
+            function submitComment() {
+
+                //const sp = {};
+                var fd = new FormData();
+                //sp.id = $(this).data('id');
+                //sp.NoiDung = $('#noiDung').val();
+                //sp.soSao = $('#soSao').val();
+                if (!model.khachHang) {
+                    var _pass = $("#pass-feedback-id").val();
+                    var _email = $("#email-feedback-id").val();
+
+                    fd.append('MatKhau', _pass);
+                    fd.append('Email', _email);
+                }
+                var _nodung = $('#noiDung').val();
+                var _masp = $('#MaSP').val();
+                var _sosao = $('#soSao').val();
+                fd.append('SoSao', _sosao);
+                fd.append('NoiDung', _nodung);
+                fd.append('MaSanPham', _masp);
+                $.ajax({
+                    type: 'POST',
+                    url: 'post-cmt',
+                    dataType: 'json',
+                    data: fd,
+                    contentType: false, // Not to set any content header
+                    processData: false, // Not to process data
+                    success: function (data) {
+                        if (data.code == 1) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Vui lòng đăng nhập',
+                                showConfirmButton: false,
+                                timer: 2500
+                            });
+                        }
+                        else if (data.code == 2) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Vui lòng kiểm tra lại',
+                                showConfirmButton: false,
+                                timer: 2500
+                            });
+                        }
+                        else {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Bình luận thành công',
+                                showConfirmButton: false,
+                                timer: 2500
+                            });
+                            $('#noiDung').val('');
+                            $('#MaSP').val('');
+                            $('#soSao').val('');
+                            window.location.reload(true);
+                        }
+
+                        //console.log(data.soLuong);
+                        //$("#soLuongGioHang").html(data.soLuong);
+                    },
+                    error: function (err) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Đã xảy ra lỗi',
+                            text: 'Vui lòng thử lại',
+                            showConfirmButton: false,
+                            timer: 2500
+                        });
+                        console.log(err);
+                    }
+                });
+            }
+
 </script>

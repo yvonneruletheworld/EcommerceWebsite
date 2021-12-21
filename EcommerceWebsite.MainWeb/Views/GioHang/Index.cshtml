@@ -1,0 +1,281 @@
+﻿@{ 
+//var otp = TempData["OTPCode"];
+}
+
+<link href="~/css/otp/style.css" rel="stylesheet" />
+
+<div id="gioHang">
+
+</div>
+<script>
+    var selectItemList = [];
+    var otpcode = 0;
+
+    $(document).ready(() => {
+        initResourceFilterQuery();
+
+    })
+    function initResourceFilterQuery() {
+        layGioHang();
+    }
+    function layGioHang() {
+        $.ajax({
+            url: '/get-data-giohang',
+            type: 'GET',
+            success: (result) => {
+                if (result.code == 500) {
+                    location.href = "/Home/Index";
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Giỏ hàng trống',
+                        showConfirmButton: false,
+                        timer: 2500
+                    });
+
+                }
+                else {
+                    $("#gioHang")[0].innerHTML = result;
+                }
+            },
+            error: (err) => {
+                alert('failed');
+                console.log(err);
+            }
+        });
+    }
+
+    function clickOTPEvent(first, last) {
+        if (first.value.length) {
+            document.getElementById(last).focus();
+        }
+    }
+
+    function xacNhanOTP() {
+        var otpInput = '';
+
+        otpInput += $('#ist').val();
+        otpInput += $('#sec').val();
+        otpInput += $('#third').val();
+        otpInput += $('#fourth').val();
+        otpInput += $('#fifth').val();
+        otpInput += $('#sixth').val();
+
+        if (otpInput === otpcode) {
+            ThanhToan();
+        }
+        else {
+            alert('Mã OTP không đúng.');
+        }
+    }
+
+    function onTruMot(maSanPham) {
+
+    }
+
+    function layThanhToan() {
+        if (selectItemList.length === 0 || selectItemList === undefined) {
+            swal("Thất bại!", "Vui lòng chọn mặt hàng để thanh toán!", "error");
+            return;
+        }
+
+        $.ajax({
+            url: '/get-data-thanhtoan',
+            type: 'GET',
+            success: (result) => {
+                if (result.code == 500) {
+                    location.href = "/KhachHang/client-login";
+                    swal("Thất bại!", "Vui lòng đăng nhập!", "error");
+                  
+                }
+                else {
+                    $("#gioHang")[0].innerHTML = result;
+                }
+            },
+            error: (err) => {
+                alert('failed');
+                console.log(err);
+            }
+        });
+    }
+
+    function addSelectCartItem(cbID) {
+        var checkItem = document.getElementById(cbID);
+        //if ($(cbID).prop('checked') == true) {
+        //    var item = $(cbID).prop('id');
+        //    selectItemList.push(item);
+        //}
+        //else {
+        //    selectItemList = selectItemList.filter(cb => cb !== item);
+        //}
+
+        if (checkItem.checked) {
+            selectItemList.push(checkItem);
+        }
+        else {
+            selectItemList = selectItemList.filter(cb => cb !== checkItem);
+        }
+    }
+
+
+    function sendEmail() {
+        const MaDC = $('#maDiaChiKH').val();
+        swal("Vui lòng đợi trong giây lát!", "Hệ thống đang xác nhận đơn hàng của bạn.", "error", {
+            buttons: false,
+            timer: 4000,
+        });
+        //swal({
+        //    title: 'Vui lòng đợi trong giây lát!',
+        //    text: 'Hệ thống đang xác nhận đơn hàng của bạn.',
+        //    timer: 5000,
+           
+        //    onOpen: function () {
+        //        swal.showLoading()
+        //    }
+        //}).then(
+        //    function () { },
+        //    // handling the promise rejection
+        //    function (dismiss) {
+        //        if (dismiss === 'timer') {
+        //            console.log('I was closed by the timer')
+        //        }
+        //    }
+        //);
+        
+        if (MaDC == "") {
+            Swal.fire({
+                icon: 'error',
+                title: 'Vui lòng chọn địa chỉ',
+                text: 'Vui lòng thử lại',
+                showConfirmButton: false,
+                timer: 2500
+            });
+        }
+        else {
+            $.ajax({
+                url: '/send-otp',
+                type: 'GET',
+                success: (result) => {
+                    if (result === 'otp-sent-failed') {
+                        alert('Không thể gửi mã OTP');
+                    }
+                    else {
+                        otpcode = result;
+                        console.log(otpcode);
+                        $("#OTPModal").modal('show');
+                    }
+                },
+                error: (err) => {
+                    alert('Lỗi gửi email');
+                    console.log(err);
+                }
+            });
+        }
+
+    }
+
+
+    //THANH TOÁN
+    function ThanhToan() {
+        // lay danh sach mat hang duoc chon thanh toan
+        var lCb = $('checkbox-col input:checked');
+        lCb = lCb.length === 0 ? selectItemList : lCb;
+
+        if (lCb.length === 0) {
+            alert('Vui lòng chọn mặt hàng để thanh toán');
+            return;
+        }
+
+        var testId = lCb[0].defaultValue;
+        if (testId === undefined || testId === '') {
+            alert('Hệ thống không xử lý được yêu cầu của bạn. Vui lòng thử lại sau!');
+            return;
+        }
+        else {
+            //check cb
+            var huiCartItems = [];
+            var norCartItems = [];
+
+            for (var i = 0; i < lCb.length; i++) {
+
+                var type = lCb[i].id.split('_')[1];
+
+                if (type === '2') {
+                    var itemId = lCb[i].value;
+                    //normal
+                    norCartItems.push(itemId);
+                } else {
+                    var id = lCb[i].id;
+                    huiCartItems.push(id);
+                }
+            }
+
+            // prepare data
+            const MaDC = $('#maDiaChiKH').val();
+            if (MaDC == null) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Vui lòng chọn địa chỉ',
+                    text: 'Vui lòng thử lại',
+                    showConfirmButton: false,
+                    timer: 2500
+                });
+            }
+            const PtThanhToan = $('#pTThanhToan').val();
+            const MaKM = $('#maKhuyenMai').val();
+            const TongTien = $('#tongTienKhuyenMai').text();
+            const ThanhTien = $('#thanhTienHang').text();
+            const PhiShip = $('#phiShip').text();
+            var fd = new FormData();
+
+            fd.append('Type', "ajax");
+            fd.append('MaDiaChi', MaDC);
+            fd.append('MaKhuyenMai', MaKM);
+            fd.append('PhuongThucThanhToan', PtThanhToan);
+            fd.append('ThanhTien', ThanhTien);
+            fd.append('TongTien', TongTien);
+            fd.append('Ship', PhiShip);
+            fd.append('ListCheckoutNormalCart', norCartItems);
+            fd.append('ListCheckoutHUICart', huiCartItems);
+
+            $.ajax({
+                url: '/thanh-toan',
+                //data: {
+                //    MaKM: MaKM,
+                //    MaDC: MaDC,
+                //    TongTien: TongTien,
+                //    ThanhTien: ThanhTien,
+                //    PhiShip: PhiShip,
+                //    PtThanhToan: PtThanhToan,
+                //    type: "ajax"
+                //},
+                type: 'POST',
+                data: fd,
+                contentType: false, // Not to set any content header
+                processData: false, // Not to process data
+                success: function (data) {
+                    location.href = "/Home/Index";
+                    fd = new FormData();
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Đặt hàng thành công',
+                        showConfirmButton: false,
+                        timer: 2500
+                    });
+                },
+                error: function (err) {
+                    fd = new FormData();
+                    console.log(err);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Thêm giỏ hàng thất bại',
+                        text: 'Vui lòng thử lại',
+                        showConfirmButton: false,
+                        timer: 2500
+                    });
+                }
+            });
+            selectItemList = [];
+        }
+
+    }
+</script>

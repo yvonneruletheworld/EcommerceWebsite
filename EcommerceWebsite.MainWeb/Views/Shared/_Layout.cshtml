@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http;
+<!DOCTYPE html>
 <html lang="en" class="no-js">
 <head>
     <meta charset="utf-8" />
@@ -54,13 +55,14 @@
         }
     </style>
 </head>
+
 <body>
     <div class="body-wrapper">
         <!-- Begin Header Area -->
         <header>
             <!-- Begin Header Top Area -->
             <div class="header-top">
-                <div class="container">
+                <div class="container" id="thanhcongCu1">
                     <div class="row">
                         <!-- Begin Header Top Left Area -->
                         <div class="col-lg-3 col-md-4">
@@ -82,13 +84,16 @@
                                             <ul class="ht-setting-list">
                                                 @if (User.Identity.Name != null)
                                                 {
-                                                    <li><a href="#">Cá nhân</a></li>
+                                                    <li><a href="@Url.Action("LayThongTinKhachHang","KhachHang")">Cá nhân</a></li>
                                                     <li><a href="#">Ví Online</a></li>
+                                                    <li>@*<a href="@Url.Action("Logout", "KhachHang")">Đăng xuất</a>*@</li>
+                                                    <li><a asp-controller="KhachHang" asp-action="Logout">Đăng xuất</a></li>
                                                 }
                                                 else
                                                 {
-                                                    <li><a asp-controller="KhachHang" asp-action="Index" >Đăng nhập</a></li>
-                                                    <li><a asp-controller="KhachHang" asp-action="Index">Đăng kí</a></li>
+                                                    <li><a asp-controller="KhachHang" asp-action="Index">Đăng nhập</a></li>
+                                                    <li><a asp-controller="KhachHang" asp-action="Register">Đăng kí</a></li>
+                                                    <li>@*<a href="@Url.Action("Register","KhachHang")">Đăng kí</a>*@</li>
                                                 }
                                             </ul>
                                         </div>
@@ -134,37 +139,68 @@
                         <div class="col-lg-3">
                             <div class="logo pb-sm-30 pb-xs-30">
                                 <a href="@Url.Action("Index","Home")">
-                                    <img src="https://i.ibb.co/dcqMFd3/Logo.png" alt="TRIPLE V" />
+                                    <img src="https://i.ibb.co/jzN4xyb/Blue-with-Gold-Laurel-Education-Logo-9-1-removebg-preview.png" alt="TRIPLE V" id="hinhanhlogo" />
+                                    @*<img src="https://i.ibb.co/7r7rdmv/Blue-with-Gold-Laurel-Education-Logo-4-1.png" alt="TRIPLE V" />*@
                                 </a>
                             </div>
                         </div>
                         <!-- Header Logo Area End Here -->
                         <!-- Begin Header Middle Right Area -->
-                        <div class="col-lg-9">
+                        <div class="col-lg-6">
+                            @using (Html.BeginForm("TimKiemSanPham", "Home", FormMethod.Get))
+                            {
+                                <form action="#" class="hm-searchbox">
+
+                                    <input type="text" placeholder="Nhập sản phẩm muốn tìm ..." name="keyword">
+                                    <button class="li-btn" type="submit"><i class="fa fa-search"></i></button>
+                                </form>
+                            }
+                        </div>
+
+                        <div class="col-lg-3">
+
+                            @*@(await Html.PartialAsync("~/Views/Home/_danhMucTimKiem.cshtml", Model.DanhMucOutputs))*@
                             <!-- Begin Header Middle Searchbox Area -->
-                            <form action="#" class="hm-searchbox">
-                                <select class="nice-select select-search-category">
-                                    <option value="0">All</option>
-                                    <option value="2">Điện thoại</option>
-                                </select>
-                                <input type="text" placeholder="Sản phẩm tìm kiếm ...">
-                                <button class="li-btn" type="submit"><i class="fa fa-search"></i></button>
-                            </form>
                             <div class="header-middle-right">
                                 <ul class="hm-menu">
                                     <li class="hm-wishlist">
-                                        <a href="wishlist.html">
-                                            <span class="cart-item-count wishlist-item-count">0</span>
+                                        <a href="@Url.Action("Index", "YeuThich")">
+                                            @if (Context.Session.GetString("_SoLuong") != null)
+                                            {
+
+                                                <span class="cart-item-count wishlist-item-count" id="soLuongyt">@Context.Session.GetString("_SoLuong")</span>
+
+                                            }
+                                            else
+                                            {
+                                                <span class="cart-item-count wishlist-item-count" id="soLuongyt">0</span>
+                                            }
                                             <i class="fa fa-heart-o"></i>
                                         </a>
                                     </li>
                                     <li class="hm-minicart">
                                         <div class="hm-minicart-trigger">
                                             <span class="item-icon"></span>
-                                            <span class="item-text">
-                                                0 VNĐ
-                                                <span class="cart-item-count">2</span>
-                                            </span>
+
+
+                                            @if (GioHangOutput.CountCart() != 0)
+                                            {
+
+                                                <span class="item-text">
+                                                    <span id="sotienGH">@string.Format("{0:0,0}", GioHangOutput.Cash()) VNĐ </span>
+
+
+                                                    <span class="cart-item-count wishlist-item-count" style=" margin-top: -14px; margin-left: -55px;" id="soLuonggh">@GioHangOutput.CountCart()</span>
+                                                </span>
+                                            }
+                                            else
+                                            {
+                                                <span class="item-text">
+                                                    <span id="sotienGH">  0 VNĐ </span>
+                                                    <span class="cart-item-count wishlist-item-count" style=" margin-top: -14px; margin-left: -55px;" id="soLuonggh">0</span>
+                                                </span>
+                                            }
+
                                         </div>
                                         <span></span>
                                         @(await Html.PartialAsync("~/Views/Home/_MiniCart.cshtml"))
@@ -178,7 +214,7 @@
             <!-- Header Middle Area End Here -->
             <!-- Begin Header Bottom Area -->
             <div class="header-bottom header-sticky stick d-none d-lg-block d-xl-block">
-                <div class="container">
+                <div class="container" id="thanhcongCu2">
                     <div class="row">
                         <div class="col-lg-12">
                             <!-- Begin Header Bottom Menu Area -->
@@ -187,13 +223,13 @@
                                     <ul class="main-menu-ul">
                                         <li><a href="@Url.Action("Index","Home")">Trang chủ</a></li>
                                         <li class="megamenu-holder">
-                                            <a href="#">Cửa hàng</a>
+                                            <a href="@Url.Action("Index","CuaHang")">Cửa hàng</a>
                                             <ul class="megamenu hb-megamenu">
                                                 <li>
-                                                    <a href="#">SẢN PHẨM</a>
+                                                    <a href="@Url.Action("Index","CuaHang")">SẢN PHẨM</a>
                                                     <ul>
                                                         <li><a href="@Url.Action("Index","CuaHang")">Tất cả sản phẩm</a></li>
-                                                        <li><a href="#">Hàng mới về</a></li>
+                                                        <li><a href="#" onclick="sanPhamMoiNhat()">Hàng mới về</a></li>
                                                         <li><a href="#">Sản phẩm nổi bật</a></li>
                                                         <li><a href="#">Săn Sale cực HOT</a></li>
                                                         <li><a href="#">Combo Tiện lợi</a></li>
@@ -255,7 +291,7 @@
                                                 <li>
                                                     <a href="blog-details-left-sidebar.html">Tổng hợp</a>
                                                     <ul>
-                                                        <li><a href="blog-details-left-sidebar.html">Danh sách đơn hàng</a></li>
+                                                        <li><a href="@Url.Action("DanhSachDonHang","LichSuDonHang")">Danh sách đơn hàng</a></li>
                                                     </ul>
                                                 </li>
                                             </ul>
@@ -265,7 +301,7 @@
                                         <li><a href="@Url.Action("Index","LienHe")">Liên hệ</a></li>
                                         <!-- Begin Header Bottom Menu Information Area -->
                                         <li class="hb-info f-right p-0 d-sm-none d-lg-block">
-                                            <span>140 Lê Trọng Tấn, Tân Phú, HCM</span>
+                                            <span style="color:white">140 Lê Trọng Tấn, Tân Phú, HCM</span>
                                         </li>
                                         <!-- Header Bottom Menu Information Area End Here -->
                                     </ul>
@@ -370,7 +406,7 @@
                             <!-- Begin Footer Logo Area -->
                             <div class="col-lg-4 col-md-6">
                                 <div class="footer-logo">
-                                    <img src="https://i.ibb.co/8dv7JC0/Ecoleaf-800x800-5-1.png" alt="Footer Logo">
+                                    <img src="https://i.ibb.co/jzN4xyb/Blue-with-Gold-Laurel-Education-Logo-9-1-removebg-preview.png" alt="Footer Logo">
                                     <p class="info">
                                         © 2018. Công ty cổ phần TRIPLE V. GPDKKD: (+84) 0908070605 do sở KH & ĐT TP.HCM cấp ngày 02/01/2007. GPMXH: 238/GP-BTTTT do Bộ Thông Tin và Truyền Thông cấp ngày 04/06/2020..
                                     </p>
@@ -527,28 +563,30 @@
 
 
     <!-- Body Wrapper End Here -->
-    <script type="text/javascript">
-        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
-        (function () {
-            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
-            s1.async = true;
-            s1.src = 'https://embed.tawk.to/6197213c6bb0760a49434ff9/1fkr5jm2k';
-            s1.charset = 'UTF-8';
-            s1.setAttribute('crossorigin', '*');
-            s0.parentNode.insertBefore(s1, s0);
-        })();
-    </script>
-    <script>
-        $(function () {
-            var mainMenuItem = $('.main-menu-ul li a');
-            for (var i = 0; i < mainMenuItem.length; i++) {
-                mainMenuItem[i].classList.add("font-weight-bold");
-            }
-        });
-    </script>
+    <script type="text/javascript" src="https://ahachat.com/customer-chats/customer_chat_sYkDwNjdjZ61a02b264fe32.js"></script>
+    @*<script type="text/javascript">
+            var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+            (function () {
+                var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+                s1.async = true;
+                s1.src = 'https://embed.tawk.to/6197213c6bb0760a49434ff9/1fkr5jm2k';
+                s1.charset = 'UTF-8';
+                s1.setAttribute('crossorigin', '*');
+                s0.parentNode.insertBefore(s1, s0);
+            })();
+        </script>
+        <script>
+            $(function () {
+                var mainMenuItem = $('.main-menu-ul li a');
+                for (var i = 0; i < mainMenuItem.length; i++) {
+                    mainMenuItem[i].classList.add("font-weight-bold");
+                }
+            });
+        </script>*@
 
     <!-- jQuery-V1.12.4 -->
     <script src="~/js/vendor/jquery-3.2.1.min.js"></script>
+
     @*<script src="~/js/vendor/jquery-1.12.4.min.js"></script>*@
     <!-- Popper js -->
     <script src="~/js/vendor/popper.min.js"></script>
@@ -590,8 +628,41 @@
     <script src="~/js/scrollUp.min.js"></script>
     <!-- Main/Activator js -->
     <script src="~/js/main.js"></script>
-
+    <script src="~/js/giohang.js"></script>
 
     @RenderSection("Scripts", required: false)
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    @*<script>
+        $(document).ready(() => {
+            initResourceFilterQuery();
+
+        })
+        function initResourceFilterQuery() {
+            layDanhMuc();
+        }
+        //Danh mục
+        function layDanhMuc() {
+            $.ajax({
+                url: '@Url.Action("layDanhMuc", "Home")',
+                type: 'GET',
+                success: function (res) {
+                    if (res.length === 0) {
+                        alert("Rỗng");
+                    }
+                    var html = `<select class="nice-select select-search-category">`;
+                    console.log(res);
+                    $.each(res, function (i, item) {
+                        html += `<option value="${i}">${item.tenDanhMuc}</option>`;
+                    });
+                    html = `</select>`;
+                    $(".danh-muc").html(html);
+                },
+                error: (err) => {
+                    alert('failed');
+                    console.log(err);
+                }
+            });
+        }
+        </script>*@
 </body>
 </html>

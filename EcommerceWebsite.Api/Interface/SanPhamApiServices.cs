@@ -1,5 +1,6 @@
 ﻿using EcommerceWebsite.Application.Constants;
 using EcommerceWebsite.Application.Pagination;
+using EcommerceWebsite.Data.Entities;
 using EcommerceWebsite.Utilities.Input;
 using EcommerceWebsite.Utilities.Output.Main;
 using EcommerceWebsite.Utilities.ViewModel;
@@ -17,7 +18,7 @@ using System.Threading.Tasks;
 namespace EcommerceWebsite.Api.Interface
 {
     public class SanPhamApiServices : BaseApiService, ISanPhamApiServices
-{
+    {
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly IConfiguration _configuration;
@@ -33,9 +34,9 @@ namespace EcommerceWebsite.Api.Interface
             throw new NotImplementedException();
         }
 
-        public async Task<List<SanPhamOutput>> laySanPham2()
+        public async Task<List<SanPhamVM>> laySanPham2()
         {
-           return await GetListAsync<SanPhamOutput>("/api/SanPham/lay-sanpham");
+            return await GetListAsync<SanPhamVM>($"/api/SanPham/lay-sanpham");
         }
 
         public async Task<bool> ThemSanPham(SanPhamOutput input)
@@ -54,7 +55,7 @@ namespace EcommerceWebsite.Api.Interface
             var requestItem = JsonConvert.SerializeObject(input);
             var httpContent = new StringContent(requestItem, Encoding.UTF8, "application/json");
 
-            var response = await client.PostAsync($"/api/SanPham/them-san-pham", httpContent );
+            var response = await client.PostAsync($"/api/SanPham/them-san-pham", httpContent);
             return response.IsSuccessStatusCode;
         }
 
@@ -85,15 +86,64 @@ namespace EcommerceWebsite.Api.Interface
             return await GetAsync<SanPhamOutput>($"/api/SanPham/ChiTiet/{prdId}");
         }
 
-        public async Task<List<SanPhamVM>> GetViewWithMultipleIds(string[] prdIds)
+        public async Task<List<SanPhamOutput>> laySanPhamTheoHang(string prdId)
         {
-            var url = "/api/SanPham/get-mulpitple-id/?";
-            for(int i = 0; i< prdIds.Length; i++)
+            return await GetListAsync<SanPhamOutput>($"/api/SanPham/lay-sanpham-theohang/{prdId}");
+        }
+
+        public async Task<List<SanPhamOutput>> laySanPhamTheoDanhMuc(string prdId)
+        {
+            return await GetListAsync<SanPhamOutput>($"/api/SanPham/lay-sanpham-theodanhmuc/{prdId}");
+        }
+
+        public async Task<List<SanPhamOutput>> timKiemSanPhamTheoTen(string keyword)
+        {
+            return await GetListAsync<SanPhamOutput>($"/api/SanPham/lay-sanpham-theoten/{keyword}");
+        }
+        public Task<SanPhamVM> laySanPhamTheoMa(string prdId)
+        {
+            return GetAsync<SanPhamVM>($"/api/SanPham/lay-sanpham-Ma/{prdId}");
+        }
+        public async Task<List<SanPhamVM>> GetViewWithMultipleIds(string[] prdIds, string comboCode)
+        {
+            var url = "/api/SanPham/get-mulpitple-id/?comboCode=" + comboCode;
+            for (int i = 0; i < prdIds.Length; i++)
             {
-                url +=  i == prdIds.Length - 1 ?  $"productIds={prdIds[i]}" :  $"productIds={prdIds[i]}&";
+                url += i == prdIds.Length - 1 ? $"productIds={prdIds[i]}" : $"productIds={prdIds[i]}&";
             }
 
             return await GetListAsync<SanPhamVM>(url);
+        }
+
+        public async Task<List<SanPhamVM>> LaySPYeuThichKH(string maKH)
+        {
+            return await GetListAsync<SanPhamVM>($"/api/SanPham/lay-sanphamyt/{maKH}");
+        }
+
+        public async Task<List<SanPhamVM>> LaySanPhamMoiNhat()
+        {
+            return await GetListAsync<SanPhamVM>($"/api/SanPham/lay-sanphammoinhat");
+        }
+
+        public async Task<bool> ThemPhieuNhap(PhieuNhapInput input)
+        {
+
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_configuration[SystemConstant.BaseAddress]);
+            //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+
+            var requestItem = JsonConvert.SerializeObject(input);
+            var httpContent = new StringContent(requestItem, Encoding.UTF8, "application/json");
+
+
+            var response = await client
+                .PostAsync($"/api/SanPham/them-phieu-nhap", httpContent);
+            return response.IsSuccessStatusCode;
+        }
+
+        public async Task<List<SanPhamNhapOutput>> LaySoLuongNhapVaBan(string maSanPham)
+        {
+            return await GetListAsync<SanPhamNhapOutput>($"/api/SanPham/lay-soluongnhap-va-ban/{maSanPham}");
         }
     }
 }

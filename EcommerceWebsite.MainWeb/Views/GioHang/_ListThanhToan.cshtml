@@ -1,0 +1,237 @@
+﻿@using EcommerceWebsite.MainWeb.Models;
+@using Microsoft.AspNetCore.Http;
+@model List<GioHang>
+@{ 
+    var userEmail = ViewBag.Email;
+    var hoTen = @Context.Session.GetString("HotenKH");
+    var diaChi = @Context.Session.GetString("DiaChiKH");
+    var SDT = @Context.Session.GetString("SDTKH");
+    var madc = @Context.Session.GetString("MaDiaChiKH");
+}
+
+<div class="breadcrumb-area">
+    <div class="container">
+        <div class="breadcrumb-content">
+            <ul>
+                <li><a href="index.html">Giỏ Hàng</a></li>
+                <li class="active">Thanh toán</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Li's Breadcrumb Area End Here -->
+<!--Checkout Area Strat-->
+<div class="checkout-area pt-60 pb-30">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="coupon-accordion">
+                    <!--Accordion Start-->
+                    <h3>
+                        Địa chỉ nhận hàng
+                        <br />
+                        <br />
+                        @if (Context.Session.GetString("HotenKH") != null)
+                        {
+
+                            <span><span class="hoTenKH">@hoTen</span> - <span class="sodienTKH">@SDT</span> - <span class="diachiGiuKH">@diaChi</span></span>
+                            <a href="#" onclick="danhSachDiaChiKH()" style="float:right">
+                                THAY ĐỔI
+                            </a>
+                        }
+                        else
+                        {
+                            <span><span class="hoTenKH"></span> - <span class="sodienTKH"></span> - <span class="diachiGiuKH"></span></span>
+                            <a href="#" onclick="danhSachDiaChiKH()" style="float:right">
+                                THÊM ĐỊA CHỈ
+                            </a>
+                        }
+
+                    </h3>
+                    <br />
+
+                </div>
+                <div class="modal fade modal-wrapper" id="dsDiaChi">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <h3 class="review-page-title">Danh sách địa chỉ của @User.Identity.Name</h3>
+                            </div>
+                            <div id="DsDiaChiKH">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-12">
+                <form action="#">
+                    <div class="checkbox-form">
+                        <h3>THÔNG TIN NHẬN ĐƠN HÀNG</h3>
+                          
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="checkout-form-list">
+
+                                        <input hidden id="maDiaChiKH" value="@madc"/>
+                                        <label>Họ Tên Người nhận: <span class="hoTenKH">@hoTen</span></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="checkout-form-list">
+                                        <label>Số điện thoại: <span class="sodienTKH">@SDT</span> </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="checkout-form-list">
+                                        <label>Địa chỉ nhận: <span class="diachiGiuKH">@diaChi</span></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="checkout-form-list">
+                                        <label>Ngày đặt hàng: @DateTime.Now</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="country-select clearfix">
+                                        <label>Phương thức thanh toán <span class="required">*</span></label>
+                                        <select class="nice-select wide" id="pTThanhToan">
+                                            <option value="Thanh toán khi nhận hàng">Thanh toán khi nhận hàng</option>
+                                            <option value="Ví Triple V Store">Ví Triple V Store</option>
+                                            <option value="Thẻ tín dụng/ghi nợ">Thẻ tín dụng/ghi nợ</option>
+                                            <option value="MoMo">MoMo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="coupon-all">
+                                        <div class="coupon">
+                                            <input id="maKhuyenMai" class="input-text" placeholder="Mã giảm giá" type="text" readonly>
+                                            <input class="button" onclick="danhSachKhuyenMai()" value="KHUYẾN MÃI" type="button">
+                                        </div>
+                                    </div>
+                                </div>
+                                @*Modal khuyến mãi*@
+                                <div class="modal fade modal-wrapper" id="dsKhuyenMai">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-body">
+                                                <h3 class="review-page-title">Danh sách khuyến mãi</h3>
+                                            </div>
+                                            <div id="danhSachKhuyenMai">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-6 col-12">
+                <div class="your-order">
+                    <h3>Đơn đặt hàng của bạn</h3>
+                    <div class="your-order-table table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="cart-product-name">Sản phẩm</th>
+                                    <th class="cart-product-total">Giá</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr class="cart_item">
+                                        @if (item.tenSanPham.Length > 25)
+                                        {
+                                            <td class="cart-product-name">@item.tenSanPham.Substring(0, 25) ...<strong class="product-quantity"> × @item.soLuong</strong></td>
+                                        }
+                                        else
+                                        {
+                                            <td class="cart-product-name">@item.tenSanPham<strong class="product-quantity"> × @item.soLuong</strong></td>
+                                        }
+                                        <td class="cart-product-total"><span class="amount">@string.Format("{0:0,0}", item.giaSanPham) VNĐ</span></td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr class="cart-subtotal">
+                                    <th>Tổng tiền hàng</th>
+                                        <td><span><span class="amount" id="thanhTienHang">@string.Format("{0:0,0}", GioHangOutput.Cash())</span> VNĐ</span></td>
+
+                                </tr>
+                                <tr class="cart-subtotal">
+                                    <th>Phí vận chuyển</th>
+
+                                    <td><span><span class="amount" id="phiShip">15,000</span> VNĐ</span></td>
+
+                                </tr>
+                                <tr class="tienGiam">
+                                </tr>
+                                <tr class="order-total">
+                                    <th>Tổng thanh toán</th>
+                                    @{
+                                        var tongTien = GioHangOutput.Cash() + 15000;
+                                        <td><span><span class="amount" id="tongTienKhuyenMai">@string.Format("{0:0,0}", tongTien)</span> VNĐ</span><br /><strike id="tienTruocDo" style="font:10px;font-weight:bold;"></strike></td>
+                                    }
+                                </tr>
+
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div class="order-button-payment">
+                        <input value="Đặt hàng" type="submit"  onclick="sendEmail()"/>
+                        @*<button value="Đặt hàng" data-toggle="modal" data-target="#OTPValidate" />*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Begin Quick View | Modal Area -->
+<div class="modal fade modal-wrapper" id="OTPModal">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h3 class="review-page-title">Xác nhận thanh toán</h3>
+                <div class="modal-inner-area row">
+                    <div class="col-lg-12">
+                        <div class="li-review-content">
+                            <!-- Begin Feedback Area -->
+                            <div class="feedback-area">
+                                <div class="feedback">
+                                    <h3 class="feedback-title">Nhập mã OTP</h3>
+                                    <p>Chúng tôi vừa gửi mã xác nhận (OTP) đến email @userEmail của bạn </p>
+                                    <p>Vui lòng nhập mã để tiếp tục thanh toán </p>
+                                    <form action="#">
+                                        <div class="feedback-input">
+                                            <div class="user-input">
+                                                <input class="otp-input" type="text" id='ist' maxlength="1" onkeyup="clickOTPEvent(this,'sec')">
+                                                <input class="otp-input" type="text" id="sec" maxlength="1" onkeyup="clickOTPEvent(this,'third')">
+                                                <input class="otp-input" type="text" id="third" maxlength="1" onkeyup="clickOTPEvent(this,'fourth')">
+                                                <input class="otp-input" type="text" id="fourth" maxlength="1" onkeyup="clickOTPEvent(this,'fifth')">
+                                                <input class="otp-input" type="text" id="fifth" maxlength="1" onkeyup="clickOTPEvent(this,'sixth')">
+                                                <input class="otp-input" type="text" id="sixth" maxlength="1">
+                                            </div>
+                                            <div class="order-button-payment">
+                                                <input value="Xác nhận" type="submit" style="color:black" onclick="xacNhanOTP()" />
+                                            </div>
+                                        </div>
+                                       
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- Feedback Area End Here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Quick View | Modal Area End Here -->

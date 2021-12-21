@@ -1,4 +1,5 @@
-using EcommerceWebsite.Api.Interface;
+    using EcommerceWebsite.Api.Interface;
+using EcommerceWebsite.Api.Mapper;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -26,9 +27,6 @@ namespace EcommerceWebsite.Admin
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddHttpClient();
-            services.AddHttpContextAccessor();
-            services.AddControllersWithViews();
-
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
                 {
@@ -36,6 +34,10 @@ namespace EcommerceWebsite.Admin
                     options.AccessDeniedPath = "/User/Forbidden/";
                 });
 
+            services.AddHttpContextAccessor();
+            services.AddControllersWithViews();
+
+            
 
             services.AddSession(options =>
             {
@@ -43,6 +45,8 @@ namespace EcommerceWebsite.Admin
             });
             //DI
             DependencyInjectionSystemConfig(services);
+            ///
+            services.AddAutoMapper(typeof(AutoMapping));
         }
 
         private void DependencyInjectionSystemConfig(IServiceCollection services)
@@ -50,6 +54,9 @@ namespace EcommerceWebsite.Admin
             services.AddScoped<IKhachHangApiServices, KhachHangApiServices>();
             services.AddScoped<ISanPhamApiServices, SanPhamApiServices>();
             services.AddScoped<IKhuyenMaiApiServices, KhuyenMaiApiServices>();
+            services.AddScoped<IGioHangApiServices, GioHangApiServices>();
+            services.AddScoped<INhaCungCapApiServices, NhaCungCapApiServices>();
+            services.AddScoped<IDanhMucApiServices, DanhMucApiServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -65,7 +72,7 @@ namespace EcommerceWebsite.Admin
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseAuthentication();

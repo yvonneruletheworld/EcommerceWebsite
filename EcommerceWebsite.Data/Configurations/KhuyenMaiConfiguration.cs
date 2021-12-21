@@ -24,6 +24,9 @@ namespace EcommerceWebsite.Data.Configurations
             builder.Property(km => km.PhanTram)
                 .HasDefaultValue(0);
 
+            builder.Property(hd => hd.DieuKienKM)
+                .HasColumnType("money");
+
         }
     }
 }

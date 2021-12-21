@@ -28,10 +28,11 @@ namespace EcommerceWebsite.Services.Services.Main
             try
             {
                 var result = await _context.DanhMucs
-                    .Where(dm => !dm.DaXoa && dm.HienThiTrangHome == true)
+                    .Where(dm => !dm.DaXoa )
                     .Select( item => new DanhMucOutput {
                         MaDanhMuc = item.MaDanhMuc,
                         TenDanhMuc = item.TenDanhMuc,
+                        HienThiTrangHome = item.HienThiTrangHome
                     }).ToListAsync();
                 foreach(var item in result)
                 {
@@ -86,7 +87,7 @@ namespace EcommerceWebsite.Services.Services.Main
         {
             var rs = new List<CategorySetVM>();
             var lstDM = await _context.DanhMucs
-                .Where(dm => !dm.DaXoa && dm.ParentId == null)
+                .Where(dm => !dm.DaXoa)
                 .ToListAsync();
             foreach(var dm in lstDM)
             {

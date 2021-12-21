@@ -47,7 +47,7 @@ namespace EcommerceWebsite.MainWeb
             //DI
             DependencyInjectionSystemConfig(services);
             services.AddAutoMapper(typeof(AutoMapping));
-
+            services.AddSession();
             //var emailConfig = Configuration
             //    .GetSection("EmailSenderConfig")
             //    .Get<EmailConfiguration>();
@@ -62,6 +62,10 @@ namespace EcommerceWebsite.MainWeb
             services.AddScoped<IKhuyenMaiApiServices, KhuyenMaiApiServices>();
             services.AddScoped<INhanHieuApiServices, NhanHieuApiServices>();
             services.AddScoped<IKhachHangApiServices, KhachHangApiServices>();
+            services.AddScoped<IYeuThichSanPhamApiServices, YeuThichSanPhamApiServices>();
+            services.AddScoped<IBinhLuanApiService, BinhLuanApiService>();
+            services.AddScoped<IGioHangApiServices, GioHangApiServices>();
+            services.AddScoped<IHoaDonApiSerivce, HoaDonApiSerivce>();
             //services.AddScoped<IEmailSenderServices, EmailSenderServices>();
         }
 
@@ -86,13 +90,12 @@ namespace EcommerceWebsite.MainWeb
             app.UseRouting();
 
             app.UseAuthorization();
-
             app.UseSession();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{type=Main}/{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
 
         }

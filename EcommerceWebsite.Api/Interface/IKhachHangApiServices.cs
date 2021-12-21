@@ -1,6 +1,8 @@
 ﻿using EcommerceWebsite.Application.Constants;
+using EcommerceWebsite.Data.Entities;
 using EcommerceWebsite.Utilities.Input;
 using EcommerceWebsite.Utilities.Output.System;
+using EcommerceWebsite.Utilities.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +12,13 @@ namespace EcommerceWebsite.Api.Interface
 {
     public interface IKhachHangApiServices
     {
+        Task<bool> Resgister(ThongTinKhachHangInput input);
+        Task<bool> UpdateOTP(string maKhachHang, string otp);
         Task<ApiResult<string>> GetLoginToken(ThongTinKhachHangInput input);
         Task<KhachHangOutput> GetKhachHangTheoMa(string maKhachHang);
+        Task<List<DiaChiKhachHang>> layDiaChiKhachHang(string MaKH);
+        Task<bool> SendMail(string mailAddress, string otpCode);
+        Task<bool> ThemDiaChiKhachHang(DiaChiKhachHang input);
+        Task<ThongTinKhachHangVM> LayThongTinKhachHang(string maKH);
     }
 }

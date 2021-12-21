@@ -24,13 +24,17 @@ namespace EcommerceWebsite.Api.Controllers
         private readonly IBangGiaServices _bangGiaServices;
         private readonly IDinhLuongServices _dinhLuongServices;
         private readonly IBinhLuanServices _binhLuanServices;
-        public SanPhamController(ISanPhamServices sanPhamServices, IMapper mapper, IBangGiaServices bangGiaServices, IDinhLuongServices dinhLuongServices, IBinhLuanServices binhLuanServices)
+        private readonly IPhieuNhapServices _phieuNhapServices;
+        private readonly IHoaDonServices _hoaDonServices;
+        public SanPhamController(ISanPhamServices sanPhamServices, IMapper mapper, IBangGiaServices bangGiaServices, IDinhLuongServices dinhLuongServices, IBinhLuanServices binhLuanServices, IPhieuNhapServices phieuNhapServices, IHoaDonServices hoaDonServices)
         {
             _sanPhamServices = sanPhamServices;
             _mapper = mapper;
             _bangGiaServices = bangGiaServices;
             _dinhLuongServices = dinhLuongServices;
             _binhLuanServices = binhLuanServices;
+            _phieuNhapServices = phieuNhapServices;
+            _hoaDonServices = hoaDonServices;
         }
         [HttpGet("lay-sanpham")]
         public async Task<IActionResult> LaySanPhams()
@@ -47,29 +51,44 @@ namespace EcommerceWebsite.Api.Controllers
                 return BadRequest(Messages.API_Exception + ex);
             }
         }
-
-        [HttpPost("them-san-pham")]
-        public async Task<IActionResult> ThemSanPham (SanPhamOutput input)
+        [HttpGet("lay-sanphamyt/{maKH}")]
+        public async Task<IActionResult> LaySanPhamYTKH(string maKH)
         {
             try
             {
-                if(ModelState.IsValid)
+                var result = await _sanPhamServices.LaySPYeuThichKH(maKH);
+                if (result == null)
+                    return BadRequest(Messages.API_EmptyResult);
+                else return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(Messages.API_Exception + ex);
+            }
+        }
+        [HttpPost("them-san-pham")]
+        public async Task<IActionResult> ThemSanPham(SanPhamOutput input, string creatorId)
+        {
+            try
+            {
+                if (ModelState.IsValid)
                 {
-                    var existObj = _sanPhamServices.GetSanPhamTheoMa(input.MaSanPham, input.TenSanPham);
-                    if (existObj != null)
-                        return BadRequest(Messages.API_Exist);
+                    //var existObj = _sanPhamServices.GetSanPhamTheoMa(input.MaSanPham, input.TenSanPham);
+                    //if (existObj != null)
+                    //    return BadRequest(Messages.API_Exist);
                     var obj = _mapper.Map<SanPham>(input);
-
+                    //obj.MaSanPham = Guid.NewGuid().ToString();
+                    obj.NguoiTao = creatorId;
                     //add
                     var result = await _sanPhamServices.ThemSanPham(obj);
-                    if (result)
+                    if (result != null)
                     {
                         //dinh luong
                         var listDinhLuong = input.ListThongSo
-                            .Select(item => new DinhLuong () { 
+                            .Select(item => new DinhLuong (item.MaDinhLuong) { 
                                 DonVi = item.DonVi,
                                 GiaTri = item.GiaTri,
-                                MaSanPham = obj.MaSanPham,
+                                MaSanPham = result,
                                 MaThuocTinh = item.MaThuocTinh,
                         }).ToList();
 
@@ -80,12 +99,13 @@ namespace EcommerceWebsite.Api.Controllers
                             {
                                 //gia ban
                                 var listGiaBan = input.BangGia
-                                .Select(item => new LichSuGia
+                                .Select(item => new BangGiaSanPham
                                 {
                                     MaDinhLuong = item.MaDinhLuong,
                                     GiaMoi = item.GiaBan,
                                     DaXoa = false,
                                     NgayTao = DateTime.Now,
+                                    NguoiTao = creatorId
                                 }).ToList();
 
                                 if (listGiaBan != null && listGiaBan.Count > 0)
@@ -98,18 +118,72 @@ namespace EcommerceWebsite.Api.Controllers
                         }
                     }
                 }
-                return BadRequest(Messages.API_Failed);
+                return BadRequest("Lỗi thêm sản phẩm: " + input.TenSanPham);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
-
-        [HttpPut("sua-san-pham/{laXoa}")]
-        public async Task<IActionResult> SuaHoacXoaSanPham (SanPhamOutput input, bool laXoa)
+        [HttpPost("them-phieu-nhap")]
+        public async Task<IActionResult> ThemPhieuNhap(PhieuNhapInput input)
         {
-            if(ModelState.IsValid)
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    int isError = 0;
+                    var listProduct = input.ListSanPhamInput;
+                    foreach (var sp in listProduct)
+                    {
+                        var rsExec = await ThemSanPham(sp, input.CreatorId);
+                        if (rsExec.GetType() == typeof(BadRequestObjectResult))
+                        {
+                            isError++;
+                            continue;
+                        }
+                    }
+                    if (isError < listProduct.Count())
+                    {
+                        //them phieu nhap
+                        //prepare data 
+                        var newInventory = new PhieuNhap()
+                        {
+                            MaNhanVien = input.CreatorId,
+                            TongTien = decimal.Parse(input.Totalvalue),
+                            MaNhaCungCap = input.Investor,
+                        };
+                        var listChiTiet = new List<ChiTietNhapSanPham>();
+                        foreach (var prd in listProduct)
+                        {
+                            var ctpn = _mapper.Map<ChiTietNhapSanPham>(prd);
+                            ctpn.DonGia = prd.BangGia[0].GiaBan;
+                            ctpn.MaNhap = newInventory.MaPhieuNhap;
+                            listChiTiet.Add(ctpn);
+                        }
+                        newInventory.ChiTietNhapSanPhams = listChiTiet;
+
+                        var rsInputInventory = await _phieuNhapServices
+                            .CreateNewInventoryVoucher(newInventory);
+                        isError = rsInputInventory ? isError : isError++;
+                    }
+                    if (isError > 0)
+                        return BadRequest(Messages.API_CointainError);
+                    else
+                        return Ok();
+                }
+                return BadRequest(Messages.API_EmptyInput);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        
+        [HttpPut("sua-san-pham/{laXoa}")]
+        public async Task<IActionResult> SuaHoacXoaSanPham(SanPhamOutput input, bool laXoa)
+        {
+            if (ModelState.IsValid)
             {
                 var obj = _mapper.Map<SanPham>(input);
                 if (obj != null)
@@ -125,12 +199,12 @@ namespace EcommerceWebsite.Api.Controllers
         }
 
         [HttpPatch("{productId}/{editor}/{newPrice}")]
-        public async Task<IActionResult> ModifyPrice (string productId, string editor, decimal newPrice)
+        public async Task<IActionResult> ModifyPrice(string productId, string editor, decimal newPrice)
         {
             if (string.IsNullOrEmpty(productId) || newPrice < 0)
                 return BadRequest(Messages.API_EmptyInput);
 
-            var obj = new LichSuGia()
+            var obj = new BangGiaSanPham()
             {
                 //MaSanPham = productId,
                 GiaMoi = newPrice,
@@ -146,7 +220,7 @@ namespace EcommerceWebsite.Api.Controllers
         }
 
         [HttpGet("ChiTiet/{productId}")]
-        public async Task<IActionResult> LayChiTietSanPham (string productId)
+        public async Task<IActionResult> LayChiTietSanPham(string productId)
         {
             if (String.IsNullOrEmpty(productId))
                 return BadRequest(Messages.API_EmptyInput);
@@ -163,12 +237,12 @@ namespace EcommerceWebsite.Api.Controllers
                 || ts.MaThuocTinh != (nameof(ProductPorpertyCode.TT07))).ToList();
                 obj.BangGia = await _bangGiaServices.LayBangGiaSanPham(productId);
                 obj.ListBinhLuan = await _binhLuanServices.LayBinhLuanTheoSanPham(productId);
-                return Ok(obj); 
-            }    
+                return Ok(obj);
+            }
         }
-        
+
         [HttpGet("Views/{productId}")]
-        public async Task<IActionResult> GetViewProduct (string productId)
+        public async Task<IActionResult> GetViewProduct(string productId)
         {
             if (String.IsNullOrEmpty(productId))
                 return BadRequest(Messages.API_EmptyInput);
@@ -176,25 +250,121 @@ namespace EcommerceWebsite.Api.Controllers
             {
                 // lay san pham
                 var listObj = await _sanPhamServices.LaySanPhamTheoLoai(1, null, productId);
-                if (listObj == null )
+                if (listObj == null)
                     return BadRequest(Messages.API_EmptyResult);
-                return Ok(listObj.FirstOrDefault()); 
-            }    
+                return Ok(listObj.FirstOrDefault());
+            }
         }
-        
+        [HttpGet("lay-sanpham-theohang/{prdId}")]
+        public async Task<IActionResult> LaySanPhamTheoHang(string prdId)
+        {
+            try
+            {
+                var result = await _sanPhamServices.laySanPhamTheoHang(prdId);
+                if (result == null)
+                    return BadRequest(Messages.API_EmptyResult);
+                else return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(Messages.API_Exception + ex);
+            }
+        }
+        [HttpGet("lay-sanpham-theodanhmuc/{prdId}")]
+        public async Task<IActionResult> laySanPhamTheoDanhMuc(string prdId)
+        {
+            try
+            {
+                var result = await _sanPhamServices.laySanPhamTheoDanhMuc(prdId);
+                if (result == null)
+                    return BadRequest(Messages.API_EmptyResult);
+                else return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(Messages.API_Exception + ex);
+            }
+        }
+        [HttpGet("lay-sanpham-theoten/{keyword}")]
+        public async Task<IActionResult> timKiemSanPhamTheoTen(string keyword)
+        {
+            try
+            {
+                var result = await _sanPhamServices.timKiemSanPhamTheoTen(keyword);
+                if (result == null)
+                    return BadRequest(Messages.API_EmptyResult);
+                else return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(Messages.API_Exception + ex);
+            }
+        }
+        [HttpGet("lay-sanpham-Ma/{keyword}")]
+        public async Task<IActionResult> LaySanPhamTheoMa(string keyword)
+        {
+            try
+            {
+                var result = await _sanPhamServices.LayChiTietSanPham(keyword);
+                if (result == null)
+                    return null;
+                else return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(Messages.API_Exception + ex);
+            }
+        }
+
         [HttpGet("get-mulpitple-id")]
-        public async Task<IActionResult> GetProductWithMultipleId ([FromQuery] string[] productIds)
+        public async Task<IActionResult> GetProductWithMultipleId(string comboCode, [FromQuery] string[] productIds)
         {
             if (productIds == null || productIds.Length == 0)
                 return BadRequest(Messages.API_EmptyInput);
             else
             {
                 // lay san pham
-                var listObj = await _sanPhamServices.GetProductWithMultipleId(productIds);
-                if (listObj == null )
+                var listObj = await _sanPhamServices.GetProductWithMultipleId(productIds, comboCode);
+                if (listObj == null)
                     return BadRequest(Messages.API_EmptyResult);
-                return Ok(listObj); 
-            }    
+                return Ok(listObj);
+            }
+        }
+        [HttpGet("lay-sanphammoinhat")]
+        public async Task<IActionResult> LaySanPhamMoiNhat()
+        {
+            try
+            {
+                var result = await _sanPhamServices.LaySanPhamMoiNhat();
+                if (result == null)
+                    return BadRequest(Messages.API_EmptyResult);
+                else return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(Messages.API_Exception + ex);
+            }
+        }
+        [HttpGet("lay-soluongnhap-va-ban/{maSanPham}")]
+        public async Task<IActionResult> LaySoLuongNhapVaBan(string maSanPham)
+        {
+            try
+            {
+                var danhSachNhap = await _phieuNhapServices.GetListImportProduct(maSanPham);
+                if(danhSachNhap != null && danhSachNhap.Count() > 0)
+                {
+                    foreach(var spn in danhSachNhap)
+                    {
+                        spn.SoLuongBan = await _hoaDonServices.LaySoLuongBan(spn.MaSanPham, spn.NgayNhap);
+                    }
+                    return Ok(danhSachNhap);
+                }
+                else return BadRequest(Messages.API_EmptyResult);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(Messages.API_Exception + ex);
+            }
         }
     }
 }

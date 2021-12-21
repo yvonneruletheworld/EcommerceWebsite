@@ -11,7 +11,9 @@ namespace EcommerceWebsite.Utilities.ViewModel
     {
         [JsonProperty("sanPham")]
         public SanPhamOutput SanPham { get; set; }
+        [JsonProperty("khachHang")]
         public KhachHangOutput KhachHang { get; set; }
         public List<SanPhamVM> HUIItems { get; set; }
+        public List<SanPhamOutput> SanPhamOutPut { get; set; }
     }
 }

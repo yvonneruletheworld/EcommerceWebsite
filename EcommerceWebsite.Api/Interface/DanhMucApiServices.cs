@@ -1,4 +1,5 @@
-﻿using EcommerceWebsite.Utilities.Output.Main;
+﻿using EcommerceWebsite.Data.Entities;
+using EcommerceWebsite.Utilities.Output.Main;
 using EcommerceWebsite.Utilities.ViewModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
@@ -25,6 +26,11 @@ namespace EcommerceWebsite.Api.Interface
         public async Task<List<CategorySetVM>> GetDanhMucVaSanPhams(int count)
         {
             return await GetListAsync<CategorySetVM>($"/api/DanhMuc/get-danhmuc-sanpham/{count}");
+        }
+
+        public async Task<List<ThuocTinh>> GetThuocTinhTheoDanhMuc(string maDanhMuc)
+        {
+            return await GetListAsync<ThuocTinh>($"/api/DanhMuc/get-danhmuc-thuoctinh/{maDanhMuc}");
         }
     }
 }

@@ -15,6 +15,7 @@ namespace EcommerceWebsite.Data.Entities
         public string TenKhuyenMai { get; set; }
         public float PhanTram { get; set; }
         public string HinhAnh { get; set; }
+        public decimal DieuKienKM { get; set; }
         public List<HoaDon> HoaDons { get; set; }
     }
 }

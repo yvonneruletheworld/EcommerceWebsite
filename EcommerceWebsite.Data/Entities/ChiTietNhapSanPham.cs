@@ -6,6 +6,7 @@ namespace EcommerceWebsite.Data.Entities
 {
    public class ChiTietNhapSanPham
     {
+
         public string MaSanPham { get; set; }
         public string MaNhap { get; set; }
         public int SoLuong { get; set; }

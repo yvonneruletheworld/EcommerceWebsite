@@ -1,4 +1,5 @@
 ﻿using EcommerceWebsite.Application.Pagination;
+using EcommerceWebsite.Data.Entities;
 using EcommerceWebsite.Utilities.Input;
 using EcommerceWebsite.Utilities.Output.Main;
 using EcommerceWebsite.Utilities.ViewModel;
@@ -13,12 +14,24 @@ namespace EcommerceWebsite.Api.Interface
     {
         Task<PageResponse<List<SanPhamOutput>>> laySanPham(PaginationFilter pagination);
 
-        Task<List<SanPhamOutput>> laySanPham2();
-
+        Task<List<SanPhamNhapOutput>> LaySoLuongNhapVaBan(string maSanPham);
+        Task<List<SanPhamVM>> laySanPham2();
+        Task<List<SanPhamVM>> LaySPYeuThichKH(string maKH);
         Task<bool> ThemSanPham(SanPhamOutput input);
+        Task<bool> ThemPhieuNhap(PhieuNhapInput input);
         Task<bool> Modify(bool laXoa, SanPhamOutput input);
         Task<SanPhamVM> LayViewSanPham(string prdId);
-        Task<List<SanPhamVM>> GetViewWithMultipleIds(string[] prdIds);
+        Task<List<SanPhamVM>> GetViewWithMultipleIds(string[] prdIds, string comboCode);
         Task<SanPhamOutput> LayChiTietSanPham(string prdId);
+
+        Task<List<SanPhamOutput>> laySanPhamTheoHang(string prdId);
+
+        Task<List<SanPhamOutput>> laySanPhamTheoDanhMuc(string prdId);
+
+        Task<List<SanPhamOutput>> timKiemSanPhamTheoTen(string keyword);
+
+        Task<SanPhamVM> laySanPhamTheoMa(string prdId);
+
+        Task<List<SanPhamVM>> LaySanPhamMoiNhat();
     }
 }
