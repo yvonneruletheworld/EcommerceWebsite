@@ -119,7 +119,7 @@ namespace EcommerceWebsite.Admin.Controllers
 
         private IEnumerable<SanPhamInput> GetListImport(string fileName)
         {
-            var filePath = $"D:\\School\triplev-store\\EcommerceWebsite.Admin\\wwwroot\\files\\{fileName}";
+            //var filePath = $"D:\\KhoaLuan\\BaiLam\\EcommerceWebsite\\EcommerceWebsite.Admin\\{fileName}";
             //var filePath = $"{ Directory.GetCurrentDirectory()}{@"\wwwroot\files}"}" +"\\" + fileName;
             System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
             using(var stream = System.IO.File.Open(fileName, FileMode.Open, FileAccess.Read))

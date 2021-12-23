@@ -3,6 +3,7 @@
 @model DoanhThuVM
 @{
     var sanPham = Model.SanPham;
+    Model.SanPham.giaBan = Model.SanPham.BangGia.FirstOrDefault().GiaBan;
     var listNhapBan = Model.ListSanPhamNhapVaBan;
     var listDinhLuong = sanPham.ListThongSo;
     var listDanhMuc = Model.ListDanhMuc;
@@ -187,20 +188,28 @@
                                 <tbody>
                                     @foreach (var item in listDinhLuong)
                                     {
-                                        <tr>
+                                    <tr>
 
-                                            <td>@item.ThuocTinh</td>
-                                            <td><input asp-for="@item.GiaTri" id="@string.Concat(item.MaDinhLuong,"_gt")" value="@item.GiaTri" type="text" class="form-control" /></td>
-                                            @if (item.MaThuocTinh == ProductPorpertyCode.TT014.ToString())
+                                        <td>@item.ThuocTinh</td>
+                                        <td><input asp-for="@item.GiaTri" id="@string.Concat(item.MaDinhLuong,"_gt")" value="@item.GiaTri" type="text" class="form-control" /></td>
+                                        @if (item.MaThuocTinh == ProductPorpertyCode.TT014.ToString())
+                                        {
+                                            if (item.GiaTri == null)
                                             {
-                                                <td><img src="@item.GiaTri??https://i.ibb.co/jzN4xyb/Blue-with-Gold-Laurel-Education-Logo-9-1-removebg-preview.png" style="width: 250px;" alt="@item.DonVi" data-target="#inputImg" data-toggle="modal" /></td>
-
+                                                <td><img src="https://i.ibb.co/jzN4xyb/Blue-with-Gold-Laurel-Education-Logo-9-1-removebg-preview.png" style="width: 250px;" alt="@item.DonVi" data-target="#inputImg" data-toggle="modal" /></td>
                                             }
                                             else
                                             {
-                                                <td><input asp-for="@item.DonVi" id="@string.Concat(item.MaDinhLuong,"_dv")" value="@item.DonVi" type="text" class="form-control" /></td>
+                                                <td><img src="@item.GiaTri" style="width: 250px;" alt="@item.DonVi" data-target="#inputImg" data-toggle="modal" /></td>
+
                                             }
-                                        </tr>
+
+                                        }
+                                        else
+                                        {
+                                            <td><input asp-for="@item.DonVi" id="@string.Concat(item.MaDinhLuong,"_dv")" value="@item.DonVi" type="text" class="form-control" /></td>
+                                        }
+                                    </tr>
                                     }
                                 </tbody>
                             </table>
@@ -305,5 +314,8 @@
                 $('#span-per').text('VND');
             }
         }
+    }
+    function HienThiGiaTri(maDV) {
+      
     }
 </script>
