@@ -24,7 +24,7 @@ namespace EcommerceWebsite.Api.Controllers
         {
             try
             {
-                var result = await _hoaDonServices.layHoaDonTheoKhachHang(maKH);
+                var result = await _hoaDonServices.DanhSachHoaDonTheoKhachHang(maKH);
                 if (result == null)
                     return BadRequest(Messages.API_EmptyResult);
                 else return Ok(result);
