@@ -30,6 +30,7 @@ namespace EcommerceWebsite.Services.Interfaces.Main
         //Task<IdentityResult> Create(ApplicationUser obj);
 
         Task<SanPhamOutput> LayChiTietSanPham(string id);
+        //Task<SanPhamOutput> LayChiTietNhapVaBan(string id);
 
         Task<List<SanPhamOutput>> laySanPhamTheoHang(string idHang);
 

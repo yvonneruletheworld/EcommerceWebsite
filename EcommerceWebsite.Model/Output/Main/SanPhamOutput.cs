@@ -28,6 +28,8 @@ namespace EcommerceWebsite.Utilities.Output.Main
         public string HinhAnh { get; set; }
         [JsonProperty("nhanHieu")]
         public string NhanHieu { get; set; }
+        [JsonProperty("maNhanHieu")]
+        public string MaNhanHieu { get; set; }
         [JsonProperty("loaiSanPham")]
         public string LoaiSanPham { get; set; }
         [JsonProperty("xepHang")]
@@ -38,6 +40,8 @@ namespace EcommerceWebsite.Utilities.Output.Main
         public decimal giaBan { get; set; }
         [JsonProperty("thanhTien")]
         public decimal ThanhTien { get; set; }
+        [JsonProperty("danhSachNhap")]
+        public List<decimal> DanhSachNhap { get; set; }
         [JsonProperty("maLoai")]
         public string MaLoai { get; set; }
 

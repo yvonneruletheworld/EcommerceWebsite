@@ -57,7 +57,7 @@ namespace EcommerceWebsite.Api.Interface
 
             var response = await client.GetAsync(url);
             var body = await response.Content.ReadAsStringAsync();
-
+            var temp = (TResponse)JsonConvert.DeserializeObject(body, typeof(TResponse));
             return response.IsSuccessStatusCode ?
                 (TResponse)JsonConvert.DeserializeObject(body, typeof(TResponse)) 
                 : JsonConvert.DeserializeObject<TResponse>(body);

@@ -8,8 +8,8 @@ namespace EcommerceWebsite.Utilities.ViewModel
 {
     public class DoanhThuVM
     {
-        public List<SanPhamNhapOutput> ListSanPhamNhapVaBan;
-        public List<ThongSoSanPhamOutput> ListDinhLuong;
+        public List<DoanhThuOutput> ListSanPhamNhapVaBan;
+        public List<ThuocTinh> ListDinhLuong;
         public List<DanhMucOutput> ListDanhMuc;
         public List<NhanHieu> ListNhanHieu;
         public SanPhamOutput SanPham;

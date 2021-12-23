@@ -13,6 +13,7 @@ namespace EcommerceWebsite.Services.Interfaces.Main
         //Task<bool> CreateNewInventoryVoucherDetail(List<ChiTietNhapSanPham> inputs);
         Task<List<ChiTietNhapSanPham>> GetAllInventoryVoucherDetail(string maPhieuNhap);
         Task<List<PhieuNhap>> GetAllInventoryVoucher();
-        Task<List<SanPhamNhapOutput>> GetListImportProduct(string maSanPham);
+        Task<List<DoanhThuOutput>> GetListImportProduct(string maSanPham);
+        Task<decimal> GetRecentlyPrice(string maSanPham);
     }
 }

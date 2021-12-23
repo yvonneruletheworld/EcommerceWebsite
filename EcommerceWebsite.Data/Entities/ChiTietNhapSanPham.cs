@@ -14,6 +14,6 @@ namespace EcommerceWebsite.Data.Entities
         public decimal ThanhTien { get; set; }
         
         public SanPham SanPham { get; set; }
-        public PhieuNhap PhieuNhap { get; set; }
+        public PhieuNhap PhieuNhapEntity { get; set; }
     }
 }

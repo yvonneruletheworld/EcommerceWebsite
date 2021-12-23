@@ -31,7 +31,7 @@ namespace EcommerceWebsite.Data.Configurations
                .HasColumnType("int")
                 .HasDefaultValue(0); ;
 
-            builder.HasOne(xl => xl.PhieuNhap)
+            builder.HasOne(xl => xl.PhieuNhapEntity)
                 .WithMany(xl => xl.ChiTietNhapSanPhams)
                 .HasForeignKey(xl => xl.MaNhap);
 

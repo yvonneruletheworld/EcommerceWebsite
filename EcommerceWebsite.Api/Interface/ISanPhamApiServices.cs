@@ -14,7 +14,7 @@ namespace EcommerceWebsite.Api.Interface
     {
         Task<PageResponse<List<SanPhamOutput>>> laySanPham(PaginationFilter pagination);
 
-        Task<List<SanPhamNhapOutput>> LaySoLuongNhapVaBan(string maSanPham);
+        Task<List<DoanhThuOutput>> LaySoLuongNhapVaBan(string maSanPham);
         Task<List<SanPhamVM>> laySanPham2();
         Task<List<SanPhamVM>> LaySPYeuThichKH(string maKH);
         Task<bool> ThemSanPham(SanPhamOutput input);
@@ -33,7 +33,6 @@ namespace EcommerceWebsite.Api.Interface
         Task<SanPhamVM> laySanPhamTheoMa(string prdId);
 
         Task<List<SanPhamVM>> LaySanPhamMoiNhat();
-
         Task<List<ThuocTinh>> layDinhluong();
     }
 }

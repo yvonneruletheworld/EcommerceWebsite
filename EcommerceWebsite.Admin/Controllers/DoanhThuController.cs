@@ -12,21 +12,31 @@ namespace EcommerceWebsite.Admin.Controllers
     {
         private readonly ISanPhamApiServices _sanPhamApiServices;
         private readonly IDanhMucApiServices _danhMucApiServices;
+        private readonly INhanHieuApiServices _nhanHieuApiServices;
 
-        public DoanhThuController(ISanPhamApiServices sanPhamApiServices, IDanhMucApiServices danhMucApiServices)
+        public DoanhThuController(ISanPhamApiServices sanPhamApiServices, IDanhMucApiServices danhMucApiServices, INhanHieuApiServices nhanHieuApiServices)
         {
             _sanPhamApiServices = sanPhamApiServices;
             _danhMucApiServices = danhMucApiServices;
+            _nhanHieuApiServices = nhanHieuApiServices;
         }
 
         public async Task<IActionResult> IndexAsync(string maSanPham)
         {
+            if(!string.IsNullOrEmpty(maSanPham))
+            {
+                var vm = new DoanhThuVM();
+                vm.SanPham = await _sanPhamApiServices.LayChiTietSanPham(maSanPham);
+                vm.SanPham.giaBan = vm.SanPham.BangGia.FirstOrDefault().GiaBan;
+                vm.ListSanPhamNhapVaBan = await _sanPhamApiServices.LaySoLuongNhapVaBan(maSanPham);
+                ViewBag.GiaNhapGanNhat = vm.ListSanPhamNhapVaBan?[0].DonGiaNhap;
+                vm.ListDinhLuong = await _sanPhamApiServices.layDinhluong();
+                vm.ListDanhMuc = await _danhMucApiServices.GetCategories();
+                vm.ListNhanHieu = await _nhanHieuApiServices.layNhanHieus();
+                return View(vm);
+            }
             // lay so luong ban va nhap 
-            var vm = new DoanhThuVM();
-           // vm.ListSanPhamNhapVaBan = await _sanPhamApiServices.LaySoLuongNhapVaBan(maSanPham);
-            vm.ListDinhLuong = await _sanPhamApiServices.layDinhluong();
-            vm.ListDanhMuc = await _danhMucApiServices.GetCategories();
-            return View(vm);
+            return   View();
         }
 
     }

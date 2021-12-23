@@ -20,7 +20,7 @@ namespace EcommerceWebsite.Services.Services.Main
             _context = context;
         }
 
-        public async Task<bool> AddRangeAsync(List<DinhLuong> input)
+        public async Task<List<string>> AddRangeAsync(List<DinhLuong> input)
         {
             try
             {
@@ -31,7 +31,23 @@ namespace EcommerceWebsite.Services.Services.Main
 
                 await _context.Database.CommitTransactionAsync();
 
-                return rs > 0;
+                if (rs > 0)
+                {
+                    var rsList = new List<string>();
+                    foreach(var dl in input)
+                    {
+                        var maSanPham = dl.MaSanPham;
+                        var maThuocTinh = dl.MaSanPham;
+                        var giaTri = dl.GiaTri;
+                        var getDl = await _context.DinhLuongs
+                            .Where(dl => dl.GiaTri == giaTri && dl.MaThuocTinh == maThuocTinh && dl.MaSanPham == maSanPham)
+                            .FirstOrDefaultAsync();
+                        if (getDl != null)
+                            rsList.Add(getDl.MaDinhLuong);
+                    }
+                    return rsList;
+                }
+                else return null;
             }
             catch (Exception ex)
             {
@@ -40,12 +56,11 @@ namespace EcommerceWebsite.Services.Services.Main
             }
         }
 
-        public async Task<List<ThuocTinh>> layDinhLuong()
+        public async Task<List<ThuocTinh>> LayThongSo()
         {
             try
             {
-                var data = await _context.ThuocTinhs.ToListAsync();
-                return data;
+                return await _context.ThuocTinhs.ToListAsync();
             }
             catch (Exception ex)
             {

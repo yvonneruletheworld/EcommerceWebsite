@@ -97,9 +97,12 @@ namespace EcommerceWebsite.Services.Services.Main
                                      TenSanPham = sp.TenSanPham,
                                      Status = sp.Status,
                                      HinhAnh = sp.HinhAnh,
+                                     MaLoai = sp_dm.MaDanhMuc,
+                                     MaNhanHieu = sp_nh.MaHang,
                                      //DanhGia = sp_dg,
                                      LoaiSanPham = sp_dm.TenDanhMuc,
                                      NhanHieu = sp_nh.TenHang,
+                                     NguoiSuaCuoi = sp.NguoiSuaCuoi
                                      //GiaBan = gb.GiaMoi
                                  }).FirstOrDefaultAsync();
                 obj.DanhGia = await _context.DanhGiaSanPhams.Where(dg => dg.MaSanPham.Equals(obj.MaSanPham)).ToListAsync();
@@ -113,6 +116,7 @@ namespace EcommerceWebsite.Services.Services.Main
             }
         }
 
+        
         public async Task<List<SanPhamVM>> LaySanPham()
         {
             try

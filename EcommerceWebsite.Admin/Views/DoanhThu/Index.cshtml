@@ -1,10 +1,13 @@
 ﻿@using EcommerceWebsite.Utilities.ViewModel
+@using EcommerceWebsite.Data.Enum
 @model DoanhThuVM
 @{
     var sanPham = Model.SanPham;
     var listNhapBan = Model.ListSanPhamNhapVaBan;
-    var listDinhLuong = Model.ListDinhLuong;
+    var listDinhLuong = sanPham.ListThongSo;
     var listDanhMuc = Model.ListDanhMuc;
+    var listThongSo = Model.ListDinhLuong;
+    var giaNhapGanNhat = ViewBag.GiaNhapGanNhat;
 }
 
 <div class="pcoded-content">
@@ -64,13 +67,13 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-3 mb-3">
+                        <div class="col-md-2 mb-2">
                             <label class="form-label" asp-for="SanPham.SoLuongTon">Số lượng tồn</label>
-                            <input type="number" asp-for="SanPham.SoLuongTon" value="@sanPham.SoLuongTon" id="SoLuongTon" name="SoLuongTon" />
+                            <input type="number" class="form-control text-box single-line" style="max-width: 100px;" asp-for="SanPham.SoLuongTon" value="@sanPham.SoLuongTon" id="SoLuongTon" name="SoLuongTon" />
                         </div>
-                        <div class="col-md-4 mb-4">
+                        <div class="col-md-5 mb-5">
                             <label class="form-label" asp-for="SanPham.MaLoai">Danh mục</label>
-                            <select id="danh-muc-selection-id" name="MaLoai">
+                            <select id="danh-muc-selection-id" class="form-control text-box single-line" name="MaLoai">
                                 @foreach (var item in listDanhMuc)
                                 {
                                     @if (item.DanhMucCon != null && item.DanhMucCon.Count() > 0)
@@ -92,7 +95,7 @@
                         </div>
                         <div class="col-md-5 mb-5">
                             <label class="form-label" asp-for="SanPham.NhanHieu">Nhan Hiệu</label>
-                            <select id="nhan-hieu-selection-id" name="NhanHieu">
+                            <select  class="form-control text-box single-line" id="nhan-hieu-selection-id" name="NhanHieu">
                                 @foreach (var item in Model.ListNhanHieu)
                                 {
                                     <option value="@item.MaHang">@item.TenHang</option>
@@ -101,17 +104,64 @@
                         </div>
 
                     </div>
-                    @*<div class="form-group">
+                    <div class="form-group">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-                            <label class="form-check-label" for="invalidCheck">Agree to terms and conditions</label>
-                            <div class="invalid-feedback">
-                                You must agree before submitting.
+                            <input class="form-check-input" onclick="onCheckPercent()" type="checkbox" value="" id="percentageAgree">
+                            <label class="form-check-label" for="">Thiết lập giá theo lợi nhuận mong muốn</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <label class="form-label" asp-for="SanPham.giaBan">Giá hiện tại</label>
+                            <input type="number"  class="form-control text-box single-line" asp-for="SanPham.giaBan" value="@sanPham.giaBan" id="giaBan" name="giaBan" />
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label class="form-label" >Giá nhập gần nhất</label>
+                            <input type="number"  class="form-control text-box single-line"  value="@giaNhapGanNhat" id="GiaNhapGanNhat" readonly name="GiaNhapGanNhat" />
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label class="form-label" >Lợi nhuận</label>
+                            <input type="number"  class="form-control text-box single-line"  id="LoiNhuan" name="LoiNhuan" /> 
+                            <span id="span-per"  class="font-weight-bold">%</span>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label class="form-label" >Giá Sản Phẩm</label>
+                            <input type="number"  class="form-control text-box single-line"  id="GiaSanPham" name="GiaSanPham" readonly />
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="form-label" asp-for="ListDinhLuong">Chọn thuộc tính</label>
+                                        <select class="form-control" id="thong-so-selection-id">
+                                            @foreach (var item in listThongSo)
+                                            {
+                                                <option value="@item.MaThuocTinh">@item.TenThuocTinh</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-6">
+                                    <label class="form-label" for="">Giá Trị</label>
+                                    <input type="text" class="form-control" placeholder="Giá trị">
+                                </div>
+
+                                <div class="col-md-6 mb-6">
+                                    <label class="form-label" for="">Đơn Vị</label>
+                                    <input type="text" class="form-control" placeholder="Đơn vị">
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <button class="btn  btn-primary" type="submit">Submit form</button>
-                    <br />*@
+
+                    <button class="btn mt-3 mb-3 btn-primary" type="submit">Cập nhật</button>
+                    <br />
                 </form>
 
             </div>
@@ -119,10 +169,10 @@
 
     </div>
     <div class="row">
-        <div class="col-sm-8">
+        <div class="col-sm-12">
             <h5 class="mb-3">THÔNG SỐ SẢN PHẨM</h5>
             <hr>
-            <div class="col-xl-12">
+
                 <div class="card">
                     <div class="card-body table-border-style">
                         <div class="table-responsive">
@@ -131,6 +181,7 @@
                                     <tr>
                                         <th>Thông Số</th>
                                         <th>Giá Trị</th>
+                                        <th>Đơn Vị</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -138,8 +189,17 @@
                                     {
                                         <tr>
 
-                                            <td>@item.TenThuocTinh</td>
-                                            <td><input id="@item.MaDi" type="text" class="form-control" /></td>
+                                            <td>@item.ThuocTinh</td>
+                                            <td><input asp-for="@item.GiaTri" id="@string.Concat(item.MaDinhLuong,"_gt")" value="@item.GiaTri" type="text" class="form-control" /></td>
+                                            @if (item.MaThuocTinh == ProductPorpertyCode.TT014.ToString())
+                                            {
+                                                <td><img src="@item.GiaTri??https://i.ibb.co/jzN4xyb/Blue-with-Gold-Laurel-Education-Logo-9-1-removebg-preview.png" style="width: 250px;" alt="@item.DonVi" data-target="#inputImg" data-toggle="modal" /></td>
+
+                                            }
+                                            else
+                                            {
+                                                <td><input asp-for="@item.DonVi" id="@string.Concat(item.MaDinhLuong,"_dv")" value="@item.DonVi" type="text" class="form-control" /></td>
+                                            }
                                         </tr>
                                     }
                                 </tbody>
@@ -147,8 +207,57 @@
                         </div>
                     </div>
                 </div>
+            
+        </div>
+    </div>
 
+
+    <div class="row mt-3">
+        <div class="col-sm-12">
+            <h5 class="mb-3">DOANH THU</h5>
+            <hr>
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-body table-border-style">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Ngày Nhập</th>
+                                        <th>Số Lượng Nhập</th>
+                                        <th>Đơn Giá Nhập</th>
+                                        <th>Tổng Tiền Nhập</th>
+                                        <th>Số Tồn</th>
+                                        <th>Đã Bán</th>
+                                        <th>Đơn Giá Bán</th>
+                                        <th>Tổng Tiền Bán</th>
+                                        <th>Lợi Nhuận</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in listNhapBan)
+                                    {
+                                        <tr>
+
+                                            <td>@item.NgayNhap</td>
+                                            <td>@item.SoLuongNhap</td>
+                                            <td>@item.DonGiaNhap</td>
+                                            <td>@item.TongTienNhap</td>
+                                            <td>@item.SoLuongTon</td>
+                                            <td>@item.DaBan</td>
+                                            <td>@item.DonGiaBan</td>
+                                            <td>@item.TongTienBan</td>
+                                            <td>@item.LoiNhuan</td>
+                                            
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
+
         </div>
     </div>
 </div>
@@ -156,22 +265,45 @@
 
 
 <script>
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
-    (function () {
-        'use strict';
-        window.addEventListener('load', function () {
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            var forms = document.getElementsByClassName('needs-validation');
-            // Loop over them and prevent submission
-            var validation = Array.prototype.filter.call(forms, function (form) {
-                form.addEventListener('submit', function (event) {
-                    if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
-            });
-        }, false);
-    })();
+    $(document).ready(function () {
+        init();
+        setUpProductPrice();
+    });
+
+    function init() {
+        //$('.danh-muc-selection-id .select-styled').text('@sanPham.LoaiSanPham');
+        var danhMucSelected = document.getElementById('danh-muc-selection-id');
+        danhMucSelected.value = '@sanPham.MaLoai';
+        var nhanHieuSelected = document.getElementById('nhan-hieu-selection-id');
+        nhanHieuSelected.value = '@sanPham.MaNhanHieu';
+        @*$('.nhan-hieu-selection-id .select-styled').text('@sanPham.NhanHieu');*@
+        if ('@sanPham.NguoiSuaCuoi' === '1')
+            $('#percentageAgree').prop('checked', true);
+    }
+
+    function onCheckPercent() {
+        setUpProductPrice();
+    }
+
+    function setUpProductPrice() {
+        var type = document.getElementById("percentageAgree");
+
+        var giaNhapTxt = $('#GiaNhapGanNhat').val();
+        var giaBanTxt = $('#giaBan').val();
+        if (giaBanTxt !== undefined && giaBanTxt !== '') {
+            var giaNhap = Number(giaNhapTxt);
+            var giaBan = Number(giaBanTxt);
+            if (type.checked) {
+                //by percent
+                var ln = ((giaBan - giaNhap) / giaNhap) * 100;
+                $('#LoiNhuan').val(ln);
+                $('#span-per').text('%');
+            }
+            else {
+                var ln = giaBan - giaNhap;
+                $('#LoiNhuan').val(ln);
+                $('#span-per').text('VND');
+            }
+        }
+    }
 </script>

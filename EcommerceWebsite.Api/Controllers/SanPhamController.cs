@@ -87,7 +87,7 @@ namespace EcommerceWebsite.Api.Controllers
                         var listDinhLuong = input.ListThongSo
                             .Select(item => new DinhLuong (item.MaDinhLuong) { 
                                 DonVi = item.DonVi,
-                                GiaTri = item.GiaTri,
+                                GiaTri = item.GiaTri?? "https://i.ibb.co/jzN4xyb/Blue-with-Gold-Laurel-Education-Logo-9-1-removebg-preview.png",
                                 MaSanPham = result,
                                 MaThuocTinh = item.MaThuocTinh,
                         }).ToList();
@@ -95,13 +95,13 @@ namespace EcommerceWebsite.Api.Controllers
                         if (listDinhLuong != null && listDinhLuong.Count > 0)
                         {
                             var rsDl = await _dinhLuongServices.AddRangeAsync(listDinhLuong);
-                            if (rsDl)
+                            if (rsDl != null && rsDl.Count() > 0)
                             {
                                 //gia ban
                                 var listGiaBan = input.BangGia
                                 .Select(item => new BangGiaSanPham
                                 {
-                                    MaDinhLuong = item.MaDinhLuong,
+                                    MaDinhLuong = rsDl[0],
                                     GiaMoi = item.GiaBan,
                                     DaXoa = false,
                                     NgayTao = DateTime.Now,
@@ -353,10 +353,6 @@ namespace EcommerceWebsite.Api.Controllers
                 var danhSachNhap = await _phieuNhapServices.GetListImportProduct(maSanPham);
                 if(danhSachNhap != null && danhSachNhap.Count() > 0)
                 {
-                    foreach(var spn in danhSachNhap)
-                    {
-                        spn.SoLuongBan = await _hoaDonServices.LaySoLuongBan(spn.MaSanPham, spn.NgayNhap);
-                    }
                     return Ok(danhSachNhap);
                 }
                 else return BadRequest(Messages.API_EmptyResult);
@@ -367,11 +363,11 @@ namespace EcommerceWebsite.Api.Controllers
             }
         }
         [HttpGet("lay-theodinhluong")]
-        public async Task<IActionResult> LayDinhLuong()
+        public async Task<IActionResult> LayThongSo()
         {
             try
             {
-                var result = await _dinhLuongServices.layDinhLuong();
+                var result = await _dinhLuongServices.LayThongSo();
                 if (result == null)
                     return BadRequest(Messages.API_EmptyResult);
                 else return Ok(result);
