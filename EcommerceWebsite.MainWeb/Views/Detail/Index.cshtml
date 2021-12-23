@@ -460,7 +460,7 @@
                         <div class="product_desc_info">
                             <div class="product-review">
                                 <h5 class="manufacturer">
-                                    <a href="#">@sanPham.LoaiSanPham</a>
+                                    <a href="@Url.Action("Index", "CuaHang",new {loaiHang =  sanPham.MaLoai})">@sanPham.LoaiSanPham</a>
                                 </h5>
                                 <div class="rating-box">
                                     <ul class="rating">
@@ -474,11 +474,11 @@
                             </div>
                             @if (sanPham.TenSanPham.Length > 30)
                             {
-                                <h4><a class="product_name" href="@Url.Action("Index", "Detail", new { prdId = sanPham.MaSanPham })">@sanPham.TenSanPham.Substring(0, 30)...</a></h4>
+                                <h4><a class="product_name" href="@Url.Action("Index", "Detail", new { prdId = sanPham.MaSanPham, prdMaDanhMuc = sanPham.MaLoai  })">@sanPham.TenSanPham.Substring(0, 30)...</a></h4>
                             }
                             else
                             {
-                                <h4><a class="product_name" href="@Url.Action("Index", "Detail", new { prdId = sanPham.MaSanPham })">@sanPham.TenSanPham</a></h4>
+                                <h4><a class="product_name" href="@Url.Action("Index", "Detail", new { prdId = sanPham.MaSanPham, prdMaDanhMuc = sanPham.MaLoai  })">@sanPham.TenSanPham</a></h4>
                             }
                             <div class="price-box">
                                 <span class="new-price" id="giaCTSP"></span>
@@ -585,23 +585,12 @@
             url: 'add-hui',
             type: 'POST',
             success: function (data) {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Thêm giỏ hàng thành công',
-                    showConfirmButton: false,
-                    timer: 2500
-                });
+                swal("Thành công!", "Thêm giỏ hàng thành công!", "success");
                 console.log(data.slGH);
                 $("#soLuonggh").html(data.slGH);
             },
             error: function () {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Thêm giỏ hàng thất bại',
-                    text: 'Vui lòng thử lại',
-                    showConfirmButton: false,
-                    timer: 2500
-                });
+                swal("Thất bại!", "Thêm giỏ hàng không thành công!", "error");
             }
         });
     }
@@ -661,28 +650,13 @@
                     processData: false, // Not to process data
                     success: function (data) {
                         if (data.code == 1) {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Vui lòng đăng nhập',
-                                showConfirmButton: false,
-                                timer: 2500
-                            });
+                            swal("Thất bại!", "Vui lòng đăng nhập!", "error");
                         }
                         else if (data.code == 2) {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Vui lòng kiểm tra lại',
-                                showConfirmButton: false,
-                                timer: 2500
-                            });
+                            swal("Thất bại!", "Vui lòng kiểm tra lại!", "error");
                         }
                         else {
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Bình luận thành công',
-                                showConfirmButton: false,
-                                timer: 2500
-                            });
+                            swal("Thành công!", "Bình luận thành công!", "success");
                             $('#noiDung').val('');
                             $('#MaSP').val('');
                             $('#soSao').val('');
@@ -693,13 +667,7 @@
                         //$("#soLuongGioHang").html(data.soLuong);
                     },
                     error: function (err) {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Đã xảy ra lỗi',
-                            text: 'Vui lòng thử lại',
-                            showConfirmButton: false,
-                            timer: 2500
-                        });
+                        swal("Thất bại!", "Vui lòng thử lại trong giây lát!", "error");
                         console.log(err);
                     }
                 });

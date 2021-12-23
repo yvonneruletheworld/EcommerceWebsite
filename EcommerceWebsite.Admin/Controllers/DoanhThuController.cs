@@ -24,7 +24,7 @@ namespace EcommerceWebsite.Admin.Controllers
             // lay so luong ban va nhap 
             var vm = new DoanhThuVM();
            // vm.ListSanPhamNhapVaBan = await _sanPhamApiServices.LaySoLuongNhapVaBan(maSanPham);
-            vm.ListDinhLuong = await _sanPhamApiServices.layDinhluong();
+          //  vm.ListDinhLuong = await _sanPhamApiServices.layDinhluong();
             vm.ListDanhMuc = await _danhMucApiServices.GetCategories();
             return View(vm);
         }

@@ -12,6 +12,6 @@ namespace EcommerceWebsite.Api.Interface
     {
         Task<List<DanhMucOutput>> GetCategories();
         Task<List<ThuocTinh>> GetThuocTinhTheoDanhMuc(string maDanhMuc);
-        Task<List<CategorySetVM>> GetDanhMucVaSanPhams(int count);
+        Task<List<CategorySetVM>> GetDanhMucVaSanPhams(int count, string maKH);
     }
 }

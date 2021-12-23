@@ -35,7 +35,7 @@
                                                     <div class="product_desc_info">
                                                         <div class="product-review">
                                                             <h5 class="manufacturer">
-                                                                <a href="product-details.html">@item.LoaiSanPham</a>
+                                                                <a href="@Url.Action("Index", "CuaHang",new {loaiHang =  item.MaLoai})">@item.LoaiSanPham</a>
                                                             </h5>
                                                             <div class="rating-box">
                                                                 <ul class="rating">

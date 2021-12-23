@@ -76,9 +76,9 @@ namespace EcommerceWebsite.Api.Interface
             return response.IsSuccessStatusCode;
         }
 
-        public async Task<SanPhamVM> LayViewSanPham(string prdId)
+        public async Task<SanPhamVM> LayViewSanPham(string prdId, string maKH)
         {
-            return await GetAsync<SanPhamVM>($"/api/SanPham/Views/{prdId}");
+            return await GetAsync<SanPhamVM>($"/api/SanPham/Views/{prdId}/{maKH}");
         }
 
         public async Task<SanPhamOutput> LayChiTietSanPham(string prdId)
@@ -91,9 +91,9 @@ namespace EcommerceWebsite.Api.Interface
             return await GetListAsync<SanPhamOutput>($"/api/SanPham/lay-sanpham-theohang/{prdId}");
         }
 
-        public async Task<List<SanPhamOutput>> laySanPhamTheoDanhMuc(string prdId)
+        public async Task<List<SanPhamOutput>> laySanPhamTheoDanhMuc(string prdId, string maKH)
         {
-            return await GetListAsync<SanPhamOutput>($"/api/SanPham/lay-sanpham-theodanhmuc/{prdId}");
+            return await GetListAsync<SanPhamOutput>($"/api/SanPham/lay-sanpham-theodanhmuc/{prdId}/{maKH}");
         }
 
         public async Task<List<SanPhamOutput>> timKiemSanPhamTheoTen(string keyword)
@@ -120,9 +120,9 @@ namespace EcommerceWebsite.Api.Interface
             return await GetListAsync<SanPhamVM>($"/api/SanPham/lay-sanphamyt/{maKH}");
         }
 
-        public async Task<List<SanPhamVM>> LaySanPhamMoiNhat()
+        public async Task<List<SanPhamVM>> LaySanPhamMoiNhat(string maKH)
         {
-            return await GetListAsync<SanPhamVM>($"/api/SanPham/lay-sanphammoinhat");
+            return await GetListAsync<SanPhamVM>($"/api/SanPham/lay-sanphammoinhat/{maKH}");
         }
 
         public async Task<bool> ThemPhieuNhap(PhieuNhapInput input)

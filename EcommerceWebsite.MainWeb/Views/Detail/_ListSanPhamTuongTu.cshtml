@@ -28,7 +28,7 @@
                                                 <div class="product_desc_info">
                                                     <div class="product-review">
                                                         <h5 class="manufacturer">
-                                                            <a href="product-details.html">@item.LoaiSanPham</a>
+                                                            <a href="@Url.Action("Index", "CuaHang",new {loaiHang =  item.MaLoai})">@item.LoaiSanPham</a>
                                                         </h5>
                                                         <div class="rating-box">
                                                             <ul class="rating">
@@ -46,10 +46,18 @@
                                                     </div>
                                                 </div>
                                                 <div class="add-actions">
+                                                    <input id="giaSanPham-@item.MaSanPham" value="@item.giaBan" hidden />
                                                     <ul class="add-actions-link">
-                                                        <li class="add-cart active"><a href="#">Add to cart</a></li>
-                                                        <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>
-                                                        <li><a class="links-details btn-them-yeuthich"  data-id="@item.MaSanPham"><i class="fa fa-heart-o"></i></a></li>
+                                                        <li class="add-cart"><a href="#" class="btn-add-cart" data-id="@item.MaSanPham">Thêm vào giỏ</a></li>
+                                                        @if (!item.TrangThaiYeuThich)
+                                                        {
+                                                            <li><a class="links-details btn-them-yeuthich" data-id="@item.MaSanPham" href="#"><i class="fa fa-heart-o"></i></a></li>
+                                                        }
+                                                        else
+                                                        {
+                                                            <li><a class="links-details btn-them-yeuthich" style="background: #ad172c; border-radius: 5px " data-id="@item.MaSanPham" href="#"><i class="fa fa-heart-o"></i></a></li>
+                                                        }
+                                                        <li><a class="links-details btn-them-yeuthich" data-id="@item.MaSanPham"><i class="fa fa-heart-o"></i></a></li>
                                                     </ul>
                                                 </div>
                                             </div>

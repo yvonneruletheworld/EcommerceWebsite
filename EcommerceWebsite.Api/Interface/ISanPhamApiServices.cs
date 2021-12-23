@@ -20,19 +20,19 @@ namespace EcommerceWebsite.Api.Interface
         Task<bool> ThemSanPham(SanPhamOutput input);
         Task<bool> ThemPhieuNhap(PhieuNhapInput input);
         Task<bool> Modify(bool laXoa, SanPhamOutput input);
-        Task<SanPhamVM> LayViewSanPham(string prdId);
+        Task<SanPhamVM> LayViewSanPham(string prdId, string maKH);
         Task<List<SanPhamVM>> GetViewWithMultipleIds(string[] prdIds, string comboCode);
         Task<SanPhamOutput> LayChiTietSanPham(string prdId);
 
         Task<List<SanPhamOutput>> laySanPhamTheoHang(string prdId);
 
-        Task<List<SanPhamOutput>> laySanPhamTheoDanhMuc(string prdId);
+        Task<List<SanPhamOutput>> laySanPhamTheoDanhMuc(string prdId, string maKH);
 
         Task<List<SanPhamOutput>> timKiemSanPhamTheoTen(string keyword);
 
         Task<SanPhamVM> laySanPhamTheoMa(string prdId);
 
-        Task<List<SanPhamVM>> LaySanPhamMoiNhat();
+        Task<List<SanPhamVM>> LaySanPhamMoiNhat(string maKH);
 
         Task<List<ThuocTinh>> layDinhluong();
     }

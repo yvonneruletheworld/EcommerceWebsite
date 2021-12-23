@@ -20,6 +20,7 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
         }
         public IActionResult Index(string loaiHang = null)
         {
+            
             ViewBag.LoaiHang = loaiHang;
             return View();
         }
@@ -67,7 +68,14 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
         {
             try
             {
-                var data = await _sanPhamApiServices.LaySanPhamMoiNhat();
+                var userId = "null";
+                if (User.Claims != null && User.Claims.Count() > 1)
+                {
+                     userId = User.Claims.Where(claim => claim.Type == ClaimTypes.Sid)
+                                             .FirstOrDefault()
+                                             .Value;
+                }
+                    var data = await _sanPhamApiServices.LaySanPhamMoiNhat(userId);
                 return PartialView("/Views/CuaHang/_ListAllSanPham.cshtml", data);
             }
             catch (Exception ex)
@@ -106,7 +114,14 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
         {
             try
             {
-                var data = await _sanPhamApiServices.laySanPhamTheoDanhMuc(prdId);
+                var userId = "null";
+                if (User.Claims != null && User.Claims.Count() > 1)
+                {
+                    userId = User.Claims.Where(claim => claim.Type == ClaimTypes.Sid)
+                                            .FirstOrDefault()
+                                            .Value;
+                }
+                var data = await _sanPhamApiServices.laySanPhamTheoDanhMuc(prdId, userId);
                 return PartialView("/Views/CuaHang/_ListSanPhamTheoHang.cshtml", data);
             }
             catch (Exception ex)

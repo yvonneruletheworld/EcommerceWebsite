@@ -61,7 +61,7 @@
                                         <div class="product_desc_info">
                                             <div class="product-review">
                                                 <h5 class="manufacturer">
-                                                    <a href="product-details.html">@item.LoaiSanPham</a>
+                                                    <a href="@Url.Action("Index", "CuaHang",new {loaiHang =  item.MaLoai})">@item.LoaiSanPham</a>
                                                 </h5>
                                                 <div class="rating-box">
                                                     <ul class="rating">
@@ -79,10 +79,18 @@
                                             </div>
                                         </div>
                                         <div class="add-actions">
+                                            <input id="giaSanPham-@item.MaSanPham" value="@item.giaBan" hidden />
                                             <ul class="add-actions-link">
-                                                <li class="add-cart active"><a href="shopping-cart.html">Thêm vào giỏ</a></li>
+                                                <li class="add-cart active"><a href="#" class="btn-add-cart" data-id="@item.MaSanPham">Thêm vào giỏ</a></li>
                                                 <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>
-                                                <li><a class="links-details btn-them-yeuthich"  data-id="@item.MaSanPham" href="#"><i class="fa fa-heart-o"></i></a></li>
+                                                @if (!item.TrangThaiYeuThich)
+                                                {
+                                                    <li><a class="links-details btn-them-yeuthich" data-id="@item.MaSanPham" href="#"><i class="fa fa-heart-o"></i></a></li>
+                                                }
+                                                else
+                                                {
+                                                    <li><a class="links-details btn-them-yeuthich" style="background: #ad172c; border-radius: 5px " data-id="@item.MaSanPham" href="#"><i class="fa fa-heart-o"></i></a></li>
+                                                }
                                             </ul>
                                         </div>
                                     </div>
@@ -114,7 +122,7 @@
                                         <div class="product_desc_info">
                                             <div class="product-review">
                                                 <h5 class="manufacturer">
-                                                    <a href="product-details.html">@item.LoaiSanPham</a>
+                                                    <a href="@Url.Action("Index", "CuaHang",new {loaiHang =  item.MaLoai})">@item.LoaiSanPham</a>
                                                 </h5>
                                                 <div class="rating-box">
                                                     <ul class="rating">
@@ -136,10 +144,18 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="shop-add-action mb-xs-30">
+                                        <input id="giaSanPham-@item.MaSanPham" value="@item.giaBan" hidden />
                                         <ul class="add-actions-link">
-                                            <li class="add-cart"><a href="#">Thêm vào giỏ</a></li>
-                                            <li class="wishlist"><a class="btn-them-yeuthich"  data-id="@item.MaSanPham" href="#"><i class="fa fa-heart-o"></i>Thêm yêu thích</a></li>
-                                            <li><a class="quick-view" data-toggle="modal" data-target="#exampleModalCenter" href="#"><i class="fa fa-eye"></i>Xem chi tiết</a></li>
+                                            <li class="add-cart"><a href="#" class="btn-add-cart" data-id="@item.MaSanPham">Thêm vào giỏ</a></li>
+                                            @if (!item.TrangThaiYeuThich)
+                                            {
+                                                <li class="wishlist"><a class="btn-them-yeuthich" data-id="@item.MaSanPham" href="#"><i class="fa fa-heart-o"></i>Thêm yêu thích</a></li>
+                                            }
+                                            else
+                                            {
+                                                <li class="wishlist"><a class="btn-them-yeuthich" data-id="@item.MaSanPham" href="#"><i class="fa fa-heart" style="color: #ad172c"></i>Thêm yêu thích</a></li>
+                                            }
+                                            <li><a class="quick-view" href="@Url.Action("Index", "Detail", new { prdId = item.MaSanPham, prdMaDanhMuc = item.MaLoai })"><i class="fa fa-eye"></i>Xem chi tiết sản phẩm</a></li>
                                         </ul>
                                     </div>
                                 </div>

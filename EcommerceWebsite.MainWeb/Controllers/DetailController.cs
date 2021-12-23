@@ -66,7 +66,7 @@ namespace EcommerceWebsite.MainWeb.Controllers
                     break;
                 }
             }
-            vm.SanPhamOutPut = await _sanPhamServices.laySanPhamTheoDanhMuc(prdMaDanhMuc);
+            var UserId = "null";
             if (User.Claims != null && User.Claims.Count() > 1)
             {
                 var user = new KhachHangOutput()
@@ -79,7 +79,11 @@ namespace EcommerceWebsite.MainWeb.Controllers
                                        .Value
                 };
                 vm.KhachHang = user;
+                UserId = User.Claims.Where(claim => claim.Type == ClaimTypes.Sid)
+                                            .FirstOrDefault()
+                                            .Value;
             }
+            vm.SanPhamOutPut = await _sanPhamServices.laySanPhamTheoDanhMuc(prdMaDanhMuc, UserId);
             return View("Views/Detail/Index.cshtml",vm);
         }
 

@@ -145,38 +145,42 @@
                             <tbody>
                                 @foreach (var item in Model)
                                 {
-                                    <tr class="cart_item">
-                                        @if (item.tenSanPham.Length > 25)
-                                        {
-                                            <td class="cart-product-name">@item.tenSanPham.Substring(0, 25) ...<strong class="product-quantity"> × @item.soLuong</strong></td>
-                                        }
-                                        else
-                                        {
-                                            <td class="cart-product-name">@item.tenSanPham<strong class="product-quantity"> × @item.soLuong</strong></td>
-                                        }
-                                        <td class="cart-product-total"><span class="amount">@string.Format("{0:0,0}", item.giaSanPham) VNĐ</span></td>
-                                    </tr>
+                                    //if (item.comboCode == null)
+                                    //{
+                                        <tr class="cart_item">
+                                            @if (item.tenSanPham.Length > 25)
+                                            {
+                                                <td class="cart-product-name">@item.tenSanPham.Substring(0, 25) ...<strong class="product-quantity"> × @item.soLuong</strong></td>
+                                            }
+                                            else
+                                            {
+                                                <td class="cart-product-name">@item.tenSanPham<strong class="product-quantity"> × @item.soLuong</strong></td>
+                                            }
+                                            <td class="cart-product-total"><span class="amount">@string.Format("{0:0,0}", item.giaBan) VNĐ</span></td>
+                                        </tr>
+                                   // }
                                 }
+                               
                             </tbody>
                             <tfoot>
                                 <tr class="cart-subtotal">
-                                    <th>Tổng tiền hàng</th>
-                                        <td><span><span class="amount" id="thanhTienHang">@string.Format("{0:0,0}", GioHangOutput.Cash())</span> VNĐ</span></td>
+                                    <th style="font-weight:bold">Tổng tiền hàng</th>
+                                        <td><span  style="color: red"><span class="amount" id="thanhTienHang"  style="color: red">@string.Format("{0:0,0}", GioHangOutput.Cash())</span> VNĐ</span></td>
 
                                 </tr>
                                 <tr class="cart-subtotal">
-                                    <th>Phí vận chuyển</th>
+                                    <th  style="font-weight: bold">Phí vận chuyển</th>
 
-                                    <td><span><span class="amount" id="phiShip">15,000</span> VNĐ</span></td>
+                                    <td><span style="color: red"><span class="amount" id="phiShip" style="color: red">15,000</span> VNĐ</span></td>
 
                                 </tr>
                                 <tr class="tienGiam">
                                 </tr>
                                 <tr class="order-total">
-                                    <th>Tổng thanh toán</th>
+                                    <th style="font-weight: bold">Tổng thanh toán</th>
                                     @{
                                         var tongTien = GioHangOutput.Cash() + 15000;
-                                        <td><span><span class="amount" id="tongTienKhuyenMai">@string.Format("{0:0,0}", tongTien)</span> VNĐ</span><br /><strike id="tienTruocDo" style="font:10px;font-weight:bold;"></strike></td>
+                                        <td><span style="color: red"><span class="amount" id="tongTienKhuyenMai"  style="color: red">@string.Format("{0:0,0}", tongTien)</span> VNĐ</span><br /><strike id="tienTruocDo" style="font:10px;font-weight:bold;"></strike></td>
                                     }
                                 </tr>
 

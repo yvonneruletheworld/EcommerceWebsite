@@ -23,9 +23,9 @@ namespace EcommerceWebsite.Api.Interface
             return await GetListAsync<DanhMucOutput>("/api/DanhMuc/get-categories");
         }
 
-        public async Task<List<CategorySetVM>> GetDanhMucVaSanPhams(int count)
+        public async Task<List<CategorySetVM>> GetDanhMucVaSanPhams(int count, string maKH)
         {
-            return await GetListAsync<CategorySetVM>($"/api/DanhMuc/get-danhmuc-sanpham/{count}");
+            return await GetListAsync<CategorySetVM>($"/api/DanhMuc/get-danhmuc-sanpham/{count}/{maKH}");
         }
 
         public async Task<List<ThuocTinh>> GetThuocTinhTheoDanhMuc(string maDanhMuc)

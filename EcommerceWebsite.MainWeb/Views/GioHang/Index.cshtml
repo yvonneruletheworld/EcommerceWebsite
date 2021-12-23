@@ -25,13 +25,6 @@
             success: (result) => {
                 if (result.code == 500) {
                     location.href = "/Home/Index";
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Giỏ hàng trống',
-                        showConfirmButton: false,
-                        timer: 2500
-                    });
-
                 }
                 else {
                     $("#gioHang")[0].innerHTML = result;
@@ -69,26 +62,43 @@
     }
 
     function capNhatSoLuongGioHang(maSanPham, soLuong, comboCode) {
+        
         $.ajax({
             url: '/cap-nhat-giohang?maSanPham=' + maSanPham + '&soLuong=' + soLuong +'&comboCode=' + comboCode,
             type: 'POST',
             success: (result) => {
                 if (result.count == 0) {
 
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Giỏ hàng trống',
-                        showConfirmButton: false,
-                        timer: 2500
-                    });
                     location.href = "/Home/Index";
                 }
 
                 else {
-                    $("#count-cart-id")[0].innerHTML = `Tổng thanh toán (${result.count} Sản phẩm)`;
-                    $("#total-cash-id")[0].innerHTML = result.cash;
+                    if (comboCode != "n") {
+                        var thanhTienSP = $('#ThanhTienSPComBo-' + maSanPham).val();
+                        var thanhTienSP0 = parseFloat(thanhTienSP) * soLuong;
+                        var thanhTienSP2 = format2(thanhTienSP0).split(".")[0];
+                        console.log(thanhTienSP2);
+                        $("#ThanhTien2ComBo-" + maSanPham).text(thanhTienSP2 + " VNĐ");
+                    }
+                    else {
+                        var thanhTienSP = $('#ThanhTienSP-' + maSanPham).val();
+                        var thanhTienSP0 = parseFloat(thanhTienSP) * soLuong;
+                        var thanhTienSP2 = format2(thanhTienSP0).split(".")[0];
+                        console.log(thanhTienSP2);
+                        $("#ThanhTien2-" + maSanPham).text(thanhTienSP2 + " VNĐ");
+                    }
+                   // $("#count-cart-id")[0].innerHTML = `Tổng thanh toán (${result.count} Sản phẩm)`;
+                    //var TongTien = parseFloat(result.cash);
+                    //var TongTien2 = format2(TongTien).split(".")[0];
+                    
                     var payment = Number(result.cash) - 15000;
-                    $("#cash-id")[0].innerHTML = payment;
+                    var ThanhTien = parseFloat(payment);
+                    var ThanhTien2 = format2(ThanhTien).split(".")[0];
+                    //$("#cash-id")[0].innerHTML = TongTien2 + "VNĐ";
+                    //$("#total-cash-id")[0].innerHTML = ThanhTien2 + "VNĐ";
+                    $("#soLuonggh").html(result.count);
+                   
+                    $("#sotienGH").html(ThanhTien2 + " VNĐ");
                 }
             },
             error: (err) => {
@@ -162,10 +172,34 @@
             swal("Thất bại!", "Vui lòng chọn mặt hàng để thanh toán!", "error");
             return;
         }
+        var huiCartItems = [];
+        var norCartItems = [];
 
+        for (var i = 0; i < selectItemList.length; i++) {
+
+            var type = selectItemList[i].id.split('_')[1];
+
+            if (type === '2') {
+                var itemId = selectItemList[i].value;
+                //normal
+                norCartItems.push(itemId);
+            } else {
+                var id = selectItemList[i].id;
+                huiCartItems.push(id);
+            }
+        }
+        var fd = new FormData();
+
+        fd.append('ListCheckoutNormalCart', norCartItems);
+        fd.append('ListCheckoutHUICart', huiCartItems);
+        console.log(huiCartItems);
+        console.log(norCartItems);
         $.ajax({
-            url: '/get-data-thanhtoan',
-            type: 'GET',
+            url: `/get-data-thanhtoan`,
+            type: 'POST',
+            data: fd,
+            contentType: false, // Not to set any content header
+            processData: false, // Not to process data
             success: (result) => {
                 if (result.code == 500) {
                     location.href = "/KhachHang/client-login";
@@ -195,9 +229,11 @@
 
         if (checkItem.checked) {
             selectItemList.push(checkItem);
+            console.log(selectItemList);
         }
         else {
             selectItemList = selectItemList.filter(cb => cb !== checkItem);
+            console.log(selectItemList);
         }
     }
 
@@ -208,32 +244,9 @@
             buttons: false,
             timer: 4000,
         });
-        //swal({
-        //    title: 'Vui lòng đợi trong giây lát!',
-        //    text: 'Hệ thống đang xác nhận đơn hàng của bạn.',
-        //    timer: 5000,
-           
-        //    onOpen: function () {
-        //        swal.showLoading()
-        //    }
-        //}).then(
-        //    function () { },
-        //    // handling the promise rejection
-        //    function (dismiss) {
-        //        if (dismiss === 'timer') {
-        //            console.log('I was closed by the timer')
-        //        }
-        //    }
-        //);
-        
+      
         if (MaDC == "") {
-            Swal.fire({
-                icon: 'error',
-                title: 'Vui lòng chọn địa chỉ',
-                text: 'Vui lòng thử lại',
-                showConfirmButton: false,
-                timer: 2500
-            });
+            swal("Thất bại!", "Vui lòng chọn địa chỉ!", "error");
         }
         else {
             $.ajax({
@@ -241,7 +254,7 @@
                 type: 'GET',
                 success: (result) => {
                     if (result === 'otp-sent-failed') {
-                        alert('Không thể gửi mã OTP');
+                        swal("Thất bại!", "Không thể gửi OTP hãy thử lại!", "error");
                     }
                     else {
                         otpcode = result;
@@ -266,13 +279,13 @@
         lCb = lCb.length === 0 ? selectItemList : lCb;
 
         if (lCb.length === 0) {
-            alert('Vui lòng chọn mặt hàng để thanh toán');
+            swal("Thất bại!", "Vui lòng chọn mặt hàng để thanh toán!", "error");
             return;
         }
 
         var testId = lCb[0].defaultValue;
         if (testId === undefined || testId === '') {
-            alert('Hệ thống không xử lý được yêu cầu của bạn. Vui lòng thử lại sau!');
+            swal("Thất bại!", "Hệ thống không xử lý được yêu cầu của bạn. Vui lòng thử lại sau!", "error");
             return;
         }
         else {
@@ -297,13 +310,7 @@
             // prepare data
             const MaDC = $('#maDiaChiKH').val();
             if (MaDC == null) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Vui lòng chọn địa chỉ',
-                    text: 'Vui lòng thử lại',
-                    showConfirmButton: false,
-                    timer: 2500
-                });
+                swal("Thất bại!", "Vui lòng chọn địa chỉ giao hàng!", "error");
             }
             const PtThanhToan = $('#pTThanhToan').val();
             const MaKM = $('#maKhuyenMai').val();
@@ -340,23 +347,12 @@
                 success: function (data) {
                     location.href = "/Home/Index";
                     fd = new FormData();
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Đặt hàng thành công',
-                        showConfirmButton: false,
-                        timer: 2500
-                    });
+                    swal("Thành công!", "Đặt hàng thành công!", "success");
                 },
                 error: function (err) {
                     fd = new FormData();
                     console.log(err);
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Thêm giỏ hàng thất bại',
-                        text: 'Vui lòng thử lại',
-                        showConfirmButton: false,
-                        timer: 2500
-                    });
+                    swal("Thất bại!", "Thêm giỏ hàng thất bại!", "error");
                 }
             });
             selectItemList = [];

@@ -48,7 +48,21 @@ namespace EcommerceWebsite.MainWeb.Controllers
             var danhMucHienThi = await _danhMucServices.GetCategories();
             vm.DanhMucOutputs = danhMucHienThi.Where(dm =>dm.HienThiTrangHome == true).ToList() ;
             vm.BannerOutputs = await _khuyenMaiServices.LaykhuyenMais();
-            vm.LoaiVaSanPham = await _danhMucServices.GetDanhMucVaSanPhams(5);
+            var userId = "null";
+            if (User.Claims != null && User.Claims.Count() > 1)
+            {
+                 userId = User.Claims.Where(claim => claim.Type == ClaimTypes.Sid)
+                                         .FirstOrDefault()
+                                         .Value;
+                var data = await _yeuThichSanPhamApiServices.laySanPhamYeuThich(userId);
+                HttpContext.Session.SetString(SessionSoLuongYT, data.Count() + "");
+            }
+            else
+            {
+                HttpContext.Session.SetString(SessionSoLuongYT, 0 + "");
+            }    
+          
+            vm.LoaiVaSanPham = await _danhMucServices.GetDanhMucVaSanPhams(5, userId);
             if (HUIConfiguration.ListHUI == null)
             {
                 var fileName = "output1";
@@ -59,14 +73,6 @@ namespace EcommerceWebsite.MainWeb.Controllers
             }
             var lstHuiDon = (HUIConfiguration.ListHUI.Where(h => h.Itemsets.Count() == 1).ToList());
             vm.SanPhamHUIDons = await GetSanPhamTheoHUIDonAsync(lstHuiDon);
-            if (User.Claims != null && User.Claims.Count() > 1)
-            {
-                var userId = User.Claims.Where(claim => claim.Type == ClaimTypes.Sid)
-                               .FirstOrDefault()
-                               .Value;
-                var data = await _yeuThichSanPhamApiServices.laySanPhamYeuThich(userId);
-                HttpContext.Session.SetString(SessionSoLuongYT, data.Count() + "");
-            }
             return View("~/Views/Home/Index.cshtml", vm);
         }
 
@@ -100,7 +106,14 @@ namespace EcommerceWebsite.MainWeb.Controllers
             var rs = new List<SanPhamVM>();
             foreach(var hui in lstHuiDon)
             {
-                var data = await _sanPhamServices.LayViewSanPham(hui.Itemsets[0].Trim());
+                var userId = "null";
+                if (User.Claims != null && User.Claims.Count() > 1)
+                {
+                    userId = User.Claims.Where(claim => claim.Type == ClaimTypes.Sid)
+                                            .FirstOrDefault()
+                                            .Value;
+                }
+                    var data = await _sanPhamServices.LayViewSanPham(hui.Itemsets[0].Trim(), userId);
                 var prd = _mapper.Map<SanPhamVM>(data);
                 rs.Add(prd);
             }

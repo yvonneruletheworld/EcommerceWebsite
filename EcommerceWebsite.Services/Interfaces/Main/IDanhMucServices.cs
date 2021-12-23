@@ -11,7 +11,7 @@ namespace EcommerceWebsite.Services.Interfaces.Main
     public interface IDanhMucServices
     {
         Task<List<DanhMucOutput>> GetDanhMucs();
-        Task<List<CategorySetVM>> GetDanhMucVaSanPhams(int itemCount);
+        Task<List<CategorySetVM>> GetDanhMucVaSanPhams(int itemCount, string maKH);
         Task<List<DanhMucOutput>> GetDanhMucCon(string parentId);
     }
 }
