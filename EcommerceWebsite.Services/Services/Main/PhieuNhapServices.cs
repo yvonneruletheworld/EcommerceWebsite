@@ -39,22 +39,16 @@ namespace EcommerceWebsite.Services.Services.Main
 
             await _context.Database.CommitTransactionAsync();
 
-            //return result > 0;
-            if (result > 0)
-            {
-                var rsDetail = await CreateNewInventoryVoucherDetail(lstObj);
-                return rsDetail;
-            }
-            return false;
+            return result > 0;
         }
 
-        private async Task<bool> CreateNewInventoryVoucherDetail(List<ChiTietNhapSanPham> inputs)
+        public async Task<bool> CreateNewInventoryVoucherDetail(ChiTietNhapSanPham inputs)
         {
             //begin transaction
             await _context.Database.BeginTransactionAsync();
 
 
-            await _context.ChiTietNhapSanPhams.AddRangeAsync(inputs);
+            await _context.ChiTietNhapSanPhams.AddAsync(inputs);
             var result = await _context.SaveChangesAsync();
 
             await _context.Database.CommitTransactionAsync();

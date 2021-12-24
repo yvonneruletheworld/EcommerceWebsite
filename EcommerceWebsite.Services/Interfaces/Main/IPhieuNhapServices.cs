@@ -11,6 +11,7 @@ namespace EcommerceWebsite.Services.Interfaces.Main
     {
         Task<bool> CreateNewInventoryVoucher(PhieuNhap input);
         //Task<bool> CreateNewInventoryVoucherDetail(List<ChiTietNhapSanPham> inputs);
+        Task<bool> CreateNewInventoryVoucherDetail(ChiTietNhapSanPham inputs);
         Task<List<ChiTietNhapSanPham>> GetAllInventoryVoucherDetail(string maPhieuNhap);
         Task<List<PhieuNhap>> GetAllInventoryVoucher();
         Task<List<DoanhThuOutput>> GetListImportProduct(string maSanPham);

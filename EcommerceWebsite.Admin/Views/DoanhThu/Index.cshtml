@@ -31,43 +31,29 @@
     <!-- [ Main Content ] start -->
     <div class="row">
         <div class="col-md-12">
-            <div class="card" style="padding-left: 50px; padding-right: 50px">
+            <div class="card" style="padding-left: 50px; padding-right: 50px; padding-bottom: 50px">
                 <h5 class="mt-5">Thông tin sản phẩm</h5>
                 <hr>
                 <form class="needs-validation" asp-action="CapNhatSanPham" method="post" asp-controller="DoanhThu">
                     <div class="row">
+                        <div class="col-3"></div>
+                        <div class="col-3"></div>
+                        <div class="col-3"></div>
+                        <div class="col-3">
+                            <button class="btn mt-3 mb-3 btn-primary float-left" type="button" onclick="SubmitForm()">Cập nhật thông tin</button>
+                        </div>
+                        @*<button class="btn mt-3 mb-3 btn-primary" type="button" onclick="SubmitForm()">Cập nhật lợi nhuận</button>*@
+                    </div>
+                    <div class="row">
                         <div class="col-md-4 mb-4">
                             <label class="form-label" asp-for="SanPham.MaSanPham">ID</label>
                             <input type="text" asp-for="SanPham.MaSanPham" placeholder="ID" class="form-control" readonly/>
-                            @*@Html.EditorFor(model => model.SanPham.MaSanPham, new
-                            {
-                                htmlAttributes = new
-                                {
-                                    @class = "form-control",
-                                    @placeholder = "ID",
-                                    @readonly = "readonly"
-                                }
-                            })*@
-                            @*<input type="text" class="form-control"  placeholder="First name" value="Mark" required>*@
-                            @*<label class="form-label">Mã sản phẩm</label>
-                <input type="text" class="form-control" readonly placeholder="First name" value="Mark" required>*@
-                        </div>
+                            </div>
                         <div class="col-md-8 mb-8">
                             <label class="form-label" asp-for="SanPham.TenSanPham">Tên Sản Phẩm</label>
-                            @*@Html.EditorFor(model => model.SanPham.TenSanPham, new
-                             {
-                                 htmlAttributes = new
-                                 {
-                            @class = "form-control",
-                                     @placeholder = "ID",
-                            @required = "required"
-                                 }
-                             })*@
+                            
                             <input type="text" asp-for="SanPham.TenSanPham" placeholder="Tên sản phẩm" class="form-control" />
-
-                            @*<label class="form-label">Tên sản phẩm</label>
-        <input type="text" class="form-control" placeholder="First name" value="Mark" required>*@
-                        </div>
+                            </div>
                     </div>
                     <div class="row">
                         <div class="col-md-2 mb-2">
@@ -163,8 +149,6 @@
                         </div>
                     </div>
 
-                    <button class="btn mt-3 mb-3 btn-primary" type="button" onclick="SubmitForm()">Cập nhật</button>
-                    <br />
                 </form>
 
             </div>

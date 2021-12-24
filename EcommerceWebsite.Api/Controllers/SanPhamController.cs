@@ -67,7 +67,7 @@ namespace EcommerceWebsite.Api.Controllers
             }
         }
         [HttpPost("them-san-pham")]
-        public async Task<IActionResult> ThemSanPham(SanPhamOutput input, string creatorId)
+        public async Task<string> ThemSanPham(SanPhamOutput input, string creatorId)
         {
             try
             {
@@ -112,13 +112,13 @@ namespace EcommerceWebsite.Api.Controllers
                                 {
                                     var rdGB = await _bangGiaServices.ThemBangGia(listGiaBan);
                                     if(rdGB)
-                                        return Ok(Messages.API_Success);
+                                        return result;
                                 }
                             }
                         }
                     }
                 }
-                return BadRequest("Lỗi thêm sản phẩm: " + input.TenSanPham);
+                return string.Empty;
             }
             catch (Exception ex)
             {
@@ -134,39 +134,39 @@ namespace EcommerceWebsite.Api.Controllers
                 {
                     int isError = 0;
                     var listProduct = input.ListSanPhamInput;
-                    foreach (var sp in listProduct)
+                    //them phieu nhap
+                    //prepare data 
+                    var newInventory = new PhieuNhap()
                     {
-                        var rsExec = await ThemSanPham(sp, input.CreatorId);
-                        if (rsExec.GetType() == typeof(BadRequestObjectResult))
-                        {
-                            isError++;
-                            continue;
-                        }
-                    }
-                    if (isError < listProduct.Count())
+                        MaNhanVien = input.CreatorId,
+                        TongTien = decimal.Parse(input.Totalvalue),
+                        MaNhaCungCap = input.Investor,
+                    };
+                    //them pn
+                    var rsInputInventory = await _phieuNhapServices
+                        .CreateNewInventoryVoucher(newInventory);
+                    if(rsInputInventory)
                     {
-                        //them phieu nhap
-                        //prepare data 
-                        var newInventory = new PhieuNhap()
+                        //them sp
+                        foreach (var sp in listProduct)
                         {
-                            MaNhanVien = input.CreatorId,
-                            TongTien = decimal.Parse(input.Totalvalue),
-                            MaNhaCungCap = input.Investor,
-                        };
-                        var listChiTiet = new List<ChiTietNhapSanPham>();
-                        foreach (var prd in listProduct)
-                        {
-                            var ctpn = _mapper.Map<ChiTietNhapSanPham>(prd);
-                            ctpn.DonGia = prd.BangGia[0].GiaBan;
-                            ctpn.MaNhap = newInventory.MaPhieuNhap;
-                            listChiTiet.Add(ctpn);
+                            var rsExec = await ThemSanPham(sp, input.CreatorId);
+                            if (string.IsNullOrEmpty(rsExec))
+                            {
+                                isError++;
+                                continue;
+                            }else
+                            {
+                                //them chi tiet nhap
+                                var ctpn = _mapper.Map<ChiTietNhapSanPham>(sp);
+                                ctpn.DonGia = sp.BangGia[0].GiaBan;
+                                ctpn.MaNhap = newInventory.MaPhieuNhap;
+                                ctpn.MaSanPham = rsExec;
+                                var rsCtn = await _phieuNhapServices.CreateNewInventoryVoucherDetail(ctpn);
+                                isError = rsCtn ? isError : isError++;
+                            }    
                         }
-                        newInventory.ChiTietNhapSanPhams = listChiTiet;
-
-                        var rsInputInventory = await _phieuNhapServices
-                            .CreateNewInventoryVoucher(newInventory);
-                        isError = rsInputInventory ? isError : isError++;
-                    }
+                    }    
                     if (isError > 0)
                         return BadRequest(Messages.API_CointainError);
                     else
