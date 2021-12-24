@@ -80,10 +80,6 @@ namespace EcommerceWebsite.Services.Services.Main
                 var data = await (from pn in _context.PhieuNhaps
                                   join ctn in _context.ChiTietNhapSanPhams on pn.MaPhieuNhap equals ctn.MaNhap into pn_ctn_group
                                   from pn_ctn in pn_ctn_group.DefaultIfEmpty()
-                                  //join cthd in _context.ChiTietHoaDons on pn_ctn.MaSanPham equals cthd.ProductId into cthd_ctn_group
-                                  //from cthd_ctn in cthd_ctn_group.DefaultIfEmpty()
-                                  //join hd in _context.HoaDons on cthd_ctn.HoaDonId equals hd.MaHoaDon into cthd_hd_group
-                                  //from cthd_hd in cthd_hd_group.DefaultIfEmpty()
                                   where  !pn.DaXoa && pn_ctn.MaSanPham == maSanPham
                                   select new DoanhThuOutput()
                                   {
@@ -119,8 +115,10 @@ namespace EcommerceWebsite.Services.Services.Main
                             .ToList();
                         var daBan = listDonHang.Sum(ldh => ldh.SoLuong);
                         data[0].DaBan = daBan;
+                        data[0].SoLuongTon = data[0].SoLuongNhap - daBan;
                         data[0].DonGiaBan = listDonHang.Count() == 0 ? 0 : (decimal)(listDonHang[0].GiaBan);
                         data[0].TongTienBan = listDonHang.Sum(ldh => ldh.SoLuong * ldh.GiaBan);
+                        data[0].LoiNhuan = TinhLoiNhuan(data[0].TongTienBan, data[0].TongTienNhap);
                     }
                     else
                     {
@@ -137,8 +135,10 @@ namespace EcommerceWebsite.Services.Services.Main
                             var daBan = listDonHang.Sum(ldh => ldh.SoLuong);
                             var tienBan = listDonHang.Sum(ldh => ldh.SoLuong * ldh.GiaBan);
                             data[i].DaBan = daBan;
+                            data[i].SoLuongTon = data[i].SoLuongNhap - daBan;
                             data[i].DonGiaBan = listDonHang.Count() == 0 ? 0: (decimal)(listDonHang[0].GiaBan) ;
                             data[i].TongTienBan = tienBan;
+                            data[i].LoiNhuan = TinhLoiNhuan(data[i].TongTienBan, data[i].TongTienNhap);
                         }    
                     }    
                 }
@@ -149,6 +149,11 @@ namespace EcommerceWebsite.Services.Services.Main
             {
                 throw ex;
             }
+        }
+
+        private float TinhLoiNhuan(decimal tongTienBan, decimal tongTienNhap)
+        {
+            return (float)(((tongTienBan - tongTienNhap) / tongTienNhap) * 100);
         }
 
         public async Task<decimal> GetRecentlyPrice(string maSanPham)

@@ -66,8 +66,10 @@ namespace EcommerceWebsite.Services.Services.Main
                                       MaThuocTinh = dl.MaThuocTinh,
                                       MaDinhLuong = dl.MaDinhLuong, // Dinh luong
                                       TenDinhLuong =  dl.GiaTri + " " + dl.DonVi,
-                                      GiaBan = dl_lsg.GiaMoi
-                                  }).ToListAsync();
+                                      GiaBan = dl_lsg.GiaMoi,
+                                      NgayTao = dl_lsg.NgayTao
+                                  }).OrderByDescending(bg => bg.NgayTao.Date)
+                                  .ThenByDescending(bg => bg.NgayTao.TimeOfDay).ToListAsync();
                 return data;
             }
             catch (Exception ex)

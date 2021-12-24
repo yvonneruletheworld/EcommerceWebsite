@@ -185,37 +185,61 @@ namespace EcommerceWebsite.Api.Controllers
         {
             if (ModelState.IsValid)
             {
+                var ErrorList = new List<string>();
                 var obj = _mapper.Map<SanPham>(input);
                 if (obj != null)
                 {
                     var rs = await _sanPhamServices.SuaHoacXoaSanPham(obj, laXoa, input.NguoiTao);
                     if (rs)
-                        return Ok(Messages.API_Success);
-                    return BadRequest(Messages.API_EmptyResult);
+                    {
+                        // sua dinh luong
+                        var newListObj = input.ListThongSo;
+                        foreach (var dl in newListObj)
+                        {
+                            var newDl = new DinhLuong(dl.MaDinhLuong)
+                            {
+                                MaThuocTinh = dl.MaThuocTinh,
+                                DonVi = dl.DonVi,
+                                GiaTri = dl.GiaTri,
+                                MaSanPham = input.MaSanPham
+                            };
+                            var rsDl = await _dinhLuongServices.UpdateAsync(newDl);
+                            if (!rsDl)
+                            {
+                                ErrorList.Add("Lỗi chỉnh sửa thông số " + dl.ThuocTinh);
+                            }    
+                        }
+                        return Ok(ErrorList);
+                    }
+                    else ErrorList.Add("Lỗi chỉnh sửa sản phẩm "+ input.MaSanPham);
                 }
-                return BadRequest(Messages.API_EmptyInput);
+                return BadRequest(ErrorList);
             }
             return BadRequest(Messages.API_Failed);
         }
 
-        [HttpPatch("{productId}/{editor}/{newPrice}")]
-        public async Task<IActionResult> ModifyPrice(string productId, string editor, decimal newPrice)
+        [HttpGet("{maDinhLuong}/{editor}/{newPrice}")]
+        public async Task<IActionResult> ModifyPrice(string maDinhLuong, string editor, decimal newPrice)
         {
-            if (string.IsNullOrEmpty(productId) || newPrice < 0)
+            if (string.IsNullOrEmpty(maDinhLuong) || newPrice < 0)
                 return BadRequest(Messages.API_EmptyInput);
 
-            var obj = new BangGiaSanPham()
+            var dl = await _dinhLuongServices.LayDinhLuongTheoSanPham(maDinhLuong);
+            if(dl != null)
             {
-                //MaSanPham = productId,
-                GiaMoi = newPrice,
-                NguoiTao = editor
-            };
-            var prdExist = await _sanPhamServices.GetSanPhamTheoMa(productId, null);
-            if (prdExist == null)
-                return BadRequest(Messages.API_EmptyInput);
-            var rs = await _bangGiaServices.ModifyPrice(obj);
-            if (rs)
-                return Ok(Messages.API_Success);
+                var obj = new BangGiaSanPham()
+                {
+                    //MaSanPham = productId,
+                    MaDinhLuong = dl.MaDinhLuong,
+                    GiaMoi = newPrice,
+                    NguoiTao = editor,
+                    NgayTao = DateTime.Now
+                };
+                var prdExist = await _bangGiaServices.ThemGia(obj);
+                if (prdExist)
+                    return Ok(Messages.API_Success);
+                return BadRequest(Messages.API_Failed);
+            }
             return BadRequest(Messages.API_Failed);
         }
 

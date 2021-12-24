@@ -1,4 +1,5 @@
-﻿using EcommerceWebsite.Utilities.Output.System;
+﻿using EcommerceWebsite.Data.Entities;
+using EcommerceWebsite.Utilities.Output.System;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,7 @@ namespace EcommerceWebsite.Api.Interface
     public  interface IHUIApiServices
     {
         Task<List<HUI>> GetListHUIFromOutput(string url);
+        Task<Dictionary<DateTime, List<HUICost>>> GetListHUIFromData();
+        Task<bool> AddListHui(List<HUICost> inputs);
     }
 }

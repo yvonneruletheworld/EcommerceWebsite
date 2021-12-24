@@ -7,7 +7,7 @@
     var listDinhLuong = sanPham.ListThongSo;
     var listDanhMuc = Model.ListDanhMuc;
     var listThongSo = Model.ListDinhLuong;
-    var giaNhapGanNhat = ViewBag.GiaNhapGanNhat;
+    var giaNhapGanNhat = Model.ListSanPhamNhapVaBan?[0].DonGiaNhap;
 }
 
 <div class="pcoded-content">
@@ -34,42 +34,45 @@
             <div class="card" style="padding-left: 50px; padding-right: 50px">
                 <h5 class="mt-5">Thông tin sản phẩm</h5>
                 <hr>
-                <form class="needs-validation" novalidate>
+                <form class="needs-validation" asp-action="CapNhatSanPham" method="post" asp-controller="DoanhThu">
                     <div class="row">
                         <div class="col-md-4 mb-4">
                             <label class="form-label" asp-for="SanPham.MaSanPham">ID</label>
-                            @Html.EditorFor(model => model.SanPham.MaSanPham, new
+                            <input type="text" asp-for="SanPham.MaSanPham" placeholder="ID" class="form-control" readonly/>
+                            @*@Html.EditorFor(model => model.SanPham.MaSanPham, new
                             {
                                 htmlAttributes = new
                                 {
-                           @class = "form-control",
+                                    @class = "form-control",
                                     @placeholder = "ID",
                                     @readonly = "readonly"
                                 }
-                            })
+                            })*@
                             @*<input type="text" class="form-control"  placeholder="First name" value="Mark" required>*@
                             @*<label class="form-label">Mã sản phẩm</label>
                 <input type="text" class="form-control" readonly placeholder="First name" value="Mark" required>*@
                         </div>
                         <div class="col-md-8 mb-8">
                             <label class="form-label" asp-for="SanPham.TenSanPham">Tên Sản Phẩm</label>
-                            @Html.EditorFor(model => model.SanPham.TenSanPham, new
-                            {
-                                htmlAttributes = new
-                                {
-                           @class = "form-control",
-                                    @placeholder = "ID",
-                           @required = "required"
-                                }
-                            })
+                            @*@Html.EditorFor(model => model.SanPham.TenSanPham, new
+                             {
+                                 htmlAttributes = new
+                                 {
+                            @class = "form-control",
+                                     @placeholder = "ID",
+                            @required = "required"
+                                 }
+                             })*@
+                            <input type="text" asp-for="SanPham.TenSanPham" placeholder="Tên sản phẩm" class="form-control" />
+
                             @*<label class="form-label">Tên sản phẩm</label>
-                <input type="text" class="form-control" placeholder="First name" value="Mark" required>*@
+        <input type="text" class="form-control" placeholder="First name" value="Mark" required>*@
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-2 mb-2">
                             <label class="form-label" asp-for="SanPham.SoLuongTon">Số lượng tồn</label>
-                            <input type="number" class="form-control text-box single-line" style="max-width: 100px;" asp-for="SanPham.SoLuongTon" value="@sanPham.SoLuongTon" id="SoLuongTon" name="SoLuongTon" />
+                            <input type="number" class="form-control text-box single-line" style="max-width: 100px;" asp-for="SanPham.SoLuongTon" value="@sanPham.SoLuongTon" id="SoLuongTon" name="SoLuongTon" readonly />
                         </div>
                         <div class="col-md-5 mb-5">
                             <label class="form-label" asp-for="SanPham.MaLoai">Danh mục</label>
@@ -107,7 +110,7 @@
                     <div class="form-group">
                         <div class="form-check">
                             <input class="form-check-input" onclick="onCheckPercent()" type="checkbox" value="" id="percentageAgree">
-                            <label class="form-check-label" for="">Thiết lập giá theo lợi nhuận mong muốn</label>
+                            <label class="form-check-label">Thiết lập giá theo lợi nhuận mong muốn</label>
                         </div>
                     </div>
                     <div class="row">
@@ -121,12 +124,12 @@
                         </div>
                         <div class="col-md-3 mb-3">
                             <label class="form-label" >Lợi nhuận</label>
-                            <input type="number"  class="form-control text-box single-line"  id="LoiNhuan" name="LoiNhuan" /> 
+                            <input type="number"  class="form-control text-box single-line" onkeyup="updateProductPride(this.value)"  id="LoiNhuan" name="LoiNhuan" /> 
                             <span id="span-per"  class="font-weight-bold">%</span>
                         </div>
                         <div class="col-md-3 mb-3">
-                            <label class="form-label" >Giá Sản Phẩm</label>
-                            <input type="number"  class="form-control text-box single-line"  id="GiaSanPham" name="GiaSanPham" readonly />
+                            <label class="form-label" asp-for="SanPham.ThanhTien" >Giá Mới</label>
+                            <input type="number" asp-for="SanPham.ThanhTien"  class="form-control text-box single-line"  id="ThanhTien" name="ThanhTien" readonly />
                         </div>
 
                     </div>
@@ -160,7 +163,7 @@
                         </div>
                     </div>
 
-                    <button class="btn mt-3 mb-3 btn-primary" type="submit">Cập nhật</button>
+                    <button class="btn mt-3 mb-3 btn-primary" type="button" onclick="SubmitForm()">Cập nhật</button>
                     <br />
                 </form>
 
@@ -303,5 +306,63 @@
                 $('#span-per').text('VND');
             }
         }
+    }
+
+    function updateProductPride(value) {
+        var giaNhapTxt = $('#GiaNhapGanNhat').val();
+        var type = document.getElementById("percentageAgree");
+        if (giaNhapTxt !== undefined && giaNhapTxt !== '') {
+            var giaNhap = Number(giaNhapTxt);
+            var loiNhuan = Number(value);
+            if (type.checked) {
+                //by percent
+                var giaBan = giaNhap * (1 + (loiNhuan/100));
+                $('#ThanhTien').val(giaBan);
+            }
+            else {
+                var giaBan = giaNhap + loiNhuan;
+                $('#ThanhTien').val(giaBan);
+            }
+
+        }
+    }
+
+    function SubmitForm() {
+        var fd = new FormData();
+        var type = document.getElementById("percentageAgree");
+
+        var masp = $('#SanPham_MaSanPham').val();
+        var tensp = $('#SanPham_TenSanPham').val();
+        var maloai = $('#danh-muc-selection-id').val();
+        var nhanhieu = $('#nhan-hieu-selection-id').val();
+        var percentageAgree = type.checked ? 1 : 0;
+        var giaBan = $('#giaBan').val();
+        var thanhTien = $('#ThanhTien').val();
+
+        fd.append('MaSanPham', masp);
+        fd.append('TenSanPham', tensp);
+        fd.append('MaLoai', maloai);
+        fd.append('NhanHieu', nhanhieu);
+        fd.append('NguoiSuaCuoi', percentageAgree);
+        fd.append('giaBan', giaBan);
+        fd.append('ThanhTien', thanhTien);
+
+
+            $.ajax({
+                url: '/cap-nhat-san-pham',
+                type: 'POST',
+                dataType: 'json',
+                data: fd,
+                contentType: false, // Not to set any content header
+                processData: false, // Not to process data
+                success: function (result) {
+
+                },
+                error: function (err)
+                {
+                    alert("Lỗi cập nhật");
+                    fd = new FormData();
+                }
+            });
     }
 </script>

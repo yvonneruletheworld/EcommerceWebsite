@@ -59,7 +59,7 @@ namespace EcommerceWebsite.Api.Interface
             return response.IsSuccessStatusCode;
         }
 
-        public async Task<bool> Modify(bool laXoa, SanPhamOutput input)
+        public async Task<List<string>> SuaSanPham(bool laXoa, SanPhamOutput input)
         {
             var sessions = _httpContextAccessor
                 .HttpContext.Session.GetString(SystemConstant.Token);
@@ -71,9 +71,11 @@ namespace EcommerceWebsite.Api.Interface
             //convert sang json
             var request = JsonConvert.SerializeObject(input);
             var httpContent = new StringContent(request, Encoding.UTF8, "application/json");
-            var response = await client.PutAsync($"/api/SanPham/them-san-pham/{laXoa}", httpContent);
-
-            return response.IsSuccessStatusCode;
+            var response = await client.PutAsync($"/api/SanPham/sua-san-pham/{laXoa}", httpContent);
+            var body = await response.Content.ReadAsStringAsync();
+            return response.IsSuccessStatusCode?
+                (List<string>) JsonConvert.DeserializeObject(body, typeof(List<string>))
+                :null;
         }
 
         public async Task<SanPhamVM> LayViewSanPham(string prdId)
@@ -127,7 +129,6 @@ namespace EcommerceWebsite.Api.Interface
 
         public async Task<bool> ThemPhieuNhap(PhieuNhapInput input)
         {
-
             var client = _httpClientFactory.CreateClient();
             client.BaseAddress = new Uri(_configuration[SystemConstant.BaseAddress]);
             //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
@@ -149,6 +150,16 @@ namespace EcommerceWebsite.Api.Interface
         public async Task<List<ThuocTinh>> layDinhluong()
         {
             return await GetListAsync<ThuocTinh>($"/api/SanPham/lay-theodinhluong");
+        }
+
+        public async Task<bool> CapNhatGia(string maDinhLuong, string editor, decimal newPrice)
+        {
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_configuration[SystemConstant.BaseAddress]);
+            //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+            var response = await client
+                .GetAsync($"/api/SanPham/{maDinhLuong}/{editor}/{newPrice}");
+            return response.IsSuccessStatusCode;
         }
     }
 }

@@ -37,7 +37,7 @@ namespace EcommerceWebsite.Services.Services.Main
                     foreach(var dl in input)
                     {
                         var maSanPham = dl.MaSanPham;
-                        var maThuocTinh = dl.MaSanPham;
+                        var maThuocTinh = dl.MaThuocTinh;
                         var giaTri = dl.GiaTri;
                         var getDl = await _context.DinhLuongs
                             .Where(dl => dl.GiaTri == giaTri && dl.MaThuocTinh == maThuocTinh && dl.MaSanPham == maSanPham)
@@ -52,6 +52,19 @@ namespace EcommerceWebsite.Services.Services.Main
             catch (Exception ex)
             {
 
+                throw ex;
+            }
+        }
+
+        public async Task<DinhLuong> LayDinhLuongTheoSanPham(string maSanPham)
+        {
+            try
+            {
+                return await _context.DinhLuongs.Where(dl => dl.MaSanPham == maSanPham)
+                    .FirstOrDefaultAsync();
+            }
+            catch (Exception ex)
+            {
                 throw ex;
             }
         }
@@ -88,6 +101,32 @@ namespace EcommerceWebsite.Services.Services.Main
             }
             catch (Exception ex)
             {
+                throw ex;
+            }
+        }
+
+        public async Task<bool> UpdateAsync(DinhLuong input)
+        {
+            try
+            {
+                await _context.Database.BeginTransactionAsync();
+                var obj = await _context.DinhLuongs.Where(dl => dl.MaDinhLuong == input.MaDinhLuong)
+                    .FirstOrDefaultAsync();
+                if (obj == null) return false;
+
+
+                _context.Entry<DinhLuong>(input).State = EntityState.Detached;
+                _context.DinhLuongs.Update(input);
+                
+
+                var rs = await _context.SaveChangesAsync();
+                await _context.Database.CommitTransactionAsync();
+
+                return rs > 0;
+            }
+            catch (Exception ex)
+            {
+                await _context.Database.RollbackTransactionAsync();
                 throw ex;
             }
         }

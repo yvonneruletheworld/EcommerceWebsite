@@ -1,0 +1,107 @@
+﻿@using EcommerceWebsite.Utilities.ViewModel
+@using EcommerceWebsite.Data.Enum
+@model HUIManageVM
+@{
+    var listHuiVaDoanhSo = Model.ListHuiVaDoanhSo;
+}
+
+<div class="pcoded-content">
+    <!-- [ breadcrumb ] start -->
+    <div class="page-header">
+        <div class="page-block">
+            <div class="row align-items-center">
+                <div class="col-md-12">
+                    <div class="page-header-title">
+                        <h5 class="m-b-10">@*@sanPham.TenSanPham*@</h5>
+                    </div>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html">Danh sách Combo </a></li>
+                        <li class="breadcrumb-item"><a href="#!">@*  *@ </a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- [ breadcrumb ] end -->
+    <!-- [ Main Content ] start -->
+
+    @foreach (var key in listHuiVaDoanhSo.Keys)
+    {
+        <div class="row">
+            <div class="col-sm-12">
+                <h5 class="mb-3">Ngày tạo: @key</h5>
+                <hr>
+
+                <div class="card">
+                    <div class="card-body table-border-style">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Mã Combo</th>
+                                        <th>Tên Sản Phẩm - Số Lượng Bán Được</th>
+                                        <th>Lượt Truy cập</th>
+                                        <th>Giá Combo</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        var listCombo = listHuiVaDoanhSo[key];
+                                        var listConvert = listCombo.GroupBy(i => i.ComboCode)
+                                            .ToDictionary(i => i.Key, i => i.ToList());
+
+                                        @foreach (var comboCode in listConvert.Keys)
+                                        {
+                                            <tr class="pointer-event" onclick="location.href = '@Url.Action("Index","ComboDetail",new { comboCode = comboCode})'">
+
+                                                <td>@comboCode</td>
+                                                <td>
+
+                                                    @foreach(var tsp in listConvert[comboCode])
+                                                    {
+                                                        <p>
+                                                            <a href="@Url.Action("Index","DoanhThu", new { maSanPham = tsp.SanPhams.MaSanPham})"> @tsp.SanPhams.TenSanPham</a>  --  
+                                                            <!--<span>-->@*@(tsp.SanPhams.ChiTietHoaDons.Count() == 0? 0 : @tsp.SanPhams.ChiTietHoaDons[0].SoLuong)*@<!--</span>-->
+                                                            <span>@tsp.DaBan</span>
+                                                        </p>
+                                                    }
+
+                                                </td>
+                                                <td>
+                                                    @listConvert[comboCode].FirstOrDefault().LuotTruyCap
+                                                </td>
+                                                <td>
+                                                    @listConvert[comboCode].FirstOrDefault().Cost
+                                                </td>
+                                                
+                                            </tr>
+                                        }
+
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    }
+</div>
+
+<script>
+    function ComboDetail(comboCode) {
+        $.ajax({
+            url: '/cap-nhat-san-pham?comboCode=' + comboCode,
+            type: 'GET',
+            contentType: false, // Not to set any content header
+            processData: false, // Not to process data
+            success: function (result) {
+
+            },
+            error: function (err) {
+                alert("Lỗi truy cập");
+            }
+        });
+    }
+</script>

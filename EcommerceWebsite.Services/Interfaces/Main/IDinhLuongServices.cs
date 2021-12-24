@@ -10,7 +10,9 @@ namespace EcommerceWebsite.Services.Interfaces.Main
     public interface IDinhLuongServices
     {
         Task<List<ThongSoSanPhamOutput>> LayThongSoTheoSanPham(string maSanPham);
+        Task<DinhLuong> LayDinhLuongTheoSanPham(string maSanPham);
         Task<List<ThuocTinh>> LayThongSo();
         Task<List<string>> AddRangeAsync(List<DinhLuong> input);
+        Task<bool> UpdateAsync(DinhLuong input);
     }
 }

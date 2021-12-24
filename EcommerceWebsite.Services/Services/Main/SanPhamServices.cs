@@ -12,7 +12,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -102,7 +101,8 @@ namespace EcommerceWebsite.Services.Services.Main
                                      //DanhGia = sp_dg,
                                      LoaiSanPham = sp_dm.TenDanhMuc,
                                      NhanHieu = sp_nh.TenHang,
-                                     NguoiSuaCuoi = sp.NguoiSuaCuoi
+                                     NguoiSuaCuoi = sp.NguoiSuaCuoi,
+                                     ThanhTien = 0
                                      //GiaBan = gb.GiaMoi
                                  }).FirstOrDefaultAsync();
                 obj.DanhGia = await _context.DanhGiaSanPhams.Where(dg => dg.MaSanPham.Equals(obj.MaSanPham)).ToListAsync();
@@ -201,22 +201,19 @@ namespace EcommerceWebsite.Services.Services.Main
                 var obj = await GetByIdAsync(input.MaSanPham);
                 if (obj == null) return false;
 
+                //input.MaSanPham = null;
                 //
                 if (laXoa)
                 {
-                    obj.DaXoa = true;
-                    obj.NgayXoa = DateTime.UtcNow;
-                    obj.NguoiXoa = editorMaSP;
-                }
-                else
-                {
-                    obj.NgaySuaCuoi = DateTime.UtcNow;
-                    obj.NguoiSuaCuoi = editorMaSP;
+                    input.DaXoa = true;
+                    //input.NgayXoa = DateTime.UtcNow;
+                    input.NguoiXoa = editorMaSP;
                 }
 
                 // 
-                _context.SanPhams.Update(obj);
-                _context.Entry(obj).State = EntityState.Modified;
+                _context.Entry<SanPham>(obj).State = EntityState.Detached;
+                _context.SanPhams.Update(input);
+               
 
                 var rs = await _context.SaveChangesAsync();
                 await _context.Database.CommitTransactionAsync();

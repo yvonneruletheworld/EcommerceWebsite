@@ -1,9 +1,11 @@
 ﻿using EcommerceWebsite.Api.Interface;
+using EcommerceWebsite.Utilities.Output.Main;
 using EcommerceWebsite.Utilities.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace EcommerceWebsite.Admin.Controllers
@@ -29,7 +31,6 @@ namespace EcommerceWebsite.Admin.Controllers
                 vm.SanPham = await _sanPhamApiServices.LayChiTietSanPham(maSanPham);
                 vm.SanPham.giaBan = vm.SanPham.BangGia.FirstOrDefault().GiaBan;
                 vm.ListSanPhamNhapVaBan = await _sanPhamApiServices.LaySoLuongNhapVaBan(maSanPham);
-                ViewBag.GiaNhapGanNhat = vm.ListSanPhamNhapVaBan?[0].DonGiaNhap;
                 vm.ListDinhLuong = await _sanPhamApiServices.layDinhluong();
                 vm.ListDanhMuc = await _danhMucApiServices.GetCategories();
                 vm.ListNhanHieu = await _nhanHieuApiServices.layNhanHieus();
@@ -37,6 +38,35 @@ namespace EcommerceWebsite.Admin.Controllers
             }
             // lay so luong ban va nhap 
             return   View();
+        }
+
+        
+        [HttpPost("cap-nhat-san-pham")]
+        public async Task<IActionResult> CapNhatSanPham(SanPhamOutput input)
+        {
+            if(ModelState.IsValid)
+            {
+                var rsUpdateGiaErr = 0;
+                var userId = "";
+               var rsUpdateSanPham = await _sanPhamApiServices.SuaSanPham(false, input);
+                if(input.ThanhTien != 0)
+                {
+                    if (User.Claims != null && User.Claims.Count() > 1)
+                    {
+                        userId = User.Claims.Where(claim => claim.Type == ClaimTypes.Sid)
+                            .FirstOrDefault().Value;
+                    }
+                    var rs = await _sanPhamApiServices.CapNhatGia(input.MaSanPham, userId, input.ThanhTien);
+                    if (!rs) rsUpdateGiaErr++;
+                }
+                
+                if(rsUpdateSanPham.Count() == 0 && rsUpdateGiaErr == 0)
+                {
+                    return RedirectToAction("Index", "DoanhThu");
+                }
+            }
+            // lay so luong ban va nhap 
+            return RedirectToAction("Index", "DoanhThu");
         }
 
     }

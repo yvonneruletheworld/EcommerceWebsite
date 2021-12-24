@@ -81,6 +81,7 @@ namespace EcommerceWebsite.Admin.Controllers
                         MaDinhLuong = maDinhLuong,
                         MaThuocTinh = prdImport.MaThuocTinh,
                         DonVi = prdImport.TenMauMa,
+                        GiaTri = "https://i.ibb.co/jzN4xyb/Blue-with-Gold-Laurel-Education-Logo-9-1-removebg-preview.png"
                     });
                     ct.BangGia.Add(new BangGiaOutput()
                     {

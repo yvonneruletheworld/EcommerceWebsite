@@ -14,6 +14,8 @@ namespace EcommerceWebsite.Utilities.Output.Main
         [JsonProperty("giaBan")]
         public decimal GiaBan { get; set; }
         [JsonProperty("maThuocTinh")]
-        public string MaThuocTinh { get; set; }
+        public string MaThuocTinh { get; set; } 
+        [JsonProperty("ngayTao")]
+        public DateTime NgayTao { get; set; }
     }
 }

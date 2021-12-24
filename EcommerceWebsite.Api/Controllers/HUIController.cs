@@ -1,5 +1,7 @@
 ﻿using EcommerceWebsite.Application.Constants;
+using EcommerceWebsite.Data.Entities;
 using EcommerceWebsite.Services.Interfaces.System;
+using EcommerceWebsite.Utilities.Output.System;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -32,6 +34,33 @@ namespace EcommerceWebsite.Api.Controllers
             if (result == null)
                 return BadRequest(Messages.API_EmptyResult);
             else return Ok(result);
+        }
+        
+        [AllowAnonymous]
+        [HttpGet("get-all-list-hui")]
+        public async Task<IActionResult> GetAllListHUIAsync ()
+        {
+            var hUICosts = await  _huiServices.GetHUICosts();
+            if(hUICosts != null || hUICosts.Count() != 0)
+            {
+                 return Ok(hUICosts);
+            }
+            return BadRequest(null);
+            
+        }
+        
+        [HttpGet("add-list-hui")]
+        public async Task<IActionResult> AddListHUI (List<HUICost> inputs)
+        {
+            if(inputs != null || inputs.Count() != 0)
+            {
+                var rs = await _huiServices.ThemHUICosts(inputs);
+                if (rs)
+                    return Ok();
+                else return BadRequest();
+            }
+            return BadRequest();
+            
         }
     }
 }

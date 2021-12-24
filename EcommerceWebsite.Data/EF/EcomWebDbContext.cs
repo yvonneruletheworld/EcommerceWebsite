@@ -44,11 +44,13 @@ namespace EcommerceWebsite.Data.EF
         public DbSet<SanPhamYeuThich> SanPhamYeuThiches { get; set; }
         public DbSet<Banner> Banners { get; set; }
         public DbSet<DanhMucThuocTinh> DanhMucThuocTinhs { get; set; }
+        public DbSet<HUICost> HUICosts { get; set; }
         
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //Configure using Fluent API
+            modelBuilder.ApplyConfiguration(new HUICostConfiguration());
             modelBuilder.ApplyConfiguration(new DanhMucConfiguration());
             modelBuilder.ApplyConfiguration(new HoaDonConfiguration());
             modelBuilder.ApplyConfiguration(new KhachHangConfiguration());

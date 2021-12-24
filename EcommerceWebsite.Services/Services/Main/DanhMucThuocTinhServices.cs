@@ -1,9 +1,9 @@
 ﻿using EcommerceWebsite.Data.EF;
 using EcommerceWebsite.Data.Entities;
 using EcommerceWebsite.Utilities.Output.Main;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
