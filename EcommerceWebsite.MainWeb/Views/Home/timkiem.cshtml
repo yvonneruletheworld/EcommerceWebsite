@@ -27,7 +27,7 @@
                                             <!-- single-product-wrap start -->
                                             <div class="single-product-wrap">
                                                 <div class="product-image">
-                                                    <a href="single-product.html">
+                                                    <a href="@Url.Action("Index", "Detail", new {  prdId = item.MaSanPham, prdMaDanhMuc = item.MaLoai})">
                                                         <img src="@item.HinhAnh" alt="@item.TenSanPham">
                                                     </a>
                                                 </div>
