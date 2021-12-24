@@ -7,6 +7,7 @@
     var diaChi = @Context.Session.GetString("DiaChiKH");
     var SDT = @Context.Session.GetString("SDTKH");
     var madc = @Context.Session.GetString("MaDiaChiKH");
+    var tongTien = (decimal) Model.Sum(s => s.giaBan);
 }
 
 <div class="breadcrumb-area">
@@ -158,16 +159,18 @@
                                             }
                                             <td class="cart-product-total"><span class="amount">@string.Format("{0:0,0}", item.giaBan) VNĐ</span></td>
                                         </tr>
-                                   // }
+                                    // }
                                 }
                                
                             </tbody>
                             <tfoot>
                                 <tr class="cart-subtotal">
                                     <th style="font-weight:bold">Tổng tiền hàng</th>
-                                        <td><span  style="color: red"><span class="amount" id="thanhTienHang"  style="color: red">@string.Format("{0:0,0}", GioHangOutput.Cash())</span> VNĐ</span></td>
+                                                         
+                                   
+                                        <td><span style="color: red"><span class="amount" id="thanhTienHang" style="color: red">@string.Format("{0:0,0}", tongTien)</span> VNĐ</span></td>
 
-                                </tr>
+                                    </tr>
                                 <tr class="cart-subtotal">
                                     <th  style="font-weight: bold">Phí vận chuyển</th>
 
@@ -179,8 +182,8 @@
                                 <tr class="order-total">
                                     <th style="font-weight: bold">Tổng thanh toán</th>
                                     @{
-                                        var tongTien = GioHangOutput.Cash() + 15000;
-                                        <td><span style="color: red"><span class="amount" id="tongTienKhuyenMai"  style="color: red">@string.Format("{0:0,0}", tongTien)</span> VNĐ</span><br /><strike id="tienTruocDo" style="font:10px;font-weight:bold;"></strike></td>
+                                    
+                                        <td><span style="color: red"><span class="amount" id="tongTienKhuyenMai"  style="color: red">@string.Format("{0:0,0}", tongTien + 15000)</span> VNĐ</span><br /><strike id="tienTruocDo" style="font:10px;font-weight:bold;"></strike></td>
                                     }
                                 </tr>
 

@@ -171,12 +171,16 @@ $('body').on('click', '.btn-them-yeuthich', function () {
                
             }
             else if (data.code == 2) {
-                console.log(data.sl);
-                $("#soLuongyt").html(data.sl);
+                location.reload();
+               // console.log(data.sl);
+              //  $("#soLuongyt").html(data.sl);
+               //$(".wishlist").html(newContent);
+
             }
             else {
-                console.log(data.sl);
-                $("#soLuongyt").html(data.sl);
+                location.reload();
+                //console.log(data.sl);
+                //$("#soLuongyt").html(data.sl);
                 swal("Thành công!", "Thêm sản phẩm yêu thích thành công!", "success");
                 }
            

@@ -1,15 +1,16 @@
 ﻿@{ 
-//var otp = TempData["OTPCode"];
+    //var otp = TempData["OTPCode"];
 }
 
 <link href="~/css/otp/style.css" rel="stylesheet" />
 
 <div id="gioHang">
-
 </div>
 <script>
+
     var selectItemList = [];
     var otpcode = 0;
+    var tongTien = 0;
 
     $(document).ready(() => {
         initResourceFilterQuery();
@@ -180,7 +181,7 @@
             var type = selectItemList[i].id.split('_')[1];
 
             if (type === '2') {
-                var itemId = selectItemList[i].value;
+                var itemId = selectItemList[i].id.split('_')[0];
                 //normal
                 norCartItems.push(itemId);
             } else {
@@ -226,14 +227,34 @@
         //else {
         //    selectItemList = selectItemList.filter(cb => cb !== item);
         //}
-
         if (checkItem.checked) {
+            tongTien = tongTien + parseFloat(checkItem.value);
             selectItemList.push(checkItem);
+            $("#count-cart-id")[0].innerHTML = `Tổng thanh toán (${selectItemList.length} Sản phẩm)`;
+            var ThanhTien = parseFloat(tongTien);
+            var ThanhTien2 = format2(ThanhTien).split(".")[0];
+            $("#total-cash-id")[0].innerHTML = ThanhTien2 + "VNĐ";
             console.log(selectItemList);
+
+            var payment = parseFloat(tongTien) + 15000;
+            var TongTien = parseFloat(payment);
+            var TongTien2 = format2(TongTien).split(".")[0];
+            $("#cash-id")[0].innerHTML = TongTien2 + "VNĐ";
+
+                   
         }
         else {
+            tongTien = tongTien - parseFloat(checkItem.value);
             selectItemList = selectItemList.filter(cb => cb !== checkItem);
-            console.log(selectItemList);
+            $("#count-cart-id")[0].innerHTML = `Tổng thanh toán (${selectItemList.length} Sản phẩm)`;
+            var ThanhTien = parseFloat(tongTien);
+            var ThanhTien2 = format2(ThanhTien).split(".")[0];
+            $("#total-cash-id")[0].innerHTML = ThanhTien2 + "VNĐ";
+
+            var payment = parseFloat(tongTien) + 15000;
+            var TongTien = parseFloat(payment);
+            var TongTien2 = format2(TongTien).split(".")[0];
+            $("#cash-id")[0].innerHTML = TongTien2 + "VNĐ";
         }
     }
 
@@ -298,7 +319,7 @@
                 var type = lCb[i].id.split('_')[1];
 
                 if (type === '2') {
-                    var itemId = lCb[i].value;
+                    var itemId = lCb[i].id.split('_')[0];
                     //normal
                     norCartItems.push(itemId);
                 } else {
@@ -359,4 +380,35 @@
         }
 
     }
+
+    function CheckAll(parent) {
+        var ids = document.getElementsByTagName('input');
+        for (var i = 0; i < ids.length; i++) {
+            
+            if (ids[i].name == "ids[]") {
+                ids[i].checked = parent.checked;
+               
+                if (ids[i].checked === false) {
+                    selectItemList = selectItemList.filter(cb => cb !== ids[i]);
+                    tongTien = tongTien - parseFloat(ids[i].value);
+                }
+                else {
+                    selectItemList.push(ids[i]);
+                    tongTien = tongTien + parseFloat(ids[i].value);
+                }
+            }
+            
+        }
+        $("#count-cart-id")[0].innerHTML = `Tổng thanh toán (${selectItemList.length} Sản phẩm)`;
+        var ThanhTien = parseFloat(tongTien);
+        var ThanhTien2 = format2(ThanhTien).split(".")[0];
+        $("#total-cash-id")[0].innerHTML = ThanhTien2 + "VNĐ";
+
+        var payment = parseFloat(tongTien) + 15000;
+        var TongTien = parseFloat(payment);
+        var TongTien2 = format2(TongTien).split(".")[0];
+        $("#cash-id")[0].innerHTML = TongTien2 + "VNĐ";
+
+    }
+   
 </script>
