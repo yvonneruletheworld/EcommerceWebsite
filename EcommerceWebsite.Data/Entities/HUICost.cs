@@ -13,7 +13,7 @@ namespace EcommerceWebsite.Data.Entities
         public SanPham SanPhams { get; set; }
         public int DaBan { get; set; }
         public int LuotTruyCap { get; set; }
-        public decimal TongGia { get; set; }
+        public int Utility { get; set; }
         public decimal ThucBan { get; set; }
     }
 }

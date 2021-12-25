@@ -62,5 +62,15 @@ namespace EcommerceWebsite.Api.Controllers
             return BadRequest();
             
         }
+        [HttpGet("get-hui-detail/{comboCode}/{ngayTao}/{ngayNhapKe}")]
+        public async Task<IActionResult> GetHuiDetail (string comboCode, string ngayTao, string ngayNhapKe)
+        {
+            var convertCreate = DateTime.Parse(ngayTao);
+            var convertImport = DateTime.Parse(ngayNhapKe);
+            var rs = await _huiServices.GetChiTietHUI(comboCode, convertCreate, convertImport);
+            if (rs != null)
+                return Ok(rs);
+            else return BadRequest(Messages.API_EmptyResult);
+        }
     }
 }

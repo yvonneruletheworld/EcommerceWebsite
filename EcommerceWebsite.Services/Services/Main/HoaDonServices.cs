@@ -19,6 +19,22 @@ namespace EcommerceWebsite.Services.Services.Main
         {
             _context = context;
         }
+
+        public async Task<List<ChiTietHoaDon>> DanhSachHoaDonComboCode(string comboCode, DateTime ngayTao, DateTime ngayNhapKe)
+        {
+            var data = await (from ct in _context.ChiTietHoaDons 
+                              join hd in _context.HoaDons on ct.HoaDonId equals hd.MaHoaDon
+                              where ct.MaHUI == comboCode
+                              && DateTime.Compare(ngayTao, ct.HoaDons.NgayTao) <= 0
+                            && DateTime.Compare(ngayNhapKe, ct.HoaDons.NgayTao) >= 0
+                            select new ChiTietHoaDon()
+                            {
+                                HoaDonId = ct.HoaDonId,
+                                HoaDons = hd
+                            }).ToListAsync();
+            return data;
+        }
+
         public async Task<List<ChiTietHoaDon>> DanhSachHoaDonTheoKhachHang(string maKH)
         {
             var data = await (from hd in _context.HoaDons

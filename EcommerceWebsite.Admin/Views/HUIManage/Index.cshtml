@@ -3,6 +3,7 @@
 @model HUIManageVM
 @{
     var listHuiVaDoanhSo = Model.ListHuiVaDoanhSo;
+    var listKeys = listHuiVaDoanhSo.Keys;
 }
 
 <div class="pcoded-content">
@@ -25,7 +26,7 @@
     <!-- [ breadcrumb ] end -->
     <!-- [ Main Content ] start -->
 
-    @foreach (var key in listHuiVaDoanhSo.Keys)
+    @foreach (var key in listKeys)
     {
         <div class="row">
             <div class="col-sm-12">
@@ -52,7 +53,8 @@
 
                                         @foreach (var comboCode in listConvert.Keys)
                                         {
-                                            <tr class="pointer-event" onclick="location.href = '@Url.Action("Index","ComboDetail",new { comboCode = comboCode})'">
+                                            var keyIndex = listKeys.ToList().IndexOf(key);
+                                            <tr class="pointer-event" onclick="location.href = '@Url.Action("Index","HUIDetail",new { comboCode = comboCode, ngayTao = key, ngayNhapKe = keyIndex==0 ? DateTime.Now : listKeys.ElementAt(keyIndex - 1)})'">
 
                                                 <td>@comboCode</td>
                                                 <td>

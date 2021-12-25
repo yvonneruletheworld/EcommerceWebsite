@@ -29,7 +29,10 @@ namespace EcommerceWebsite.Admin.Controllers
             {
                 var vm = new DoanhThuVM();
                 vm.SanPham = await _sanPhamApiServices.LayChiTietSanPham(maSanPham);
-                vm.SanPham.giaBan = vm.SanPham.BangGia.FirstOrDefault().GiaBan;
+                vm.SanPham.giaBan = vm.SanPham.BangGia
+                    .OrderByDescending(bg => bg.NgayTao.Date)
+                    .ThenByDescending(bg => bg.NgayTao.TimeOfDay)
+                    .FirstOrDefault().GiaBan;
                 vm.ListSanPhamNhapVaBan = await _sanPhamApiServices.LaySoLuongNhapVaBan(maSanPham);
                 vm.ListDinhLuong = await _sanPhamApiServices.layDinhluong();
                 vm.ListDanhMuc = await _danhMucApiServices.GetCategories();

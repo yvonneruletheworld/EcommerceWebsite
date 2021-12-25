@@ -1,7 +1,10 @@
 ﻿using EcommerceWebsite.Data.EF;
 using EcommerceWebsite.Data.Entities;
+using EcommerceWebsite.Services.Interfaces.Main;
 using EcommerceWebsite.Services.Interfaces.System;
+using EcommerceWebsite.Utilities.Output.Main;
 using EcommerceWebsite.Utilities.Output.System;
+using EcommerceWebsite.Utilities.ViewModel;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -15,10 +18,12 @@ namespace EcommerceWebsite.Services.Services.System
     public class HUIServices : IHUIServices
     {
         private readonly EcomWebDbContext _context;
+        private readonly IHoaDonServices _hoaDonServices;
 
-        public HUIServices(EcomWebDbContext context)
+        public HUIServices(EcomWebDbContext context, IHoaDonServices hoaDonServices)
         {
             _context = context;
+            _hoaDonServices = hoaDonServices;
         }
 
         public Task<Dictionary<string, List<string>>> ModifyListOutput(List<HUI> inputList)
@@ -79,66 +84,6 @@ namespace EcommerceWebsite.Services.Services.System
             return result > 0;
         }
 
-        //    public async Task<Dictionary<DateTime,List<HUI>>> GetHUICosts()
-        //    {
-        //        var listHui = await _context.HUICosts.OrderByDescending(bl => bl.NgayTao.Date)
-        //                        .ThenByDescending(bl => bl.NgayTao.TimeOfDay)
-        //                        .ToListAsync(); 
-
-        //        var rs = new Dictionary<DateTime, List<HUI>>();
-        //        var dicHui = listHui.GroupBy(hc => hc.NgayTao)
-        //            .ToDictionary(hc=> hc.Key, hc => hc.ToList());
-        //        for(int i = 0; i< dicHui.Keys.Count(); i++)
-        //        {
-        //            //loc xong ngay
-        //            var value = new List<HUI>();
-        //            var key = dicHui.Keys.ElementAt(i);
-        //            var nextKey = i==0? DateTime.Now : dicHui.Keys.ElementAt(i - 1);
-        //            foreach(var hui in dicHui[key])
-        //            {
-
-        //                var listHoaDon = await (from cthd in _context.ChiTietHoaDons
-        //                                        join hd in _context.HoaDons on cthd.HoaDonId equals hd.MaHoaDon
-        //                                        join sp in _context.SanPhams on hui.MaSanPham equals sp.MaSanPham
-        //                                        where cthd.MaHUI == hui.ComboCode && cthd.ProductId == hui.MaSanPham
-        //                                        && DateTime.Compare(hui.NgayTao, hd.NgayTao) <= 0
-        //                                        && DateTime.Compare(nextKey,hd.NgayTao) >= 0
-        //                                        select new ChiTietHoaDon()
-        //                                        {
-        //                                            SanPhams = sp,
-        //                                            SoLuong = cthd.SoLuong,
-        //                                            GiaBan = cthd.GiaBan
-        //                                        }).ToListAsync(); 
-
-        //                var tmp = await (from sp in _context.SanPhams
-        //                                 join cthd in _context.ChiTietHoaDons on sp.MaSanPham equals cthd.ProductId 
-        //                                 join hd in _context.HoaDons on cthd.HoaDonId equals hd.MaHoaDon
-        //                                        join sp in _context.SanPhams on hui.MaSanPham equals sp.MaSanPham
-        //                                        where cthd.MaHUI == hui.ComboCode && cthd.ProductId == hui.MaSanPham
-        //                                        && DateTime.Compare(hui.NgayTao, hd.NgayTao) <= 0
-        //                                        && DateTime.Compare(nextKey,hd.NgayTao) >= 0
-        //                                        select new ChiTietHoaDon()
-        //                                        {
-        //                                            SanPhams = sp,
-        //                                            SoLuong = cthd.SoLuong,
-        //                                            GiaBan = cthd.GiaBan
-        //                                        }).ToListAsync();
-        //                var item = new HUI()
-        //                {
-        //                    Id = hui.ComboCode,
-        //                    TongGia = hui.Cost,
-        //                    DaBan = listHoaDon.Sum(ct => ct.SoLuong),
-        //                    ThucBan = listHoaDon.Sum(ct => ct.SoLuong * ct.GiaBan),
-        //                    SanPhams = listHoaDon
-        //                };
-        //                value.Add(item);
-        //            }
-        //            rs.Add(key,value);
-        //        }
-        //        return rs;
-        //    }
-        //}
-
         public async Task<Dictionary<DateTime, List<HUICost>>> GetHUICosts()
         {
             var listHui = await (from hui in _context.HUICosts
@@ -191,6 +136,66 @@ namespace EcommerceWebsite.Services.Services.System
             var rs = listHui.GroupBy(hc => hc.NgayTao)
                     .ToDictionary(hc=> hc.Key, hc => hc.ToList());
             return rs;
+        }
+
+        public Task<bool> SetUpGiaChoHUIItemset()
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<HUIDetailVM> GetChiTietHUI(string comboCode, DateTime ngayTao, DateTime ngayNhapKe)
+        {
+            try
+            {
+                var result = await _context.HUICosts
+                .Where(hc => hc.ComboCode == comboCode && hc.NgayTao == ngayTao)
+                .Select(item => new HUIDetailVM()
+                {
+                    ComboCode = item.ComboCode,
+                    Utility = item.Utility,
+                }).FirstOrDefaultAsync();
+                //get List product
+                if (result != null)
+                {
+                    var listProduct = await GetListchiTietSanPhamHUI(result.ComboCode, ngayTao);
+                    var listHoaDon = await _hoaDonServices.DanhSachHoaDonComboCode(comboCode, ngayTao, ngayNhapKe);
+                    result.ListSanPhamHUIs = listProduct;
+                    result.ListHoaDon = listHoaDon;
+                    result.TongGiaSetUp = listProduct.Sum(sp => sp.GiaHUI);
+                    result.DaBan = listHoaDon.Count();
+                }
+                return result;
+            }
+            catch (Exception es)
+            {
+
+                throw es;
+            }
+            //var result = new HUIDetailVM();
+            //get huicost
+            
+        }
+
+        private async Task<List<DoanhThuOutput>> GetListchiTietSanPhamHUI(string comboCode, DateTime ngayTao)
+        {
+            var data = await (from hui in _context.HUICosts
+                              join sp in _context.SanPhams on hui.MaSanPham equals sp.MaSanPham into hui_sp_group
+                              from hui_sp in hui_sp_group.DefaultIfEmpty()
+                              join ctn in _context.ChiTietNhapSanPhams on hui_sp.MaSanPham equals ctn.MaSanPham into sp_ct_group
+                              from sp_ct in sp_ct_group.DefaultIfEmpty()
+                              join pn in _context.PhieuNhaps.Where(p => DateTime.Compare(p.NgayTao, ngayTao) <= 0)
+                                                              .OrderByDescending(d => d.NgayTao.Date)
+                                                              .ThenByDescending(d => d.NgayTao.TimeOfDay).Take(1) on sp_ct.MaNhap equals pn.MaPhieuNhap
+                              where hui.NgayTao == ngayTao && hui.ComboCode == comboCode && !hui_sp.DaXoa
+                              select new DoanhThuOutput()
+                              {
+                                  MaSanPham = hui_sp.NguoiXoa,
+                                  TenSanPham = hui_sp.TenSanPham,
+                                  DonGiaNhap = sp_ct.DonGia,
+                                  //LoiNhuan = (float)hui_sp.Utility,
+                                  GiaHUI = hui_sp.GiaHUI
+                              }).ToListAsync();
+            return data;
         }
     }
 }

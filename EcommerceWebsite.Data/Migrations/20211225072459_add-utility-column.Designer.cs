@@ -4,14 +4,16 @@ using EcommerceWebsite.Data.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EcommerceWebsite.Data.Migrations
 {
     [DbContext(typeof(EcomWebDbContext))]
-    partial class EcomWebDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211225072459_add-utility-column")]
+    partial class addutilitycolumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

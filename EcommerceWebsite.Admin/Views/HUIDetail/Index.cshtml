@@ -1,0 +1,217 @@
+﻿@using EcommerceWebsite.Utilities.ViewModel
+@model HUIDetailVM
+@{
+   var mucLoiNhuan = ViewBag.MucLoiNhuan;
+   var giaVon = ViewBag.GiaVon;
+    var listHoaDon = Model.ListHoaDon.GroupBy(ct => ct.HoaDonId)
+        .ToDictionary(hd => hd.Key, hd => hd.ToList());
+}
+<div class="pcoded-content">
+    <!-- [ breadcrumb ] start -->
+    <div class="page-header">
+        <div class="page-block">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="page-header-title">
+                        <h5 class="m-b-10">Chi tiết Combo</h5>
+                    </div>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html">@Model.ComboCode</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 mb-3">
+            <div class="col-xl-12 col-md-12">
+                <div class="card flat-card">
+                    <div class="row-table">
+                        <div class="col-sm-6 card-body">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <i class="material-icons-two-tone text-primary mb-1">shopping_cart</i>
+                                </div>
+                                <div class="col-sm-8 text-md-center">
+                                    <h5>@Model.DaBan</h5>
+                                    <span>Lượt Mua (bao gồm những sản phẩm mua lẻ)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 d-none d-md-table-cell d-lg-table-cell d-xl-table-cell card-body br">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <i class="material-icons-two-tone text-primary mb-1">language</i>
+                                </div>
+                                <div class="col-sm-8 text-md-center">
+                                    <h5 id="GiaVonCombo">@Model.Utility % </h5>
+                                    <span>Lợi Nhuận Combo</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 card-body">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <i class="material-icons-two-tone text-primary mb-1">unarchive</i>
+                                </div>
+                                <div class="col-sm-8 text-md-center">
+                                    <h5>@mucLoiNhuan %</h5>
+                                    <span>Lợi nhuận tối thiểu</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row-table">
+                        <div class="col-sm-6 d-none d-md-table-cell d-lg-table-cell d-xl-table-cell card-body br">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <i class="material-icons-two-tone text-primary mb-1">language</i>
+                                </div>
+                                <div class="col-sm-8 text-md-center">
+                                    <h5 id="GiaVonCombo">@giaVon VNĐ</h5>
+                                    <span>Giá Vốn</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 d-none d-md-table-cell d-lg-table-cell d-xl-table-cell card-body br">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <i class="material-icons-two-tone text-primary mb-1">language</i>
+                                </div>
+                                <div class="col-sm-8 text-md-center">
+                                    <h5 id="TongGiaAuto">@Model.TongGiaAuto VNĐ</h5>
+                                    <span>Giá Bán Mặc Định</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 card-body">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <i class="material-icons-two-tone text-primary mb-1">unarchive</i>
+                                </div>
+                                <div class="col-sm-8 text-md-center">
+                                    <h5 id="TongGiaSetUp">@Model.TongGiaSetUp VNĐ</h5>
+                                    <span>Giá Thiết Lập </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="col-xl-12">
+            <h5 class="mb-3">Sản phẩm trong Combo</h5>
+            <hr>
+            <div class="card">
+                <div class="card-body table-border-style">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Mã Combo</th>
+                                    <th>Tên sản phẩm</th>
+                                    @*<th>Hình ảnh</th>*@
+                                    <th>Giá Vốn</th>
+                                    <th>Quy Đổi </th>
+                                    @*<th>Giá Hiện Tại</th>*@
+                                    <th>Giá theo combo</th>
+                                    <th>Chỉnh Sửa</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach(var sp in Model.ListSanPhamHUIs)
+                                {
+                                    var thiPhanSanPham = (double)(sp.DonGiaNhap / giaVon);
+                                    var giaMacDinh = Model.TongGiaAuto * thiPhanSanPham;
+                                    <tr>
+                                        <td>@sp.MaSanPham</td>
+                                        <td>@sp.TenSanPham</td>
+                                        <td>@String.Format("{0:0,0.0}", sp.DonGiaNhap)</td>
+                                        <td>@String.Format("{0:00.00}",thiPhanSanPham * 100) %</td>
+                                        @*<td>@sp.DonGiaBan</td>*@
+                                        <td>@String.Format("{0:0,0.0}", sp.GiaHUI) </td>
+                                        <td><input autofocus type="text" id="@sp.MaSanPham" value="@String.Format("{0:0,0.0}",giaMacDinh)" class="form-control" placeholder="Nhập Giá" /></td>
+                                    </tr>
+                                }
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <hr />
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-end mr-5">
+                        <li class="page-item disabled">
+                            <button type="button" onclick="onCapNhatGiaClick()" class="btn btn-md btn-success" >Cập Nhật</button>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+        </div>
+        
+        <div class="col-xl-12">
+            <h5 class="mb-3">DANH SÁCH HÓA ĐƠN</h5>
+            <hr>
+            <div class="card">
+                <div class="card-body table-border-style">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Mã Hóa Đơn</th>
+                                    <th>Ngày Tạo</th>
+                                    <th>Số Lượng Mua</th>
+                                    <th>Tổng Cộng</th>
+                                    <th>Thành Tiền </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach(var hd in listHoaDon)
+                                { 
+                                    <tr>
+                                        <td>@hd.Key</td>
+                                        <td>@hd.Value.FirstOrDefault().HoaDons.NgayTao</td>
+                                        <td>@hd.Value.Count()</td>
+                                        <td>@hd.Value.FirstOrDefault().HoaDons.TongCong</td>
+                                        <td>@hd.Value.FirstOrDefault().HoaDons.ThanhTien</td>
+                                    </tr>
+                                }
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <hr />
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-end">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#!" tabindex="-1">Previous</a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#!">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#!">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#!">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#!">Next</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    $(document).ready(function () {
+
+    });
+    function onCapNhatGiaClick() {
+
+    }
+</script>

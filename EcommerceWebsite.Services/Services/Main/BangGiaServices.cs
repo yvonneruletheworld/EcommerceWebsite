@@ -60,13 +60,14 @@ namespace EcommerceWebsite.Services.Services.Main
                 var data = await (from dl in _context.DinhLuongs
                                   join lsg in _context.BangGiaSanPhams on dl.MaDinhLuong equals lsg.MaDinhLuong into dl_lsg_group
                                   from dl_lsg in dl_lsg_group.DefaultIfEmpty()
-                                  where dl.MaSanPham == prdId && !dl_lsg.DaXoa && dl.GiaTri != "0"
+                                  where dl.MaSanPham == prdId && !dl_lsg.DaXoa 
                                   select new BangGiaOutput
                                   {
                                       MaThuocTinh = dl.MaThuocTinh,
                                       MaDinhLuong = dl.MaDinhLuong, // Dinh luong
                                       TenDinhLuong =  dl.GiaTri + " " + dl.DonVi,
                                       GiaBan = dl_lsg.GiaMoi,
+                                      DinhLuong = dl,
                                       NgayTao = dl_lsg.NgayTao
                                   }).OrderByDescending(bg => bg.NgayTao.Date)
                                   .ThenByDescending(bg => bg.NgayTao.TimeOfDay).ToListAsync();

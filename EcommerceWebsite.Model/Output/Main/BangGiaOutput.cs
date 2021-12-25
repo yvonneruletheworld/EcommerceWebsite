@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using EcommerceWebsite.Data.Entities;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -17,5 +18,6 @@ namespace EcommerceWebsite.Utilities.Output.Main
         public string MaThuocTinh { get; set; } 
         [JsonProperty("ngayTao")]
         public DateTime NgayTao { get; set; }
+        public DinhLuong DinhLuong { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using EcommerceWebsite.Application.Constants;
 using EcommerceWebsite.Data.Entities;
 using EcommerceWebsite.Utilities.Output.System;
+using EcommerceWebsite.Utilities.ViewModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
@@ -38,6 +39,13 @@ namespace EcommerceWebsite.Api.Interface
             var response = await client
                 .PostAsync($"/api/SanPham/add-list-hui", httpContent);
             return response.IsSuccessStatusCode;
+        }
+
+        public async Task<HUIDetailVM> GetHuiDetail(string comboCode, DateTime ngayTao, DateTime ngayNhapKe)
+        {
+            var convertDate1 = ngayTao.ToString("s");
+            var convertDate2 = ngayNhapKe.ToString("s");
+            return await GetAsync<HUIDetailVM>($"/api/HUI/get-hui-detail/{comboCode}/{convertDate1}/{convertDate2}");
         }
 
         public async Task<Dictionary<DateTime, List<HUICost>>> GetListHUIFromData()

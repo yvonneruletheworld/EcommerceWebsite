@@ -45,6 +45,7 @@ namespace EcommerceWebsite.MainWeb.Controllers
         {
             var vm = new DetailVM();
             vm.SanPham = await _sanPhamServices.LayChiTietSanPham(prdId);
+            vm.SanPham.BangGia = vm.SanPham.BangGia.Where(dl => dl.DinhLuong.GiaTri != "0").ToList();
             //if (User != null)
             //{
             //    string id = _userManager.GetUserId(User);
