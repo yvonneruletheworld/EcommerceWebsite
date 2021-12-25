@@ -172,9 +172,6 @@ $('body').on('click', '.btn-them-yeuthich', function () {
             }
             else if (data.code == 2) {
                 location.reload();
-               // console.log(data.sl);
-              //  $("#soLuongyt").html(data.sl);
-               //$(".wishlist").html(newContent);
 
             }
             else {

@@ -5,6 +5,7 @@
 <link href="~/css/otp/style.css" rel="stylesheet" />
 
 <div id="gioHang">
+
 </div>
 <script>
 
@@ -173,6 +174,7 @@
             swal("Thất bại!", "Vui lòng chọn mặt hàng để thanh toán!", "error");
             return;
         }
+        
         var huiCartItems = [];
         var norCartItems = [];
 
@@ -303,7 +305,6 @@
             swal("Thất bại!", "Vui lòng chọn mặt hàng để thanh toán!", "error");
             return;
         }
-
         var testId = lCb[0].defaultValue;
         if (testId === undefined || testId === '') {
             swal("Thất bại!", "Hệ thống không xử lý được yêu cầu của bạn. Vui lòng thử lại sau!", "error");
@@ -366,14 +367,15 @@
                 contentType: false, // Not to set any content header
                 processData: false, // Not to process data
                 success: function (data) {
-                    location.href = "/Home/Index";
-                    fd = new FormData();
                     swal("Thành công!", "Đặt hàng thành công!", "success");
+                    location.href = "/Home/Index";
+                    location.reload();
+                  
                 },
                 error: function (err) {
-                    fd = new FormData();
-                    console.log(err);
                     swal("Thất bại!", "Thêm giỏ hàng thất bại!", "error");
+                    location.reload();
+                   
                 }
             });
             selectItemList = [];
