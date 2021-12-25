@@ -1,6 +1,7 @@
 ﻿@using EcommerceWebsite.Utilities.ViewModel
 @model HUIDetailVM
 @{
+   var isFirst = ViewBag.IsFirst;
    var mucLoiNhuan = ViewBag.MucLoiNhuan;
    var giaVon = ViewBag.GiaVon;
     var listHoaDon = Model.ListHoaDon.GroupBy(ct => ct.HoaDonId)
@@ -117,7 +118,7 @@
                                     <th>Quy Đổi </th>
                                     @*<th>Giá Hiện Tại</th>*@
                                     <th>Giá theo combo</th>
-                                    <th>Chỉnh Sửa</th>
+                                    <th>Giá mặc định</th>
 
                                 </tr>
                             </thead>
@@ -126,15 +127,22 @@
                                 {
                                     var thiPhanSanPham = (double)(sp.DonGiaNhap / giaVon);
                                     var giaMacDinh = Model.TongGiaAuto * thiPhanSanPham;
-                                    <tr>
-                                        <td>@sp.MaSanPham</td>
-                                        <td>@sp.TenSanPham</td>
-                                        <td>@String.Format("{0:0,0.0}", sp.DonGiaNhap)</td>
-                                        <td>@String.Format("{0:00.00}",thiPhanSanPham * 100) %</td>
-                                        @*<td>@sp.DonGiaBan</td>*@
-                                        <td>@String.Format("{0:0,0.0}", sp.GiaHUI) </td>
+                                <tr>
+                                    <td>@sp.MaSanPham</td>
+                                    <td>@sp.TenSanPham</td>
+                                    <td>@String.Format("{0:0,0.0}", sp.DonGiaNhap)</td>
+                                    <td>@String.Format("{0:00.00}", thiPhanSanPham * 100) %</td>
+                                    @*<td>@sp.DonGiaBan</td>*@
+                                    <td>@String.Format("{0:0,0.0}", sp.GiaHUI) </td>
+                                    @if (isFirst)
+                                    {
                                         <td><input autofocus type="text" id="@sp.MaSanPham" value="@String.Format("{0:0,0.0}",giaMacDinh)" class="form-control" placeholder="Nhập Giá" /></td>
-                                    </tr>
+                                    }
+                                    else
+                                    {
+                                        <td><input readonly autofocus type="text" id="@sp.MaSanPham" value="@String.Format("{0:0,0.0}",giaMacDinh)" class="form-control" placeholder="Nhập Giá" /></td>
+                                    }
+                                </tr>
                                 }
                                 
                             </tbody>
