@@ -91,5 +91,51 @@ namespace EcommerceWebsite.Services.Services.Main
                 throw ex;
             }
         }
+
+        public async Task<bool> ThemVaSuaHang(NhanHieu input)
+        {
+            var duLieu = _context.NhanHieus.FirstOrDefault(x => x.MaHang == input.MaHang);
+            if (duLieu != null)
+            {
+               
+                    await _context.Database.BeginTransactionAsync();
+                    duLieu.TenHang = input.TenHang;
+                    _context.NhanHieus.Update(duLieu);
+                    var rs = await _context.SaveChangesAsync();
+                    await _context.Database.CommitTransactionAsync();
+                    return false;
+
+            }
+            else
+            {
+                //begin transaction
+                await _context.Database.BeginTransactionAsync();
+                //add
+                await _context.NhanHieus.AddAsync(input);
+                var result = await _context.SaveChangesAsync();
+
+                await _context.Database.CommitTransactionAsync();
+
+                return true;
+            }
+        }
+        public async Task<bool> XoaHang(string input)
+        {
+           
+            var duLieu = _context.NhanHieus.FirstOrDefault(x => x.MaHang == input);
+            if (duLieu != null)
+            {
+                await _context.Database.BeginTransactionAsync();
+                _context.NhanHieus.Remove(duLieu);
+                var rs = await _context.SaveChangesAsync();
+                await _context.Database.CommitTransactionAsync();
+                return true;
+
+            }
+            else
+            {
+                return true;
+            }
+        }
     }
 }

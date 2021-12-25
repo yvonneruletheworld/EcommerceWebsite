@@ -150,5 +150,34 @@ namespace EcommerceWebsite.Api.Interface
         {
             return await GetListAsync<ThuocTinh>($"/api/SanPham/lay-theodinhluong");
         }
+
+        public async Task<bool> ThemVaSuaHang(NhanHieu input)
+        {
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_configuration[SystemConstant.BaseAddress]);
+            //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+
+            var requestItem = JsonConvert.SerializeObject(input);
+            var httpContent = new StringContent(requestItem, Encoding.UTF8, "application/json");
+
+
+            var response = await client
+                .PostAsync($"/api/SanPham/them-thuocTinh", httpContent);
+            return response.IsSuccessStatusCode;
+        }
+        public async Task<bool> XoaHang(string input)
+        {
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_configuration[SystemConstant.BaseAddress]);
+            //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+
+            var requestItem = JsonConvert.SerializeObject(input);
+            var httpContent = new StringContent(requestItem, Encoding.UTF8, "application/json");
+
+
+            var response = await client
+                .PostAsync($"/api/SanPham/xoa-hang/{input}", httpContent);
+            return response.IsSuccessStatusCode;
+        }
     }
 }

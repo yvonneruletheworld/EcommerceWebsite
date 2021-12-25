@@ -6,6 +6,10 @@ namespace EcommerceWebsite.Data.Entities
 {
    public class NhanHieu
     {
+        public NhanHieu()
+        {
+            MaHang =  Guid.NewGuid().ToString();
+        }
         public string MaHang { get; set; }
         public string TenHang { get; set; }
         public string HinhAnh { get; set; }

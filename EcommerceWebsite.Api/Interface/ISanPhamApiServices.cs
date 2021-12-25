@@ -34,5 +34,8 @@ namespace EcommerceWebsite.Api.Interface
 
         Task<List<SanPhamVM>> LaySanPhamMoiNhat();
         Task<List<ThuocTinh>> layDinhluong();
+
+        Task<bool> ThemVaSuaHang(NhanHieu input);
+        Task<bool> XoaHang(string input);
     }
 }

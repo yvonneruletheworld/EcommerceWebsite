@@ -21,9 +21,7 @@
         <div class="col-sm-12 mb-3">
             <h5 class="mb-3">THAO TÁC</h5>
             <hr>
-            <button class="btn mb-1 btn-primary"><i data-feather="save"></i> Thêm </button>
-            <button class="btn mb-1 btn-primary"><i data-feather="delete"></i> Xóa</button>
-            <button class="btn mb-1 btn-primary"><i data-feather="edit"></i> Sửa</button>
+            <button class="btn mb-1 btn-primary" onclick="bnThemNhanHieu()"><i data-feather="save"></i> Thêm </button>
         </div>
 
         <div class="col-xl-12">
@@ -35,7 +33,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Tên hãng</th>
-                                  
+                                    <th colspan="2">Thao tác</th>
 
                                 </tr>
                             </thead>
@@ -46,9 +44,10 @@
                                     {
 
                                         <tr>
-                                            <td>@item.MaHang</td>
+                                            <td >@item.MaHang</td>
                                             <td>@item.TenHang</td>
-                                          
+                                            <td><a href="#" class="suaNhanHieu" data-id="@item.MaHang" data-ten="@item.TenHang"><i data-feather="edit"></i></a></td>
+                                            <td><a href="#" class="xoaHang" data-id="@item.MaHang"><i data-feather="delete"></i></a></td>
                                         </tr>
                                     }
                                 }
@@ -71,10 +70,120 @@
                     </ul>
                 </nav>
             </div>
-
         </div>
-
     </div>
-
+    <div class="modal" tabindex="-1" role="dialog" id="hienThiModalThemHang">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="truongHop">THÊM ĐỊNH LƯỢNG</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <label class="form-label">Mã thuộc tính</label>
+                            <input type="text" class="form-control text-box single-line" readonly id="maNhanHieu" placeholder="Mã thuộc tính" />
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Tên thuộc tính</label>
+                            <input type="text" class="form-control text-box single-line" id="TenThuocTinh" placeholder="Tên thuộc tính" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="ThemNhanHieu()">Lưu</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
+<script>
+    $('body').on('click', '.suaNhanHieu', function() {
+        var id = $(this).data('id');
+        var ten = $(this).data('ten');
+        $("#maNhanHieu").val(id);
+        $("#truongHop").text("SỬA NHÃN HIỆU");
+        $("#TenThuocTinh").val(ten);
+        $("#hienThiModalThemHang").modal('show');
+        
+    });
+    $('body').on('click', '.xoaHang', function () {
+        var id = $(this).data('id');
+        swal({
+            title: "Bạn có chắc chắn?",
+            text: "Sau khi xóa, bạn sẽ không thể khôi phục dữ liệu này!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        url: '/SanPham/XoaHangSanPham',
+                        data: {
+                            maHieuHang: id
+                        },
+                        success: function (data) {
+
+                            if (data.code == 2) {
+
+                            }
+                            else {
+                                swal("Thành công!", "Xóa thành công rồi đấy bạn ơi!", "success");
+                                location.reload();
+                            }
+                        },
+                        error: function () {
+                            swal("Thất bại!", "Bạn hãy thử lại xem nào!", "error");
+                        }
+                    });
+
+                } else {
+                    swal("Dữ liệu bạn còn ngon đấy!");
+                }
+            });
+    });
+    function bnThemNhanHieu() {
+        $("#maNhanHieu").val('');
+        $("#TenThuocTinh").val('');
+        $("#truongHop").text("THÊM NHÃN HIỆU");
+        $("#hienThiModalThemHang").modal('show');
+    }
+    function ThemNhanHieu() {
+        var tenNhanHieu = $("#TenThuocTinh").val();
+        var maNhanHieu = $("#maNhanHieu").val();
+        if (maNhanHieu == null) {
+            $("#truongHop").text("THÊM NHÃN HIỆU");
+        }
+            $.ajax({
+                url: '/SanPham/ThemVaSuaHang',
+                data: {
+                    tenThuocTinh: tenNhanHieu,
+                    maHieuHang: maNhanHieu
+                },
+                success: function (data) {
+
+                    if (data.code == 2) {
+                        swal("Thành công!", "Sửa Nhãn hiệu thành công!", "success");
+                        location.reload();
+                    }
+                    else {
+                        swal("Thành công!", "Thêm Nhãn hiệu thành công!", "success");
+                        location.reload();
+                    }
+
+
+                },
+                error: function () {
+                    swal("Thất bại!", "Thêm Nhãn hiệu thất bại hãy thử lại!", "error");
+                }
+            });
+           
+    }
+ 
+</script>
