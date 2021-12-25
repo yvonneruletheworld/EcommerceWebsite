@@ -401,5 +401,59 @@ namespace EcommerceWebsite.Api.Controllers
                 return BadRequest(Messages.API_Exception + ex);
             }
         }
+        [HttpPost("them-thuocTinh")]
+        public async Task<IActionResult> ThemVaSuaHang(NhanHieu thuocTinh)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    
+                    var result = await _dinhLuongServices.ThemVaSuaHang(thuocTinh);
+                    if (!result)
+                    {
+                        return BadRequest(Messages.API_Failed);
+                    }
+                    else
+                    {
+                        return Ok(Messages.API_Success);
+                    }
+
+
+                }
+                return BadRequest(Messages.API_Failed);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        [HttpPost("xoa-hang/{maHang}")]
+        public async Task<IActionResult> XoaHang(string maHang)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+
+                    var result = await _dinhLuongServices.XoaHang(maHang);
+                    if (!result)
+                    {
+                        return BadRequest(Messages.API_Failed);
+                    }
+                    else
+                    {
+                        return Ok(Messages.API_Success);
+                    }
+
+
+                }
+                return BadRequest(Messages.API_Failed);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

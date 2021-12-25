@@ -14,5 +14,7 @@ namespace EcommerceWebsite.Services.Interfaces.Main
         Task<List<ThuocTinh>> LayThongSo();
         Task<List<string>> AddRangeAsync(List<DinhLuong> input);
         Task<bool> UpdateAsync(DinhLuong input);
+        Task<bool> ThemVaSuaHang(NhanHieu input);
+        Task<bool> XoaHang(string maNhanHieu);
     }
 }

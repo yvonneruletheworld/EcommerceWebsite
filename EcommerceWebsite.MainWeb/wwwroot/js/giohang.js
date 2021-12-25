@@ -87,7 +87,7 @@ $('body').on('click', '.btn-xoa-gioHang', function () {
         }
     });
 })
-$('body').on('click', '.btn-sua-gioHang', function () {
+     function () {
     const id = $(this).data('id');
     const soLuong = $("#soLuongGH-"+id+"").val();
     $.ajax({

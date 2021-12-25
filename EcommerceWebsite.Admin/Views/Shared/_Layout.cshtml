@@ -18,7 +18,7 @@
     @using Microsoft.AspNetCore.Http
 </head>
 <body>
-   
+
     <!-- [ Pre-loader ] start -->
     <div class="loader-bg">
         <div class="loader-track">
@@ -73,10 +73,9 @@
                         <a href="#!" class="pc-link "><span class="pc-micon"><i data-feather="grid"></i></span><span class="pc-mtext">SẢN PHẨM</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                         <ul class="pc-submenu">
                             <li class="pc-item"><a class="pc-link" href="@Url.Action("DanhSachSanPham","SanPham")">Sản phẩm</a></li>
-                            <li class="pc-item"><a class="pc-link" href="#">Danh mục</a></li>
                             <li class="pc-item"><a class="pc-link" href="@Url.Action("Index","HUIManage")">Quản lý Combo</a></li>
-                            <li class="pc-item"><a class="pc-link" href="#">Hãng</a></li>
-                            <li class="pc-item"><a class="pc-link" href="#">Đánh giá sản phẩm</a></li>
+                            <li class="pc-item"><a class="pc-link" href="@Url.Action("QuanLyDanhMuc","SanPham")">Danh mục</a></li>
+                            <li class="pc-item"><a class="pc-link" href="@Url.Action("QuanLyNhanHieu","SanPham")">Hãng</a></li>
                         </ul>
                     </li>
                     @*Đơn hàng*@
@@ -153,7 +152,7 @@
                                 <i class="material-icons-two-tone">account_circle</i>
                                 <span>Tài khoản của bạn</span>
                             </a>
-                           
+
                             <a href="#!" class="dropdown-item">
                                 <i class="material-icons-two-tone">settings</i>
                                 <span>Thiết lập</span>
@@ -227,7 +226,7 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/xuly.js"></script>
     @RenderSection("Scripts", required: false)
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
 </body>
