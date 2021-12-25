@@ -281,15 +281,15 @@ namespace EcommerceWebsite.Api.Controllers
             }
         }
 
-        [HttpGet("Views/{productId}")]
-        public async Task<IActionResult> GetViewProduct(string productId)
+        [HttpGet("Views/{productId}/{maKH}")]
+        public async Task<IActionResult> GetViewProduct(string productId, string maKH)
         {
             if (String.IsNullOrEmpty(productId))
                 return BadRequest(Messages.API_EmptyInput);
             else
             {
                 // lay san pham
-                var listObj = await _sanPhamServices.LaySanPhamTheoLoai(1, null, productId);
+                var listObj = await _sanPhamServices.LaySanPhamTheoLoai(1, null, productId, maKH);
                 if (listObj == null)
                     return BadRequest(Messages.API_EmptyResult);
                 return Ok(listObj.FirstOrDefault());
@@ -310,12 +310,12 @@ namespace EcommerceWebsite.Api.Controllers
                 return BadRequest(Messages.API_Exception + ex);
             }
         }
-        [HttpGet("lay-sanpham-theodanhmuc/{prdId}")]
-        public async Task<IActionResult> laySanPhamTheoDanhMuc(string prdId)
+        [HttpGet("lay-sanpham-theodanhmuc/{prdId}/{maKH}")]
+        public async Task<IActionResult> laySanPhamTheoDanhMuc(string prdId, string maKH)
         {
             try
             {
-                var result = await _sanPhamServices.laySanPhamTheoDanhMuc(prdId);
+                var result = await _sanPhamServices.laySanPhamTheoDanhMuc(prdId, maKH);
                 if (result == null)
                     return BadRequest(Messages.API_EmptyResult);
                 else return Ok(result);
@@ -370,12 +370,12 @@ namespace EcommerceWebsite.Api.Controllers
                 return Ok(listObj);
             }
         }
-        [HttpGet("lay-sanphammoinhat")]
-        public async Task<IActionResult> LaySanPhamMoiNhat()
+        [HttpGet("lay-sanphammoinhat/{maKH}")]
+        public async Task<IActionResult> LaySanPhamMoiNhat(string maKH)
         {
             try
             {
-                var result = await _sanPhamServices.LaySanPhamMoiNhat();
+                var result = await _sanPhamServices.LaySanPhamMoiNhat(maKH);
                 if (result == null)
                     return BadRequest(Messages.API_EmptyResult);
                 else return Ok(result);

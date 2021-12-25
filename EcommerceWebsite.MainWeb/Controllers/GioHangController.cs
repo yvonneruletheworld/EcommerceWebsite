@@ -161,8 +161,8 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
                 throw ex;
             }
         }
-        [HttpGet("get-data-thanhtoan")]
-        public async Task<IActionResult> ThanhToanGioHangAsync()
+        [HttpPost("get-data-thanhtoan")]
+        public async Task<IActionResult> ThanhToanGioHangAsync(HoaDonInput hoaDonInput)
         {
             try
             {
@@ -171,7 +171,48 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
                     var userId = User.Claims.Where(claim => claim.Type == ClaimTypes.Sid)
                                              .FirstOrDefault()
                                              .Value;
-                    var data = GioHangOutput.NormalCart;
+                    //Kiem tra gio hang binh thuong va gio hang HUI
+                    List<GioHang> gioHang = new List<GioHang>();
+                    if (hoaDonInput.ListCheckoutHUICart != null && hoaDonInput.ListCheckoutNormalCart != null
+                        && (hoaDonInput.ListCheckoutHUICart.Count() != 0 || hoaDonInput.ListCheckoutNormalCart.Count() != 0))
+                    {
+                        //loc giỏ hàng bình thường 
+                        if (hoaDonInput.ListCheckoutNormalCart.Count() != 0 && hoaDonInput.ListCheckoutNormalCart[0] != null)
+                        {
+                            var listCheckoutNormalCart = hoaDonInput.ListCheckoutNormalCart[0].Split(",");
+                            foreach (var cartId in listCheckoutNormalCart)
+                            {
+                                var checkOutItem = GioHangOutput.Find(cartId);
+                                if (checkOutItem != null)
+                                {
+                                    gioHang.Add(checkOutItem);
+                                }
+
+                            }
+                        }
+
+                        //lọc giỏ hàng HUI
+                        if (hoaDonInput.ListCheckoutHUICart.Count() != 0 && hoaDonInput.ListCheckoutHUICart[0] != null)
+                        {
+                            var listCheckoutHUICart = hoaDonInput.ListCheckoutHUICart[0].Split(",");
+                            foreach (var idAndCode in listCheckoutHUICart)
+                            {
+                                var cartId = idAndCode.Split('_')[0];
+                                var code = idAndCode.Split('_')[1];
+                                var checkOutItem = GioHangOutput.Find(cartId, code);
+                                if (checkOutItem != null)
+                                {
+                                    gioHang.Add(checkOutItem);
+                                }
+
+                            }
+                        }
+                    }
+                    //else //Gio hang trong
+                    //    return Json(new { status = false });
+
+
+                    var data = gioHang;
                     var KH = await _khachHangApiServices.layDiaChiKhachHang(userId);
                     if (KH.Count != 0)
                     {
@@ -371,9 +412,10 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
                     hd.ThanhTien = input.ThanhTien;
                     hd.PhiGiaoHang = input.Ship;
                     hd.MaKhuyenMai = input.MaKhuyenMai;
+                    hd.TinhTrang = "Đang xử lý";
                     var them = string.IsNullOrEmpty(input.MaKhuyenMai)?
-                        await _gioHangApiServices.ThemHoaDon(hd)
-                        : await _gioHangApiServices.ThemHoaDonKhongKM(hd); ;
+                        await _gioHangApiServices.ThemHoaDonKhongKM(hd)
+                        : await _gioHangApiServices.ThemHoaDon(hd);
                     string maHoaDon = hd.MaHoaDon;
                     if (them)// thêm thành công
                     {

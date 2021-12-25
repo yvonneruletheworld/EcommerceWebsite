@@ -203,8 +203,12 @@
 
                                         </div>
                                         <span></span>
-                                        @(await Html.PartialAsync("~/Views/Home/_MiniCart.cshtml"))
-                                </ul>
+                                        <div class="minicart">
+                                                <a href="@Url.Action("Index","GioHang")" class="li-button li-button-fullwidth li-button-sm">
+                                                    <span>Chi tiết giỏ hàng</span>
+                                                </a>
+                                        </div>
+</ul>
                             </div>
                         </div>
                         <!-- Header Middle Right Area End Here -->

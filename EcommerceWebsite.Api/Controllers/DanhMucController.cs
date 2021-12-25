@@ -39,12 +39,12 @@ namespace EcommerceWebsite.Api.Controllers
             } 
         }
 
-        [HttpGet("get-danhmuc-sanpham/{count}")]
-        public async Task<IActionResult> GetDanhMucVaSanPham (int count)
+        [HttpGet("get-danhmuc-sanpham/{count}/{maKH}")]
+        public async Task<IActionResult> GetDanhMucVaSanPham (int count, string maKH)
         {
             try
             {
-                var rs = await _danhMucServices.GetDanhMucVaSanPhams(count);
+                var rs = await _danhMucServices.GetDanhMucVaSanPhams(count, maKH);
                 if (rs == null)
                     return BadRequest(Messages.API_EmptyResult);
                 else

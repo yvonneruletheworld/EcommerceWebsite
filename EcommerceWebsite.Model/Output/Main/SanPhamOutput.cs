@@ -36,6 +36,7 @@ namespace EcommerceWebsite.Utilities.Output.Main
         public string XepHang { get; set; }
         [JsonProperty("trangThai")]
         public Status Status { get; set; }
+        public Boolean TrangThaiYeuThich { get; set; }
 
         public decimal giaBan { get; set; }
         [JsonProperty("thanhTien")]

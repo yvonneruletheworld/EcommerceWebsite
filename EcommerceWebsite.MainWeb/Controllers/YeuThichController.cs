@@ -64,10 +64,11 @@ namespace EcommerceWebsite.MainWeb.Controllers
                     spyt.MaSanPham = id;
                     spyt.MaKhachHang = userId;
                     var them =  _yeuThichSanPhamApiServices.ThemYeuThichSanPham(spyt);
-                    var soLuong = await _yeuThichSanPhamApiServices.laySanPhamYeuThich(userId);
-                    HttpContext.Session.SetString(SessionSoLuongYT, soLuong.Count() + "");
+                   
                     if (them.Result)// thêm thành công
                     {
+                        var soLuong = await _yeuThichSanPhamApiServices.laySanPhamYeuThich(userId);
+                        HttpContext.Session.SetString(SessionSoLuongYT, soLuong.Count() + "");
                         return Json(new
                         {
                            sl = soLuong.Count(),
@@ -76,6 +77,8 @@ namespace EcommerceWebsite.MainWeb.Controllers
                     }
                     else//Đã thêm
                     {
+                        var soLuong = await _yeuThichSanPhamApiServices.laySanPhamYeuThich(userId);
+                        HttpContext.Session.SetString(SessionSoLuongYT, soLuong.Count() + "");
                         return Json(new
                         {
                             sl = soLuong.Count(),

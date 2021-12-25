@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -77,8 +78,8 @@ namespace EcommerceWebsite.Services.Services.Main
         {
             try
             {
-                //lấy những thông số k phải list
-                var obj = await (from sp in _context.SanPhams
+                    //lấy những thông số k phải list
+                    var obj = await (from sp in _context.SanPhams
                                      // Sản phẩm - Đánh giá 1 - 1
                                      //join dg in _context.DanhGiaSanPhams on (sp == null ? string.Empty : sp.MaSanPham) equals dg.MaSanPham into sp_dg_group
                                      //from sp_dg in sp_dg_group.DefaultIfEmpty()
@@ -145,7 +146,6 @@ namespace EcommerceWebsite.Services.Services.Main
                                           LoaiSanPham = loaiSanPham.TenDanhMuc,
                                           GiaBan = dl_lsg.GiaMoi,
                                           MaLoai = loaiSanPham.MaDanhMuc,
-
                                           TrangThaiYeuThich = false
                                       }).ToListAsync();
                     return data;
@@ -227,7 +227,7 @@ namespace EcommerceWebsite.Services.Services.Main
             }
         }
 
-        public async Task<List<SanPhamVM>> LaySanPhamTheoLoai(int take = 1, string loaiSanPham = null, string maSanPham = null)
+        public async Task<List<SanPhamVM>> LaySanPhamTheoLoai(int take = 1, string loaiSanPham = null, string maSanPham = null, string maKH = null)
         {
             try
             {
@@ -258,6 +258,7 @@ namespace EcommerceWebsite.Services.Services.Main
                                       GiaBan = dl_lsg.GiaMoi,
                                       ngayTao = sp.NgayTao,
                                       MaLoai = sp.MaLoaiSanPham,
+                                      TrangThaiYeuThich = _context.SanPhamYeuThiches.FirstOrDefault(x => x.MaKhachHang == maKH && x.MaSanPham == sp.MaSanPham && x.TrangThai).TrangThai == null ? false : true,
                                       //XepHang = sp_dl.MaDinhLuong
                                   }).Take(take).ToListAsync();
 
@@ -305,7 +306,7 @@ namespace EcommerceWebsite.Services.Services.Main
                 throw ex;
             }
         }
-        public async Task<List<SanPhamOutput>> laySanPhamTheoDanhMuc(string idDanhMuc)
+        public async Task<List<SanPhamOutput>> laySanPhamTheoDanhMuc(string idDanhMuc, string maKH = null)
         {
             try
             {
@@ -331,6 +332,7 @@ namespace EcommerceWebsite.Services.Services.Main
                                       LoaiSanPham = loaiSanPham.TenDanhMuc,
                                       giaBan = dl_lsg.GiaMoi,
                                       MaLoai = loaiSanPham.MaDanhMuc,
+                                      TrangThaiYeuThich = _context.SanPhamYeuThiches.FirstOrDefault(x => x.MaKhachHang == maKH && x.MaSanPham == sp.MaSanPham && x.TrangThai).TrangThai == null ? false : true,
                                   }).ToListAsync();
                 return data;
             }
@@ -344,6 +346,7 @@ namespace EcommerceWebsite.Services.Services.Main
         {
             try
             {
+
                 var data = await (from sp in _context.SanPhams.Where(s => s.TenSanPham.Contains(idTen))
                                   join nhanHieu in _context.NhanHieus on sp.MaHang equals nhanHieu.MaHang
                                   join loaiSanPham in _context.DanhMucs on sp.MaLoaiSanPham equals loaiSanPham.MaDanhMuc
@@ -366,6 +369,7 @@ namespace EcommerceWebsite.Services.Services.Main
                                       LoaiSanPham = loaiSanPham.TenDanhMuc,
                                       giaBan = dl_lsg.GiaMoi,
                                       MaLoai = loaiSanPham.MaDanhMuc,
+
                                   }).ToListAsync();
                 return data;
             }
@@ -497,7 +501,7 @@ namespace EcommerceWebsite.Services.Services.Main
             }
         }
 
-        public async Task<List<SanPhamVM>> LaySanPhamMoiNhat()
+        public async Task<List<SanPhamVM>> LaySanPhamMoiNhat(string maKH = null)
         {
             try
             {
@@ -526,8 +530,7 @@ namespace EcommerceWebsite.Services.Services.Main
                                      LoaiSanPham = loaiSanPham.TenDanhMuc,
                                      GiaBan = dl_lsg.GiaMoi,
                                      MaLoai = loaiSanPham.MaDanhMuc,
-
-                                     TrangThaiYeuThich = false
+                                     TrangThaiYeuThich = _context.SanPhamYeuThiches.FirstOrDefault(x => x.MaKhachHang == maKH && x.MaSanPham == sp.MaSanPham && x.TrangThai).TrangThai == null ? false : true,
                                  }).ToListAsync();
                 return data;
             }

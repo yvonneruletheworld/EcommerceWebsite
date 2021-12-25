@@ -51,9 +51,11 @@
             </div>
         </div>
     </div>
+    <input id="maDanhMuc1" value="@ViewBag.LoaiHang" hidden/>
 </div>
 
 <script>
+
     $(document).ready(() => {
         initResourceFilterQuery();
 
@@ -64,19 +66,38 @@
         layDanhMuc();
     }
     //san pham
+
     function getDataSanPham() {
-        $.ajax({
-            url: '/get-data-allsanpham',
-            type: 'GET',
-            dataType: 'html',
-            success: (result) => {
-                $("#loadAllSanPham")[0].innerHTML = result;
-            },
-            error: (err) => {
-                alert('failed');
-                console.log(err);
-            }
-        });
+        var maDMuc = $('#maDanhMuc1').val();
+        if (maDMuc == "") {
+            $.ajax({
+                url: '/get-data-allsanpham',
+                type: 'GET',
+                dataType: 'html',
+                success: (result) => {
+                    $("#loadAllSanPham")[0].innerHTML = result;
+                },
+                error: (err) => {
+                    alert('failed');
+                    console.log(err);
+                }
+            });
+        }
+        else {
+            $.ajax({
+                url: `/get-data-sanpham-loai/${maDMuc}`,
+                type: 'GET',
+                dataType: 'html',
+                success: (result) => {
+                    $("#loadAllSanPham")[0].innerHTML = result;
+                },
+                error: (err) => {
+                    alert('failed');
+                    console.log(err);
+                }
+            });
+        };
+
     }
     //Hãng
     function layNhanHieuSanPham() {

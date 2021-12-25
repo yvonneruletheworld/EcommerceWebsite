@@ -61,7 +61,7 @@
                                         <div class="product_desc_info">
                                             <div class="product-review">
                                                 <h5 class="manufacturer">
-                                                    <a href="product-details.html">@item.LoaiSanPham</a>
+                                                    <a href="@Url.Action("Index", "CuaHang",new {loaiHang =  item.MaLoai})">@item.LoaiSanPham</a>
                                                 </h5>
                                                 <div class="rating-box">
                                                     <ul class="rating">
@@ -122,7 +122,7 @@
                                         <div class="product_desc_info">
                                             <div class="product-review">
                                                 <h5 class="manufacturer">
-                                                    <a href="product-details.html">@item.LoaiSanPham</a>
+                                                    <a href="@Url.Action("Index", "CuaHang",new {loaiHang =  item.MaLoai})">@item.LoaiSanPham</a>
                                                 </h5>
                                                 <div class="rating-box">
                                                     <ul class="rating">
@@ -155,7 +155,7 @@
                                             {
                                                 <li class="wishlist"><a class="btn-them-yeuthich" data-id="@item.MaSanPham" href="#"><i class="fa fa-heart" style="color: #ad172c"></i>Thêm yêu thích</a></li>
                                             }
-                                            <li><a class="quick-view" data-toggle="modal" data-target="#exampleModalCenter" href="#"><i class="fa fa-eye"></i>Quick view</a></li>
+                                            <li><a class="quick-view" href="@Url.Action("Index", "Detail", new { prdId = item.MaSanPham, prdMaDanhMuc = item.MaLoai })"><i class="fa fa-eye"></i>Xem chi tiết sản phẩm</a></li>
                                         </ul>
                                     </div>
                                 </div>

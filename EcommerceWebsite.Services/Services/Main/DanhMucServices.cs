@@ -83,7 +83,7 @@ namespace EcommerceWebsite.Services.Services.Main
                 }).FirstOrDefault();
         }
 
-        public async Task<List<CategorySetVM>> GetDanhMucVaSanPhams(int itemCount)
+        public async Task<List<CategorySetVM>> GetDanhMucVaSanPhams(int itemCount, string maKH)
         {
             var rs = new List<CategorySetVM>();
             var lstDM = await _context.DanhMucs
@@ -95,12 +95,13 @@ namespace EcommerceWebsite.Services.Services.Main
                     break;
                 else
                 {
-                    var sanPhamTheoDanhMucs = await _sanPhamServices.LaySanPhamTheoLoai(itemCount, dm.MaDanhMuc);
+                        var sanPhamTheoDanhMucs = await _sanPhamServices.LaySanPhamTheoLoai(itemCount, dm.MaDanhMuc, null, maKH);
                     if (sanPhamTheoDanhMucs == null || sanPhamTheoDanhMucs.Count == 0)
                         continue;
                     else
                     {
                         var newItem = new CategorySetVM();
+                        newItem.MaDanhMuc = dm.MaDanhMuc;
                         newItem.TenDanhMuc = dm.TenDanhMuc;
                         newItem.ListSanPham = sanPhamTheoDanhMucs;
                         newItem.ListDanhMucCon = await GetDanhMucCon(dm.MaDanhMuc);

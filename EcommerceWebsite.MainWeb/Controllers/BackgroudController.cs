@@ -58,7 +58,7 @@ namespace EcommerceWebsite.MainWeb.Controllers
                                 authProperties);
                     var s = User.Identity;
                     if (string.IsNullOrEmpty(previousPage))
-                        return RedirectToAction("Index", "Home");
+                        return  RedirectToAction("Index", "Home");
                     else
                     {
                         //get user id
