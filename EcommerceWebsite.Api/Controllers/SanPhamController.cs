@@ -66,6 +66,21 @@ namespace EcommerceWebsite.Api.Controllers
                 return BadRequest(Messages.API_Exception + ex);
             }
         }
+        [HttpGet("lay-PhieuNhap/{maPN}")]
+        public async Task<IActionResult> layPhieuNhapSanPham(string maPN)
+        {
+            try
+            {
+                var result = await _sanPhamServices.LayPhieuNhapSanPham(maPN);
+                if (result == null)
+                    return BadRequest(Messages.API_EmptyResult);
+                else return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(Messages.API_Exception + ex);
+            }
+        }
         [HttpPost("them-san-pham")]
         public async Task<string> ThemSanPham(SanPhamOutput input, string creatorId)
         {
@@ -147,6 +162,7 @@ namespace EcommerceWebsite.Api.Controllers
                         .CreateNewInventoryVoucher(newInventory);
                     if(rsInputInventory)
                     {
+                       
                         //them sp
                         foreach (var sp in listProduct)
                         {
@@ -437,6 +453,34 @@ namespace EcommerceWebsite.Api.Controllers
                 {
 
                     var result = await _dinhLuongServices.XoaHang(maHang);
+                    if (!result)
+                    {
+                        return BadRequest(Messages.API_Failed);
+                    }
+                    else
+                    {
+                        return Ok(Messages.API_Success);
+                    }
+
+
+                }
+                return BadRequest(Messages.API_Failed);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [HttpPost("them-dinhluongsanpham")]
+        public async Task<IActionResult> ThemDinhLuongSanPham(DinhLuong input)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                   
+                    var result = await _sanPhamServices.ThemDinhLuongSanPham(input);
                     if (!result)
                     {
                         return BadRequest(Messages.API_Failed);

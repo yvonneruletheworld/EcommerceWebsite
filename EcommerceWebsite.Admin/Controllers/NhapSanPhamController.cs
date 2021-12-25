@@ -15,6 +15,7 @@ using EcommerceWebsite.Data.Enum;
 using AutoMapper;
 using EcommerceWebsite.Utilities.Input;
 using System.Security.Claims;
+using EcommerceWebsite.Data.Entities;
 
 namespace EcommerceWebsite.Admin.Controllers
 {
@@ -45,11 +46,11 @@ namespace EcommerceWebsite.Admin.Controllers
             {
                 throw ex;
             }
-          
+
         }
 
         [HttpPost]
-        public async Task<IActionResult> ReadInputExcel(IFormFile file ,[FromServices] IHostingEnvironment hostingEnvironment)
+        public async Task<IActionResult> ReadInputExcel(IFormFile file, [FromServices] IHostingEnvironment hostingEnvironment)
         {
             //string filePath = $"{hostingEnvironment.WebRootPath}\\files\\{file.FileName}";
             using (FileStream fileStream = System.IO.File.Create(file.FileName))
@@ -63,15 +64,15 @@ namespace EcommerceWebsite.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SaveInputExcel([FromQuery]List<SanPhamInput> listImport, string maNhaCungCap, string total, string maLoai)
+        public async Task<IActionResult> SaveInputExcel([FromQuery] List<SanPhamInput> listImport, string maNhaCungCap, string total, string maLoai)
         {
-            var listProducts = listImport.Count() == 0? HttpContext.Session.Get<IEnumerable<SanPhamInput>>("ListImportPrd"): listImport;
+            var listProducts = listImport.Count() == 0 ? HttpContext.Session.Get<IEnumerable<SanPhamInput>>("ListImportPrd") : listImport;
             var ListChiTietNhap = new List<SanPhamOutput>();
-            foreach(var prdImport in listProducts)
+            foreach (var prdImport in listProducts)
             {
                 var ct = _mapper.Map<SanPhamOutput>(prdImport);
                 ct.MaSanPham = Guid.NewGuid().ToString();
-                if(ct != null)
+                if (ct != null)
                 {
                     //prepare data
                     ct.MaLoai = maLoai;
@@ -88,9 +89,9 @@ namespace EcommerceWebsite.Admin.Controllers
                         MaDinhLuong = maDinhLuong,
                         GiaBan = prdImport.GiaNhap,
                         TenDinhLuong = ct.ListThongSo[0].DonVi,
-                    }) ;
+                    });
                     ListChiTietNhap.Add(ct);
-                }    
+                }
             }
             //call api
             //prepare data
@@ -112,22 +113,38 @@ namespace EcommerceWebsite.Admin.Controllers
             };
 
             var resultInsert = await _sanPhamApiServices.ThemPhieuNhap(phieuNhapInput);
-            if (resultInsert) {
-                HttpContext.Session.Remove("ListImportPrd");
-                return Json(new { code = 200 }); 
-            } else return Json(new { code = 500 });
-        }
 
+            if (resultInsert)
+            {
+                HttpContext.Session.Remove("ListImportPrd");
+                var maPhieuNhap = HttpContext.Session.GetString("MaPhieuNhap");
+                return Json(new { code = 200 });
+            }
+            else return Json(new { code = 500 });
+        }
+        [HttpGet("get-data-phieunhapSP/{maPN}")]
+        public async Task<IActionResult> layPhieuNhapSP(string maPN)
+        {
+            try
+            {
+                var data = await _sanPhamApiServices.layPhieuNhapSP(maPN);
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         private IEnumerable<SanPhamInput> GetListImport(string fileName)
         {
             var filePath = $"D:\\School\triplev-store\\EcommerceWebsite.Admin\\wwwroot\\files\\{fileName}";
             //var filePath = $"{ Directory.GetCurrentDirectory()}{@"\wwwroot\files}"}" +"\\" + fileName;
             System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
-            using(var stream = System.IO.File.Open(fileName, FileMode.Open, FileAccess.Read))
+            using (var stream = System.IO.File.Open(fileName, FileMode.Open, FileAccess.Read))
             {
-                using(var reader = ExcelReaderFactory.CreateReader(stream))
+                using (var reader = ExcelReaderFactory.CreateReader(stream))
                 {
-                    while(reader.Read())
+                    while (reader.Read())
                     {
                         var prd = new SanPhamInput()
                         {
@@ -145,5 +162,7 @@ namespace EcommerceWebsite.Admin.Controllers
                 }
             }
         }
+
+     
     }
 }

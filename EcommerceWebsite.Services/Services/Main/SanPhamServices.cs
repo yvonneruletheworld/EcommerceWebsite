@@ -576,5 +576,66 @@ namespace EcommerceWebsite.Services.Services.Main
                 throw ex;
             }
         }
+
+        public async Task<List<PhieuNhap>> LayPhieuNhapSanPham(string maPN)
+        {
+            try
+            {
+                var data = await _context.PhieuNhaps.Where(s => s.MaPhieuNhap == maPN).ToListAsync();
+                return data;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public async Task<bool> ThemDinhLuongSanPham(DinhLuong input)
+        {
+            try
+            {
+                if (input.MaThuocTinh == "TT07" || input.MaThuocTinh == "TT014")
+                {
+                    await _context.Database.BeginTransactionAsync();
+                    await _context.DinhLuongs.AddRangeAsync(input);
+
+                    var rs = await _context.SaveChangesAsync();
+
+                    await _context.Database.CommitTransactionAsync();
+                    return rs > 0;
+                }
+                 var duLieu = await _context.DinhLuongs.FirstOrDefaultAsync(s => s.MaThuocTinh == input.MaThuocTinh && s.MaSanPham == input.MaSanPham);
+                if(duLieu != null)
+                {
+                  
+                        await _context.Database.BeginTransactionAsync();
+                        duLieu.GiaTri = input.GiaTri;
+                        duLieu.DonVi = input.DonVi;
+                        _context.Entry<DinhLuong>(input).State = EntityState.Detached;
+                        _context.DinhLuongs.Update(duLieu);
+                        var rs = await _context.SaveChangesAsync();
+                        await _context.Database.CommitTransactionAsync();
+                        return true;
+                }
+                else
+                {
+                    await _context.Database.BeginTransactionAsync();
+                    await _context.DinhLuongs.AddRangeAsync(input);
+
+                    var rs = await _context.SaveChangesAsync();
+
+                    await _context.Database.CommitTransactionAsync();
+                    return rs > 0;
+                }
+              
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
     }
 }

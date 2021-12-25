@@ -120,7 +120,19 @@
                         </div>
 
                     </div>
+                </form>
 
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h5 class="mb-3">THÔNG SỐ SẢN PHẨM</h5>
+            <hr>
+           
+            <div class="card">
+                <form class="needs-validation" style="padding-left: 50px; padding-right: 50px; padding-top: 50px; ">
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="row">
@@ -139,29 +151,21 @@
                             <div class="row">
                                 <div class="col-md-6 mb-6">
                                     <label class="form-label" for="">Giá Trị</label>
-                                    <input type="text" class="form-control" placeholder="Giá trị">
+                                    <input type="text" class="form-control" id="GiaTriTT" placeholder="Giá trị">
                                 </div>
 
                                 <div class="col-md-6 mb-6">
                                     <label class="form-label" for="">Đơn Vị</label>
-                                    <input type="text" class="form-control" placeholder="Đơn vị">
+                                    <input type="text" class="form-control"  id="DonViTT" placeholder="Đơn vị">
+                                </div>
+                                <div class="col-3">
+                                    <button class="btn mt-3 mb-3 btn-primary float-left" type="button" onclick="ThemDinhLuong()">Thêm thông số</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </form>
-
-            </div>
-        </div>
-
-    </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <h5 class="mb-3">THÔNG SỐ SẢN PHẨM</h5>
-            <hr>
-
-                <div class="card">
+               
                     <div class="card-body table-border-style">
                         <div class="table-responsive">
                             <table class="table table-hover">
@@ -202,7 +206,7 @@
                             </table>
                         </div>
                     </div>
-                </div>
+            </div>
             
         </div>
     </div>
@@ -358,7 +362,31 @@
                 }
             });
     }
-    function HienThiGiaTri(maDV) {
-      
+    function ThemDinhLuong() {
+
+
+        var masp = $('#SanPham_MaSanPham').val();
+        var MaThuocTinh = $('#thong-so-selection-id').val();
+        var GiaTri = $('#GiaTriTT').val();
+        var DonVi = $('#DonViTT').val();
+
+        $.ajax({
+            url: '/DoanhThu/ThemDinhLuongSanPham',
+            dataType: 'json',
+            data: {
+                maThuocTinh: MaThuocTinh,
+                maSanPham: masp,
+                giaTri: GiaTri,
+                DonVi: DonVi
+            },
+        
+            success: function (result) {
+                location.reload();
+            },
+            error: function (err) {
+                alert("Lỗi cập nhật");
+                fd = new FormData();
+            }
+        });
     }
 </script>

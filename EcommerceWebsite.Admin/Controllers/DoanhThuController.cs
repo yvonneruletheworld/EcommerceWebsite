@@ -1,4 +1,5 @@
 ﻿using EcommerceWebsite.Api.Interface;
+using EcommerceWebsite.Data.Entities;
 using EcommerceWebsite.Utilities.Output.Main;
 using EcommerceWebsite.Utilities.ViewModel;
 using Microsoft.AspNetCore.Mvc;
@@ -70,6 +71,44 @@ namespace EcommerceWebsite.Admin.Controllers
             }
             // lay so luong ban va nhap 
             return RedirectToAction("Index", "DoanhThu");
+        }
+        public async Task<IActionResult> ThemDinhLuongSanPham(string maThuocTinh, string maSanPham, string giaTri, string DonVi)
+        {
+            try
+            {
+                DinhLuong spyt = new DinhLuong(null);
+                spyt.MaThuocTinh = maThuocTinh;
+                spyt.MaSanPham = maSanPham;
+                spyt.GiaTri = giaTri;
+                spyt.DonVi = DonVi;
+                var them = _sanPhamApiServices.ThemDinhLuongSanPham(spyt);
+                if (them.Result)// thêm thành công
+                {
+                    return Json(new
+                    {
+                        status = true
+                    });
+                }
+                else//Đã thêm
+                {
+                    return Json(new
+                    {
+
+                        code = 2,
+                        msg = "Lỗi rồi",
+                    });
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    code = 500,
+                    msg = "Lỗi rồi" + ex.Message
+                });
+            }
         }
 
     }
