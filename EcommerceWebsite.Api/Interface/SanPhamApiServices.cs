@@ -161,5 +161,25 @@ namespace EcommerceWebsite.Api.Interface
                 .GetAsync($"/api/SanPham/{maDinhLuong}/{editor}/{newPrice}");
             return response.IsSuccessStatusCode;
         }
+
+        public async Task<List<PhieuNhap>> layPhieuNhapSP(string maPN)
+        {
+            return await GetListAsync<PhieuNhap>($"/api/SanPham/lay-PhieuNhap/{maPN}");
+        }
+
+        public async Task<bool> ThemDinhLuongSanPham(DinhLuong input)
+        {
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_configuration[SystemConstant.BaseAddress]);
+            //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+
+            var requestItem = JsonConvert.SerializeObject(input);
+            var httpContent = new StringContent(requestItem, Encoding.UTF8, "application/json");
+
+
+            var response = await client
+                .PostAsync($"/api/SanPham/them-dinhluongsanpham", httpContent);
+            return response.IsSuccessStatusCode;
+        }
     }
 }

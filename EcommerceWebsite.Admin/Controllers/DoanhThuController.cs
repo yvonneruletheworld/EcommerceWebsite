@@ -1,4 +1,5 @@
 ﻿using EcommerceWebsite.Api.Interface;
+using EcommerceWebsite.Data.Entities;
 using EcommerceWebsite.Utilities.Output.Main;
 using EcommerceWebsite.Utilities.ViewModel;
 using Microsoft.AspNetCore.Mvc;
@@ -29,7 +30,7 @@ namespace EcommerceWebsite.Admin.Controllers
             {
                 var vm = new DoanhThuVM();
                 vm.SanPham = await _sanPhamApiServices.LayChiTietSanPham(maSanPham);
-                vm.SanPham.giaBan = vm.SanPham.BangGia.FirstOrDefault().GiaBan;
+              
                 vm.ListSanPhamNhapVaBan = await _sanPhamApiServices.LaySoLuongNhapVaBan(maSanPham);
                 vm.ListDinhLuong = await _sanPhamApiServices.layDinhluong();
                 vm.ListDanhMuc = await _danhMucApiServices.GetCategories();
@@ -67,6 +68,44 @@ namespace EcommerceWebsite.Admin.Controllers
             }
             // lay so luong ban va nhap 
             return RedirectToAction("Index", "DoanhThu");
+        }
+        public async Task<IActionResult> ThemDinhLuongSanPham(string maThuocTinh, string maSanPham, string giaTri, string DonVi)
+        {
+            try
+            {
+                DinhLuong spyt = new DinhLuong(null);
+                spyt.MaThuocTinh = maThuocTinh;
+                spyt.MaSanPham = maSanPham;
+                spyt.GiaTri = giaTri;
+                spyt.DonVi = DonVi;
+                var them = _sanPhamApiServices.ThemDinhLuongSanPham(spyt);
+                if (them.Result)// thêm thành công
+                {
+                    return Json(new
+                    {
+                        status = true
+                    });
+                }
+                else//Đã thêm
+                {
+                    return Json(new
+                    {
+
+                        code = 2,
+                        msg = "Lỗi rồi",
+                    });
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    code = 500,
+                    msg = "Lỗi rồi" + ex.Message
+                });
+            }
         }
 
     }
