@@ -84,7 +84,7 @@
                             </select>
                         </div>
                         <div class="col-md-5 mb-5">
-                            <label class="form-label" asp-for="SanPham.NhanHieu">Nhan Hiệu</label>
+                            <label class="form-label" asp-for="SanPham.NhanHieu">Nhãn Hiệu</label>
                             <select  class="form-control text-box single-line" id="nhan-hieu-selection-id" name="NhanHieu">
                                 @foreach (var item in Model.ListNhanHieu)
                                 {
@@ -103,11 +103,11 @@
                     <div class="row">
                         <div class="col-md-3 mb-3">
                             <label class="form-label" asp-for="SanPham.giaBan">Giá hiện tại</label>
-                            <input type="number"  class="form-control text-box single-line" asp-for="SanPham.giaBan" value="@sanPham.giaBan" id="giaBan" name="giaBan" />
+                            <input type="text"  class="form-control text-box single-line" asp-for="SanPham.giaBan" value="@string.Format("{0:0,0}",sanPham.giaBan)" id="giaBan" name="giaBan" />
                         </div>
                         <div class="col-md-3 mb-3">
                             <label class="form-label" >Giá nhập gần nhất</label>
-                            <input type="number"  class="form-control text-box single-line"  value="@giaNhapGanNhat" id="GiaNhapGanNhat" readonly name="GiaNhapGanNhat" />
+                            <input type="text"  class="form-control text-box single-line"  value="@string.Format("{0:0,0}",giaNhapGanNhat)" id="GiaNhapGanNhat" readonly name="GiaNhapGanNhat" />
                         </div>
                         <div class="col-md-3 mb-3">
                             <label class="form-label" >Lợi nhuận</label>
@@ -241,14 +241,15 @@
 
                                             <td>@item.NgayNhap</td>
                                             <td>@item.SoLuongNhap</td>
-                                            <td>@item.DonGiaNhap</td>
-                                            <td>@item.TongTienNhap</td>
+                                            <td>@string.Format("{0:0,0}", item.DonGiaNhap) VNĐ</td>
+                                            <td>@string.Format("{0:0,0}", item.TongTienNhap) VNĐ</td>
                                             <td>@item.SoLuongTon</td>
                                             <td>@item.DaBan</td>
-                                            <td>@item.DonGiaBan</td>
-                                            <td>@item.TongTienBan</td>
+                                            <td>@string.Format("{0:0,0}", item.DonGiaBan) VNĐ</td>
+                                            <td>@string.Format("{0:0,0}", item.TongTienBan) VNĐ</td>
                                             <td>@item.LoiNhuan</td>
-                                            
+
+
                                         </tr>
                                     }
                                 </tbody>
@@ -264,16 +265,16 @@
 
 <script>
     $(document).ready(function () {
-        init();
-        setUpProductPrice();
-    });
+                                                init();
+                                                setUpProductPrice();
+                                            });
 
-    function init() {
-        //$('.danh-muc-selection-id .select-styled').text('@sanPham.LoaiSanPham');
-        var danhMucSelected = document.getElementById('danh-muc-selection-id');
-        danhMucSelected.value = '@sanPham.MaLoai';
-        var nhanHieuSelected = document.getElementById('nhan-hieu-selection-id');
-        nhanHieuSelected.value = '@sanPham.MaNhanHieu';
+                                            function init() {
+                                                //$('.danh-muc-selection-id .select-styled').text('@sanPham.LoaiSanPham');
+                                                var danhMucSelected = document.getElementById('danh-muc-selection-id');
+                                                danhMucSelected.value = '@sanPham.MaLoai';
+                                                var nhanHieuSelected = document.getElementById('nhan-hieu-selection-id');
+                                                nhanHieuSelected.value = '@sanPham.MaNhanHieu';
         @*$('.nhan-hieu-selection-id .select-styled').text('@sanPham.NhanHieu');*@
         if ('@sanPham.NguoiSuaCuoi' === '1')
             $('#percentageAgree').prop('checked', true);
