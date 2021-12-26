@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using EcommerceWebsite.Services.Interfaces.ExtraServices;
 using EcommerceWebsite.Utilities.Output.System;
+using EcommerceWebsite.Data.Entities;
 
 namespace EcommerceWebsite.Admin.Controllers
 {
@@ -26,6 +27,7 @@ namespace EcommerceWebsite.Admin.Controllers
             vm.ListHuiVaDoanhSo = await _huiApiServices.GetListHUIFromData();
             return View(vm);
         }
+       
         public async Task<IActionResult> NhapNewHUI()
         {
             // doc hui
@@ -33,9 +35,14 @@ namespace EcommerceWebsite.Admin.Controllers
             var fileName = "output1";
             var huiReadRs = await _huiApiServices.GetListHUIFromOutput(fileName);
 
-            HttpContext.Session.Set<List<HUI>>("ListImportHUI", huiReadRs);
-
-            return View();
+            if(huiReadRs != null && huiReadRs.Count() > 0)
+            {
+                var addResult = await _huiApiServices.AddListHui(huiReadRs);
+                if (addResult)
+                    return await IndexAsync();
+            }
+            //HttpContext.Session.Set<List<HUI>>("ListImportHUI", huiReadRs);
+            return await IndexAsync();
         }
 
         public List<DoanhThuOutput> SetUpGiaChoHUIItemset(List<DoanhThuOutput> listSanPhamHUI, int mucLoiNhuan)
@@ -51,5 +58,6 @@ namespace EcommerceWebsite.Admin.Controllers
             }
             return listSanPhamHUI;
         }
+
     }
 }

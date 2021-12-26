@@ -1,4 +1,5 @@
-﻿using EcommerceWebsite.Data.EF;
+﻿using EcommerceWebsite.Application.Constants;
+using EcommerceWebsite.Data.EF;
 using EcommerceWebsite.Data.Entities;
 using EcommerceWebsite.Services.Interfaces.Main;
 using EcommerceWebsite.Services.Interfaces.System;
@@ -19,11 +20,13 @@ namespace EcommerceWebsite.Services.Services.System
     {
         private readonly EcomWebDbContext _context;
         private readonly IHoaDonServices _hoaDonServices;
+        private readonly ISanPhamServices _sanPhamServices;
 
-        public HUIServices(EcomWebDbContext context, IHoaDonServices hoaDonServices)
+        public HUIServices(EcomWebDbContext context, IHoaDonServices hoaDonServices, ISanPhamServices sanPhamServices)
         {
             _context = context;
             _hoaDonServices = hoaDonServices;
+            _sanPhamServices = sanPhamServices;
         }
 
         public Task<Dictionary<string, List<string>>> ModifyListOutput(List<HUI> inputList)
@@ -87,7 +90,7 @@ namespace EcommerceWebsite.Services.Services.System
         public async Task<Dictionary<DateTime, List<HUICost>>> GetHUICosts()
         {
             var listHui = await (from hui in _context.HUICosts
-                                 join sp in _context.SanPhams on hui.MaSanPham equals sp.MaSanPham
+                                 join sp in _context.SanPhams on hui.MaSanPham equals sp.NguoiXoa
                                  select new HUICost()
                                  {
                                      ComboCode = hui.ComboCode,
@@ -148,13 +151,13 @@ namespace EcommerceWebsite.Services.Services.System
             try
             {
                 var result = await _context.HUICosts
-                .Where(hc => hc.ComboCode == comboCode && hc.NgayTao == ngayTao)
+                .Where(hc => hc.ComboCode == comboCode && hc.NgayTao.Date == ngayTao.Date )
                 .Select(item => new HUIDetailVM()
                 {
                     ComboCode = item.ComboCode,
                     Utility = item.Utility,
                 }).FirstOrDefaultAsync();
-                //get List product
+               
                 if (result != null)
                 {
                     var listProduct = await GetListchiTietSanPhamHUI(result.ComboCode, ngayTao);
@@ -179,23 +182,87 @@ namespace EcommerceWebsite.Services.Services.System
         private async Task<List<DoanhThuOutput>> GetListchiTietSanPhamHUI(string comboCode, DateTime ngayTao)
         {
             var data = await (from hui in _context.HUICosts
-                              join sp in _context.SanPhams on hui.MaSanPham equals sp.MaSanPham into hui_sp_group
+                              join sp in _context.SanPhams on hui.MaSanPham equals sp.NguoiXoa into hui_sp_group
                               from hui_sp in hui_sp_group.DefaultIfEmpty()
                               join ctn in _context.ChiTietNhapSanPhams on hui_sp.MaSanPham equals ctn.MaSanPham into sp_ct_group
                               from sp_ct in sp_ct_group.DefaultIfEmpty()
-                              join pn in _context.PhieuNhaps.Where(p => DateTime.Compare(p.NgayTao, ngayTao) <= 0)
+                              join pn in _context.PhieuNhaps.Where(p => DateTime.Compare(p.NgayTao.Date, ngayTao.Date) <= 0)
                                                               .OrderByDescending(d => d.NgayTao.Date)
                                                               .ThenByDescending(d => d.NgayTao.TimeOfDay).Take(1) on sp_ct.MaNhap equals pn.MaPhieuNhap
-                              where hui.NgayTao == ngayTao && hui.ComboCode == comboCode && !hui_sp.DaXoa
+                              where hui.NgayTao.Date == ngayTao.Date && hui.ComboCode == comboCode && !hui_sp.DaXoa
                               select new DoanhThuOutput()
                               {
                                   MaSanPham = hui_sp.NguoiXoa,
                                   TenSanPham = hui_sp.TenSanPham,
                                   DonGiaNhap = sp_ct.DonGia,
                                   //LoiNhuan = (float)hui_sp.Utility,
-                                  GiaHUI = hui_sp.GiaHUI
+                                  GiaHUI = hui.Cost
                               }).ToListAsync();
-            return data;
+            
+            var tmp = await (from hui in _context.HUICosts
+                              join sp in _context.SanPhams on hui.MaSanPham equals sp.NguoiXoa into hui_sp_group
+                              from hui_sp in hui_sp_group.DefaultIfEmpty()
+                              join ctn in _context.ChiTietNhapSanPhams on hui_sp.MaSanPham equals ctn.MaSanPham into sp_ct_group
+                              from sp_ct in sp_ct_group.DefaultIfEmpty()
+                              where hui.NgayTao.Date == ngayTao.Date && hui.ComboCode == comboCode && !hui_sp.DaXoa
+                              select new DoanhThuOutput()
+                              {
+                                  MaSanPham = hui_sp.NguoiXoa,
+                                  TenSanPham = hui_sp.TenSanPham,
+                                  DonGiaNhap = sp_ct.DonGia,
+                                  NgayNhap = sp_ct.PhieuNhapEntity.NgayTao,
+                                  //LoiNhuan = (float)hui_sp.Utility,
+                                  GiaHUI = hui.Cost
+                              }).ToListAsync();
+
+            var tmp2 = tmp.Where(p => DateTime.Compare(p.NgayNhap.Date, ngayTao.Date) <= 0)
+                                                              .OrderByDescending(d => d.NgayNhap.Date)
+                                                              .ThenByDescending(d => d.NgayNhap.TimeOfDay)
+                                                              .ToList();
+            return data.Count() == 0 ? tmp2 : data;
+        }
+
+        public async Task<bool> UpdateHUIItemsetCode()
+        {
+            var listSanPham = await _context.SanPhams.ToListAsync();
+            if(listSanPham != null)
+            {
+                foreach(var sp in listSanPham)
+                {
+                    var code = Randoms.RandomString().ToUpper();
+                    sp.NguoiXoa = code;
+                    var rs = await _sanPhamServices.SuaHoacXoaSanPham(sp, false);
+                    if (!rs) return false;
+                }
+                return true;
+            }
+            return false;
+        }
+
+        public async Task<bool> SuaGiaHUI(string maHUI, decimal giaTien, string comboCode, DateTime ngayTao)
+        {
+            try
+            {
+                await _context.Database.BeginTransactionAsync();
+                var obj = await _context.HUICosts
+                    .SingleOrDefaultAsync(sp => sp.MaSanPham == maHUI && sp.ComboCode == comboCode && sp.NgayTao.Date == ngayTao.Date);
+                if (obj == null) return false;
+
+                obj.Cost = giaTien;
+                // 
+                _context.Entry<HUICost>(obj).State = EntityState.Detached;
+                _context.HUICosts.Update(obj);
+
+                var rs = await _context.SaveChangesAsync();
+                await _context.Database.CommitTransactionAsync();
+
+                return rs > 0;
+            }
+            catch (Exception ex)
+            {
+                await _context.Database.RollbackTransactionAsync();
+                throw ex;
+            }
         }
     }
 }

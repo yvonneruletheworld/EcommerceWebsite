@@ -21,6 +21,7 @@ namespace EcommerceWebsite.Admin.Controllers
         }
         public async Task<IActionResult> DanhSachSanPhamAsync()
         {
+            // cap nhat loi nhuan
             var data = await _sanPhamApiServices.laySanPham2();
             return View(data);
         }

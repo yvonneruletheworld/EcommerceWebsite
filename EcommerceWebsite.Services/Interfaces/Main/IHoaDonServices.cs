@@ -8,6 +8,7 @@ namespace EcommerceWebsite.Services.Interfaces.Main
 {
   public  interface IHoaDonServices
     {
+        Task<bool> CapNhatLoiNhuanChoSanPham();
         Task<List<ChiTietHoaDon>> DanhSachHoaDonTheoKhachHang(string maKH);
         Task<List<ChiTietHoaDon>> DanhSachHoaDonComboCode(string comboCode, DateTime ngayTao, DateTime ngayNhapKe);
         Task<int> LaySoLuongBan(string maSanPham, DateTime ngayNhap);

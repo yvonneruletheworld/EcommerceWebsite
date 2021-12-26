@@ -10,6 +10,7 @@ namespace EcommerceWebsite.Utilities.ViewModel
     {
 
         public string MaSanPham { get; set; }
+        public string MaHUIItem { get; set; }
         public string ComboCode { get; set; }
         public string TenSanPham { get; set; }
         public string HinhAnh { get; set; }

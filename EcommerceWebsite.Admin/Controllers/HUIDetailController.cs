@@ -19,14 +19,15 @@ namespace EcommerceWebsite.Admin.Controllers
             _huiServices = huiServices;
         }
 
-        public async Task<IActionResult> IndexAsync(string comboCode, DateTime ngayTao, DateTime ngayNhapKe)
+        public async Task<IActionResult> IndexAsync(string comboCode, DateTime ngayTao, DateTime ngayNhapKe, int keyIndex)
         {
             var vm = await _huiServices.GetHuiDetail(comboCode, ngayTao,ngayNhapKe);
             //vm.
             ViewBag.MucLoiNhuan = "40";
             var giaVon = vm.ListSanPhamHUIs.Sum(sp => sp.DonGiaNhap);
             ViewBag.GiaVon = giaVon;
-            ViewBag.IsFirst = ngayNhapKe == DateTime.Now;
+            ViewBag.NgayTao = ngayTao;
+            ViewBag.IsFirst = keyIndex == 0;
             // tính tổng tiền của combo dựa vào HUI của itemset 
             var tongGiaAuto = ((double)giaVon + ((double)giaVon * (double)(vm.Utility * 0.01)));
             vm.TongGiaAuto = tongGiaAuto;
@@ -36,16 +37,15 @@ namespace EcommerceWebsite.Admin.Controllers
         }
         
         [HttpPost("update-gia")]
-        public async Task<IActionResult> UpdateGia([FromBody] List<DoanhThuOutput> inputs)
+        public async Task<IActionResult> UpdateGia(string comboCode , string ngayTao , [FromBody]List<DoanhThuOutput> inputs)
         {
+            var error = 0;
             foreach(var gm in inputs)
             {
-                var newObj = new SanPham()
-                {
-                    //MaSanPham = gm.MaSanPham
-                };
+                var rs = await _huiServices.SuaGiaHui(gm.MaSanPham, gm.GiaHUI, comboCode, ngayTao);
+                error = rs ? error : error++;
             }
-            return null;
+            return error == 0? Json(new { code = 200 }) : Json(new { code = 500 });
         }
     }
 }

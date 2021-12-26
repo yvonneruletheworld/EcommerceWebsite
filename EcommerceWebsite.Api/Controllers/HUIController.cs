@@ -1,5 +1,6 @@
 ﻿using EcommerceWebsite.Application.Constants;
 using EcommerceWebsite.Data.Entities;
+using EcommerceWebsite.Services.Interfaces.Main;
 using EcommerceWebsite.Services.Interfaces.System;
 using EcommerceWebsite.Utilities.Output.System;
 using Microsoft.AspNetCore.Authorization;
@@ -17,10 +18,12 @@ namespace EcommerceWebsite.Api.Controllers
     public class HUIController : ControllerBase
     {
         private readonly IHUIServices _huiServices;
+        private readonly ISanPhamServices _sanPhamServices;
 
-        public HUIController(IHUIServices huiServices)
+        public HUIController(IHUIServices huiServices, ISanPhamServices sanPhamServices)
         {
             _huiServices = huiServices;
+            _sanPhamServices = sanPhamServices;
         }
 
         [AllowAnonymous]
@@ -40,6 +43,7 @@ namespace EcommerceWebsite.Api.Controllers
         [HttpGet("get-all-list-hui")]
         public async Task<IActionResult> GetAllListHUIAsync ()
         {
+            //var updateCode = await _huiServices.UpdateHUIItemsetCode();
             var hUICosts = await  _huiServices.GetHUICosts();
             if(hUICosts != null || hUICosts.Count() != 0)
             {
@@ -49,12 +53,28 @@ namespace EcommerceWebsite.Api.Controllers
             
         }
         
-        [HttpGet("add-list-hui")]
-        public async Task<IActionResult> AddListHUI (List<HUICost> inputs)
+        [HttpPost("add-list-hui")]
+        public async Task<IActionResult> AddListHUI (List<HUI> inputs)
         {
             if(inputs != null || inputs.Count() != 0)
             {
-                var rs = await _huiServices.ThemHUICosts(inputs);
+                // convert data
+                var datetime = DateTime.Now;
+                var listHuiCostContainPrdId = new List<HUICost>();
+                foreach (var input in inputs)
+                {
+                   var listHui = await _sanPhamServices.GetProductWithMultipleId(input.Itemsets);
+                    listHui.ForEach(h => {
+                        h.ComboCode = input.Id;
+                        h.Cost = 0;
+                        h.DaXoa = false;
+                        h.Utility = (int)input.Utility;
+                        h.NgayTao = datetime;
+                        h.Status = true;
+                    });
+                    listHuiCostContainPrdId.AddRange(listHui);
+                }
+                var rs = await _huiServices.ThemHUICosts(listHuiCostContainPrdId);
                 if (rs)
                     return Ok();
                 else return BadRequest();
@@ -72,5 +92,21 @@ namespace EcommerceWebsite.Api.Controllers
                 return Ok(rs);
             else return BadRequest(Messages.API_EmptyResult);
         }
+        [HttpGet("sua-gia-hui/{maHUI}/{giaMoi}/{comboCode}/{ngayTao}")]
+        public async Task<IActionResult> SuaGiaHui(string maHUI, decimal giaMoi, string comboCode, string ngayTao)
+        {
+            if (ModelState.IsValid)
+            {
+                var convertDate = DateTime.Parse(ngayTao);
+                var rs = await _huiServices.SuaGiaHUI(maHUI, giaMoi, comboCode,convertDate);
+                if (rs)
+                {
+                    return Ok(true);
+                }
+                return BadRequest(false);
+            }
+            return BadRequest(false);
+        }
+
     }
 }
