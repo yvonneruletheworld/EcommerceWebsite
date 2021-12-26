@@ -27,7 +27,12 @@ namespace EcommerceWebsite.Api.Interface
             _httpClientFactory = httpClientFactory;
         }
 
-        public async Task<bool> AddListHui(List<HUICost> inputs)
+        public async Task<bool> SuaGiaHui(string maHUI , decimal giaMoi, string comboCode, string ngayTao)
+        {
+            return await GetAsync<bool>($"/api/HUI/sua-gia-hui/{maHUI}/{giaMoi}/{comboCode}/{ngayTao}");
+        }
+
+        public async Task<bool> AddListHui(List<HUI> inputs)
         {
             var client = _httpClientFactory.CreateClient();
             client.BaseAddress = new Uri(_configuration[SystemConstant.BaseAddress]);
@@ -37,7 +42,7 @@ namespace EcommerceWebsite.Api.Interface
             var httpContent = new StringContent(requestItem, Encoding.UTF8, "application/json");
 
             var response = await client
-                .PostAsync($"/api/SanPham/add-list-hui", httpContent);
+                .PostAsync($"/api/HUI/add-list-hui", httpContent);
             return response.IsSuccessStatusCode;
         }
 

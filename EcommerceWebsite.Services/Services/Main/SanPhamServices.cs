@@ -122,7 +122,6 @@ namespace EcommerceWebsite.Services.Services.Main
         {
             try
             {
-              
                     var data = await (from sp in _context.SanPhams
                                       join nhanHieu in _context.NhanHieus on sp.MaHang equals nhanHieu.MaHang
                                       join loaiSanPham in _context.DanhMucs on sp.MaLoaiSanPham equals loaiSanPham.MaDanhMuc
@@ -146,7 +145,8 @@ namespace EcommerceWebsite.Services.Services.Main
                                           LoaiSanPham = loaiSanPham.TenDanhMuc,
                                           GiaBan = dl_lsg.GiaMoi,
                                           MaLoai = loaiSanPham.MaDanhMuc,
-                                          TrangThaiYeuThich = false
+                                          TrangThaiYeuThich = false,
+                                          MaHUIItem = sp.NguoiXoa
                                       }).ToListAsync();
                     return data;
               
@@ -209,6 +209,10 @@ namespace EcommerceWebsite.Services.Services.Main
                     //input.NgayXoa = DateTime.UtcNow;
                     input.NguoiXoa = editorMaSP;
                 }
+
+                input.NgayTao = obj.NgayTao;
+                input.NguoiXoa = obj.NguoiXoa;
+                input.NguoiTao = obj.NguoiTao;
 
                 // 
                 _context.Entry<SanPham>(obj).State = EntityState.Detached;
@@ -435,6 +439,9 @@ namespace EcommerceWebsite.Services.Services.Main
                                   from dl_lsg in _context.BangGiaSanPhams.Where(lsg => lsg.MaDinhLuong.Equals(sp_dl.MaDinhLuong))
                                                                 .OrderByDescending(lsg => lsg.NgayTao.Date)
                                                                 .ThenByDescending(d => d.NgayTao.TimeOfDay).Take(1)
+                                  from hui_sp in _context.HUICosts.Where(hui => hui.MaSanPham == sp.NguoiXoa && hui.ComboCode == comboCode)
+                                                                    .OrderByDescending(hui => hui.NgayTao.Date)
+                                                                .ThenByDescending(hui => hui.NgayTao.TimeOfDay).Take(1)
                                   where !sp.DaXoa && idArray.Contains(sp.MaSanPham)
                                   select new SanPhamVM()
                                   {
@@ -447,7 +454,29 @@ namespace EcommerceWebsite.Services.Services.Main
                                       NhanHieu = sp_nh.TenHang,
                                       GiaBan = dl_lsg.GiaMoi,
                                       ComboCode = comboCode,
-                                      GiaHUI = sp.GiaHUI
+                                      GiaHUI = hui_sp.Cost
+                                      //XepHang = sp_dl.MaDinhLuong
+                                  }).ToListAsync();
+
+                return data;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+        }
+        
+        public async Task<List<HUICost>> GetProductWithMultipleId(string[] idArray)
+        {
+            try
+            {
+                var data = await (from sp in _context.SanPhams
+                                 where !sp.DaXoa && idArray.Contains(sp.MaSanPham)
+                                  select new HUICost()
+                                  {
+                                      MaSanPham = sp.NguoiXoa,
                                       //XepHang = sp_dl.MaDinhLuong
                                   }).ToListAsync();
 

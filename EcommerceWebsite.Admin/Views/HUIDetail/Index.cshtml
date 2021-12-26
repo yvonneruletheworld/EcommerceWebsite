@@ -1,12 +1,18 @@
 ﻿@using EcommerceWebsite.Utilities.ViewModel
 @model HUIDetailVM
 @{
-   var isFirst = ViewBag.IsFirst;
-   var mucLoiNhuan = ViewBag.MucLoiNhuan;
-   var giaVon = ViewBag.GiaVon;
+    var isFirst = ViewBag.IsFirst;
+    var mucLoiNhuan = ViewBag.MucLoiNhuan;
+    var giaVon = ViewBag.GiaVon;
     var listHoaDon = Model.ListHoaDon.GroupBy(ct => ct.HoaDonId)
         .ToDictionary(hd => hd.Key, hd => hd.ToList());
+    //var count = Model.ListSanPhamHUIs.Count();
+    DateTime ngayTao = ViewBag.NgayTao;
 }
+
+<script>
+    var model = @Json.Serialize(Model);
+</script>
 <div class="pcoded-content">
     <!-- [ breadcrumb ] start -->
     <div class="page-header">
@@ -133,7 +139,7 @@
                                     <td>@String.Format("{0:0,0.0}", sp.DonGiaNhap)</td>
                                     <td>@String.Format("{0:00.00}", thiPhanSanPham * 100) %</td>
                                     @*<td>@sp.DonGiaBan</td>*@
-                                    <td>@String.Format("{0:0,0.0}", sp.GiaHUI) </td>
+                                    <td><span id="@string.Concat(sp.MaSanPham,"_giaHUI")">@String.Format("{0:0,0.0}", sp.GiaHUI)</span> </td>
                                     @if (isFirst)
                                     {
                                         <td><input autofocus type="text" id="@sp.MaSanPham" value="@String.Format("{0:0,0.0}",giaMacDinh)" class="form-control" placeholder="Nhập Giá" /></td>
@@ -220,6 +226,34 @@
 
     });
     function onCapNhatGiaClick() {
-
+        var listSanpham = model.listSanPhamHUIs;
+        //listSanpham.forEach(item, index)
+        //{
+        //    console.log(item + index);
+        //}
+        for (var i = 0; i < listSanpham.length; i++) {
+            var item = listSanpham[i];
+            var newGiaHUI = $(`#${item.maSanPham}`).val();
+            newGiaHUI = newGiaHUI.replaceAll(",", "");
+            item.giaHUI = Number(newGiaHUI);
+        }
+        console.log(listSanpham);
+        var ngayTao = '@ngayTao.ToString("s")';
+        var cc = '@Model.ComboCode';
+        $.ajax({
+            url: '/update-gia?comboCode=' + cc + '&ngayTao=' + ngayTao,
+            type: 'POST',
+            contentType: "application/json",
+            data: JSON.stringify(listSanpham),
+            success: function (result) {
+                for (var i = 0; i < listSanpham.length; i++) {
+                    var item = listSanpham[i];
+                    $(`#${item.maSanPham}_giaHUI`)[0].innerText = item.giaHUI;
+                }
+            },
+            error: function (err) {
+                alert("Lỗi cập nhật");
+            }
+        });
     }
 </script>

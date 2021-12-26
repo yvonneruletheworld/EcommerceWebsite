@@ -43,49 +43,56 @@ namespace EcommerceWebsite.MainWeb.Controllers
         [HttpGet("Detail")]
         public async Task<IActionResult> IndexAsync(string prdId,string prdMaDanhMuc)
         {
-            var vm = new DetailVM();
-            vm.SanPham = await _sanPhamServices.LayChiTietSanPham(prdId);
-            vm.SanPham.BangGia = vm.SanPham.BangGia.Where(dl => dl.DinhLuong.GiaTri != "0").ToList();
-            //if (User != null)
-            //{
-            //    string id = _userManager.GetUserId(User);
-            //    vm.KhachHang = await _khachHangServices.GetKhachHangTheoMa(id);
-            //}
-            var lstHUI = HUIConfiguration.ListHUI.Where(hui => hui.Itemsets.Length > 1)
-                    .OrderByDescending(hui => hui.Utility).ToList();
-            lstHUI??= await _huiServices.GetListHUIFromOutput("output1");
-
-            foreach(var hui in lstHUI)
+            if(!string.IsNullOrEmpty(prdId) && !string.IsNullOrEmpty(prdMaDanhMuc))
             {
-                var itemSet = hui.Itemsets;
-                if (itemSet.Contains(prdId))
+                var vm = new DetailVM();
+                vm.SanPham = await _sanPhamServices.LayChiTietSanPham(prdId);
+                if(vm.SanPham != null)
                 {
-                    //itemSet = itemSet.Where(i => i != prdId).ToArray();
-                    vm.HUIItems = await _sanPhamServices.GetViewWithMultipleIds(itemSet, hui.Id);
-                    HttpContext.Session.Set<List<SanPhamVM>>("HUIS", vm.HUIItems);
-                    //TempData["HUIITEMS"] = vm.HUIItems;
-                    break;
+                    vm.SanPham.BangGia = vm.SanPham?.BangGia.Where(dl => dl.DinhLuong.GiaTri != "0").ToList();
+                    //if (User != null)
+                    //{
+                    //    string id = _userManager.GetUserId(User);
+                    //    vm.KhachHang = await _khachHangServices.GetKhachHangTheoMa(id);
+                    //}
+                    var lstHUI = HUIConfiguration.ListHUI.Where(hui => hui.Itemsets.Length > 1)
+                            .OrderByDescending(hui => hui.Utility).ToList();
+                    lstHUI ??= await _huiServices.GetListHUIFromOutput("output1");
+
+                    foreach (var hui in lstHUI)
+                    {
+                        var itemSet = hui.Itemsets;
+                        if (itemSet.Contains(prdId))
+                        {
+                            //itemSet = itemSet.Where(i => i != prdId).ToArray();
+                            vm.HUIItems = await _sanPhamServices.GetViewWithMultipleIds(itemSet, hui.Id);
+                            HttpContext.Session.Set<List<SanPhamVM>>("HUIS", vm.HUIItems);
+                            //TempData["HUIITEMS"] = vm.HUIItems;
+                            break;
+                        }
+                    }
+                    var UserId = "null";
+                    if (User.Claims != null && User.Claims.Count() > 1)
+                    {
+                        var user = new KhachHangOutput()
+                        {
+                            Email = User.Claims.Where(claim => claim.Type == ClaimTypes.Email)
+                                               .FirstOrDefault()
+                                               .Value,
+                            TenKhachHang = User.Claims.Where(claim => claim.Type == ClaimTypes.Name)
+                                               .FirstOrDefault()
+                                               .Value
+                        };
+                        vm.KhachHang = user;
+                        UserId = User.Claims.Where(claim => claim.Type == ClaimTypes.Sid)
+                                                    .FirstOrDefault()
+                                                    .Value;
+                    }
+                    vm.SanPhamOutPut = await _sanPhamServices.laySanPhamTheoDanhMuc(prdMaDanhMuc, UserId);
+                    return View("Views/Detail/Index.cshtml", vm);
                 }
             }
-            var UserId = "null";
-            if (User.Claims != null && User.Claims.Count() > 1)
-            {
-                var user = new KhachHangOutput()
-                {
-                    Email = User.Claims.Where(claim => claim.Type == ClaimTypes.Email)
-                                       .FirstOrDefault()
-                                       .Value,
-                    TenKhachHang = User.Claims.Where(claim => claim.Type == ClaimTypes.Name)
-                                       .FirstOrDefault()
-                                       .Value
-                };
-                vm.KhachHang = user;
-                UserId = User.Claims.Where(claim => claim.Type == ClaimTypes.Sid)
-                                            .FirstOrDefault()
-                                            .Value;
-            }
-            vm.SanPhamOutPut = await _sanPhamServices.laySanPhamTheoDanhMuc(prdMaDanhMuc, UserId);
-            return View("Views/Detail/Index.cshtml",vm);
+            return View("Views/Detail/Index.cshtml");
         }
 
         [HttpPost("post-cmt")]

@@ -28,6 +28,15 @@
 
     @foreach (var key in listKeys)
     {
+<div class="row">
+    <div class="col-sm-12 mb-3">
+        <h5 class="mb-3">THAO TÁC</h5>
+        <hr>
+        <a  href="@Url.Action("NhapNewHUI","HUIManage")" class="btn mb-1 btn-primary"><i data-feather="save"></i> Thêm </a>
+        <button class="btn mb-1 btn-primary"><i data-feather="delete"></i> Xóa</button>
+        <button class="btn mb-1 btn-primary"><i data-feather="edit"></i> Sửa</button>
+    </div>
+</div>
         <div class="row">
             <div class="col-sm-12">
                 <h5 class="mb-3">Ngày tạo: @key</h5>
@@ -54,7 +63,7 @@
                                         @foreach (var comboCode in listConvert.Keys)
                                         {
                                             var keyIndex = listKeys.ToList().IndexOf(key);
-                                            <tr class="pointer-event" onclick="location.href = '@Url.Action("Index","HUIDetail",new { comboCode = comboCode, ngayTao = key, ngayNhapKe = keyIndex==0 ? DateTime.Now : listKeys.ElementAt(keyIndex - 1)})'">
+                                            <tr class="pointer-event" onclick="location.href = '@Url.Action("Index","HUIDetail",new { comboCode = comboCode, ngayTao = key, ngayNhapKe = keyIndex==0 ? DateTime.Now : listKeys.ElementAt(keyIndex - 1), keyIndex = keyIndex})'">
 
                                                 <td>@comboCode</td>
                                                 <td>
@@ -73,7 +82,7 @@
                                                     @listConvert[comboCode].FirstOrDefault().LuotTruyCap
                                                 </td>
                                                 <td>
-                                                    @listConvert[comboCode].FirstOrDefault().Cost
+                                                    @listConvert[comboCode].Sum(c => c.Cost);
                                                 </td>
                                                 
                                             </tr>

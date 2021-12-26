@@ -470,6 +470,14 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
 
                                 }
                             }
+
+                            // loc lai gio hang HUI
+                            foreach (var hui in GioHangOutput.HUICart.Keys)
+                            {
+                                var value = GioHangOutput.HUICart[hui];
+                                if (value == null || value.Count() == 0)
+                                    GioHangOutput.HUICart.Remove(hui);
+                            }
                             return Json(new{ status = true});
                         }else //Gio hang trong
                             return Json(new{ status = false});

@@ -1,5 +1,6 @@
 ﻿using EcommerceWebsite.Data.Entities;
 using EcommerceWebsite.Utilities.Output.Main;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,6 +9,7 @@ namespace EcommerceWebsite.Utilities.ViewModel
 {
     public class HUIDetailVM
     {
+        [JsonProperty("listSanPhamHUIs")]
         public List<DoanhThuOutput> ListSanPhamHUIs { get; set; }
         public string ComboCode { get; set; }
         public int Utility { get; set; }

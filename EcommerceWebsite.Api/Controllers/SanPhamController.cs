@@ -41,6 +41,7 @@ namespace EcommerceWebsite.Api.Controllers
         {
             try
             {
+                var update = await _hoaDonServices.CapNhatLoiNhuanChoSanPham();
                 var result = await _sanPhamServices.LaySanPham();
                 if (result == null)
                     return BadRequest(Messages.API_EmptyResult);
@@ -233,7 +234,8 @@ namespace EcommerceWebsite.Api.Controllers
             }
             return BadRequest(Messages.API_Failed);
         }
-
+        
+       
         [HttpGet("{maDinhLuong}/{editor}/{newPrice}")]
         public async Task<IActionResult> ModifyPrice(string maDinhLuong, string editor, decimal newPrice)
         {

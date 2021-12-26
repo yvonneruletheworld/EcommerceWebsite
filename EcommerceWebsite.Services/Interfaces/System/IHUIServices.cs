@@ -12,6 +12,8 @@ namespace EcommerceWebsite.Services.Interfaces.System
     public interface IHUIServices
     {
         Task<bool> SetUpGiaChoHUIItemset();
+        Task<bool> UpdateHUIItemsetCode();
+        Task<bool> SuaGiaHUI(string maHUI, decimal giaTien, string comboCode, DateTime ngayTao);
         Task<HUIDetailVM> GetChiTietHUI(string comboCode, DateTime ngayTao, DateTime ngayNhapKe);
         //Task<List<DoanhThuOutput>> GetListchiTietSanPhamHUI (string comboCode);
         Task<bool> ThemHUICosts(List<HUICost> inputs);
