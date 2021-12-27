@@ -82,7 +82,7 @@ namespace EcommerceWebsite.Admin.Controllers
                 string[] lineArray = lines.ToArray();
                 try
                 {
-                    System.IO.File.WriteAllLines(@"D:\Applications\eclipse-workspace\java.huiminer_190921\src\tools\contextHUIM.txt", lines);
+                    System.IO.File.WriteAllLines(@"D:\\KhoaLuan\\BaiLam\\BaiThu\\src\\tools\\contextHUIM.txt", lines);
                     return await IndexAsync();
                 }
                 catch (Exception err)

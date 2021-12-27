@@ -75,7 +75,7 @@
                                     <i class="material-icons-two-tone text-primary mb-1">language</i>
                                 </div>
                                 <div class="col-sm-8 text-md-center">
-                                    <h5 id="GiaVonCombo">@giaVon VNĐ</h5>
+                                    <h5 id="GiaVonCombo"> @string.Format("{0:0,0}", giaVon) VNĐ</h5>
                                     <span>Giá Vốn</span>
                                 </div>
                             </div>
@@ -86,7 +86,7 @@
                                     <i class="material-icons-two-tone text-primary mb-1">language</i>
                                 </div>
                                 <div class="col-sm-8 text-md-center">
-                                    <h5 id="TongGiaAuto">@Model.TongGiaAuto VNĐ</h5>
+                                    <h5 id="TongGiaAuto">@string.Format("{0:0,0}", Model.TongGiaAuto) VNĐ</h5>
                                     <span>Giá Bán Mặc Định</span>
                                 </div>
                             </div>
@@ -97,7 +97,7 @@
                                     <i class="material-icons-two-tone text-primary mb-1">unarchive</i>
                                 </div>
                                 <div class="col-sm-8 text-md-center">
-                                    <h5 id="TongGiaSetUp">@Model.TongGiaSetUp VNĐ</h5>
+                                    <h5 id="TongGiaSetUp">@string.Format("{0:0,0}", Model.TongGiaSetUp) VNĐ</h5>
                                     <span>Giá Thiết Lập </span>
                                 </div>
                             </div>
@@ -105,7 +105,8 @@
                     </div>
                 </div>
             </div>
-            
+
+
         </div>
 
         <div class="col-xl-12">

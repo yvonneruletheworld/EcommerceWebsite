@@ -9,31 +9,20 @@ $('body').on('click', '.btn-xuly-donhang', function () {
         },
         success: function (data) {
             if (data.code == 1) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Duyệt đơn thất bại',
-                    text: 'Vui lòng thử lại',
-                    showConfirmButton: false,
-                    timer: 2500
-                });
+                swal("Thất bại!", "Duyệt đơn thất bại!", "error");
+
+               
             }
             else {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Duyệt đơn thành công',
-                    showConfirmButton: false,
-                    timer: 2500
-                });
+                swal("Thành công!", "Duyệt đơn thành công!", "success");
+                location.reload();
             }
         },
         error: function () {
-            Swal.fire({
-                icon: 'error',
-                title: 'Duyệt đơn thất bại',
-                text: 'Vui lòng thử lại',
-                showConfirmButton: false,
-                timer: 2500
-            });
+            swal("Thất bại!", "Duyệt đơn thất bại!", "error");
         }
     });
 })
+function format2(n) {
+    return n.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+}

@@ -2,6 +2,10 @@
 @using EcommerceWebsite.Data.Enum
 @model DoanhThuVM
 @{
+    if (Model == null)
+    {
+        return;
+    }
     var sanPham = Model.SanPham;
     Model.SanPham.giaBan = Model.SanPham.BangGia.FirstOrDefault().GiaBan;
     var listNhapBan = Model.ListSanPhamNhapVaBan;
@@ -111,12 +115,12 @@
                         </div>
                         <div class="col-md-3 mb-3">
                             <label class="form-label" >Lợi nhuận</label>
-                            <input type="number"  class="form-control text-box single-line" onkeyup="updateProductPride(this.value)"  id="LoiNhuan" name="LoiNhuan" /> 
+                            <input type="text"  class="form-control text-box single-line" onkeyup="updateProductPride(this.value)"  id="LoiNhuan" name="LoiNhuan" /> 
                             <span id="span-per"  class="font-weight-bold">%</span>
                         </div>
                         <div class="col-md-3 mb-3">
                             <label class="form-label" asp-for="SanPham.ThanhTien" >Giá Mới</label>
-                            <input type="number" asp-for="SanPham.ThanhTien"  class="form-control text-box single-line"  id="ThanhTien" name="ThanhTien" readonly />
+                            <input type="text" asp-for="SanPham.ThanhTien"  class="form-control text-box single-line"  id="ThanhTien" name="ThanhTien" readonly />
                         </div>
 
                     </div>
@@ -287,8 +291,8 @@
     function setUpProductPrice() {
         var type = document.getElementById("percentageAgree");
 
-        var giaNhapTxt = $('#GiaNhapGanNhat').val();
-        var giaBanTxt = $('#giaBan').val();
+        var giaNhapTxt = @giaNhapGanNhat;
+        var giaBanTxt = @sanPham.giaBan;
         if (giaBanTxt !== undefined && giaBanTxt !== '') {
             var giaNhap = Number(giaNhapTxt);
             var giaBan = Number(giaBanTxt);
@@ -300,26 +304,33 @@
             }
             else {
                 var ln = giaBan - giaNhap;
-                $('#LoiNhuan').val(ln);
+                var tien = parseFloat(ln);
+                var tien2 = format2(tien);
+              
+                $('#LoiNhuan').val(tien2);
                 $('#span-per').text('VND');
             }
         }
     }
 
     function updateProductPride(value) {
-        var giaNhapTxt = $('#GiaNhapGanNhat').val();
+        var giaNhapTxt = @giaNhapGanNhat;
         var type = document.getElementById("percentageAgree");
         if (giaNhapTxt !== undefined && giaNhapTxt !== '') {
             var giaNhap = Number(giaNhapTxt);
             var loiNhuan = Number(value);
             if (type.checked) {
                 //by percent
-                var giaBan = giaNhap * (1 + (loiNhuan/100));
-                $('#ThanhTien').val(giaBan);
+                var giaBan = giaNhap * (1 + (loiNhuan / 100));
+                var tien = parseFloat(giaBan);
+                var tien2 = format2(tien);
+                $('#ThanhTien').val(tien2);
             }
             else {
                 var giaBan = giaNhap + loiNhuan;
-                $('#ThanhTien').val(giaBan);
+                var tien = parseFloat(giaBan);
+                var tien2 = format2(tien);
+                $('#ThanhTien').val(tien2);
             }
 
         }
@@ -354,12 +365,11 @@
                 contentType: false, // Not to set any content header
                 processData: false, // Not to process data
                 success: function (result) {
-
+                    location.reload();
                 },
                 error: function (err)
                 {
-                    alert("Lỗi cập nhật");
-                    fd = new FormData();
+                    location.reload();
                 }
             });
     }
@@ -380,13 +390,12 @@
                 giaTri: GiaTri,
                 DonVi: DonVi
             },
-        
+
             success: function (result) {
                 location.reload();
             },
             error: function (err) {
-                alert("Lỗi cập nhật");
-                fd = new FormData();
+                location.reload();
             }
         });
     }

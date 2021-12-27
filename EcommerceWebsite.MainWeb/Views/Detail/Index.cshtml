@@ -8,8 +8,13 @@
 }
 
 @{
+    if (Model == null)
+    {
+        return;
+    }
     //var pre = (Dictionary<string, string>)ViewData["PreviousPage"];
     var sanPham = Model.SanPham;
+
     var khachHang = Model.KhachHang;
     var huis = Model.HUIItems;
     var bangThongSo = sanPham.ListThongSo.Where(ts => ts.MaThuocTinh != nameof(ProductPorpertyCode.TT07)
