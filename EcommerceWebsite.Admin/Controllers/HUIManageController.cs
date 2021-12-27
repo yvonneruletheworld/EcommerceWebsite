@@ -52,11 +52,46 @@ namespace EcommerceWebsite.Admin.Controllers
             if (result != null)
             {
                 //prepare data 
-                var lines = new string[result.Sum(r => r.ChiTietHoaDons.Count())];
-                return await IndexAsync();
+                //Tính TU
+                var dicHoaDon = result.GroupBy(ct => ct.HoaDons.NgayTao)
+                    .ToDictionary(ct => ct.Key, ct => ct.ToList());
+                var lines = new List<string>();
+                foreach (var hd in dicHoaDon)
+                {
+                    var chiTiets = hd.Value;
+                    var newLinePrd = "";
+                    var newLineUtil = "";
+                    int TU = 0;
+                    foreach ( var ct in chiTiets)
+                    {
+                        newLinePrd += chiTiets.IndexOf(ct) != chiTiets.Count() - 1 ?
+                            ct.SanPhams.NguoiXoa + " " : ct.SanPhams.NguoiXoa +":";
+                        newLineUtil += chiTiets.IndexOf(ct) != chiTiets.Count() - 1 ?
+                            (int)ct.SanPhams.Utility * ct.SoLuong + " " : (int)ct.SanPhams.Utility * ct.SoLuong + "";
+                        TU += (int)ct.SanPhams.Utility * ct.SoLuong;
+                        if(chiTiets.IndexOf(ct) == chiTiets.Count() - 1)
+                        {
+                            newLinePrd = newLinePrd + TU + ":" + newLineUtil;
+                            lines.Add(newLinePrd);
+                        }    
+                    }    
+                }
+
+                //write
+
+                string[] lineArray = lines.ToArray();
+                try
+                {
+                    System.IO.File.WriteAllLines(@"D:\Applications\eclipse-workspace\java.huiminer_190921\src\tools\contextHUIM.txt", lines);
+                    return await IndexAsync();
+                }
+                catch (Exception err)
+                {
+                    throw err;
+                }
+                    
             }
                 
-            //HttpContext.Session.Set<List<HUI>>("ListImportHUI", huiReadRs);
             return await IndexAsync();
         }
 

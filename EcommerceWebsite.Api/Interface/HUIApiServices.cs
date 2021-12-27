@@ -64,9 +64,9 @@ namespace EcommerceWebsite.Api.Interface
             return await GetListAsync<HUI>($"/api/HUI/get-list-hui/{fileName}");
         }
 
-        public async Task<List<DoanhThuOutput>> GetListHUIForInput()
+        public async Task<List<ChiTietHoaDon>> GetListHUIForInput()
         {
-            return await GetListAsync<DoanhThuOutput>($"/api/HUI/get-hui-export-list");
+            return await GetListAsync<ChiTietHoaDon>($"/api/HUI/get-hui-export-list");
         }
     }
 }

@@ -103,19 +103,25 @@ namespace EcommerceWebsite.Api.Controllers
         {
             try
             {
-                var data = await _sanPhamServices.LayListSanPham();
-                var result = new List<DoanhThuOutput>();
-                foreach(var sp in data)
+                var rs = await _hoaDonServices.DanhSachHoaDonExport();
+                if (rs != null)
                 {
-                    var danhSachNhap = await _phieuNhapServices.GetListImportProduct(sp.MaSanPham);
-                    if (danhSachNhap != null && danhSachNhap.Count() > 0)
-                    {
-                        danhSachNhap.LastOrDefault().MaSanPham = sp.NguoiXoa;
-                        result.Add(danhSachNhap.LastOrDefault());
-                    }
-                    else continue;
+                    return Ok(rs);
                 }
-                return Ok(result);
+                else return BadRequest(Messages.API_Exception);
+                //var data = await _sanPhamServices.LayListSanPham();
+                //var result = new List<DoanhThuOutput>();
+                //foreach(var sp in data)
+                //{
+                //    var danhSachNhap = await _phieuNhapServices.GetListImportProduct(sp.MaSanPham);
+                //    if (danhSachNhap != null && danhSachNhap.Count() > 0)
+                //    {
+                //        danhSachNhap.LastOrDefault().MaSanPham = sp.NguoiXoa; 
+                //        result.Add(danhSachNhap.LastOrDefault());
+                //    }
+                //    else continue;
+                //}
+                //return Ok(result);
             }
             catch (Exception ex)
             {
