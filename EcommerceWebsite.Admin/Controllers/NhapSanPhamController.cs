@@ -76,14 +76,15 @@ namespace EcommerceWebsite.Admin.Controllers
                 if (ct != null)
                 {
                     //prepare data
-                    ct.MaLoai = maLoai;
+                    ct.MaLoai = prdImport.MaLoai;
+                    ct.HinhAnh = prdImport.HinhAnh;
                     var maDinhLuong = Guid.NewGuid().ToString();
                     ct.ListThongSo.Add(new ThongSoSanPhamOutput()
                     {
                         MaDinhLuong = maDinhLuong,
                         MaThuocTinh = prdImport.MaThuocTinh,
                         DonVi = prdImport.TenMauMa,
-                        GiaTri = "https://i.ibb.co/jzN4xyb/Blue-with-Gold-Laurel-Education-Logo-9-1-removebg-preview.png"
+                        GiaTri = prdImport.HinhAnh,
                     });
                     ct.BangGia.Add(new BangGiaOutput()
                     {
@@ -126,7 +127,7 @@ namespace EcommerceWebsite.Admin.Controllers
         
         private IEnumerable<SanPhamInput> GetListImport(string fileName)
         {
-            var filePath = $"D:\\School\triplev-store\\EcommerceWebsite.Admin\\wwwroot\\files\\{fileName}";
+           // var filePath = $"D:\\School\triplev-store\\EcommerceWebsite.Admin\\wwwroot\\files\\{fileName}";
             //var filePath = $"{ Directory.GetCurrentDirectory()}{@"\wwwroot\files}"}" +"\\" + fileName;
             System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
             using (var stream = System.IO.File.Open(fileName, FileMode.Open, FileAccess.Read))
@@ -138,11 +139,13 @@ namespace EcommerceWebsite.Admin.Controllers
                         var prd = new SanPhamInput()
                         {
                             TenSanPham = reader.GetValue(0).ToString(),
-                            NhanHieu = reader.GetValue(1).ToString(),
-                            TenMauMa = reader.GetValue(2).ToString(),
-                            SoLuongNhap = int.Parse(reader.GetValue(3).ToString().Trim()),
-                            GiaNhap = decimal.Parse(reader.GetValue(4).ToString().Trim()),
-                            ThanhTien = decimal.Parse(reader.GetValue(5).ToString().Trim()),
+                            NhanHieu = reader.GetValue(1).ToString().Trim(),
+                            MaLoai = reader.GetValue(2).ToString().Trim(),
+                            TenMauMa = reader.GetValue(3).ToString(),
+                            SoLuongNhap = int.Parse(reader.GetValue(4).ToString().Trim()),
+                            GiaNhap = decimal.Parse(reader.GetValue(5).ToString().Trim()),
+                            ThanhTien = decimal.Parse(reader.GetValue(6).ToString().Trim()),
+                            HinhAnh = reader.GetValue(7).ToString(),
                             MaThuocTinh = nameof(ProductPorpertyCode.TT014)
                         };
 
