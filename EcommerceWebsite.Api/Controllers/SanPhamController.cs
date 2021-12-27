@@ -273,6 +273,9 @@ namespace EcommerceWebsite.Api.Controllers
                 if (obj == null)
                     return BadRequest(Messages.API_EmptyResult);
                 // list Hinh anh, Thong so, Gia, Danh gia
+                //lay so Luong Ton 
+                var soLuongTon = (await _phieuNhapServices.GetListImportProduct(productId)).LastOrDefault();
+                obj.SoLuongTon = soLuongTon.SoLuongTon;
                 var listThongSo = await _dinhLuongServices.LayThongSoTheoSanPham(productId) ?? null;
                 obj.ListHinhAnh = listThongSo.Where(ts => ts.MaThuocTinh == (nameof(ProductPorpertyCode.TT014))).ToList();
                 obj.ListThongSo = listThongSo.Where(ts => ts.MaThuocTinh != (nameof(ProductPorpertyCode.TT014))

@@ -107,21 +107,7 @@ namespace EcommerceWebsite.Services.Services.Main
                     if(listHoaDonCuaSanPham.Count >= 0)
                     {
                         var currentDate = DateTime.Now;
-                        //if (data.Count() == 1)
-                        //{
-                        //    // nhap lan dau
-                        //    var listDonHang = listHoaDonCuaSanPham
-                        //        .Where(cthd => DateTime.Compare(cthd.HoaDons.NgayTao, currentDate) >= 0)
-                        //        .ToList();
-                        //    var daBan = listDonHang.Sum(ldh => ldh.SoLuong);
-                        //    data[0].DaBan = daBan;
-                        //    data[0].SoLuongTon = data[0].SoLuongNhap - daBan;
-                        //    data[0].DonGiaBan = listDonHang.Count() == 0 ? 0 : (decimal)(listDonHang[0].GiaBan);
-                        //    data[0].TongTienBan = listDonHang.Sum(ldh => ldh.SoLuong * ldh.GiaBan);
-                        //    data[0].LoiNhuan = TinhLoiNhuan(data[0].TongTienBan, data[0].TongTienNhap);
-                        //}
-                        //else
-                        //{
+                        
                             var soTonKiTruoc = 0;
                             for (int i = 0; i < data.Count(); i++)
                             {
