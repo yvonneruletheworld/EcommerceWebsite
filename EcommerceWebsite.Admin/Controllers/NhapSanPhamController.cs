@@ -65,7 +65,7 @@ namespace EcommerceWebsite.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SaveInputExcel([FromQuery] List<SanPhamInput> listImport, string maNhaCungCap, string total, string maLoai)
+        public async Task<IActionResult> SaveInputExcel([FromQuery] List<SanPhamInput> listImport, string maNhaCungCap, string total)
         {
             var listProducts = listImport.Count() == 0 ? HttpContext.Session.Get<IEnumerable<SanPhamInput>>("ListImportPrd") : listImport;
             var ListChiTietNhap = new List<SanPhamOutput>();

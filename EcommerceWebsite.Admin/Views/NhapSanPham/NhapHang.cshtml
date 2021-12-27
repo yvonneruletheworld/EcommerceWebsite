@@ -91,7 +91,7 @@
                     </select>
                 </div>
                 
-                <div class="form-group">
+                @*<div class="form-group">
                     <label class="form-label" for="loai-hang-hoa-selection">Loại hàng hóa</label>
                     <select class="form-select" id="loai-hang-hoa-selection">
                         @foreach (var item in Model.DanhMucs)
@@ -113,10 +113,10 @@
                         }
 
                     </select>
-                </div>
+                </div>*@
                 <div class="form-group">
                     <label class="form-label" >Ngày nhập hàng</label>
-                    <input type="date" id="ngay-nhap-id" class="form-control" value="@DateTime.Now.ToString("MM/dd/yyyy")" placeholder="Nhập ngày">
+                    <input type="date" id="ngay-nhap-id" class="form-control" value="@DateTime.Today.ToString("yyyy-MM-dd")" placeholder="Nhập ngày">
                 </div>
                 <div class="form-group">
                     <label class="form-label" >Số Lượng : @tongSoNhap Sản phẩm</label>
@@ -210,7 +210,7 @@
 
                                     if (model.sanPhamInputs) {
             $.ajax({
-                                        url: 'SaveInputExcel?maNhaCungCap=' + ncc + '&total=' + tt + '&maLoai=' + ml,
+                                        url: 'SaveInputExcel?maNhaCungCap=' + ncc + '&total=' + tt ,
                 type: 'POST',
                 data: fd,
                 contentType: false, // Not to set any content header
