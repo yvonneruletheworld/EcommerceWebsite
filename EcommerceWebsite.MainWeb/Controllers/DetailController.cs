@@ -65,6 +65,7 @@ namespace EcommerceWebsite.MainWeb.Controllers
                         if (itemSet.Contains(prdId))
                         {
                             //itemSet = itemSet.Where(i => i != prdId).ToArray();
+                            itemSet = itemSet.Where(i => i != prdId).ToArray();
                             vm.HUIItems = await _sanPhamServices.GetViewWithMultipleIds(itemSet, hui.Id);
                             HttpContext.Session.Set<List<SanPhamVM>>("HUIS", vm.HUIItems);
                             //TempData["HUIITEMS"] = vm.HUIItems;

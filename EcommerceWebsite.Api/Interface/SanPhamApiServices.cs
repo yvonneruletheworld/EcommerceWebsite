@@ -108,7 +108,7 @@ namespace EcommerceWebsite.Api.Interface
         }
         public async Task<List<SanPhamVM>> GetViewWithMultipleIds(string[] prdIds, string comboCode)
         {
-            var url = "/api/SanPham/get-mulpitple-id/?comboCode=" + comboCode;
+            var url = "/api/SanPham/get-mulpitple-id/?comboCode=" + comboCode +"&";
             for (int i = 0; i < prdIds.Length; i++)
             {
                 url += i == prdIds.Length - 1 ? $"productIds={prdIds[i]}" : $"productIds={prdIds[i]}&";

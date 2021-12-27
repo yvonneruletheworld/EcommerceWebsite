@@ -108,8 +108,8 @@ namespace EcommerceWebsite.Services.Services.Main
             var data = await (from ct in _context.ChiTietHoaDons 
                               join hd in _context.HoaDons on ct.HoaDonId equals hd.MaHoaDon
                               where ct.MaHUI == comboCode
-                              && DateTime.Compare(ngayTao, ct.HoaDons.NgayTao) <= 0
-                            && DateTime.Compare(ngayNhapKe, ct.HoaDons.NgayTao) >= 0
+                              && DateTime.Compare(ngayTao.Date, ct.HoaDons.NgayTao.Date) <= 0
+                            && DateTime.Compare(ngayNhapKe.Date, ct.HoaDons.NgayTao.Date) >= 0
                             select new ChiTietHoaDon()
                             {
                                 HoaDonId = ct.HoaDonId,

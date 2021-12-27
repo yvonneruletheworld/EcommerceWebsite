@@ -25,7 +25,7 @@ namespace EcommerceWebsite.Admin.Controllers
         {
             var vm = new HUIManageVM();
             vm.ListHuiVaDoanhSo = await _huiApiServices.GetListHUIFromData();
-            return View(vm);
+            return View("/Views/HUIManage/Index.cshtml",vm);
         }
        
         public async Task<IActionResult> NhapNewHUI()
@@ -41,6 +41,21 @@ namespace EcommerceWebsite.Admin.Controllers
                 if (addResult)
                     return await IndexAsync();
             }
+            //HttpContext.Session.Set<List<HUI>>("ListImportHUI", huiReadRs);
+            return await IndexAsync();
+        }
+        
+        public async Task<IActionResult> XuatNewData()
+        {
+            // doc data
+            var result = await _huiApiServices.GetListHUIForInput();
+            if (result != null)
+            {
+                //prepare data 
+                var lines = new string[result.Sum(r => r.ChiTietHoaDons.Count())];
+                return await IndexAsync();
+            }
+                
             //HttpContext.Session.Set<List<HUI>>("ListImportHUI", huiReadRs);
             return await IndexAsync();
         }

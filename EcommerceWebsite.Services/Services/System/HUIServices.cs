@@ -110,19 +110,10 @@ namespace EcommerceWebsite.Services.Services.System
                 var nextDate = i == 0 ? DateTime.Now : 
                     (listHui.ElementAt(i - 1).NgayTao == hui.NgayTao)? DateTime.Now : listHui.ElementAt(i - 1).NgayTao;
 
-                var temp = await (from cthd in _context.ChiTietHoaDons
-                                  join hd in _context.HoaDons on cthd.HoaDonId equals hd.MaHoaDon
-                                  where cthd.MaHUI == hui.ComboCode
-                                  select new ChiTietHoaDon()
-                                  {
-                                      HoaDons = hd,
-                                      SoLuong = cthd.SoLuong,
-                                      GiaBan = cthd.GiaBan
-                                  }).ToListAsync();
                 var listHoaDon = await (from cthd in _context.ChiTietHoaDons
                                         join hd in _context.HoaDons on cthd.HoaDonId equals hd.MaHoaDon
                                         where cthd.MaHUI == hui.ComboCode 
-                                        && DateTime.Compare(hui.NgayTao, hd.NgayTao) <= 0
+                                        && DateTime.Compare(hui.NgayTao.Date, hd.NgayTao.Date) <= 0
                                         && DateTime.Compare(nextDate, hd.NgayTao) >= 0
                                         select new ChiTietHoaDon()
                                         {
@@ -186,7 +177,9 @@ namespace EcommerceWebsite.Services.Services.System
                               from hui_sp in hui_sp_group.DefaultIfEmpty()
                               join ctn in _context.ChiTietNhapSanPhams on hui_sp.MaSanPham equals ctn.MaSanPham into sp_ct_group
                               from sp_ct in sp_ct_group.DefaultIfEmpty()
-                              join pn in _context.PhieuNhaps.Where(p => DateTime.Compare(p.NgayTao.Date, ngayTao.Date) <= 0)
+                              join pn in _context.PhieuNhaps.Where(p => (DateTime.Compare(p.NgayTao.Date, ngayTao.Date) == 0 ?
+                                                                TimeSpan.Compare(p.NgayTao.TimeOfDay, ngayTao.TimeOfDay) <= 0
+                                                                : DateTime.Compare(p.NgayTao.Date, ngayTao.Date) <= 0))
                                                               .OrderByDescending(d => d.NgayTao.Date)
                                                               .ThenByDescending(d => d.NgayTao.TimeOfDay).Take(1) on sp_ct.MaNhap equals pn.MaPhieuNhap
                               where hui.NgayTao.Date == ngayTao.Date && hui.ComboCode == comboCode && !hui_sp.DaXoa
@@ -215,7 +208,9 @@ namespace EcommerceWebsite.Services.Services.System
                                   GiaHUI = hui.Cost
                               }).ToListAsync();
 
-            var tmp2 = tmp.Where(p => DateTime.Compare(p.NgayNhap.Date, ngayTao.Date) <= 0)
+            var tmp2 = tmp.Where(p => (DateTime.Compare(p.NgayNhap.Date, ngayTao.Date) == 0 ?
+                                                                TimeSpan.Compare(p.NgayNhap.TimeOfDay, ngayTao.TimeOfDay) <= 0
+                                                                : DateTime.Compare(p.NgayNhap.Date, ngayTao.Date) <= 0))
                                                               .OrderByDescending(d => d.NgayNhap.Date)
                                                               .ThenByDescending(d => d.NgayNhap.TimeOfDay)
                                                               .ToList();
@@ -264,5 +259,6 @@ namespace EcommerceWebsite.Services.Services.System
                 throw ex;
             }
         }
+
     }
 }

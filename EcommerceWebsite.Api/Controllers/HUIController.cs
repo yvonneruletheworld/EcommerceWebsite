@@ -2,6 +2,7 @@
 using EcommerceWebsite.Data.Entities;
 using EcommerceWebsite.Services.Interfaces.Main;
 using EcommerceWebsite.Services.Interfaces.System;
+using EcommerceWebsite.Utilities.Output.Main;
 using EcommerceWebsite.Utilities.Output.System;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -19,11 +20,15 @@ namespace EcommerceWebsite.Api.Controllers
     {
         private readonly IHUIServices _huiServices;
         private readonly ISanPhamServices _sanPhamServices;
+        private readonly IHoaDonServices _hoaDonServices;
+        private readonly IPhieuNhapServices _phieuNhapServices;
 
-        public HUIController(IHUIServices huiServices, ISanPhamServices sanPhamServices)
+        public HUIController(IHUIServices huiServices, ISanPhamServices sanPhamServices, IHoaDonServices hoaDonServices, IPhieuNhapServices phieuNhapServices)
         {
             _huiServices = huiServices;
             _sanPhamServices = sanPhamServices;
+            _hoaDonServices = hoaDonServices;
+            _phieuNhapServices = phieuNhapServices;
         }
 
         [AllowAnonymous]
@@ -41,9 +46,10 @@ namespace EcommerceWebsite.Api.Controllers
         
         [AllowAnonymous]
         [HttpGet("get-all-list-hui")]
-        public async Task<IActionResult> GetAllListHUIAsync ()
+        public async Task<IActionResult> GetAllListHUIAsync (string maSanPham)
         {
             //var updateCode = await _huiServices.UpdateHUIItemsetCode();
+            var update = await _hoaDonServices.CapNhatLoiNhuanChoSanPham();
             var hUICosts = await  _huiServices.GetHUICosts();
             if(hUICosts != null || hUICosts.Count() != 0)
             {
@@ -91,6 +97,30 @@ namespace EcommerceWebsite.Api.Controllers
             if (rs != null)
                 return Ok(rs);
             else return BadRequest(Messages.API_EmptyResult);
+        }
+        [HttpGet("get-hui-export-list")]
+        public async Task<IActionResult> GetHuiExport ()
+        {
+            try
+            {
+                var data = await _sanPhamServices.LayListSanPham();
+                var result = new List<DoanhThuOutput>();
+                foreach(var sp in data)
+                {
+                    var danhSachNhap = await _phieuNhapServices.GetListImportProduct(sp.MaSanPham);
+                    if (danhSachNhap != null && danhSachNhap.Count() > 0)
+                    {
+                        danhSachNhap.LastOrDefault().MaSanPham = sp.NguoiXoa;
+                        result.Add(danhSachNhap.LastOrDefault());
+                    }
+                    else continue;
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(Messages.API_Exception + ex);
+            }
         }
         [HttpGet("sua-gia-hui/{maHUI}/{giaMoi}/{comboCode}/{ngayTao}")]
         public async Task<IActionResult> SuaGiaHui(string maHUI, decimal giaMoi, string comboCode, string ngayTao)

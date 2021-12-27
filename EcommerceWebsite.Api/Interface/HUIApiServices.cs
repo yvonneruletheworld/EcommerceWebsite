@@ -1,5 +1,6 @@
 ﻿using EcommerceWebsite.Application.Constants;
 using EcommerceWebsite.Data.Entities;
+using EcommerceWebsite.Utilities.Output.Main;
 using EcommerceWebsite.Utilities.Output.System;
 using EcommerceWebsite.Utilities.ViewModel;
 using Microsoft.AspNetCore.Http;
@@ -61,6 +62,11 @@ namespace EcommerceWebsite.Api.Interface
         public async Task<List<HUI>> GetListHUIFromOutput(string fileName)
         {
             return await GetListAsync<HUI>($"/api/HUI/get-list-hui/{fileName}");
+        }
+
+        public async Task<List<DoanhThuOutput>> GetListHUIForInput()
+        {
+            return await GetListAsync<DoanhThuOutput>($"/api/HUI/get-hui-export-list");
         }
     }
 }
