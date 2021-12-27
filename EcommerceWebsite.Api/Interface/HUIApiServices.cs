@@ -33,7 +33,7 @@ namespace EcommerceWebsite.Api.Interface
             return await GetAsync<bool>($"/api/HUI/sua-gia-hui/{maHUI}/{giaMoi}/{comboCode}/{ngayTao}");
         }
 
-        public async Task<bool> AddListHui(List<HUI> inputs)
+        public async Task<bool> AddListHui(List<HUI> inputs, string ngayDau, string ngayCuoi)
         {
             var client = _httpClientFactory.CreateClient();
             client.BaseAddress = new Uri(_configuration[SystemConstant.BaseAddress]);
@@ -43,7 +43,7 @@ namespace EcommerceWebsite.Api.Interface
             var httpContent = new StringContent(requestItem, Encoding.UTF8, "application/json");
 
             var response = await client
-                .PostAsync($"/api/HUI/add-list-hui", httpContent);
+                .PostAsync($"/api/HUI/add-list-hui/{ngayDau}/{ngayCuoi}", httpContent);
             return response.IsSuccessStatusCode;
         }
 
@@ -64,9 +64,15 @@ namespace EcommerceWebsite.Api.Interface
             return await GetListAsync<HUI>($"/api/HUI/get-list-hui/{fileName}");
         }
 
-        public async Task<List<ChiTietHoaDon>> GetListHUIForInput()
+        public async Task<List<ChiTietHoaDon>> GetListHUIForInput(string ngayDau, string ngayCuoi)
         {
-            return await GetListAsync<ChiTietHoaDon>($"/api/HUI/get-hui-export-list");
+            return await GetListAsync<ChiTietHoaDon>($"/api/HUI/get-hui-export-list/{ngayDau}/{ngayCuoi}");
+        }
+
+        public async Task<bool> UpdateNgaySua(DateTime ngaySua)
+        {
+            var convertDate = ngaySua.ToString("s");
+            return await GetAsync<bool>($"/api/HUI/update-ngay-tao/{convertDate}");
         }
     }
 }

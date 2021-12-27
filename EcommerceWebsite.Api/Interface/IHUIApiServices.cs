@@ -11,11 +11,12 @@ namespace EcommerceWebsite.Api.Interface
 {
     public  interface IHUIApiServices
     {
+        Task<bool> UpdateNgaySua(DateTime ngaySua);
         Task<bool> SuaGiaHui(string maHUI, decimal giaMoi, string comboCode,string ngayTao);
         Task<List<HUI>> GetListHUIFromOutput(string url);
-        Task<List<ChiTietHoaDon>> GetListHUIForInput();
+        Task<List<ChiTietHoaDon>> GetListHUIForInput(string ngayDau, string ngayCuoi);
         Task<HUIDetailVM> GetHuiDetail(string comboCode, DateTime ngayTao, DateTime ngayNhapKe);
         Task<Dictionary<DateTime, List<HUICost>>> GetListHUIFromData();
-        Task<bool> AddListHui(List<HUI> inputs);
+        Task<bool> AddListHui(List<HUI> inputs, string ngayDau, string ngayCuoi);
     }
 }

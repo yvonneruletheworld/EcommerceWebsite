@@ -10,7 +10,7 @@ namespace EcommerceWebsite.Services.Interfaces.Main
     {
         Task<bool> CapNhatLoiNhuanChoSanPham();
         Task<List<ChiTietHoaDon>> DanhSachHoaDonTheoKhachHang(string maKH);
-        Task<List<ChiTietHoaDon>> DanhSachHoaDonExport();
+        Task<List<ChiTietHoaDon>> DanhSachHoaDonExport(string firstDate, string secondDate);
         Task<List<ChiTietHoaDon>> DanhSachHoaDonComboCode(string comboCode, DateTime ngayTao, DateTime ngayNhapKe);
         Task<int> LaySoLuongBan(string maSanPham, DateTime ngayNhap);
     }

@@ -59,26 +59,59 @@ namespace EcommerceWebsite.Api.Controllers
             
         }
         
-        [HttpPost("add-list-hui")]
-        public async Task<IActionResult> AddListHUI (List<HUI> inputs)
+        [HttpPost("add-list-hui/{ngayDau}/{ngayCuoi}")]
+        public async Task<IActionResult> AddListHUI (string ngayDau, string ngayCuoi, List<HUI> inputs)
         {
             if(inputs != null || inputs.Count() != 0)
             {
-                // convert data
+
+                var hoaDons = await _hoaDonServices.DanhSachHoaDonExport(ngayDau, ngayCuoi);
+
+                //Tinh U
+
+                //var dicHoaDon = hoaDons.GroupBy(ct => ct.HoaDons.NgayTao)
+                //   .ToDictionary(ct => ct.Key, ct => ct.ToList());
+                //var lines = new List<HoaDon>();
+                //foreach (var hd in dicHoaDon)
+                //{
+                //    var line = new List<ChiTietHoaDon>();
+                    
+                //    var chiTiets = hd.Value;
+                //    int TU = 0;
+                //    foreach (var ct in chiTiets)
+                //    {
+                //        TU += (int)ct.SanPhams.Utility * ct.SoLuong;
+                //    }
+                //    var newHd = new HoaDon() {
+                //        TongCong = TU,
+                //        ChiTietHoaDons = line
+                //    };
+                //    lines.Add(newHd);
+                //}
+
+
                 var datetime = DateTime.Now;
                 var listHuiCostContainPrdId = new List<HUICost>();
                 foreach (var input in inputs)
                 {
                    var listHui = await _sanPhamServices.GetProductWithMultipleId(input.Itemsets);
-                    listHui.ForEach(h => {
-                        h.ComboCode = input.Id;
-                        h.Cost = 0;
-                        h.DaXoa = false;
-                        h.Utility = (int)input.Utility;
-                        h.NgayTao = datetime;
-                        h.Status = true;
-                    });
-                    listHuiCostContainPrdId.AddRange(listHui);
+                    //Count so luong ban cua cac san pham trong tat ca chi tiet
+                    var countCt = 0;
+                    foreach (var sp in listHui)
+                    {
+                        countCt += hoaDons.Where(ctn => ctn.ProductId == sp.MaSanPham).Sum(ctn => ctn.SoLuong);
+                        if(listHui.IndexOf(sp) == listHui.Count() - 1)
+                        {
+                            var newInput = new HUICost();
+                            newInput.ComboCode = input.Id;
+                            newInput.Cost = 0;
+                            newInput.DaXoa = false;
+                            newInput.Utility = (int)input.Utility / countCt;
+                            newInput.NgayTao = datetime;
+                            newInput.Status = true;
+                            listHuiCostContainPrdId.Add(newInput);
+                        }
+                    }
                 }
                 var rs = await _huiServices.ThemHUICosts(listHuiCostContainPrdId);
                 if (rs)
@@ -98,34 +131,39 @@ namespace EcommerceWebsite.Api.Controllers
                 return Ok(rs);
             else return BadRequest(Messages.API_EmptyResult);
         }
-        [HttpGet("get-hui-export-list")]
-        public async Task<IActionResult> GetHuiExport ()
+        [HttpGet("get-hui-export-list/{ngayDau}/{ngayCuoi}")]
+        public async Task<IActionResult> GetHuiExport (string ngayDau, string ngayCuoi)
         {
             try
             {
-                var rs = await _hoaDonServices.DanhSachHoaDonExport();
+                var rs = await _hoaDonServices.DanhSachHoaDonExport(ngayDau, ngayCuoi);
                 if (rs != null)
                 {
                     return Ok(rs);
                 }
                 else return BadRequest(Messages.API_Exception);
-                //var data = await _sanPhamServices.LayListSanPham();
-                //var result = new List<DoanhThuOutput>();
-                //foreach(var sp in data)
-                //{
-                //    var danhSachNhap = await _phieuNhapServices.GetListImportProduct(sp.MaSanPham);
-                //    if (danhSachNhap != null && danhSachNhap.Count() > 0)
-                //    {
-                //        danhSachNhap.LastOrDefault().MaSanPham = sp.NguoiXoa; 
-                //        result.Add(danhSachNhap.LastOrDefault());
-                //    }
-                //    else continue;
-                //}
-                //return Ok(result);
             }
             catch (Exception ex)
             {
                 return BadRequest(Messages.API_Exception + ex);
+            }
+        }
+        [HttpGet("update-ngay-tao/{ngaySua}")]
+        public async Task<IActionResult> UpdateNgayTao (string ngaysua )
+        {
+            try
+            {
+                DateTime dateConvert = DateTime.Parse(ngaysua);
+                var rs = await _huiServices.UpdateHUIItemsetCode(dateConvert);
+                if (rs)
+                {
+                    return Ok(true);
+                }
+                else return BadRequest();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(false);
             }
         }
         [HttpGet("sua-gia-hui/{maHUI}/{giaMoi}/{comboCode}/{ngayTao}")]

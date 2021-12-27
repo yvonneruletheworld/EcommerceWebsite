@@ -37,7 +37,7 @@ namespace EcommerceWebsite.Admin.Controllers
 
             if(huiReadRs != null && huiReadRs.Count() > 0)
             {
-                var addResult = await _huiApiServices.AddListHui(huiReadRs);
+                var addResult = await _huiApiServices.AddListHui(huiReadRs,"add", DateTime.Now.ToString("s"));
                 if (addResult)
                     return await IndexAsync();
             }
@@ -48,7 +48,7 @@ namespace EcommerceWebsite.Admin.Controllers
         public async Task<IActionResult> XuatNewData()
         {
             // doc data
-            var result = await _huiApiServices.GetListHUIForInput();
+            var result = await _huiApiServices.GetListHUIForInput("import",DateTime.Now.ToString("s"));
             if (result != null)
             {
                 //prepare data 
@@ -83,6 +83,9 @@ namespace EcommerceWebsite.Admin.Controllers
                 try
                 {
                     System.IO.File.WriteAllLines(@"D:\Applications\eclipse-workspace\java.huiminer_190921\src\tools\contextHUIM.txt", lines);
+                    //update ngày sua cuoi
+                    var rsUpdate = await _huiApiServices.UpdateNgaySua(DateTime.Now);
+
                     return await IndexAsync();
                 }
                 catch (Exception err)

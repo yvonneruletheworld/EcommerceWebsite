@@ -476,7 +476,7 @@ namespace EcommerceWebsite.Services.Services.Main
             try
             {
                 var data = await (from sp in _context.SanPhams
-                                 where !sp.DaXoa && idArray.Contains(sp.MaSanPham)
+                                 where !sp.DaXoa && idArray.Contains(sp.NguoiXoa)
                                   select new HUICost()
                                   {
                                       MaSanPham = sp.NguoiXoa,

@@ -118,35 +118,24 @@ namespace EcommerceWebsite.Services.Services.Main
             return data;
         }
 
-        public async Task<List<ChiTietHoaDon>> DanhSachHoaDonExport()
+        public async Task<List<ChiTietHoaDon>> DanhSachHoaDonExport(string firstDate, string secondDate)
         {
            
             try
             {
-                var ngayNhapHUICuoi = (await _context.HUICosts.OrderByDescending(hc => hc.NgayTao.Date)
+                var rsf = (await _context.HUICosts.OrderByDescending(hc => hc.NgayTao.Date)
                                                    .ThenByDescending(hc => hc.NgayTao.TimeOfDay)
                                                    .FirstOrDefaultAsync()).NgayTao;
-
-                //var data = await (from hd in _context.HoaDons
-                //                  join cthd in _context.ChiTietHoaDons on hd.MaHoaDon equals cthd.HoaDonId into hd_cthd_group
-                //                  from hd_cthd in hd_cthd_group.DefaultIfEmpty()
-                //                  join sp in _context.SanPhams on hd_cthd.ProductId equals sp.MaSanPham into cthd_sp_group
-                //                  from cthd_sp in cthd_sp_group.DefaultIfEmpty()
-                //                  where DateTime.Compare(hd.NgayTao, ngayNhapHUICuoi) >= 0
-                //                  select new ChiTietHoaDon
-                //                  {
-                //                      HoaDons = hd,
-                //                      SanPhams = cthd_sp,
-                //                      ProductId = hd_cthd.ProductId,
-                //                      HoaDonId = hd.MaHoaDon,
-                //                      GiaBan = hd_cthd.GiaBan,
-                //                      SoLuong = hd_cthd.SoLuong
-                //                  }).ToListAsync();
+                var rss = firstDate == "add" ?
+                    (await _context.HUICosts.OrderByDescending(hc => hc.NgayTao.Date)
+                                                   .ThenByDescending(hc => hc.NgayTao.TimeOfDay)
+                                                   .FirstOrDefaultAsync()).NgaySuaCuoi
+                   : DateTime.Now;
                 var data1 = await (from hd in _context.HoaDons
                                   join cthd in _context.ChiTietHoaDons on hd.MaHoaDon equals cthd.HoaDonId
                                   join sp in _context.SanPhams on cthd.ProductId equals sp.MaSanPham 
-                                  where DateTime.Compare(hd.NgayTao, ngayNhapHUICuoi) >= 0
-                                  select new ChiTietHoaDon
+                                  where DateTime.Compare(hd.NgayTao, (DateTime)rsf) >= 0 && DateTime.Compare(hd.NgayTao, (DateTime)rss) <= 0
+                                   select new ChiTietHoaDon
                                   {
                                       HoaDons = hd,
                                       SanPhams = sp,

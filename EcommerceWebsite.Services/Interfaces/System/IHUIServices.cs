@@ -13,6 +13,7 @@ namespace EcommerceWebsite.Services.Interfaces.System
     {
         Task<bool> SetUpGiaChoHUIItemset();
         Task<bool> UpdateHUIItemsetCode();
+        Task<bool> UpdateHUIItemsetCode(DateTime ngaySua);
         Task<bool> SuaGiaHUI(string maHUI, decimal giaTien, string comboCode, DateTime ngayTao);
         Task<HUIDetailVM> GetChiTietHUI(string comboCode, DateTime ngayTao, DateTime ngayNhapKe);
         //Task<List<DoanhThuOutput>> GetListchiTietSanPhamHUI (string comboCode);

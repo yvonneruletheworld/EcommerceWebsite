@@ -260,5 +260,39 @@ namespace EcommerceWebsite.Services.Services.System
             }
         }
 
+        public async Task<bool> UpdateHUIItemsetCode(DateTime ngaySua)
+        {
+            var ngayTao = (await _context.HUICosts.OrderByDescending(hc => hc.NgayTao.Date)
+                                                   .ThenByDescending(hc => hc.NgayTao.TimeOfDay)
+                                                   .FirstOrDefaultAsync()).NgayTao;
+
+            var listSanPham = await _context.HUICosts.Where(hc => hc.NgayTao == ngayTao).ToListAsync();
+            if (listSanPham != null)
+            {
+                var err = 0;
+                foreach(var hc in listSanPham)
+                {
+                    hc.NgaySuaCuoi = ngaySua;
+                    try
+                    {
+                        await _context.Database.BeginTransactionAsync();
+                        _context.Entry<HUICost>(hc).State = EntityState.Detached;
+                        _context.HUICosts.Update(hc);
+
+                        var rs = await _context.SaveChangesAsync();
+                        await _context.Database.CommitTransactionAsync();
+                        err += rs > 0 ? 0 : 1;
+                        
+                    }
+                    catch (Exception ex)
+                    {
+                        continue;
+                        throw ex;
+                    }
+                }
+                return err == 0;
+            }
+            return false;
+        }
     }
 }
