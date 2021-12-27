@@ -93,6 +93,7 @@ namespace EcommerceWebsite.Services.Services.Main
                                  select new SanPhamOutput()
                                  {
                                      MaSanPham = sp.MaSanPham,
+                                     MaHuiItem = sp.NguoiXoa,
                                      SoLuongTon = sp.SoLuongTon,
                                      TenSanPham = sp.TenSanPham,
                                      Status = sp.Status,
@@ -253,7 +254,7 @@ namespace EcommerceWebsite.Services.Services.Main
                                   from dl_lsg in _context.BangGiaSanPhams.Where(lsg => lsg.MaDinhLuong.Equals(sp_dl.MaDinhLuong))
                                                                 .OrderByDescending(lsg => lsg.NgayTao.Date)
                                                                 .ThenByDescending(d => d.NgayTao.TimeOfDay).Take(1)
-                                  where !sp.DaXoa && (string.IsNullOrEmpty(loaiSanPham) ? sp.MaSanPham == maSanPham : sp.MaLoaiSanPham == loaiSanPham)
+                                  where !sp.DaXoa && (string.IsNullOrEmpty(loaiSanPham) ? sp.NguoiXoa == maSanPham : sp.MaLoaiSanPham == loaiSanPham)
                                   select new SanPhamVM()
                                   {
                                       MaSanPham = sp.MaSanPham,
@@ -446,7 +447,7 @@ namespace EcommerceWebsite.Services.Services.Main
                                   from hui_sp in _context.HUICosts.Where(hui => hui.MaSanPham == sp.NguoiXoa && hui.ComboCode == comboCode)
                                                                     .OrderByDescending(hui => hui.NgayTao.Date)
                                                                 .ThenByDescending(hui => hui.NgayTao.TimeOfDay).Take(1)
-                                  where !sp.DaXoa && idArray.Contains(sp.MaSanPham)
+                                  where !sp.DaXoa && idArray.Contains(sp.NguoiXoa)
                                   select new SanPhamVM()
                                   {
                                       MaSanPham = sp.MaSanPham,
@@ -458,7 +459,8 @@ namespace EcommerceWebsite.Services.Services.Main
                                       NhanHieu = sp_nh.TenHang,
                                       GiaBan = dl_lsg.GiaMoi,
                                       ComboCode = comboCode,
-                                      GiaHUI = hui_sp.Cost
+                                      GiaHUI = hui_sp.Cost,
+                                      MaHUIItem = sp.NguoiXoa
                                       //XepHang = sp_dl.MaDinhLuong
                                   }).ToListAsync();
 

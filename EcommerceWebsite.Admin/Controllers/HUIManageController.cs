@@ -38,11 +38,11 @@ namespace EcommerceWebsite.Admin.Controllers
             if(huiReadRs != null && huiReadRs.Count() > 0)
             {
                 var addResult = await _huiApiServices.AddListHui(huiReadRs,"add", DateTime.Now.ToString("s"));
-                if (addResult)
-                    return await IndexAsync();
+                return Json(new { code = addResult? 1 : 2 });
+
             }
             //HttpContext.Session.Set<List<HUI>>("ListImportHUI", huiReadRs);
-            return await IndexAsync();
+            return Json(new { code = 2 });
         }
         
         public async Task<IActionResult> XuatNewData()
@@ -86,7 +86,7 @@ namespace EcommerceWebsite.Admin.Controllers
                     //update ngày sua cuoi
                     var rsUpdate = await _huiApiServices.UpdateNgaySua(DateTime.Now);
 
-                    return await IndexAsync();
+                    return Json(new { code = rsUpdate ? 1 : 2 });
                 }
                 catch (Exception err)
                 {
@@ -94,8 +94,8 @@ namespace EcommerceWebsite.Admin.Controllers
                 }
                     
             }
-                
-            return await IndexAsync();
+
+            return Json(new { code =  2 });
         }
 
         public List<DoanhThuOutput> SetUpGiaChoHUIItemset(List<DoanhThuOutput> listSanPhamHUI, int mucLoiNhuan)

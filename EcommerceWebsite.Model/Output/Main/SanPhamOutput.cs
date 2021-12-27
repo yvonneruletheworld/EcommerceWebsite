@@ -20,6 +20,8 @@ namespace EcommerceWebsite.Utilities.Output.Main
         //[Required]
         [JsonProperty("maSanPham")]
         public string MaSanPham { get; set; }
+        [JsonProperty("maHuiItem")]
+        public string MaHuiItem { get; set; }
         [JsonProperty("tenSanPham")]
         public string TenSanPham { get; set; }
         [JsonProperty("soLuongTon")]

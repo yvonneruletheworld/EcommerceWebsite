@@ -62,7 +62,7 @@ namespace EcommerceWebsite.MainWeb.Controllers
                     foreach (var hui in lstHUI)
                     {
                         var itemSet = hui.Itemsets;
-                        if (itemSet.Contains(prdId))
+                        if (itemSet.Contains(vm.SanPham.MaHuiItem))
                         {
                             //itemSet = itemSet.Where(i => i != prdId).ToArray();
                             //itemSet = itemSet.Where(i => i != prdId).ToArray();
