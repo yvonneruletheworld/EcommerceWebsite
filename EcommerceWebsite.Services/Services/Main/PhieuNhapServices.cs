@@ -145,7 +145,6 @@ namespace EcommerceWebsite.Services.Services.Main
 
                                 soTonKiTruoc += i == 0 ? 0 : data[i - 1].SoLuongNhap - daBanKiTruoc;
                                 data[i].DaBan = daBan;
-                                data[i].ChiTietHoaDons = listDonHang;
                                 data[i].SoLuongTonKyTruoc = i == 0? 0 : soTonKiTruoc;
                                 data[i].SoLuongTon = data[i].SoLuongNhap - daBan + data[i].SoLuongTonKyTruoc;
                                 data[i].DonGiaBan = listDonHang.Count() == 0 ? 0 : (decimal)(listDonHang[0].GiaBan);

@@ -118,6 +118,55 @@ namespace EcommerceWebsite.Services.Services.Main
             return data;
         }
 
+        public async Task<List<ChiTietHoaDon>> DanhSachHoaDonExport()
+        {
+           
+            try
+            {
+                var ngayNhapHUICuoi = (await _context.HUICosts.OrderByDescending(hc => hc.NgayTao.Date)
+                                                   .ThenByDescending(hc => hc.NgayTao.TimeOfDay)
+                                                   .FirstOrDefaultAsync()).NgayTao;
+
+                //var data = await (from hd in _context.HoaDons
+                //                  join cthd in _context.ChiTietHoaDons on hd.MaHoaDon equals cthd.HoaDonId into hd_cthd_group
+                //                  from hd_cthd in hd_cthd_group.DefaultIfEmpty()
+                //                  join sp in _context.SanPhams on hd_cthd.ProductId equals sp.MaSanPham into cthd_sp_group
+                //                  from cthd_sp in cthd_sp_group.DefaultIfEmpty()
+                //                  where DateTime.Compare(hd.NgayTao, ngayNhapHUICuoi) >= 0
+                //                  select new ChiTietHoaDon
+                //                  {
+                //                      HoaDons = hd,
+                //                      SanPhams = cthd_sp,
+                //                      ProductId = hd_cthd.ProductId,
+                //                      HoaDonId = hd.MaHoaDon,
+                //                      GiaBan = hd_cthd.GiaBan,
+                //                      SoLuong = hd_cthd.SoLuong
+                //                  }).ToListAsync();
+                var data1 = await (from hd in _context.HoaDons
+                                  join cthd in _context.ChiTietHoaDons on hd.MaHoaDon equals cthd.HoaDonId
+                                  join sp in _context.SanPhams on cthd.ProductId equals sp.MaSanPham 
+                                  where DateTime.Compare(hd.NgayTao, ngayNhapHUICuoi) >= 0
+                                  select new ChiTietHoaDon
+                                  {
+                                      HoaDons = hd,
+                                      SanPhams = sp,
+                                      ProductId = cthd.ProductId,
+                                      HoaDonId = hd.MaHoaDon,
+                                      GiaBan = cthd.GiaBan,
+                                      SoLuong = cthd.SoLuong
+                                  }).ToListAsync();
+                
+                return data1;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            
+        }
+
         public async Task<List<ChiTietHoaDon>> DanhSachHoaDonTheoKhachHang(string maKH)
         {
             var data = await (from hd in _context.HoaDons
