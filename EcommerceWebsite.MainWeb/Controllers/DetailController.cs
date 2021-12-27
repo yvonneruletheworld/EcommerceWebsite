@@ -49,7 +49,7 @@ namespace EcommerceWebsite.MainWeb.Controllers
                 vm.SanPham = await _sanPhamServices.LayChiTietSanPham(prdId);
                 if(vm.SanPham != null)
                 {
-                    vm.SanPham.BangGia = vm.SanPham?.BangGia.Where(dl => dl.DinhLuong.GiaTri != "0").ToList();
+                    vm.SanPham.BangGia = vm.SanPham.BangGia.Where(dl => dl.MaThuocTinh == "TT014" || dl.MaThuocTinh == "TT07").ToList();
                     //if (User != null)
                     //{
                     //    string id = _userManager.GetUserId(User);
