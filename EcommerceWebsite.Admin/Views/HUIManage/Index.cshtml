@@ -32,8 +32,8 @@
     <div class="col-sm-12 mb-3">
         <h5 class="mb-3">THAO TÁC</h5>
         <hr>
-        <a  href="@Url.Action("NhapNewHUI","HUIManage")" class="btn mb-1 btn-primary"><i data-feather="save"></i> Thêm </a>
-        <a  href="@Url.Action("XuatNewData","HUIManage")" class="btn mb-1 btn-primary"><i data-feather="delete"></i> Cập Nhật Dữ Liệu </a>
+        <button class="btn mb-1 btn-primary" onclick="XuatNewHUI()"><i data-feather="save"></i> Thêm </button>
+        <button  class="btn mb-1 btn-primary" onclick="XuatNewData()"> <i data-feather="delete"></i> Cập Nhật Dữ Liệu </button>
         <button class="btn mb-1 btn-primary"><i data-feather="edit"></i> Sửa</button>
     </div>
 </div>
@@ -101,5 +101,38 @@
 </div>
 
 <script>
-   
+    function XuatNewHUI() {
+        debugger;
+        $.ajax({
+            url: '/HUIManage/NhapNewHUI',
+            success: function (data) {
+                if (data.code == 1) {
+                    location.reload();
+                }
+                else {
+                    swal("Thất bại!", "Bạn hãy thử lại!", "error");
+                }
+            
+            },
+            error: function () {
+                swal("Thất bại!", "Bạn hãy thử lại!", "error");
+            }
+        });
+    }
+        function XuatNewData() {
+            $.ajax({
+                url: '/HUIManage/XuatNewData',
+                success: function (data) {
+                    if (data.code == 1) {
+                        location.reload();
+                    }
+                    else {
+                        swal("Thất bại!", "Bạn hãy thử lại!", "error");
+                    }
+                },
+                error: function () {
+                    swal("Thất bại!", "Bạn hãy thử lại!", "error");
+                }
+            });
+        }
 </script>
