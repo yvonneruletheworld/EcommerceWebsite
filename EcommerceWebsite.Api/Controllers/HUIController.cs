@@ -65,8 +65,8 @@ namespace EcommerceWebsite.Api.Controllers
             if(inputs != null || inputs.Count() != 0)
             {
 
-                var hoaDons = await _hoaDonServices.DanhSachHoaDonExport(ngayDau, ngayCuoi);
-
+                //var hoaDons = await _hoaDonServices.DanhSachHoaDonExport(ngayDau, ngayCuoi);
+                var sanPhams = await _sanPhamServices.LayListSanPham();
                 //Tinh U
 
                 //var dicHoaDon = hoaDons.GroupBy(ct => ct.HoaDons.NgayTao)
@@ -96,17 +96,18 @@ namespace EcommerceWebsite.Api.Controllers
                 {
                    var listHui = await _sanPhamServices.GetProductWithMultipleId(input.Itemsets);
                     //Count so luong ban cua cac san pham trong tat ca chi tiet
-                    var countCt = 0;
+                    var countCt = 0.0m;
                     foreach (var sp in listHui)
                     {
-                        countCt += hoaDons.Where(ctn => ctn.ProductId == sp.MaSanPham).Sum(ctn => ctn.SoLuong);
+                        countCt += sanPhams.Where(spt => spt.NguoiXoa == sp.MaSanPham).FirstOrDefault().Utility;
                         if(listHui.IndexOf(sp) == listHui.Count() - 1)
                         {
                             var newInput = new HUICost();
                             newInput.ComboCode = input.Id;
                             newInput.Cost = 0;
+                            newInput.MaSanPham = sp.MaSanPham;
                             newInput.DaXoa = false;
-                            newInput.Utility = (int)input.Utility / countCt;
+                            newInput.Utility = (int)((int)input.Utility / (countCt/listHui.Count()));
                             newInput.NgayTao = datetime;
                             newInput.Status = true;
                             listHuiCostContainPrdId.Add(newInput);
