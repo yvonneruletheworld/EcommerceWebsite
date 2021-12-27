@@ -60,7 +60,7 @@ namespace EcommerceWebsite.Services.Services.Main
         {
             try
             {
-                return await _context.DinhLuongs.Where(dl => dl.MaSanPham == maSanPham)
+                return await _context.DinhLuongs.Where(dl => dl.MaSanPham == maSanPham && dl.MaThuocTinh == "TT014")
                     .FirstOrDefaultAsync();
             }
             catch (Exception ex)

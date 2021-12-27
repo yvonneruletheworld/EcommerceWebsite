@@ -213,6 +213,9 @@ namespace EcommerceWebsite.Services.Services.Main
                 input.NgayTao = obj.NgayTao;
                 input.NguoiXoa = obj.NguoiXoa;
                 input.NguoiTao = obj.NguoiTao;
+                input.HinhAnh = obj.HinhAnh;
+                input.Status = obj.Status;
+                input.SoLuongTon = obj.SoLuongTon;
 
                 // 
                 _context.Entry<SanPham>(obj).State = EntityState.Detached;
@@ -668,6 +671,11 @@ namespace EcommerceWebsite.Services.Services.Main
 
                 throw ex;
             }
+        }
+
+        public async Task<List<SanPham>> LayListSanPham()
+        {
+            return await _context.SanPhams.Where(sp => sp.Utility > 0 && !sp.DaXoa).ToListAsync();
         }
     }
 }

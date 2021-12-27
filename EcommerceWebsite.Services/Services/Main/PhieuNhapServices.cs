@@ -82,9 +82,9 @@ namespace EcommerceWebsite.Services.Services.Main
                                       MaSanPham = ctn_pn.MaSanPham,
                                       SoLuongNhap = ctn_pn.SoLuong,
                                       DonGiaNhap = ctn_pn.DonGia,
-                                      TongTienNhap = ctn_pn.ThanhTien,
+                                      TongTienNhap = ctn_pn.SoLuong * ctn_pn.DonGia,
                                       NgayNhap = pn.NgayTao,
-                                      SoLuongTon = sp_ctn.SoLuongTon,
+                                      SoLuongTon = ctn_pn.SoLuong,
                                       SoLuongTonKyTruoc = 0,
                                       LoiNhuan = 0
                                   }).OrderBy(lsg => lsg.NgayNhap.Date)
@@ -104,24 +104,24 @@ namespace EcommerceWebsite.Services.Services.Main
                                                           SoLuong = cthd.SoLuong
                                                       }).ToListAsync();
                     //set up receipt
-                    if(listHoaDonCuaSanPham.Count > 0)
+                    if(listHoaDonCuaSanPham.Count >= 0)
                     {
                         var currentDate = DateTime.Now;
-                        if (data.Count() == 1)
-                        {
-                            // nhap lan dau
-                            var listDonHang = listHoaDonCuaSanPham
-                                .Where(cthd => DateTime.Compare(cthd.HoaDons.NgayTao, currentDate) >= 0)
-                                .ToList();
-                            var daBan = listDonHang.Sum(ldh => ldh.SoLuong);
-                            data[0].DaBan = daBan;
-                            data[0].SoLuongTon = data[0].SoLuongNhap - daBan;
-                            data[0].DonGiaBan = listDonHang.Count() == 0 ? 0 : (decimal)(listDonHang[0].GiaBan);
-                            data[0].TongTienBan = listDonHang.Sum(ldh => ldh.SoLuong * ldh.GiaBan);
-                            data[0].LoiNhuan = TinhLoiNhuan(data[0].TongTienBan, data[0].TongTienNhap);
-                        }
-                        else
-                        {
+                        //if (data.Count() == 1)
+                        //{
+                        //    // nhap lan dau
+                        //    var listDonHang = listHoaDonCuaSanPham
+                        //        .Where(cthd => DateTime.Compare(cthd.HoaDons.NgayTao, currentDate) >= 0)
+                        //        .ToList();
+                        //    var daBan = listDonHang.Sum(ldh => ldh.SoLuong);
+                        //    data[0].DaBan = daBan;
+                        //    data[0].SoLuongTon = data[0].SoLuongNhap - daBan;
+                        //    data[0].DonGiaBan = listDonHang.Count() == 0 ? 0 : (decimal)(listDonHang[0].GiaBan);
+                        //    data[0].TongTienBan = listDonHang.Sum(ldh => ldh.SoLuong * ldh.GiaBan);
+                        //    data[0].LoiNhuan = TinhLoiNhuan(data[0].TongTienBan, data[0].TongTienNhap);
+                        //}
+                        //else
+                        //{
                             var soTonKiTruoc = 0;
                             for (int i = 0; i < data.Count(); i++)
                             {
@@ -130,8 +130,12 @@ namespace EcommerceWebsite.Services.Services.Main
                                 var nextDate = i == data.Count() - 1 ? currentDate : data[i + 1].NgayNhap;
                                 var previousDate = i == 0 ? curDate : data[i - 1].NgayNhap ;
                                 var listDonHang = listHoaDonCuaSanPham
-                                                .Where(cthd => DateTime.Compare(cthd.HoaDons.NgayTao, nextDate) <= 0
-                                                && DateTime.Compare(cthd.HoaDons.NgayTao, curDate) >= 0)
+                                                .Where(cthd => (DateTime.Compare(cthd.HoaDons.NgayTao.Date, nextDate.Date) == 0 ?
+                                                TimeSpan.Compare(cthd.HoaDons.NgayTao.TimeOfDay, nextDate.TimeOfDay) <= 0 
+                                                : DateTime.Compare(cthd.HoaDons.NgayTao.Date, nextDate.Date) <= 0)
+                                                && (DateTime.Compare(cthd.HoaDons.NgayTao.Date, curDate.Date) == 0 ?
+                                                TimeSpan.Compare(cthd.HoaDons.NgayTao.TimeOfDay, curDate.TimeOfDay) >= 0
+                                                : DateTime.Compare(cthd.HoaDons.NgayTao.Date, curDate.Date) >= 0))
                                                 .ToList();
                                 var daBan = listDonHang.Sum(ldh => ldh.SoLuong);
                                 var daBanKiTruoc = i == 0 ? 0 : data[i - 1].DaBan;
@@ -141,13 +145,14 @@ namespace EcommerceWebsite.Services.Services.Main
 
                                 soTonKiTruoc += i == 0 ? 0 : data[i - 1].SoLuongNhap - daBanKiTruoc;
                                 data[i].DaBan = daBan;
+                                data[i].ChiTietHoaDons = listDonHang;
                                 data[i].SoLuongTonKyTruoc = i == 0? 0 : soTonKiTruoc;
                                 data[i].SoLuongTon = data[i].SoLuongNhap - daBan + data[i].SoLuongTonKyTruoc;
                                 data[i].DonGiaBan = listDonHang.Count() == 0 ? 0 : (decimal)(listDonHang[0].GiaBan);
                                 data[i].TongTienBan = tienBan;
                                 data[i].LoiNhuan = TinhLoiNhuan(data[i].TongTienBan, data[i].TongTienNhap);
                             }
-                        }
+                        //}
                     }
                    
                 }

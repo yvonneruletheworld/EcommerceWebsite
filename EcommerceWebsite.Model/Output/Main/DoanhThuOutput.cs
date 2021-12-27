@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using EcommerceWebsite.Data.Entities;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -22,5 +23,6 @@ namespace EcommerceWebsite.Utilities.Output.Main
         public string TenSanPham { get; set; }
         [JsonProperty("giaHUI")]
         public decimal GiaHUI { get; set; }
+        public List<ChiTietHoaDon> ChiTietHoaDons { get; set; }
     }
 }
