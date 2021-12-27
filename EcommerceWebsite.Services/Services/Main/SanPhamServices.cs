@@ -146,7 +146,8 @@ namespace EcommerceWebsite.Services.Services.Main
                                           GiaBan = dl_lsg.GiaMoi,
                                           MaLoai = loaiSanPham.MaDanhMuc,
                                           TrangThaiYeuThich = false,
-                                          MaHUIItem = sp.NguoiXoa
+                                          MaHUIItem = sp.NguoiXoa,
+                                          loiNhuan = sp.Utility,
                                       }).ToListAsync();
                     return data;
               

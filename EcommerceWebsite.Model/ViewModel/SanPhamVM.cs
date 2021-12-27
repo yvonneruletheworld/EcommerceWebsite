@@ -22,6 +22,7 @@ namespace EcommerceWebsite.Utilities.ViewModel
         public string NhanHieu { get; set; }
         public string MaLoai { get; set; }
         public DateTime ngayTao { get; set; }
+        public decimal loiNhuan { get; set; }
         public Status Status { get; set; }
         public bool TrangThaiYeuThich { get; set; }
     }
