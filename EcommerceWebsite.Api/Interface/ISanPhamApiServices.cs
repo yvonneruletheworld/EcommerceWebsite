@@ -37,7 +37,7 @@ namespace EcommerceWebsite.Api.Interface
 
         Task<List<ThuocTinh>> layDinhluong();
 
-        Task<List<PhieuNhap>> layPhieuNhapSP(string maPN);
+        Task<List<PhieuNhap>> layPhieuNhapSP();
 
         Task<bool> ThemDinhLuongSanPham(DinhLuong input);
 

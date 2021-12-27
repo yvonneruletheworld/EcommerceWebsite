@@ -146,7 +146,8 @@ namespace EcommerceWebsite.Services.Services.Main
                                           GiaBan = dl_lsg.GiaMoi,
                                           MaLoai = loaiSanPham.MaDanhMuc,
                                           TrangThaiYeuThich = false,
-                                          MaHUIItem = sp.NguoiXoa
+                                          MaHUIItem = sp.NguoiXoa,
+                                          loiNhuan = sp.Utility,
                                       }).ToListAsync();
                     return data;
               
@@ -612,11 +613,11 @@ namespace EcommerceWebsite.Services.Services.Main
             }
         }
 
-        public async Task<List<PhieuNhap>> LayPhieuNhapSanPham(string maPN)
+        public async Task<List<PhieuNhap>> LayPhieuNhapSanPham()
         {
             try
             {
-                var data = await _context.PhieuNhaps.Where(s => s.MaPhieuNhap == maPN).ToListAsync();
+                var data = await _context.PhieuNhaps.ToListAsync();
                 return data;
 
             }

@@ -7,7 +7,7 @@
     var diaChi = @Context.Session.GetString("DiaChiKH");
     var SDT = @Context.Session.GetString("SDTKH");
     var madc = @Context.Session.GetString("MaDiaChiKH");
-    var tongTien = (decimal) Model.Sum(s => s.giaBan);
+    var tongTien = (decimal) Model.Sum(s => s.dThanhTien);
 }
 
 <div class="breadcrumb-area">
@@ -157,7 +157,7 @@
                                             {
                                                 <td class="cart-product-name">@item.tenSanPham<strong class="product-quantity"> × @item.soLuong</strong></td>
                                             }
-                                            <td class="cart-product-total"><span class="amount">@string.Format("{0:0,0}", item.giaBan) VNĐ</span></td>
+                                            <td class="cart-product-total"><span class="amount">@string.Format("{0:0,0}", item.dThanhTien) VNĐ</span></td>
                                         </tr>
                                     // }
                                 }

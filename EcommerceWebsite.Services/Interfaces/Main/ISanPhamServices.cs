@@ -46,7 +46,7 @@ namespace EcommerceWebsite.Services.Interfaces.Main
 
         Task<List<SanPhamVM>> LaySanPhamMoiNhat(string maKH);
 
-        Task<List<PhieuNhap>> LayPhieuNhapSanPham(string maPN);
+        Task<List<PhieuNhap>> LayPhieuNhapSanPham();
 
         Task<bool> ThemDinhLuongSanPham(DinhLuong input);
 

@@ -191,9 +191,9 @@ namespace EcommerceWebsite.Api.Interface
             return response.IsSuccessStatusCode;
         }
 
-        public async Task<List<PhieuNhap>> layPhieuNhapSP(string maPN)
+        public async Task<List<PhieuNhap>> layPhieuNhapSP()
         {
-            return await GetListAsync<PhieuNhap>($"/api/SanPham/lay-PhieuNhap/{maPN}");
+            return await GetListAsync<PhieuNhap>($"/api/SanPham/lay-PhieuNhap");
         }
 
         public async Task<bool> ThemDinhLuongSanPham(DinhLuong input)

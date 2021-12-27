@@ -116,7 +116,7 @@
                 </div>
                 <div class="form-group">
                     <label class="form-label" >Ngày nhập hàng</label>
-                    <input type="date" id="ngay-nhap-id" class="form-control" placeholder="Nhập ngày">
+                    <input type="date" id="ngay-nhap-id" class="form-control" value="@DateTime.Now.ToString("MM/dd/yyyy")" placeholder="Nhập ngày">
                 </div>
                 <div class="form-group">
                     <label class="form-label" >Số Lượng : @tongSoNhap Sản phẩm</label>
@@ -146,7 +146,20 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            </tbody>
+                                @if (Model.phieuNhap != null)
+                                {
+                                    @foreach (var sp in Model.phieuNhap)
+                                        {
+                                <tr>
+                                    <td>@sp.MaPhieuNhap</td>
+                                    <td>@sp.MaNhaCungCap</td>
+                                    <td>@sp.TongTien</td>
+                                    <td>@sp.NgayTao</td>
+                                </tr>
+                                       
+                                        }
+                                    }
+                                    </tbody>
                         </table>
                     </div>
                 </div>
@@ -176,28 +189,28 @@
 
     $(document).ready(function () {
         $('#importSanPham').change(function (e) {
-            var files = e.target.files[0];
-            if (files) {
+                                        var files = e.target.files[0];
+                                        if (files) {
                 $('#form-import-id').submit();
                 $('#file-name').text('File được chọn: ' + files.name);
-            }
-        });
-    });
+                                        }
+                                    });
+                                });
     function onInputClick() {
         $('#importSanPham').click();
-    }
-    function luuImport() {
-        var ncc = $('#nha-cungcap-selection').val();
-        var ml = $('#loai-hang-hoa-selection').val();
-        var tt = '@tongThanhTien';
-        var listImport = model.sanPhamInputs;
+                                }
+                                function luuImport() {
+                                    var ncc = $('#nha-cungcap-selection').val();
+                                    var ml = $('#loai-hang-hoa-selection').val();
+                                    var tt = '@tongThanhTien';
+                                    var listImport = model.sanPhamInputs;
 
-        var fd = new FormData();
-        fd.append('listImport', listImport);
+                                    var fd = new FormData();
+                                    fd.append('listImport', listImport);
 
-        if (model.sanPhamInputs) {
+                                    if (model.sanPhamInputs) {
             $.ajax({
-                url: 'SaveInputExcel?maNhaCungCap=' + ncc + '&total=' + tt + '&maLoai=' + ml,
+                                        url: 'SaveInputExcel?maNhaCungCap=' + ncc + '&total=' + tt + '&maLoai=' + ml,
                 type: 'POST',
                 data: fd,
                 contentType: false, // Not to set any content header
@@ -207,16 +220,16 @@
                         alert("Một số sản phẩm đã xảy ra lỗi trong quá trình lưu. Hãy kiểm tra danh sách hiển thị sản phẩm.");
                     else
                         alert("Thêm thành công");
-                    fd = new FormData();
+                    location.reload();
                 },
                 error: (err) => {
                     alert("Server không phản hồi! ");
-                    fd = new FormData();
+                    location.reload();
                 }
             });
-        }
-    }
-    
+                                    }
+                                }
+
 
 </script>
 
