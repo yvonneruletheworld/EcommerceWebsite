@@ -39,6 +39,7 @@ namespace EcommerceWebsite.Admin.Controllers
                 var vm = new NhapHangVM();
                 vm.DanhMucs = await _danhMucApiServices.GetCategories();
                 vm.NhaCungCaps = await _nhaCungCapApiServices.layNhaCungCap();
+                vm.phieuNhap = await _sanPhamApiServices.layPhieuNhapSP();
                 vm.SanPhamInputs = importList;
                 return View("/Views/NhapSanPham/NhapHang.cshtml", vm);
             }
@@ -122,19 +123,7 @@ namespace EcommerceWebsite.Admin.Controllers
             }
             else return Json(new { code = 500 });
         }
-        [HttpGet("get-data-phieunhapSP/{maPN}")]
-        public async Task<IActionResult> layPhieuNhapSP(string maPN)
-        {
-            try
-            {
-                var data = await _sanPhamApiServices.layPhieuNhapSP(maPN);
-                return Ok(data);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
+        
         private IEnumerable<SanPhamInput> GetListImport(string fileName)
         {
             var filePath = $"D:\\School\triplev-store\\EcommerceWebsite.Admin\\wwwroot\\files\\{fileName}";

@@ -67,12 +67,12 @@ namespace EcommerceWebsite.Api.Controllers
                 return BadRequest(Messages.API_Exception + ex);
             }
         }
-        [HttpGet("lay-PhieuNhap/{maPN}")]
-        public async Task<IActionResult> layPhieuNhapSanPham(string maPN)
+        [HttpGet("lay-PhieuNhap")]
+        public async Task<IActionResult> layPhieuNhapSanPham()
         {
             try
             {
-                var result = await _sanPhamServices.LayPhieuNhapSanPham(maPN);
+                var result = await _sanPhamServices.LayPhieuNhapSanPham();
                 if (result == null)
                     return BadRequest(Messages.API_EmptyResult);
                 else return Ok(result);

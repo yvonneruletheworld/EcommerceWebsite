@@ -14,6 +14,7 @@ namespace EcommerceWebsite.Utilities.ViewModel
         public IEnumerable<SanPhamInput> SanPhamInputs { get; set; }
         [JsonProperty("nhaCungCap")]
         public List<NhaCungCap> NhaCungCaps { get; set; }
+        public List<PhieuNhap> phieuNhap { get; set; }
         [JsonProperty("danhMuc")]
         public List<DanhMucOutput> DanhMucs { get; set; }
        
