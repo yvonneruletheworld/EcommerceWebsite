@@ -95,7 +95,7 @@ namespace EcommerceWebsite.Services.Services.Main
                     break;
                 else
                 {
-                        var sanPhamTheoDanhMucs = await _sanPhamServices.LaySanPhamTheoLoai(itemCount, dm.MaDanhMuc, null, maKH);
+                        var sanPhamTheoDanhMucs = await _sanPhamServices.LaySanPhamTheoLoaiKhongHUi(itemCount, dm.MaDanhMuc, null, maKH);
                     if (sanPhamTheoDanhMucs == null || sanPhamTheoDanhMucs.Count == 0)
                         continue;
                     else

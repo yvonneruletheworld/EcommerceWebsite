@@ -78,9 +78,9 @@ namespace EcommerceWebsite.Api.Interface
                 :null;
         }
 
-        public async Task<SanPhamVM> LayViewSanPham(string prdId, string maKH)
+        public async Task<SanPhamVM> LayViewSanPham(string prdId, string maKH, string comBo = null)
         {
-            return await GetAsync<SanPhamVM>($"/api/SanPham/Views/{prdId}/{maKH}");
+            return await GetAsync<SanPhamVM>($"/api/SanPham/Views/{prdId}/{maKH}/{comBo}");
         }
 
         public async Task<SanPhamOutput> LayChiTietSanPham(string prdId)
