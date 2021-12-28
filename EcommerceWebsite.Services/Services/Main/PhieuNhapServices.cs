@@ -167,7 +167,6 @@ namespace EcommerceWebsite.Services.Services.Main
         {
             try
             {
-
                 var data1 = await (from hd in _context.HoaDons
                                   join cthd in _context.ChiTietHoaDons on hd.MaHoaDon equals cthd.HoaDonId into hd_cthd_group
                                   from cthd_hd in hd_cthd_group.DefaultIfEmpty()
@@ -195,62 +194,91 @@ namespace EcommerceWebsite.Services.Services.Main
                                   }).OrderBy(lsg => lsg.NgayNhap.Date)
                                     .ThenBy(d => d.NgayNhap.TimeOfDay)
                                     .ToListAsync();
-
-                var toDic = data1.GroupBy(pn => pn.NgayNhap)
-                    .ToDictionary(pn => pn.Key, pn => pn.ToList());
-                if (toDic != null && toDic.Count() > 0)
+                var toDic = new Dictionary<DateTime, List<DoanhThuOutput>>();
+                if (data1.Count() > 0)
                 {
-                    //key = ngay tao hoa don
-                    var listNgayNhap = toDic.Keys.ToList();
-                    var soTon = 0;
-                    var tongBan = 0.0m;
-                    var tongNhap = 0.0m;
-                    foreach (var key in listNgayNhap)
+                    toDic = data1.GroupBy(pn => pn.NgayNhap)
+                    .ToDictionary(pn => pn.Key, pn => pn.ToList());
+                    if (toDic != null && toDic.Count() > 0)
                     {
-                        var currentIndex = listNgayNhap.IndexOf(key);
-                        var ngayNhapKe = currentIndex == listNgayNhap.Count() - 1 ? DateTime.Now
-                            : listNgayNhap[currentIndex + 1];
-                        var filterList = toDic[key].Where(hd => DateTime.Compare(hd.NgayBan, key) >= 0
-                                                                && DateTime.Compare(hd.NgayBan, ngayNhapKe) <= 0)
-                                                    .OrderBy(hd => hd.NgayBan.Date)
-                                                    .ThenBy(hd => hd.NgayBan.TimeOfDay).ToList();
-                        //var tonKho = 0;
-                        //var tongBan = 0.0m;
-                        tongNhap += toDic[key].FirstOrDefault().TongTienNhap;
-                        if (filterList.Count() == 0)
+                        //key = ngay tao hoa don
+                        var listNgayNhap = toDic.Keys.ToList();
+                        var soTon = 0;
+                        var tongBan = 0.0m;
+                        var tongNhap = 0.0m;
+                        foreach (var key in listNgayNhap)
                         {
-                            soTon += toDic[key].FirstOrDefault().SoLuongNhap;
-                            var obj = new DoanhThuOutput()
+                            var currentIndex = listNgayNhap.IndexOf(key);
+                            var ngayNhapKe = currentIndex == listNgayNhap.Count() - 1 ? DateTime.Now
+                                : listNgayNhap[currentIndex + 1];
+                            var filterList = toDic[key].Where(hd => DateTime.Compare(hd.NgayBan, key) >= 0
+                                                                    && DateTime.Compare(hd.NgayBan, ngayNhapKe) <= 0)
+                                                        .OrderBy(hd => hd.NgayBan.Date)
+                                                        .ThenBy(hd => hd.NgayBan.TimeOfDay).ToList();
+                            //var tonKho = 0;
+                            //var tongBan = 0.0m;
+                            tongNhap += toDic[key].FirstOrDefault().TongTienNhap;
+                            if (filterList.Count() == 0)
                             {
-                                DonGiaNhap = toDic[key].FirstOrDefault().DonGiaNhap,
-                                SoLuongNhap = toDic[key].FirstOrDefault().SoLuongNhap,
-                                TongTienNhap = toDic[key].FirstOrDefault().TongTienNhap,
-                                SoLuongTon = soTon,
-                                LoiNhuan = TinhLoiNhuan(tongBan, tongNhap)
-                            };
-                            filterList.Add(obj);
-                        }
-                        else
-                        {
-                            for (int i = 0; i < filterList.Count(); i++)
-                            {
-                                var trs = filterList[i];
-
-                                if (i == 0)
+                                soTon += toDic[key].FirstOrDefault().SoLuongNhap;
+                                var obj = new DoanhThuOutput()
                                 {
-                                    soTon += trs.SoLuongNhap;
-                                }
-                                soTon -= trs.DaBan;
-                                trs.SoLuongTon = soTon;
-                                tongBan += trs.TongTienBan;
-                                //trs.TongTienBan = tongBan + tongBan;
-                                trs.LoiNhuan = TinhLoiNhuan(tongBan, tongNhap);
+                                    DonGiaNhap = toDic[key].FirstOrDefault().DonGiaNhap,
+                                    SoLuongNhap = toDic[key].FirstOrDefault().SoLuongNhap,
+                                    TongTienNhap = toDic[key].FirstOrDefault().TongTienNhap,
+                                    SoLuongTon = soTon,
+                                    LoiNhuan = TinhLoiNhuan(tongBan, tongNhap)
+                                };
+                                filterList.Add(obj);
                             }
+                            else
+                            {
+                                for (int i = 0; i < filterList.Count(); i++)
+                                {
+                                    var trs = filterList[i];
+
+                                    if (i == 0)
+                                    {
+                                        soTon += trs.SoLuongNhap;
+                                    }
+                                    soTon -= trs.DaBan;
+                                    trs.SoLuongTon = soTon;
+                                    tongBan += trs.TongTienBan;
+                                    //trs.TongTienBan = tongBan + tongBan;
+                                    trs.LoiNhuan = TinhLoiNhuan(tongBan, tongNhap);
+                                }
+                            }
+
+                            toDic[key].Clear();
+                            toDic[key].AddRange(filterList);
                         }
-                        
-                        toDic[key].Clear();
-                        toDic[key].AddRange(filterList);
                     }
+                }
+                else
+                {
+                    var data = await (from pn in _context.PhieuNhaps
+                                      join ctn in _context.ChiTietNhapSanPhams on pn.MaPhieuNhap equals ctn.MaNhap into pn_ctn_group
+                                      from ctn_pn in pn_ctn_group.DefaultIfEmpty()
+                                      join sp in _context.SanPhams on ctn_pn.MaSanPham equals sp.MaSanPham into ctn_sp_group
+                                      from sp_ctn in ctn_sp_group.DefaultIfEmpty()
+                                      where !pn.DaXoa && sp_ctn.MaSanPham == maSanPham
+                                      select new DoanhThuOutput()
+                                      {
+                                          MaSanPham = ctn_pn.MaSanPham,
+                                          SoLuongNhap = ctn_pn.SoLuong,
+                                          DonGiaNhap = ctn_pn.DonGia,
+                                          TongTienNhap = ctn_pn.SoLuong * ctn_pn.DonGia,
+                                          NgayNhap = pn.NgayTao,
+                                          SoLuongTon = ctn_pn.SoLuong,
+                                          NgayBan = new DateTime(),
+                                          DonGiaBan = 0,
+                                          DaBan = 0,
+                                          TongTienBan = 0,
+                                          LoiNhuan = TinhLoiNhuan(0, ctn_pn.SoLuong * ctn_pn.DonGia)
+                                      }).OrderBy(lsg => lsg.NgayNhap.Date)
+                                   .ThenBy(d => d.NgayNhap.TimeOfDay).ToListAsync();
+                    toDic = data.GroupBy(pn => pn.NgayNhap)
+                    .ToDictionary(pn => pn.Key, pn => pn.ToList());
                 }
                 return toDic;
             }
