@@ -287,15 +287,15 @@ namespace EcommerceWebsite.Api.Controllers
             }
         }
 
-        [HttpGet("Views/{productId}/{maKH}")]
-        public async Task<IActionResult> GetViewProduct(string productId, string maKH)
+        [HttpGet("Views/{productId}/{maKH}/{comBo}")]
+        public async Task<IActionResult> GetViewProduct(string productId, string maKH, string comBo = null)
         {
             if (String.IsNullOrEmpty(productId))
                 return BadRequest(Messages.API_EmptyInput);
             else
             {
                 // lay san pham
-                var listObj = await _sanPhamServices.LaySanPhamTheoLoai(1, null, productId, maKH);
+                var listObj = await _sanPhamServices.LaySanPhamTheoLoai(1, null, productId, maKH, comBo);
                 if (listObj == null)
                     return BadRequest(Messages.API_EmptyResult);
                 return Ok(listObj.FirstOrDefault());

@@ -120,14 +120,17 @@
                                                         <h4><a class="product_name" href="@Url.Action("Index", "Detail", new {  prdId = prd.MaSanPham, prdMaDanhMuc = prd.MaLoai })">@prd.TenSanPham</a></h4>
                                                     }
                                                     <div class="price-box">
-                                                        <span class="new-price"  >@string.Format("{0:0,0}", prd.GiaBan) VNĐ</span>
+                                                        <span class="new-price" style="text-decoration-line: line-through ">@string.Format("{0:0,0}", prd.GiaBan) VNĐ</span>
+                                                    </div>
+                                                    <div class="price-box">
+                                                        <span class="new-price">@string.Format("{0:0,0}", prd.GiaHUI) VNĐ</span>
                                                     </div>
                                                     <div class="countersection">
                                                         <div class="li-countdown"></div>
                                                     </div>
                                                 </div>
                                                 <div class="add-actions">
-                                                    <input id="giaSanPham-@prd.MaSanPham" value="@prd.GiaBan" hidden />
+                                                    <input id="giaSanPham-@prd.MaSanPham" value="@prd.GiaHUI" hidden />
                                                     <ul class="add-actions-link">
 
                                                         <li class="add-cart active"><a href="#" class="btn-add-cart" data-id="@prd.MaSanPham">Thêm vào giỏ</a></li>

@@ -367,10 +367,16 @@
                 contentType: false, // Not to set any content header
                 processData: false, // Not to process data
                 success: function (data) {
-                    swal("Thành công!", "Đặt hàng thành công!", "success");
-                    location.href = "/Home/Index";
-                    location.reload();
-                  
+                    if (data.code == 1) {
+                        swal("Thành công!", "Đặt hàng thành công!", "success");
+                        location.href = "/Home/Index";
+                        location.reload();
+                    }
+                    else {
+                        swal("Thất bại!", "Đặt hàng thất bại!", "error");
+                        location.reload();
+                    }
+                   
                 },
                 error: function (err) {
                     swal("Thất bại!", "Đặt hàng thất bại!", "error");

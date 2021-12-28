@@ -21,7 +21,7 @@ namespace EcommerceWebsite.Api.Interface
         Task<bool> ThemPhieuNhap(PhieuNhapInput input);
         Task<List<string>> SuaSanPham(bool laXoa, SanPhamOutput input);
         Task<bool> CapNhatGia(string maDinhLuong, string editor, decimal newPrice);
-        Task<SanPhamVM> LayViewSanPham(string prdId, string maKH);
+        Task<SanPhamVM> LayViewSanPham(string prdId, string maKH, string comBo);
         Task<List<SanPhamVM>> GetViewWithMultipleIds(string[] prdIds, string comboCode);
         Task<SanPhamOutput> LayChiTietSanPham(string prdId);
 

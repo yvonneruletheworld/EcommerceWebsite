@@ -113,7 +113,7 @@ namespace EcommerceWebsite.MainWeb.Controllers
                                             .FirstOrDefault()
                                             .Value;
                 }
-                    var data = await _sanPhamServices.LayViewSanPham(hui.Itemsets[0].Trim(), userId);
+                 var data = await _sanPhamServices.LayViewSanPham(hui.Itemsets[0].Trim(), userId, hui.Id);
                 var prd = _mapper.Map<SanPhamVM>(data);
                 rs.Add(prd);
             }

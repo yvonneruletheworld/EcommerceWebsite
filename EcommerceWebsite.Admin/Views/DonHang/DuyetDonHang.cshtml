@@ -38,6 +38,7 @@
                                     @*<th>Hình ảnh</th>*@
                                     <th>Trạng Thái</th>
                                     <th>Tổng cộng</th>
+                                    <th>Ngày đặt</th>
                                     <th>Thao tác</th>
 
                                 </tr>
@@ -52,7 +53,8 @@
                                             <td>@item.MaHoaDon</td>
                                             <td>@item.MaKhachHang</td>
                                             <td>@item.TinhTrang</td>
-                                            <td>@item.TongCong</td>
+                                            <td>@string.Format("{0:0,0}", item.TongCong)</td>
+                                            <td>@item.NgayTao</td>
                                             <td > <a href="#" class="btn-xuly-donhang" data-id="@item.MaHoaDon"><i data-feather="check-circle"></i></a></td>
                                         </tr>
                                     }

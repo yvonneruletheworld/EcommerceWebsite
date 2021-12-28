@@ -60,7 +60,9 @@ namespace EcommerceWebsite.Services.Services.Main
         {
             try
             {
-                var data = await _context.HoaDons.Where(s => s.TinhTrang == "Đã duyệt").ToListAsync();
+                var data = await _context.HoaDons.Where(s => s.TinhTrang == "Đã duyệt")
+                    .OrderByDescending(s => s.NgayTao)
+                    .ThenByDescending( s=> s.NgayTao).ToListAsync();
                 return data;
 
             }
@@ -75,7 +77,9 @@ namespace EcommerceWebsite.Services.Services.Main
         {
             try
             {
-                var data = await _context.HoaDons.Where(s => s.TinhTrang == "Đang xử lý").ToListAsync();
+                var data = await _context.HoaDons.Where(s => s.TinhTrang == "Đang xử lý")
+                    .OrderByDescending(s => s.NgayTao)
+                    .ThenByDescending(s => s.NgayTao).ToListAsync();
                 return data;
 
             }

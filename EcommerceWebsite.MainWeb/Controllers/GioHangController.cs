@@ -478,9 +478,9 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
                                 if (value == null || value.Count() == 0)
                                     GioHangOutput.HUICart.Remove(hui);
                             }
-                            return Json(new{ status = true});
+                            return Json(new{ code = 1, status = true});
                         }else //Gio hang trong
-                            return Json(new{ status = false});
+                            return Json(new{ code = 2, status = false});
                     }
                     else return Json(new{code = 2,msg = "Lỗi rồi",});
                 }
@@ -488,7 +488,7 @@ namespace EcommerceWebsite.WebApp.Controllers.Main
                 {
                     return Json(new
                     {
-                        code = 1,
+                        code = 3,
                         msg = "Lỗi rồi",
                     });
                 }

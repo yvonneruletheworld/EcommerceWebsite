@@ -22,7 +22,7 @@ namespace EcommerceWebsite.Services.Interfaces.Main
         Task<bool> KiemTraGia(string value);
         Task<List<SanPhamVM>> LaySanPham();
         Task<List<SanPham>> LayListSanPham();
-        Task<List<SanPhamVM>> LaySanPhamTheoLoai(int take = 1, string loaiSanPham = null, string maSanPham = null, string maKH = null);
+        Task<List<SanPhamVM>> LaySanPhamTheoLoai(int take = 1, string loaiSanPham = null, string maSanPham = null, string maKH = null, string comBo = null);
         Task<List<SanPhamVM>> GetProductWithMultipleId(string [] idArray, string comboCode);
 
         //Task<List<SanPhamOutput>> laySanPham();
@@ -49,6 +49,7 @@ namespace EcommerceWebsite.Services.Interfaces.Main
         Task<List<PhieuNhap>> LayPhieuNhapSanPham();
 
         Task<bool> ThemDinhLuongSanPham(DinhLuong input);
+        Task<List<SanPhamVM>> LaySanPhamTheoLoaiKhongHUi(int take = 1, string loaiSanPham = null, string maSanPham = null, string maKH = null);
 
     }
 }

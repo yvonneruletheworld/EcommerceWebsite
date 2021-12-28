@@ -226,9 +226,9 @@
                 <div class="col-sm-12">
                     <h5 class="mb-3">Ngày nhập: @date</h5>
                     <p>
-                        <span>Đơn giá nhập: @dicNhapBan[date].FirstOrDefault().DonGiaNhap</span>
+                        <span>Đơn giá nhập: @string.Format("{0:0,0}", dicNhapBan[date].FirstOrDefault().DonGiaNhap)</span>
                         <span>Số lượng nhập: @dicNhapBan[date].FirstOrDefault().SoLuongNhap</span>
-                        <span>Tổng nhập: @dicNhapBan[date].FirstOrDefault().TongTienNhap</span>
+                        <span>Tổng nhập: @string.Format("{0:0,0}", dicNhapBan[date].FirstOrDefault().TongTienNhap)</span>
                     </p>
                     <hr>
 
@@ -248,9 +248,9 @@
                                     </thead>
                                     <tbody>
                                         @{
-                                            var listHoaDon = dicNhapBan[date];
+                                    var listHoaDon = dicNhapBan[date];
 
-                                            @foreach (var hd in listHoaDon)
+                                    @foreach (var hd in listHoaDon)
                                             {
                                         <tr>
 
@@ -262,10 +262,10 @@
                                                 @hd.SoLuongTon
                                             </td>
                                             <td>
-                                                @string.Format("{0:0,0}", hd.DonGiaBan) VNĐ;
+                                                @string.Format("{0:0,0}", hd.DonGiaBan) VNĐ
                                             </td>
                                             <td>
-                                                @string.Format("{0:0,0}", hd.TongTienBan) VNĐ;
+                                                @string.Format("{0:0,0}", hd.TongTienBan) VNĐ
                                             </td>
                                             @if (hd.LoiNhuan <= 0)
                                             {
@@ -289,7 +289,8 @@
             </div>
         }
     </div>
-   
+
+
 
 
 

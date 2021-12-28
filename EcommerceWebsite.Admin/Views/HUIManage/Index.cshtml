@@ -27,19 +27,22 @@
     <!-- [ Main Content ] start -->
 
     <div class="row">
-        <div class="col-sm-12 mb-3">
+        <div class="col-sm-12">
             <h5 class="mb-3">THAO TÁC</h5>
             <hr>
             <p>
                 <span>Lợi nhuận cao nhất: </span>
                 <span>Lợi nhuận thấp nhất: </span>
             </p>
-            <span>Thiết lập mức lợi nhuận mong muốn: </span><input type="number" class="form-control text-box single-line" style="max-width: 100px" id="min-util" /> %
-
-            <button class="btn mb-1 btn-primary" onclick="XuatNewHUI()"><i data-feather="save"></i> Thêm </button>
+            <button class="btn mb-1 btn-primary" onclick="XuatNewHUI()"><i data-feather="save"></i> Thêm Input </button>
             <button class="btn mb-1 btn-primary" onclick="XuatNewData()"> <i data-feather="delete"></i> Cập Nhật Dữ Liệu </button>
+            <p class="mb-6">
+                <span >Thiết lập mức lợi nhuận mong muốn: </span><input type="number" class="form-control text-box single-line" value="1" min="1" style="max-width: 100px" id="min-util" /> %
+            </p>
+            
         </div>
     </div>
+    
 
     @foreach (var key in listKeys)
     {
