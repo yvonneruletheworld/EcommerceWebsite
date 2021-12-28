@@ -17,7 +17,7 @@ namespace EcommerceWebsite.Data.Entities
         public decimal TongTien { get; set; }
 
         public NhanVien NhanVien { get; set; }
-        public NhaCungCap NhaCungCap { get; set; }
+        public NhaCungCap NhaCungCapE { get; set; }
         public List<ChiTietNhapSanPham> ChiTietNhapSanPhams { get; set; }
     }
 }

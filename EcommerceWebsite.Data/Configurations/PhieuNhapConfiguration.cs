@@ -27,7 +27,7 @@ namespace EcommerceWebsite.Data.Configurations
             builder.Property(nsp => nsp.TongTien)
                 .HasColumnType("money");
 
-            builder.HasOne(nsp => nsp.NhaCungCap)
+            builder.HasOne(nsp => nsp.NhaCungCapE)
                 .WithMany(nsp => nsp.PhieuNhaps)
                 .HasForeignKey(nsp => nsp.MaNhaCungCap);
 

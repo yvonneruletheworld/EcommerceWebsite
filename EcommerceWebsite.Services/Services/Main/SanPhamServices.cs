@@ -623,7 +623,19 @@ namespace EcommerceWebsite.Services.Services.Main
         {
             try
             {
-                var data = await _context.PhieuNhaps.ToListAsync();
+                var data = await (from pn in _context.PhieuNhaps 
+                                  join ncc in _context.NhaCungCaps on pn.MaNhaCungCap equals ncc.MaNhaCungCap
+                                  where !pn.DaXoa
+                                  select new PhieuNhap()
+                                  {
+                                      MaPhieuNhap = pn.MaPhieuNhap,
+                                      NhaCungCapE = ncc,
+                                      NgayTao = pn.NgayTao,
+                                      TongTien = pn.TongTien
+                                  })
+                                  .OrderByDescending(pn => pn.NgayTao.Date)
+                                  .ThenByDescending(pn => pn.NgayTao.TimeOfDay)
+                                  .ToListAsync();
                 return data;
 
             }
