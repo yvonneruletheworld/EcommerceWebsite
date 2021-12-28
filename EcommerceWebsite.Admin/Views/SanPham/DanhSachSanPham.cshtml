@@ -35,12 +35,11 @@
                                 <tr>
                                     <th>Mã sản phẩm</th>
                                     <th>Tên sản phẩm</th>
-                                    @*<th>Hình ảnh</th>*@
-                                    <th>Hãng</th>
-                                    <th>lợi nhuận</th>
-                                    <th>Số lượng tồn</th>
-                                    <th>Trạng thái</th>
                                     <th>Loại sản phẩm</th>
+                                    <th>Giá Bán</th>
+                                    <th>Số lượng tồn</th>
+                                    <th>lợi nhuận</th>
+                                    <th>Trạng thái</th>
 
                                 </tr>
                             </thead>
@@ -50,24 +49,38 @@
                                     foreach (var item in Model)
                                     {
                                         
-                                        <tr>
-                                            <td><a href="@Url.Action("Index","DoanhThu", new { maSanPham = item.MaSanPham})"> @item.MaHUIItem</a></td>
-                                            <td>@item.TenSanPham</td>
-                                            @*<td><img src="@item.HinhAnh" width="50%" /></td>*@
-                                            <td>@item.NhanHieu</td>
-                                            <td>@item.loiNhuan</td>
+                                    <tr>
+                                        <td><a href="@Url.Action("Index","DoanhThu", new { maSanPham = item.MaSanPham})"> @item.MaHUIItem</a></td>
+                                        <td class="col-3"><a  href="@Url.Action("Index","DoanhThu", new { maSanPham = item.MaSanPham})"> <span style="white-space: pre-wrap">@item.TenSanPham</span> </a></td>
+                                        <td>@item.LoaiSanPham</td>
+                                        <td>@string.Format("{0:0,0}", item.GiaBan) </td>
+                                        @if (item.SoLuongTon <= 0)
+                                        {
+                                            <td><span class="text-danger"> @item.SoLuongTon</span></td>
+                                        }
+                                        else
+                                        {
                                             <td>@item.SoLuongTon</td>
-                                            @if (item.Status.Equals("InActive"))
-                                            {
-                                                <td>Tạm ngưng</td>
-                                            }
-                                            else
-                                            {
-                                                <td>Hoạt động</td>
-                                            }
+                                        }
+                                        @if (item.loiNhuan <= 0)
+                                        {
+                                            <td><span class="text-danger"> @item.loiNhuan</span></td>
+                                        }
+                                        else
+                                        {
+                                            <td><span class="font-weight-bold"> @item.loiNhuan</span></td>
+                                        }
+                                    
+                                        @if (item.Status.Equals("InActive"))
+                                        {
+                                            <td><span class="text-danger"> Tạm ngưng</span></td>
+                                        }
+                                        else
+                                        {
+                                            <td><span class="text-primary"> Hoạt động</span></td>
+                                        }
 
-                                            <td>@item.LoaiSanPham</td>
-                                        </tr>
+                                    </tr>
                                     }
                                 }
                             </tbody>

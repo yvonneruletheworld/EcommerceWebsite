@@ -45,7 +45,7 @@ namespace EcommerceWebsite.Admin.Controllers
             return Json(new { code = 2 });
         }
         
-        public async Task<IActionResult> XuatNewData()
+        public async Task<IActionResult> XuatNewData(string min)
         {
             // doc data
             var result = await _huiApiServices.GetListHUIForInput("import",DateTime.Now.ToString("s"));
@@ -56,6 +56,7 @@ namespace EcommerceWebsite.Admin.Controllers
                 var dicHoaDon = result.GroupBy(ct => ct.HoaDons.NgayTao)
                     .ToDictionary(ct => ct.Key, ct => ct.ToList());
                 var lines = new List<string>();
+                lines.Add(min.Trim());
                 foreach (var hd in dicHoaDon)
                 {
                     var chiTiets = hd.Value;

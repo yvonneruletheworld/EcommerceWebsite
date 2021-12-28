@@ -26,17 +26,24 @@
     <!-- [ breadcrumb ] end -->
     <!-- [ Main Content ] start -->
 
+    <div class="row">
+        <div class="col-sm-12 mb-3">
+            <h5 class="mb-3">THAO TÁC</h5>
+            <hr>
+            <p>
+                <span>Lợi nhuận cao nhất: </span>
+                <span>Lợi nhuận thấp nhất: </span>
+            </p>
+            <span>Thiết lập mức lợi nhuận mong muốn: </span><input type="number" class="form-control text-box single-line" style="max-width: 100px" id="min-util" /> %
+
+            <button class="btn mb-1 btn-primary" onclick="XuatNewHUI()"><i data-feather="save"></i> Thêm </button>
+            <button class="btn mb-1 btn-primary" onclick="XuatNewData()"> <i data-feather="delete"></i> Cập Nhật Dữ Liệu </button>
+        </div>
+    </div>
+
     @foreach (var key in listKeys)
     {
-<div class="row">
-    <div class="col-sm-12 mb-3">
-        <h5 class="mb-3">THAO TÁC</h5>
-        <hr>
-        <button class="btn mb-1 btn-primary" onclick="XuatNewHUI()"><i data-feather="save"></i> Thêm </button>
-        <button  class="btn mb-1 btn-primary" onclick="XuatNewData()"> <i data-feather="delete"></i> Cập Nhật Dữ Liệu </button>
-        <button class="btn mb-1 btn-primary"><i data-feather="edit"></i> Sửa</button>
-    </div>
-</div>
+
         <div class="row">
             <div class="col-sm-12">
                 <h5 class="mb-3">Ngày tạo: @key</h5>
@@ -68,10 +75,10 @@
                                                 <td>@comboCode</td>
                                                 <td>
 
-                                                    @foreach(var tsp in listConvert[comboCode])
+                                                    @foreach (var tsp in listConvert[comboCode])
                                                     {
                                                         <p>
-                                                            <a href="@Url.Action("Index","DoanhThu", new { maSanPham = tsp.SanPhams.MaSanPham})"> @tsp.SanPhams.TenSanPham</a>  --  
+                                                            <a href="@Url.Action("Index","DoanhThu", new { maSanPham = tsp.SanPhams.MaSanPham})"> @tsp.SanPhams.TenSanPham</a>  --
                                                             <!--<span>-->@*@(tsp.SanPhams.ChiTietHoaDons.Count() == 0? 0 : @tsp.SanPhams.ChiTietHoaDons[0].SoLuong)*@<!--</span>-->
                                                             <span>@tsp.DaBan</span>
                                                         </p>
@@ -84,7 +91,7 @@
                                                 <td>
                                                     @listConvert[comboCode].Sum(c => c.Cost);
                                                 </td>
-                                                
+
                                             </tr>
                                         }
 
@@ -119,9 +126,10 @@
             }
         });
     }
-        function XuatNewData() {
-            $.ajax({
-                url: '/HUIManage/XuatNewData',
+    function XuatNewData() {
+        var min = $('#min-util').val();
+        $.ajax({
+            url: '/HUIManage/XuatNewData?min=' + min,
                 success: function (data) {
                     if (data.code == 1) {
                         location.reload();

@@ -41,7 +41,7 @@ namespace EcommerceWebsite.Services.Services.Main
                                                            && (dl.MaThuocTinh == (nameof(ProductPorpertyCode.TT07))
                                                            || dl.MaThuocTinh == (nameof(ProductPorpertyCode.TT014)))).Take(1)
                                       //join lsg in _context.LichSuGias on sp_dl.MaDinhLuong equals lsg.MaDinhLuong into dl_lsg_group
-                                  from dl_lsg in _context.BangGiaSanPhams.Where(lsg => lsg.MaDinhLuong.Equals(sp_dl.MaDinhLuong))
+                                  from dl_lsg in _context.BangGiaSanPhams.Where(lsg => lsg.MaDinhLuong.Equals(sp_dl.MaDinhLuong) && !lsg.DaXoa)
                                                                 .OrderByDescending(lsg => lsg.NgayTao.Date)
                                                                 .ThenByDescending(d => d.NgayTao.TimeOfDay).Take(1)
                                   where !sp.DaXoa && yt.MaKhachHang == MaKH  && yt.MaSanPham == sp.MaSanPham && yt.TrangThai

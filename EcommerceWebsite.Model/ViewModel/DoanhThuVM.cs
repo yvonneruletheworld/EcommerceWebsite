@@ -8,7 +8,7 @@ namespace EcommerceWebsite.Utilities.ViewModel
 {
     public class DoanhThuVM
     {
-        public List<DoanhThuOutput> ListSanPhamNhapVaBan;
+        public Dictionary<DateTime, List<DoanhThuOutput>> ListSanPhamNhapVaBan;
         public List<ThuocTinh> ListDinhLuong;
         public List<DanhMucOutput> ListDanhMuc;
         public List<NhanHieu> ListNhanHieu;

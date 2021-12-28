@@ -9,6 +9,7 @@ namespace EcommerceWebsite.Utilities.Output.Main
     public class DoanhThuOutput
     {
         public DateTime NgayNhap { get; set; }
+        public DateTime NgayBan { get; set; }
         public int SoLuongNhap { get; set; }
         public decimal DonGiaNhap { get; set; }
         public decimal TongTienNhap { get; set; }

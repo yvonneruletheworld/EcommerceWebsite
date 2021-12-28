@@ -49,7 +49,12 @@ namespace EcommerceWebsite.Admin.Controllers
             }
 
         }
-
+        /// <summary>
+        /// Doc file excel va luu vao code
+        /// </summary>
+        /// <param name="file"></param>
+        /// <param name="hostingEnvironment"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> ReadInputExcel(IFormFile file, [FromServices] IHostingEnvironment hostingEnvironment)
         {
@@ -60,6 +65,7 @@ namespace EcommerceWebsite.Admin.Controllers
                 fileStream.Flush();
             }
             var listProducts = GetListImport(file.FileName);
+            // luu vao session
             HttpContext.Session.Set<IEnumerable<SanPhamInput>>("ListImportPrd", listProducts);
             return await NhapHang(listProducts);
         }

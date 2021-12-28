@@ -23,13 +23,14 @@ namespace EcommerceWebsite.Services.Services.Main
     {
         private readonly EcomWebDbContext _context;
         private readonly IMapper _mapper;
-        private readonly IBangGiaServices _bangGiaServices;
+        //private readonly IBangGiaServices _bangGiaServices;
+        private readonly IPhieuNhapServices _phieuNhapServices;
 
-        public SanPhamServices(EcomWebDbContext context, IMapper mapper, IBangGiaServices bangGiaServices)
+        public SanPhamServices(EcomWebDbContext context, IMapper mapper, IPhieuNhapServices phieuNhapServices)
         {
             _context = context;
             _mapper = mapper;
-            _bangGiaServices = bangGiaServices;
+            _phieuNhapServices = phieuNhapServices;
         }
 
         public async Task<PageResponse<List<SanPhamOutput>>> GetListProductByPage(PaginationFilter filter)
@@ -124,7 +125,7 @@ namespace EcommerceWebsite.Services.Services.Main
             try
             {
                     var data = await (from sp in _context.SanPhams
-                                      join nhanHieu in _context.NhanHieus on sp.MaHang equals nhanHieu.MaHang
+                                      //join nhanHieu in _context.NhanHieus on sp.MaHang equals nhanHieu.MaHang
                                       join loaiSanPham in _context.DanhMucs on sp.MaLoaiSanPham equals loaiSanPham.MaDanhMuc
                                      
                                       from sp_dl in _context.DinhLuongs
@@ -132,7 +133,7 @@ namespace EcommerceWebsite.Services.Services.Main
                                                              && (dl.MaThuocTinh == (nameof(ProductPorpertyCode.TT07))
                                                              || dl.MaThuocTinh == (nameof(ProductPorpertyCode.TT014)))).Take(1)
                                           //join lsg in _context.BangGiaSanPhams on sp_dl.MaDinhLuong equals lsg.MaDinhLuong into dl_lsg_group
-                                      from dl_lsg in _context.BangGiaSanPhams.Where(lsg => lsg.MaDinhLuong.Equals(sp_dl.MaDinhLuong))
+                                      from dl_lsg in _context.BangGiaSanPhams.Where(lsg => lsg.MaDinhLuong.Equals(sp_dl.MaDinhLuong) && !lsg.DaXoa)
                                                                     .OrderByDescending(lsg => lsg.NgayTao.Date).Take(1)
 
                                       where !sp.DaXoa
@@ -140,9 +141,9 @@ namespace EcommerceWebsite.Services.Services.Main
                                       {
                                           MaSanPham = sp.MaSanPham,
                                           TenSanPham = sp.TenSanPham,
-                                          SoLuongTon = sp.SoLuongTon,
+                                          SoLuongTon = 0,
                                           HinhAnh = sp.HinhAnh,
-                                          NhanHieu = nhanHieu.TenHang,
+                                          //NhanHieu = nhanHieu.TenHang,
                                           LoaiSanPham = loaiSanPham.TenDanhMuc,
                                           GiaBan = dl_lsg.GiaMoi,
                                           MaLoai = loaiSanPham.MaDanhMuc,
@@ -150,9 +151,12 @@ namespace EcommerceWebsite.Services.Services.Main
                                           MaHUIItem = sp.NguoiXoa,
                                           loiNhuan = sp.Utility,
                                       }).ToListAsync();
+                foreach(var sp in data)
+                {
+                    var list = (await _phieuNhapServices.GetListImportProduct(sp.MaSanPham)).FirstOrDefault();
+                    sp.SoLuongTon = list.SoLuongTon;
+                }    
                     return data;
-              
-
             }
             catch (Exception ex)
             {
@@ -251,7 +255,7 @@ namespace EcommerceWebsite.Services.Services.Main
                                                            && (dl.MaThuocTinh == (nameof(ProductPorpertyCode.TT07))
                                                            || dl.MaThuocTinh == (nameof(ProductPorpertyCode.TT014)))).Take(1)
                                       //join lsg in _context.BangGiaSanPhams on sp_dl.MaDinhLuong equals lsg.MaDinhLuong into dl_lsg_group
-                                  from dl_lsg in _context.BangGiaSanPhams.Where(lsg => lsg.MaDinhLuong.Equals(sp_dl.MaDinhLuong))
+                                  from dl_lsg in _context.BangGiaSanPhams.Where(lsg => lsg.MaDinhLuong.Equals(sp_dl.MaDinhLuong) && !lsg.DaXoa)
                                                                 .OrderByDescending(lsg => lsg.NgayTao.Date)
                                                                 .ThenByDescending(d => d.NgayTao.TimeOfDay).Take(1)
                                   where !sp.DaXoa && (string.IsNullOrEmpty(loaiSanPham) ? sp.NguoiXoa == maSanPham : sp.MaLoaiSanPham == loaiSanPham)
@@ -293,7 +297,7 @@ namespace EcommerceWebsite.Services.Services.Main
                                                          && (dl.MaThuocTinh == (nameof(ProductPorpertyCode.TT07))
                                                          || dl.MaThuocTinh == (nameof(ProductPorpertyCode.TT014)))).Take(1)
                                       //join lsg in _context.BangGiaSanPhams on sp_dl.MaDinhLuong equals lsg.MaDinhLuong into dl_lsg_group
-                                  from dl_lsg in _context.BangGiaSanPhams.Where(lsg => lsg.MaDinhLuong.Equals(sp_dl.MaDinhLuong))
+                                  from dl_lsg in _context.BangGiaSanPhams.Where(lsg => lsg.MaDinhLuong.Equals(sp_dl.MaDinhLuong) && !lsg.DaXoa)
                                                                 .OrderByDescending(lsg => lsg.NgayTao.Date).Take(1)
 
                                   where !sp.DaXoa
@@ -327,7 +331,7 @@ namespace EcommerceWebsite.Services.Services.Main
                                                          && (dl.MaThuocTinh == (nameof(ProductPorpertyCode.TT07))
                                                          || dl.MaThuocTinh == (nameof(ProductPorpertyCode.TT014)))).Take(1)
                                       //join lsg in _context.BangGiaSanPhams on sp_dl.MaDinhLuong equals lsg.MaDinhLuong into dl_lsg_group
-                                  from dl_lsg in _context.BangGiaSanPhams.Where(lsg => lsg.MaDinhLuong.Equals(sp_dl.MaDinhLuong))
+                                  from dl_lsg in _context.BangGiaSanPhams.Where(lsg => lsg.MaDinhLuong.Equals(sp_dl.MaDinhLuong ) && !lsg.DaXoa)
                                                                 .OrderByDescending(lsg => lsg.NgayTao.Date).Take(1)
 
                                   where !sp.DaXoa
@@ -364,7 +368,7 @@ namespace EcommerceWebsite.Services.Services.Main
                                                          && (dl.MaThuocTinh == (nameof(ProductPorpertyCode.TT07))
                                                          || dl.MaThuocTinh == (nameof(ProductPorpertyCode.TT014)))).Take(1)
                                       //join lsg in _context.BangGiaSanPhams on sp_dl.MaDinhLuong equals lsg.MaDinhLuong into dl_lsg_group
-                                  from dl_lsg in _context.BangGiaSanPhams.Where(lsg => lsg.MaDinhLuong.Equals(sp_dl.MaDinhLuong))
+                                  from dl_lsg in _context.BangGiaSanPhams.Where(lsg => lsg.MaDinhLuong.Equals(sp_dl.MaDinhLuong) && !lsg.DaXoa)
                                                                 .OrderByDescending(lsg => lsg.NgayTao.Date).Take(1)
 
                                   where !sp.DaXoa
@@ -441,7 +445,7 @@ namespace EcommerceWebsite.Services.Services.Main
                                                            && (dl.MaThuocTinh == (nameof(ProductPorpertyCode.TT07))
                                                            || dl.MaThuocTinh == (nameof(ProductPorpertyCode.TT014)))).Take(1)
                                       //join lsg in _context.BangGiaSanPhams on sp_dl.MaDinhLuong equals lsg.MaDinhLuong into dl_lsg_group
-                                  from dl_lsg in _context.BangGiaSanPhams.Where(lsg => lsg.MaDinhLuong.Equals(sp_dl.MaDinhLuong))
+                                  from dl_lsg in _context.BangGiaSanPhams.Where(lsg => lsg.MaDinhLuong.Equals(sp_dl.MaDinhLuong) && !lsg.DaXoa)
                                                                 .OrderByDescending(lsg => lsg.NgayTao.Date)
                                                                 .ThenByDescending(d => d.NgayTao.TimeOfDay).Take(1)
                                   from hui_sp in _context.HUICosts.Where(hui => hui.MaSanPham == sp.NguoiXoa && hui.ComboCode == comboCode)
@@ -509,7 +513,7 @@ namespace EcommerceWebsite.Services.Services.Main
                                                          && (dl.MaThuocTinh == (nameof(ProductPorpertyCode.TT07))
                                                          || dl.MaThuocTinh == (nameof(ProductPorpertyCode.TT014)))).Take(1)
                                       //join lsg in _context.BangGiaSanPhams on sp_dl.MaDinhLuong equals lsg.MaDinhLuong into dl_lsg_group
-                                  from dl_lsg in _context.BangGiaSanPhams.Where(lsg => lsg.MaDinhLuong.Equals(sp_dl.MaDinhLuong))
+                                  from dl_lsg in _context.BangGiaSanPhams.Where(lsg => lsg.MaDinhLuong.Equals(sp_dl.MaDinhLuong) && !lsg.DaXoa)
                                                                 .OrderByDescending(lsg => lsg.NgayTao.Date).Take(1)
 
                                   where !sp.DaXoa
@@ -550,7 +554,7 @@ namespace EcommerceWebsite.Services.Services.Main
                                                         && (dl.MaThuocTinh == (nameof(ProductPorpertyCode.TT07))
                                                         || dl.MaThuocTinh == (nameof(ProductPorpertyCode.TT014)))).Take(1)
                                      //join lsg in _context.BangGiaSanPhams on sp_dl.MaDinhLuong equals lsg.MaDinhLuong into dl_lsg_group
-                                 from dl_lsg in _context.BangGiaSanPhams.Where(lsg => lsg.MaDinhLuong.Equals(sp_dl.MaDinhLuong))
+                                 from dl_lsg in _context.BangGiaSanPhams.Where(lsg => lsg.MaDinhLuong.Equals(sp_dl.MaDinhLuong) && !lsg.DaXoa)
                                                                .OrderByDescending(lsg => lsg.NgayTao.Date).Take(1)
 
                                  where !sp.DaXoa && sp.NgayTao >= NgayHienTai()

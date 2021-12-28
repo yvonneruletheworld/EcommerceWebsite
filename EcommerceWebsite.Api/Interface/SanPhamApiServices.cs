@@ -142,9 +142,9 @@ namespace EcommerceWebsite.Api.Interface
             return response.IsSuccessStatusCode;
         }
 
-        public async Task<List<DoanhThuOutput>> LaySoLuongNhapVaBan(string maSanPham)
+        public async Task<Dictionary<DateTime, List<DoanhThuOutput>> > LaySoLuongNhapVaBan(string maSanPham)
         {
-            return await GetListAsync<DoanhThuOutput>($"/api/SanPham/lay-soluongnhap-va-ban/{maSanPham}");
+            return await GetAsync<Dictionary<DateTime, List<DoanhThuOutput>>>($"/api/SanPham/lay-soluongnhap-va-ban/{maSanPham}");
         }
 
         public async Task<List<ThuocTinh>> layDinhluong()

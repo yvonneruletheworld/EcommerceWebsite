@@ -167,6 +167,7 @@ namespace EcommerceWebsite.Api.Controllers
                         //them sp
                         foreach (var sp in listProduct)
                         {
+                            sp.NguoiXoa = Randoms.RandomString().ToString();
                             var rsExec = await ThemSanPham(sp, input.CreatorId);
                             if (string.IsNullOrEmpty(rsExec))
                             {
@@ -395,10 +396,10 @@ namespace EcommerceWebsite.Api.Controllers
         {
             try
             {
-                var danhSachNhap = await _phieuNhapServices.GetListImportProduct(maSanPham);
-                if(danhSachNhap != null && danhSachNhap.Count() > 0)
+                var toDic = await _phieuNhapServices.GetListImportProduct2(maSanPham);
+                if (toDic != null && toDic.Count() > 0)
                 {
-                    return Ok(danhSachNhap);
+                    return Ok(toDic);
                 }
                 else return BadRequest(Messages.API_EmptyResult);
             }
@@ -407,6 +408,12 @@ namespace EcommerceWebsite.Api.Controllers
                 return BadRequest(Messages.API_Exception + ex);
             }
         }
+
+        private float TinhLoiNhuan(decimal tongTienBan, decimal tongTienNhap)
+        {
+            return (float)(((tongTienBan - tongTienNhap) / tongTienNhap) * 100);
+        }
+
         [HttpGet("lay-theodinhluong")]
         public async Task<IActionResult> LayThongSo()
         {

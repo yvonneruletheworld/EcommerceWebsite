@@ -1,6 +1,7 @@
 ﻿using EcommerceWebsite.Data.EF;
 using EcommerceWebsite.Data.Entities;
 using EcommerceWebsite.Services.Interfaces.Main;
+using EcommerceWebsite.Utilities.Output.Main;
 using EcommerceWebsite.Utilities.ViewModel;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -26,51 +27,23 @@ namespace EcommerceWebsite.Services.Services.Main
 
         public async Task<bool> CapNhatLoiNhuanChoSanPham()
         {
-            //var listChiTietNhap = await (from ctn in _context.ChiTietNhapSanPhams
-            //                             join pn in _context.PhieuNhaps on ctn.MaNhap equals pn.MaPhieuNhap 
-
-            //                             select new ChiTietNhapSanPham()
-            //                             {
-            //                                 PhieuNhapEntity = pn,
-            //                                 DonGia = ctn.DonGia,
-            //                                 MaNhap = ctn.MaNhap,
-            //                                 MaSanPham = ctn.MaSanPham,
-            //                                 SoLuong = ctn.SoLuong,
-            //                                 ThanhTien = ctn.ThanhTien
-            //                             }).OrderByDescending(ctn => ctn.PhieuNhapEntity.NgayTao.Date)
-            //                            .ThenByDescending(ctn => ctn.PhieuNhapEntity.NgayTao.TimeOfDay)
-            //                            .ToListAsync();
-
-
-            //var listChiTietHoaDon = await (from cthd in _context.ChiTietHoaDons
-            //                               join hd in _context.HoaDons on cthd.HoaDonId equals hd.MaHoaDon
-            //                               select new ChiTietHoaDon()
-            //                               {
-            //                                   GiaBan = cthd.GiaBan,
-            //                                   HoaDonId = cthd.HoaDonId,
-            //                                   HoaDons = hd,
-            //                                   MaHUI = cthd.MaHUI,
-            //                                   ProductId = cthd.ProductId,
-            //                                   SoLuong = cthd.SoLuong
-            //                               }).OrderByDescending(cthd => cthd.HoaDons.NgayTao.Date)
-            //                               .ThenByDescending(cthd => cthd.HoaDons.NgayTao.TimeOfDay)
-            //                               .ToListAsync();
-
-            //var dicChiTietNhap = listChiTietNhap.GroupBy(x => x.PhieuNhapEntity.NgayTao)
-            //    .ToDictionary(x => x.Key, x => x.ToList());
-
-            //var dicChiTietHoaDon = listChiTietHoaDon.GroupBy(x => x.HoaDons.NgayTao)
-            //    .ToDictionary(x => x.Key, x => x.ToList());
             try
             {
                 var listSanPham = await _context.SanPhams.ToListAsync();
 
                 foreach (var sp in listSanPham)
                 {
-                    var result = await _phieuNhapServices.GetListImportProduct(sp.MaSanPham);
+                    var result = await _phieuNhapServices.GetListImportProduct2(sp.MaSanPham);
                     if (result != null && result.Count() > 0)
                     {
-                        var loiNhuan = result[result.Count() - 1].LoiNhuan;
+                        var listLoiNhuan = new List<DoanhThuOutput>();
+
+                        foreach (var date in result.Keys)
+                        {
+                            listLoiNhuan.AddRange(result[date]);
+                        }
+                        var tongloiNhuan = listLoiNhuan.Sum(ln => ln.LoiNhuan);
+                        var loiNhuan = tongloiNhuan / listLoiNhuan.Count();
                         sp.Utility = (decimal)loiNhuan;
                         var resultUpdate = await _sanPhamServices.SuaHoacXoaSanPham(sp, false);
                         if (!resultUpdate) continue;

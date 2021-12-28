@@ -9,6 +9,7 @@ namespace EcommerceWebsite.Services.Interfaces.Main
 {
     public interface IPhieuNhapServices
     {
+        Task<Dictionary<DateTime, List<DoanhThuOutput>>> GetListImportProduct2(string maSanPham);
         Task<bool> CreateNewInventoryVoucher(PhieuNhap input);
         //Task<bool> CreateNewInventoryVoucherDetail(List<ChiTietNhapSanPham> inputs);
         Task<bool> CreateNewInventoryVoucherDetail(ChiTietNhapSanPham inputs);
