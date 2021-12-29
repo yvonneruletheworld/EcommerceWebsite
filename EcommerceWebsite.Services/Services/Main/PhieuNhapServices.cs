@@ -316,5 +316,11 @@ namespace EcommerceWebsite.Services.Services.Main
                 throw ex;
             }
         }
+
+        public async Task<decimal> LayTongNhap()
+        {
+            return (await _context.ChiTietNhapSanPhams.ToListAsync())
+                .Sum(ct => ct.SoLuong * ct.DonGia);
+        }
     }
 }

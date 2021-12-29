@@ -164,5 +164,18 @@ namespace EcommerceWebsite.Services.Services.Main
                 throw ex;
             }
         }
+
+        public async Task<List<ChiTietHoaDon>> LayTongBan()
+        {
+            var data = await (from hd in _context.HoaDons
+                              join ct in _context.ChiTietHoaDons on hd.MaHoaDon equals ct.HoaDonId
+                              select new ChiTietHoaDon()
+                              {
+                                  HoaDonId = hd.MaHoaDon,
+                                  GiaBan = ct.GiaBan,
+                                  SoLuong = ct.SoLuong
+                              }).ToListAsync();
+            return data;
+        }
     }
 }

@@ -13,5 +13,6 @@ namespace EcommerceWebsite.Services.Interfaces.Main
         Task<List<ChiTietHoaDon>> DanhSachHoaDonExport(string firstDate, string secondDate);
         Task<List<ChiTietHoaDon>> DanhSachHoaDonComboCode(string comboCode, DateTime ngayTao, DateTime ngayNhapKe);
         Task<int> LaySoLuongBan(string maSanPham, DateTime ngayNhap);
+        Task<List<ChiTietHoaDon>> LayTongBan();
     }
 }

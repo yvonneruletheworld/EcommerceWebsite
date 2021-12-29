@@ -50,5 +50,10 @@ namespace EcommerceWebsite.Api.Interface
         {
             return await GetListAsync<SanPhamVM>($"/api/YeuThichSanPham/lay-sanpham-yeuthich/{MaKH}");
         }
+
+        public async Task<List<decimal>> LoadTrangChu()
+        {
+            return await GetListAsync<decimal>($"/api/YeuThichSanPham/load-trang-chu");
+        }
     }
 }

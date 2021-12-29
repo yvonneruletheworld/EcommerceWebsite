@@ -263,6 +263,11 @@ namespace EcommerceWebsite.Services.Services.System
                 return true;
             }
         }
+
+        public async Task<int> CountKhachHang()
+        {
+            return (await _context.KhachHangs.ToListAsync()).Count();
+        }
         //public Task<Dictionary<string, KhachHang>> LoginAsync(string usernameOrPhone, string pass)
         //{
         //    var result = new Dictionary<string, KhachHang>();

@@ -19,13 +19,15 @@ namespace EcommerceWebsite.Admin.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IKhachHangApiServices _khachHangApiService;
         private readonly ISanPhamApiServices _sanPhamService;
+        private readonly IYeuThichSanPhamApiServices _yeuThichSanPhamService;
 
 
-        public HomeController(ILogger<HomeController> logger, IKhachHangApiServices khachHangService, ISanPhamApiServices sanPhamService)
+        public HomeController(ILogger<HomeController> logger, IKhachHangApiServices khachHangService, ISanPhamApiServices sanPhamService, IYeuThichSanPhamApiServices yeuThichSanPhamService)
         {
             _logger = logger;
             _khachHangApiService = khachHangService;
             _sanPhamService = sanPhamService;
+            _yeuThichSanPhamService = yeuThichSanPhamService;
         }
 
         public async Task<IActionResult> IndexAsync()
@@ -37,6 +39,13 @@ namespace EcommerceWebsite.Admin.Controllers
                 var duLieu = await _khachHangApiService.LayThongTinKhachHang(userId);
                 HttpContext.Session.SetString("HoTenAdmin", duLieu.HoTen);
             }
+            var data = await _yeuThichSanPhamService.LoadTrangChu();
+            ViewBag.TongKhachHang = data[0];
+            ViewBag.TongSanPham = data[1];
+            ViewBag.DaBan = data[3];
+            ViewBag.TongTienNhap = data[4];
+            ViewBag.TongTienBan = data[2];
+            ViewBag.LoiNhuan = ((data[2] - data[4])/ data[4]) * 100;
             //var rs = await _sanPhamService.laySanPham2();
             return View();
         }

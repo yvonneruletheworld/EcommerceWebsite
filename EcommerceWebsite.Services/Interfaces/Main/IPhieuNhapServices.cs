@@ -17,5 +17,6 @@ namespace EcommerceWebsite.Services.Interfaces.Main
         Task<List<PhieuNhap>> GetAllInventoryVoucher();
         Task<List<DoanhThuOutput>> GetListImportProduct(string maSanPham);
         Task<decimal> GetRecentlyPrice(string maSanPham);
+        Task<decimal> LayTongNhap();
     }
 }

@@ -2,4 +2,110 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "[TRIPLE V - Admin] Trang chủ";
 }
+@{ 
 
+    var tongkhach = ViewBag.TongKhachHang;
+    var tongsp = ViewBag.TongSanPham;
+    var daBan = ViewBag.DaBan;
+    var tongnhap = string.Format("{0:0,0}", ViewBag.TongTienNhap);
+    var tongban = string.Format("{0:0,0}", ViewBag.TongTienBan);
+    var loinhuan = string.Format("{0:0,0}", ViewBag.LoiNhuan);
+}
+<div class="pcoded-content">
+    <!-- [ breadcrumb ] start -->
+    <div class="page-header">
+        <div class="page-block">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="page-header-title">
+                        <h5 class="m-b-10">Tổng quang</h5>
+                    </div>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- [ breadcrumb ] end -->
+    <!-- [ Main Content ] start -->
+    <div class="row">
+        <!-- support-section start -->
+        <div class="col-xl-12 col-md-12">
+            <div class="card flat-card">
+                <div class="row-table">
+                    <div class="col-sm-6 card-body br">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <i class="material-icons-two-tone text-primary mb-1">group</i>
+                            </div>
+                            <div class="col-sm-8 text-md-center">
+                                <h5>@tongkhach</h5>
+                                <span>Khách Hàng</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 d-none d-md-table-cell d-lg-table-cell d-xl-table-cell card-body br">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <i class="material-icons-two-tone text-primary mb-1">language</i>
+                            </div>
+                            <div class="col-sm-8 text-md-center">
+                                <h5>@tongsp</h5>
+                                <span>Sản Phẩm</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 card-body">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <i class="material-icons-two-tone text-primary mb-1">unarchive</i>
+                            </div>
+                            <div class="col-sm-8 text-md-center">
+                                <h5>@daBan</h5>
+                                <span>Hóa Đơn</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row-table">
+                    <div class="col-sm-6 card-body br">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <i class="material-icons-two-tone text-primary mb-1">swap_horizontal_circle</i>
+                            </div>
+                            <div class="col-sm-8 text-md-center">
+                                <h5>@tongnhap VNĐ</h5>
+                                <span>Tổng Nhập</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 d-none d-md-table-cell d-lg-table-cell d-xl-table-cell card-body br">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <i class="material-icons-two-tone text-primary mb-1">cloud_download</i>
+                            </div>
+                            <div class="col-sm-8 text-md-center">
+                                <h5>@tongban VNĐ</h5>
+                                <span>Tổng Bán</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 card-body">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <i class="material-icons-two-tone text-primary mb-1">shopping_cart</i>
+                            </div>
+                            <div class="col-sm-8 text-md-center">
+                                <h5>@loinhuan %</h5>
+                                <span>Lợi Nhuận</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <!-- [ Main Content ] end -->
+</div>

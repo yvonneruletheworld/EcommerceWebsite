@@ -14,6 +14,7 @@ namespace EcommerceWebsite.Services.Interfaces.Main
     public interface ISanPhamServices 
     {
         Task<PageResponse<List<SanPhamOutput>>> GetListProductByPage(PaginationFilter filter);
+        Task<int> CountSanPham();
 
         Task<List<HUICost>> GetProductWithMultipleId(string[] idArray);
         Task<string> ThemSanPham(SanPham input);

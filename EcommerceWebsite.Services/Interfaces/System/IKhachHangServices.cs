@@ -28,5 +28,6 @@ namespace EcommerceWebsite.Services.Interfaces.System
         Task<List<DiaChiKhachHang>> layDiaChiKhachHang(string MaKH);
         Task<bool> ThemDiaChiKhachHang(DiaChiKhachHang input);
         Task<ThongTinKhachHangVM> LayThongTinKhachHang(string maKH);
+        Task<int> CountKhachHang();
     }
 }

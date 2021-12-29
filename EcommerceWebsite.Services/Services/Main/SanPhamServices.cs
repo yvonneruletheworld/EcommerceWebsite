@@ -741,5 +741,10 @@ namespace EcommerceWebsite.Services.Services.Main
         {
             return await _context.SanPhams.Where(sp => sp.Utility > 0 && !sp.DaXoa).ToListAsync();
         }
+
+        public async Task<int> CountSanPham()
+        {
+            return (await _context.SanPhams.ToListAsync()).Count();
+        }
     }
 }
