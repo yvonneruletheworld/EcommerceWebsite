@@ -210,7 +210,10 @@ namespace EcommerceWebsite.Api.Interface
                 .PostAsync($"/api/SanPham/them-dinhluongsanpham", httpContent);
             return response.IsSuccessStatusCode;
         }
+        public async Task<List<decimal>> LoadMinMax()
+        {
+            return await GetListAsync<decimal>($"/api/SanPham/load-min-max");
+        }
 
-       
     }
 }

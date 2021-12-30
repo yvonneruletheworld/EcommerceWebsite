@@ -15,15 +15,20 @@ namespace EcommerceWebsite.Admin.Controllers
     public class HUIManageController : Controller
     {
         private readonly IHUIApiServices _huiApiServices;
+        private readonly ISanPhamApiServices _sanPhamApiServices;
 
-        public HUIManageController(IHUIApiServices huiApiServices)
+        public HUIManageController(IHUIApiServices huiApiServices, ISanPhamApiServices sanPhamApiServices)
         {
             _huiApiServices = huiApiServices;
+            _sanPhamApiServices = sanPhamApiServices;
         }
 
         public async Task<IActionResult> IndexAsync()
         {
             var vm = new HUIManageVM();
+            var data = await _sanPhamApiServices.LoadMinMax();
+            ViewBag.UtitlyMin = data[1];
+            ViewBag.UtitlyMax = data[0];
             vm.ListHuiVaDoanhSo = await _huiApiServices.GetListHUIFromData();
             return View("/Views/HUIManage/Index.cshtml",vm);
         }
@@ -83,8 +88,8 @@ namespace EcommerceWebsite.Admin.Controllers
                 string[] lineArray = lines.ToArray();
                 try
                 {
-                    System.IO.File.WriteAllLines(@"D:\Applications\eclipse-workspace\java.huiminer_190921\src\tools\contextHUIM.txt", lines);
-                    //System.IO.File.WriteAllLines(@"D:\KhoaLuan\BaiLam\BaiThu\src\tools\contextHUIM.txt", lines);
+                    //System.IO.File.WriteAllLines(@"D:\Applications\eclipse-workspace\java.huiminer_190921\src\tools\contextHUIM.txt", lines);
+                    System.IO.File.WriteAllLines(@"D:\KhoaLuan\BaiLam\ThuatToanHUIMiner\src\tools\contextHUIM.txt", lines);
                     //update ngày sua cuoi
                     var rsUpdate = await _huiApiServices.UpdateNgaySua(DateTime.Now);
 

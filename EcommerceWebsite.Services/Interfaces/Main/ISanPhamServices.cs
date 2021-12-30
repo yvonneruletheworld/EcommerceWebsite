@@ -50,6 +50,11 @@ namespace EcommerceWebsite.Services.Interfaces.Main
         Task<List<PhieuNhap>> LayPhieuNhapSanPham();
 
         Task<bool> ThemDinhLuongSanPham(DinhLuong input);
+
+        Task<decimal> layUtilityMax();
+
+        Task<decimal> layUtilityMin();
+
         Task<List<SanPhamVM>> LaySanPhamTheoLoaiKhongHUi(int take = 1, string loaiSanPham = null, string maSanPham = null, string maKH = null);
 
     }

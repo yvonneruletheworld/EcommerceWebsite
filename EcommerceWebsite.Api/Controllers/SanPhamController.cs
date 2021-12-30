@@ -511,5 +511,24 @@ namespace EcommerceWebsite.Api.Controllers
                 throw ex;
             }
         }
+        [HttpGet("load-min-max")]
+        public async Task<IActionResult> LoadMinMax()
+        {
+            try
+            {
+                var result = new List<decimal>();
+                var UtilityMax = await _sanPhamServices.layUtilityMax();
+                var UtilityMin = await _sanPhamServices.layUtilityMin();
+               
+                result.AddRange(new decimal[] { UtilityMax, UtilityMin });
+                if (result == null)
+                    return BadRequest(Messages.API_EmptyResult);
+                else return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(Messages.API_Exception + ex);
+            }
+        }
     }
 }

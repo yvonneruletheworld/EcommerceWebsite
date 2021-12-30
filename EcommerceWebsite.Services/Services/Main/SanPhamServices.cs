@@ -746,5 +746,14 @@ namespace EcommerceWebsite.Services.Services.Main
         {
             return (await _context.SanPhams.ToListAsync()).Count();
         }
+
+        public async Task<decimal> layUtilityMax()
+        {
+            return  _context.SanPhams.Max(s => s.Utility);
+        }
+        public async Task<decimal> layUtilityMin()
+        {
+            return _context.SanPhams.Min(s => s.Utility);
+        }
     }
 }

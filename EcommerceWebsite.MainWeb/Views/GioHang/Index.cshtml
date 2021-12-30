@@ -371,20 +371,23 @@
                         swal("Thành công!", "Đặt hàng thành công!", "success");
                         location.href = "/Home/Index";
                         location.reload();
+                        selectItemList = [];
                     }
                     else {
                         swal("Thất bại!", "Đặt hàng thất bại!", "error");
                         location.reload();
+                        selectItemList = [];
                     }
                    
                 },
                 error: function (err) {
                     swal("Thất bại!", "Đặt hàng thất bại!", "error");
                     location.reload();
+                    selectItemList = [];
                    
                 }
             });
-            selectItemList = [];
+          
         }
 
     }

@@ -31,8 +31,8 @@
             <h5 class="mb-3">THAO TÁC</h5>
             <hr>
             <p>
-                <span>Lợi nhuận cao nhất: </span>
-                <span>Lợi nhuận thấp nhất: </span>
+                <span>Lợi nhuận cao nhất: @ViewBag.UtitlyMax</span>
+                <span>Lợi nhuận thấp nhất: @ViewBag.UtitlyMin</span>
             </p>
             <button class="btn mb-1 btn-primary" onclick="XuatNewHUI()"><i data-feather="save"></i> Thêm Input </button>
             <button class="btn mb-1 btn-primary" onclick="XuatNewData()"> <i data-feather="delete"></i> Cập Nhật Dữ Liệu </button>
@@ -92,7 +92,7 @@
                                                     @listConvert[comboCode].FirstOrDefault().LuotTruyCap
                                                 </td>
                                                 <td>
-                                                    @listConvert[comboCode].Sum(c => c.Cost);
+                                                    @string.Format("{0:0,0}", listConvert[comboCode].Sum(c => c.Cost)) VNĐ
                                                 </td>
 
                                             </tr>
@@ -112,7 +112,6 @@
 
 <script>
     function XuatNewHUI() {
-        debugger;
         $.ajax({
             url: '/HUIManage/NhapNewHUI',
             success: function (data) {

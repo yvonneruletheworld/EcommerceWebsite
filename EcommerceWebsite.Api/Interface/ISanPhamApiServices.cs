@@ -42,6 +42,9 @@ namespace EcommerceWebsite.Api.Interface
         Task<bool> ThemDinhLuongSanPham(DinhLuong input);
 
         Task<bool> ThemVaSuaHang(NhanHieu input);
+
         Task<bool> XoaHang(string input);
+
+        Task<List<decimal>> LoadMinMax();
     }
 }
