@@ -19,8 +19,8 @@ namespace EcommerceWebsite.Api.Controllers
         {
             _hoaDonServices = hoaDonServices;
         }
-        [HttpGet("lay-hoaDonTheoKH/{maKH}")]
-        public async Task<IActionResult> layHoaDon(string maKH)
+        [HttpGet("DanhSachHoaDonTheoKhachHang/{maKH}")]
+        public async Task<IActionResult> DanhSachHoaDonTheoKhachHang(string maKH)
         {
             try
             {

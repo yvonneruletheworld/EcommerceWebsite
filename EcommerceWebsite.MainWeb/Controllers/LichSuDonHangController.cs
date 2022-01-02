@@ -25,7 +25,7 @@ namespace EcommerceWebsite.MainWeb.Controllers
                     var userId = User.Claims.Where(claim => claim.Type == ClaimTypes.Sid)
                                              .FirstOrDefault()
                                              .Value;
-                    var duLieu = await _hoaDonApiSerivce.LayHoaDonTheoKhachHangs(userId);
+                    var duLieu = await _hoaDonApiSerivce.DanhSachHoaDonTheoKhachHang(userId);
                     return View("/Views/LichSuDonHang/DanhSachDonHang.cshtml", duLieu);
                 }
                 return RedirectToAction("Index", "KhachHang");
