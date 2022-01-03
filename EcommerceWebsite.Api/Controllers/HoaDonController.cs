@@ -25,9 +25,10 @@ namespace EcommerceWebsite.Api.Controllers
             try
             {
                 var result = await _hoaDonServices.DanhSachHoaDonTheoKhachHang(maKH);
-                if (result == null)
+                var dicHoaDon = result.OrderBy(ct => ct.HoaDons.NgayTao).OrderBy(ct2 => ct2.HoaDonId);
+                if (dicHoaDon == null)
                     return BadRequest(Messages.API_EmptyResult);
-                else return Ok(result);
+                else return Ok(dicHoaDon);
             }
             catch (Exception ex)
             {

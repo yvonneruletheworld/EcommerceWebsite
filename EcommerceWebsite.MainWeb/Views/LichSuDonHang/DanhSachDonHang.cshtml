@@ -1,52 +1,88 @@
 ﻿@using EcommerceWebsite.Data.Entities
 @model List<ChiTietHoaDon>
+@{ 
+    string[] maHD = new string[Model.Count];
+    string[] maSP = new string[Model.Count];
+    int viTri = 0;
+    foreach (var getData in Model)
+    {
+        maHD[viTri] = getData.HoaDonId;
+        maSP[viTri] = getData.ProductId;
+        viTri++;
+    }
+}
 
 <div class="compare-area pt-60 pb-60">
-    @foreach (var item in Model)
+    @for (int i = 0; i < viTri; i++)
     {
-        <br />
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="coupon-accordion">
-                        <h3>@item.HoaDons.PhuongThucThanhToan<span id="showlogin" style="float:right;">@item.HoaDons.TinhTrang</span></h3>
+        @foreach (var item in Model)
+        {
+            @if ((maHD[i] == item.HoaDonId && maSP[i] == item.ProductId))
+            {
+                <br />
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="coupon-accordion">
+                                <h3>
+                                    @item.HoaDons.PhuongThucThanhToan
+                                    <span id="showlogin" style="float:right;">
+                                        @if (@item.HoaDons.TinhTrang == null)
+                                        {
+                                            <p>Đang xử lý</p>
+                                        }
+                                        else
+                                        {
+                                            @item.HoaDons.TinhTrang
+                                        }
+                                    </span>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="product-image">
+                                <a href="single-product.html">
+                                    <img src="@item.SanPhams.HinhAnh" alt="@item.SanPhams.TenSanPham" />
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-7">
+                            <br />
+                            <h4>@item.SanPhams.TenSanPham</h4>
+                            <br />
+                            <span>Số lượng: @item.SoLuong</span>
+                        </div>
+                        <div class="col-lg-2" style="text-align:end;">
+                            <span>@string.Format("{0:0,0}", item.GiaBan) VNĐ</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="product-image">
-                        <a href="single-product.html">
-                            <img src="@item.SanPhams.HinhAnh" alt="@item.SanPhams.TenSanPham" />
-                        </a>
+            }
+            else if (maHD[i] == item.HoaDonId && maSP[i] != item.ProductId)
+            {
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="product-image">
+                                <a href="single-product.html">
+                                    <img src="@item.SanPhams.HinhAnh" alt="@item.SanPhams.TenSanPham" />
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-7">
+                            <br />
+                            <h4>@item.SanPhams.TenSanPham</h4>
+                            <br />
+                            <span>Số lượng: @item.SoLuong</span>
+                        </div>
+                        <div class="col-lg-2" style="text-align:end;">
+                            <span>@string.Format("{0:0,0}", item.GiaBan) VNĐ</span>
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-7">
-                    <br />
-                    <h4>@item.SanPhams.TenSanPham</h4>
-                    <br />
-                    <span>@item.SoLuong</span>
-                </div>
-                <div class="col-lg-2" style="text-align:end;">
-                    <span>@string.Format("{0:0,0}", item.GiaBan) VNĐ</span>
-                </div>
-            </div>
-            <br />
-            <div class="row">
-                <div class="col-lg-3">
-                    <h6>Đánh giá sản phẩm</h6>
-                </div>
-                <div class="col-lg-5">
-
-                </div>
-                <div class="col-lg-2">
-                    <button class="form-control" style="background: #ff6a00; float:right">Đánh giá</button>
-                </div>
-                <div class="col-lg-2">
-                    <button class="form-control" style="background: #808080; float: right">Mua lại</button>
-                </div>
-            </div>
-        </div>
+            }
+        }
     }
 </div>
-
