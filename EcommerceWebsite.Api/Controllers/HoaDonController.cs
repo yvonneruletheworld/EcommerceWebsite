@@ -25,7 +25,7 @@ namespace EcommerceWebsite.Api.Controllers
             try
             {
                 var result = await _hoaDonServices.DanhSachHoaDonTheoKhachHang(maKH);
-                var dicHoaDon = result.OrderBy(ct => ct.HoaDons.NgayTao).OrderBy(ct2 => ct2.HoaDonId);
+                var dicHoaDon = result.OrderByDescending(ct => ct.HoaDons.NgayTao);
                 if (dicHoaDon == null)
                     return BadRequest(Messages.API_EmptyResult);
                 else return Ok(dicHoaDon);
