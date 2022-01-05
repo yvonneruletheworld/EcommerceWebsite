@@ -242,3 +242,23 @@
     </div>
 </div>
 <!-- Quick View | Modal Area End Here -->
+<script>
+    $(document).ready(() => {
+        $('.otp-input').bind('paste', function (e) {
+            e.stopPropagation();
+            e.preventDefault();
+            var pastedData = e.originalEvent.clipboardData.getData('text');
+            otpCode = pastedData;
+            var charArray = Array.from(pastedData);
+            var inputTextboxArray = $('.otp-input');
+            for (var i = 0; i < inputTextboxArray.length; i++) {
+                var digit = charArray[i];
+                if (digit)
+                    inputTextboxArray[i].value = digit.toUpperCase();
+                else {
+                    inputTextboxArray[i].value = '';
+                }
+            }
+        });
+    })
+</script>
