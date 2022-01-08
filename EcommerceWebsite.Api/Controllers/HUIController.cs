@@ -108,9 +108,9 @@ namespace EcommerceWebsite.Api.Controllers
                             newInput.MaSanPham = sp.MaSanPham;
                             newInput.DaXoa = false;
                             newInput.Utility = (int)((int)input.Utility / (countCt/listHui.Count()));
-                            newInput.NgayTao = DateTime.Parse("2021-12-06 22:37:58.0019319");
-                            //newInput.NgayTao = datetime;
-                            newInput.Status = true;
+                        //newInput.NgayTao = DateTime.Parse("2021-12-06 22:37:58.0019319");
+                        newInput.NgayTao = datetime;
+                        newInput.Status = true;
                             listHuiCostContainPrdId.Add(newInput);
                         //}
                     }
