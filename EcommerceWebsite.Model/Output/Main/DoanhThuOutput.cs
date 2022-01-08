@@ -16,6 +16,7 @@ namespace EcommerceWebsite.Utilities.Output.Main
         public int SoLuongTon { get; set; }
         public int SoLuongTonKyTruoc { get; set; }
         public int DaBan { get; set; }
+        public bool DaXoa { get; set; }
         public decimal DonGiaBan { get; set; }
         public decimal TongTienBan { get; set; }
         public float LoiNhuan { get; set; }

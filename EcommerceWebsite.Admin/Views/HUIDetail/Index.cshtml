@@ -1,7 +1,6 @@
 ﻿@using EcommerceWebsite.Utilities.ViewModel
 @model HUIDetailVM
 @{
-    var isFirst = ViewBag.IsFirst;
     var mucLoiNhuan = ViewBag.MucLoiNhuan;
     var giaVon = ViewBag.GiaVon;
     var listHoaDon = Model.ListHoaDon.GroupBy(ct => ct.HoaDonId)
@@ -141,7 +140,7 @@
                                     <td>@String.Format("{0:00.00}", thiPhanSanPham * 100) %</td>
                                     @*<td>@sp.DonGiaBan</td>*@
                                     <td><span id="@string.Concat(sp.MaSanPham,"_giaHUI")">@String.Format("{0:0,0.0}", sp.GiaHUI)</span> </td>
-                                    @if (isFirst)
+                                    @if (!sp.DaXoa)
                                     {
                                         <td><input autofocus type="text" id="@sp.MaSanPham" value="@String.Format("{0:0,0.0}",giaMacDinh)" class="form-control" placeholder="Nhập Giá" /></td>
                                     }

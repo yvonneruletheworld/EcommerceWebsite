@@ -16,22 +16,22 @@
     $(document).ready(() => {
         initResourceFilterQuery();
 
-        $('.otp-input').bind('paste', function (e) {
-            e.stopPropagation();
-            e.preventDefault();
-            var pastedData = e.originalEvent.clipboardData.getData('text');
-            otpCode = pastedData;
-            var charArray = Array.from(pastedData);
-            var inputTextboxArray = $('.otp-input');
-            for (var i = 0; i < inputTextboxArray.length; i++) {
-                var digit = charArray[i];
-                if (digit)
-                    inputTextboxArray[i].value = digit.toUpperCase();
-                else {
-                    inputTextboxArray[i].value = '';
-                }
-            }
-        });
+        //$('.otp-input').bind('paste', function (e) {
+        //    e.stopPropagation();
+        //    e.preventDefault();
+        //    var pastedData = e.originalEvent.clipboardData.getData('text');
+        //    otpCode = pastedData;
+        //    var charArray = Array.from(pastedData);
+        //    var inputTextboxArray = $('.otp-input');
+        //    for (var i = 0; i < inputTextboxArray.length; i++) {
+        //        var digit = charArray[i];
+        //        if (digit)
+        //            inputTextboxArray[i].value = digit.toUpperCase();
+        //        else {
+        //            inputTextboxArray[i].value = '';
+        //        }
+        //    }
+        //});
     })
     function initResourceFilterQuery() {
         layGioHang();
@@ -58,6 +58,23 @@
     function clickOTPEvent(first, last) {
         if (first.value.length) {
             document.getElementById(last).focus();
+        }
+    }
+    
+    function onPasteOTP(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        var pastedData = e.clipboardData.getData('text');
+        otpCode = pastedData;
+        var charArray = Array.from(pastedData);
+        var inputTextboxArray = $('.otp-input');
+        for (var i = 0; i < inputTextboxArray.length; i++) {
+            var digit = charArray[i];
+            if (digit)
+                inputTextboxArray[i].value = digit.toUpperCase();
+            else {
+                inputTextboxArray[i].value = '';
+            }
         }
     }
 

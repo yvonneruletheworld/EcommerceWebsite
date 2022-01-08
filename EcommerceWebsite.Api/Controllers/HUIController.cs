@@ -100,18 +100,19 @@ namespace EcommerceWebsite.Api.Controllers
                     foreach (var sp in listHui)
                     {
                         countCt += sanPhams.Where(spt => spt.NguoiXoa == sp.MaSanPham).FirstOrDefault().Utility;
-                        if(listHui.IndexOf(sp) == listHui.Count() - 1)
-                        {
+                        //if(listHui.IndexOf(sp) == listHui.Count() - 1)
+                        //{
                             var newInput = new HUICost();
                             newInput.ComboCode = input.Id;
                             newInput.Cost = 0;
                             newInput.MaSanPham = sp.MaSanPham;
                             newInput.DaXoa = false;
                             newInput.Utility = (int)((int)input.Utility / (countCt/listHui.Count()));
-                            newInput.NgayTao = datetime;
+                            newInput.NgayTao = DateTime.Parse("2021-12-06 22:37:58.0019319");
+                            //newInput.NgayTao = datetime;
                             newInput.Status = true;
                             listHuiCostContainPrdId.Add(newInput);
-                        }
+                        //}
                     }
                 }
                 var rs = await _huiServices.ThemHUICosts(listHuiCostContainPrdId);

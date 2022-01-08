@@ -188,6 +188,7 @@ namespace EcommerceWebsite.Services.Services.System
                                   MaSanPham = hui_sp.NguoiXoa,
                                   TenSanPham = hui_sp.TenSanPham,
                                   DonGiaNhap = sp_ct.DonGia,
+                                  DaXoa =  hui.DaXoa,
                                   //LoiNhuan = (float)hui_sp.Utility,
                                   GiaHUI = hui.Cost
                               }).ToListAsync();

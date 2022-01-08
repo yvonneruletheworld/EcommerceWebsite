@@ -19,7 +19,7 @@ namespace EcommerceWebsite.Admin.Controllers
             _huiServices = huiServices;
         }
 
-        public async Task<IActionResult> IndexAsync(string comboCode, DateTime ngayTao, DateTime ngayNhapKe, int keyIndex)
+        public async Task<IActionResult> IndexAsync(string comboCode, DateTime ngayTao, DateTime ngayNhapKe)
         {
             var vm = await _huiServices.GetHuiDetail(comboCode, ngayTao,ngayNhapKe);
             //vm.
@@ -27,7 +27,6 @@ namespace EcommerceWebsite.Admin.Controllers
             var giaVon = vm.ListSanPhamHUIs.Sum(sp => sp.DonGiaNhap);
             ViewBag.GiaVon = giaVon;
             ViewBag.NgayTao = ngayTao;
-            ViewBag.IsFirst = keyIndex == 0;
             // tính tổng tiền của combo dựa vào HUI của itemset 
             var tongGiaAuto = ((double)giaVon + ((double)giaVon * (double)(vm.Utility * 0.01)));
             vm.TongGiaAuto = tongGiaAuto;

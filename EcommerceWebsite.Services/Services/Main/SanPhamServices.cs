@@ -273,7 +273,7 @@ namespace EcommerceWebsite.Services.Services.Main
                                       GiaBan = dl_lsg.GiaMoi,
                                       ngayTao = sp.NgayTao,
                                       MaLoai = sp.MaLoaiSanPham,
-                                      GiaHUI = hui_sp.Cost,
+                                      GiaHUI = hui_sp.Cost==0.0m ? dl_lsg.GiaMoi : hui_sp.Cost,
                                       TrangThaiYeuThich = _context.SanPhamYeuThiches.FirstOrDefault(x => x.MaKhachHang == maKH && x.MaSanPham == sp.MaSanPham && x.TrangThai).TrangThai == null ? false : true,
                                       //XepHang = sp_dl.MaDinhLuong
                                   }).Take(take).ToListAsync();
@@ -739,7 +739,7 @@ namespace EcommerceWebsite.Services.Services.Main
         
         public async Task<List<SanPham>> LayListSanPham()
         {
-            return await _context.SanPhams.Where(sp => sp.Utility > 0 && !sp.DaXoa).ToListAsync();
+            return await _context.SanPhams.Where(sp =>!sp.DaXoa).ToListAsync();
         }
 
         public async Task<int> CountSanPham()

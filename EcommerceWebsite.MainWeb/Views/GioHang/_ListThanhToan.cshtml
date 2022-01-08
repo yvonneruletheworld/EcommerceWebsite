@@ -218,12 +218,12 @@
                                     <form action="#">
                                         <div class="feedback-input">
                                             <div class="user-input">
-                                                <input class="otp-input" type="text" id='ist' maxlength="1" onkeyup="clickOTPEvent(this,'sec')">
-                                                <input class="otp-input" type="text" id="sec" maxlength="1" onkeyup="clickOTPEvent(this,'third')">
-                                                <input class="otp-input" type="text" id="third" maxlength="1" onkeyup="clickOTPEvent(this,'fourth')">
-                                                <input class="otp-input" type="text" id="fourth" maxlength="1" onkeyup="clickOTPEvent(this,'fifth')">
-                                                <input class="otp-input" type="text" id="fifth" maxlength="1" onkeyup="clickOTPEvent(this,'sixth')">
-                                                <input class="otp-input" type="text" id="sixth" maxlength="1">
+                                                <input class="otp-input" onpaste="onPasteOTP(event)" type="text" id='ist' maxlength="1" onkeyup="clickOTPEvent(this,'sec')">
+                                                <input class="otp-input" onpaste="onPasteOTP(event)" type="text" id="sec" maxlength="1" onkeyup="clickOTPEvent(this,'third')">
+                                                <input class="otp-input" onpaste="onPasteOTP(event)" type="text" id="third" maxlength="1" onkeyup="clickOTPEvent(this,'fourth')">
+                                                <input class="otp-input" onpaste="onPasteOTP(event)" type="text" id="fourth" maxlength="1" onkeyup="clickOTPEvent(this,'fifth')">
+                                                <input class="otp-input" onpaste="onPasteOTP(event)" type="text" id="fifth" maxlength="1" onkeyup="clickOTPEvent(this,'sixth')">
+                                                <input class="otp-input" onpaste="onPasteOTP(event)" type="text" id="sixth" maxlength="1">
                                             </div>
                                             <div class="order-button-payment">
                                                 <input value="Xác nhận" type="submit" style="color:black" onclick="xacNhanOTP()" />
@@ -242,7 +242,7 @@
     </div>
 </div>
 <!-- Quick View | Modal Area End Here -->
-<script>
+@*<script>
     $(document).ready(() => {
         $('.otp-input').bind('paste', function (e) {
             e.stopPropagation();
@@ -261,4 +261,4 @@
             }
         });
     })
-</script>
+</script>*@

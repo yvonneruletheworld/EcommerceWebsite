@@ -73,7 +73,7 @@
                                         @foreach (var comboCode in listConvert.Keys)
                                         {
                                             var keyIndex = listKeys.ToList().IndexOf(key);
-                                            <tr class="pointer-event" onclick="location.href = '@Url.Action("Index","HUIDetail",new { comboCode = comboCode, ngayTao = key, ngayNhapKe = keyIndex==0 ? DateTime.Now : listKeys.ElementAt(keyIndex - 1), keyIndex = keyIndex})'">
+                                            <tr class="pointer-event" onclick="location.href = '@Url.Action("Index","HUIDetail",new { comboCode = comboCode, ngayTao = key, ngayNhapKe = keyIndex==0 ? DateTime.Now : listKeys.ElementAt(keyIndex - 1)})'">
 
                                                 <td>@comboCode</td>
                                                 <td>
