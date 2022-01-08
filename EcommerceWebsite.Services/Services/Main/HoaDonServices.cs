@@ -133,12 +133,13 @@ namespace EcommerceWebsite.Services.Services.Main
         {
             var data = await (from hd in _context.HoaDons
                               join cthd in _context.ChiTietHoaDons on hd.MaHoaDon equals cthd.HoaDonId
+                              join sp in _context.SanPhams on cthd.ProductId equals sp.MaSanPham
                               where hd.MaKhachHang == maKH
                               select new ChiTietHoaDon
                               {
                                   HoaDons = hd,
                                   ProductId = cthd.ProductId,
-
+                                  SanPhams = sp,
                                   HoaDonId = hd.MaHoaDon,
                                   GiaBan = cthd.GiaBan,
                                   SoLuong = cthd.SoLuong

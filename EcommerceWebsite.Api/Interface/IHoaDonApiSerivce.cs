@@ -8,6 +8,6 @@ namespace EcommerceWebsite.Api.Interface
 {
    public interface IHoaDonApiSerivce
     {
-        Task<List<HoaDon>> LayHoaDonTheoKhachHangs(string maKH);
+        Task<List<ChiTietHoaDon>> DanhSachHoaDonTheoKhachHang(string maKH);
     }
 }

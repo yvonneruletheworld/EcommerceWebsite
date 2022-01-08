@@ -231,14 +231,15 @@ namespace EcommerceWebsite.Services.Services.System
         public async Task<ThongTinKhachHangVM> LayThongTinKhachHang(string maKH)
         {
             return await (from kh in _context.KhachHangs
-                          //from kh2 in _context.AspNetUsers
-                          //where kh.MaKhachHang == kh2.Id
+                          join ap in _context.ApplicationUsers on (kh == null ? string.Empty : kh.MaKhachHang) equals ap.Id
+                          where !ap.IsDeleted && kh.MaKhachHang == maKH
                           select new ThongTinKhachHangVM
                           {
-                              HoTen = kh.HoTen.ToString(),
-                              //GioiTinh = GioiTinh(kh.GioiTinh),
-                              //SoDienThoai = kh2.PhoneNumber.ToString(),
-                              //Email = kh2.Email.ToString()
+                              MaKH = kh.MaKhachHang,
+                              HoTen = kh.HoTen,
+                              Email = ap.Email,
+                              GioiTinh = kh.GioiTinh,
+                              SoDienThoai = ap.PhoneNumber
                           }).FirstOrDefaultAsync();
         }
 

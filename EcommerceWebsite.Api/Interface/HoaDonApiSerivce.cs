@@ -16,9 +16,9 @@ namespace EcommerceWebsite.Api.Interface
          : base(httpClietnFactory, config, httpContextAccessor)
         {
         }
-        public async Task<List<HoaDon>> LayHoaDonTheoKhachHangs(string maKH)
+        public async Task<List<ChiTietHoaDon>> DanhSachHoaDonTheoKhachHang(string maKH)
         {
-            return await GetListAsync<HoaDon>($"/api/HoaDon/lay-hoaDonTheoKH/{maKH}");
+            return await GetListAsync<ChiTietHoaDon>($"/api/HoaDon/DanhSachHoaDonTheoKhachHang/{maKH}");
         }
 
       

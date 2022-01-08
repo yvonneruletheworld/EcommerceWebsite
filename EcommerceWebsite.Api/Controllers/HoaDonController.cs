@@ -19,15 +19,16 @@ namespace EcommerceWebsite.Api.Controllers
         {
             _hoaDonServices = hoaDonServices;
         }
-        [HttpGet("lay-hoaDonTheoKH/{maKH}")]
-        public async Task<IActionResult> layHoaDon(string maKH)
+        [HttpGet("DanhSachHoaDonTheoKhachHang/{maKH}")]
+        public async Task<IActionResult> DanhSachHoaDonTheoKhachHang(string maKH)
         {
             try
             {
                 var result = await _hoaDonServices.DanhSachHoaDonTheoKhachHang(maKH);
-                if (result == null)
+                var dicHoaDon = result.OrderByDescending(ct => ct.HoaDons.NgayTao);
+                if (dicHoaDon == null)
                     return BadRequest(Messages.API_EmptyResult);
-                else return Ok(result);
+                else return Ok(dicHoaDon);
             }
             catch (Exception ex)
             {
