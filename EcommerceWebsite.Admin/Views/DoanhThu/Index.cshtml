@@ -103,7 +103,7 @@
                     <div class="form-group">
                         <div class="form-check">
                             <input class="form-check-input" onclick="onCheckPercent()" type="checkbox" value="" id="percentageAgree">
-                            <label class="form-check-label">Thiết lập giá theo lợi nhuận mong muốn</label>
+                            <label class="form-check-label">Thiết lập giá theo phần trăm lợi nhuận (%)</label>
                         </div>
                     </div>
                     <div class="row">
@@ -116,9 +116,9 @@
                             <input type="text" class="form-control text-box single-line" value="@string.Format("{0:0,0}",giaNhapGanNhat)" id="GiaNhapGanNhat" readonly name="GiaNhapGanNhat" />
                         </div>
                         <div class="col-md-3 mb-3">
-                            <label class="form-label">Lợi nhuận</label>
-                            <input type="text" class="form-control text-box single-line" onkeyup="updateProductPride(this.value)" id="LoiNhuan" name="LoiNhuan" />
-                            <span id="span-per" class="font-weight-bold">%</span>
+                            <label class="form-label" id="loi-nhuan-title">Lợi nhuận</label>
+                            <input type="number" class="form-control text-box single-line" onkeyup="updateProductPride(this.value)" id="LoiNhuan" name="LoiNhuan" />
+                            <span id="loi-nhuan-error" class="text-danger"></span>
                         </div>
                         <div class="col-md-3 mb-3">
                             <label class="form-label" asp-for="SanPham.ThanhTien">Giá Mới</label>
@@ -377,9 +377,10 @@
             var giaBan = Number(giaBanTxt);
             if (type.checked) {
                 //by percent
+                $('#loi-nhuan-title')[0].innerHTML = 'Lợi nhuận (%)';
+
                 var ln = ((giaBan - giaNhap) / giaNhap) * 100;
                 $('#LoiNhuan').val(ln);
-                $('#span-per').text('%');
             }
             else {
                 var ln = giaBan - giaNhap;
@@ -387,7 +388,7 @@
                 var tien2 = format2(tien);
               
                 $('#LoiNhuan').val(tien2);
-                $('#span-per').text('VND');
+                $('#loi-nhuan-title')[0].innerHTML = 'Lợi nhuận (VND)';
             }
         }
     }
@@ -420,24 +421,31 @@
     }
 
     function SubmitForm() {
-        var fd = new FormData();
-        var type = document.getElementById("percentageAgree");
+        var loiNhuanMongMuon = $('#LoiNhuan').val();
+        if (Number(loiNhuanMongMuon) <= 0) {
+            $("#loi-nhuan-error")[0].innerHTML = 'Lợi nhuận phải lớn hơn 0';
+            return;
+        }
+        else {
+            $("#loi-nhuan-error")[0].innerHTML = '';
+            var fd = new FormData();
+            var type = document.getElementById("percentageAgree");
 
-        var masp = $('#SanPham_MaSanPham').val();
-        var tensp = $('#SanPham_TenSanPham').val();
-        var maloai = $('#danh-muc-selection-id').val();
-        var nhanhieu = $('#nhan-hieu-selection-id').val();
-        var percentageAgree = type.checked ? 1 : 0;
-        var giaBan = $('#giaBan').val();
-        var thanhTien = $('#ThanhTien').val();
+            var masp = $('#SanPham_MaSanPham').val();
+            var tensp = $('#SanPham_TenSanPham').val();
+            var maloai = $('#danh-muc-selection-id').val();
+            var nhanhieu = $('#nhan-hieu-selection-id').val();
+            var percentageAgree = type.checked ? 1 : 0;
+            var giaBan = $('#giaBan').val();
+            var thanhTien = $('#ThanhTien').val();
 
-        fd.append('MaSanPham', masp);
-        fd.append('TenSanPham', tensp);
-        fd.append('MaLoai', maloai);
-        fd.append('NhanHieu', nhanhieu);
-        fd.append('NguoiSuaCuoi', percentageAgree);
-        fd.append('giaBan', giaBan);
-        fd.append('ThanhTien', thanhTien);
+            fd.append('MaSanPham', masp);
+            fd.append('TenSanPham', tensp);
+            fd.append('MaLoai', maloai);
+            fd.append('NhanHieu', nhanhieu);
+            fd.append('NguoiSuaCuoi', percentageAgree);
+            fd.append('giaBan', giaBan);
+            fd.append('ThanhTien', thanhTien);
 
 
             $.ajax({
@@ -450,11 +458,11 @@
                 success: function (result) {
                     location.reload();
                 },
-                error: function (err)
-                {
+                error: function (err) {
                     location.reload();
                 }
             });
+        }
     }
     function ThemDinhLuong() {
 
