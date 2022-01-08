@@ -488,6 +488,7 @@
                             }
                             <div class="price-box">
                                 <span class="new-price" id="giaCTSP"></span>
+                                <span class="new-price" id="giaCTSP">@sanPham</span>
                             </div>
                         </div>
                         <div class="add-actions">
@@ -525,12 +526,17 @@
                                     </div>
                                     <div class="product_desc">
                                         <div class="product_desc_info">
-
-                                            <h4 style="height:57px"><a class="product_name" href="@Url.Action("Index", "Detail", new { prdId = sp.MaSanPham })">@sp.TenSanPham</a></h4>
-                                         
+                                            @if (sp.TenSanPham.Length > 30)
+                                            {
+                                                <h4 style="height:57px"><a class="product_name" href="@Url.Action("Index", "Detail", new { prdId = sp.MaSanPham, prdMaDanhMuc = sp.MaLoai  })">@sp.TenSanPham.Substring(0, 30)...</a></h4>
+                                            }
+                                            else
+                                            {
+                                                <h4 style="height:57px"><a class="product_name" href="@Url.Action("Index", "Detail", new { prdId = sp.MaSanPham, prdMaDanhMuc = sp.MaLoai  })">@sp.TenSanPham</a></h4>
+                                            }
                                             <div class="price-box">
-                                                <strike class="new-price" style="font-size:11px">@string.Format("{0:0,0}", sp.GiaBan)</strike>
-                                                <span class="new-price" style="font-size:11px">@string.Format("{0:0,0}", sp.GiaHUI)</span>
+                                                <strike class="new-price" style="font-size:11px">@string.Format("{0:0,0}", sp.GiaBan) VNĐ</strike>
+                                                <span class="new-price" style="font-size:11px">@string.Format("{0:0,0}", sp.GiaHUI) VNĐ</span>
                                             </div>
                                         </div>
                                     </div>
@@ -559,7 +565,7 @@
             </div>
             <div class="col-lg-2" style=" text-align:center; padding-top:100px">
                 <div style="width:100%; align-items: center; display: flex; justify-content: center;">
-                    <span>Tổng tiền: <span id="tongTieninHUI"></span></span>
+                    <span style="font-size: 13px">Tổng tiền: <span id="tongTieninHUI" style="color:red"></span></span>
                     <br />
                 </div>
 
