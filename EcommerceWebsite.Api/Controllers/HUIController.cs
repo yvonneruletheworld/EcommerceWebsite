@@ -96,10 +96,10 @@ namespace EcommerceWebsite.Api.Controllers
                 {
                    var listHui = await _sanPhamServices.GetProductWithMultipleId(input.Itemsets);
                     //Count so luong ban cua cac san pham trong tat ca chi tiet
-                    var countCt = 0.0m;
+                    var averageUtil = listHui.Average(item => item.Utility);
                     foreach (var sp in listHui)
                     {
-                        countCt += sanPhams.Where(spt => spt.NguoiXoa == sp.MaSanPham).FirstOrDefault().Utility;
+                        //countCt += sanPhams.Where(spt => spt.NguoiXoa == sp.MaSanPham).FirstOrDefault().Utility;
                         //if(listHui.IndexOf(sp) == listHui.Count() - 1)
                         //{
                             var newInput = new HUICost();
@@ -107,7 +107,7 @@ namespace EcommerceWebsite.Api.Controllers
                             newInput.Cost = 0;
                             newInput.MaSanPham = sp.MaSanPham;
                             newInput.DaXoa = false;
-                            newInput.Utility = (int)((int)input.Utility / (countCt/listHui.Count()));
+                            newInput.Utility = (int)((int)input.Utility / averageUtil);
                         //newInput.NgayTao = DateTime.Parse("2021-12-06 22:37:58.0019319");
                         newInput.NgayTao = datetime;
                         newInput.Status = true;

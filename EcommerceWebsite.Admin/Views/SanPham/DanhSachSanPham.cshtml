@@ -37,7 +37,6 @@
                                     <th>Tên sản phẩm</th>
                                     <th>Loại sản phẩm</th>
                                     <th>Giá Bán</th>
-                                    <th>Số lượng tồn</th>
                                     <th>lợi nhuận</th>
                                     <th>Trạng thái</th>
 
@@ -54,14 +53,6 @@
                                         <td class="col-3"><a  href="@Url.Action("Index","DoanhThu", new { maSanPham = item.MaSanPham})"> <span style="white-space: pre-wrap">@item.TenSanPham</span> </a></td>
                                         <td>@item.LoaiSanPham</td>
                                         <td>@string.Format("{0:0,0}", item.GiaBan) </td>
-                                        @if (item.SoLuongTon <= 0)
-                                        {
-                                            <td><span class="text-danger"> @item.SoLuongTon</span></td>
-                                        }
-                                        else
-                                        {
-                                            <td>@item.SoLuongTon</td>
-                                        }
                                         @if (item.loiNhuan <= 0)
                                         {
                                             <td><span class="text-danger"> @item.loiNhuan</span></td>
