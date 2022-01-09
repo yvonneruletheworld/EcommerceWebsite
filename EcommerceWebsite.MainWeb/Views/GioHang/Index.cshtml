@@ -79,20 +79,19 @@
     }
 
     function xacNhanOTP() {
-
+        var otpInput = '';
         var inputTextboxArray = $('.otp-input');
         for (var i = 0; i < inputTextboxArray.length; i++) {
+            otpInput += inputTextboxArray[i].value;
             inputTextboxArray[i].value = '';
         }
 
-        var otpInput = '';
-
-        otpInput += $('#ist').val();
-        otpInput += $('#sec').val();
-        otpInput += $('#third').val();
-        otpInput += $('#fourth').val();
-        otpInput += $('#fifth').val();
-        otpInput += $('#sixth').val();
+        //otpInput += $('#ist').val();
+        //otpInput += $('#sec').val();
+        //otpInput += $('#third').val();
+        //otpInput += $('#fourth').val();
+        //otpInput += $('#fifth').val();
+        //otpInput += $('#sixth').val();
 
         if (otpInput === otpcode) {
             ThanhToan();

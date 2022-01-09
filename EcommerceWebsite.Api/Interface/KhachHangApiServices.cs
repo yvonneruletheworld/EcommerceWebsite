@@ -95,7 +95,7 @@ namespace EcommerceWebsite.Api.Interface
             var httpContext = new StringContent(dataJson, Encoding.UTF8, "application/json");
             var client = _httpClientFactory.CreateClient();
             client.BaseAddress = new Uri(_config[SystemConstant.BaseAddress]);
-            var response = await client.PostAsync("/api/KhachHang/user-login", httpContext);
+            var response = await client.PostAsync("/api/KhachHang/user-resigter", httpContext);
 
             var content = await response.Content.ReadAsStringAsync();
             return response.IsSuccessStatusCode;

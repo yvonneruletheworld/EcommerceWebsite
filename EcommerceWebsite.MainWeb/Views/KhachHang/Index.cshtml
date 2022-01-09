@@ -43,6 +43,11 @@
                                     <span style="color: red" id="trangThaiSDT"></span>
                                 </div>
                                 <div class="col-md-12 col-12 mb-20">
+                                    <label>Tên đăng nhập *</label>
+                                    <input class="mb-0" asp-for="TenDangNhap" id="TenDangNhap" name="TenDangNhap" placeholder="Example123">
+                                    <span style="color: red" id="trangThaiTDN"></span>
+                                </div>
+                                <div class="col-md-12 col-12 mb-20">
                                     <label>Email*</label>
                                     <input class="mb-0" asp-for="Email" id="EmailKT" name="Email" placeholder="Example@gmail.com">
                                     <span style="color: red" id="trangThaiMail"></span>
@@ -57,6 +62,13 @@
                                     <input class="mb-0" type="password" asp-for="XacNhanMatKhau" id="nhapLaiMK" name="XacNhanMatKhau" placeholder="Xác nhận mật khẩu">
                                     <span style="color: red" id="trangThaiNhapLaiMK"></span>
                                 </div>
+
+                                <div class="col-md-12 col-12 mb-20">
+                                    <label>Địa chỉ cụ thể *</label>
+                                    <textarea class="mb-0"  id="DiaChi" name="DiaChi" placeholder="123 Tên Đường, tên Phường, tên Thành Phố"></textarea>
+                                    <span style="color: red" id="trangThaiDiaChi"></span>
+                                </div>
+                                
                                 <div class="col-12">
                                     <button onclick="submitRegister()" class="register-button mt-0">Đăng ký</button>
                                 </div>
@@ -76,7 +88,7 @@ else
             <div class="row">
                 <div class="col-sm-12 col-md-12 col-xs-12 col-lg-6 mb-30">
                     <!-- Login Form s-->
-                    <form id="form-login-id" asp-action="Index" method="post">
+                    <form id="form-login-id" asp-action="Index" asp-controller="Backgroud" method="post">
                         <div class="login-form">
                             <div asp-validation-summary="All" class="text-danger"></div>
                             <h4 class="login-title">Đăng nhập</h4>
@@ -174,14 +186,16 @@ else
             //prepare data
             var fd = new FormData();
             fd.append('HoTen', $('#HoTen').val());
-            fd.append('SDT', $('#SDT').val());
-            fd.append('Email', $('#Email').val());
-            fd.append('MatKhau', $('#MatKhau').val());
-            fd.append('XacNhanMatKhau', $('#XacNhanMatKhau').val());
+            fd.append('SDT', $('#SdtKT').val());
+            fd.append('Email', $('#EmailKT').val());
+            fd.append('MatKhau', $('#MatKhauKT').val());
+            fd.append('DiaChi', $('#DiaChi').val());
+            fd.append('XacNhanMatKhau', $('#nhapLaiMK').val());
+            fd.append('TenDangNhap', $('#TenDangNhap').val());
             fd.append('Type', @Model.Type);
 
             $.ajax({
-                url: '@Url.Action("Register", "KhachHang")',
+                url: 'DangKy',
                 type: 'POST',
                 dataType: 'json',
                 data: fd,

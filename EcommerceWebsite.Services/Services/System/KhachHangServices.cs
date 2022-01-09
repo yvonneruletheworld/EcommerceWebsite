@@ -102,7 +102,7 @@ namespace EcommerceWebsite.Services.Services.System
             {
                 // bat dau transaction create record
                 await _context.Database.BeginTransactionAsync();
-
+                DateTime ngayTao = DateTime.Now;
                 //global var
                 var id = Guid.NewGuid().ToString();
                 //Them vao AspUser
@@ -111,11 +111,12 @@ namespace EcommerceWebsite.Services.Services.System
                 {
                     Id = id, // tao ma ngau nhien
                     UserName = input.TenDangNhap,
-                    CreateDate = DateTime.UtcNow,
+                    CreateDate = ngayTao,
                     CreateUserId = input.TenDangNhap,
                     Email = input.Email,
                     Ip = input.Ip,
                     IsDeleted = false,
+                    Status = Data.Enum.Status.Active
                 };
                 user.NormalizedEmail = user.Email.ToUpper();
                 user.NormalizedUserName = user.Email.ToUpper();
@@ -134,7 +135,7 @@ namespace EcommerceWebsite.Services.Services.System
                         HoTen = input.HoTen,
                         GioiTinh = input.GioiTinh,
                         HinhAnh = input.HinhAnh,
-                        NgayTao = user.CreateDate,
+                        NgayTao = ngayTao,
                         DaXoa = false
                     };
 
@@ -145,13 +146,14 @@ namespace EcommerceWebsite.Services.Services.System
                     {
                         //Tao dia chi khach hang
                         DiaChiKhachHang diaChi = new DiaChiKhachHang();
-                        diaChi = _mapper.Map<DiaChiKhachHang>(input.DiaChi);
+                        //diaChi = _mapper.Map<DiaChiKhachHang>(input.DiaChi);
                         //diaChi.MaDiaChi = Guid.NewGuid().ToString();
+                        diaChi.DiaChi = input.DiaChi;
                         diaChi.DaXoa = false;
-                        diaChi.NguoiTao = user.UserName;
-                        diaChi.MaKhachHang = user.Id;
-                        diaChi.Hoten = khachHang.HoTen;
-                        diaChi.SDT = user.PhoneNumber;
+                        diaChi.NguoiTao = input.TenDangNhap;
+                        diaChi.MaKhachHang = id;
+                        diaChi.Hoten = input.HoTen;
+                        diaChi.SDT = input.SDT;
                         await _context.DiaChiKhaches.AddAsync(diaChi);
 
                         var resultDiaChi = await _context.SaveChangesAsync();

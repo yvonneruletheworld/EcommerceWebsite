@@ -33,15 +33,15 @@ namespace EcommerceWebsite.Admin.Controllers
         public async Task<IActionResult> IndexAsync()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return View();
+            return View("Views/Login/Index.cshtml");
         }
 
-        [HttpPost]
+        [Route("Logout")]
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(
                         CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("Index", "Home");
+            return await IndexAsync();
         }
 
         [HttpPost("client-login")]

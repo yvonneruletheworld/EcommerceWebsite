@@ -30,7 +30,7 @@ namespace EcommerceWebsite.MainWeb.Controllers
             _configuration = configuration;
         }
 
-        [HttpPost("client-login")]
+        [HttpPost]
         public async Task<IActionResult> Index(ThongTinKhachHangInput input, string previousPage = null)
         {
             input.XacNhanMatKhau = input.MatKhau;

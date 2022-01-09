@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace EcommerceWebsite.MainWeb.Controllers
 {
-    [Route("/KhachHang")]
+    //[Route("/KhachHang")]
     //[ApiExplorerSettings(IgnoreApi = true)]
     public class KhachHangController : BackgroudController
     {
@@ -33,7 +33,7 @@ namespace EcommerceWebsite.MainWeb.Controllers
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return View(vm);
         }
-        [HttpGet("client-register")]
+        [HttpGet]
         public async Task<IActionResult> Register()
         {
             var vm = new ThongTinKhachHangInput();
@@ -42,8 +42,8 @@ namespace EcommerceWebsite.MainWeb.Controllers
             return View("/Views/KhachHang/Index.cshtml", vm);
         }
 
-        [HttpPost("post-client-register")]
-        public async Task<IActionResult> Register(ThongTinKhachHangInput input)
+        [HttpPost]
+        public async Task<IActionResult> DangKy(ThongTinKhachHangInput input)
         {
             if(ModelState.IsValid)
             {

@@ -31,7 +31,7 @@ namespace EcommerceWebsite.Utilities.Input
         public bool GioiTinh { get; set; }
         public string HinhAnh { get; set; }
 
-        public DiaChiKhachHangInput DiaChi { get; set; }
+        public string DiaChi { get; set; }
         public bool GhiNhoDangNhap { get; set; }
 
         public ThongTinKhachHangInput()
