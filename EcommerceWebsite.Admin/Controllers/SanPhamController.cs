@@ -23,7 +23,8 @@ namespace EcommerceWebsite.Admin.Controllers
         {
             // cap nhat loi nhuan
             var data = await _sanPhamApiServices.laySanPham2();
-            return View(data);
+            var sort = data.OrderByDescending(dt => dt.loiNhuan).ToList();
+            return View(sort);
         }
         public async Task<IActionResult> QuanLyDanhMuc()
         {

@@ -66,7 +66,8 @@ namespace EcommerceWebsite.MainWeb.Controllers
             if (HUIConfiguration.ListHUI == null)
             {
                 var fileName = "output1";
-                HUIConfiguration.ListHUI = await _huiServices.GetListHUIFromOutput(fileName);
+                var result = await _huiServices.GetListHUIFromOutput(fileName);
+                HUIConfiguration.ListHUI = result.Where(h => h.Id != "minuntil").ToList();
                 //save constant
                 //HUIConfiguration.ListHUI = listHUI.Where(hui => hui.Itemsets.Length > 1)
                 //    .OrderByDescending(hui => hui.Utility).ToList();

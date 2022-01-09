@@ -60,16 +60,27 @@ namespace EcommerceWebsite.Services.Services.System
             while (!reader.EndOfStream)
             {
                 var line = await reader.ReadLineAsync();
-                HUI hui = new HUI()
+                if (!line.Contains(":"))
                 {
-                    Id = "hui-" + stt++,
-                    Utility = double.Parse(line.Trim().Split(":")[1]),
-                    Itemsets = line.Trim()
+                    HUI hui = new HUI()
+                    {
+                        Id = "minuntil",
+                        Utility = double.Parse(line.Trim()),
+                    };
+                    yield return hui;
+                    
+                }else
+                {
+                    HUI hui = new HUI()
+                    {
+                        Id = "hui-" + stt++,
+                        Utility = double.Parse(line.Trim().Split(":")[1]),
+                        Itemsets = line.Trim()
                                    .Split(":")[0].Split(",")
                                    .Select(it => it.Trim()).ToArray()
-                };
-
-                yield return hui;
+                    };
+                    yield return hui;
+                }
             }
         }
 
@@ -147,6 +158,7 @@ namespace EcommerceWebsite.Services.Services.System
                 {
                     ComboCode = item.ComboCode,
                     Utility = item.Utility,
+                    MinUtility = item.NguoiTao
                 }).FirstOrDefaultAsync();
                
                 if (result != null)
@@ -206,6 +218,7 @@ namespace EcommerceWebsite.Services.Services.System
                                   DonGiaNhap = sp_ct.DonGia,
                                   NgayNhap = sp_ct.PhieuNhapEntity.NgayTao,
                                   //LoiNhuan = (float)hui_sp.Utility,
+                                  DaXoa = hui.DaXoa,
                                   GiaHUI = hui.Cost
                               }).ToListAsync();
 

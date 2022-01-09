@@ -13,6 +13,7 @@ namespace EcommerceWebsite.Utilities.ViewModel
         public List<DoanhThuOutput> ListSanPhamHUIs { get; set; }
         public string ComboCode { get; set; }
         public int Utility { get; set; }
+        public string MinUtility { get; set; }
         public double TongGiaAuto { get; set; }
         public decimal TongGiaSetUp { get; set; }
         public int DaBan { get; set; }

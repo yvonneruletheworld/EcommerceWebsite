@@ -64,7 +64,8 @@ namespace EcommerceWebsite.Api.Controllers
         {
             if(inputs != null || inputs.Count() != 0)
             {
-
+                var minutil = inputs.Where(i => i.Id == "minuntil").FirstOrDefault().Utility;
+                inputs = inputs.Where(i => i.Id != "minuntil").ToList();
                 //var hoaDons = await _hoaDonServices.DanhSachHoaDonExport(ngayDau, ngayCuoi);
                 var sanPhams = await _sanPhamServices.LayListSanPham();
                 //Tinh U
@@ -107,9 +108,10 @@ namespace EcommerceWebsite.Api.Controllers
                             newInput.Cost = 0;
                             newInput.MaSanPham = sp.MaSanPham;
                             newInput.DaXoa = false;
-                            newInput.Utility = (int)((int)input.Utility / averageUtil);
-                        //newInput.NgayTao = DateTime.Parse("2021-12-06 22:37:58.0019319");
+                            newInput.Utility = input.Utility > 100? (int)((int)input.Utility / averageUtil) : (int)input.Utility;
+                        //newInput.NgayTao = DateTime.Parse("2021-12-06 22:37:58.0019324");
                         newInput.NgayTao = datetime;
+                        newInput.NguoiTao = minutil.ToString();
                         newInput.Status = true;
                             listHuiCostContainPrdId.Add(newInput);
                         //}

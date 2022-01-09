@@ -532,6 +532,7 @@ namespace EcommerceWebsite.Services.Services.Main
                                       select new HUICost()
                                       {
                                           MaSanPham = sp.NguoiXoa,
+                                          Utility = (int)sp.Utility
                                           //XepHang = sp_dl.MaDinhLuong
                                       }).ToListAsync();
 

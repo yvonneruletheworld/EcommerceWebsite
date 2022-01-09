@@ -23,7 +23,6 @@ namespace EcommerceWebsite.Admin.Controllers
         {
             var vm = await _huiServices.GetHuiDetail(comboCode, ngayTao,ngayNhapKe);
             //vm.
-            ViewBag.MucLoiNhuan = "40";
             var giaVon = vm.ListSanPhamHUIs.Sum(sp => sp.DonGiaNhap);
             ViewBag.GiaVon = giaVon;
             ViewBag.NgayTao = ngayTao;
