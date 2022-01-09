@@ -117,7 +117,7 @@
                         </div>
                         <div class="col-md-3 mb-3">
                             <label class="form-label" id="loi-nhuan-title">Lợi nhuận</label>
-                            <input type="number" class="form-control text-box single-line" onkeyup="updateProductPride(this.value)" id="LoiNhuan" name="LoiNhuan" />
+                            <input type="text" class="form-control text-box single-line" onkeyup="updateProductPride(this.value)" id="LoiNhuan" name="LoiNhuan" />
                             <span id="loi-nhuan-error" class="text-danger"></span>
                         </div>
                         <div class="col-md-3 mb-3">
@@ -368,6 +368,7 @@
     }
 
     function setUpProductPrice() {
+
         var type = document.getElementById("percentageAgree");
 
         var giaNhapTxt = @giaNhapGanNhat;
@@ -424,6 +425,10 @@
         var loiNhuanMongMuon = $('#LoiNhuan').val();
         if (Number(loiNhuanMongMuon) <= 0) {
             $("#loi-nhuan-error")[0].innerHTML = 'Lợi nhuận phải lớn hơn 0';
+            return;
+        }
+        else if (isNaN(loiNhuanMongMuon)) {
+            $("#loi-nhuan-error")[0].innerHTML = 'Giá trị không hợp lệ';
             return;
         }
         else {
