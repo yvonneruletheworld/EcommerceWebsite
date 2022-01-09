@@ -277,6 +277,12 @@ namespace EcommerceWebsite.Services.Services.Main
                                           LoiNhuan = TinhLoiNhuan(0, ctn_pn.SoLuong * ctn_pn.DonGia)
                                       }).OrderBy(lsg => lsg.NgayNhap.Date)
                                    .ThenBy(d => d.NgayNhap.TimeOfDay).ToListAsync();
+                    int slt = 0;
+                    foreach(var item in data)
+                    {
+                        item.SoLuongTon += data.IndexOf(item) == 0? 0 : slt;
+                        slt += item.SoLuongTon;
+                    }
                     toDic = data.GroupBy(pn => pn.NgayNhap)
                     .ToDictionary(pn => pn.Key, pn => pn.ToList());
                 }
