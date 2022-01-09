@@ -488,7 +488,6 @@
                             }
                             <div class="price-box">
                                 <span class="new-price" id="giaCTSP"></span>
-                                <span class="new-price" id="giaCTSP">@sanPham</span>
                             </div>
                         </div>
                         <div class="add-actions">
@@ -534,10 +533,17 @@
                                             {
                                                 <h4 style="height:57px"><a class="product_name" href="@Url.Action("Index", "Detail", new { prdId = sp.MaSanPham, prdMaDanhMuc = sp.MaLoai  })">@sp.TenSanPham</a></h4>
                                             }
-                                            <div class="price-box">
-                                                <strike class="new-price" style="font-size:11px">@string.Format("{0:0,0}", sp.GiaBan) VNĐ</strike>
+                                        <div class="price-box">
+                                            <strike class="new-price" style="font-size:11px">@string.Format("{0:0,0}", sp.GiaBan) VNĐ</strike>
+                                            @if (sp.GiaHUI == 0)
+                                            {
+                                                <span class="new-price" style="font-size:11px">@string.Format("{0:0,0}", sp.GiaBan) VNĐ</span>
+                                            }
+                                            else
+                                            {
                                                 <span class="new-price" style="font-size:11px">@string.Format("{0:0,0}", sp.GiaHUI) VNĐ</span>
-                                            </div>
+                                            }
+                                        </div>
                                         </div>
                                     </div>
                                 </div>
