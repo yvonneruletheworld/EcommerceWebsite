@@ -3,21 +3,31 @@
 @{ 
     string[] maHD = new string[Model.Count];
     string[] maSP = new string[Model.Count];
+    string[] tenSP = new string[Model.Count];
+    string[] phuongThuc = new string[Model.Count];
+    string[] tinhTrang = new string[Model.Count];
+    string[] hinhAnh = new string[Model.Count];
+    int[] soLuong = new int[Model.Count];
+    decimal[] giaBan = new decimal[Model.Count];
     int viTri = 0;
     foreach (var getData in Model)
     {
         maHD[viTri] = getData.HoaDonId;
         maSP[viTri] = getData.ProductId;
+        tenSP[viTri] = getData.SanPhams.TenSanPham;
+        phuongThuc[viTri] = getData.HoaDons.PhuongThucThanhToan;
+        tinhTrang[viTri] = getData.HoaDons.TinhTrang;
+        hinhAnh[viTri] = getData.SanPhams.HinhAnh;
+        soLuong[viTri] = getData.SoLuong;
+        giaBan[viTri] = getData.GiaBan;
         viTri++;
     }
 }
 
 <div class="compare-area pt-60 pb-60">
-    @for (int i = 0; i < viTri; i++)
+    @for (int i = 0; i < viTri - 1; i++)
     {
-        @foreach (var item in Model)
-        {
-            @if ((maHD[i] == item.HoaDonId && maSP[i] == item.ProductId))
+            @if ((i == 0) || (maHD[i].ToString() != maHD[i - 1].ToString()))
             {
                 <br />
                 <div class="container">
@@ -25,15 +35,15 @@
                         <div class="col-12">
                             <div class="coupon-accordion">
                                 <h3>
-                                    Phương thức thanh toán: @item.HoaDons.PhuongThucThanhToan
+                                    Phương thức thanh toán: @phuongThuc[i].ToString()
                                     <span id="showlogin" style="float:right;">
-                                        @if (@item.HoaDons.TinhTrang == null)
+                                        @if (@tinhTrang[i] == null)
                                         {
                                             <p>Đang xử lý</p>
                                         }
                                         else
                                         {
-                                            @item.HoaDons.TinhTrang
+                                            @tinhTrang[i].ToString()
                                         }
                                     </span>
                                 </h3>
@@ -42,47 +52,47 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-2">
-                            <div class="product-image"  style="width: 120px">
-                                <a href="#" >
-                                    <img src="@item.SanPhams.HinhAnh" alt="@item.SanPhams.TenSanPham" />
+                            <div class="product-image" style="width: 120px">
+                                <a href="#">
+                                    <img src="@hinhAnh[i].ToString()" alt="@tenSP[i].ToString()" />
                                 </a>
                             </div>
                         </div>
                         <div class="col-lg-8">
                             <br />
-                            <h4>@item.SanPhams.TenSanPham</h4>
+                            <h4>@tenSP[i].ToString()</h4>
                             <br />
-                            <span>Số lượng: @item.SoLuong</span>
+                            <span>Số lượng: @soLuong[i].ToString()</span>
                         </div>
                         <div class="col-lg-2" style="text-align:end;">
-                            <span>@string.Format("{0:0,0}", item.GiaBan) VNĐ</span>
+                            <span>@string.Format("{0:0,0}", giaBan[i].ToString()) VNĐ</span>
                         </div>
                     </div>
                 </div>
             }
-            else if (maHD[i] == item.HoaDonId && maSP[i] != item.ProductId)
+            else
             {
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-2">
-                            <div class="product-image"  style="width: 120px">
+                            <div class="product-image" style="width: 120px">
                                 <a href="#">
-                                    <img src="@item.SanPhams.HinhAnh" alt="@item.SanPhams.TenSanPham" />
+                                    <img src="@hinhAnh[i].ToString()" alt="@tenSP[i].ToString()" />
                                 </a>
                             </div>
                         </div>
                         <div class="col-lg-8">
                             <br />
-                            <h4>@item.SanPhams.TenSanPham</h4>
+                            <h4>@tenSP[i].ToString()</h4>
                             <br />
-                            <span>Số lượng: @item.SoLuong</span>
+                            <span>Số lượng: @soLuong[i].ToString()</span>
                         </div>
                         <div class="col-lg-2" style="text-align:end;">
-                            <span>@string.Format("{0:0,0}", item.GiaBan) VNĐ</span>
+                            <span>@string.Format("{0:0,0}", giaBan[i].ToString()) VNĐ</span>
                         </div>
                     </div>
                 </div>
             }
-        }
+        
     }
 </div>
